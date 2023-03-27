@@ -1,31 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:6024" name="DC.Identifier"/>
-<meta content="A trust anchor represents an authoritative entity via a public key and
-associated data. The public key is used to verify digital signatures,
-and the associated data is used to constrain the types of information
-for which the trust anchor is authoritative. A relying party uses
-trust anchors to determine if a digitally signed object is valid by
-verifying a digital signature using the trust anchor's public key,
-and by enforcing the constraints expressed in the associated data for
-the trust anchor. This document describes some of the problems
-associated with the lack of a standard trust anchor management
-mechanism and defines requirements for data formats and push-based
-protocols designed to address these problems. This document is not an
-Internet Standards Track specification; it is published for
-informational purposes." name="DC.Description.Abstract"/>
-<meta content="Reddy, Raksha" name="DC.Creator"/>
-<meta content="Wallace, Carl" name="DC.Creator"/>
-<meta content="October, 2010" name="DC.Date.Issued"/>
-<meta content="Trust Anchor Management Requirements" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6024 - Trust Anchor Management Requirements</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="R. Reddy" name="citation_author"/>
+<meta content="C. Wallace" name="citation_author"/>
+<meta content="October, 2010" name="citation_publication_date"/>
+<meta content="Trust Anchor Management Requirements" name="citation_title"/>
+<meta content="10.17487/RFC6024" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6024" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6024.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6024: Trust Anchor Management Requirements</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -54,7 +41,7 @@ informational purposes." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -63,7 +50,7 @@ informational purposes." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -142,19 +129,18 @@ informational purposes." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -168,21 +154,9 @@ informational purposes." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6024.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6024" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-pkix-ta-mgmt-reqs.html" title="draft-ietf-pkix-ta-mgmt-reqs">draft-ietf-pkix-t...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6024" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6024" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                          R. Reddy
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6024.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6024.txt.pdf">PDF</a>|<a href="/rfc/rfc6024.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6024" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6024&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6024" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                          R. Reddy
 Request for Comments: 6024                      National Security Agency
 Category: Informational                                       C. Wallace
 ISSN: 2070-1721                                       Cygnacom Solutions
@@ -226,7 +200,7 @@ Copyright Notice
    Copyright (c) 2010 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -234,7 +208,7 @@ Copyright Notice
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
@@ -290,11 +264,11 @@ Table of Contents
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Digital signatures are used in many applications.  For digital
    signatures to provide integrity and authentication, the public key
@@ -346,7 +320,7 @@ Table of Contents
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
@@ -366,7 +340,7 @@ Table of Contents
    methods.  Sections <a href="#section-3">3</a> and <a href="#section-4">4</a> describe requirements and security
    considerations for a trust anchor management solution.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Terminology</span>
 
    The following terms are defined in order to provide a vocabulary for
    describing requirements for trust anchor management.
@@ -392,7 +366,7 @@ Table of Contents
       more than one trust anchor store, each of which may be used by one
       or more applications.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Requirements Notation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Requirements Notation</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -402,11 +376,11 @@ Table of Contents
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Problem%20Statement"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Problem Statement</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Problem%20Statement"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Problem Statement</span>
 
    Trust anchors are used to support many application scenarios.  Most
    Internet browsers and email clients use trust anchors when
@@ -458,7 +432,7 @@ Table of Contents
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
@@ -484,15 +458,15 @@ Table of Contents
    requirements for a solution to this problem along with some security
    considerations.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Requirements"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Requirements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Requirements"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Requirements</span>
 
    This section describes the requirements for a trust anchor management
    protocol.  Requirements are provided for trust anchor contents as
    well as for trust anchor store management operations.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Transport%20Independence"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Transport Independence</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Transport%20Independence"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Transport Independence</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  Functional Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  Functional Requirements</span>
 
    A general-purpose solution for the management of trust anchors <em>MUST</em>
    be transport independent in order to apply to a range of device
@@ -504,7 +478,7 @@ Table of Contents
    application layer.  Confidentiality <em>MAY</em> be provided for such
    transactions.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.1.2" name="section-3.1.2">3.1.2</a>.  Rationale</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.1.2" id="section-3.1.2">3.1.2</a>.  Rationale</span>
 
    Not all devices that use trust anchors are available for online
    management operations; some devices may require manual interaction
@@ -514,16 +488,16 @@ Table of Contents
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
    modified en route.  Only connectionless integrity is required, for
    compatibility with store-and-forward contexts.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Basic%20Management%20Operations"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Basic Management Operations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Basic%20Management%20Operations"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Basic Management Operations</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Functional Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.2.1" id="section-3.2.1">3.2.1</a>.  Functional Requirements</span>
 
    At a minimum, a protocol used for trust anchor management <em>MUST</em> enable
    a trust anchor manager to perform the following operations:
@@ -542,7 +516,7 @@ Table of Contents
    option.  For example, some implementations may support only
    replacement of trust anchor stores.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.2.2" name="section-3.2.2">3.2.2</a>.  Rationale</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.2.2" id="section-3.2.2">3.2.2</a>.  Rationale</span>
 
    These requirements describe the core operations required to manage
    the contents of a trust anchor store.  An edit operation was omitted
@@ -553,9 +527,9 @@ Table of Contents
    trust anchor store.  Trust anchor store replacement may be useful as
    a simple, higher-bandwidth alternative to add and remove operations.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Management%20Targets"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Management Targets</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Management%20Targets"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Management Targets</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.3.1" name="section-3.3.1">3.3.1</a>.  Functional Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.3.1" id="section-3.3.1">3.3.1</a>.  Functional Requirements</span>
 
    A protocol for TA management <em>MUST</em> allow a TA management transaction
    to be directed to:
@@ -570,11 +544,11 @@ Table of Contents
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.3.2" name="section-3.3.2">3.3.2</a>.  Rationale</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.3.2" id="section-3.3.2">3.3.2</a>.  Rationale</span>
 
    Connections between PKIs can be accomplished using different means.
    Unilateral or bilateral cross-certification can be performed, or a
@@ -607,9 +581,9 @@ Table of Contents
    can enable efficient management of all stores under a trust anchor
    manager's control.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Delegation%20of%20TA%20Manager%20Authority"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Delegation of TA Manager Authority</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Delegation%20of%20TA%20Manager%20Authority"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Delegation of TA Manager Authority</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.4.1" name="section-3.4.1">3.4.1</a>.  Functional Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.4.1" id="section-3.4.1">3.4.1</a>.  Functional Requirements</span>
 
    A trust anchor management protocol <em>MUST</em> enable secure transfer of
    control of a trust anchor store from one trust anchor manager to
@@ -617,7 +591,7 @@ Table of Contents
    without requiring delegation of the overall trust anchor management
    capability itself.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.4.2" name="section-3.4.2">3.4.2</a>.  Rationale</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.4.2" id="section-3.4.2">3.4.2</a>.  Rationale</span>
 
    Trust anchor manager rekey is one type of transfer that must be
    supported.  In this case, the new key will be assigned the same
@@ -626,7 +600,7 @@ Table of Contents
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
@@ -637,9 +611,9 @@ Table of Contents
    trust anchor manager may allow its delegate to further delegate
    firmware signing authority to other entities.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20RFC%205280%20Support"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  <a href="./rfc5280.html">RFC 5280</a> Support</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20RFC%205280%20Support"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  <a href="./rfc5280.html">RFC 5280</a> Support</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.5.1" name="section-3.5.1">3.5.1</a>.  Functional Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.5.1" id="section-3.5.1">3.5.1</a>.  Functional Requirements</span>
 
    A trust anchor management protocol <em>MUST</em> enable management of trust
    anchors that will be used to validate certification paths and CRLs in
@@ -649,7 +623,7 @@ Table of Contents
    trust anchor public key.  Examples of such constraints are name
    constraints, certificate policies, and key usage.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.5.2" name="section-3.5.2">3.5.2</a>.  Rationale</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.5.2" id="section-3.5.2">3.5.2</a>.  Rationale</span>
 
    Certification path validation is one of the most common applications
    of trust anchors.  The rules for using trust anchors for path
@@ -659,9 +633,9 @@ Table of Contents
    possibly through a delegate, the revocation status information of
    certificates it issues; this is often accomplished by signing a CRL.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20Support%20Purposes%20other%20than%20Certification%20Path%20Validation"></a></body></html><a class="selflink" href="#section-3.6" name="section-3.6">3.6</a>.  Support Purposes other than Certification Path Validation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20Support%20Purposes%20other%20than%20Certification%20Path%20Validation"></a></body></html><a class="selflink" href="#section-3.6" id="section-3.6">3.6</a>.  Support Purposes other than Certification Path Validation</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.6.1" name="section-3.6.1">3.6.1</a>.  Functional Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.6.1" id="section-3.6.1">3.6.1</a>.  Functional Requirements</span>
 
    A trust anchor management protocol <em>MUST</em> enable management of trust
    anchors that can be used for purposes other than certification path
@@ -670,7 +644,7 @@ Table of Contents
    trust anchor to delegate authority (to other TAs or certificate
    holders) and to prevent a trust anchor from delegating authority.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.6.2" name="section-3.6.2">3.6.2</a>.  Rationale</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.6.2" id="section-3.6.2">3.6.2</a>.  Rationale</span>
 
    Trust anchors are used to validate a variety of signed objects, not
    just public key certificates and CRLs.  For example, a trust anchor
@@ -682,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
@@ -690,9 +664,9 @@ Table of Contents
    CRLs.  Thus, it is important to be able to impose constraints on the
    ways in which a given TA is employed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.%20%20Trust%20Anchor%20Format"></a></body></html><a class="selflink" href="#section-3.7" name="section-3.7">3.7</a>.  Trust Anchor Format</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.%20%20Trust%20Anchor%20Format"></a></body></html><a class="selflink" href="#section-3.7" id="section-3.7">3.7</a>.  Trust Anchor Format</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.7.1" name="section-3.7.1">3.7.1</a>.  Functional Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.7.1" id="section-3.7.1">3.7.1</a>.  Functional Requirements</span>
 
    Minimally, a trust anchor management protocol <em>MUST</em> support management
    of trust anchors represented as self-signed certificates and trust
@@ -709,7 +683,7 @@ Table of Contents
    representation of constraints that can be applied to restrict the use
    of a trust anchor.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.7.2" name="section-3.7.2">3.7.2</a>.  Rationale</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.7.2" id="section-3.7.2">3.7.2</a>.  Rationale</span>
 
    Prior to the publication of [<a href="./rfc5914.html" title='"Trust Anchor Format"'>RFC5914</a>], there was no standardized
    format for trust anchors.  Self-signed X.509 certificates are
@@ -722,9 +696,9 @@ Table of Contents
    firmware packages [<a href="./rfc4108.html" title='"Using Cryptographic Message Syntax (CMS) to Protect Firmware Packages"'>RFC4108</a>].  Constraints may include a validity
    period, constraints on certification path validation, etc.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.%20%20Source%20Authentication"></a></body></html><a class="selflink" href="#section-3.8" name="section-3.8">3.8</a>.  Source Authentication</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.%20%20Source%20Authentication"></a></body></html><a class="selflink" href="#section-3.8" id="section-3.8">3.8</a>.  Source Authentication</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.8.1" name="section-3.8.1">3.8.1</a>.  Functional Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.8.1" id="section-3.8.1">3.8.1</a>.  Functional Requirements</span>
 
    An entity receiving trust anchor management data <em>MUST</em> be able to
    authenticate the identity of the party providing the information and
@@ -738,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
@@ -747,21 +721,21 @@ Table of Contents
    trust anchor store and be able to confirm the contents of the report
    have not been subsequently altered.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.8.2" name="section-3.8.2">3.8.2</a>.  Rationale</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.8.2" id="section-3.8.2">3.8.2</a>.  Rationale</span>
 
    Data origin authentication and integrity are required to support
    remote management operations, even when TA management transactions
    are effected via store-and-forward communications.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.9.%20%20Reduce%20Reliance%20on%20Out-of-Band%20Trust%20Mechanisms"></a></body></html><a class="selflink" href="#section-3.9" name="section-3.9">3.9</a>.  Reduce Reliance on Out-of-Band Trust Mechanisms</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.9.%20%20Reduce%20Reliance%20on%20Out-of-Band%20Trust%20Mechanisms"></a></body></html><a class="selflink" href="#section-3.9" id="section-3.9">3.9</a>.  Reduce Reliance on Out-of-Band Trust Mechanisms</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.9.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.9.1" name="section-3.9.1">3.9.1</a>.  Functional Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.9.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.9.1" id="section-3.9.1">3.9.1</a>.  Functional Requirements</span>
 
    When performing add operations, a trust anchor management protocol
    <em>SHOULD</em> enable TA integrity to be checked automatically by a relying
    party without relying on out-of-band trust mechanisms.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.9.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.9.2" name="section-3.9.2">3.9.2</a>.  Rationale</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.9.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.9.2" id="section-3.9.2">3.9.2</a>.  Rationale</span>
 
    Traditionally, a trust anchor is distributed out-of-band with its
    integrity checked manually prior to installation.  Installation
@@ -773,9 +747,9 @@ Table of Contents
    anchor management protocol.  Ideally, out-of-band trust mechanisms
    will be required only during trust anchor store initialization.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.10.%20%20Replay%20Detection"></a></body></html><a class="selflink" href="#section-3.10" name="section-3.10">3.10</a>.  Replay Detection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.10.%20%20Replay%20Detection"></a></body></html><a class="selflink" href="#section-3.10" id="section-3.10">3.10</a>.  Replay Detection</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.10.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.10.1" name="section-3.10.1">3.10.1</a>.  Functional Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.10.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.10.1" id="section-3.10.1">3.10.1</a>.  Functional Requirements</span>
 
    A trust anchor management protocol <em>MUST</em> enable participants engaged
    in a trust anchor management protocol exchange to detect replay
@@ -784,7 +758,7 @@ Table of Contents
    Mechanisms that do require a reliable source of time <em>MAY</em> be
    available.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.10.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.10.2" name="section-3.10.2">3.10.2</a>.  Rationale</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.10.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.10.2" id="section-3.10.2">3.10.2</a>.  Rationale</span>
 
    Detection of replays of trust anchor management transactions is
    required to support remote management operations.  Replay of old
@@ -794,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
@@ -806,16 +780,16 @@ Table of Contents
    source of time, so a replay detection mechanism that requires a
    reliable time source is insufficient.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.11.%20%20Compromise%20or%20Disaster%20Recovery"></a></body></html><a class="selflink" href="#section-3.11" name="section-3.11">3.11</a>.  Compromise or Disaster Recovery</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.11.%20%20Compromise%20or%20Disaster%20Recovery"></a></body></html><a class="selflink" href="#section-3.11" id="section-3.11">3.11</a>.  Compromise or Disaster Recovery</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.11.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.11.1" name="section-3.11.1">3.11.1</a>.  Functional Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.11.1.%20%20Functional%20Requirements"></a></body></html><a class="selflink" href="#section-3.11.1" id="section-3.11.1">3.11.1</a>.  Functional Requirements</span>
 
    A trust anchor management protocol <em>MUST</em> enable recovery from the
    compromise or loss of a trust anchor private key, including the
    private key authorized to serve as a trust anchor manager, without
    requiring re-initialization of the trust store.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.11.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.11.2" name="section-3.11.2">3.11.2</a>.  Rationale</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.11.2.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3.11.2" id="section-3.11.2">3.11.2</a>.  Rationale</span>
 
    Compromise or loss of a private key corresponding to a trust anchor
    can have significant negative consequences.  Currently, in some
@@ -825,7 +799,7 @@ Table of Contents
    management protocol should support recovery options that do not
    require trust anchor store re-initialization.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Security Considerations</span>
 
    The public key used to authenticate a TA management transaction may
    have been placed in the client as the result of an earlier TA
@@ -850,7 +824,7 @@ Table of Contents
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
@@ -876,29 +850,29 @@ Table of Contents
    Many of the security considerations from [<a href="./rfc5280.html" title='"Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile"'>RFC5280</a>] are also
    applicable to trust anchor management.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20References"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20References"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC5055" name="ref-RFC5055">RFC5055</a>]  Freeman, T., Housley, R., Malpani, A., Cooper, D., and W.
+   [<a id="ref-RFC5055">RFC5055</a>]  Freeman, T., Housley, R., Malpani, A., Cooper, D., and W.
               Polk, "Server-Based Certificate Validation Protocol
               (SCVP)", <a href="./rfc5055.html">RFC 5055</a>, December 2007.
 
-   [<a id="ref-RFC5280" name="ref-RFC5280">RFC5280</a>]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+   [<a id="ref-RFC5280">RFC5280</a>]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
               (CRL) Profile", <a href="./rfc5280.html">RFC 5280</a>, May 2008.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC2560" name="ref-RFC2560">RFC2560</a>]  Myers, M., Ankney, R., Malpani, A., Galperin, S., and C.
+   [<a id="ref-RFC2560">RFC2560</a>]  Myers, M., Ankney, R., Malpani, A., Galperin, S., and C.
               Adams, "X.509 Internet Public Key Infrastructure Online
               Certificate Status Protocol - OCSP", <a href="./rfc2560.html">RFC 2560</a>, June 1999.
 
-   [<a id="ref-RFC3161" name="ref-RFC3161">RFC3161</a>]  Adams, C., Cain, P., Pinkas, D., and R. Zuccherato,
+   [<a id="ref-RFC3161">RFC3161</a>]  Adams, C., Cain, P., Pinkas, D., and R. Zuccherato,
               "Internet X.509 Public Key Infrastructure Time-Stamp
               Protocol (TSP)", <a href="./rfc3161.html">RFC 3161</a>, August 2001.
 
@@ -906,24 +880,24 @@ Table of Contents
 
 
 <span class="grey">Reddy &amp; Wallace               Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6024.html">RFC 6024</a>                 Trust Anchor Management            October 2010</span>
 
 
-   [<a id="ref-RFC4108" name="ref-RFC4108">RFC4108</a>]  Housley, R., "Using Cryptographic Message Syntax (CMS) to
+   [<a id="ref-RFC4108">RFC4108</a>]  Housley, R., "Using Cryptographic Message Syntax (CMS) to
               Protect Firmware Packages", <a href="./rfc4108.html">RFC 4108</a>, August 2005.
 
-   [<a id="ref-RFC4210" name="ref-RFC4210">RFC4210</a>]  Adams, C., Farrell, S., Kause, T., and T. Mononen,
+   [<a id="ref-RFC4210">RFC4210</a>]  Adams, C., Farrell, S., Kause, T., and T. Mononen,
               "Internet X.509 Public Key Infrastructure Certificate
               Management Protocol (CMP)", <a href="./rfc4210.html">RFC 4210</a>, September 2005.
 
-   [<a id="ref-RFC5652" name="ref-RFC5652">RFC5652</a>]  Housley, R., "Cryptographic Message Syntax (CMS)", STD 70,
+   [<a id="ref-RFC5652">RFC5652</a>]  Housley, R., "Cryptographic Message Syntax (CMS)", STD 70,
               <a href="./rfc5652.html">RFC 5652</a>, September 2009.
 
-   [<a id="ref-RFC5914" name="ref-RFC5914">RFC5914</a>]  Housley, R., Ashmore, S., and C. Wallace, "Trust Anchor
+   [<a id="ref-RFC5914">RFC5914</a>]  Housley, R., Ashmore, S., and C. Wallace, "Trust Anchor
               Format", <a href="./rfc5914.html">RFC 5914</a>, June 2010.
 
-   [<a id="ref-RFC5934" name="ref-RFC5934">RFC5934</a>]  Housley, R., Ashmore, S., and C. Wallace, "Trust Anchor
+   [<a id="ref-RFC5934">RFC5934</a>]  Housley, R., Ashmore, S., and C. Wallace, "Trust Anchor
               Management Protocol (TAMP)", <a href="./rfc5934.html">RFC 5934</a>, August 2010.
 
 Authors' Addresses
@@ -962,11 +936,6 @@ Authors' Addresses
 
 
 Reddy &amp; Wallace               Informational                    [Page 14]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

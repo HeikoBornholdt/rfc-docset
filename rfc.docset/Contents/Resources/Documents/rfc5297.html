@@ -1,25 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:5297" name="DC.Identifier"/>
-<meta content="This memo describes SIV (Synthetic Initialization Vector), a block
-cipher mode of operation. SIV takes a key, a plaintext, and multiple
-variable-length octet strings that will be authenticated but not
-encrypted. It produces a ciphertext having the same length as the
-plaintext and a synthetic initialization vector. Depending on how it
-is used, SIV achieves either the goal of deterministic authenticated
-encryption or the goal of nonce-based, misuse-resistant authenticated
-encryption. This memo provides information for the Internet community." name="DC.Description.Abstract"/>
-<meta content="Dan Harkins &lt;dharkins@arubanetworks.com&gt;" name="DC.Creator"/>
-<meta content="October, 2008" name="DC.Date.Issued"/>
-<meta content="Synthetic Initialization Vector (SIV) Authenticated Encryption Using the Advanced Encryption Standard (AES)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5297 - Synthetic Initialization Vector (SIV) Authenticated Encryption Using the Advanced Encryption Standard (AES)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="D. Harkins" name="citation_author"/>
+<meta content="October, 2008" name="citation_publication_date"/>
+<meta content="Synthetic Initialization Vector (SIV) Authenticated Encryption Using the Advanced Encryption Standard (AES)" name="citation_title"/>
+<meta content="10.17487/RFC5297" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5297" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5297.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5297: Synthetic Initialization Vector (SIV) Authenticated Encryption Using the Advanced Encryption Standard (AES)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -48,7 +40,7 @@ encryption. This memo provides information for the Internet community." name="DC
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -57,7 +49,7 @@ encryption. This memo provides information for the Internet community." name="DC
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -136,19 +128,18 @@ encryption. This memo provides information for the Internet community." name="DC
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -162,21 +153,9 @@ encryption. This memo provides information for the Internet community." name="DC
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5297.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5297" title="PDF version of this document">pdf</a>] [<a href="./draft-dharkins-siv-aes.html" title="draft-dharkins-siv-aes">draft-dharkins-si...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5297" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5297" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                         D. Harkins
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5297.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5297.txt.pdf">PDF</a>|<a href="/rfc/rfc5297.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5297" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5297&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc5297" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                         D. Harkins
 Request for Comments: 5297                                Aruba Networks
 Category: Informational                                     October 2008
 
@@ -228,7 +207,7 @@ Abstract
 
 
 <span class="grey">Hawkins                      Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -284,13 +263,13 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Background"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Background</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Background"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Background</span>
 
    Various attacks have been described (e.g., [<a href="#ref-BADESP" title='"Problem Areas for the IP Security Protocols"'>BADESP</a>]) when data is
    merely privacy protected and not additionally authenticated or
@@ -340,19 +319,19 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Definitions"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Definitions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Definitions"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Definitions</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in <a href="./rfc2119.html">RFC 2119</a> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Motivation"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>.  Motivation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Motivation"></a></body></html><a class="selflink" href="#section-1.3" id="section-1.3">1.3</a>.  Motivation</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.1.%20%20Key%20Wrapping"></a></body></html><a class="selflink" href="#section-1.3.1" name="section-1.3.1">1.3.1</a>.  Key Wrapping</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.1.%20%20Key%20Wrapping"></a></body></html><a class="selflink" href="#section-1.3.1" id="section-1.3.1">1.3.1</a>.  Key Wrapping</span>
 
    A key distribution protocol must protect keys it is distributing.
    This has not always been done correctly.  For example, RADIUS
@@ -369,7 +348,7 @@ Table of Contents
    a more general purpose solution as it allows for associated data to
    be specified.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.2.%20%20Resistance%20to%20Nonce%20Misuse/Reuse"></a></body></html><a class="selflink" href="#section-1.3.2" name="section-1.3.2">1.3.2</a>.  Resistance to Nonce Misuse/Reuse</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.2.%20%20Resistance%20to%20Nonce%20Misuse/Reuse"></a></body></html><a class="selflink" href="#section-1.3.2" id="section-1.3.2">1.3.2</a>.  Resistance to Nonce Misuse/Reuse</span>
 
    The nonce-based authenticated encryption schemes described above are
    susceptible to reuse and/or misuse of the nonce.  Depending on the
@@ -396,7 +375,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -419,7 +398,7 @@ Table of Contents
    same plaintext (and same associated data) was protected with the same
    nonce and key.  See Security Considerations (<a href="#section-7">Section 7</a>).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.3.%20%20Key%20Derivation"></a></body></html><a class="selflink" href="#section-1.3.3" name="section-1.3.3">1.3.3</a>.  Key Derivation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.3.%20%20Key%20Derivation"></a></body></html><a class="selflink" href="#section-1.3.3" id="section-1.3.3">1.3.3</a>.  Key Derivation</span>
 
    A PRF is frequently used as a key derivation function (e.g., [<a href="#ref-WLAN" title='"Draft Standard for IEEE802.11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specification"'>WLAN</a>])
    by passing it a key and a single string.  Typically, this single
@@ -452,11 +431,11 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.4.%20%20Robustness%20versus%20Performance"></a></body></html><a class="selflink" href="#section-1.3.4" name="section-1.3.4">1.3.4</a>.  Robustness versus Performance</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.4.%20%20Robustness%20versus%20Performance"></a></body></html><a class="selflink" href="#section-1.3.4" id="section-1.3.4">1.3.4</a>.  Robustness versus Performance</span>
 
    SIV cannot perform at the same high throughput rates that other
    authenticated encryption schemes can (e.g., [<a href="#ref-GCM" title='"The Galois/Counter Mode of Operation (GCM)"'>GCM</a>] or [<a href="#ref-OCB" title='"The OCB Authenticated Encryption Algorithm"'>OCB</a>]) due to
@@ -465,7 +444,7 @@ Table of Contents
    applications -- it can provide a robust alternative, especially when
    considering its resistance to nonce reuse.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.5.%20%20Conservation%20of%20Cryptographic%20Primitives"></a></body></html><a class="selflink" href="#section-1.3.5" name="section-1.3.5">1.3.5</a>.  Conservation of Cryptographic Primitives</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.5.%20%20Conservation%20of%20Cryptographic%20Primitives"></a></body></html><a class="selflink" href="#section-1.3.5" id="section-1.3.5">1.3.5</a>.  Conservation of Cryptographic Primitives</span>
 
    The cipher mode described herein can do authenticated encryption, key
    wrapping, key derivation, and serve as a generic message
@@ -475,9 +454,9 @@ Table of Contents
    and/or processor constrained and that cannot afford to implement
    multiple cryptographic primitives to accomplish these functions.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Specification%20of%20SIV"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Specification of SIV</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Specification%20of%20SIV"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Specification of SIV</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Notation"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Notation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Notation"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Notation</span>
 
    SIV and S2V use the following notation:
 
@@ -508,7 +487,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -542,7 +521,7 @@ Table of Contents
    E(K,X)
       indicates AES encryption of string X using key K.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Overview"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Overview</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Overview"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Overview</span>
 
    SIV-AES uses AES in CMAC mode (S2V) and in counter mode (CTR).  SIV-
    AES takes either a 256-, 384-, or 512-bit key (which is broken up
@@ -552,7 +531,7 @@ Table of Contents
    comprises a synthetic initialization vector concatenated with the
    encrypted plaintext.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Doubling"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Doubling</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Doubling"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Doubling</span>
 
    The doubling operation on a 128-bit input string is performed using a
    left-shift of the input followed by a conditional xor operation on
@@ -564,7 +543,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -574,7 +553,7 @@ Table of Contents
    Note that this is the same operation used to generate sub-keys for
    CMAC-AES.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20S2V"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  S2V</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20S2V"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  S2V</span>
 
    The S2V operation consists of the doubling and xoring of the outputs
    of a pseudo-random function, CMAC, operating over individual strings
@@ -620,7 +599,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -676,11 +655,11 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20CTR"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  CTR</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20CTR"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  CTR</span>
 
    CTR is a counter mode of AES.  It takes as input a plaintext P of
    arbitrary length, a key K of length 128, 192, or 256 bits, and a
@@ -720,7 +699,7 @@ Table of Contents
    amount of plaintext that can be safely protected by SIV-AES to 2^39 -
    128 bits or 2^71 - 128 bits, respectively.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20SIV%20Encrypt"></a></body></html><a class="selflink" href="#section-2.6" name="section-2.6">2.6</a>.  SIV Encrypt</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20SIV%20Encrypt"></a></body></html><a class="selflink" href="#section-2.6" id="section-2.6">2.6</a>.  SIV Encrypt</span>
 
    SIV-encrypt takes as input a key K of length 256, 384, or 512 bits,
    plaintext of arbitrary length, and a vector of associated data AD[ ]
@@ -732,7 +711,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -788,7 +767,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -817,7 +796,7 @@ Table of Contents
    counter are zeroed out just prior to being used by CTR for
    optimization purposes, see <a href="#section-5">Section 5</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.%20%20SIV%20Decrypt"></a></body></html><a class="selflink" href="#section-2.7" name="section-2.7">2.7</a>.  SIV Decrypt</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.%20%20SIV%20Decrypt"></a></body></html><a class="selflink" href="#section-2.7" id="section-2.7">2.7</a>.  SIV Decrypt</span>
 
    SIV-decrypt takes as input a key K of length 256, 384, or 512 bits,
    Z, which represents a synthetic initialization vector V concatenated
@@ -844,7 +823,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -900,7 +879,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -935,7 +914,7 @@ Table of Contents
    counter are zeroed out just prior to being used in CTR mode for
    optimization purposes, see <a href="#section-5">Section 5</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Nonce-Based%20Authenticated%20Encryption%20with%20SIV"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Nonce-Based Authenticated Encryption with SIV</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Nonce-Based%20Authenticated%20Encryption%20with%20SIV"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Nonce-Based Authenticated Encryption with SIV</span>
 
    SIV performs nonce-based authenticated encryption when a component of
    the associated data is a nonce.  For purposes of interoperability the
@@ -956,14 +935,14 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
    It <em>MAY</em> be necessary to transport this nonce with the output generated
    by S2V.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Deterministic%20Authenticated%20Encryption%20with%20SIV"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Deterministic Authenticated Encryption with SIV</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Deterministic%20Authenticated%20Encryption%20with%20SIV"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Deterministic Authenticated Encryption with SIV</span>
 
    When the plaintext to encrypt and authenticate contains data that is
    unpredictable to an adversary -- for example, a secret key -- SIV can
@@ -975,7 +954,7 @@ Table of Contents
    wrapping of keys) <em>MAY</em> define associated data inputs to SIV.  It is
    not necessary to add a nonce component to the AD in this case.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Optimizations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Optimizations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Optimizations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Optimizations</span>
 
    Implementations that cannot or do not wish to support addition modulo
    2^128 can take advantage of the fact that the 31st and 63rd bits
@@ -999,9 +978,9 @@ Table of Contents
    multiple components, up to the variant component, can be computed
    once and cached.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  IANA Considerations</span>
 
-   [<a id="ref-RFC5116" name="ref-RFC5116">RFC5116</a>] defines a uniform interface to cipher modes that provide
+   [<a id="ref-RFC5116">RFC5116</a>] defines a uniform interface to cipher modes that provide
    nonce-based Authenticated Encryption with Associated Data (AEAD).  It
    does this via a registry of AEAD algorithms.
 
@@ -1012,7 +991,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -1031,7 +1010,7 @@ Table of Contents
    used for any other AEAD mode (e.g., a scatter/gather technique) can
    be used with SIV.
 
-   [<a id="ref-RFC5116" name="ref-RFC5116">RFC5116</a>] requires AEAD algorithm specifications to include maximal
+   [<a id="ref-RFC5116">RFC5116</a>] requires AEAD algorithm specifications to include maximal
    limits to the amount of plaintext, the amount of associated data, and
    the size of a nonce that the AEAD algorithm can accept.
 
@@ -1068,7 +1047,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -1076,7 +1055,7 @@ Table of Contents
    invocations and the amount of plaintext protected with each
    invocation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20AEAD_AES_SIV_CMAC_256"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  AEAD_AES_SIV_CMAC_256</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20AEAD_AES_SIV_CMAC_256"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  AEAD_AES_SIV_CMAC_256</span>
 
    The AES-SIV-CMAC-256 AEAD algorithm works as specified in Sections
    2.6 and 2.7.  The input and output lengths for AES-SIV-CMAC-256 as
@@ -1097,7 +1076,7 @@ Table of Contents
    The security implications of nonce reuse and/or misuse are described
    in <a href="#section-1.3.2">Section 1.3.2</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20AEAD_AES_SIV_CMAC_384"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  AEAD_AES_SIV_CMAC_384</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20AEAD_AES_SIV_CMAC_384"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  AEAD_AES_SIV_CMAC_384</span>
 
    The AES-SIV-CMAC-384 AEAD algorithm works as specified in Sections
    2.6 and 2.7.  The input and output lengths for AES-SIV-CMAC-384 as
@@ -1124,11 +1103,11 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20AEAD_AES_SIV_CMAC_512"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  AEAD_AES_SIV_CMAC_512</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20AEAD_AES_SIV_CMAC_512"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  AEAD_AES_SIV_CMAC_512</span>
 
    The AES-SIV-CMAC-512 AEAD algorithm works as specified in Sections
    2.6 and 2.7.  The input and output lengths for AES-SIV-CMAC-512 as
@@ -1149,7 +1128,7 @@ Table of Contents
    The security implications of nonce reuse and/or misuse are described
    in <a href="#section-1.3.2">Section 1.3.2</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    SIV provides confidentiality in the sense that the output of SIV-
    Encrypt is indistinguishable from a random string of bits.  It
@@ -1180,7 +1159,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -1199,7 +1178,7 @@ Table of Contents
    a component to S2V, that limits the number of components of
    associated data that can be safely passed to SIV to 126.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgments</span>
 
    Thanks to Phil Rogaway for patiently answering numerous questions on
    SIV and S2V and for useful critiques of earlier versions of this
@@ -1208,27 +1187,27 @@ Table of Contents
    reviewing this paper and producing another independent implementation
    of SIV, thereby confirming the correctness of the test vectors.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-CMAC" name="ref-CMAC">CMAC</a>]      Dworkin, M., "Recommendation for Block Cipher Modes of
+   [<a id="ref-CMAC">CMAC</a>]      Dworkin, M., "Recommendation for Block Cipher Modes of
                Operation: The CMAC Mode for Authentication", NIST
                Special Pulication 800-38B, May 2005.
 
-   [<a id="ref-MODES" name="ref-MODES">MODES</a>]     Dworkin, M., "Recommendation for Block Cipher Modes of
+   [<a id="ref-MODES">MODES</a>]     Dworkin, M., "Recommendation for Block Cipher Modes of
                Operation: Methods and Techniques", NIST Special
                Pulication 800-38A, 2001 edition.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]    Bradner, S., "Key words for use in RFCs to Indicate
-               Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]    Bradner, S., "Key words for use in RFCs to Indicate
+               Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC5116" name="ref-RFC5116">RFC5116</a>]    McGrew, D., "An Interface and Algorithms for
+   [<a id="ref-RFC5116">RFC5116</a>]    McGrew, D., "An Interface and Algorithms for
                Authenticated Encryption", <a href="./rfc5116.html">RFC 5116</a>, January 2008.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-APPCRY" name="ref-APPCRY">APPCRY</a>]    Menezes, A., van Oorshot, P., and S. Vanstone, "Handbook
+   [<a id="ref-APPCRY">APPCRY</a>]    Menezes, A., van Oorshot, P., and S. Vanstone, "Handbook
                of Applied Cryptography", CRC Press Series on Discrete
                Mathematics and Its Applications, 1996.
 
@@ -1236,54 +1215,54 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
-   [<a id="ref-BADESP" name="ref-BADESP">BADESP</a>]    Bellovin, S., "Problem Areas for the IP Security
+   [<a id="ref-BADESP">BADESP</a>]    Bellovin, S., "Problem Areas for the IP Security
                Protocols", Proceedings from the 6th Usenix UNIX Security
                Symposium, July 22-25 1996.
 
-   [<a id="ref-RFC3610" name="ref-RFC3610">RFC3610</a>]   Whiting, D., Housley, R., and N. Ferguson, "Counter with
+   [<a id="ref-RFC3610">RFC3610</a>]   Whiting, D., Housley, R., and N. Ferguson, "Counter with
                CBC-MAC (CCM)", <a href="./rfc3610.html">RFC 3610</a>, September 2003.
 
-   [<a id="ref-DAE" name="ref-DAE">DAE</a>]       Rogaway, P. and T. Shrimpton, "Deterministic
+   [<a id="ref-DAE">DAE</a>]       Rogaway, P. and T. Shrimpton, "Deterministic
                Authenticated Encryption, A Provable-Security Treatment
                of the Key-Wrap Problem", Advances in Cryptology --
                EUROCRYPT '06 St. Petersburg, Russia, 2006.
 
-   [<a id="ref-GCM" name="ref-GCM">GCM</a>]       McGrew, D. and J. Viega, "The Galois/Counter Mode of
+   [<a id="ref-GCM">GCM</a>]       McGrew, D. and J. Viega, "The Galois/Counter Mode of
                Operation (GCM)".
 
-   [<a id="ref-JUTLA" name="ref-JUTLA">JUTLA</a>]     Jutla, C., "Encryption Modes With Almost Free Message
+   [<a id="ref-JUTLA">JUTLA</a>]     Jutla, C., "Encryption Modes With Almost Free Message
                Integrity", Proceedings of the International Conference
                on the Theory and Application of Cryptographic
                Techniques:  Advances in Cryptography.
 
-   [<a id="ref-OCB" name="ref-OCB">OCB</a>]       Krovetz, T. and P. Rogaway, "The OCB Authenticated
+   [<a id="ref-OCB">OCB</a>]       Krovetz, T. and P. Rogaway, "The OCB Authenticated
                Encryption Algorithm", Work in Progress, March 2005.
 
-   [<a id="ref-RADKEY" name="ref-RADKEY">RADKEY</a>]    Zorn, G., Zhang, T., Walker, J., and J. Salowey, "RADIUS
+   [<a id="ref-RADKEY">RADKEY</a>]    Zorn, G., Zhang, T., Walker, J., and J. Salowey, "RADIUS
                Attributes for the Delivery of Keying Material", Work in
                Progress, April 2007.
 
-   [<a id="ref-RANDORCL" name="ref-RANDORCL">RANDORCL</a>]  Bellare, M. and P. Rogaway, "Random Oracles are
+   [<a id="ref-RANDORCL">RANDORCL</a>]  Bellare, M. and P. Rogaway, "Random Oracles are
                Practical:  A Paradigm for Designing Efficient
                Protocols", Proceeding of the First ACM Conference on
                Computer and Communications Security, November 1993.
 
-   [<a id="ref-RFC2104" name="ref-RFC2104">RFC2104</a>]   Krawczyk, H., Bellare, M., and R. Canetti, "HMAC: Keyed-
+   [<a id="ref-RFC2104">RFC2104</a>]   Krawczyk, H., Bellare, M., and R. Canetti, "HMAC: Keyed-
                Hashing for Message Authentication", <a href="./rfc2104.html">RFC 2104</a>, February
                1997.
 
-   [<a id="ref-RFC2548" name="ref-RFC2548">RFC2548</a>]   Zorn, G., "Microsoft Vendor-specific RADIUS Attributes",
+   [<a id="ref-RFC2548">RFC2548</a>]   Zorn, G., "Microsoft Vendor-specific RADIUS Attributes",
                <a href="./rfc2548.html">RFC 2548</a>, March 1999.
 
-   [<a id="ref-RFC2865" name="ref-RFC2865">RFC2865</a>]   Rigney, C., Willens, S., Rubens, A., and W. Simpson,
+   [<a id="ref-RFC2865">RFC2865</a>]   Rigney, C., Willens, S., Rubens, A., and W. Simpson,
                "Remote Authentication Dial In User Service (RADIUS)",
                <a href="./rfc2865.html">RFC 2865</a>, June 2000.
 
-   [<a id="ref-RFC3217" name="ref-RFC3217">RFC3217</a>]   Housley, R., "Triple-DES and RC2 Key Wrapping", <a href="./rfc3217.html">RFC 3217</a>,
+   [<a id="ref-RFC3217">RFC3217</a>]   Housley, R., "Triple-DES and RC2 Key Wrapping", <a href="./rfc3217.html">RFC 3217</a>,
                December 2001.
 
 
@@ -1292,27 +1271,27 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
-   [<a id="ref-RFC3394" name="ref-RFC3394">RFC3394</a>]   Schaad, J. and R. Housley, "Advanced Encryption Standard
+   [<a id="ref-RFC3394">RFC3394</a>]   Schaad, J. and R. Housley, "Advanced Encryption Standard
                (AES) Key Wrap Algorithm", <a href="./rfc3394.html">RFC 3394</a>, September 2002.
 
-   [<a id="ref-SP800-38D" name="ref-SP800-38D">SP800-38D</a>] Dworkin, M., "Recommendations for Block Cipher Modes of
+   [<a id="ref-SP800-38D">SP800-38D</a>] Dworkin, M., "Recommendations for Block Cipher Modes of
                Operation: Galois Counter Mode (GCM) and GMAC", NIST
                Special Pulication 800-38D, June 2007.
 
-   [<a id="ref-VIRT" name="ref-VIRT">VIRT</a>]      Garfinkel, T. and M. Rosenblum, "When Virtual is Harder
+   [<a id="ref-VIRT">VIRT</a>]      Garfinkel, T. and M. Rosenblum, "When Virtual is Harder
                than Real: Security Challenges in Virtual Machine Based
                Computing Environments" In 10th Workshop on Hot Topics in
                Operating Systems, May 2005.
 
-   [<a id="ref-WLAN" name="ref-WLAN">WLAN</a>]      "Draft Standard for IEEE802.11: Wireless LAN Medium
+   [<a id="ref-WLAN">WLAN</a>]      "Draft Standard for IEEE802.11: Wireless LAN Medium
                Access Control (MAC) and Physical Layer (PHY)
                Specification", 2007.
 
-   [<a id="ref-X9F1" name="ref-X9F1">X9F1</a>]      Dworkin, M., "Wrapping of Keys and Associated Data",
+   [<a id="ref-X9F1">X9F1</a>]      Dworkin, M., "Wrapping of Keys and Associated Data",
                Request for review of key wrap algorithms. Cryptology
                ePrint report 2004/340, 2004. Contents are excerpts from
                a draft standard of the Accredited Standards Committee,
@@ -1348,15 +1327,15 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Test%20Vectors"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Test Vectors</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Test%20Vectors"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Test Vectors</span>
 
    The following test vectors are for the mode defined in <a href="#section-6.1">Section 6.1</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Deterministic%20Authenticated%20Encryption%20Example"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>.  Deterministic Authenticated Encryption Example</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Deterministic%20Authenticated%20Encryption%20Example"></a></body></html><a class="selflink" href="#appendix-A.1" id="appendix-A.1">A.1</a>.  Deterministic Authenticated Encryption Example</span>
 
    Input:
    -----
@@ -1404,7 +1383,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -1425,7 +1404,7 @@ Table of Contents
            85632d07 c6e8f37f 950acd32 0a2ecc93
            40c02b96 90c4dc04 daef7f6a fe5c
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Nonce-Based%20Authenticated%20Encryption%20Example"></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>.  Nonce-Based Authenticated Encryption Example</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Nonce-Based%20Authenticated%20Encryption%20Example"></a></body></html><a class="selflink" href="#appendix-A.2" id="appendix-A.2">A.2</a>.  Nonce-Based Authenticated Encryption Example</span>
 
    Input:
    -----
@@ -1460,7 +1439,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -1516,7 +1495,7 @@ Table of Contents
 
 
 <span class="grey">Hawkins                      Informational                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -1572,7 +1551,7 @@ Author's Address
 
 
 <span class="grey">Hawkins                      Informational                     [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc5297.html">RFC 5297</a>                        SIV-AES                     October 2008</span>
 
 
@@ -1581,7 +1560,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2008).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1601,7 +1580,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1628,11 +1607,6 @@ Intellectual Property
 
 
 Hawkins                      Informational                     [Page 26]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

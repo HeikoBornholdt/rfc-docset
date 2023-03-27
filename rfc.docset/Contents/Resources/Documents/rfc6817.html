@@ -1,32 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-shalunov-ledbat-congestion" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:6817" name="DC.Identifier"/>
-<meta content="December, 2012" name="DC.Date.Issued"/>
-<meta content="Kuehlewind, Mirja" name="DC.Creator"/>
-<meta content="Hazel, Greg" name="DC.Creator"/>
-<meta content="Shalunov, Stanislav" name="DC.Creator"/>
-<meta content="Iyengar, Janardhan" name="DC.Creator"/>
-<meta content="Low Extra Delay Background Transport (LEDBAT) is an experimental
-delay-based congestion control algorithm that seeks to utilize the
-available bandwidth on an end-to-end path while limiting the
-consequent increase in queueing delay on that path. LEDBAT uses
-changes in one-way delay measurements to limit congestion that the
-flow itself induces in the network. LEDBAT is designed for use by
-background bulk-transfer applications to be no more aggressive than
-standard TCP congestion control (as specified in RFC 5681) and to
-yield in the presence of competing flows, thus limiting interference
-with the network performance of competing flows. This document defines
-an Experimental Protocol for the Internet community." name="DC.Description.Abstract"/>
-<meta content="Low Extra Delay Background Transport (LEDBAT)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6817 - Low Extra Delay Background Transport (LEDBAT)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="S. Shalunov" name="citation_author"/>
+<meta content="G. Hazel" name="citation_author"/>
+<meta content="J. Iyengar" name="citation_author"/>
+<meta content="M. Kuehlewind" name="citation_author"/>
+<meta content="December, 2012" name="citation_publication_date"/>
+<meta content="Low Extra Delay Background Transport (LEDBAT)" name="citation_title"/>
+<meta content="10.17487/RFC6817" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6817" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6817.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6817: Low Extra Delay Background Transport (LEDBAT)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -55,7 +43,7 @@ an Experimental Protocol for the Internet community." name="DC.Description.Abstr
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -64,7 +52,7 @@ an Experimental Protocol for the Internet community." name="DC.Description.Abstr
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -143,19 +131,18 @@ an Experimental Protocol for the Internet community." name="DC.Description.Abstr
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -169,21 +156,9 @@ an Experimental Protocol for the Internet community." name="DC.Description.Abstr
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgyellow" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6817.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6817" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-ledbat-congestion.html" title="draft-ietf-ledbat-congestion">draft-ietf-ledbat...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6817" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6817" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                       S. Shalunov
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6817.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6817.txt.pdf">PDF</a>|<a href="/rfc/rfc6817.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6817" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6817&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6817" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                       S. Shalunov
 Request for Comments: 6817                                      G. Hazel
 Category: Experimental                                  BitTorrent, Inc.
 ISSN: 2070-1721                                               J. Iyengar
@@ -235,7 +210,7 @@ Status of This Memo
 
 
 <span class="grey">Shalunov, et al.              Experimental                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -244,7 +219,7 @@ Copyright Notice
    Copyright (c) 2012 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -291,7 +266,7 @@ Copyright Notice
 
 
 <span class="grey">Shalunov, et al.              Experimental                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -347,11 +322,11 @@ Table of Contents
 
 
 <span class="grey">Shalunov, et al.              Experimental                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    TCP congestion control [<a href="./rfc5681.html" title='"TCP Congestion Control"'>RFC5681</a>] seeks to share bandwidth at a
    bottleneck link equitably among flows competing at the bottleneck,
@@ -387,13 +362,13 @@ Table of Contents
    In the rest of this document, we refer to congestion control
    specified in [<a href="./rfc5681.html" title='"TCP Congestion Control"'>RFC5681</a>] as "standard TCP".
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Requirements Notation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Requirements Notation</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Design%20Goals"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Design Goals</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Design%20Goals"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Design Goals</span>
 
    LEDBAT congestion control seeks to achieve the following goals:
 
@@ -403,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">Shalunov, et al.              Experimental                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -413,7 +388,7 @@ Table of Contents
    3.  to yield quickly to standard TCP flows that share the same
        bottleneck link.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Applicability"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>.  Applicability</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Applicability"></a></body></html><a class="selflink" href="#section-1.3" id="section-1.3">1.3</a>.  Applicability</span>
 
    LEDBAT is a "scavenger" congestion control mechanism that is
    motivated primarily by background bulk-transfer applications, such as
@@ -459,13 +434,13 @@ Table of Contents
 
 
 <span class="grey">Shalunov, et al.              Experimental                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20LEDBAT%20Congestion%20Control"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  LEDBAT Congestion Control</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20LEDBAT%20Congestion%20Control"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  LEDBAT Congestion Control</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Overview"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Overview</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Overview"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Overview</span>
 
    A standard TCP sender increases its congestion window until a loss
    occurs [<a href="./rfc5681.html" title='"TCP Congestion Control"'>RFC5681</a>] or an ECN mark is received [<a href="./rfc3168.html" title='"The Addition of Explicit Congestion Notification (ECN) to IP"'>RFC3168</a>], which, in the
@@ -486,7 +461,7 @@ Table of Contents
    predetermined target, LEDBAT decreases its sending rate as a response
    to potential congestion in the network.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Preliminaries"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Preliminaries</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Preliminaries"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Preliminaries</span>
 
    A LEDBAT sender uses a congestion window (cwnd) to gate the amount of
    data that the sender can send into the network in one round-trip time
@@ -515,11 +490,11 @@ Table of Contents
 
 
 <span class="grey">Shalunov, et al.              Experimental                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Receiver-Side%20Operation"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Receiver-Side Operation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Receiver-Side%20Operation"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Receiver-Side Operation</span>
 
    A LEDBAT receiver calculates the one-way delay from the sender to the
    receiver based on its own system time and timestamps in the received
@@ -545,9 +520,9 @@ Table of Contents
    are applied, the computed delay samples should be available to the
    sender in the order they were generated at the receiver.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Sender-Side%20Operation"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Sender-Side Operation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Sender-Side%20Operation"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Sender-Side Operation</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.1.%20%20An%20Overview"></a></body></html><a class="selflink" href="#section-2.4.1" name="section-2.4.1">2.4.1</a>.  An Overview</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.1.%20%20An%20Overview"></a></body></html><a class="selflink" href="#section-2.4.1" id="section-2.4.1">2.4.1</a>.  An Overview</span>
 
    As a first approximation, a LEDBAT sender operates as shown below;
    the complete algorithm is specified later in <a href="#section-2.4.2">Section 2.4.2</a>.  TARGET
@@ -571,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Shalunov, et al.              Experimental                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -587,7 +562,7 @@ Table of Contents
    idle times, which we now take into account in our complete sender
    algorithm below.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.2.%20%20The%20Complete%20Sender%20Algorithm"></a></body></html><a class="selflink" href="#section-2.4.2" name="section-2.4.2">2.4.2</a>.  The Complete Sender Algorithm</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.2.%20%20The%20Complete%20Sender%20Algorithm"></a></body></html><a class="selflink" href="#section-2.4.2" id="section-2.4.2">2.4.2</a>.  The Complete Sender Algorithm</span>
 
    update_current_delay() maintains a list of one-way delay
    measurements, of which a filtered value is used as an estimate of the
@@ -627,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Shalunov, et al.              Experimental                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -683,7 +658,7 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -739,7 +714,7 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -770,7 +745,7 @@ update_CTO()
    any ACKs.  A maximum value <em>MAY</em> be placed on the CTO, and if placed,
    it <em>MUST</em> be at least 60 seconds.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Parameter%20Values"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  Parameter Values</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Parameter%20Values"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  Parameter Values</span>
 
    TARGET <em>MUST</em> be 100 milliseconds or less, and this choice of value is
    explained further in <a href="#section-3.3">Section 3.3</a>.  Note that using the same TARGET
@@ -795,7 +770,7 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -851,16 +826,16 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Understanding%20LEDBAT%20Mechanisms"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Understanding LEDBAT Mechanisms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Understanding%20LEDBAT%20Mechanisms"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Understanding LEDBAT Mechanisms</span>
 
    This section describes the delay estimation and window management
    mechanisms used in LEDBAT.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Delay%20Estimation"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Delay Estimation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Delay%20Estimation"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Delay Estimation</span>
 
    LEDBAT estimates congestion in the direction of the data flow, and to
    avoid measuring additional delay from, e.g., queue buildup on the
@@ -878,7 +853,7 @@ update_CTO()
    sender separates the queueing delay component from the rest of the
    end-to-end delay, as described below.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Estimating%20Base%20Delay"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  Estimating Base Delay</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Estimating%20Base%20Delay"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  Estimating Base Delay</span>
 
    Since queuing delay is always additive to the end-to-end delay,
    LEDBAT estimates the sum of the constant delay components, which we
@@ -894,7 +869,7 @@ update_CTO()
    unchanged), whereas a smaller observation window results in faster
    response to true changes in the base delay.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Estimating%20Queueing%20Delay"></a></body></html><a class="selflink" href="#section-3.1.2" name="section-3.1.2">3.1.2</a>.  Estimating Queueing Delay</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Estimating%20Queueing%20Delay"></a></body></html><a class="selflink" href="#section-3.1.2" id="section-3.1.2">3.1.2</a>.  Estimating Queueing Delay</span>
 
    Assuming that the base delay is constant (in the absence of any route
    changes), the queueing delay is represented by the variable component
@@ -907,7 +882,7 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -915,14 +890,14 @@ update_CTO()
    delay estimation, such as due to spikes in processing delay at a node
    on the path.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Managing%20the%20Congestion%20Window"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Managing the Congestion Window</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Managing%20the%20Congestion%20Window"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Managing the Congestion Window</span>
 
    LEDBAT uses a simple linear controller to determine the sending rate
    as a function of the delay estimate, where the response of the sender
    is proportional to the difference between the current queueing delay
    estimate and the target.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Window%20Increase%3A%20Probing%20for%20More%20Bandwidth"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Window Increase: Probing for More Bandwidth</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Window%20Increase%3A%20Probing%20for%20More%20Bandwidth"></a></body></html><a class="selflink" href="#section-3.2.1" id="section-3.2.1">3.2.1</a>.  Window Increase: Probing for More Bandwidth</span>
 
    When the queuing delay is smaller than a delay target value, as
    specified by the TARGET parameter in this document, a LEDBAT sender
@@ -938,7 +913,7 @@ update_CTO()
    induce.  If the current queuing delay equals the TARGET value, LEDBAT
    tries to maintain this extra delay.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Window%20Decrease%3A%20Responding%20to%20Congestion"></a></body></html><a class="selflink" href="#section-3.2.2" name="section-3.2.2">3.2.2</a>.  Window Decrease: Responding to Congestion</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Window%20Decrease%3A%20Responding%20to%20Congestion"></a></body></html><a class="selflink" href="#section-3.2.2" id="section-3.2.2">3.2.2</a>.  Window Decrease: Responding to Congestion</span>
 
    When a sender's queueing delay estimate is higher than the target,
    the LEDBAT flow's rate should be reduced.  LEDBAT's linear controller
@@ -963,11 +938,11 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Choosing%20the%20Queuing%20Delay%20Target"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Choosing the Queuing Delay Target</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Choosing%20the%20Queuing%20Delay%20Target"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Choosing the Queuing Delay Target</span>
 
    The International Telecommunication Union's (ITU's) Recommendation
    G.114 defines a one-way delay of 150 ms to be acceptable for most
@@ -987,9 +962,9 @@ update_CTO()
    BitTorrent Delivery Network Accelerator (DNA), and as an experimental
    mechanism in uTorrent [<a href="#ref-uTorrent" title='"uTorrent Transport Protocol library"'>uTorrent</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Discussion"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Discussion</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Discussion"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Discussion</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Framing%20and%20ACK%20Frequency%20Considerations"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Framing and ACK Frequency Considerations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Framing%20and%20ACK%20Frequency%20Considerations"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Framing and ACK Frequency Considerations</span>
 
    While the actual framing and wire format of the protocols using
    LEDBAT are outside the scope of this document, we briefly consider
@@ -1006,7 +981,7 @@ update_CTO()
    packet received or less frequently; LEDBAT does require that the
    receiver <em>MUST</em> transmit at least one ACK in every RTT.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Competing%20with%20TCP%20Flows"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Competing with TCP Flows</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Competing%20with%20TCP%20Flows"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Competing with TCP Flows</span>
 
    LEDBAT is designed to respond to congestion indications earlier than
    loss-based standard TCP [<a href="./rfc5681.html" title='"TCP Congestion Control"'>RFC5681</a>].  A LEDBAT flow gets more
@@ -1019,7 +994,7 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -1028,7 +1003,7 @@ update_CTO()
    flow falls back to standard TCP behavior, and is no more aggressive
    than standard TCP [<a href="./rfc5681.html" title='"TCP Congestion Control"'>RFC5681</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Competing%20with%20Non-TCP%20Flows"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Competing with Non-TCP Flows</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Competing%20with%20Non-TCP%20Flows"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Competing with Non-TCP Flows</span>
 
    While LEDBAT yields to all high-load flows, both TCP and non-TCP,
    LEDBAT may not yield to low-load and latency-sensitive traffic that
@@ -1045,7 +1020,7 @@ update_CTO()
    which ought to be within the delay tolerance for most latency-
    sensitive applications, including VoIP applications.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Fairness%20among%20LEDBAT%20Flows"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Fairness among LEDBAT Flows</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Fairness%20among%20LEDBAT%20Flows"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Fairness among LEDBAT Flows</span>
 
    The primary design goals of LEDBAT are focused on the aggregate
    behavior of LEDBAT flows when they compete with standard TCP.  Since
@@ -1075,7 +1050,7 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -1112,14 +1087,14 @@ update_CTO()
    immediately correctly measured.  With a small number of LEDBAT flows,
    system noise may sufficiently regulate the latecomer's advantage.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Open%20Areas%20for%20Experimentation"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Open Areas for Experimentation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Open%20Areas%20for%20Experimentation"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Open Areas for Experimentation</span>
 
    We now outline some areas that need experimentation in the Internet
    and under different network scenarios.  These experiments should help
    the community understand LEDBAT's dynamics and should help towards
    further standardization of LEDBAT and LEDBAT-related documents.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Network%20Effects%20and%20Monitoring"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Network Effects and Monitoring</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Network%20Effects%20and%20Monitoring"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Network Effects and Monitoring</span>
 
    Further study is required to fully understand the behavior and
    convergence properties of LEDBAT in networks with non-tail-drop, non-
@@ -1131,7 +1106,7 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -1162,7 +1137,7 @@ update_CTO()
    TARGET as specified in this document, LEDBAT flows should be expected
    to back off and reduce their sending rate.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Parameter%20Values"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Parameter Values</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Parameter%20Values"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Parameter Values</span>
 
    The throughput and response of LEDBAT to the proposed parameter
    values of TARGET, decrease-GAIN, BASE_HISTORY, INIT_CWND, and
@@ -1187,11 +1162,11 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Filters"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Filters</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Filters"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Filters</span>
 
    LEDBAT's effectiveness depends on a sender's ability to accurately
    estimate end-to-end queueing delay from delay samples.  Consequently,
@@ -1204,7 +1179,7 @@ update_CTO()
    irrespective of the number of delay samples in the ACK.  This impact
    should be studied when the different filters are considered.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Framing"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Framing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Framing"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Framing</span>
 
    This document defines only a congestion control algorithm and assumes
    that framing mechanisms for exchanging delay information exist within
@@ -1219,7 +1194,7 @@ update_CTO()
    Careful experimentation is necessary to understand and integrate
    LEDBAT into both new and existing protocols.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    LEDBAT's aggressiveness is contingent on the delay estimates and on
    the TARGET delay value.  If these parameter values at the sender are
@@ -1243,7 +1218,7 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -1252,45 +1227,45 @@ update_CTO()
    compatible with use of IPsec and Transport Layer Security (TLS) /
    Datagram Transport Layer Security (DTLS).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgements</span>
 
    We thank folks in the LEDBAT working group for their comments and
    feedback.  Special thanks to Murari Sridharan and Rolf Winter for
    their patient and untiring shepherding.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]   Bradner, S., "Key words for use in RFCs to Indicate
-               Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]   Bradner, S., "Key words for use in RFCs to Indicate
+               Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC3168" name="ref-RFC3168">RFC3168</a>]   Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
+   [<a id="ref-RFC3168">RFC3168</a>]   Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
                of Explicit Congestion Notification (ECN) to IP",
                <a href="./rfc3168.html">RFC 3168</a>, September 2001.
 
-   [<a id="ref-RFC4821" name="ref-RFC4821">RFC4821</a>]   Mathis, M. and J. Heffner, "Packetization Layer Path MTU
+   [<a id="ref-RFC4821">RFC4821</a>]   Mathis, M. and J. Heffner, "Packetization Layer Path MTU
                Discovery", <a href="./rfc4821.html">RFC 4821</a>, March 2007.
 
-   [<a id="ref-RFC5681" name="ref-RFC5681">RFC5681</a>]   Allman, M., Paxson, V., and E. Blanton, "TCP Congestion
+   [<a id="ref-RFC5681">RFC5681</a>]   Allman, M., Paxson, V., and E. Blanton, "TCP Congestion
                Control", <a href="./rfc5681.html">RFC 5681</a>, September 2009.
 
-   [<a id="ref-RFC6298" name="ref-RFC6298">RFC6298</a>]   Paxson, V., Allman, M., Chu, J., and M. Sargent,
+   [<a id="ref-RFC6298">RFC6298</a>]   Paxson, V., Allman, M., Chu, J., and M. Sargent,
                "Computing TCP's Retransmission Timer", <a href="./rfc6298.html">RFC 6298</a>,
                June 2011.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Informative References</span>
 
-   [<a id="ref-Bra94" name="ref-Bra94">Bra94</a>]     Brakmo, L., O'Malley, S., and L. Peterson, "TCP Vegas:
+   [<a id="ref-Bra94">Bra94</a>]     Brakmo, L., O'Malley, S., and L. Peterson, "TCP Vegas:
                New techniques for congestion detection and avoidance",
                Proceedings of SIGCOMM '94, pages 24-35, August 1994.
 
-   [<a id="ref-Car10" name="ref-Car10">Car10</a>]     Carofiglio, G., Muscariello, L., Rossi, D., Testa, C.,
+   [<a id="ref-Car10">Car10</a>]     Carofiglio, G., Muscariello, L., Rossi, D., Testa, C.,
                and S. Valenti, "Rethinking Low Extra Delay Background
                Transport Protocols", October 2010,
                &lt;<a href="http://arxiv.org/abs/1010.5623v1">http://arxiv.org/abs/1010.5623v1</a>&gt;.
 
-   [<a id="ref-Low02" name="ref-Low02">Low02</a>]     Low, S., Peterson, L., and L. Wang, "Understanding TCP
+   [<a id="ref-Low02">Low02</a>]     Low, S., Peterson, L., and L. Wang, "Understanding TCP
                Vegas: A Duality Model", JACM 49 (2), March 2002.
 
 
@@ -1299,31 +1274,31 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
-   [<a id="ref-RFC5905" name="ref-RFC5905">RFC5905</a>]   Mills, D., Martin, J., Burbank, J., and W. Kasch,
+   [<a id="ref-RFC5905">RFC5905</a>]   Mills, D., Martin, J., Burbank, J., and W. Kasch,
                "Network Time Protocol Version 4: Protocol and Algorithms
                Specification", <a href="./rfc5905.html">RFC 5905</a>, June 2010.
 
-   [<a id="ref-RFC6297" name="ref-RFC6297">RFC6297</a>]   Welzl, M. and D. Ros, "A Survey of Lower-than-Best-Effort
+   [<a id="ref-RFC6297">RFC6297</a>]   Welzl, M. and D. Ros, "A Survey of Lower-than-Best-Effort
                Transport Protocols", <a href="./rfc6297.html">RFC 6297</a>, June 2011.
 
-   [<a id="ref-Sch10" name="ref-Sch10">Sch10</a>]     Schneider, J., Wagner, J., Winter, R., and H. Kolbe, "Out
+   [<a id="ref-Sch10">Sch10</a>]     Schneider, J., Wagner, J., Winter, R., and H. Kolbe, "Out
                of my Way -- Evaluating Low Extra Delay Background
                Transport in an ADSL Access Network", Proceedings of 22nd
                International Teletraffic Congress (ITC22), September
                2010.
 
-   [<a id="ref-g114" name="ref-g114">g114</a>]      "SERIES G: TRANSMISSION SYSTEMS AND MEDIA, DIGITAL
+   [<a id="ref-g114">g114</a>]      "SERIES G: TRANSMISSION SYSTEMS AND MEDIA, DIGITAL
                SYSTEMS AND NETWORKS; International telephone connections
                and circuits - General; Recommendations on the
                transmission quality for an entire international
                telephone connection; One-way transmission time", ITU-T
                Recommendation G.114, 05/2003.
 
-   [<a id="ref-uTorrent" name="ref-uTorrent">uTorrent</a>]  Hazel, G., "uTorrent Transport Protocol library",
+   [<a id="ref-uTorrent">uTorrent</a>]  Hazel, G., "uTorrent Transport Protocol library",
                July 2012, &lt;<a href="http://github.com/bittorrent/libutp">http://github.com/bittorrent/libutp</a>&gt;.
 
 
@@ -1355,11 +1330,11 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Measurement%20Errors"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Measurement Errors</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Measurement%20Errors"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Measurement Errors</span>
 
    LEDBAT measures and uses one-way delays, and we now consider
    measurement errors in timestamp generation and use.  In this section,
@@ -1371,7 +1346,7 @@ update_CTO()
    offset from the true time, and a skew.  We now consider these errors
    in the context of LEDBAT.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Clock%20Offset"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>.  Clock Offset</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Clock%20Offset"></a></body></html><a class="selflink" href="#appendix-A.1" id="appendix-A.1">A.1</a>.  Clock Offset</span>
 
    The offset of the clocks, both the sender's and the receiver's, shows
    up as a fixed error in LEDBAT's one-way delay measurement.  The
@@ -1385,7 +1360,7 @@ update_CTO()
    window computations.  Clock offset error thus has no impact on
    LEDBAT.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Clock%20Skew"></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>.  Clock Skew</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Clock%20Skew"></a></body></html><a class="selflink" href="#appendix-A.2" id="appendix-A.2">A.2</a>.  Clock Skew</span>
 
    Clock skew generally shows up as a linearly changing error in a time
    estimate.  Similar to the offset, the skew of LEDBAT's one-way delay
@@ -1411,7 +1386,7 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -1467,7 +1442,7 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -1523,7 +1498,7 @@ update_CTO()
 
 
 <span class="grey">Shalunov, et al.              Experimental                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc6817.html">RFC 6817</a>                         LEDBAT                    December 2012</span>
 
 
@@ -1579,11 +1554,6 @@ Authors' Addresses
 
 
 Shalunov, et al.              Experimental                     [Page 25]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,25 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:5050" name="DC.Identifier"/>
-<meta content="This document describes the end-to-end protocol, block formats, and
-abstract service description for the exchange of messages (bundles) in
-Delay Tolerant Networking (DTN).  This document was produced within
-the IRTF's Delay Tolerant Networking Research Group (DTNRG) and
-represents the consensus of all of the active contributors to this
-group. See http://www.dtnrg.org for more information. This memo
-defines an Experimental Protocol for the Internet community." name="DC.Description.Abstract"/>
-<meta content="Scott, Keith L." name="DC.Creator"/>
-<meta content="Burleigh, Scott" name="DC.Creator"/>
-<meta content="November, 2007" name="DC.Date.Issued"/>
-<meta content="Bundle Protocol Specification" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5050 - Bundle Protocol Specification</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="K. Scott" name="citation_author"/>
+<meta content="S. Burleigh" name="citation_author"/>
+<meta content="November, 2007" name="citation_publication_date"/>
+<meta content="Bundle Protocol Specification" name="citation_title"/>
+<meta content="10.17487/RFC5050" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5050" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5050.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5050: Bundle Protocol Specification</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -48,7 +41,7 @@ defines an Experimental Protocol for the Internet community." name="DC.Descripti
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -57,7 +50,7 @@ defines an Experimental Protocol for the Internet community." name="DC.Descripti
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -136,19 +129,18 @@ defines an Experimental Protocol for the Internet community." name="DC.Descripti
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -162,21 +154,9 @@ defines an Experimental Protocol for the Internet community." name="DC.Descripti
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgyellow" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5050.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5050" title="PDF version of this document">pdf</a>] [<a href="./draft-irtf-dtnrg-bundle-spec.html" title="draft-irtf-dtnrg-bundle-spec">draft-irtf-dtnrg-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5050" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5050" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5050">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                           K. Scott
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5050.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5050.txt.pdf">PDF</a>|<a href="/rfc/rfc5050.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5050" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5050&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5050" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5050" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                           K. Scott
 Request for Comments: 5050                         The MITRE Corporation
 Category: Experimental                                       S. Burleigh
                                           NASA Jet Propulsion Laboratory
@@ -228,7 +208,7 @@ Abstract
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -284,7 +264,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -299,7 +279,7 @@ Table of Contents
    <a href="#appendix-A">Appendix A</a>.  Contributors  . . . . . . . . . . . . . . . . . . . . <a href="#page-49">49</a>
    <a href="#appendix-B">Appendix B</a>.  Comments  . . . . . . . . . . . . . . . . . . . . . . <a href="#page-49">49</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This document describes version 6 of the Delay Tolerant Networking
    (DTN) "bundle" protocol (BP).  Delay Tolerant Networking is an end-
@@ -340,7 +320,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -381,7 +361,7 @@ Table of Contents
    o  Mechanisms for populating the routing or forwarding information
       bases of bundle nodes.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Requirements Notation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Requirements Notation</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -396,13 +376,13 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Service%20Description"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Service Description</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Service%20Description"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Service Description</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Definitions"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Definitions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Definitions"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Definitions</span>
 
    Bundle -  A bundle is a protocol data unit of the DTN bundle
       protocol.  Each bundle comprises a sequence of two or more
@@ -452,7 +432,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -508,7 +488,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -564,7 +544,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -620,7 +600,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -666,7 +646,7 @@ Table of Contents
       custody.  A "custodian" of a bundle is a singleton endpoint whose
       sole member is one of the bundle's custodial nodes.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Implementation%20Architectures"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Implementation Architectures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Implementation%20Architectures"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Implementation Architectures</span>
 
    The above definitions are intended to enable the bundle protocol's
    operations to be specified in a manner that minimizes bias toward any
@@ -676,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -732,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -748,7 +728,7 @@ Table of Contents
        Substantial non-volatile storage resources are provided, and
        arbitrarily complex forwarding algorithms are supported.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Services%20Offered%20by%20Bundle%20Protocol%20Agents"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Services Offered by Bundle Protocol Agents</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Services%20Offered%20by%20Bundle%20Protocol%20Agents"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Services Offered by Bundle Protocol Agents</span>
 
    The bundle protocol agent of each node is expected to provide the
    following services to the node's application agent:
@@ -767,7 +747,7 @@ Table of Contents
 
    o  delivering a received bundle.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Bundle%20Format"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Bundle Format</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Bundle%20Format"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Bundle Format</span>
 
    Each bundle shall be a concatenated sequence of at least two block
    structures.  The first block in the sequence must be a primary bundle
@@ -788,11 +768,11 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Self-Delimiting%20Numeric%20Values%20%28SDNVs%29"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Self-Delimiting Numeric Values (SDNVs)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Self-Delimiting%20Numeric%20Values%20%28SDNVs%29"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Self-Delimiting Numeric Values (SDNVs)</span>
 
    The design of the bundle protocol attempts to reconcile minimal
    consumption of transmission bandwidth with:
@@ -844,7 +824,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -876,7 +856,7 @@ Table of Contents
    numeric values in bundle blocks yields the smallest block sizes
    without sacrificing scalability.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Bundle%20Processing%20Control%20Flags"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Bundle Processing Control Flags</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Bundle%20Processing%20Control%20Flags"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Bundle Processing Control Flags</span>
 
    The bundle processing control flags field in the primary bundle block
    of each bundle is an SDNV; the value encoded in this SDNV is a string
@@ -900,7 +880,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -956,7 +936,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -974,7 +954,7 @@ Table of Contents
    the "Bundle must not be fragmented" flag must be 1, and all status
    report request flags must be zero.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Block%20Processing%20Control%20Flags"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Block Processing Control Flags</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Block%20Processing%20Control%20Flags"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Block Processing Control Flags</span>
 
    The block processing control flags field in every block other than
    the primary bundle block is an SDNV; the value encoded in this SDNV
@@ -1012,7 +992,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1026,7 +1006,7 @@ Table of Contents
    processing flags must be set to zero on all blocks that follow the
    payload block.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Endpoint%20IDs"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Endpoint IDs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Endpoint%20IDs"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Endpoint IDs</span>
 
    The destinations of bundles are bundle endpoints, identified by text
    strings termed "endpoint IDs" (see <a href="#section-3.1">Section 3.1</a>).  Each endpoint ID
@@ -1068,7 +1048,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1089,7 +1069,7 @@ Table of Contents
    support expression of endpoint IDs in some internationalized manner
    (e.g., Internationalized Resource Identifiers (IRIs); see [<a href="./rfc3987.html" title='"Internationalized Resource Identifiers (IRIs)"'>RFC3987</a>]).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Formats%20of%20Bundle%20Blocks"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  Formats of Bundle Blocks</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Formats%20of%20Bundle%20Blocks"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  Formats of Bundle Blocks</span>
 
    This section describes the formats of the primary block and payload
    block.  Rules for processing these blocks appear in <a href="#section-5">Section 5</a> of this
@@ -1124,7 +1104,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1180,7 +1160,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1223,7 +1203,7 @@ Table of Contents
    therefore variable length.  A two-octet SDNV is shown here for
    convenience in representation.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.1.%20%20Primary%20Bundle%20Block"></a></body></html><a class="selflink" href="#section-4.5.1" name="section-4.5.1">4.5.1</a>.  Primary Bundle Block</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.1.%20%20Primary%20Bundle%20Block"></a></body></html><a class="selflink" href="#section-4.5.1" id="section-4.5.1">4.5.1</a>.  Primary Bundle Block</span>
 
    The primary bundle block contains the basic information needed to
    route bundles to their destinations.  The fields of the primary
@@ -1236,7 +1216,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1292,7 +1272,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1348,7 +1328,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1360,7 +1340,7 @@ Table of Contents
       Total Application Data Unit Length field is omitted from the
       block.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.%20%20Canonical%20Bundle%20Block%20Format"></a></body></html><a class="selflink" href="#section-4.5.2" name="section-4.5.2">4.5.2</a>.  Canonical Bundle Block Format</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.%20%20Canonical%20Bundle%20Block%20Format"></a></body></html><a class="selflink" href="#section-4.5.2" id="section-4.5.2">4.5.2</a>.  Canonical Bundle Block Format</span>
 
    Every bundle block of every type other than the primary bundle block
    comprises the following fields, in this order:
@@ -1404,7 +1384,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1435,7 +1415,7 @@ Table of Contents
 
              Figure 7: Block Layout Showing Two EID References
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.3.%20%20Bundle%20Payload%20Block"></a></body></html><a class="selflink" href="#section-4.5.3" name="section-4.5.3">4.5.3</a>.  Bundle Payload Block</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.3.%20%20Bundle%20Payload%20Block"></a></body></html><a class="selflink" href="#section-4.5.3" id="section-4.5.3">4.5.3</a>.  Bundle Payload Block</span>
 
    The fields of the bundle payload block are:
 
@@ -1460,7 +1440,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1468,7 +1448,7 @@ Table of Contents
    never set.  The block body data for payload blocks is the application
    data carried by the bundle.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Extension%20Blocks"></a></body></html><a class="selflink" href="#section-4.6" name="section-4.6">4.6</a>.  Extension Blocks</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Extension%20Blocks"></a></body></html><a class="selflink" href="#section-4.6" id="section-4.6">4.6</a>.  Extension Blocks</span>
 
    "Extension blocks" are all blocks other than the primary and payload
    blocks.  Because extension blocks are not defined in the Bundle
@@ -1489,7 +1469,7 @@ Table of Contents
    expected to define the circumstances under which this flag may be
    cleared, if any.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Dictionary%20Revision"></a></body></html><a class="selflink" href="#section-4.7" name="section-4.7">4.7</a>.  Dictionary Revision</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Dictionary%20Revision"></a></body></html><a class="selflink" href="#section-4.7" id="section-4.7">4.7</a>.  Dictionary Revision</span>
 
    Any strings (scheme names and SSPs) in a bundle's dictionary that are
    referenced neither from the bundle's primary block nor from the block
@@ -1503,7 +1483,7 @@ Table of Contents
    primary block and/or in the block EID reference fields of extension
    blocks.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Bundle%20Processing"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Bundle Processing</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Bundle%20Processing"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Bundle Processing</span>
 
    The bundle processing procedures mandated in this section and in
    <a href="#section-6">Section 6</a> govern the operation of the Bundle Protocol Agent and the
@@ -1516,7 +1496,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1527,7 +1507,7 @@ Table of Contents
    incoming or outgoing bundle due to a fault condition recognized by
    that protocol.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Generation%20of%20Administrative%20Records"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Generation of Administrative Records</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Generation%20of%20Administrative%20Records"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Generation of Administrative Records</span>
 
    All initial transmission of bundles is in response to bundle
    transmission requests presented by nodes' application agents.  When
@@ -1572,7 +1552,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1588,7 +1568,7 @@ Table of Contents
    o  The "current custodian" of a bundle is the endpoint identified by
       the current custodian endpoint ID in the bundle's primary block.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Bundle%20Transmission"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Bundle Transmission</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Bundle%20Transmission"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Bundle Transmission</span>
 
    The steps in processing a bundle transmission request are:
 
@@ -1614,7 +1594,7 @@ Table of Contents
 
    Step 3:   Processing proceeds from Step 1 of <a href="#section-5.4">Section 5.4</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Bundle%20Dispatching"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Bundle Dispatching</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Bundle%20Dispatching"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Bundle Dispatching</span>
 
    The steps in dispatching a bundle are:
 
@@ -1628,11 +1608,11 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Bundle%20Forwarding"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Bundle Forwarding</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Bundle%20Forwarding"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Bundle Forwarding</span>
 
    The steps in forwarding a bundle are:
 
@@ -1684,7 +1664,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1723,7 +1703,7 @@ Table of Contents
       *  The bundle's "Forward pending" retention constraint must be
          removed.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.1.%20%20Forwarding%20Contraindicated"></a></body></html><a class="selflink" href="#section-5.4.1" name="section-5.4.1">5.4.1</a>.  Forwarding Contraindicated</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.1.%20%20Forwarding%20Contraindicated"></a></body></html><a class="selflink" href="#section-5.4.1" id="section-5.4.1">5.4.1</a>.  Forwarding Contraindicated</span>
 
    The steps in responding to contraindication of forwarding for some
    reason are:
@@ -1740,7 +1720,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1753,7 +1733,7 @@ Table of Contents
       to be contraindicated, processing proceeds from Step 5 of
       <a href="#section-5.4">Section 5.4</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.2.%20%20Forwarding%20Failed"></a></body></html><a class="selflink" href="#section-5.4.2" name="section-5.4.2">5.4.2</a>.  Forwarding Failed</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.2.%20%20Forwarding%20Failed"></a></body></html><a class="selflink" href="#section-5.4.2" id="section-5.4.2">5.4.2</a>.  Forwarding Failed</span>
 
    The steps in responding to a declaration of forwarding failure for
    some reason are:
@@ -1779,7 +1759,7 @@ Table of Contents
       must be followed, citing the reason for which forwarding was
       determined to be contraindicated.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20Bundle%20Expiration"></a></body></html><a class="selflink" href="#section-5.5" name="section-5.5">5.5</a>.  Bundle Expiration</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20Bundle%20Expiration"></a></body></html><a class="selflink" href="#section-5.5" id="section-5.5">5.5</a>.  Bundle Expiration</span>
 
    A bundle expires when the current time is greater than the bundle's
    creation time plus its lifetime as specified in the primary bundle
@@ -1796,11 +1776,11 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.%20%20Bundle%20Reception"></a></body></html><a class="selflink" href="#section-5.6" name="section-5.6">5.6</a>.  Bundle Reception</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.%20%20Bundle%20Reception"></a></body></html><a class="selflink" href="#section-5.6" id="section-5.6">5.6</a>.  Bundle Reception</span>
 
    The steps in processing a bundle received from another node are:
 
@@ -1852,7 +1832,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1866,7 +1846,7 @@ Table of Contents
 
    Step 5:   Processing proceeds from Step 1 of <a href="#section-5.3">Section 5.3</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.7.%20%20Local%20Bundle%20Delivery"></a></body></html><a class="selflink" href="#section-5.7" name="section-5.7">5.7</a>.  Local Bundle Delivery</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.7.%20%20Local%20Bundle%20Delivery"></a></body></html><a class="selflink" href="#section-5.7" id="section-5.7">5.7</a>.  Local Bundle Delivery</span>
 
    The steps in processing a bundle that is destined for an endpoint of
    which this node is a member are:
@@ -1908,7 +1888,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1921,7 +1901,7 @@ Table of Contents
          custodial delivery by generating a "Succeeded" custody signal
          for the bundle, destined for the bundle's current custodian.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.8.%20%20Bundle%20Fragmentation"></a></body></html><a class="selflink" href="#section-5.8" name="section-5.8">5.8</a>.  Bundle Fragmentation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.8.%20%20Bundle%20Fragmentation"></a></body></html><a class="selflink" href="#section-5.8" id="section-5.8">5.8</a>.  Bundle Fragmentation</span>
 
    It may at times be necessary for bundle protocol agents to reduce the
    sizes of bundles in order to forward them.  This might be the case,
@@ -1964,7 +1944,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -1988,7 +1968,7 @@ Table of Contents
    o  The relative order of all blocks that are present in a fragment
       must be the same as in the bundle prior to fragmentation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.9.%20%20Application%20Data%20Unit%20Reassembly"></a></body></html><a class="selflink" href="#section-5.9" name="section-5.9">5.9</a>.  Application Data Unit Reassembly</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.9.%20%20Application%20Data%20Unit%20Reassembly"></a></body></html><a class="selflink" href="#section-5.9" id="section-5.9">5.9</a>.  Application Data Unit Reassembly</span>
 
    If the concatenation -- as informed by fragment offsets and payload
    lengths -- of the payloads of all previously received fragments with
@@ -2020,11 +2000,11 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.10.%20%20Custody%20Transfer"></a></body></html><a class="selflink" href="#section-5.10" name="section-5.10">5.10</a>.  Custody Transfer</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.10.%20%20Custody%20Transfer"></a></body></html><a class="selflink" href="#section-5.10" id="section-5.10">5.10</a>.  Custody Transfer</span>
 
    The conditions under which a node may accept custody of a bundle
    whose destination is not a singleton endpoint are not defined in this
@@ -2041,7 +2021,7 @@ Table of Contents
    then it must follow the custody acceptance procedure defined in
    <a href="#section-5.10.1">Section 5.10.1</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.10.1.%20%20Custody%20Acceptance"></a></body></html><a class="selflink" href="#section-5.10.1" name="section-5.10.1">5.10.1</a>.  Custody Acceptance</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.10.1.%20%20Custody%20Acceptance"></a></body></html><a class="selflink" href="#section-5.10.1" id="section-5.10.1">5.10.1</a>.  Custody Acceptance</span>
 
    Procedures for acceptance of custody of a bundle whose destination is
    not a singleton endpoint are not defined in this specification.
@@ -2076,7 +2056,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -2089,7 +2069,7 @@ Table of Contents
 
    The bundle should be retained in persistent storage if possible.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.10.2.%20%20Custody%20Release"></a></body></html><a class="selflink" href="#section-5.10.2" name="section-5.10.2">5.10.2</a>.  Custody Release</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.10.2.%20%20Custody%20Release"></a></body></html><a class="selflink" href="#section-5.10.2" id="section-5.10.2">5.10.2</a>.  Custody Release</span>
 
    Procedures for release of custody of a bundle whose destination is
    not a singleton endpoint are not defined in this specification.
@@ -2099,7 +2079,7 @@ Table of Contents
    constraint must be removed from the bundle and any custody transfer
    timer that has been established for this bundle must be destroyed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.11.%20%20Custody%20Transfer%20Success"></a></body></html><a class="selflink" href="#section-5.11" name="section-5.11">5.11</a>.  Custody Transfer Success</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.11.%20%20Custody%20Transfer%20Success"></a></body></html><a class="selflink" href="#section-5.11" id="section-5.11">5.11</a>.  Custody Transfer Success</span>
 
    Procedures for determining custody transfer success for a bundle
    whose destination is not a singleton endpoint are not defined in this
@@ -2110,7 +2090,7 @@ Table of Contents
    the destination of the bundle is a singleton endpoint, custody of the
    bundle must be released as described in <a href="#section-5.10.2">Section 5.10.2</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.12.%20%20Custody%20Transfer%20Failure"></a></body></html><a class="selflink" href="#section-5.12" name="section-5.12">5.12</a>.  Custody Transfer Failure</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.12.%20%20Custody%20Transfer%20Failure"></a></body></html><a class="selflink" href="#section-5.12" id="section-5.12">5.12</a>.  Custody Transfer Failure</span>
 
    Procedures for determining custody transfer failure for a bundle
    whose destination is not a singleton endpoint are not defined in this
@@ -2132,7 +2112,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -2140,7 +2120,7 @@ Table of Contents
    custody of the bundle and to revise its algorithm for computing
    countdown intervals for custody transfer timers.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.13.%20%20Bundle%20Deletion"></a></body></html><a class="selflink" href="#section-5.13" name="section-5.13">5.13</a>.  Bundle Deletion</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.13.%20%20Bundle%20Deletion"></a></body></html><a class="selflink" href="#section-5.13" id="section-5.13">5.13</a>.  Bundle Deletion</span>
 
    The steps in deleting a bundle are:
 
@@ -2162,12 +2142,12 @@ Table of Contents
 
    Step 2:   All of the bundle's retention constraints must be removed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.14.%20%20Discarding%20a%20Bundle"></a></body></html><a class="selflink" href="#section-5.14" name="section-5.14">5.14</a>.  Discarding a Bundle</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.14.%20%20Discarding%20a%20Bundle"></a></body></html><a class="selflink" href="#section-5.14" id="section-5.14">5.14</a>.  Discarding a Bundle</span>
 
    As soon as a bundle has no remaining retention constraints it may be
    discarded.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.15.%20%20Canceling%20a%20Transmission"></a></body></html><a class="selflink" href="#section-5.15" name="section-5.15">5.15</a>.  Canceling a Transmission</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.15.%20%20Canceling%20a%20Transmission"></a></body></html><a class="selflink" href="#section-5.15" id="section-5.15">5.15</a>.  Canceling a Transmission</span>
 
    When requested to cancel a specified transmission, where the bundle
    created upon initiation of the indicated transmission has not yet
@@ -2175,7 +2155,7 @@ Table of Contents
    the reason "transmission cancelled".  For this purpose, the procedure
    defined in <a href="#section-5.13">Section 5.13</a> must be followed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.16.%20%20Polling"></a></body></html><a class="selflink" href="#section-5.16" name="section-5.16">5.16</a>.  Polling</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.16.%20%20Polling"></a></body></html><a class="selflink" href="#section-5.16" id="section-5.16">5.16</a>.  Polling</span>
 
    When requested to poll a specified registration that is in the
    Passive state, the bundle protocol agent must immediately deliver the
@@ -2188,13 +2168,13 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Administrative%20Record%20Processing"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Administrative Record Processing</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Administrative%20Record%20Processing"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Administrative Record Processing</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Administrative%20Records"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Administrative Records</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Administrative%20Records"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Administrative Records</span>
 
    Administrative records are standard application data units that are
    used in providing some of the features of the Bundle Protocol.  Two
@@ -2244,11 +2224,11 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.1.%20%20Bundle%20Status%20Reports"></a></body></html><a class="selflink" href="#section-6.1.1" name="section-6.1.1">6.1.1</a>.  Bundle Status Reports</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.1.%20%20Bundle%20Status%20Reports"></a></body></html><a class="selflink" href="#section-6.1.1" id="section-6.1.1">6.1.1</a>.  Bundle Status Reports</span>
 
    The transmission of 'bundle status reports' under specified
    conditions is an option that can be invoked when transmission of a
@@ -2300,7 +2280,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -2356,7 +2336,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -2412,7 +2392,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -2435,7 +2415,7 @@ Table of Contents
    Source Endpoint ID text:   The text of the source endpoint ID of the
       bundle that caused the status report to be generated.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.2.%20%20Custody%20Signals"></a></body></html><a class="selflink" href="#section-6.1.2" name="section-6.1.2">6.1.2</a>.  Custody Signals</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.2.%20%20Custody%20Signals"></a></body></html><a class="selflink" href="#section-6.1.2" id="section-6.1.2">6.1.2</a>.  Custody Signals</span>
 
    Custody signals are administrative records that effect custody
    transfer operations.  They are transmitted to the endpoints that are
@@ -2468,7 +2448,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -2524,7 +2504,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 42]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-43" id="page-43" name="page-43"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-43"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -2580,14 +2560,14 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 43]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-44" id="page-44" name="page-44"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-44"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
    Source Endpoint ID text:   The text of the source endpoint ID of the
       bundle to which the signal applies.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Generation%20of%20Administrative%20Records"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Generation of Administrative Records</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Generation%20of%20Administrative%20Records"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Generation of Administrative Records</span>
 
    Whenever the application agent's administrative element is directed
    by the bundle protocol agent to generate an administrative record
@@ -2606,7 +2586,7 @@ Table of Contents
       this administrative record must be presented to the bundle
       protocol agent.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Reception%20of%20Custody%20Signals"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  Reception of Custody Signals</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Reception%20of%20Custody%20Signals"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  Reception of Custody Signals</span>
 
    For each received custody signal that has the "custody transfer
    succeeded" flag set to 1, the administrative element of the
@@ -2618,9 +2598,9 @@ Table of Contents
    application agent must direct the bundle protocol agent to follow the
    custody transfer failure procedure in <a href="#section-5.12">Section 5.12</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Services%20Required%20of%20the%20Convergence%20Layer"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Services Required of the Convergence Layer</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Services%20Required%20of%20the%20Convergence%20Layer"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Services Required of the Convergence Layer</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20The%20Convergence%20Layer"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  The Convergence Layer</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20The%20Convergence%20Layer"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  The Convergence Layer</span>
 
    The successful operation of the end-to-end bundle protocol depends on
    the operation of underlying protocols at what is termed the
@@ -2636,11 +2616,11 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 44]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-45" id="page-45" name="page-45"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-45"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Summary%20of%20Convergence%20Layer%20Services"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Summary of Convergence Layer Services</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Summary%20of%20Convergence%20Layer%20Services"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Summary of Convergence Layer Services</span>
 
    Each convergence layer protocol adapter is expected to provide the
    following services to the bundle protocol agent:
@@ -2659,7 +2639,7 @@ Table of Contents
    implementations conforming to those protocols to provide additional
    services.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Security Considerations</span>
 
    The bundle protocol has taken security into concern from the outset
    of its design.  It was always assumed that security services would be
@@ -2692,7 +2672,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 45]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-46" id="page-46" name="page-46"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-46"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -2748,7 +2728,7 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 46]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-47" id="page-47" name="page-47"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-47"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -2761,42 +2741,42 @@ Table of Contents
    implementation is <em>RECOMMENDED</em>.  Use of the Bundle Security Protocol
    in Bundle Protocol operations is <em>OPTIONAL</em>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  IANA Considerations</span>
 
    The "dtn:" URI scheme has been provisionally registered by IANA.  See
    <a href="http://www.iana.org/assignments/uri-schemes.html">http://www.iana.org/assignments/uri-schemes.html</a> for the latest
    details.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" id="section-10.1">10.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-URI" name="ref-URI">URI</a>]      Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+   [<a id="ref-URI">URI</a>]      Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", <a href="./rfc3986.html">RFC 3986</a>,
               STD 66, January 2005.
 
-   [<a id="ref-URIREG" name="ref-URIREG">URIREG</a>]   Hansen, T., Hardie, T., and L. Masinter, "Guidelines and
+   [<a id="ref-URIREG">URIREG</a>]   Hansen, T., Hardie, T., and L. Masinter, "Guidelines and
               Registration Procedures for New URI Schemes", <a href="./rfc4395.html">RFC 4395</a>,
-              <a href="./bcp115.html">BCP 115</a>, February 2006.
+              <a href="https://www.rfc-editor.org/bcp/bcp115">BCP 115</a>, February 2006.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" id="section-10.2">10.2</a>.  Informative References</span>
 
-   [<a id="ref-ARCH" name="ref-ARCH">ARCH</a>]     V. Cerf et. al., "Delay-Tolerant Network Architecture",
+   [<a id="ref-ARCH">ARCH</a>]     V. Cerf et. al., "Delay-Tolerant Network Architecture",
               <a href="./rfc4838.html">RFC 4838</a>, April 2007.
 
-   [<a id="ref-ASN1" name="ref-ASN1">ASN1</a>]     "Abstract Syntax Notation One (ASN.1), "ASN.1 Encoding
+   [<a id="ref-ASN1">ASN1</a>]     "Abstract Syntax Notation One (ASN.1), "ASN.1 Encoding
               Rules: Specification of Basic Encoding Rules (BER),
               Canonical Encoding Rules (CER) and Distinguished Encoding
               Rules (DER)," ITU-T Rec. X.690 (2002) | ISO/IEC 8825-
               1:2002", 2003.
 
-   [<a id="ref-BSP" name="ref-BSP">BSP</a>]      Symington, S., "Bundle Security Protocol Specification",
+   [<a id="ref-BSP">BSP</a>]      Symington, S., "Bundle Security Protocol Specification",
               Work Progress, October 2007.
 
-   [<a id="ref-RFC3987" name="ref-RFC3987">RFC3987</a>]  Duerst, M. and M. Suignard, "Internationalized Resource
+   [<a id="ref-RFC3987">RFC3987</a>]  Duerst, M. and M. Suignard, "Internationalized Resource
               Identifiers (IRIs)", <a href="./rfc3987.html">RFC 3987</a>, January 2005.
 
 
@@ -2804,21 +2784,21 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 47]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-48" id="page-48" name="page-48"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-48"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
-   [<a id="ref-SECO" name="ref-SECO">SECO</a>]     Farrell, S., Symington, S., Weiss, H., and P. Lovell,
+   [<a id="ref-SECO">SECO</a>]     Farrell, S., Symington, S., Weiss, H., and P. Lovell,
               "Delay-Tolerant Networking Security Overview",
               Work Progress, July 2007.
 
-   [<a id="ref-SIGC" name="ref-SIGC">SIGC</a>]     Fall, K., "A Delay-Tolerant Network Architecture for
+   [<a id="ref-SIGC">SIGC</a>]     Fall, K., "A Delay-Tolerant Network Architecture for
               Challenged Internets", SIGCOMM 2003 .
 
-   [<a id="ref-TUT" name="ref-TUT">TUT</a>]      Warthman, F., "Delay-Tolerant Networks (DTNs): A
+   [<a id="ref-TUT">TUT</a>]      Warthman, F., "Delay-Tolerant Networks (DTNs): A
               Tutorial", &lt;<a href="http://www.dtnrg.org">http://www.dtnrg.org</a>&gt;.
 
-   [<a id="ref-UTC" name="ref-UTC">UTC</a>]      Arias, E. and B. Guinot, ""Coordinated universal time UTC:
+   [<a id="ref-UTC">UTC</a>]      Arias, E. and B. Guinot, ""Coordinated universal time UTC:
               historical background and perspectives" in Journees
               systemes de reference spatio-temporels", 2004.
 
@@ -2860,11 +2840,11 @@ Table of Contents
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 48]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-49" id="page-49" name="page-49"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-49"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Contributors"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Contributors</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Contributors"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Contributors</span>
 
    This was an effort of the Delay Tolerant Networking Research Group.
    The following DTNRG participants contributed significant technical
@@ -2877,7 +2857,7 @@ Table of Contents
    University (most of <a href="#section-4.1">Section 4.1</a>), and Howard Weiss of SPARTA, Inc.
    (text of <a href="#section-8">Section 8</a>).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Comments"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Comments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Comments"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Comments</span>
 
    Please refer comments to dtn-interest@mailman.dtnrg.org.  The Delay
    Tolerant Networking Research Group (DTNRG) Web site is located at
@@ -2916,7 +2896,7 @@ Authors' Addresses
 
 
 <span class="grey">Scott &amp; Burleigh              Experimental                     [Page 49]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-50" id="page-50" name="page-50"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-50"></span>
 <span class="grey"><a href="./rfc5050.html">RFC 5050</a>             Bundle Protocol Specification         November 2007</span>
 
 
@@ -2925,7 +2905,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2007).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a> and at www.rfc-editor.org/copyright.html, and
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and at www.rfc-editor.org/copyright.html, and
    except as set forth therein, the authors retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -2945,7 +2925,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -2972,11 +2952,6 @@ Intellectual Property
 
 
 Scott &amp; Burleigh              Experimental                     [Page 50]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

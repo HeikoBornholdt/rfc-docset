@@ -1,24 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:3042" name="DC.Identifier"/>
-<meta content="This document proposes a new Transmission Control Protocol (TCP)
-mechanism that can be used to more effectively recover lost segments
-when a connection's congestion window is small, or when a large
-number of segments are lost in a single transmission window.
-[STANDARDS-TRACK]" name="DC.Description.Abstract"/>
-<meta content="Floyd, Sally" name="DC.Creator"/>
-<meta content="Balakrishnan, Hari" name="DC.Creator"/>
-<meta content="Allman, Mark" name="DC.Creator"/>
-<meta content="January, 2001" name="DC.Date.Issued"/>
-<meta content="Enhancing TCP's Loss Recovery Using Limited Transmit" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 3042 - Enhancing TCP's Loss Recovery Using Limited Transmit</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="M. Allman" name="citation_author"/>
+<meta content="H. Balakrishnan" name="citation_author"/>
+<meta content="S. Floyd" name="citation_author"/>
+<meta content="January, 2001" name="citation_publication_date"/>
+<meta content=" Enhancing TCP's Loss Recovery Using Limited Transmit " name="citation_title"/>
+<meta content="10.17487/RFC3042" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc3042" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc3042.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 3042:  Enhancing TCP's Loss Recovery Using Limited Transmit </title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -47,7 +42,7 @@ number of segments are lost in a single transmission window.
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -56,7 +51,7 @@ number of segments are lost in a single transmission window.
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -135,19 +130,18 @@ number of segments are lost in a single transmission window.
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -161,21 +155,9 @@ number of segments are lost in a single transmission window.
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc3042.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc3042" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-tsvwg-limited-xmit.html" title="draft-ietf-tsvwg-limited-xmit">draft-ietf-tsvwg-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc3042" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc3042" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                          M. Allman
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc3042.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc3042.txt.pdf">PDF</a>|<a href="/rfc/rfc3042.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc3042" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=3042&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc3042" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                          M. Allman
 Request for Comments: 3042                                  NASA GRC/BBN
 Category: Standards Track                                H. Balakrishnan
                                                                      MIT
@@ -212,7 +194,7 @@ Abstract
    timeout.  Limited Transmit can be used both in conjunction with, and
    in the absence of, the TCP selective acknowledgment (SACK) mechanism.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1%20%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>   Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1%20%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>   Introduction</span>
 
    A number of researchers have observed that TCP's loss recovery
    strategies do not work well when the congestion window at a TCP
@@ -227,7 +209,7 @@ Abstract
 
 
 <span class="grey">Allman, et al.              Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc3042.html">RFC 3042</a>              Enhancing TCP Loss Recovery           January 2001</span>
 
 
@@ -283,18 +265,18 @@ Abstract
 
 
 <span class="grey">Allman, et al.              Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc3042.html">RFC 3042</a>              Enhancing TCP Loss Recovery           January 2001</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a> Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a> Terminology</span>
 
    In this document, he key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>",
    "<em>SHALL</em>", "<em>SHALL NOT</em>", "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>",
    AND "<em>OPTIONAL</em>" are to be interpreted as described in <a href="./rfc2119.html">RFC 2119</a> [1] and
    indicate requirement levels for protocols.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2%20%20%20The%20Limited%20Transmit%20Algorithm"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>   The Limited Transmit Algorithm</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2%20%20%20The%20Limited%20Transmit%20Algorithm"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>   The Limited Transmit Algorithm</span>
 
    When a TCP sender has previously unsent data queued for transmission
    it <em>SHOULD</em> use the Limited Transmit algorithm, which calls for a TCP
@@ -339,11 +321,11 @@ Abstract
 
 
 <span class="grey">Allman, et al.              Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc3042.html">RFC 3042</a>              Enhancing TCP Loss Recovery           January 2001</span>
 
 
-   [<a id="ref-BPS99" name="ref-BPS99">BPS99</a>] shows that packet reordering is not a rare network event.
+   [<a id="ref-BPS99">BPS99</a>] shows that packet reordering is not a rare network event.
    [<a href="./rfc2581.html" title='"TCP Congestion Control"'>RFC2581</a>] does not provide for sending of data on the first two
    duplicate ACKs that arrive at the sender.  This causes a burst of
    segments to be sent when an ACK for new data does arrive following
@@ -355,7 +337,7 @@ Abstract
    Researchers wishing to investigate this mechanism further can do so
    by enabling "singledup_" for the given TCP connection.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3%20%20%20Related%20Work"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>   Related Work</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3%20%20%20Related%20Work"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>   Related Work</span>
 
    Deployment of Explicit Congestion Notification (ECN) [Flo94,<a href="./rfc2481.html">RFC2481</a>]
    may benefit connections with small congestion window sizes [<a href="#ref-SA00" title='"Performance Evaluation of Explicit Congestion Notification (ECN) in IP Networks"'>SA00</a>].
@@ -383,7 +365,7 @@ Abstract
    send a new data segment on the second duplicate ACK that arrives at
    the sender.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4%20%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>   Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4%20%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>   Security Considerations</span>
 
    The additional security implications of the changes proposed in this
    document, compared to TCP's current vulnerabilities, are minimal.
@@ -395,7 +377,7 @@ Abstract
 
 
 <span class="grey">Allman, et al.              Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc3042.html">RFC 3042</a>              Enhancing TCP Loss Recovery           January 2001</span>
 
 
@@ -451,7 +433,7 @@ Abstract
 
 
 <span class="grey">Allman, et al.              Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc3042.html">RFC 3042</a>              Enhancing TCP Loss Recovery           January 2001</span>
 
 
@@ -462,7 +444,7 @@ Acknowledgments
 
 References
 
-   [<a id="ref-Bal98" name="ref-Bal98">Bal98</a>]   Hari Balakrishnan.  Challenges to Reliable Data Transport
+   [<a id="ref-Bal98">Bal98</a>]   Hari Balakrishnan.  Challenges to Reliable Data Transport
              over Heterogeneous Wireless Networks.  Ph.D. Thesis,
              University of California at Berkeley, August 1998.
 
@@ -474,79 +456,79 @@ References
              in Proc. IEEE INFOCOM Conf., San Francisco, CA, March
              1998.)
 
-   [<a id="ref-BPS99" name="ref-BPS99">BPS99</a>]   Jon Bennett, Craig Partridge, Nicholas Shectman.  Packet
+   [<a id="ref-BPS99">BPS99</a>]   Jon Bennett, Craig Partridge, Nicholas Shectman.  Packet
              Reordering is Not Pathological Network Behavior.  IEEE/ACM
              Transactions on Networking, December 1999.
 
-   [<a id="ref-FF96" name="ref-FF96">FF96</a>]    Kevin Fall, Sally Floyd.  Simulation-based Comparisons of
+   [<a id="ref-FF96">FF96</a>]    Kevin Fall, Sally Floyd.  Simulation-based Comparisons of
              Tahoe, Reno, and SACK TCP.  ACM Computer Communication
              Review, July 1996.
 
-   [<a id="ref-Flo94" name="ref-Flo94">Flo94</a>]   Sally Floyd.  TCP and Explicit Congestion Notification.
+   [<a id="ref-Flo94">Flo94</a>]   Sally Floyd.  TCP and Explicit Congestion Notification.
              ACM Computer Communication Review, October 1994.
 
-   [<a id="ref-Jac88" name="ref-Jac88">Jac88</a>]   Van Jacobson.  Congestion Avoidance and Control.  ACM
+   [<a id="ref-Jac88">Jac88</a>]   Van Jacobson.  Congestion Avoidance and Control.  ACM
              SIGCOMM 1988.
 
-   [<a id="ref-LK98" name="ref-LK98">LK98</a>]    Dong Lin, H.T. Kung.  TCP Fast Recovery Strategies:
+   [<a id="ref-LK98">LK98</a>]    Dong Lin, H.T. Kung.  TCP Fast Recovery Strategies:
              Analysis and Improvements.  Proceedings of InfoCom, March
              1998.
 
-   [<a id="ref-MSML99" name="ref-MSML99">MSML99</a>]  Matt Mathis, Jeff Semke, Jamshid Mahdavi, Kevin Lahey.  The
+   [<a id="ref-MSML99">MSML99</a>]  Matt Mathis, Jeff Semke, Jamshid Mahdavi, Kevin Lahey.  The
              Rate Halving Algorithm, 1999. URL:
              <a href="http://www.psc.edu/networking/rate_halving.html">http://www.psc.edu/networking/rate_halving.html</a>.
 
-   [<a id="ref-Mor97" name="ref-Mor97">Mor97</a>]   Robert Morris.  TCP Behavior with Many Flows.  Proceedings
+   [<a id="ref-Mor97">Mor97</a>]   Robert Morris.  TCP Behavior with Many Flows.  Proceedings
              of the Fifth IEEE International Conference on Network
              Protocols.  October 1997.
 
-   [<a id="ref-NS" name="ref-NS">NS</a>]      Ns network simulator.  URL: <a href="http://www.isi.edu/nsnam/">http://www.isi.edu/nsnam/</a>.
+   [<a id="ref-NS">NS</a>]      Ns network simulator.  URL: <a href="http://www.isi.edu/nsnam/">http://www.isi.edu/nsnam/</a>.
 
 
 
 
 
 <span class="grey">Allman, et al.              Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc3042.html">RFC 3042</a>              Enhancing TCP Loss Recovery           January 2001</span>
 
 
-   [<a id="ref-PA00" name="ref-PA00">PA00</a>]    Paxson, V. and M. Allman, "Computing TCP's Retransmission
+   [<a id="ref-PA00">PA00</a>]    Paxson, V. and M. Allman, "Computing TCP's Retransmission
              Timer", <a href="./rfc2988.html">RFC 2988</a>, November 2000.
 
-   [<a id="ref-Riz96" name="ref-Riz96">Riz96</a>]   Luigi Rizzo.  Issues in the Implementation of Selective
+   [<a id="ref-Riz96">Riz96</a>]   Luigi Rizzo.  Issues in the Implementation of Selective
              Acknowledgments for TCP.  January, 1996.  URL:
              <a href="http://www.iet.unipi.it/~luigi/selack.ps">http://www.iet.unipi.it/~luigi/selack.ps</a>
 
-   [<a id="ref-SA00" name="ref-SA00">SA00</a>]    Hadi Salim, J. and U. Ahmed, "Performance Evaluation of
+   [<a id="ref-SA00">SA00</a>]    Hadi Salim, J. and U. Ahmed, "Performance Evaluation of
              Explicit Congestion Notification (ECN) in IP Networks", <a href="./rfc2884.html">RFC</a>
              <a href="./rfc2884.html">2884</a>, July 2000.
 
-   [<a id="ref-SCWA99" name="ref-SCWA99">SCWA99</a>]  Stefan Savage, Neal Cardwell, David Wetherall, Tom
+   [<a id="ref-SCWA99">SCWA99</a>]  Stefan Savage, Neal Cardwell, David Wetherall, Tom
              Anderson.  TCP Congestion Control with a Misbehaving
              Receiver.  ACM Computer Communications Review, October
              1999.
 
-   [<a id="ref-RFC793" name="ref-RFC793">RFC793</a>]  Postel, J., "Transmission Control Protocol", STD 7, <a href="./rfc793.html">RFC</a>
+   [<a id="ref-RFC793">RFC793</a>]  Postel, J., "Transmission Control Protocol", STD 7, <a href="./rfc793.html">RFC</a>
              <a href="./rfc793.html">793</a>, September 1981.
 
-   [<a id="ref-RFC2018" name="ref-RFC2018">RFC2018</a>] Mathis, M., Mahdavi, J., Floyd, S. and A. Romanow, "TCP
+   [<a id="ref-RFC2018">RFC2018</a>] Mathis, M., Mahdavi, J., Floyd, S. and A. Romanow, "TCP
              Selective Acknowledgement Options", <a href="./rfc2018.html">RFC 2018</a>, October 1996.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>] Bradner, S., "Key words for use in RFCs to Indicate
-             Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>] Bradner, S., "Key words for use in RFCs to Indicate
+             Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC2481" name="ref-RFC2481">RFC2481</a>] Ramakrishnan, K. and S. Floyd, "A Proposal to Add Explicit
+   [<a id="ref-RFC2481">RFC2481</a>] Ramakrishnan, K. and S. Floyd, "A Proposal to Add Explicit
              Congestion Notification (ECN) to IP", <a href="./rfc2481.html">RFC 2481</a>, January
              1999.
 
-   [<a id="ref-RFC2581" name="ref-RFC2581">RFC2581</a>] Allman, M., Paxson, V. and W. Stevens, "TCP Congestion
+   [<a id="ref-RFC2581">RFC2581</a>] Allman, M., Paxson, V. and W. Stevens, "TCP Congestion
              Control", <a href="./rfc2581.html">RFC 2581</a>, April 1999.
 
-   [<a id="ref-RFC2582" name="ref-RFC2582">RFC2582</a>] Floyd, S. and T. Henderson, "The NewReno Modification to
+   [<a id="ref-RFC2582">RFC2582</a>] Floyd, S. and T. Henderson, "The NewReno Modification to
              TCP's Fast Recovery Algorithm", <a href="./rfc2582.html">RFC 2582</a>, April 1999.
 
-   [<a id="ref-ZQ00" name="ref-ZQ00">ZQ00</a>]    Yin Zhang and Lili Qiu, Understanding the End-to-End
+   [<a id="ref-ZQ00">ZQ00</a>]    Yin Zhang and Lili Qiu, Understanding the End-to-End
              Performance Impact of RED in a Heterogeneous Environment,
              Cornell CS Technical Report 2000-1802, July 2000.  URL
              <a href="http://www.cs.cornell.edu/yzhang/papers.htm">http://www.cs.cornell.edu/yzhang/papers.htm</a>.
@@ -563,7 +545,7 @@ References
 
 
 <span class="grey">Allman, et al.              Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc3042.html">RFC 3042</a>              Enhancing TCP Loss Recovery           January 2001</span>
 
 
@@ -619,7 +601,7 @@ Authors' Addresses
 
 
 <span class="grey">Allman, et al.              Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc3042.html">RFC 3042</a>              Enhancing TCP Loss Recovery           January 2001</span>
 
 
@@ -675,11 +657,6 @@ Acknowledgement
 
 
 Allman, et al.              Standards Track                     [Page 9]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,0 +1,776 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="index,follow" name="robots"/>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="V. Beeram" name="citation_author"/>
+<meta content="I. Minei" name="citation_author"/>
+<meta content="R. Shakir" name="citation_author"/>
+<meta content="D. Pacella" name="citation_author"/>
+<meta content="T. Saad" name="citation_author"/>
+<meta content="May, 2018" name="citation_publication_date"/>
+<meta content="Techniques to Improve the Scalability of RSVP-TE Deployments" name="citation_title"/>
+<meta content="10.17487/RFC8370" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc8370" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc8370.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 8370: Techniques to Improve the Scalability of RSVP-TE Deployments</title>
+<style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+           /* line-height: 0pt; */
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style>
+<!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]--> <script type="text/javascript"><!--
+    function addHeaderTags() {
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
+                }
+            }
+        }
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc8370.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc8370.txt.pdf">PDF</a>|<a href="/rfc/rfc8370.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc8370" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=8370&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc8370" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                    V. Beeram, Ed.
+Request for Comments: 8370                              Juniper Networks
+Category: Standards Track                                       I. Minei
+ISSN: 2070-1721                                                R. Shakir
+                                                             Google, Inc
+                                                              D. Pacella
+                                                                 Verizon
+                                                                 T. Saad
+                                                           Cisco Systems
+                                                                May 2018
+
+
+      <span class="h1">Techniques to Improve the Scalability of RSVP-TE Deployments</span>
+
+Abstract
+
+   Networks that utilize RSVP-TE LSPs are encountering implementations
+   that have a limited ability to support the growth in the number of
+   LSPs deployed.
+
+   This document defines two techniques, Refresh-Interval Independent
+   RSVP (RI-RSVP) and Per-Peer Flow Control, that reduce the number of
+   processing cycles required to maintain RSVP-TE LSP state in Label
+   Switching Routers (LSRs) and hence allow implementations to support
+   larger scale deployments.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in <a href="./rfc7841.html#section-2">Section 2 of RFC 7841</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href="https://www.rfc-editor.org/info/rfc8370">https://www.rfc-editor.org/info/rfc8370</a>.
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Beeram, et al.               Standards Track                    [Page 1]</span></pre>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
+<span class="grey"><a href="./rfc8370.html">RFC 8370</a>              RSVP-TE Scaling - Techniques              May 2018</span>
+
+
+Copyright Notice
+
+   Copyright (c) 2018 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+Table of Contents
+
+   <a href="#section-1">1</a>.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-3">3</a>
+   <a href="#section-2">2</a>.  Required Support for <a href="./rfc2961.html">RFC 2961</a> . . . . . . . . . . . . . . . .   <a href="#page-4">4</a>
+     <a href="#section-2.1">2.1</a>.  Required Functionality from <a href="./rfc2961.html">RFC 2961</a>  . . . . . . . . . .   <a href="#page-4">4</a>
+     <a href="#section-2.2">2.2</a>.  Making Acknowledgements Mandatory . . . . . . . . . . . .   <a href="#page-4">4</a>
+   <a href="#section-3">3</a>.  Refresh-Interval Independent RSVP (RI-RSVP) . . . . . . . . .   <a href="#page-5">5</a>
+     <a href="#section-3.1">3.1</a>.  Capability Advertisement  . . . . . . . . . . . . . . . .   <a href="#page-6">6</a>
+     <a href="#section-3.2">3.2</a>.  Compatibility . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-6">6</a>
+   <a href="#section-4">4</a>.  Per-Peer Flow Control . . . . . . . . . . . . . . . . . . . .   <a href="#page-6">6</a>
+     <a href="#section-4.1">4.1</a>.  Capability Advertisement  . . . . . . . . . . . . . . . .   <a href="#page-7">7</a>
+     <a href="#section-4.2">4.2</a>.  Compatibility . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-7">7</a>
+   <a href="#section-5">5</a>.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   <a href="#page-7">7</a>
+     <a href="#section-5.1">5.1</a>.  Capability Object Values  . . . . . . . . . . . . . . . .   <a href="#page-7">7</a>
+   <a href="#section-6">6</a>.  Security Considerations . . . . . . . . . . . . . . . . . . .   <a href="#page-8">8</a>
+   <a href="#section-7">7</a>.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-8">8</a>
+     <a href="#section-7.1">7.1</a>.  Normative References  . . . . . . . . . . . . . . . . . .   <a href="#page-8">8</a>
+     <a href="#section-7.2">7.2</a>.  Informative References  . . . . . . . . . . . . . . . . .   <a href="#page-9">9</a>
+   <a href="#appendix-A">Appendix A</a>.  Recommended Defaults . . . . . . . . . . . . . . . .  <a href="#page-10">10</a>
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-10">10</a>
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-11">11</a>
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-11">11</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Beeram, et al.               Standards Track                    [Page 2]</span></pre>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
+<span class="grey"><a href="./rfc8370.html">RFC 8370</a>              RSVP-TE Scaling - Techniques              May 2018</span>
+
+
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
+
+   Networks that utilize RSVP-TE [<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>] LSPs are encountering
+   implementations that have a limited ability to support the growth in
+   the number of LSPs deployed.
+
+   The set of RSVP Refresh Overhead Reduction procedures [<a href="./rfc2961.html" title='"RSVP Refresh Overhead Reduction Extensions"'>RFC2961</a>]
+   serves as a powerful toolkit for RSVP-TE implementations to help
+   cover a majority of the concerns about soft-state scaling.  However,
+   even with these tools in the toolkit, analysis of existing
+   implementations [<a href="./rfc5439.html" title='"An Analysis of Scaling Issues in MPLS-TE Core Networks"'>RFC5439</a>] indicates that the processing required
+   beyond a certain scale may still cause significant disruption to a
+   Label Switching Router (LSR).
+
+   This document builds on existing scaling work and analysis and
+   defines protocol extensions to help RSVP-TE deployments push the
+   envelope further on scaling by increasing the threshold above which
+   an LSR struggles to achieve sufficient processing to maintain LSP
+   state.
+
+   This document defines two techniques, Refresh-Interval Independent
+   RSVP (RI-RSVP) and Per-Peer Flow Control, that cut down the number of
+   processing cycles required to maintain LSP state.  RI-RSVP helps
+   completely eliminate RSVP's reliance on refreshes and refresh
+   timeouts, while Per-Peer Flow Control enables a busy RSVP speaker to
+   apply back pressure to its peer(s).  This document defines a unique
+   RSVP Capability [<a href="./rfc5063.html" title='"Extensions to GMPLS Resource Reservation Protocol (RSVP) Graceful Restart"'>RFC5063</a>] for each technique (support for the
+   CAPABILITY object is a prerequisite for implementing these
+   techniques).  Note that the Per-Peer Flow-Control technique requires
+   the RI-RSVP technique as a prerequisite.  In order to reap maximum
+   scaling benefits, it is strongly recommended that implementations
+   support both techniques and have them enabled by default.  Both
+   techniques are fully backward compatible and can be deployed
+   incrementally.
+
+   The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
+   "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "NOT <em>RECOMMENDED</em>", "<em>MAY</em>", and
+   "<em>OPTIONAL</em>" in this document are to be interpreted as described in <a href="https://www.rfc-editor.org/bcp/bcp14">BCP</a>
+   <a href="https://www.rfc-editor.org/bcp/bcp14">14</a> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>] [<a href="./rfc8174.html" title='"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"'>RFC8174</a>] when, and only when, they appear in all
+   capitals, as shown here.
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Beeram, et al.               Standards Track                    [Page 3]</span></pre>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
+<span class="grey"><a href="./rfc8370.html">RFC 8370</a>              RSVP-TE Scaling - Techniques              May 2018</span>
+
+
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Required%20Support%20for%20RFC%202961"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Required Support for <a href="./rfc2961.html">RFC 2961</a></span>
+
+   The techniques defined in Sections <a href="#section-3">3</a> and <a href="#section-4">4</a> are based on proposals
+   made in [<a href="./rfc2961.html" title='"RSVP Refresh Overhead Reduction Extensions"'>RFC2961</a>].  Implementations of these techniques need to
+   support the RSVP messages and procedures defined in [<a href="./rfc2961.html" title='"RSVP Refresh Overhead Reduction Extensions"'>RFC2961</a>] with
+   some minor modifications and alterations to recommended time
+   intervals and iteration counts (see <a href="#appendix-A">Appendix A</a> for the set of
+   recommended defaults).
+
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Required%20Functionality%20from%20RFC%202961"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Required Functionality from <a href="./rfc2961.html">RFC 2961</a></span>
+
+   An implementation that supports the techniques discussed in Sections
+   3 and 4 must support the functionality described in [<a href="./rfc2961.html" title='"RSVP Refresh Overhead Reduction Extensions"'>RFC2961</a>] as
+   follows:
+
+   o  It <em>MUST</em> indicate support for RSVP Refresh Overhead Reduction
+      extensions (as specified in <a href="./rfc2961.html#section-2">Section 2 of [RFC2961]</a>).
+
+   o  It <em>MUST</em> support receipt of any RSVP Refresh Overhead Reduction
+      message as defined in [<a href="./rfc2961.html" title='"RSVP Refresh Overhead Reduction Extensions"'>RFC2961</a>].
+
+   o  It <em>MUST</em> initiate all RSVP Refresh Overhead Reduction mechanisms as
+      defined in [<a href="./rfc2961.html" title='"RSVP Refresh Overhead Reduction Extensions"'>RFC2961</a>] (including the SRefresh message) with the
+      default behavior being to initiate the mechanisms; however, a
+      configuration override should be offered.
+
+   o  It <em>MUST</em> support reliable delivery of Path/Resv and the
+      corresponding Tear/Err messages (as specified in <a href="./rfc2961.html#section-4">Section 4 of
+      [RFC2961]</a>).
+
+   o  It <em>MUST</em> support retransmission of all unacknowledged RSVP-TE
+      messages using exponential backoff (as specified in <a href="./rfc2961.html#section-6">Section 6 of
+      [RFC2961]</a>).
+
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Making%20Acknowledgements%20Mandatory"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Making Acknowledgements Mandatory</span>
+
+   The reliable message delivery mechanism specified in [<a href="./rfc2961.html" title='"RSVP Refresh Overhead Reduction Extensions"'>RFC2961</a>] states
+   that "Nodes receiving a non-out of order [sic] message containing a
+   MESSAGE_ID object with the ACK_Desired flag set, <em>SHOULD</em> respond with
+   a MESSAGE_ID_ACK object."
+
+   In an implementation that supports the techniques discussed in
+   Sections <a href="#section-3">3</a> and <a href="#section-4">4</a>, nodes receiving a non-out-of-order message
+   containing a MESSAGE_ID object with the ACK_Desired flag set <em>MUST</em>
+   respond with a MESSAGE_ID_ACK object.  This MESSAGE_ID_ACK object can
+   be packed with other MESSAGE_ID_ACK or MESSAGE_ID_NACK objects and
+   sent in an Ack message (or piggybacked in any other RSVP message).
+
+
+
+
+<span class="grey">Beeram, et al.               Standards Track                    [Page 4]</span></pre>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
+<span class="grey"><a href="./rfc8370.html">RFC 8370</a>              RSVP-TE Scaling - Techniques              May 2018</span>
+
+
+   This improvement to the predictability of the system in terms of
+   reliable message delivery is key for being able to take any action
+   based on a non-receipt of an ACK.
+
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Refresh-Interval%20Independent%20RSVP%20%28RI-RSVP%29"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Refresh-Interval Independent RSVP (RI-RSVP)</span>
+
+   The RSVP protocol relies on periodic refreshes for state
+   synchronization between RSVP neighbors and recovery from lost RSVP
+   messages.  It relies on a refresh timeout for stale-state cleanup.
+   The primary motivation behind introducing the notion of Refresh-
+   Interval Independent RSVP (RI-RSVP) is to completely eliminate RSVP's
+   reliance on refreshes and refresh timeouts.  This is done by simply
+   increasing the refresh interval to a fairly large value.  [<a href="./rfc2961.html" title='"RSVP Refresh Overhead Reduction Extensions"'>RFC2961</a>]
+   and [<a href="./rfc5439.html" title='"An Analysis of Scaling Issues in MPLS-TE Core Networks"'>RFC5439</a>] talk about increasing the value of the refresh interval
+   to provide linear improvement of transmission overhead, but they also
+   point out the degree of functionality that is lost by doing so.  This
+   section revisits this notion, but also sets out additional
+   requirements to make sure that there is no loss of functionality
+   incurred by increasing the value of the refresh interval.
+
+   An implementation that supports RI-RSVP:
+
+   o  <em>MUST</em> support all of the requirements specified in <a href="#section-2">Section 2</a>.
+
+   o  <em>MUST</em> make the default value of the configurable refresh interval
+      (R) be a large value (tens of minutes).  A default value of 20
+      minutes is <em>RECOMMENDED</em> by this document.
+
+   o  <em>MUST</em> use a separate shorter refresh interval for refreshing state
+      associated with unacknowledged Path/Resv (uR) messages.  A default
+      value of 30 seconds is <em>RECOMMENDED</em> by this document.
+
+   o  <em>MUST</em> implement coupling the state of individual LSPs with the
+      state of the corresponding RSVP-TE signaling adjacency.  When an
+      RSVP-TE speaker detects RSVP-TE signaling adjacency failure, the
+      speaker <em>MUST</em> act as if all the Path and Resv states learned via
+      the failed signaling adjacency have timed out.
+
+   o  <em>MUST</em> make use of the Hello session based on the Node-ID ([<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>]
+      [<a href="./rfc4558.html" title='"Node-ID Based Resource Reservation Protocol (RSVP) Hello: A Clarification Statement"'>RFC4558</a>]) for detection of RSVP-TE signaling adjacency failures.
+      A default value of 9 seconds is <em>RECOMMENDED</em> by this document for
+      the configurable node hello interval (as opposed to the default
+      value of 5 milliseconds proposed in <a href="./rfc3209.html#section-5.3">Section 5.3 of [RFC3209]</a>).
+
+   o  <em>MUST</em> indicate support for RI-RSVP via the CAPABILITY object
+      [<a href="./rfc5063.html" title='"Extensions to GMPLS Resource Reservation Protocol (RSVP) Graceful Restart"'>RFC5063</a>] in Hello messages.
+
+
+
+
+
+<span class="grey">Beeram, et al.               Standards Track                    [Page 5]</span></pre>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
+<span class="grey"><a href="./rfc8370.html">RFC 8370</a>              RSVP-TE Scaling - Techniques              May 2018</span>
+
+
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Capability%20Advertisement"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Capability Advertisement</span>
+
+   An implementation supporting the RI-RSVP technique <em>MUST</em> set a new
+   flag, RI-RSVP Capable, in the CAPABILITY object signaled in Hello
+   messages.  The following bit indicates that the sender supports
+   RI-RSVP:
+
+      Bit Number 28 (0x0008) - RI-RSVP Capable (I-bit)
+
+   Any node that sets the new I-bit in its CAPABILITY object <em>MUST</em> also
+   set the Refresh-Reduction-Capable bit [<a href="./rfc2961.html" title='"RSVP Refresh Overhead Reduction Extensions"'>RFC2961</a>] in the common header
+   of all RSVP-TE messages.  If a peer sets the I-bit in the CAPABILITY
+   object but does not set the Refresh-Reduction-Capable bit, then the
+   RI-RSVP functionality <em>MUST NOT</em> be activated for that peer.
+
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Compatibility"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Compatibility</span>
+
+   The RI-RSVP functionality <em>MUST NOT</em> be activated with a peer that does
+   not indicate support for this functionality.  Inactivation of the
+   RI-RSVP functionality <em>MUST</em> result in the use of the traditional
+   smaller refresh interval [<a href="./rfc2205.html" title='"Resource ReSerVation Protocol (RSVP) -- Version 1 Functional Specification"'>RFC2205</a>].
+
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Per-Peer%20Flow%20Control"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Per-Peer Flow Control</span>
+
+   The functionality discussed in this section provides an RSVP speaker
+   with the ability to apply back pressure to its peer(s) to reduce/
+   eliminate a significant portion of the RSVP-TE control message load.
+
+   An implementation that supports Per-Peer Flow Control:
+
+   o  <em>MUST</em> support all of the requirements specified in <a href="#section-2">Section 2</a>.
+
+   o  <em>MUST</em> support RI-RSVP (<a href="#section-3">Section 3</a>).
+
+   o  <em>MUST</em> treat lack of ACKs from a peer as an indication of a peer's
+      RSVP-TE control-plane congestion.  If congestion is detected, the
+      local system <em>MUST</em> throttle RSVP-TE messages to the affected peer.
+      This <em>MUST</em> be done on a per-peer basis.  (Per-peer throttling <em>MAY</em>
+      be implemented by a traffic-shaping mechanism that proportionally
+      reduces the RSVP-signaling packet rate as the number of
+      outstanding ACKs increases.  When the number of outstanding ACKs
+      decreases, the send rate would be adjusted up again.)
+
+   o  <em>SHOULD</em> use a Retry Limit (Rl) value of 7 (<a href="./rfc2961.html#section-6.2">Section 6.2 of [RFC2961]</a>
+      suggests using 3).
+
+   o  <em>SHOULD</em> prioritize Hello messages and messages carrying
+      Acknowledgements over other RSVP messages.
+
+
+
+<span class="grey">Beeram, et al.               Standards Track                    [Page 6]</span></pre>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
+<span class="grey"><a href="./rfc8370.html">RFC 8370</a>              RSVP-TE Scaling - Techniques              May 2018</span>
+
+
+   o  <em>SHOULD</em> prioritize Tear/Error over trigger Path/Resv (messages that
+      bring up new LSP state) sent to a peer when the local system
+      detects RSVP-TE control-plane congestion in the peer.
+
+   o  <em>MUST</em> indicate support for this technique via the CAPABILITY object
+      [<a href="./rfc5063.html" title='"Extensions to GMPLS Resource Reservation Protocol (RSVP) Graceful Restart"'>RFC5063</a>] in Hello messages.
+
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Capability%20Advertisement"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Capability Advertisement</span>
+
+   An implementation supporting the Per-Peer Flow-Control technique <em>MUST</em>
+   set a new flag, Per-Peer Flow-Control Capable, in the CAPABILITY
+   object signaled in Hello messages.  The following bit indicates that
+   the sender supports Per-Peer Flow Control:
+
+      Bit Number 27 (0x0010) - Per-Peer Flow-Control Capable (F-bit)
+
+   Any node that sets the new F-bit in its CAPABILITY object <em>MUST</em> also
+   set the Refresh-Reduction-Capable bit in the common header of all
+   RSVP-TE messages.  If a peer sets the F-bit in the CAPABILITY object
+   but does not set the Refresh-Reduction-Capable bit, then the Per-Peer
+   Flow-Control functionality <em>MUST NOT</em> be activated for that peer.
+
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Compatibility"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Compatibility</span>
+
+   The Per-Peer Flow-Control functionality <em>MUST NOT</em> be activated with a
+   peer that does not indicate support for this functionality.  If a
+   peer hasn't indicated that it is capable of participating in Per-Peer
+   Flow Control, then it <em>SHOULD NOT</em> be assumed that the peer would
+   always acknowledge a non-out-of-order message containing a MESSAGE_ID
+   object with the ACK_Desired flag set.
+
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  IANA Considerations</span>
+
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Capability%20Object%20Values"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Capability Object Values</span>
+
+   IANA maintains the "Capability Object values" subregistry [<a href="./rfc5063.html" title='"Extensions to GMPLS Resource Reservation Protocol (RSVP) Graceful Restart"'>RFC5063</a>]
+   within the "Resource Reservation Protocol (RSVP) Parameters" registry
+   &lt;<a href="http://www.iana.org/assignments/rsvp-parameters">http://www.iana.org/assignments/rsvp-parameters</a>&gt;.  IANA has assigned
+   two new Capability Object Value bit flags as follows:
+
+      Bit      Hex     Name                                Reference
+      Number   Value
+      ------------------------------------------------------------------
+        28     0x0008  RI-RSVP Capable (I)                 <a href="#section-3">Section 3</a>
+        27     0x0010  Per-Peer Flow-Control Capable (F)   <a href="#section-4">Section 4</a>
+
+
+
+
+
+
+<span class="grey">Beeram, et al.               Standards Track                    [Page 7]</span></pre>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
+<span class="grey"><a href="./rfc8370.html">RFC 8370</a>              RSVP-TE Scaling - Techniques              May 2018</span>
+
+
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
+
+   This document does not introduce new security issues.  The security
+   considerations pertaining to the original RSVP protocol [<a href="./rfc2205.html" title='"Resource ReSerVation Protocol (RSVP) -- Version 1 Functional Specification"'>RFC2205</a>] and
+   RSVP-TE [<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>], and those that are described in [<a href="./rfc5920.html" title='"Security Framework for MPLS and GMPLS Networks"'>RFC5920</a>], remain
+   relevant.
+
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  References</span>
+
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Normative References</span>
+
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
+              DOI 10.17487/RFC2119, March 1997,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;.
+
+   [<a id="ref-RFC2205">RFC2205</a>]  Braden, R., Ed., Zhang, L., Berson, S., Herzog, S., and S.
+              Jamin, "Resource ReSerVation Protocol (RSVP) -- Version 1
+              Functional Specification", <a href="./rfc2205.html">RFC 2205</a>, DOI 10.17487/RFC2205,
+              September 1997, &lt;<a href="https://www.rfc-editor.org/info/rfc2205">https://www.rfc-editor.org/info/rfc2205</a>&gt;.
+
+   [<a id="ref-RFC2961">RFC2961</a>]  Berger, L., Gan, D., Swallow, G., Pan, P., Tommasi, F.,
+              and S. Molendini, "RSVP Refresh Overhead Reduction
+              Extensions", <a href="./rfc2961.html">RFC 2961</a>, DOI 10.17487/RFC2961, April 2001,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc2961">https://www.rfc-editor.org/info/rfc2961</a>&gt;.
+
+   [<a id="ref-RFC3209">RFC3209</a>]  Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan, V.,
+              and G. Swallow, "RSVP-TE: Extensions to RSVP for LSP
+              Tunnels", <a href="./rfc3209.html">RFC 3209</a>, DOI 10.17487/RFC3209, December 2001,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc3209">https://www.rfc-editor.org/info/rfc3209</a>&gt;.
+
+   [<a id="ref-RFC4558">RFC4558</a>]  Ali, Z., Rahman, R., Prairie, D., and D. Papadimitriou,
+              "Node-ID Based Resource Reservation Protocol (RSVP) Hello:
+              A Clarification Statement", <a href="./rfc4558.html">RFC 4558</a>,
+              DOI 10.17487/RFC4558, June 2006,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc4558">https://www.rfc-editor.org/info/rfc4558</a>&gt;.
+
+   [<a id="ref-RFC5063">RFC5063</a>]  Satyanarayana, A., Ed. and R. Rahman, Ed., "Extensions to
+              GMPLS Resource Reservation Protocol (RSVP) Graceful
+              Restart", <a href="./rfc5063.html">RFC 5063</a>, DOI 10.17487/RFC5063, October 2007,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc5063">https://www.rfc-editor.org/info/rfc5063</a>&gt;.
+
+   [<a id="ref-RFC8174">RFC8174</a>]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in <a href="./rfc2119.html">RFC</a>
+              <a href="./rfc2119.html">2119</a> Key Words", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc8174.html">RFC 8174</a>, DOI 10.17487/RFC8174,
+              May 2017, &lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;.
+
+
+
+
+
+
+<span class="grey">Beeram, et al.               Standards Track                    [Page 8]</span></pre>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
+<span class="grey"><a href="./rfc8370.html">RFC 8370</a>              RSVP-TE Scaling - Techniques              May 2018</span>
+
+
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Informative References</span>
+
+   [<a id="ref-RFC5439">RFC5439</a>]  Yasukawa, S., Farrel, A., and O. Komolafe, "An Analysis of
+              Scaling Issues in MPLS-TE Core Networks", <a href="./rfc5439.html">RFC 5439</a>,
+              DOI 10.17487/RFC5439, February 2009,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc5439">https://www.rfc-editor.org/info/rfc5439</a>&gt;.
+
+   [<a id="ref-RFC5920">RFC5920</a>]  Fang, L., Ed., "Security Framework for MPLS and GMPLS
+              Networks", <a href="./rfc5920.html">RFC 5920</a>, DOI 10.17487/RFC5920, July 2010,
+              &lt;<a href="https://www.rfc-editor.org/info/rfc5920">https://www.rfc-editor.org/info/rfc5920</a>&gt;.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Beeram, et al.               Standards Track                    [Page 9]</span></pre>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
+<span class="grey"><a href="./rfc8370.html">RFC 8370</a>              RSVP-TE Scaling - Techniques              May 2018</span>
+
+
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Recommended%20Defaults"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Recommended Defaults</span>
+
+   a.  Refresh Interval (R) - 20 minutes (<a href="#section-3">Section 3</a>):
+       Given that an implementation supporting RI-RSVP doesn't rely on
+       refreshes for state sync between peers, the function of the RSVP
+       refresh interval is analogous to that of IGP refresh interval
+       (the default of which is typically in the order of tens of
+       minutes).  Choosing a default of 20 minutes allows the refresh
+       timer to be randomly set to a value in the range [10 minutes
+       (0.5R), 30 minutes (1.5R)].
+
+   b.  Node Hello Interval - 9 seconds (<a href="#section-3">Section 3</a>):
+
+       [<a id="ref-RFC3209">RFC3209</a>] defines the hello timeout as 3.5 times the hello
+       interval.  Choosing 9 seconds for the node hello interval gives a
+       hello timeout of 3.5 * 9 = 31.5 seconds.  This puts the hello
+       timeout value in the vicinity of the IGP hello timeout value.
+
+   c.  Retry-Limit (Rl) - 7 (<a href="#section-4">Section 4</a>):
+       Choosing 7 as the retry-limit results in an overall rapid
+       retransmit phase of 31.5 seconds.  This matches up with the hello
+       timeout of 31.5 seconds.
+
+   d.  Refresh Interval for refreshing state associated with
+       unacknowledged Path/Resv messages (uR) - 30 seconds (<a href="#section-3">Section 3</a>):
+       The recommended refresh interval (R) value of 20 minutes (for an
+       implementation supporting RI-RSVP) cannot be used for refreshing
+       state associated with unacknowledged Path/Resv messages.  This
+       document recommends the use of the traditional default refresh
+       interval value of 30 seconds for uR.
+
+Acknowledgements
+
+   The authors would like to thank Yakov Rekhter for initiating this
+   work and providing valuable input.  They would like to thank
+   Raveendra Torvi and Chandra Ramachandran for participating in the
+   many discussions that led to the techniques discussed in this
+   document.  They would also like to thank Adrian Farrel, Lou Berger,
+   and Elwyn Davies for providing detailed review comments and text
+   suggestions.
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Beeram, et al.               Standards Track                   [Page 10]</span></pre>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
+<span class="grey"><a href="./rfc8370.html">RFC 8370</a>              RSVP-TE Scaling - Techniques              May 2018</span>
+
+
+Contributors
+
+   Markus Jork
+   Juniper Networks
+   Email: mjork@juniper.net
+
+   Ebben Aries
+   Juniper Networks
+   Email: exa@juniper.net
+
+Authors' Addresses
+
+   Vishnu Pavan Beeram (editor)
+   Juniper Networks
+
+   Email: vbeeram@juniper.net
+
+
+   Ina Minei
+   Google, Inc
+
+   Email: inaminei@google.com
+
+
+   Rob Shakir
+   Google, Inc
+
+   Email: rjs@rob.sh
+
+
+   Dante Pacella
+   Verizon
+
+   Email: dante.j.pacella@verizon.com
+
+
+   Tarek Saad
+   Cisco Systems
+
+   Email: tsaad@cisco.com
+
+
+
+
+
+
+
+
+
+
+
+Beeram, et al.               Standards Track                   [Page 11]
+</pre>
+</body>
+</html>

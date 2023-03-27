@@ -1,35 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:6007" name="DC.Identifier"/>
-<meta content="A Path Computation Element (PCE) may be required to perform dependent
-path computations. Dependent path computations are requests that need
-to be synchronized in order to meet specific objectives. An example of
-a dependent request would be a PCE computing a set of services that
-are required to be diverse (disjointed) from each other. When a PCE
-computes sets of dependent path computation requests concurrently, use
-of the Synchronization VECtor (SVEC) list is required for association
-among the sets of dependent path computation requests. The SVEC object
-is optional and carried within the Path Computation Element
-Communication Protocol (PCEP) PCRequest (PCReq) message.  This
-document does not specify the PCEP SVEC object or procedure. This
-informational document clarifies the use of the SVEC list for
-synchronized path computations when computing dependent requests. The
-document also describes a number of usage scenarios for SVEC lists
-within single-domain and multi-domain environments. This document is
-not an Internet Standards Track specification; it is published for
-informational purposes." name="DC.Description.Abstract"/>
-<meta content="King, Daniel" name="DC.Creator"/>
-<meta content="Nishioka, Itaru" name="DC.Creator"/>
-<meta content="September, 2010" name="DC.Date.Issued"/>
-<meta content="Use of the Synchronization VECtor (SVEC) List for Synchronized Dependent Path Computations" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6007 - Use of the Synchronization VECtor (SVEC) List for Synchronized Dependent Path Computations</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="I. Nishioka" name="citation_author"/>
+<meta content="D. King" name="citation_author"/>
+<meta content="September, 2010" name="citation_publication_date"/>
+<meta content="Use of the Synchronization VECtor (SVEC) List for Synchronized Dependent Path Computations" name="citation_title"/>
+<meta content="10.17487/RFC6007" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6007" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6007.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6007: Use of the Synchronization VECtor (SVEC) List for Synchronized Dependent Path Computations</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -58,7 +41,7 @@ informational purposes." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -67,7 +50,7 @@ informational purposes." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -146,19 +129,18 @@ informational purposes." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -172,21 +154,9 @@ informational purposes." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6007.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6007" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-pce-pcep-svec-list.html" title="draft-ietf-pce-pcep-svec-list">draft-ietf-pce-pc...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6007" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6007" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                       I. Nishioka
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6007.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6007.txt.pdf">PDF</a>|<a href="/rfc/rfc6007.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6007" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6007&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6007" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                       I. Nishioka
 Request for Comments: 6007                                     NEC Corp.
 Category: Informational                                          D. King
 ISSN: 2070-1721                                       Old Dog Consulting
@@ -238,7 +208,7 @@ Status of This Memo
 
 
 <span class="grey">Nishioka &amp; King               Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
@@ -247,7 +217,7 @@ Copyright Notice
    Copyright (c) 2010 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -294,7 +264,7 @@ Copyright Notice
 
 
 <span class="grey">Nishioka &amp; King               Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
@@ -334,9 +304,9 @@ Table of Contents
       <a href="#section-9.2">9.2</a>. Informative References ....................................<a href="#page-17">17</a>
    <a href="#section-10">10</a>. Acknowledgements ..............................................<a href="#page-18">18</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
-   [<a id="ref-RFC5440" name="ref-RFC5440">RFC5440</a>] describes the specifications for the Path Computation
+   [<a id="ref-RFC5440">RFC5440</a>] describes the specifications for the Path Computation
    Element Communication Protocol (PCEP).  PCEP specifies the
    communication between a Path Computation Client (PCC) and a Path
    Computation Element (PCE), or between two PCEs based on the PCE
@@ -350,7 +320,7 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
@@ -372,7 +342,7 @@ Table of Contents
    to specify the procedure when using SVEC lists for dependent and
    synchronized path computation requests.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20SVEC%20Object"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  SVEC Object</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20SVEC%20Object"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  SVEC Object</span>
 
    When a PCC or PCE sends path computation requests to a PCE, a PCEP
    Path Computation Request (PCReq) message may carry multiple requests,
@@ -384,7 +354,7 @@ Table of Contents
    the paths.  The path computation requests listed in the SVEC must be
    handled in a specific relation to each other (i.e., synchronized).
 
-   [<a id="ref-RFC5440" name="ref-RFC5440">RFC5440</a>] defines two synchronous path computation modes for
+   [<a id="ref-RFC5440">RFC5440</a>] defines two synchronous path computation modes for
    dependent or independent path computation requests specified by the
    dependency flags (i.e., Node, Link, or Shared Risk Link Group (SRLG)
    diverse flags) in the SVEC:
@@ -406,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
@@ -418,7 +388,7 @@ Table of Contents
    synchronization type.  The SVEC object is defined in <a href="#section-7.13">Section 7.13</a>
    ("SVEC Object") of [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Application%20of%20SVEC%20Lists"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Application of SVEC Lists</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Application%20of%20SVEC%20Lists"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Application of SVEC Lists</span>
 
    It is important for the PCE, when performing path computations, to
    synchronize any path computation requests with a dependency.  For
@@ -462,7 +432,7 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
@@ -494,7 +464,7 @@ Table of Contents
    The SVEC association and disjoint VSPT are available to both single-
    PCE path computation and multi-PCE path computation.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    This document uses PCE terminology defined in [<a href="./rfc4655.html" title='"A Path Computation Element (PCE)-Based Architecture"'>RFC4655</a>], [<a href="./rfc4875.html" title='"Extensions to Resource Reservation Protocol - Traffic Engineering (RSVP-TE) for Point-to- Multipoint TE Label Switched Paths (LSPs)"'>RFC4875</a>],
    and [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>].
@@ -518,7 +488,7 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
@@ -528,13 +498,13 @@ Table of Contents
 
    VSPT: Virtual Shortest Path Tree, defined in [<a href="./rfc5441.html" title='"A Backward-Recursive PCE-Based Computation (BRPC) Procedure to Compute Shortest Constrained Inter-Domain Traffic Engineering Label Switched Paths"'>RFC5441</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20SVEC%20Association%20Scenarios"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  SVEC Association Scenarios</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20SVEC%20Association%20Scenarios"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  SVEC Association Scenarios</span>
 
    This section clarifies several path computation scenarios in which
    SVEC association can be applied.  Also, any combination of scenarios
    described in this section could be applicable.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Synchronized%20Computation%20for%20Diverse%20Path%20Requests"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Synchronized Computation for Diverse Path Requests</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Synchronized%20Computation%20for%20Diverse%20Path%20Requests"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Synchronized Computation for Diverse Path Requests</span>
 
    A PCE may compute two or more point-to-point diverse paths
    concurrently, in order to increase the probability of meeting primary
@@ -574,7 +544,7 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
@@ -596,7 +566,7 @@ Table of Contents
    using Exclude Route Object (XRO) and/or Include Route Object (IRO)
    constraints in the primary request.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Synchronized%20Computation%20for%20Point-to-Multipoint%20Path%20Requests"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Synchronized Computation for Point-to-Multipoint Path Requests</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Synchronized%20Computation%20for%20Point-to-Multipoint%20Path%20Requests"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Synchronized Computation for Point-to-Multipoint Path Requests</span>
 
    For point-to-multipoint path requests, SVEC association can be
    applied.
@@ -630,15 +600,15 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20SVEC%20Association"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  SVEC Association</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20SVEC%20Association"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  SVEC Association</span>
 
    This section describes the associations among SVECs in a SVEC list.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20SVEC%20List"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  SVEC List</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20SVEC%20List"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  SVEC List</span>
 
    PCEP provides the capability to carry one or more SVEC objects in a
    PCReq message, and this set of SVEC objects within the PCReq message
@@ -647,7 +617,7 @@ Table of Contents
    association among such distinct groups, associated SVECs described in
    this document are used.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Associated%20SVECs"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Associated SVECs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Associated%20SVECs"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Associated SVECs</span>
 
    "Associated SVECs" means that there are relationships among multiple
    SVECs in a SVEC list.  Note that there is no automatic association in
@@ -686,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
@@ -698,7 +668,7 @@ Table of Contents
 
            Request-ID #X, Request-ID #Y, Request-ID #Z
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Non-Associated%20SVECs"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Non-Associated SVECs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Non-Associated%20SVECs"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Non-Associated SVECs</span>
 
    "Non-associated SVECs" means that there are no relationships among
    SVECs.  If none of the SVEC objects in the SVEC list on a PCReq
@@ -723,9 +693,9 @@ Table of Contents
 
            Request-ID #X, Request-ID #Y, Request-ID #Z
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Processing%20of%20SVEC%20List"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Processing of SVEC List</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Processing%20of%20SVEC%20List"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Processing of SVEC List</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Single-PCE%2C%20Single-Domain%20Environments"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Single-PCE, Single-Domain Environments</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Single-PCE%2C%20Single-Domain%20Environments"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Single-PCE, Single-Domain Environments</span>
 
    In this environment, there is a single PCE within the domain.
 
@@ -742,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
@@ -766,7 +736,7 @@ Table of Contents
    malformed, the PCE should cancel the path computation request and
    respond to the PCC with the relevant PCErr message.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Multi-PCE%2C%20Single-Domain%20Environments"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Multi-PCE, Single-Domain Environments</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Multi-PCE%2C%20Single-Domain%20Environments"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Multi-PCE, Single-Domain Environments</span>
 
    There are multiple PCEs in a domain, to which PCCs can communicate
    directly, and PCCs can choose an appropriate PCE for load-balanced
@@ -783,7 +753,7 @@ Table of Contents
    Therefore, a PCC must not send dependent path computation requests
    associated by SVECs to different PCEs.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Multi-PCE%2C%20Multi-Domain%20Environments"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Multi-PCE, Multi-Domain Environments</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Multi-PCE%2C%20Multi-Domain%20Environments"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Multi-PCE, Multi-Domain Environments</span>
 
    In this environment, there are multiple domains in which PCEs are
    located in each domain, and end-to-end dependent paths (i.e., diverse
@@ -798,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
@@ -854,16 +824,16 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20End-to-End%20Diverse%20Path%20Computation"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  End-to-End Diverse Path Computation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20End-to-End%20Diverse%20Path%20Computation"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  End-to-End Diverse Path Computation</span>
 
    In this section, the synchronous approach is provided to compute
    primary and secondary paths simultaneously.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Disjoint%20VSPT"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Disjoint VSPT</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Disjoint%20VSPT"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Disjoint VSPT</span>
 
    The BRPC procedure constructs a VSPT to inform the enquiring PCE of
    potential paths to the destination node.
@@ -910,7 +880,7 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
@@ -924,7 +894,7 @@ Table of Contents
 
                 Figure 3.  Disjoint VSPTs from PCE2 to PCE1
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Disjoint%20VSPT%20Encoding"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Disjoint VSPT Encoding</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Disjoint%20VSPT%20Encoding"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Disjoint VSPT Encoding</span>
 
    Encoding for the disjoint VSPT follows the definition of PCEP message
    encoding in [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>].
@@ -966,11 +936,11 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Path%20Computation%20Procedure"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  Path Computation Procedure</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Path%20Computation%20Procedure"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  Path Computation Procedure</span>
 
    For end-to-end diverse path computation, the same mode of operation
    as that of the BRPC procedure can be applied (i.e., Step 1 to Step n
@@ -988,59 +958,59 @@ Table of Contents
    requests with disjoint VSPTs.  The selection and application of the
    appropriate algorithm is out of scope in this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Manageability%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Manageability Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Manageability%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Manageability Considerations</span>
 
    This section describes manageability considerations specified in
    [<a href="#ref-PCE-MNG-REQS" title='"Inclusion of Manageability Sections in PCE Working Group Drafts"'>PCE-MNG-REQS</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Control%20of%20Function%20and%20Policy"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Control of Function and Policy</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Control%20of%20Function%20and%20Policy"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Control of Function and Policy</span>
 
    In addition to [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>], PCEP implementations should allow the PCC
    to be responsible for mapping the requested paths to computation
    requests.  The PCC should construct the SVECs to identify and
    associate SVEC relationships.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Information%20and%20Data%20Models%20%28MIB%20Modules%29"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Information and Data Models (MIB Modules)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Information%20and%20Data%20Models%20%28MIB%20Modules%29"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Information and Data Models (MIB Modules)</span>
 
    There are currently no additional parameters for MIB modules.  There
    would be value in a MIB module that details the SVEC association.
    This work is currently out of scope of this document.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Liveness%20Detection%20and%20Monitoring"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  Liveness Detection and Monitoring</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Liveness%20Detection%20and%20Monitoring"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  Liveness Detection and Monitoring</span>
 
    The associated SVEC in this document allows PCEs to compute optimal
    sets of diverse paths.  This type of path computation may require
    more time to obtain its results.  Therefore, it is recommended for
    PCEP to support the PCE monitoring mechanism specified in [<a href="./rfc5886.html" title='"A Set of Monitoring Tools for Path Computation Element (PCE)-Based Architecture"'>RFC5886</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Verifying%20Correct%20Operation"></a></body></html><a class="selflink" href="#section-7.4" name="section-7.4">7.4</a>.  Verifying Correct Operation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Verifying%20Correct%20Operation"></a></body></html><a class="selflink" href="#section-7.4" id="section-7.4">7.4</a>.  Verifying Correct Operation</span>
 
-   [<a id="ref-RFC5440" name="ref-RFC5440">RFC5440</a>] provides a sufficient description for this document.  There
+   [<a id="ref-RFC5440">RFC5440</a>] provides a sufficient description for this document.  There
    are no additional considerations.
 
 
 
 
 <span class="grey">Nishioka &amp; King               Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Requirements%20on%20Other%20Protocols%20and%20Functional%20Components"></a></body></html><a class="selflink" href="#section-7.5" name="section-7.5">7.5</a>.  Requirements on Other Protocols and Functional Components</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Requirements%20on%20Other%20Protocols%20and%20Functional%20Components"></a></body></html><a class="selflink" href="#section-7.5" id="section-7.5">7.5</a>.  Requirements on Other Protocols and Functional Components</span>
 
    This document does not require any other protocol and functional
    components.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.6.%20%20Impact%20on%20Network%20Operation"></a></body></html><a class="selflink" href="#section-7.6" name="section-7.6">7.6</a>.  Impact on Network Operation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.6.%20%20Impact%20on%20Network%20Operation"></a></body></html><a class="selflink" href="#section-7.6" id="section-7.6">7.6</a>.  Impact on Network Operation</span>
 
-   [<a id="ref-RFC5440" name="ref-RFC5440">RFC5440</a>] provides descriptions for the mechanisms discussed in this
+   [<a id="ref-RFC5440">RFC5440</a>] provides descriptions for the mechanisms discussed in this
    document.  There is value in considering that large associated SVECs
    will require greater PCE resources, compared to non-associated SVECs.
    Additionally, the sending of large associated SVECs within multiple
    PCReq messages will require more network resources.  Solving these
    specific issues is out of scope of this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Security Considerations</span>
 
    This document describes the usage of the SVEC list, and does not have
    any extensions for PCEP.  The security of the procedures described in
@@ -1062,15 +1032,15 @@ Table of Contents
    o  Specifying which PCCs may request large SVEC associations through
       PCE access policy control.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC4655" name="ref-RFC4655">RFC4655</a>]      Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
+   [<a id="ref-RFC4655">RFC4655</a>]      Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
                   Computation Element (PCE)-Based Architecture",
                   <a href="./rfc4655.html">RFC 4655</a>, August 2006.
 
-   [<a id="ref-RFC4657" name="ref-RFC4657">RFC4657</a>]      Ash, J., Ed., and J. Le Roux, Ed., "Path Computation
+   [<a id="ref-RFC4657">RFC4657</a>]      Ash, J., Ed., and J. Le Roux, Ed., "Path Computation
                   Element (PCE) Communication Protocol Generic
                   Requirements", <a href="./rfc4657.html">RFC 4657</a>, September 2006.
 
@@ -1078,52 +1048,52 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
-   [<a id="ref-RFC4875" name="ref-RFC4875">RFC4875</a>]      Aggarwal, R., Ed., Papadimitriou, D., Ed., and S.
+   [<a id="ref-RFC4875">RFC4875</a>]      Aggarwal, R., Ed., Papadimitriou, D., Ed., and S.
                   Yasukawa, Ed., "Extensions to Resource Reservation
                   Protocol - Traffic Engineering (RSVP-TE) for Point-to-
                   Multipoint TE Label Switched Paths (LSPs)", <a href="./rfc4875.html">RFC 4875</a>,
                   May 2007.
 
-   [<a id="ref-RFC5440" name="ref-RFC5440">RFC5440</a>]      Vasseur, JP., Ed., and JL. Le Roux, Ed., "Path
+   [<a id="ref-RFC5440">RFC5440</a>]      Vasseur, JP., Ed., and JL. Le Roux, Ed., "Path
                   Computation Element (PCE) Communication Protocol
                   (PCEP)", <a href="./rfc5440.html">RFC 5440</a>, March 2009.
 
-   [<a id="ref-RFC5441" name="ref-RFC5441">RFC5441</a>]      Vasseur, JP., Ed., Zhang, R., Bitar, N., and JL. Le
+   [<a id="ref-RFC5441">RFC5441</a>]      Vasseur, JP., Ed., Zhang, R., Bitar, N., and JL. Le
                   Roux, "A Backward-Recursive PCE-Based Computation
                   (BRPC) Procedure to Compute Shortest Constrained
                   Inter-Domain Traffic Engineering Label Switched
                   Paths", <a href="./rfc5441.html">RFC 5441</a>, April 2009.
 
-   [<a id="ref-RFC5520" name="ref-RFC5520">RFC5520</a>]      Bradford, R., Ed., Vasseur, JP., and A. Farrel,
+   [<a id="ref-RFC5520">RFC5520</a>]      Bradford, R., Ed., Vasseur, JP., and A. Farrel,
                   "Preserving Topology Confidentiality in Inter-Domain
                   Path Computation Using a Path-Key-Based Mechanism",
                   <a href="./rfc5520.html">RFC 5520</a>, April 2009.
 
-   [<a id="ref-RFC5521" name="ref-RFC5521">RFC5521</a>]      Oki, E., Takeda, T., and A. Farrel, "Extensions to the
+   [<a id="ref-RFC5521">RFC5521</a>]      Oki, E., Takeda, T., and A. Farrel, "Extensions to the
                   Path Computation Element Communication Protocol (PCEP)
                   for Route Exclusions", <a href="./rfc5521.html">RFC 5521</a>, April 2009.
 
-   [<a id="ref-RFC5557" name="ref-RFC5557">RFC5557</a>]      Lee, Y., Le Roux, JL., King, D., and E. Oki, "Path
+   [<a id="ref-RFC5557">RFC5557</a>]      Lee, Y., Le Roux, JL., King, D., and E. Oki, "Path
                   Computation Element Communication Protocol (PCEP)
                   Requirements and Protocol Extensions in Support of
                   Global Concurrent Optimization", <a href="./rfc5557.html">RFC 5557</a>, July 2009.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-H-PCE" name="ref-H-PCE">H-PCE</a>]        King, D., Ed., and A. Farrel, Ed., "The Application of
+   [<a id="ref-H-PCE">H-PCE</a>]        King, D., Ed., and A. Farrel, Ed., "The Application of
                   the Path Computation Element Architecture to the
                   Determination of a Sequence of Domains in MPLS &amp;
                   GMPLS", Work in Progress, December 2009.
 
-   [<a id="ref-PCE-MNG-REQS" name="ref-PCE-MNG-REQS">PCE-MNG-REQS</a>] Farrel, A., "Inclusion of Manageability Sections in
+   [<a id="ref-PCE-MNG-REQS">PCE-MNG-REQS</a>] Farrel, A., "Inclusion of Manageability Sections in
                   PCE Working Group Drafts", Work in Progress, July
                   2009.
 
-   [<a id="ref-RFC5886" name="ref-RFC5886">RFC5886</a>]      Vasseur, JP., Ed., Le Roux, JL., and Y. Ikejiri, "A
+   [<a id="ref-RFC5886">RFC5886</a>]      Vasseur, JP., Ed., Le Roux, JL., and Y. Ikejiri, "A
                   Set of Monitoring Tools for Path Computation Element
                   (PCE)-Based Architecture", <a href="./rfc5886.html">RFC 5886</a>, June 2010.
 
@@ -1134,17 +1104,17 @@ Table of Contents
 
 
 <span class="grey">Nishioka &amp; King               Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6007.html">RFC 6007</a>             SVEC List for Path Computations      September 2010</span>
 
 
-   [<a id="ref-RFC6006" name="ref-RFC6006">RFC6006</a>]      Zhao, Q., Ed., King, D., Ed., Verhaeghe, F., Takeda,
+   [<a id="ref-RFC6006">RFC6006</a>]      Zhao, Q., Ed., King, D., Ed., Verhaeghe, F., Takeda,
                   T., Ali, Z., and J. Meuric, "Extensions to the Path
                   Computation Element Communication Protocol (PCEP) for
                   Point-to-Multipoint Traffic Engineering Label Switched
                   Paths", <a href="./rfc6006.html">RFC 6006</a>, September 2010.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Acknowledgements</span>
 
    The authors would like to thank Adrian Farrel, Julien Meuric, and
    Filippo Cugini for their valuable comments.
@@ -1190,11 +1160,6 @@ Authors' Addresses
 
 
 Nishioka &amp; King               Informational                    [Page 18]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

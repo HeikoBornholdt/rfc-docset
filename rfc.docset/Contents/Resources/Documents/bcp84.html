@@ -1,1066 +1,1166 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-<meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<link href="" rel="icon" type="image/png"/>
-<link href="" rel="shortcut icon" type="image/png"/>
-<title>BCP 84 - Ingress Filtering for Multihomed Networks</title>
-<style type="text/css">
-	@media only screen 
-	  and (min-width: 992px)
-	  and (max-width: 1199px) {
-	    body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 768px)
-	  and (max-width: 991px) {
-            body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 480px)
-	  and (max-width: 767px) {
-            body { font-size: 11pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (max-width: 479px) {
-            body { font-size: 8pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-device-width : 375px) 
-	  and (max-device-width : 667px) {
-            body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
-        }
-	@media only screen 
-	  and (min-device-width: 1200px) {
-            body { font-size: 10pt; margin: 0 4em; }
-            div.content { width: 96ex; margin: 0; }
-        }
-        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-	    font-weight: bold;
-            line-height: 0pt;
-            display: inline;
-            white-space: pre;
-            font-family: monospace;
-            font-size: 1em;
-	    font-weight: bold;
-        }
-        pre {
-            font-size: 1em;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-	.pre {
-	    white-space: pre;
-	    font-family: monospace;
-	}
-	.header{
-	    font-weight: bold;
-	}
-        .newpage {
-            page-break-before: always;
-        }
-        .invisible {
-            text-decoration: none;
-            color: white;
-        }
-        a.selflink {
-          color: black;
-          text-decoration: none;
-        }
-        @media print {
-            body {
-                font-family: monospace;
-                font-size: 10.5pt;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                font-size: 1em;
-            }
-        
-            a:link, a:visited {
-                color: inherit;
-                text-decoration: none;
-            }
-            .noprint {
-                display: none;
-            }
-        }
-	@media screen {
-	    .grey, .grey a:link, .grey a:visited {
-		color: #777;
-	    }
-            .docinfo {
-                background-color: #EEE;
-            }
-            .top {
-                border-top: 7px solid #EEE;
-            }
-            .bgwhite  { background-color: white; }
-            .bgred    { background-color: #F44; }
-            .bggrey   { background-color: #666; }
-            .bgbrown  { background-color: #840; }            
-            .bgorange { background-color: #FA0; }
-            .bgyellow { background-color: #EE0; }
-            .bgmagenta{ background-color: #F4F; }
-            .bgblue   { background-color: #66F; }
-            .bgcyan   { background-color: #4DD; }
-            .bggreen  { background-color: #4F4; }
-
-            .legend   { font-size: 90%; }
-            .cplate   { font-size: 70%; border: solid grey 1px; }
-	}
-    </style>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="http://gmpg.org/xfn/11" rel="profile"/>
+<meta charset="utf-8"/>
+<meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/> <title>Information on BCP 84 » RFC Editor</title>
+<meta content="WordPress 6.0.3" name="generator"/> <!-- leave this for stats -->
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/style.css" media="screen" rel="stylesheet" type="text/css"/>
 <!--[if IE]>
-    <style>
-    body {
-       font-size: 13px;
-       margin: 10px 10px;
-    }
+                <style type="text/css">
+                #headerimg{ filter:alpha(opacity=80);}
+                .top img{ filter:alpha(opacity=60);}
+                .top img:hover{ filter:alpha(opacity=100);}
+                ul.comment-preview li{ filter:alpha(opacity=70);}
+                ul.comment-preview li:hover{ filter:alpha(opacity=100);}
+                #commentform input[type="text"],#commentform .comment-form-author .required, 
+                #commentform .comment-form-email .required{padding-left: 65px !important;}
+                .top a {position: relative;top: 2px;}
+                </style>
+        <![endif]-->
+<!--[if IE 7]>
+                <style type="text/css">
+                #headerimgwrap{ position:absolute;left:20%}
+                .hleft{position:absolute;}
+                .hright{position:absolute; right:0;}
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<!--[if IE 8 ]>
+                <style type="text/css">
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<link href="https://www.rfc-editor.org/xmlrpc.php" rel="pingback"/>
+<meta content="max-image-preview:large" name="robots"/>
+<link href="./fonts.googleapis.com.html" rel="dns-prefetch"/>
+<link href="./s.w.org.html" rel="dns-prefetch"/>
+<link href="https://www.rfc-editor.org/feed/" rel="alternate" title="RFC Editor » Feed" type="application/rss+xml"/>
+<link href="https://www.rfc-editor.org/comments/feed/" rel="alternate" title="RFC Editor » Comments Feed" type="application/rss+xml"/>
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.rfc-editor.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.3"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dist/block-library/style.min.css?ver=6.0.3" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<style id="responsive-menu-inline-css" type="text/css">
+/** This file is major component of this plugin so please don't try to edit here. */
+#rmp_menu_trigger-2538 {
+  width: 55px;
+  height: 55px;
+  position: fixed;
+  top: 15px;
+  border-radius: 5px;
+  display: none;
+  text-decoration: none;
+  right: 5%;
+  background: #000000;
+  transition: transform 0.5s, background-color 0.5s;
+}
+#rmp_menu_trigger-2538:hover, #rmp_menu_trigger-2538:focus {
+  background: #000000;
+  text-decoration: unset;
+}
+#rmp_menu_trigger-2538.is-active {
+  background: #000000;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-box {
+  width: 25px;
+  color: #ffffff;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-icon-active, #rmp_menu_trigger-2538 .rmp-trigger-text-open {
+  display: none;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-active, #rmp_menu_trigger-2538.is-active .rmp-trigger-text-open {
+  display: inline;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-inactive, #rmp_menu_trigger-2538.is-active .rmp-trigger-text {
+  display: none;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label {
+  color: #ffffff;
+  pointer-events: none;
+  line-height: 13px;
+  font-family: inherit;
+  font-size: 14px;
+  display: inline;
+  text-transform: inherit;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-top {
+  display: block;
+  margin-bottom: 12px;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-bottom {
+  display: block;
+  margin-top: 12px;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner {
+  display: block;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::after {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  position: absolute;
+}
+#rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+#rmp_menu_trigger-2538:hover .responsive-menu-pro-inner, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+/* Hamburger menu styling */
+@media screen and (max-width: 1024px) {
+  /** Menu Title Style */
+  /** Menu Additional Content Style */
+  #l_sidebar {
+    display: none !important;
+  }
+  #rmp_menu_trigger-2538 {
+    display: block;
+  }
+  #rmp-container-2538 {
+    position: fixed;
+    top: 0;
+    margin: 0;
+    transition: transform 0.5s;
+    overflow: auto;
+    display: block;
+    width: 75%;
+    background-color: #212121;
+    background-image: url("");
+    height: 100%;
+    left: 0;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+  }
+  #rmp-menu-wrap-2538 {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu, #rmp-menu-wrap-2538 .rmp-submenu {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-1 .rmp-menu-item-link {
+    padding-left: 10%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-2 .rmp-menu-item-link {
+    padding-left: 15%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-3 .rmp-menu-item-link {
+    padding-left: 20%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-4 .rmp-menu-item-link {
+    padding-left: 25%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu.rmp-submenu-open {
+    display: block;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+    font-weight: normal;
+    letter-spacing: 0px;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.5s, border-color 0.5s, 0.5s;
+    padding: 0 5%;
+    padding-right: 50px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:after, #rmp-menu-wrap-2538 .rmp-menu-item-link:before {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:focus {
+    outline: none;
+    border-color: unset;
+    box-shadow: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link .rmp-font-icon {
+    height: 40px;
+    line-height: 40px;
+    margin-right: 10px;
+    font-size: 13px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    overflow: hidden;
+    background-size: cover;
+    overflow: hidden;
+    right: 0;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow .rmp-font-icon {
+    margin-right: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow * {
+    vertical-align: middle;
+    line-height: 40px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active {
+    display: block;
+    background-size: cover;
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow {
+    right: 0;
+    border-right: unset;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-description {
+    margin: 0;
+    padding: 5px 5%;
+    opacity: 0.8;
+    color: #ffffff;
+  }
+  #rmp-search-box-2538 {
+    display: block;
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+  }
+  #rmp-search-box-2538 .rmp-search-form {
+    margin: 0;
+  }
+  #rmp-search-box-2538 .rmp-search-box {
+    background: #ffffff;
+    border: 1px solid #dadada;
+    color: #333333;
+    width: 100%;
+    padding: 0 5%;
+    border-radius: 30px;
+    height: 45px;
+    -webkit-appearance: none;
+  }
+  #rmp-search-box-2538 .rmp-search-box::placeholder {
+    color: #c7c7cd;
+  }
+  #rmp-search-box-2538 .rmp-search-box:focus {
+    background-color: #ffffff;
+    outline: 2px solid #dadada;
+    color: #333333;
+  }
+  #rmp-menu-title-2538 {
+    background-color: #212121;
+    color: #ffffff;
+    text-align: left;
+    font-size: 13px;
+    padding-top: 10%;
+    padding-left: 5%;
+    padding-bottom: 0%;
+    padding-right: 5%;
+    font-weight: 400;
+    transition: background-color 0.5s, border-color 0.5s, color 0.5s;
+  }
+  #rmp-menu-title-2538:hover {
+    background-color: #212121;
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 > a {
+    color: #ffffff;
+    width: 100%;
+    background-color: unset;
+    text-decoration: none;
+  }
+  #rmp-menu-title-2538 > a:hover {
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 .rmp-font-icon {
+    font-size: 13px;
+  }
+  #rmp-menu-additional-content-2538 {
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+    color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+/**
+This file contents common styling of menus.
+*/
+.rmp-container {
+  display: none;
+  visibility: visible;
+  padding: 0px 0px 0px 0px;
+  z-index: 99998;
+  transition: all 0.3s;
+  /** Scrolling bar in menu setting box **/
+}
+.rmp-container.rmp-fade-top, .rmp-container.rmp-fade-left, .rmp-container.rmp-fade-right, .rmp-container.rmp-fade-bottom {
+  display: none;
+}
+.rmp-container.rmp-slide-left, .rmp-container.rmp-push-left {
+  transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+}
+.rmp-container.rmp-slide-left.rmp-menu-open, .rmp-container.rmp-push-left.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-right, .rmp-container.rmp-push-right {
+  transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+}
+.rmp-container.rmp-slide-right.rmp-menu-open, .rmp-container.rmp-push-right.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-top, .rmp-container.rmp-push-top {
+  transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+}
+.rmp-container.rmp-slide-top.rmp-menu-open, .rmp-container.rmp-push-top.rmp-menu-open {
+  transform: translateY(0);
+  -ms-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+}
+.rmp-container.rmp-slide-bottom, .rmp-container.rmp-push-bottom {
+  transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+  -moz-transform: translateY(100%);
+}
+.rmp-container.rmp-slide-bottom.rmp-menu-open, .rmp-container.rmp-push-bottom.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container::-webkit-scrollbar {
+  width: 0px;
+}
+.rmp-container ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+.rmp-container .rmp-menu-wrap .rmp-menu {
+  transition: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  border: 0;
+  bottom: auto;
+  box-sizing: border-box;
+  clip: auto;
+  color: #666;
+  display: block;
+  float: none;
+  font-family: inherit;
+  font-size: 14px;
+  height: auto;
+  left: auto;
+  line-height: 1.7;
+  list-style-type: none;
+  margin: 0;
+  min-height: auto;
+  max-height: none;
+  opacity: 1;
+  outline: none;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  pointer-events: auto;
+  right: auto;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  transform: none;
+  top: auto;
+  visibility: inherit;
+  width: auto;
+  word-wrap: break-word;
+  white-space: normal;
+}
+.rmp-container .rmp-menu-additional-content {
+  display: block;
+  word-break: break-word;
+}
+.rmp-container .rmp-menu-title {
+  display: flex;
+  flex-direction: column;
+}
+.rmp-container .rmp-menu-title .rmp-menu-title-image {
+  max-width: 100%;
+  margin-bottom: 15px;
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+}
+button.rmp_menu_trigger {
+  z-index: 999999;
+  overflow: hidden;
+  outline: none;
+  border: 0;
+  display: none;
+  margin: 0;
+  transition: transform 0.5s, background-color 0.5s;
+  padding: 0;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before, button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  content: "";
+  display: block;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before {
+  top: 10px;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  bottom: 10px;
+}
+button.rmp_menu_trigger .rmp-trigger-box {
+  width: 40px;
+  display: inline-block;
+  position: relative;
+  pointer-events: none;
+  vertical-align: super;
+}
+.admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+  margin-top: 32px !important;
+}
+@media screen and (max-width: 782px) {
+  .admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+    margin-top: 46px !important;
+  }
+}
+/*  Menu Trigger Boring Animation */
+.rmp-menu-trigger-boring .responsive-menu-pro-inner {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring .responsive-menu-pro-inner::after, .rmp-menu-trigger-boring .responsive-menu-pro-inner::before {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner {
+  transform: rotate(45deg);
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:before {
+  top: 0;
+  opacity: 0;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:after {
+  bottom: 0;
+  transform: rotate(-90deg);
+}
+
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dashicons.min.css?ver=6.0.3" id="dashicons-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/css/mobile.css?ver=0.1" id="tech-mobile-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans%7C&amp;ver=6.0.3" id="google_fonts-css" media="screen" rel="stylesheet" type="text/css"/>
+<script id="jquery-core-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" type="text/javascript"></script>
+<script id="jquery-migrate-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" type="text/javascript"></script>
+<script id="rmp_menu_scripts-js-extra" type="text/javascript">
+/* <![CDATA[ */
+var rmp_menu = {"ajaxURL":"https:\/\/www.rfc-editor.org\/wp-admin\/admin-ajax.php","wp_nonce":"2262d2d074","menu":[{"menu_theme":null,"theme_type":"default","theme_location_menu":"","submenu_submenu_arrow_width":"40","submenu_submenu_arrow_width_unit":"px","submenu_submenu_arrow_height":"40","submenu_submenu_arrow_height_unit":"px","submenu_arrow_position":"right","submenu_sub_arrow_background_colour":"#212121","submenu_sub_arrow_background_hover_colour":"#3f3f3f","submenu_sub_arrow_background_colour_active":"#212121","submenu_sub_arrow_background_hover_colour_active":"#3f3f3f","submenu_sub_arrow_border_width":"1","submenu_sub_arrow_border_width_unit":"px","submenu_sub_arrow_border_colour":"#212121","submenu_sub_arrow_border_hover_colour":"#3f3f3f","submenu_sub_arrow_border_colour_active":"#212121","submenu_sub_arrow_border_hover_colour_active":"#3f3f3f","submenu_sub_arrow_shape_colour":"#ffffff","submenu_sub_arrow_shape_hover_colour":"#ffffff","submenu_sub_arrow_shape_colour_active":"#ffffff","submenu_sub_arrow_shape_hover_colour_active":"#ffffff","use_header_bar":"off","header_bar_items_order":"{\"logo\":\"on\",\"title\":\"on\",\"search\":\"on\",\"html content\":\"on\"}","header_bar_title":"","header_bar_html_content":"","header_bar_logo":"","header_bar_logo_link":"","header_bar_logo_width":null,"header_bar_logo_width_unit":"%","header_bar_logo_height":null,"header_bar_logo_height_unit":"%","header_bar_height":"80","header_bar_height_unit":"px","header_bar_padding":{"top":"0px","right":"5%","bottom":"0px","left":"5%"},"header_bar_font":"","header_bar_font_size":"14","header_bar_font_size_unit":"px","header_bar_text_color":"#ffffff","header_bar_background_color":"#ffffff","header_bar_breakpoint":"800","header_bar_position_type":"fixed","header_bar_adjust_page":null,"header_bar_scroll_enable":"off","header_bar_scroll_background_color":"#36bdf6","mobile_breakpoint":"600","tablet_breakpoint":"1024","transition_speed":"0.5","sub_menu_speed":"0.2","show_menu_on_page_load":"","menu_disable_scrolling":"off","menu_overlay":"off","menu_overlay_colour":"rgba(0, 0, 0, 0.7)","desktop_menu_width":"","desktop_menu_width_unit":"px","desktop_menu_positioning":"fixed","desktop_menu_side":"","desktop_menu_to_hide":"","use_current_theme_location":"off","mega_menu":{"225":"off","227":"off","229":"off","228":"off","226":"off"},"desktop_submenu_open_animation":"none","desktop_submenu_open_animation_speed":"100ms","desktop_submenu_open_on_click":"off","desktop_menu_hide_and_show":"off","menu_name":"Default Menu","menu_to_use":"responsive-menu","different_menu_for_mobile":"off","menu_to_use_in_mobile":"main-menu","use_mobile_menu":"on","use_tablet_menu":"on","use_desktop_menu":null,"menu_display_on":"all-pages","menu_to_hide":"#l_sidebar,.hright,#r_sidebar","submenu_descriptions_on":"","custom_walker":"","menu_background_colour":"#212121","menu_depth":"5","smooth_scroll_on":"off","smooth_scroll_speed":"500","menu_font_icons":[],"menu_links_height":"40","menu_links_height_unit":"px","menu_links_line_height":"40","menu_links_line_height_unit":"px","menu_depth_0":"5","menu_depth_0_unit":"%","menu_font_size":"13","menu_font_size_unit":"px","menu_font":"","menu_font_weight":"normal","menu_text_alignment":"left","menu_text_letter_spacing":"","menu_word_wrap":"off","menu_link_colour":"#ffffff","menu_link_hover_colour":"#ffffff","menu_current_link_colour":"#ffffff","menu_current_link_hover_colour":"#ffffff","menu_item_background_colour":"#212121","menu_item_background_hover_colour":"#3f3f3f","menu_current_item_background_colour":"#212121","menu_current_item_background_hover_colour":"#3f3f3f","menu_border_width":"1","menu_border_width_unit":"px","menu_item_border_colour":"#212121","menu_item_border_colour_hover":"#212121","menu_current_item_border_colour":"#212121","menu_current_item_border_hover_colour":"#3f3f3f","submenu_links_height":"40","submenu_links_height_unit":"px","submenu_links_line_height":"40","submenu_links_line_height_unit":"px","menu_depth_side":"left","menu_depth_1":"10","menu_depth_1_unit":"%","menu_depth_2":"15","menu_depth_2_unit":"%","menu_depth_3":"20","menu_depth_3_unit":"%","menu_depth_4":"25","menu_depth_4_unit":"%","submenu_item_background_colour":"#212121","submenu_item_background_hover_colour":"#3f3f3f","submenu_current_item_background_colour":"#212121","submenu_current_item_background_hover_colour":"#3f3f3f","submenu_border_width":"1","submenu_border_width_unit":"px","submenu_item_border_colour":"#212121","submenu_item_border_colour_hover":"#212121","submenu_current_item_border_colour":"#212121","submenu_current_item_border_hover_colour":"#3f3f3f","submenu_font_size":"13","submenu_font_size_unit":"px","submenu_font":"","submenu_font_weight":"normal","submenu_text_letter_spacing":"","submenu_text_alignment":"left","submenu_link_colour":"#ffffff","submenu_link_hover_colour":"#ffffff","submenu_current_link_colour":"#ffffff","submenu_current_link_hover_colour":"#ffffff","inactive_arrow_shape":"\u25bc","active_arrow_shape":"\u25b2","inactive_arrow_font_icon":"","active_arrow_font_icon":"","inactive_arrow_image":"","active_arrow_image":"","submenu_arrow_width":"40","submenu_arrow_width_unit":"px","submenu_arrow_height":"40","submenu_arrow_height_unit":"px","arrow_position":"right","menu_sub_arrow_shape_colour":"#ffffff","menu_sub_arrow_shape_hover_colour":"#ffffff","menu_sub_arrow_shape_colour_active":"#ffffff","menu_sub_arrow_shape_hover_colour_active":"#ffffff","menu_sub_arrow_border_width":"1","menu_sub_arrow_border_width_unit":"px","menu_sub_arrow_border_colour":"#212121","menu_sub_arrow_border_hover_colour":"#3f3f3f","menu_sub_arrow_border_colour_active":"#212121","menu_sub_arrow_border_hover_colour_active":"#3f3f3f","menu_sub_arrow_background_colour":"#212121","menu_sub_arrow_background_hover_colour":"#3f3f3f","menu_sub_arrow_background_colour_active":"#212121","menu_sub_arrow_background_hover_colour_active":"#3f3f3f","fade_submenus":"off","fade_submenus_side":"left","fade_submenus_delay":"100","fade_submenus_speed":"500","use_slide_effect":"off","slide_effect_back_to_text":"Back","accordion_animation":"off","auto_expand_all_submenus":"off","auto_expand_current_submenus":"off","menu_item_click_to_trigger_submenu":"off","button_width":"55","button_width_unit":"px","button_height":"55","button_height_unit":"px","button_background_colour":"#000000","button_background_colour_hover":"#000000","button_background_colour_active":"#000000","toggle_button_border_radius":"5","button_transparent_background":"off","button_left_or_right":"right","button_position_type":"fixed","button_distance_from_side":"5","button_distance_from_side_unit":"%","button_top":"15","button_top_unit":"px","button_push_with_animation":"off","button_click_animation":"boring","button_line_margin":"5","button_line_margin_unit":"px","button_line_width":"25","button_line_width_unit":"px","button_line_height":"3","button_line_height_unit":"px","button_line_colour":"#ffffff","button_line_colour_hover":"#ffffff","button_line_colour_active":"#ffffff","button_font_icon":"","button_font_icon_when_clicked":"","button_image":"","button_image_when_clicked":"","button_title":"","button_title_open":"","button_title_position":"left","button_font":"","button_font_size":"14","button_font_size_unit":"px","button_title_line_height":"13","button_title_line_height_unit":"px","button_text_colour":"#ffffff","button_trigger_type_click":"on","button_trigger_type_hover":"off","button_click_trigger":"#responsive-menu-button","items_order":{"title":"on","menu":"on","search":"","additional content":"on"},"menu_title":"","menu_title_link":"","menu_title_link_location":"_self","menu_title_image":"","menu_title_font_icon":"","menu_title_section_padding":{"top":"10%","right":"5%","bottom":"0%","left":"5%"},"menu_title_background_colour":"#212121","menu_title_background_hover_colour":"#212121","menu_title_font_size":"13","menu_title_font_size_unit":"px","menu_title_alignment":"left","menu_title_font_weight":"400","menu_title_font_family":"","menu_title_colour":"#ffffff","menu_title_hover_colour":"#ffffff","menu_title_image_width":null,"menu_title_image_width_unit":"%","menu_title_image_height":null,"menu_title_image_height_unit":"px","menu_additional_content":"<a href=\"\/search\/rfc_search.php\">Advanced Search<\/a>\r\n<form id=\"search_query_separator_id\" name=\"search_query_separator_name\"  action=\"\/search\/rfc_search_detail.php\" method=\"POST\" onsubmit=\"return validateComboBox(this);\"> \r\n<input type=\"text\" id =\"combo_box_id\" name=\"combo_box\"  maxlength=\"20\" size =\"35\" placeholder=\"number, title, keyword, or author surname\"><\/form>\r\n","menu_additional_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_additional_content_font_size":"16","menu_additional_content_font_size_unit":"px","menu_additional_content_alignment":"center","menu_additional_content_colour":"#ffffff","menu_search_box_text":"Search","menu_search_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_search_box_height":"45","menu_search_box_height_unit":"px","menu_search_box_border_radius":"30","menu_search_box_text_colour":"#333333","menu_search_box_background_colour":"#ffffff","menu_search_box_placeholder_colour":"#c7c7cd","menu_search_box_border_colour":"#dadada","menu_section_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_width":"75","menu_width_unit":"%","menu_maximum_width":"","menu_maximum_width_unit":"px","menu_minimum_width":"","menu_minimum_width_unit":"px","menu_auto_height":"off","menu_container_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_container_background_colour":"#212121","menu_background_image":"","animation_type":"slide","menu_appear_from":"left","animation_speed":"0.5","page_wrapper":"","menu_close_on_body_click":"off","menu_close_on_scroll":"off","menu_close_on_link_click":"off","enable_touch_gestures":"","breakpoint":"1024","menu_depth_5":"30","menu_depth_5_unit":"%","keyboard_shortcut_close_menu":"27,37","keyboard_shortcut_open_menu":"32,39","button_image_alt":"","button_image_alt_when_clicked":"","button_font_icon_type":"font-awesome","button_font_icon_when_clicked_type":"font-awesome","button_trigger_type":"click","active_arrow_image_alt":"","inactive_arrow_image_alt":"","active_arrow_font_icon_type":"font-awesome","inactive_arrow_font_icon_type":"font-awesome","menu_adjust_for_wp_admin_bar":"off","menu_title_image_alt":"","menu_title_font_icon_type":"font-awesome","minify_scripts":"off","scripts_in_footer":"off","external_files":"off","remove_fontawesome":"","remove_bootstrap":"","shortcode":"off","mobile_only":"off","custom_css":"","single_menu_height":"80","single_menu_height_unit":"px","single_menu_font":"","single_menu_font_size":"14","single_menu_font_size_unit":"px","single_menu_submenu_height":"40","single_menu_submenu_height_unit":"px","single_menu_submenu_font":"","single_menu_submenu_font_size":"12","single_menu_submenu_font_size_unit":"px","single_menu_item_link_colour":"#000000","single_menu_item_link_colour_hover":"#000000","single_menu_item_background_colour":"#ffffff","single_menu_item_background_colour_hover":"#ffffff","single_menu_item_submenu_link_colour":"#000000","single_menu_item_submenu_link_colour_hover":"#000000","single_menu_item_submenu_background_colour":"#ffffff","single_menu_item_submenu_background_colour_hover":"#ffffff","header_bar_logo_alt":"","desktop_menu_options":"{}","admin_theme":"light","single_menu_line_height":"80","single_menu_line_height_unit":"px","single_menu_submenu_line_height":"40","single_menu_submenu_line_height_unit":"px","hide_on_mobile":"off","hide_on_desktop":"off","menu_title_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_id":2538,"active_toggle_contents":"\u25b2","inactive_toggle_contents":"\u25bc"}]};
+/* ]]> */
+</script>
+<script id="rmp_menu_scripts-js" src="https://www.rfc-editor.org/wp-content/plugins/responsive-menu/v4.0.0/assets/js/rmp-menu.js?ver=4.1.11" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-json/" rel="https://api.w.org/"/><link href="https://www.rfc-editor.org/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+<link href="https://www.rfc-editor.org/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+<meta content="WordPress 6.0.3" name="generator"/>
+<script type="text/javascript">
+        jQuery(document).ready(function($){
+	/* toggle nav */
+	$("#menu-icon").on("click", function(){
+		$(".top-menu").slideToggle();
+		$(this).toggleClass("active");
+	});
+
+        });
+        </script><script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/matomo-tracking.js" type="text/javascript"></script>
+<style type="text/css">/*Variable Styles*/
+#page{ 
+background:#FFFFFF url() repeat top center scroll;
+}
+body{
+font:normal 14px/1.3em Noto Sans, Sans-Serif;
+background:#FFFFFF url() repeat top center scroll;
+}
+.techozoic_font_size{
+font-size: 14px;
+}
+.narrowcolumn .entry,.widecolumn .entry, .top {
+font:normal 14px/1.5em Noto Sans, Sans-Serif;
+color: #2C4353;
+}
+.noclass,.home .narrowcolumn .entry, home .widecolumn .entry, .top,.post .singlepost,.archive .narrowcolumn .entry, .archive .widecolumn .entry, .top{
+background-color:#E3E3E3;
+border-top:1px #A0B3C2 solid;
+}
+.top{
+border:none;
+}
+.blog_title, .blog_title a, .blog_title a:hover, .blog_title a:visited{
+font:normal 40px/1.3em Courier, Sans-Serif;
+color:  	#000000;
+}
+h1.post_title{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.post_title a{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.entry h1{
+font:bold 3em/2.2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h2{
+font:bold 2em/2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h3{
+font:bold 1.4em/1.6em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h4{
+font:bold 1.3em/1.4em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h5{
+font:bold 1.2em/1.3em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.sidebar h2, .sidebar h3, #footer h2{
+font: bold 18px/1.3em Noto Sans, Sans-Serif;
+color:#2C4353;
+}
+.widgettitle {
+font-size: 18px;
+margin: 1px 0;
+}
+#content {
+font-size: 14px;
+}
+acronym,abbr,span.caps,small,.trackback li,.sidebar, .postmetadata {
+font-size: 12px;
+}
+.postmetadata{
+font: normal 12px/1.3em Noto Sans, Sans-Serif;
+color: #777777;
+}
+ul#nav a, ul#admin a, #dropdown li.current_page_item a:hover, .top-menu li.current-menu-item a:hover, #dropdown li.current_page_item ul a, .top-menu li.current-menu-item ul a, ul#nav li.current_page_item a:hover, {
+color: #A0B3C2;
+}
+.commenlist .author,#searchform #s, #searchsubmit:hover,#catsubmit:hover,#wp-submit:hover,#TB_ajaxContent {
+background-color: #A0B3C2 ;
+}
+ul#admin li, ul#dropdown li, #navmenu .top-menu li{
+/*background-color: #E3E3E3;*/
+}
+ul#admin li a, ul#dropdown li a, #navmenu .top-menu li a{
+font-style: bold; 
+font-size:14px;
+font-family: Noto Sans, Sans-Serif;
+color:#A0B3C2;
+}
+ul#admin li a:hover, ul#dropdown li a:hover, #navmenu .top-menu li a:hover{
+color: #A0B3C2;
+}
+#dropdown > li, ul.top-menu > li{
+margin: 0 3px;
+}
+.ribbon ul.top-menu > li, .square ul.top-menu > li, #dropdown > li{
+margin: 0;
+padding: 0 3px;
+}
+.ribbon ul.top-menu > li.has_children:hover:after, .square ul.top-menu > li.has_children:hover:after, #dropdown > li.has_children:hover:after {
+border-bottom: 5px solid #E3E3E3;
+}
+#dropdown ul, .top-menu ul{
+background-color: #E3E3E3;
+}
+.ribbon, .square, #dropdown{
+background-color: #E3E3E3;
+background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E3E3E3), to(#CCCCCC));
+background-image: -webkit-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:    -moz-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:     -ms-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:      -o-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:         linear-gradient(top, #E3E3E3, #CCCCCC);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E3E3E3', endColorstr='#CCCCCC');
+}
+.ribbon ul.top-menu:before{
+border-right: 10px solid #CCCCCC;
+}
+.ribbon ul.top-menu:after{
+border-left: 10px solid #CCCCCC;
+}.ribbon ul.top-menu > li:last-child, .square ul.top-menu > li:last-child, #dropdown > li:last-child{
+margin-right: 100px;
+}#navmenu .top-menu li, #navmenu .top-menu ul.sub-menu, ul#admin li, #navmenu #dropdown li{
+background-color: #E3E3E3;
+}       
+#navmenu #dropdown li.current_page_item, #navmenu .top-menu li.current-menu-item, #navmenu .top-menu ul.sub-menu li.current-menu-item {
+background-color: #A0B3C2 ;
+}
+#navmenu #dropdown li:hover, #navmenu .top-menu li:hover, #navmenu .top-menu ul.sub-menu > li:hover {
+background-color:#EFEFEF;
+}
+#navmenu #dropdown li.current_page_item > a:hover, #navmenu .top-menu li.current-menu-item > a:hover, #navmenu .top-menu li.current-menu-item:hover > a, #navmenu .top-menu li:hover > a, #navmenu #dropdown li:hover > a {
+color:#A0B3C2;
+}
+#navmenu #dropdown li.current_page_item > a, #navmenu .top-menu li.current-menu-item > a{
+color:#F7F7F7;
+}
+ul#admin li:hover{
+background:#EFEFEF;
+box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-moz-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-webkit-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+}#dropdown li ul li, .top-menu li ul li, #dropdown li ul , .top-menu li ul{
+width: 250px !important;
+}
+#dropdown li ul ul, .top-menu li ul ul{
+left:250px ; 
+}
+.tags {
+border-bottom:1px #A0B3C2 solid;
+border-top:1px #A0B3C2 solid;
+}
+a,h2 a:hover,h3 a:hover,#user_login,#user_pass, #sidenav a:visited {
+color:#597EAA; 
+text-decoration:none;
+}
+#searchform #s {
+color:#E3E3E3; 
+text-decoration:none;
+}
+a:hover {
+color:#114477; 
+text-decoration:underline;
+}
+a:visited{
+color:#476588;
+}
+.description {
+color:#A0B3C2;
+}
+#headerimg {
+;
+float:left;margin-left:10px;
+}
+#header-logo{
+float:left;margin-left:10px;
+padding-top:0px;
+padding-left:0px;
+}
+.single .blog_title a:hover {
+cursor:default;
+text-decoration:none;
+}
+.noclass{
+-moz-box-shadow:none !important;
+box-shadow:none !important;
+-webkit-box-shadow: none !important;
+opacity:1 !important;
+border: none !important;
+}#headerimgwrap{
+top:20%;
+}  #page {
+width: 90%;
+}
+.narrowcolumn {
+float:left;
+margin:0;
+padding:25px 3% 20px 2%;
+width:75%;
+}
+#l_sidebar {
+float:left;
+padding:25px 1% 0 2%;
+width:17%
+}#dropdown, .top-menu{
+text-align:left;
+}#header {
+background-repeat: no-repeat;  
+background-position: center center;
+height: 110px;
+}
+.hleft, .hright {
+height: 70px;
+}table.statictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.statictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #CACACA;
+}
+table.statictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+
+
+table.statictable tr{
+        background-color: #F6F6F6;
+}
+
+table.statictable td.special {
+          font-weight: bold;
+          color:grey
+}
+table.statictable td.title {
+         font-weight: bold;
+         letter-spacing: inherit
+}
+
+table.statictable .boldtext {
+       font-weight: bold;
+       color: #597eaa;
+}
+
+table.dynamictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.dynamictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #FEFEFEFE;
+}
+table.dynamictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+table.dynamictable tr.even{
+        background-color: #ffffff;
+}
+table.dynamictable tr.odd{
+        background-color: #F6F6F6;
+}
+table.erratasearch {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-color: #666666;
+        border-collapse: collapse;
+        text-align:center;
+}
+table.erratasearch th {
+        border-width: 1px;
+        padding: 8px;
+        
+        text-decoration: underline;
+        border-color: #666666;
+        //background-color: #ffffff;
+        background-color: silver;
+}
+
+table.erratasearch td {
+        border-width: 1px;
+        padding: 8px;
+        border-color: #666666;
+        background-color: #ffffff;
+        text-align:left;
+}
+table.erratasearch td.sbar { 
+          background-color: silver;
+          text-align: center;
+        }
+
+
+.nosidebar{
+    float:left;
+    margin:0 10%;
+    padding:0 0 10px;
+    width:70%;
+}
+
+input[type="button"], .button, div#infinite-handle span {
+    display: inline-block;
+    zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+    *display: inline;
+    vertical-align: baseline;
+    margin: 0 2px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    padding: .3em 1em .35em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .25em; 
+    -moz-border-radius: .25em;
+    border-radius: .25em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    color: #505050;
+    border: solid 1px #b7b7b7;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+    background: -moz-linear-gradient(top,  #fff,  #ededed);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+}
+input[type="button"]:hover, .button:hover, div#infinite-handle span:hover {
+    text-decoration: none;
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+    background: -moz-linear-gradient(top,  #fff,  #dcdcdc);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+}
+input[type="button"]:active, .button:active, div#infinite-handle span: active {
+    position: relative;
+    top: 1px;
+    color: #999;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+    background: -moz-linear-gradient(top,  #ededed,  #fff);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
+}
+
+.search_label_bold { text-align: left;
+                     border-style: none;
+                     font-weight: bold;
+                   }
+
+.error { font-weight: bold; color: red; }
+
+textarea {
+   font-family: inherit;
+   font-size: inherit;
+}
+/*DIV to hold scroll tables*/
+.scrolltable{
+   width:95%
+
+}
+
+/*--------------------------------------------------------------------------------
+----------------------------RFCMETA PAGE  Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+ body.rfcmeta {
+font-family: 'Noto Sans', sans-serif;
+color: #2C4353;
+width: 100%;}
+
+ body.rfcmeta #page {
+width: 100%;
+box-shadow:none;
+margin-top: 0px;}
+
+ body.rfcmeta .hright { height:120px;}
+
+ body.rfcmeta #header {width: 100%;
+ background-color: #fff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 0px;;}
+
+ body.rfcmeta .singlepost.entry {padding-top: 0px!important;}
+ body.rfcmeta .singlepost.entry dl,  body.rfcmeta .singlepost.entry p, body.rfcmeta .singlepost.entry h2, body.rfcmeta .singlepost.entry h3 { margin-left:40px;
+ margin-right: 20px; }
+
+ body.rfcmeta .singlepost.entry dt{
+         font-weight: bold!important;
+         margin-top: 15px;}
+
+          body.rfcmeta .singlepost.entry dd{
+         margin-left: 15px;}
+
+ body.rfcmeta a{
+color: #597eaa;}
+  body.rfcmeta .entryheader {background-color:#2C4353 !important;
+  border-bottom: 10px solid #FFF !important;
+  margin-top: 0px;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;}
+
+   body.rfcmeta .entryheader h2 a, body.rfcmeta .entryheader h2 {color: #fff  !important;
+   font-size: 50px;
+   padding: 0px !important;
+   line-height: 1.2;
+   font:bold !important;}
+
+   body.rfcmeta .entryheader h2 a:hover {color: #aob3c2 !important;}
+
+   body.rfcmeta .entryheader h3 {color: #fff  !important;
+   font-size: 18px;
+   padding: 0px;
+   line-height: 1.2;
+   padding-top: 10px;
+   }
+
+      body.rfcmeta .entryheader h3 span {font-weight: normal;
+          font-size: 14px;
+          text-transform: uppercase;}
+    h2 {font-weight: bold;}
+
+ body.rfcmeta   #search_query_separator_id  {padding-bottom: 5px;
+ padding-top: 5px;}
+
+ body.rfcmeta .page {margin-top: 0px!important;
+ padding-top: 0px!important;}
+
+    /*--------------------------------------------------------------------------------
+----------------------------end RFCMETA PAGE Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+
+.cluster_heading {
+ font-size: 14px;
+}
+</style> <style type="text/css">
+        #header {
+            background-image: url();
+        }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
-    function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
-                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
-                }
-	    }
-	}
-    }
-    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
-    function showElem(id) {
-        var elem = document.getElementById(id);
-        elem.innerHTML = eval(id+"_html");
-        elem.style.visibility='visible';
-    }
-    function hideElem(id) {
-        var elem = document.getElementById(id);
-        elem.style.visibility='hidden';        
-        elem.innerHTML = "";
-    }
-    // -->
-    </script>
+<script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/iterate-survey.js" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="32x32"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="192x192"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="apple-touch-icon"/>
+<meta content="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" name="msapplication-TileImage"/>
 </head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo " onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
+<body class="rfcmeta">
+<a id="top"></a>
+<div id="page">
+<div id="header">
+<div class="hright">
+<div class="hwidget widget_text"><h2 class="widgettitle">Search RFCs</h2> <div class="textwidget"><form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="40" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+<a href="/search/rfc_search.php">Advanced Search</a>
+</div>
+</div></div>
+<div id="headerimgwrap">
+<div id="headerimg">
+<h1 class="blog_title"> <a href="https://www.rfc-editor.org/">RFC Editor</a>
+</h1> </div><!--end headerimg-->
+</div><!--end headerimgwrap-->
+</div><!--end header-->
+<div class="nosidebar" id="content">
+<h1 class="post_title"></h1>
+<div class="post-127 page type-page status-publish hentry post clear" id="post-127">
+<div class="singlepost entry">
+<div class="entryheader"><h2><a href="https://www.rfc-editor.org/bcp/bcp84.txt">BCP 84</a></h2></div><p>
+<b>Cite this BCP</b>: 
+<a href="/refs/ref-bcp84.txt">TXT</a></p>
+<b>BCP 84 contains the following RFCs:</b><div class="scrolltable"><table class="statictable"><tr><th>Number</th><th>Files</th><th>Title</th><th>Authors</th><th>Date</th><th>More Info</th><th>Status</th></tr><tr><td><a href="https://www.rfc-editor.org/info/rfc3704" target="_blank">RFC 3704</a>, <a href="https://www.rfc-editor.org/info/bcp84" target="_blank">BCP 84</a></td><td>    </td><td><b>Ingress Filtering for Multihomed Networks </b></td><td>F. Baker, P. Savola</td><td>March 2004</td><td>Updates <a href="https://www.rfc-editor.org/info/rfc2827" target="_blank">RFC 2827</a>, Updated by <a href="https://www.rfc-editor.org/info/rfc8704" target="_blank">RFC 8704</a></td><td>Best Current Practice </td></tr><tr><td><a href="https://www.rfc-editor.org/info/rfc8704" target="_blank">RFC 8704</a>, <a href="https://www.rfc-editor.org/info/bcp84" target="_blank">BCP 84</a></td><td>    </td><td><b>Enhanced Feasible-Path Unicast Reverse Path Forwarding</b></td><td>K. Sriram, D. Montgomery, J. Haas</td><td>February 2020</td><td>Updates <a href="https://www.rfc-editor.org/info/rfc3704" target="_blank">RFC 3704</a></td><td>Best Current Practice </td></tr></table></div><hr/><h2>Abstract of RFC 3704</h2> <p> BCP 38, RFC 2827, is designed to limit the impact of distributed denial of service attacks, by denying traffic with spoofed addresses access to the network, and to help ensure that traffic is traceable to its correct source network.  As a side effect of protecting the Internet against such attacks, the network implementing the solution also protects itself from this and other attacks, such as spoofed management access to networking equipment.  There are cases when this may create problems, e.g., with multihoming.  This document describes the current ingress filtering operational mechanisms, examines generic issues related to ingress filtering, and delves into the effects on multihoming in particular.  This memo updates RFC 2827.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements. </p><h2>Abstract of RFC 8704</h2> <p>This document identifies a need for and proposes improvement of the
+unicast Reverse Path Forwarding (uRPF) techniques (see RFC 3704) for
+detection and mitigation of source address spoofing (see BCP 38).
+Strict uRPF is inflexible about directionality, the loose uRPF is
+oblivious to directionality, and the current feasible-path uRPF
+attempts to strike a balance between the two (see RFC 3704). However,
+as shown in this document, the existing feasible-path uRPF still has
+shortcomings. This document describes enhanced feasible-path uRPF
+(EFP-uRPF) techniques that are more flexible (in a meaningful way)
+about directionality than the feasible-path uRPF (RFC 3704). The
+proposed EFP-uRPF methods aim to significantly reduce false positives
+regarding invalid detection in source address validation (SAV).
+Hence, they can potentially alleviate ISPs' concerns about the
+possibility of disrupting service for their customers and encourage
+greater deployment of uRPF techniques. This document updates RFC
+3704.</p> <hr/>
+<p>
+For the definition of <b>Status</b>,
+see <a href="/info/rfc2026">RFC 2026</a>.
+</p><p>
+For the definition of <b>Stream</b>, see <a href="/info/rfc8729">RFC 8729</a>.
+</p>
+<hr/> </div>
 </div>
 </div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/bcp/bcp84.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/bcp84" title="PDF version of this document">pdf</a>]                                                        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                           F. Baker
-Request for Comments: 3704                                 Cisco Systems
-Updates: <a href="./rfc2827.html">2827</a>                                                  P. Savola
-BCP: 84                                                        CSC/FUNET
-Category: Best Current Practice                               March 2004
-
-
-               <span class="h1">Ingress Filtering for Multihomed Networks</span>
-
-Status of this Memo
-
-   This document specifies an Internet Best Current Practices for the
-   Internet Community, and requests discussion and suggestions for
-   improvements.  Distribution of this memo is unlimited.
-
-Copyright Notice
-
-   Copyright (C) The Internet Society (2004).  All Rights Reserved.
-
-Abstract
-
-   <a href="./bcp38.html">BCP 38</a>, <a href="./rfc2827.html">RFC 2827</a>, is designed to limit the impact of distributed
-   denial of service attacks, by denying traffic with spoofed addresses
-   access to the network, and to help ensure that traffic is traceable
-   to its correct source network.  As a side effect of protecting the
-   Internet against such attacks, the network implementing the solution
-   also protects itself from this and other attacks, such as spoofed
-   management access to networking equipment.  There are cases when this
-   may create problems, e.g., with multihoming.  This document describes
-   the current ingress filtering operational mechanisms, examines
-   generic issues related to ingress filtering, and delves into the
-   effects on multihoming in particular.  This memo updates <a href="./rfc2827.html">RFC 2827</a>.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                  [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-Table of Contents
-
-   <a href="#section-1">1</a>.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-3">3</a>
-   <a href="#section-2">2</a>.  Different Ways to Implement Ingress Filtering  . . . . . . . .  <a href="#page-4">4</a>
-       <a href="#section-2.1">2.1</a> Ingress Access Lists . . . . . . . . . . . . . . . . . . .  <a href="#page-4">4</a>
-       <a href="#section-2.2">2.2</a> Strict Reverse Path Forwarding . . . . . . . . . . . . . .  <a href="#page-5">5</a>
-       <a href="#section-2.3">2.3</a> Feasible Path Reverse Path Forwarding  . . . . . . . . . .  <a href="#page-6">6</a>
-       <a href="#section-2.4">2.4</a> Loose Reverse Path Forwarding  . . . . . . . . . . . . . .  <a href="#page-6">6</a>
-       <a href="#section-2.5">2.5</a> Loose Reverse Path Forwarding Ignoring Default Routes  . .  <a href="#page-7">7</a>
-   <a href="#section-3">3</a>.  Clarifying the Applicability of Ingress Filtering  . . . . . .  <a href="#page-8">8</a>
-       <a href="#section-3.1">3.1</a> Ingress Filtering at Multiple Levels . . . . . . . . . . .  <a href="#page-8">8</a>
-       <a href="#section-3.2">3.2</a> Ingress Filtering to Protect Your Own Infrastructure . . .  <a href="#page-8">8</a>
-       <a href="#section-3.3">3.3</a> Ingress Filtering on Peering Links . . . . . . . . . . . .  <a href="#page-9">9</a>
-   <a href="#section-4">4</a>.  Solutions to Ingress Filtering with Multihoming  . . . . . . .  <a href="#page-9">9</a>
-       <a href="#section-4.1">4.1</a> Use Loose RPF When Appropriate . . . . . . . . . . . . . . <a href="#page-10">10</a>
-       <a href="#section-4.2">4.2</a> Ensure That Each ISP's Ingress Filter Is Complete  . . . . <a href="#page-11">11</a>
-       4.3 Send Traffic Using a Provider Prefix Only to That Provider 11
-   <a href="#section-5">5</a>.  Security Considerations  . . . . . . . . . . . . . . . . . . . <a href="#page-12">12</a>
-   <a href="#section-6">6</a>.  Conclusions and Future Work  . . . . . . . . . . . . . . . . . <a href="#page-13">13</a>
-   <a href="#section-7">7</a>.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . <a href="#page-14">14</a>
-   <a href="#section-8">8</a>.  References . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="#page-14">14</a>
-       <a href="#section-8.1">8.1</a>.  Normative References . . . . . . . . . . . . . . . . . . <a href="#page-14">14</a>
-       <a href="#section-8.2">8.2</a>.  Informative References . . . . . . . . . . . . . . . . . <a href="#page-14">14</a>
-   <a href="#section-9">9</a>.  Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . <a href="#page-15">15</a>
-   <a href="#section-10">10</a>. Full Copyright Statement . . . . . . . . . . . . . . . . . . . <a href="#page-16">16</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                  [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
-
-   <a href="./bcp38.html">BCP 38</a>, <a href="./rfc2827.html">RFC 2827</a> [<a href="#ref-1" title='"Network Ingress Filtering: Defeating Denial of Service Attacks which employ IP Source Address Spoofing"'>1</a>], is designed to limit the impact of distributed
-   denial of service attacks, by denying traffic with spoofed addresses
-   access to the network, and to help ensure that traffic is traceable
-   to its correct source network.  As a side effect of protecting the
-   Internet against such attacks, the network implementing the solution
-   also protects itself from this and other attacks, such as spoofed
-   management access to networking equipment.  There are cases when this
-   may create problems, e.g., with multihoming.  This document describes
-   the current ingress filtering operational mechanisms, examines
-   generic issues related to ingress filtering and delves into the
-   effects on multihoming in particular.
-
-   <a href="./rfc2827.html">RFC 2827</a> recommends that ISPs police their customers' traffic by
-   dropping traffic entering their networks that is coming from a source
-   address not legitimately in use by the customer network.  The
-   filtering includes but is in no way limited to the traffic whose
-   source address is a so-called "Martian Address" - an address that is
-   reserved [<a href="#ref-3" title='"Special-Use IPv4 Addresses"'>3</a>], including any address within 0.0.0.0/8, 10.0.0.0/8,
-   127.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, or
-   240.0.0.0/4.
-
-   The reasoning behind the ingress filtering procedure is that
-   Distributed Denial of Service Attacks frequently spoof other systems'
-   source addresses, placing a random number in the field.  In some
-   attacks, this random number is deterministically within the target
-   network, simultaneously attacking one or more machines and causing
-   those machines to attack others with ICMP messages or other traffic;
-   in this case, the attacked sites can protect themselves by proper
-   filtering, by verifying that their prefixes are not used in the
-   source addresses in packets received from the Internet.  In other
-   attacks, the source address is literally a random 32 bit number,
-   resulting in the source of the attack being difficult to trace.  If
-   the traffic leaving an edge network and entering an ISP can be
-   limited to traffic it is legitimately sending, attacks can be
-   somewhat mitigated: traffic with random or improper source addresses
-   can be suppressed before it does significant damage, and attacks can
-   be readily traced back to at least their source networks.
-
-   This document is aimed at ISP and edge network operators who 1) would
-   like to learn more of ingress filtering methods in general, or 2) are
-   already using ingress filtering to some degree but who would like to
-   expand its use and want to avoid the pitfalls of ingress filtering in
-   the multihomed/asymmetric scenarios.
-
-
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                  [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-   In <a href="#section-2">section 2</a>, several different ways to implement ingress filtering
-   are described and examined in the generic context.  In <a href="#section-3">section 3</a>,
-   some clarifications on the applicability of ingress filtering methods
-   are made.  In <a href="#section-4">section 4</a>, ingress filtering is analyzed in detail from
-   the multihoming perspective.  In <a href="#section-5">section 5</a>, conclusions and potential
-   future work items are identified.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Different%20Ways%20to%20Implement%20Ingress%20Filtering"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Different Ways to Implement Ingress Filtering</span>
-
-   This section serves as an introduction to different operational
-   techniques used to implement ingress filtering as of writing this
-   memo.  The mechanisms are described and analyzed in general terms,
-   and multihoming-specific issues are described in <a href="#section-4">Section 4</a>.
-
-   There are at least five ways one can implement <a href="./rfc2827.html">RFC 2827</a>, with varying
-   impacts.  These include (the names are in relatively common usage):
-
-   o  Ingress Access Lists
-
-   o  Strict Reverse Path Forwarding
-
-   o  Feasible Path Reverse Path Forwarding
-
-   o  Loose Reverse Path Forwarding
-
-   o  Loose Reverse Path Forwarding ignoring default routes
-
-   Other mechanisms are also possible, and indeed, there are a number of
-   techniques that might profit from further study, specification,
-   implementation, and/or deployment; see <a href="#section-6">Section 6</a>.  However, these are
-   out of scope.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Ingress%20Access%20Lists"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Ingress Access Lists</span>
-
-   An Ingress Access List is a filter that checks the source address of
-   every message received on a network interface against a list of
-   acceptable prefixes, dropping any packet that does not match the
-   filter.  While this is by no means the only way to implement an
-   ingress filter, it is the one proposed by <a href="./rfc2827.html">RFC 2827</a> [<a href="#ref-1" title='"Network Ingress Filtering: Defeating Denial of Service Attacks which employ IP Source Address Spoofing"'>1</a>], and in some
-   sense the most deterministic one.
-
-   However, Ingress Access Lists are typically maintained manually; for
-   example, forgetting to have the list updated at the ISPs if the set
-   of prefixes changes (e.g., as a result of multihoming) might lead to
-   discarding the packets if they do not pass the ingress filter.
-
-
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                  [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-   Naturally, this problem is not limited to Ingress Access Lists -- it
-   is inherent to Ingress Filtering when the ingress filter is not
-   complete.  However, usually Ingress Access Lists are more difficult
-   to maintain than the other mechanisms, and having an outdated list
-   can prevent legitimate access.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Strict%20Reverse%20Path%20Forwarding"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Strict Reverse Path Forwarding</span>
-
-   Strict Reverse Path Forwarding (Strict RPF) is a simple way to
-   implement an ingress filter.  It is conceptually identical to using
-   access lists for ingress filtering, with the exception that the
-   access list is dynamic.  This may also be used to avoid duplicate
-   configuration (e.g., maintaining both static routes or BGP prefix-
-   list filters and interface access-lists).  The procedure is that the
-   source address is looked up in the Forwarding Information Base (FIB)
-   - and if the packet is received on the interface which would be used
-   to forward the traffic to the source of the packet, it passes the
-   check.
-
-   Strict Reverse Path Forwarding is a very reasonable approach in front
-   of any kind of edge network; in particular, it is far superior to
-   Ingress Access Lists when the network edge is advertising multiple
-   prefixes using BGP.  It makes for a simple, cheap, fast, and dynamic
-   filter.
-
-   But Strict Reverse Path Forwarding has some problems of its own.
-   First, the test is only applicable in places where routing is
-   symmetrical - where IP datagrams in one direction and responses from
-   the other deterministically follow the same path.  While this is
-   common at edge network interfaces to their ISP, it is in no sense
-   common between ISPs, which normally use asymmetrical "hot potato"
-   routing.  Also, if BGP is carrying prefixes and some legitimate
-   prefixes are not being advertised or not being accepted by the ISP
-   under its policy, the effect is the same as ingress filtering using
-   an incomplete access list: some legitimate traffic is filtered for
-   lack of a route in the filtering router's Forwarding Information
-   Base.
-
-   There are operational techniques, especially with BGP but somewhat
-   applicable to other routing protocols as well, to make strict RPF
-   work better in the case of asymmetric or multihomed traffic.  The ISP
-   assigns a better metric which is not propagated outside of the
-   router, either a vendor-specific "weight" or a protocol distance to
-   prefer the directly received routes.  With BGP and sufficient
-   machinery in place, setting the preferences could even be automated,
-   using BGP Communities [<a href="#ref-2" title='"BGP Communities Attribute"'>2</a>].  That way, the route will always be the
-   best one in the FIB, even in the scenarios where only the primary
-   connectivity would be used and typically no packets would pass
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                  [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-   through the interface.  This method assumes that there is no strict
-   RPF filtering between the primary and secondary edge routers; in
-   particular, when applied to multihoming to different ISPs, this
-   assumption may fail.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Feasible%20Path%20Reverse%20Path%20Forwarding"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Feasible Path Reverse Path Forwarding</span>
-
-   Feasible Path Reverse Path Forwarding (Feasible RPF) is an extension
-   of Strict RPF.  The source address is still looked up in the FIB (or
-   an equivalent, RPF-specific table) but instead of just inserting one
-   best route there, the alternative paths (if any) have been added as
-   well, and are valid for consideration.  The list is populated using
-   routing-protocol specific methods, for example by including all or N
-   (where N is less than all) feasible BGP paths in the Routing
-   Information Base (RIB).  Sometimes this method has been implemented
-   as part of a Strict RPF implementation.
-
-   In the case of asymmetric routing and/or multihoming at the edge of
-   the network, this approach provides a way to relatively easily
-   address the biggest problems of Strict RPF.
-
-   It is critical to understand the context in which Feasible RPF
-   operates.  The mechanism relies on consistent route advertisements
-   (i.e., the same prefix(es), through all the paths) propagating to all
-   the routers performing Feasible RPF checking.  For example, this may
-   not hold e.g., in the case where a secondary ISP does not propagate
-   the BGP advertisement to the primary ISP e.g., due to route-maps or
-   other routing policies not being up-to-date.  The failure modes are
-   typically similar to "operationally enhanced Strict RPF", as
-   described above.
-
-   As a general guideline, if an advertisement is filtered, the packets
-   will be filtered as well.
-
-   In consequence, properly defined, Feasible RPF is a very powerful
-   tool in certain kinds of asymmetric routing scenarios, but it is
-   important to understand its operational role and applicability
-   better.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Loose%20Reverse%20Path%20Forwarding"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Loose Reverse Path Forwarding</span>
-
-   Loose Reverse Path Forwarding (Loose RPF) is algorithmically similar
-   to strict RPF, but differs in that it checks only for the existence
-   of a route (even a default route, if applicable), not where the route
-   points to.  Practically, this could be considered as a "route
-   presence check" ("loose RPF is a misnomer in a sense because there is
-   no "reverse path" check in the first place).
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                  [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-   The questionable benefit of Loose RPF is found in asymmetric routing
-   situations: a packet is dropped if there is no route at all, such as
-   to "Martian addresses" or addresses that are not currently routed,
-   but is not dropped if a route exists.
-
-   Loose Reverse Path Forwarding has problems, however.  Since it
-   sacrifices directionality, it loses the ability to limit an edge
-   network's traffic to traffic legitimately sourced from that network,
-   in most cases, rendering the mechanism useless as an ingress
-   filtering mechanism.
-
-   Also, many ISPs use default routes for various purposes such as
-   collecting illegitimate traffic at so-called "Honey Pot" systems or
-   discarding any traffic they do not have a "real" route to, and
-   smaller ISPs may well purchase transit capabilities and use a default
-   route from a larger provider.  At least some implementations of Loose
-   RPF check where the default route points to.  If the route points to
-   the interface where Loose RPF is enabled, any packet is allowed from
-   that interface; if it points nowhere or to some other interface, the
-   packets with bogus source addresses will be discarded at the Loose
-   RPF interface even in the presence of a default route.  If such
-   fine-grained checking is not implemented, presence of a default route
-   nullifies the effect of Loose RPF completely.
-
-   One case where Loose RPF might fit well could be an ISP filtering
-   packets from its upstream providers, to get rid of packets with
-   "Martian" or other non-routed addresses.
-
-   If other approaches are unsuitable, loose RPF could be used as a form
-   of contract verification: the other network is presumably certifying
-   that it has provided appropriate ingress filtering rules, so the
-   network doing the filtering need only verify the fact and react if
-   any packets which would show a breach in the contract are detected.
-   Of course, this mechanism would only show if the source addresses
-   used are "martian" or other unrouted addresses -- not if they are
-   from someone else's address space.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Loose%20Reverse%20Path%20Forwarding%20Ignoring%20Default%20Routes"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  Loose Reverse Path Forwarding Ignoring Default Routes</span>
-
-   The fifth implementation technique may be characterized as Loose RPF
-   ignoring default routes, i.e., an "explicit route presence check".
-   In this approach, the router looks up the source address in the route
-   table, and preserves the packet if a route is found.  However, in the
-   lookup, default routes are excluded.  Therefore, the technique is
-   mostly usable in scenarios where default routes are used only to
-   catch traffic with bogus source addresses, with an extensive (or even
-   full) list of explicit routes to cover legitimate traffic.
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                  [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-   Like Loose RPF, this is useful in places where asymmetric routing is
-   found, such as on inter-ISP links.  However, like Loose RPF, since it
-   sacrifices directionality, it loses the ability to limit an edge
-   network's traffic to traffic legitimately sourced from that network.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Clarifying%20the%20Applicability%20of%20Ingress%20Filtering"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Clarifying the Applicability of Ingress Filtering</span>
-
-   What may not be readily apparent is that ingress filtering is not
-   applied only at the "last-mile" interface between the ISP and the end
-   user.  It's perfectly fine, and recommended, to also perform ingress
-   filtering at the edges of ISPs where appropriate, at the routers
-   connecting LANs to an enterprise network, etc. -- this increases the
-   defense in depth.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Ingress%20Filtering%20at%20Multiple%20Levels"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Ingress Filtering at Multiple Levels</span>
-
-   Because of wider deployment of ingress filtering, the issue is
-   recursive.  Ingress filtering has to work everywhere where it's used,
-   not just between the first two parties.  That is, if a user
-   negotiates a special ingress filtering arrangement with his ISP, he
-   should also ensure (or make sure the ISP ensures) that the same
-   arrangements also apply to the ISP's upstream and peering links, if
-   ingress filtering is being used there -- or will get used, at some
-   point in the future; similarly with the upstream ISPs and peers.
-
-   In consequence, manual models which do not automatically propagate
-   the information to every party where the packets would go and where
-   ingress filtering might be applied have only limited generic
-   usefulness.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Ingress%20Filtering%20to%20Protect%20Your%20Own%20Infrastructure"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Ingress Filtering to Protect Your Own Infrastructure</span>
-
-   Another feature stemming from wider deployment of ingress filtering
-   may not be readily apparent.  The routers and other ISP
-   infrastructure are vulnerable to several kinds of attacks.  The
-   threat is typically mitigated by restricting who can access these
-   systems.
-
-   However, unless ingress filtering (or at least, a limited subset of
-   it) has been deployed at every border (towards the customers, peers
-   and upstreams) -- blocking the use of your own addresses as source
-   addresses -- the attackers may be able to circumvent the protections
-   of the infrastructure gear.
-
-   Therefore, by deploying ingress filtering, one does not just help the
-   Internet as a whole, but protects against several classes of threats
-   to your own infrastructure as well.
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                  [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Ingress%20Filtering%20on%20Peering%20Links"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Ingress Filtering on Peering Links</span>
-
-   Ingress filtering on peering links, whether by ISPs or by end-sites,
-   is not really that much different from the more typical "downstream"
-   or "upstream" ingress filtering.
-
-   However, it's important to note that with mixed upstream/downstream
-   and peering links, the different links may have different properties
-   (e.g., relating to contracts, trust, viability of the ingress
-   filtering mechanisms, etc.).  In the most typical case, just using an
-   ingress filtering mechanism towards a peer (e.g., Strict RPF) works
-   just fine as long as the routing between the peers is kept reasonably
-   symmetric.  It might even be considered useful to be able to filter
-   out source addresses coming from an upstream link which should have
-   come over a peering link (implying something like Strict RPF is used
-   towards the upstream) -- but this is a more complex topic and
-   considered out of scope; see <a href="#section-6">Section 6</a>.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Solutions%20to%20Ingress%20Filtering%20with%20Multihoming"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Solutions to Ingress Filtering with Multihoming</span>
-
-   First, one must ask why a site multihomes; for example, the edge
-   network might:
-
-   o  use two ISPs for backing up the Internet connectivity to ensure
-      robustness,
-
-   o  use whichever ISP is offering the fastest TCP service at the
-      moment,
-
-   o  need several points of access to the Internet in places where no
-      one ISP offers service, or
-
-   o  be changing ISPs (and therefore multihoming only temporarily).
-
-   One can imagine a number of approaches to working around the
-   limitations of ingress filters for multihomed networks.  Options
-   include:
-
-   1.  Do not multihome.
-
-   2.  Do not use ingress filters.
-
-   3.  Accept that service will be incomplete.
-
-   4.  On some interfaces, weaken ingress filtering by using an
-       appropriate form of loose RPF check, as described in <a href="#section-4.1">Section 4.1</a>.
-
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                  [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-   5.  Ensure, by BGP or by contract, that each ISP's ingress filter is
-       complete, as described in <a href="#section-4.2">Section 4.2</a>.
-
-   6.  Ensure that edge networks only deliver traffic to their ISPs that
-       will in fact pass the ingress filter, as described in <a href="#section-4.3">Section</a>
-       <a href="#section-4.3">4.3</a>.
-
-   The first three of these are obviously mentioned for completeness;
-   they are not and cannot be viable positions; the final three are
-   considered below.
-
-   The fourth and the fifth must be ensured in the upstream ISPs as
-   well, as described in <a href="#section-3.1">Section 3.1</a>.
-
-   Next, we now look at the viable ways for dealing with the side-
-   effects of ingress filters.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Use%20Loose%20RPF%20When%20Appropriate"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Use Loose RPF When Appropriate</span>
-
-   Where asymmetric routing is preferred or is unavoidable, ingress
-   filtering may be difficult to deploy using a mechanism such as strict
-   RPF which requires the paths to be symmetrical.  In many cases, using
-   operational methods or feasible RPF may ensure the ingress filter is
-   complete, like described below.  Failing that, the only real options
-   are to not perform ingress filtering, use a manual access-list
-   (possibly in addition to some other mechanisms), or to using some
-   form of Loose RPF check.
-
-   Failing to provide any ingress filter at all essentially trusts the
-   downstream network to behave itself, which is not the wisest course
-   of action.  However, especially in the case of very large networks of
-   even hundreds or thousands of prefixes, maintaining manual access-
-   lists may be too much to ask.
-
-   The use of Loose RPF does not seem like a good choice between the
-   edge network and the ISP, since it loses the directionality of the
-   test.  This argues in favor of either using a complete filter in the
-   upstream network or ensuring in the downstream network that packets
-   the upstream network will reject will never reach it.
-
-   Therefore, the use of Loose RPF cannot be recommended, except as a
-   way to measure whether "martian" or other unrouted addresses are
-   being used.
-
-
-
-
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                 [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Ensure%20That%20Each%20ISP%27s%20Ingress%20Filter%20Is%20Complete"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Ensure That Each ISP's Ingress Filter Is Complete</span>
-
-   For the edge network, if multihoming is being used for robustness or
-   to change routing from time to time depending on measured ISP
-   behavior, the simplest approach will be to ensure that its ISPs in
-   fact carry its addresses in routing.  This will often require the
-   edge network to use provider-independent prefixes and exchange routes
-   with its ISPs with BGP, to ensure that its prefix is carried upstream
-   to the major transit ISPs.  Of necessity, this implies that the edge
-   network will be of a size and technical competence to qualify for a
-   separate address assignment and an autonomous system number from its
-   RIR.
-
-   There are a number of techniques which make it easier to ensure the
-   ISP's ingress filter is complete.  Feasible RPF and Strict RPF with
-   operational techniques both work quite well for multihomed or
-   asymmetric scenarios between the ISP and an edge network.
-
-   When a routing protocol is not being used, but rather the customer
-   information is generated from databases such as Radius, TACACS, or
-   Diameter, the ingress filtering can be the most easily ensured and
-   kept up-to-date with Strict RPF or Ingress Access Lists generated
-   automatically from such databases.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Send%20Traffic%20Using%20a%20Provider%20Prefix%20Only%20to%20That%20Provider"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Send Traffic Using a Provider Prefix Only to That Provider</span>
-
-   For smaller edge networks that use provider-based addressing and
-   whose ISPs implement ingress filters (which they should do), the
-   third option is to route traffic being sourced from a given
-   provider's address space to that provider.
-
-   This is not a complicated procedure, but requires careful planning
-   and configuration.  For robustness, the edge network may choose to
-   connect to each of its ISPs through two or more different Points of
-   Presence (POPs), so that if one POP or line experiences an outage,
-   another link to the same ISP can be used.  Alternatively, a set of
-   tunnels could be configured instead of multiple connections to the
-   same ISP [<a href="#ref-4" title='"Scalable Support for Multi-homed Multi-provider Connectivity"'>4</a>][5].  This way the edge routers are configured to first
-   inspect the source address of a packet destined to an ISP and shunt
-   it into the appropriate tunnel or interface toward the ISP.
-
-   If such a scenario is applied exhaustively, so that an exit router is
-   chosen in the edge network for every prefix the network uses, traffic
-   originating from any other prefix can be summarily discarded instead
-   of sending it to an ISP.
-
-
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                 [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
-
-   Ingress filtering is typically performed to ensure that traffic
-   arriving on one network interface legitimately comes from a computer
-   residing on a network reachable through that interface.
-
-   The closer to the actual source ingress filtering is performed, the
-   more effective it is.  One could wish that the first hop router would
-   ensure that traffic being sourced from its neighboring end system was
-   correctly addressed; a router further away can only ensure that it is
-   possible that there is such a system within the indicated prefix.
-   Therefore, ingress filtering should be done at multiple levels, with
-   different level of granularity.
-
-   It bears to keep in mind that while one goal of ingress filtering is
-   to make attacks traceable, it is impossible to know whether the
-   particular attacker "somewhere in the Internet" is being ingress
-   filtered or not.  Therefore, one can only guess whether the source
-   addresses have been spoofed or not: in any case, getting a possible
-   lead -- e.g., to contact a potential source to ask whether they're
-   observing an attack or not -- is still valuable, and more so when the
-   ingress filtering gets more and more widely deployed.
-
-   In consequence, every administrative domain should try to ensure a
-   sufficient level of ingress filtering on its borders.
-
-   Security properties and applicability of different ingress filtering
-   types differ a lot.
-
-   o  Ingress Access Lists require typically manual maintenance, but are
-      the most bulletproof when done properly; typically, ingress access
-      lists are best fit between the edge and the ISP when the
-      configuration is not too dynamic if strict RPF is not an option,
-      between ISPs if the number of used prefixes is low, or as an
-      additional layer of protection.
-
-   o  Strict RPF check is a very easy and sure way to implement ingress
-      filtering.  It is typically fit between the edge network and the
-      ISP.  In many cases, a simple strict RPF can be augmented by
-      operational procedures in the case of asymmetric traffic patterns,
-      or the feasible RPF technique to also account for other
-      alternative paths.
-
-   o  Feasible Path RPF check is an extension of Strict RPF.  It is
-      suitable in all the scenarios where Strict RPF is, but multihomed
-      or asymmetric scenarios in particular.  However, one must remember
-      that Feasible RPF assumes the consistent origination and
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                 [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-      propagation of routing information to work; the implications of
-      this must be understood especially if a prefix advertisement
-      passes through third parties.
-
-   o  Loose RPF primarily filters out unrouted prefixes such as Martian
-      addresses.  It can be applied in the upstream interfaces to reduce
-      the size of DoS attacks with unrouted source addresses.  In the
-      downstream interfaces it can only be used as a contract
-      verification, that the other network has performed at least some
-      ingress filtering.
-
-   When weighing the tradeoffs of different ingress filtering
-   mechanisms, the security properties of a more relaxed approach should
-   be carefully considered before applying it.  Especially when applied
-   by an ISP towards an edge network, there don't seem to be many
-   reasons why a stricter form of ingress filtering would not be
-   appropriate.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Conclusions%20and%20Future%20Work"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Conclusions and Future Work</span>
-
-   This memo describes ingress filtering techniques in general and the
-   options for multihomed networks in particular.
-
-   It is important for ISPs to implement ingress filtering to prevent
-   spoofed addresses being used, both to curtail DoS attacks and to make
-   them more traceable, and to protect their own infrastructure.  This
-   memo describes mechanisms that could be used to achieve that effect,
-   and the tradeoffs of those mechanisms.
-
-   To summarize:
-
-   o  Ingress filtering should always be done between the ISP and a
-      single-homed edge network.
-
-   o  Ingress filtering with Feasible RPF or similar Strict RPF
-      techniques could almost always be applied between the ISP and
-      multi-homed edge networks as well.
-
-   o  Both the ISPs and edge networks should verify that their own
-      addresses are not being used in source addresses in the packets
-      coming from outside their network.
-
-   o  Some form of ingress filtering is also reasonable between ISPs,
-      especially if the number of prefixes is low.
-
-
-
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                 [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-   This memo will lower the bar for the adoption of ingress filtering
-   especially in the scenarios like asymmetric/multihomed networks where
-   the general belief has been that ingress filtering is difficult to
-   implement.
-
-   One can identify multiple areas where additional work would be
-   useful:
-
-   o  Specify the mechanisms in more detail: there is some variance
-      between implementations e.g., on whether traffic to multicast
-      destination addresses will always pass the Strict RPF filter or
-      not.  By formally specifying the mechanisms the implementations
-      might get harmonized.
-
-   o  Study and specify Routing Information Base (RIB) -based RPF
-      mechanisms, e.g., Feasible Path RPF, in more detail.  In
-      particular, consider under which assumptions these mechanisms work
-      as intended and where they don't.
-
-   o  Write a more generic note on the ingress filtering mechanisms than
-      this memo, after the taxonomy and the details or the mechanisms
-      (points above) have been fleshed out.
-
-   o  Consider the more complex case where a network has connectivity
-      with different properties (e.g., peers and upstreams), and wants
-      to ensure that traffic sourced with a peer's address should not be
-      accepted from the upstream.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgements</span>
-
-   Rob Austein, Barry Greene, Christoph Reichert, Daniel Senie, Pedro
-   Roque, and Iljitsch van Beijnum reviewed this document and helped in
-   improving it.  Thomas Narten, Ted Hardie, and Russ Housley provided
-   good feedback which boosted the document in its final stages.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  References</span>
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Normative References</span>
-
-   [<a id="ref-1" name="ref-1">1</a>]  Ferguson, P. and D. Senie, "Network Ingress Filtering: Defeating
-        Denial of Service Attacks which employ IP Source Address
-        Spoofing", <a href="./bcp38.html">BCP 38</a>, <a href="./rfc2827.html">RFC 2827</a>, May 2000.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Informative References</span>
-
-   [<a id="ref-2" name="ref-2">2</a>]  Chandrasekeran, R., Traina, P. and T. Li, "BGP Communities
-        Attribute", <a href="./rfc1997.html">RFC 1997</a>, August 1996.
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                 [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-   [<a id="ref-3" name="ref-3">3</a>]  IANA, "Special-Use IPv4 Addresses", <a href="./rfc3330.html">RFC 3330</a>, September 2002.
-
-   [<a id="ref-4" name="ref-4">4</a>]  Bates, T. and Y. Rekhter, "Scalable Support for Multi-homed
-        Multi-provider Connectivity", <a href="./rfc2260.html">RFC 2260</a>, January 1998.
-
-   [<a id="ref-5" name="ref-5">5</a>]  Hagino, J. and H. Snyder, "IPv6 Multihoming Support at Site Exit
-        Routers", <a href="./rfc3178.html">RFC 3178</a>, October 2001.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Authors%27%20Addresses"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Authors' Addresses</span>
-
-   Fred Baker
-   Cisco Systems
-   Santa Barbara, CA  93117
-   US
-
-   EMail: fred@cisco.com
-
-
-   Pekka Savola
-   CSC/FUNET
-   Espoo
-   Finland
-
-   EMail: psavola@funet.fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Baker &amp; Savola           Best Current Practice                 [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
-<span class="grey"><a href="./rfc3704.html">RFC 3704</a>       Ingress Filtering for Multihomed Networks      March 2004</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Full%20Copyright%20Statement"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Full Copyright Statement</span>
-
-   Copyright (C) The Internet Society (2004).  This document is subject
-   to the rights, licenses and restrictions contained in <a href="./bcp78.html">BCP 78</a> and
-   except as set forth therein, the authors retain all their rights.
-
-   This document and the information contained herein are provided on an
-   "AS IS" basis and THE CONTRIBUTOR, THE ORGANIZATION HE/SHE REPRESENTS
-   OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY AND THE INTERNET
-   ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED,
-   INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE
-   INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
-   WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
-
-Intellectual Property
-
-   The IETF takes no position regarding the validity or scope of any
-   Intellectual Property Rights or other rights that might be claimed to
-   pertain to the implementation or use of the technology described in
-   this document or the extent to which any license under such rights
-   might or might not be available; nor does it represent that it has
-   made any independent effort to identify any such rights.  Information
-   on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
-
-   Copies of IPR disclosures made to the IETF Secretariat and any
-   assurances of licenses to be made available, or the result of an
-   attempt made to obtain a general license or permission for the use of
-   such proprietary rights by implementers or users of this
-   specification can be obtained from the IETF on-line IPR repository at
-   <a href="http://www.ietf.org/ipr">http://www.ietf.org/ipr</a>.
-
-   The IETF invites any interested party to bring to its attention any
-   copyrights, patents or patent applications, or other proprietary
-   rights that may cover technology that may be required to implement
-   this standard.  Please address the information to the IETF at ietf-
-   ipr@ietf.org.
-
-Acknowledgement
-
-   Funding for the RFC Editor function is currently provided by the
-   Internet Society.
-
-
-
-
-
-
-
-
-
-Baker &amp; Savola           Best Current Practice                 [Page 16]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
+<br/><br/><div id="footer">
+<div id="footerdivs">
+</div>
+<div style="clear:both"></div>
+<p class="credit">
+<a href="./www.iab.org/.html">IAB</a> • <a href="./www.iana.org/.html">IANA</a>  • <a href="./www.ietf.org.html">IETF</a> • <a href="./www.irtf.org.html">IRTF</a> • <a href="/about/independent">ISE</a> • <a href="./www.internetsociety.org.html">ISOC</a> • <a href="./trustee.ietf.org/.html">IETF Trust</a>
+<br/>
+<a href="/report-summary">Reports</a> • <a href="./www.ietf.org/privacy-statement/.html">Privacy Statement</a> • <a href="/sitemap">Site Map</a> • <a href="/contact">Contact Us</a> </p>
+</div><!--footer-->
+</div><!--page-->
+<button aria-controls="rmp-container-2538" aria-label="Menu Trigger" class="rmp_menu_trigger rmp-menu-trigger-boring" id="rmp_menu_trigger-2538" type="button">
+<span class="rmp-trigger-box">
+<span class="responsive-menu-pro-inner"></span>
+</span>
+</button>
+<div class="rmp-container rmp-container rmp-slide-left" id="rmp-container-2538">
+<div class="rmp-menu-title" id="rmp-menu-title-2538">
+<a href="" id="rmp-menu-title-link" target="_self">
+<span></span>
+</a>
+</div>
+<div class="rmp-menu-wrap" id="rmp-menu-wrap-2538"><ul aria-label="Default Menu" class="rmp-menu" id="rmp-menu-2538" role="menubar"><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-632" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/retrieve/" role="menuitem">Document Retrieval</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-633" role="none"><a class="rmp-menu-item-link" href="/errata.php" role="menuitem">Errata</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-634" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/faq/" role="menuitem">Frequently Asked Questions</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-636" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/rse/format-faq/" role="menuitem">Future Format FAQ</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-637" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/history/" role="menuitem">History</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-638" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/about/" role="menuitem">About Us</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-639" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/other/" role="menuitem">Other Information</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-640" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/pubprocess/" role="menuitem">Publication Process</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-641" role="none"><a class="rmp-menu-item-link" href="/current_queue.php" role="menuitem">Publication Queue</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-642" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/styleguide/" role="menuitem">Style Guide</a></li></ul></div> <div class="rmp-menu-additional-content" id="rmp-menu-additional-content-2538">
+<a href="/search/rfc_search.php">Advanced Search</a>
+<form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="20" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+</div>
 </div>
 </body>
 </html>

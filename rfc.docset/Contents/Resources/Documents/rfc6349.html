@@ -1,29 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-constantine-ippm-tcp-throughput-tm" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:6349" name="DC.Identifier"/>
-<meta content="August, 2011" name="DC.Date.Issued"/>
-<meta content="Constantine, Barry" name="DC.Creator"/>
-<meta content="Schrage, Reinhard" name="DC.Creator"/>
-<meta content="Jorgenson, Loki" name="DC.Creator"/>
-<meta content="Forget, Gilles" name="DC.Creator"/>
-<meta content="This memo describes a methodology for measuring sustained TCP
-throughput performance in an end-to-end managed network environment.
-This memo is intended to provide a practical approach to help users
-validate the TCP layer performance of a managed network, which should
-provide a better indication of end-user application level experience.
-In the methodology, various TCP and network parameters are identified
-that should be tested as part of the network verification at the TCP
-layer." name="DC.Description.Abstract"/>
-<meta content="TCP Throughput Testing Methodology" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6349 - TCP Throughput Testing Methodology</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="B. Constantine" name="citation_author"/>
+<meta content="G. Forget" name="citation_author"/>
+<meta content="R. Geib" name="citation_author"/>
+<meta content="R. Schrage" name="citation_author"/>
+<meta content="August, 2011" name="citation_publication_date"/>
+<meta content="Framework for TCP Throughput Testing" name="citation_title"/>
+<meta content="10.17487/RFC6349" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6349" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6349.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6349: Framework for TCP Throughput Testing</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -52,7 +43,7 @@ layer." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -61,7 +52,7 @@ layer." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -140,19 +131,18 @@ layer." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -166,21 +156,9 @@ layer." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6349.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6349" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-ippm-tcp-throughput-tm.html" title="draft-ietf-ippm-tcp-throughput-tm">draft-ietf-ippm-t...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6349" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6349" title="Side-by-side diff">Diff2</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6349&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>]           </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                    B. Constantine
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6349.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6349.txt.pdf">PDF</a>|<a href="/rfc/rfc6349.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6349" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6349&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6349" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                    B. Constantine
 Request for Comments: 6349                                          JDSU
 Category: Informational                                        G. Forget
 ISSN: 2070-1721                            Bell Canada (Ext. Consultant)
@@ -232,7 +210,7 @@ Status of This Memo
 
 
 <span class="grey">Constantine, et al.           Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -241,7 +219,7 @@ Copyright Notice
    Copyright (c) 2011 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -288,11 +266,11 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    In the network industry, the SLA (Service Level Agreement) provided
    to business-class customers is generally based upon Layer 2/3
@@ -344,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -388,7 +366,7 @@ Table of Contents
    proposed methodology.  <a href="#section-4">Section 4</a> defines the metrics, while <a href="#section-5">Section 5</a>
    explains how to conduct the tests and interpret the results.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Language"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Requirements Language</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Language"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Requirements Language</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -400,11 +378,11 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Terminology</span>
 
    The common definitions used in this methodology are as follows:
 
@@ -456,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -467,7 +445,7 @@ Table of Contents
    methodology makes no attempt to characterize specific network
    architectures.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20TCP%20Equilibrium"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>.  TCP Equilibrium</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20TCP%20Equilibrium"></a></body></html><a class="selflink" href="#section-1.3" id="section-1.3">1.3</a>.  TCP Equilibrium</span>
 
    TCP connections have three (3) fundamental congestion window phases,
    which are depicted in Figure 1.3.
@@ -512,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -532,7 +510,7 @@ Table of Contents
    commonly referred to as the Send Socket Buffer.  This is done
    independently of the TCP RWND size advertised by the receiver.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Scope%20and%20Goals"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Scope and Goals</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Scope%20and%20Goals"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Scope and Goals</span>
 
    Before defining the goals, it is important to clearly define the
    areas that are out of scope.
@@ -568,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -596,7 +574,7 @@ Table of Contents
      Throughput.  However, this methodology is not intended to provide
      detailed diagnosis on these issues.  See <a href="#section-5.2">Section 5.2</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Methodology"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Methodology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Methodology"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Methodology</span>
 
    This methodology is intended for operational and managed IP networks.
    A multitude of network architectures and topologies can be tested.
@@ -624,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -680,7 +658,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -709,7 +687,7 @@ Table of Contents
      tester that exposes the ability to run the PLPMTUD algorithm
      independently from the OS stack.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Path%20MTU"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Path MTU</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Path%20MTU"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Path MTU</span>
 
    TCP implementations should use Path MTU Discovery techniques (PMTUD).
    PMTUD relies on ICMP 'need to frag' messages to learn the path MTU.
@@ -736,11 +714,11 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Round-Trip%20Time%20%28RTT%29%20and%20Bottleneck%20Bandwidth%20%28BB%29"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Round-Trip Time (RTT) and Bottleneck Bandwidth (BB)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Round-Trip%20Time%20%28RTT%29%20and%20Bottleneck%20Bandwidth%20%28BB%29"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Round-Trip Time (RTT) and Bottleneck Bandwidth (BB)</span>
 
    Before stateful TCP testing can begin, it is important to determine
    the baseline RTT (i.e., non-congested inherent delay) and BB of the
@@ -748,7 +726,7 @@ Table of Contents
    calculate the BDP and to provide estimates of the TCP RWND and Send
    Socket Buffer sizes that <em>SHOULD</em> be used in subsequent test steps.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Measuring%20RTT"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Measuring RTT</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Measuring%20RTT"></a></body></html><a class="selflink" href="#section-3.2.1" id="section-3.2.1">3.2.1</a>.  Measuring RTT</span>
 
    As previously defined in <a href="#section-1.2">Section 1.2</a>, RTT is the elapsed time between
    the clocking in of the first bit of a TCP segment sent and the
@@ -792,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -806,7 +784,7 @@ Table of Contents
      Service) reclassification is done at any hop.  ICMP is not as
      reliable and accurate as in-band measurements.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Measuring%20BB"></a></body></html><a class="selflink" href="#section-3.2.2" name="section-3.2.2">3.2.2</a>.  Measuring BB</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Measuring%20BB"></a></body></html><a class="selflink" href="#section-3.2.2" id="section-3.2.2">3.2.2</a>.  Measuring BB</span>
 
    Before any TCP Throughput test can be conducted, bandwidth
    measurement tests <em>SHOULD</em> be run with stateless IP streams (i.e., not
@@ -830,7 +808,7 @@ Table of Contents
    These bandwidth measurements <em>SHOULD</em> use network capacity techniques
    as defined in [<a href="./rfc5136.html" title='"Defining Network Capacity"'>RFC5136</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Measuring%20TCP%20Throughput"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Measuring TCP Throughput</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Measuring%20TCP%20Throughput"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Measuring TCP Throughput</span>
 
    This methodology specifically defines TCP Throughput measurement
    techniques to verify maximum achievable TCP performance in a managed
@@ -848,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -869,7 +847,7 @@ Table of Contents
    Percentage, and the Buffer Delay Percentage <em>MUST</em> be measured in each
    direction.  These 3 metrics are defined in <a href="#section-4">Section 4</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Minimum%20TCP%20RWND"></a></body></html><a class="selflink" href="#section-3.3.1" name="section-3.3.1">3.3.1</a>.  Minimum TCP RWND</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Minimum%20TCP%20RWND"></a></body></html><a class="selflink" href="#section-3.3.1" id="section-3.3.1">3.3.1</a>.  Minimum TCP RWND</span>
 
    The TCP TTD <em>MUST</em> allow the Send Socket Buffer and Receive Window
    sizes to be set higher than the BDP; otherwise, TCP performance will
@@ -904,7 +882,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -960,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -1016,7 +994,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -1048,7 +1026,7 @@ Table of Contents
 
       Figure 3.3.1b.  TCP Throughputs on a T3 with Different TCP RWND
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20TCP%20Metrics"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  TCP Metrics</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20TCP%20Metrics"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  TCP Metrics</span>
 
    This methodology focuses on a TCP Throughput and provides 3 basic
    metrics that can be used for better understanding of the results.  It
@@ -1059,7 +1037,7 @@ Table of Contents
    Throughput comparisons under varying network conditions and host
    buffer size/RWND settings.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Transfer%20Time%20Ratio"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Transfer Time Ratio</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Transfer%20Time%20Ratio"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Transfer Time Ratio</span>
 
    The first metric is the TCP Transfer Time Ratio, which is simply the
    ratio between the Actual TCP Transfer Time versus the Ideal TCP
@@ -1072,7 +1050,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -1090,7 +1068,7 @@ Table of Contents
    provide derivations for the Maximum Achievable TCP Throughput and
    example calculations for the TCP Transfer Time Ratio.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Maximum%20Achievable%20TCP%20Throughput%20Calculation"></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a>.  Maximum Achievable TCP Throughput Calculation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Maximum%20Achievable%20TCP%20Throughput%20Calculation"></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a>.  Maximum Achievable TCP Throughput Calculation</span>
 
    This section provides formulas to calculate the Maximum Achievable
    TCP Throughput, with examples for T3 (44.21 Mbps) and Ethernet.
@@ -1128,7 +1106,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -1184,11 +1162,11 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20TCP%20Transfer%20Time%20and%20Transfer%20Time%20Ratio%20Calculation"></a></body></html><a class="selflink" href="#section-4.1.2" name="section-4.1.2">4.1.2</a>.  TCP Transfer Time and Transfer Time Ratio Calculation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20TCP%20Transfer%20Time%20and%20Transfer%20Time%20Ratio%20Calculation"></a></body></html><a class="selflink" href="#section-4.1.2" id="section-4.1.2">4.1.2</a>.  TCP Transfer Time and Transfer Time Ratio Calculation</span>
 
    The following table illustrates the Ideal TCP Transfer Time of a
    single TCP connection when its TCP RWND and Send Socket Buffer sizes
@@ -1240,11 +1218,11 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20TCP%20Efficiency"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  TCP Efficiency</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20TCP%20Efficiency"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  TCP Efficiency</span>
 
    The second metric represents the percentage of Bytes that were not
    retransmitted.
@@ -1256,7 +1234,7 @@ Table of Contents
    Transmitted Bytes are the total number of TCP Bytes to be
    transmitted, including the original and the retransmitted Bytes.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20TCP%20Efficiency%20Percentage%20Calculation"></a></body></html><a class="selflink" href="#section-4.2.1" name="section-4.2.1">4.2.1</a>.  TCP Efficiency Percentage Calculation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20TCP%20Efficiency%20Percentage%20Calculation"></a></body></html><a class="selflink" href="#section-4.2.1" id="section-4.2.1">4.2.1</a>.  TCP Efficiency Percentage Calculation</span>
 
    As an example, if 100,000 Bytes were sent and 2,000 had to be
    retransmitted, the TCP Efficiency Percentage would be calculated as:
@@ -1269,7 +1247,7 @@ Table of Contents
    if so, then these multiple retransmissions are added to the
    Retransmitted Bytes and to the Transmitted Bytes counts.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Buffer%20Delay"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Buffer Delay</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Buffer%20Delay"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Buffer Delay</span>
 
    The third metric is the Buffer Delay Percentage, which represents the
    increase in RTT during a TCP Throughput test versus the inherent or
@@ -1296,11 +1274,11 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.%20%20Buffer%20Delay%20Percentage%20Calculation"></a></body></html><a class="selflink" href="#section-4.3.1" name="section-4.3.1">4.3.1</a>.  Buffer Delay Percentage Calculation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.%20%20Buffer%20Delay%20Percentage%20Calculation"></a></body></html><a class="selflink" href="#section-4.3.1" id="section-4.3.1">4.3.1</a>.  Buffer Delay Percentage Calculation</span>
 
    As an example, consider a network path with a baseline RTT of 25 ms.
    During the course of a TCP transfer, the average RTT across the
@@ -1318,7 +1296,7 @@ Table of Contents
    diagnosed by correlating with sub-optimal TCP Efficiency Percentage
    and/or Buffer Delay Percentage metrics.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Conducting%20TCP%20Throughput%20Tests"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Conducting TCP Throughput Tests</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Conducting%20TCP%20Throughput%20Tests"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Conducting TCP Throughput Tests</span>
 
    Several TCP tools are currently used in the network world, and one of
    the most common is "iperf".  With this tool, hosts are installed at
@@ -1343,7 +1321,7 @@ Table of Contents
    properly exercise network buffers (i.e., greater than 30 seconds) and
    <em>SHOULD</em> also characterize performance at different times of the day.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Single%20versus%20Multiple%20TCP%20Connections"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Single versus Multiple TCP Connections</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Single%20versus%20Multiple%20TCP%20Connections"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Single versus Multiple TCP Connections</span>
 
    The decision whether to conduct single- or multiple-TCP-connection
    tests depends upon the size of the BDP in relation to the TCP RWND
@@ -1352,7 +1330,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -1395,7 +1373,7 @@ Table of Contents
    Additionally, the TCP Efficiency Percentage metric <em>MUST</em> be computed
    for each connection as defined in <a href="#section-4.2">Section 4.2</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Results%20Interpretation"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Results Interpretation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Results%20Interpretation"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Results Interpretation</span>
 
    At the end, a TCP Throughput Test Device (TCP TTD) <em>SHOULD</em> generate a
    report with the calculated BDP and a set of Window size experiments.
@@ -1408,7 +1386,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -1464,7 +1442,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -1520,7 +1498,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -1544,12 +1522,12 @@ Table of Contents
 
    Note that both ends of a TCP connection <em>MUST</em> be properly tuned.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    Measuring TCP network performance raises security concerns.  Metrics
    produced within this framework may create security issues.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Denial-of-Service%20Attacks"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Denial-of-Service Attacks</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Denial-of-Service%20Attacks"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Denial-of-Service Attacks</span>
 
    TCP network performance metrics, as defined in this document, attempt
    to fill the NUT with a stateful connection.  However, since the test
@@ -1559,13 +1537,13 @@ Table of Contents
    may require cooperation between the end-user customer and the network
    provider.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20User%20Data%20Confidentiality"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  User Data Confidentiality</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20User%20Data%20Confidentiality"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  User Data Confidentiality</span>
 
    Metrics within this framework generate packets from a sample, rather
    than taking samples based on user data.  Thus, our framework does not
    threaten user data confidentiality.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Interference%20with%20Metrics"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  Interference with Metrics</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Interference%20with%20Metrics"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  Interference with Metrics</span>
 
    The security considerations that apply to any active measurement of
    live networks are relevant here as well.  See [<a href="./rfc4656.html" title='"A One-way Active Measurement Protocol (OWAMP)"'>RFC4656</a>] and
@@ -1576,49 +1554,49 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgments</span>
 
    Thanks to Lars Eggert, Al Morton, Matt Mathis, Matt Zekauskas, Yaakov
    Stein, and Loki Jorgenson for many good comments and for pointing us
    to great sources of information pertaining to past works in the TCP
    capacity area.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Normative References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Normative References</span>
 
-   [<a id="ref-RFC1191" name="ref-RFC1191">RFC1191</a>]   Mogul, J. and S. Deering, "Path MTU discovery", <a href="./rfc1191.html">RFC 1191</a>,
+   [<a id="ref-RFC1191">RFC1191</a>]   Mogul, J. and S. Deering, "Path MTU discovery", <a href="./rfc1191.html">RFC 1191</a>,
                November 1990.
 
-   [<a id="ref-RFC1323" name="ref-RFC1323">RFC1323</a>]   Jacobson, V., Braden, R., and D. Borman, "TCP Extensions
+   [<a id="ref-RFC1323">RFC1323</a>]   Jacobson, V., Braden, R., and D. Borman, "TCP Extensions
                for High Performance", <a href="./rfc1323.html">RFC 1323</a>, May 1992.
 
-   [<a id="ref-RFC2018" name="ref-RFC2018">RFC2018</a>]   Mathis, M., Mahdavi, J., Floyd, S., and A. Romanow, "TCP
+   [<a id="ref-RFC2018">RFC2018</a>]   Mathis, M., Mahdavi, J., Floyd, S., and A. Romanow, "TCP
                Selective Acknowledgment Options", <a href="./rfc2018.html">RFC 2018</a>,
                October 1996.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]   Bradner, S., "Key words for use in RFCs to Indicate
-               Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]   Bradner, S., "Key words for use in RFCs to Indicate
+               Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC2544" name="ref-RFC2544">RFC2544</a>]   Bradner, S. and J. McQuaid, "Benchmarking Methodology for
+   [<a id="ref-RFC2544">RFC2544</a>]   Bradner, S. and J. McQuaid, "Benchmarking Methodology for
                Network Interconnect Devices", <a href="./rfc2544.html">RFC 2544</a>, March 1999.
 
-   [<a id="ref-RFC4656" name="ref-RFC4656">RFC4656</a>]   Shalunov, S., Teitelbaum, B., Karp, A., Boote, J., and M.
+   [<a id="ref-RFC4656">RFC4656</a>]   Shalunov, S., Teitelbaum, B., Karp, A., Boote, J., and M.
                Zekauskas, "A One-way Active Measurement Protocol
                (OWAMP)", <a href="./rfc4656.html">RFC 4656</a>, September 2006.
 
-   [<a id="ref-RFC4821" name="ref-RFC4821">RFC4821</a>]   Mathis, M. and J. Heffner, "Packetization Layer Path MTU
+   [<a id="ref-RFC4821">RFC4821</a>]   Mathis, M. and J. Heffner, "Packetization Layer Path MTU
                Discovery", <a href="./rfc4821.html">RFC 4821</a>, March 2007.
 
-   [<a id="ref-RFC4898" name="ref-RFC4898">RFC4898</a>]   Mathis, M., Heffner, J., and R. Raghunarayan, "TCP
+   [<a id="ref-RFC4898">RFC4898</a>]   Mathis, M., Heffner, J., and R. Raghunarayan, "TCP
                Extended Statistics MIB", <a href="./rfc4898.html">RFC 4898</a>, May 2007.
 
-   [<a id="ref-RFC5136" name="ref-RFC5136">RFC5136</a>]   Chimento, P. and J. Ishac, "Defining Network Capacity",
+   [<a id="ref-RFC5136">RFC5136</a>]   Chimento, P. and J. Ishac, "Defining Network Capacity",
                <a href="./rfc5136.html">RFC 5136</a>, February 2008.
 
-   [<a id="ref-RFC5357" name="ref-RFC5357">RFC5357</a>]   Hedayat, K., Krzanowski, R., Morton, A., Yum, K., and J.
+   [<a id="ref-RFC5357">RFC5357</a>]   Hedayat, K., Krzanowski, R., Morton, A., Yum, K., and J.
                Babiarz, "A Two-Way Active Measurement Protocol (TWAMP)",
                <a href="./rfc5357.html">RFC 5357</a>, October 2008.
 
@@ -1632,7 +1610,7 @@ Table of Contents
 
 
 <span class="grey">Constantine, et al.           Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc6349.html">RFC 6349</a>          Framework for TCP Throughput Testing       August 2011</span>
 
 
@@ -1688,11 +1666,6 @@ Authors' Addresses
 
 
 Constantine, et al.           Informational                    [Page 27]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

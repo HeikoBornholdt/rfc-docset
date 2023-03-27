@@ -1,34 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-begen-avt-post-repair-rtcp-xr" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5725" name="DC.Identifier"/>
-<meta content="February, 2010" name="DC.Date.Issued"/>
-<meta content="Hsu, Dong" name="DC.Creator"/>
-<meta content="Lague, Michael" name="DC.Creator"/>
-<meta content="Begen, Ali" name="DC.Creator"/>
-<meta content="This document defines a new report block type within the framework of
-RTP Control Protocol (RTCP) Extended Reports (XR). One of the initial
-XR report block types is the Loss Run Length Encoding (RLE) Report
-Block. This report conveys the information regarding the individual
-Real-time Transport Protocol (RTP) packet receipt and loss events
-experienced during the RTCP interval preceding the transmission of the
-report. The new report, which is referred to as the Post-repair Loss
-RLE Report, carries the information regarding the remaining lost
-packets after all loss-repair methods are applied. By comparing the
-RTP packet receipts/losses before and after the loss repair is
-completed, one can determine the effectiveness of the loss- repair
-methods in an aggregated fashion. This document also defines the
-signaling of the Post-repair Loss RLE Report in the Session
-Description Protocol (SDP)." name="DC.Description.Abstract"/>
-<meta content="Post-Repair Loss RLE Report Block Type for RTCP XR" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5725 - Post-Repair Loss RLE Report Block Type for RTCP XR</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="A. Begen" name="citation_author"/>
+<meta content="D. Hsu" name="citation_author"/>
+<meta content="M. Lague" name="citation_author"/>
+<meta content="February, 2010" name="citation_publication_date"/>
+<meta content="Post-Repair Loss RLE Report Block Type for RTP Control Protocol (RTCP) Extended Reports (XRs)" name="citation_title"/>
+<meta content="10.17487/RFC5725" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5725" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5725.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5725: Post-Repair Loss RLE Report Block Type for RTP Control Protocol (RTCP) Extended Reports (XRs)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -57,7 +42,7 @@ Description Protocol (SDP)." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -66,7 +51,7 @@ Description Protocol (SDP)." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -145,19 +130,18 @@ Description Protocol (SDP)." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -171,21 +155,9 @@ Description Protocol (SDP)." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5725.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5725" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-avt-post-repair-rtcp-xr.html" title="draft-ietf-avt-post-repair-rtcp-xr">draft-ietf-avt-po...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5725" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5725" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5725">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                          A. Begen
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5725.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5725.txt.pdf">PDF</a>|<a href="/rfc/rfc5725.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5725" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5725&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5725" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5725" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Engineering Task Force (IETF)                          A. Begen
 Request for Comments: 5725                                        D. Hsu
 Category: Standards Track                                       M. Lague
 ISSN: 2070-1721                                                    Cisco
@@ -237,7 +209,7 @@ Status of This Memo
 
 
 <span class="grey">Begen, et al.                Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5725.html">RFC 5725</a>         Post-Repair Loss RLE Report Block Type    February 2010</span>
 
 
@@ -246,7 +218,7 @@ Copyright Notice
    Copyright (c) 2010 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -293,11 +265,11 @@ Table of Contents
 
 
 <span class="grey">Begen, et al.                Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5725.html">RFC 5725</a>         Post-Repair Loss RLE Report Block Type    February 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    The RTP Control Protocol (RTCP) is the out-of-band control protocol
    for applications that are using the Real-time Transport Protocol
@@ -349,7 +321,7 @@ Table of Contents
 
 
 <span class="grey">Begen, et al.                Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5725.html">RFC 5725</a>         Post-Repair Loss RLE Report Block Type    February 2010</span>
 
 
@@ -374,13 +346,13 @@ Table of Contents
    specific packets they have received.  In other words, the coverage of
    the post-repair Loss RLEs may or may not be contiguous.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Requirements Notation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Requirements Notation</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Post-Repair%20Loss%20RLE%20Report%20Block"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Post-Repair Loss RLE Report Block</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Post-Repair%20Loss%20RLE%20Report%20Block"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Post-Repair Loss RLE Report Block</span>
 
    The Post-repair Loss RLE Report Block is similar to the existing Loss
    RLE Report Block defined in [<a href="./rfc3611.html" title='"RTP Control Protocol Extended Reports (RTCP XR)"'>RFC3611</a>].  The report format is shown in
@@ -405,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Begen, et al.                Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5725.html">RFC 5725</a>         Post-Repair Loss RLE Report Block Type    February 2010</span>
 
 
@@ -461,7 +433,7 @@ Table of Contents
 
 
 <span class="grey">Begen, et al.                Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5725.html">RFC 5725</a>         Post-Repair Loss RLE Report Block Type    February 2010</span>
 
 
@@ -490,7 +462,7 @@ Table of Contents
    bandwidth usage rules, as they are described in [<a href="./rfc3611.html" title='"RTP Control Protocol Extended Reports (RTCP XR)"'>RFC3611</a>], apply to
    Post-repair Loss RLE reports as well.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Session%20Description%20Protocol%20Signaling"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Session Description Protocol Signaling</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Session%20Description%20Protocol%20Signaling"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Session Description Protocol Signaling</span>
 
    A new parameter is defined for the Post-repair Loss RLE Report Block
    to be used with Session Description Protocol (SDP) [<a href="./rfc4566.html" title='"SDP: Session Description Protocol"'>RFC4566</a>] using
@@ -506,7 +478,7 @@ Table of Contents
    parameter is compatible with the definition of "format-ext" in the
    "rtcp-xr" attribute.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    The security considerations of [<a href="./rfc3611.html" title='"RTP Control Protocol Extended Reports (RTCP XR)"'>RFC3611</a>] apply in this document as
    well.  Additional security considerations are briefly mentioned
@@ -517,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Begen, et al.                Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5725.html">RFC 5725</a>         Post-Repair Loss RLE Report Block Type    February 2010</span>
 
 
@@ -553,7 +525,7 @@ Table of Contents
    <em>MAY</em> be protected by using the Secure RTP (SRTP) and Secure RTP
    Control Protocol (SRTCP) [<a href="./rfc3711.html" title='"The Secure Real-time Transport Protocol (SRTP)"'>RFC3711</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  IANA Considerations</span>
 
    New block types for RTCP XR are subject to IANA registration.  For
    general guidelines on IANA considerations for RTCP XR, refer to
@@ -573,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Begen, et al.                Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5725.html">RFC 5725</a>         Post-Repair Loss RLE Report Block Type    February 2010</span>
 
 
@@ -585,43 +557,43 @@ Table of Contents
    170 West Tasman Drive
    San Jose, CA 95134 USA
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgments</span>
 
    The authors would like to thank the members of the VQE Team at Cisco
    and Colin Perkins for their inputs and suggestions.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC3550" name="ref-RFC3550">RFC3550</a>]  Schulzrinne, H., Casner, S., Frederick, R., and V.
+   [<a id="ref-RFC3550">RFC3550</a>]  Schulzrinne, H., Casner, S., Frederick, R., and V.
               Jacobson, "RTP: A Transport Protocol for Real-Time
               Applications", STD 64, <a href="./rfc3550.html">RFC 3550</a>, July 2003.
 
-   [<a id="ref-RFC3611" name="ref-RFC3611">RFC3611</a>]  Friedman, T., Caceres, R., and A. Clark, "RTP Control
+   [<a id="ref-RFC3611">RFC3611</a>]  Friedman, T., Caceres, R., and A. Clark, "RTP Control
               Protocol Extended Reports (RTCP XR)", <a href="./rfc3611.html">RFC 3611</a>,
               November 2003.
 
-   [<a id="ref-RFC4566" name="ref-RFC4566">RFC4566</a>]  Handley, M., Jacobson, V., and C. Perkins, "SDP: Session
+   [<a id="ref-RFC4566">RFC4566</a>]  Handley, M., Jacobson, V., and C. Perkins, "SDP: Session
               Description Protocol", <a href="./rfc4566.html">RFC 4566</a>, July 2006.
 
-   [<a id="ref-RFC5234" name="ref-RFC5234">RFC5234</a>]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
+   [<a id="ref-RFC5234">RFC5234</a>]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
               Specifications: ABNF", STD 68, <a href="./rfc5234.html">RFC 5234</a>, January 2008.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC3711" name="ref-RFC3711">RFC3711</a>]  Baugher, M., McGrew, D., Naslund, M., Carrara, E., and K.
+   [<a id="ref-RFC3711">RFC3711</a>]  Baugher, M., McGrew, D., Naslund, M., Carrara, E., and K.
               Norrman, "The Secure Real-time Transport Protocol (SRTP)",
               <a href="./rfc3711.html">RFC 3711</a>, March 2004.
 
-   [<a id="ref-RFC4588" name="ref-RFC4588">RFC4588</a>]  Rey, J., Leon, D., Miyazaki, A., Varsa, V., and R.
+   [<a id="ref-RFC4588">RFC4588</a>]  Rey, J., Leon, D., Miyazaki, A., Varsa, V., and R.
               Hakenberg, "RTP Retransmission Payload Format", <a href="./rfc4588.html">RFC 4588</a>,
               July 2006.
 
-   [<a id="ref-RFC5109" name="ref-RFC5109">RFC5109</a>]  Li, A., "RTP Payload Format for Generic Forward Error
+   [<a id="ref-RFC5109">RFC5109</a>]  Li, A., "RTP Payload Format for Generic Forward Error
               Correction", <a href="./rfc5109.html">RFC 5109</a>, December 2007.
 
 
@@ -629,7 +601,7 @@ Table of Contents
 
 
 <span class="grey">Begen, et al.                Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5725.html">RFC 5725</a>         Post-Repair Loss RLE Report Block Type    February 2010</span>
 
 
@@ -685,11 +657,6 @@ Authors' Addresses
 
 
 Begen, et al.                Standards Track                    [Page 9]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

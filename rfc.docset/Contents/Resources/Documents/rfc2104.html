@@ -1,26 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:2104" name="DC.Identifier"/>
-<meta content="This document describes HMAC, a mechanism for message authentication
-using cryptographic hash functions. HMAC can be used with any
-iterative cryptographic hash function, e.g., MD5, SHA-1, in
-combination with a secret shared key. The cryptographic strength of
-HMAC depends on the properties of the underlying hash function. This
-memo provides information for the Internet community. This memo does
-not specify an Internet standard of any kind" name="DC.Description.Abstract"/>
-<meta content="Krawczyk, Hugo" name="DC.Creator"/>
-<meta content="Canetti, Ran" name="DC.Creator"/>
-<meta content="Bellare, Mihir" name="DC.Creator"/>
-<meta content="February, 1997" name="DC.Date.Issued"/>
-<meta content="HMAC: Keyed-Hashing for Message Authentication" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 2104 - HMAC: Keyed-Hashing for Message Authentication</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="H. Krawczyk" name="citation_author"/>
+<meta content="M. Bellare" name="citation_author"/>
+<meta content="R. Canetti" name="citation_author"/>
+<meta content="February, 1997" name="citation_publication_date"/>
+<meta content=" HMAC: Keyed-Hashing for Message Authentication " name="citation_title"/>
+<meta content="10.17487/RFC2104" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc2104" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc2104.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 2104:  HMAC: Keyed-Hashing for Message Authentication </title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -49,7 +42,7 @@ not specify an Internet standard of any kind" name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -58,7 +51,7 @@ not specify an Internet standard of any kind" name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -137,19 +130,18 @@ not specify an Internet standard of any kind" name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -163,21 +155,9 @@ not specify an Internet standard of any kind" name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc2104.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc2104" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-ipsec-hmac-md5.html" title="draft-ietf-ipsec-hmac-md5">draft-ietf-ipsec-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc2104" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc2104" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=2104">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">Updated by: <a href="./rfc6151.html">6151</a>                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                       H. Krawczyk
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc2104.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc2104.txt.pdf">PDF</a>|<a href="/rfc/rfc2104.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc2104" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=2104&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc2104" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc2104" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo">Updated by: <a href="/rfc/rfc6151" target="_blank">6151</a> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                       H. Krawczyk
 Request for Comments: 2104                                          IBM
 Category: Informational                                      M. Bellare
                                                                    UCSD
@@ -202,7 +182,7 @@ Abstract
    combination with a secret shared key.  The cryptographic strength of
    HMAC depends on the properties of the underlying hash function.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>. Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>. Introduction</span>
 
    Providing a way to check the integrity of information transmitted
    over or stored in an unreliable medium is a prime necessity in the
@@ -229,7 +209,7 @@ Abstract
 
 
 <span class="grey">Krawczyk, et. al.            Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc2104.html">RFC 2104</a>                          HMAC                     February 1997</span>
 
 
@@ -285,11 +265,11 @@ Abstract
 
 
 <span class="grey">Krawczyk, et. al.            Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc2104.html">RFC 2104</a>                          HMAC                     February 1997</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20Definition%20of%20HMAC"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>. Definition of HMAC</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20Definition%20of%20HMAC"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>. Definition of HMAC</span>
 
    The definition of HMAC requires a cryptographic hash function, which
    we denote by H, and a secret key K. We assume H to be a cryptographic
@@ -341,11 +321,11 @@ Abstract
 
 
 <span class="grey">Krawczyk, et. al.            Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc2104.html">RFC 2104</a>                          HMAC                     February 1997</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Keys"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>. Keys</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Keys"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>. Keys</span>
 
    The key for HMAC can be of any length (keys longer than B bytes are
    first hashed using H).  However, less than L bytes is strongly
@@ -363,7 +343,7 @@ Abstract
    security practice that helps against potential weaknesses of the
    function and keys, and limits the damage of an exposed key.)
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Implementation%20Note"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>. Implementation Note</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Implementation%20Note"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>. Implementation Note</span>
 
    HMAC is defined in such a way that the underlying hash function H can
    be used with no modification to its code. In particular, it uses the
@@ -397,11 +377,11 @@ Abstract
 
 
 <span class="grey">Krawczyk, et. al.            Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc2104.html">RFC 2104</a>                          HMAC                     February 1997</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20Truncated%20output"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>. Truncated output</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20Truncated%20output"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>. Truncated output</span>
 
    A well-known practice with message authentication codes is to
    truncate the output of the MAC and output only part of the bits
@@ -425,7 +405,7 @@ Abstract
    specified, e.g. HMAC-MD5, then it is assumed that all the bits of the
    hash are output.)
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20Security"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>. Security</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20Security"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>. Security</span>
 
    The security of the message authentication mechanism presented here
    depends on cryptographic properties of the hash function H: the
@@ -453,7 +433,7 @@ Abstract
 
 
 <span class="grey">Krawczyk, et. al.            Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc2104.html">RFC 2104</a>                          HMAC                     February 1997</span>
 
 
@@ -509,7 +489,7 @@ Abstract
 
 
 <span class="grey">Krawczyk, et. al.            Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc2104.html">RFC 2104</a>                          HMAC                     February 1997</span>
 
 
@@ -565,7 +545,7 @@ Abstract
 
 
 <span class="grey">Krawczyk, et. al.            Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc2104.html">RFC 2104</a>                          HMAC                     February 1997</span>
 
 
@@ -621,7 +601,7 @@ caddr_t         digest;              /* caller digest to be filled in */
 
 
 <span class="grey">Krawczyk, et. al.            Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc2104.html">RFC 2104</a>                          HMAC                     February 1997</span>
 
 
@@ -677,7 +657,7 @@ Test Vectors (Trailing '\0' of a character string not included in test):
 
 
 <span class="grey">Krawczyk, et. al.            Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc2104.html">RFC 2104</a>                          HMAC                     February 1997</span>
 
 
@@ -702,58 +682,58 @@ Acknowledgments
 
 References
 
-   [<a id="ref-ANSI" name="ref-ANSI">ANSI</a>]  ANSI X9.9, "American National Standard for Financial
+   [<a id="ref-ANSI">ANSI</a>]  ANSI X9.9, "American National Standard for Financial
            Institution Message Authentication (Wholesale)," American
            Bankers Association, 1981.   Revised 1986.
 
-   [<a id="ref-Atk" name="ref-Atk">Atk</a>]   Atkinson, R., "IP Authentication Header", <a href="./rfc1826.html">RFC 1826</a>, August
+   [<a id="ref-Atk">Atk</a>]   Atkinson, R., "IP Authentication Header", <a href="./rfc1826.html">RFC 1826</a>, August
            1995.
 
-   [<a id="ref-BCK1" name="ref-BCK1">BCK1</a>]  M. Bellare, R. Canetti, and H. Krawczyk,
+   [<a id="ref-BCK1">BCK1</a>]  M. Bellare, R. Canetti, and H. Krawczyk,
            "Keyed Hash Functions and Message Authentication",
            Proceedings of Crypto'96, LNCS 1109, pp. 1-15.
            (<a href="http://www.research.ibm.com/security/keyed-md5.html">http://www.research.ibm.com/security/keyed-md5.html</a>)
 
-   [<a id="ref-BCK2" name="ref-BCK2">BCK2</a>]  M. Bellare, R. Canetti, and H. Krawczyk,
+   [<a id="ref-BCK2">BCK2</a>]  M. Bellare, R. Canetti, and H. Krawczyk,
            "Pseudorandom Functions Revisited: The Cascade Construction",
            Proceedings of FOCS'96.
 
-   [<a id="ref-Dobb" name="ref-Dobb">Dobb</a>]  H. Dobbertin, "The Status of MD5  After a Recent Attack",
+   [<a id="ref-Dobb">Dobb</a>]  H. Dobbertin, "The Status of MD5  After a Recent Attack",
            RSA Labs' CryptoBytes, Vol. 2 No. 2, Summer 1996.
            <a href="http://www.rsa.com/rsalabs/pubs/cryptobytes.html">http://www.rsa.com/rsalabs/pubs/cryptobytes.html</a>
 
-   [<a id="ref-PV" name="ref-PV">PV</a>]    B. Preneel and P. van Oorschot, "Building fast MACs from hash
+   [<a id="ref-PV">PV</a>]    B. Preneel and P. van Oorschot, "Building fast MACs from hash
            functions", Advances in Cryptology -- CRYPTO'95 Proceedings,
            Lecture Notes in Computer Science, Springer-Verlag Vol.963,
            1995, pp. 1-14.
 
-   [<a id="ref-MD5" name="ref-MD5">MD5</a>]   Rivest, R., "The MD5 Message-Digest Algorithm",
+   [<a id="ref-MD5">MD5</a>]   Rivest, R., "The MD5 Message-Digest Algorithm",
            <a href="./rfc1321.html">RFC 1321</a>, April 1992.
 
 
 
 <span class="grey">Krawczyk, et. al.            Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc2104.html">RFC 2104</a>                          HMAC                     February 1997</span>
 
 
-   [<a id="ref-MM" name="ref-MM">MM</a>]    Meyer, S. and Matyas, S.M., Cryptography, New York Wiley,
+   [<a id="ref-MM">MM</a>]    Meyer, S. and Matyas, S.M., Cryptography, New York Wiley,
            1982.
 
-   [<a id="ref-RIPEMD" name="ref-RIPEMD">RIPEMD</a>] H. Dobbertin, A. Bosselaers, and B. Preneel, "RIPEMD-160: A
+   [<a id="ref-RIPEMD">RIPEMD</a>] H. Dobbertin, A. Bosselaers, and B. Preneel, "RIPEMD-160: A
             strengthened version of RIPEMD", Fast Software Encryption,
             LNCS Vol 1039, pp. 71-82.
             <a href="ftp://ftp.esat.kuleuven.ac.be/pub/COSIC/bosselae/ripemd/">ftp://ftp.esat.kuleuven.ac.be/pub/COSIC/bosselae/ripemd/</a>.
 
-   [<a id="ref-SHA" name="ref-SHA">SHA</a>]   NIST, FIPS PUB 180-1: Secure Hash Standard, April 1995.
+   [<a id="ref-SHA">SHA</a>]   NIST, FIPS PUB 180-1: Secure Hash Standard, April 1995.
 
-   [<a id="ref-Tsu" name="ref-Tsu">Tsu</a>]   G. Tsudik, "Message authentication with one-way hash
+   [<a id="ref-Tsu">Tsu</a>]   G. Tsudik, "Message authentication with one-way hash
            functions", In Proceedings of Infocom'92, May 1992.
            (Also in "Access Control and Policy Enforcement in
             Internetworks", Ph.D. Dissertation, Computer Science
             Department, University of Southern California, April 1991.)
 
-   [<a id="ref-VW" name="ref-VW">VW</a>]    P. van Oorschot and M. Wiener, "Parallel Collision
+   [<a id="ref-VW">VW</a>]    P. van Oorschot and M. Wiener, "Parallel Collision
            Search with Applications to Hash Functions and Discrete
            Logarithms", Proceedings of the 2nd ACM Conf. Computer and
            Communications Security, Fairfax, VA, November 1994.
@@ -789,11 +769,6 @@ Authors' Addresses
 
 
 Krawczyk, et. al.            Informational                     [Page 11]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,32 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-stewart-tsvwg-prsctp" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:3758" name="DC.Identifier"/>
-<meta content="May, 2004" name="DC.Date.Issued"/>
-<meta content="Tuexen, Michael" name="DC.Creator"/>
-<meta content="Conrad, Phillip T." name="DC.Creator"/>
-<meta content="Ramalho, Michael A." name="DC.Creator"/>
-<meta content="Stewart, Randall R." name="DC.Creator"/>
-<meta content="Xie, Qiaobing" name="DC.Creator"/>
-<meta content="This memo describes an extension to the Stream Control Transmission
-Protocol (SCTP) that allows an SCTP endpoint to signal to its peer
-that it should move the cumulative ack point forward. When both sides
-of an SCTP association support this extension, it can be used by an
-SCTP implementation to provide partially reliable data transmission
-service to an upper layer protocol. This memo describes the protocol
-extensions, which consist of a new parameter for INIT and INIT ACK,
-and a new FORWARD TSN chunk type, and provides one example of a
-partially reliable service that can be provided to the upper layer via
-this mechanism. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
-<meta content="Stream Control Transmission Protocol (SCTP) Partial Reliability Extension" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 3758 - Stream Control Transmission Protocol (SCTP) Partial Reliability Extension</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="R. Stewart" name="citation_author"/>
+<meta content="M. Ramalho" name="citation_author"/>
+<meta content="Q. Xie" name="citation_author"/>
+<meta content="M. Tuexen" name="citation_author"/>
+<meta content="P. Conrad" name="citation_author"/>
+<meta content="May, 2004" name="citation_publication_date"/>
+<meta content=" Stream Control Transmission Protocol (SCTP) Partial Reliability Extension " name="citation_title"/>
+<meta content="10.17487/RFC3758" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc3758" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc3758.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 3758:  Stream Control Transmission Protocol (SCTP) Partial Reliability Extension </title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -55,7 +44,7 @@ this mechanism. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -64,7 +53,7 @@ this mechanism. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -143,19 +132,18 @@ this mechanism. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -169,21 +157,9 @@ this mechanism. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc3758.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc3758" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-tsvwg-prsctp.html" title="draft-ietf-tsvwg-prsctp">draft-ietf-tsvwg-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc3758" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc3758" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                         R. Stewart
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc3758.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc3758.txt.pdf">PDF</a>|<a href="/rfc/rfc3758.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc3758" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=3758&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc3758" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                         R. Stewart
 Request for Comments: 3758                                    M. Ramalho
 Category: Standards Track                            Cisco Systems, Inc.
                                                                   Q. Xie
@@ -235,7 +211,7 @@ Abstract
 
 
 <span class="grey">Stewart, et al.             Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -273,14 +249,14 @@ Table of Contents
    <a href="#section-10">10</a>. Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . <a href="#page-20">20</a>
    11. Full Copyright Statement . . . . . . . . . . . . . . . . . . .
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This memo describes an extension to the Stream Control Transmission
    Protocol (SCTP) <a href="./rfc2960.html">RFC 2960</a> [<a href="#ref-2" title='"Stream Control Transmission Protocol"'>2</a>] that allows an SCTP sender to signal to
    its peer that it should no longer expect to receive one or more DATA
    chunks.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Overview%20of%20Protocol%20Extensions"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Overview of Protocol Extensions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Overview%20of%20Protocol%20Extensions"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Overview of Protocol Extensions</span>
 
    The protocol extension described in this document consists of two new
    elements:
@@ -291,7 +267,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -300,7 +276,7 @@ Table of Contents
       skipping past one or more DATA chunks that may not yet have been
       received and/or acknowledged.)
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Overview%20of%20New%20Services%20Provided%20to%20the%20Upper%20Layer"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Overview of New Services Provided to the Upper Layer</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Overview%20of%20New%20Services%20Provided%20to%20the%20Upper%20Layer"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Overview of New Services Provided to the Upper Layer</span>
 
    When this extension is supported by both sides of an SCTP
    association, it can be used to provide partially reliable transport
@@ -347,7 +323,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -358,7 +334,7 @@ Table of Contents
    definitions may be standardized as the need arises without further
    changes to the on-the-wire protocol.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Benefits%20of%20PR-SCTP"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>.  Benefits of PR-SCTP</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Benefits%20of%20PR-SCTP"></a></body></html><a class="selflink" href="#section-1.3" id="section-1.3">1.3</a>.  Benefits of PR-SCTP</span>
 
    Hereafter, we use the notation "Partial Reliable Stream Control
    Transmission Protocol (PR-SCTP)" to refer to the SCTP protocol,
@@ -403,23 +379,23 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Conventions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Conventions</span>
 
    The keywords <em>MUST</em>, <em>MUST NOT</em>, <em>REQUIRED</em>, <em>SHALL</em>, <em>SHALL NOT</em>, <em>SHOULD</em>,
    <em>SHOULD NOT</em>, <em>RECOMMENDED</em>, NOT <em>RECOMMENDED</em>, <em>MAY</em>, and <em>OPTIONAL</em>, when
    they appear in this document, are to be interpreted as described in
-   <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a> [<a href="#ref-1" title='"Key words for use in RFCs to Indicate Requirement Levels"'>1</a>].
+   <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a> [<a href="#ref-1" title='"Key words for use in RFCs to Indicate Requirement Levels"'>1</a>].
 
    Comparisons and arithmetic on Transport Sequence Numbers (TSNs) are
    governed by the rules in <a href="./rfc2960.html#section-1.6">Section 1.6 of RFC 2960</a> [<a href="#ref-2" title='"Stream Control Transmission Protocol"'>2</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Protocol%20Changes%20to%20support%20PR-SCTP"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Protocol Changes to support PR-SCTP</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Protocol%20Changes%20to%20support%20PR-SCTP"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Protocol Changes to support PR-SCTP</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Forward-TSN-Supported%20Parameter%20For%20INIT%20and%20INIT%20ACK"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Forward-TSN-Supported Parameter For INIT and INIT ACK</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Forward-TSN-Supported%20Parameter%20For%20INIT%20and%20INIT%20ACK"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Forward-TSN-Supported Parameter For INIT and INIT ACK</span>
 
    The following new <em>OPTIONAL</em> parameter is added to the INIT and INIT
    ACK chunks.
@@ -447,7 +423,7 @@ Table of Contents
 
       Indicates the size of the parameter, i.e., 4.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2%20Forward%20Cumulative%20TSN%20Chunk%20Definition%20%28FORWARD%20TSN%29"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a> Forward Cumulative TSN Chunk Definition (FORWARD TSN)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2%20Forward%20Cumulative%20TSN%20Chunk%20Definition%20%28FORWARD%20TSN%29"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a> Forward Cumulative TSN Chunk Definition (FORWARD TSN)</span>
 
    The following new chunk type is defined:
 
@@ -459,7 +435,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -515,13 +491,13 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Negotiation%20of%20Forward-TSN-Supported%20parameter"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Negotiation of Forward-TSN-Supported parameter</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Negotiation%20of%20Forward-TSN-Supported%20parameter"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Negotiation of Forward-TSN-Supported parameter</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Sending%20Forward-TSN-Supported%20param%20in%20INIT"></a></body></html><a class="selflink" href="#section-3.3.1" name="section-3.3.1">3.3.1</a>.  Sending Forward-TSN-Supported param in INIT</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Sending%20Forward-TSN-Supported%20param%20in%20INIT"></a></body></html><a class="selflink" href="#section-3.3.1" id="section-3.3.1">3.3.1</a>.  Sending Forward-TSN-Supported param in INIT</span>
 
    If an SCTP endpoint supports the FORWARD TSN chunk, then any time it
    sends an INIT during association establishment, it <em>MAY</em> include the
@@ -534,7 +510,7 @@ Table of Contents
    FORWARD TSN chunk, returning an ERROR to the peer upon receipt of any
    FORWARD TSN.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.%20%20Receipt%20of%20Forward-TSN-Supported%20parameter%20in%20INIT%20or%20INIT-ACK"></a></body></html><a class="selflink" href="#section-3.3.2" name="section-3.3.2">3.3.2</a>.  Receipt of Forward-TSN-Supported parameter in INIT or INIT-ACK</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.%20%20Receipt%20of%20Forward-TSN-Supported%20parameter%20in%20INIT%20or%20INIT-ACK"></a></body></html><a class="selflink" href="#section-3.3.2" id="section-3.3.2">3.3.2</a>.  Receipt of Forward-TSN-Supported parameter in INIT or INIT-ACK</span>
 
    When a receiver of an INIT detects a Forward-TSN-Supported parameter
    and does not support the Forward-TSN chunk type, the receiver <em>MUST</em>
@@ -571,11 +547,11 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.3.%20%20Receipt%20of%20Op.%20Error%20for%20Forward-TSN-Supported%20Param"></a></body></html><a class="selflink" href="#section-3.3.3" name="section-3.3.3">3.3.3</a>.  Receipt of Op. Error for Forward-TSN-Supported Param</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.3.%20%20Receipt%20of%20Op.%20Error%20for%20Forward-TSN-Supported%20Param"></a></body></html><a class="selflink" href="#section-3.3.3" id="section-3.3.3">3.3.3</a>.  Receipt of Op. Error for Forward-TSN-Supported Param</span>
 
    When an SCTP endpoint that desires to use the FORWARD TSN chunk
    feature for partially reliable data transfer receives an operational
@@ -602,7 +578,7 @@ Table of Contents
       <em>MUST NOT</em> transmit a FORWARD TSN chunk at any time during the life
       of the association.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Definition%20of%20%22abandoned%22%20in%20the%20context%20of%20PR-SCTP"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Definition of "abandoned" in the context of PR-SCTP</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Definition%20of%20%22abandoned%22%20in%20the%20context%20of%20PR-SCTP"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Definition of "abandoned" in the context of PR-SCTP</span>
 
    At some point, a sending PR-SCTP implementation <em>MAY</em> determine that a
    particular data chunk <em>SHOULD NOT</em> be transmitted or retransmitted
@@ -627,11 +603,11 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Sender%20Side%20Implementation%20of%20PR-SCTP"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  Sender Side Implementation of PR-SCTP</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Sender%20Side%20Implementation%20of%20PR-SCTP"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  Sender Side Implementation of PR-SCTP</span>
 
    The sender side implementation of PR-SCTP is identical to that of the
    base SCTP protocol, except for:
@@ -683,7 +659,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -739,7 +715,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -795,7 +771,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -815,7 +791,7 @@ Table of Contents
        for retransmission later (e.g., either by T3-Timeout or by Fast
        Retransmit).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20Receiver%20Side%20Implementation%20of%20PR-SCTP"></a></body></html><a class="selflink" href="#section-3.6" name="section-3.6">3.6</a>.  Receiver Side Implementation of PR-SCTP</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20Receiver%20Side%20Implementation%20of%20PR-SCTP"></a></body></html><a class="selflink" href="#section-3.6" id="section-3.6">3.6</a>.  Receiver Side Implementation of PR-SCTP</span>
 
    The receiver side implementation of PR-SCTP at an SCTP endpoint A is
    capable of supporting any PR-SCTP service definition used by the
@@ -851,7 +827,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -907,7 +883,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -926,7 +902,7 @@ Table of Contents
    implies that the receiver will drop the chunk and report it as a
    duplicate in the next outbound SACK chunk.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Services%20provided%20by%20PR-SCTP%20to%20the%20upper%20layer"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Services provided by PR-SCTP to the upper layer</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Services%20provided%20by%20PR-SCTP%20to%20the%20upper%20layer"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Services provided by PR-SCTP to the upper layer</span>
 
    As described in <a href="#section-1.2">Section 1.2</a>, it is feasible to implement a variety of
    partially reliable transport services using the new protocol
@@ -963,14 +939,14 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
    o  Finally, <a href="#section-4.4">Section 4.4</a> describes some additional usage notes that
       upper layer protocol designers and implementors may find helpful.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20PR-SCTP%20Service%20Definition%20for%20%22timed%20reliability%22"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  PR-SCTP Service Definition for "timed reliability"</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20PR-SCTP%20Service%20Definition%20for%20%22timed%20reliability%22"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  PR-SCTP Service Definition for "timed reliability"</span>
 
    The "timed reliability" service is a natural extension of the
    "lifetime" concept already present in the base SCTP protocol.
@@ -1019,7 +995,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -1050,7 +1026,7 @@ Table of Contents
    opportunity, WITHOUT requiring that lifetime be evaluated immediately
    at the point in time where it expires.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20PR-SCTP%20Association%20Establishment"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  PR-SCTP Association Establishment</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20PR-SCTP%20Association%20Establishment"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  PR-SCTP Association Establishment</span>
 
    An upper layer protocol (ULP) that uses PR-SCTP may need to know
    whether PR-SCTP can be supported on a given association.  Therefore,
@@ -1075,7 +1051,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -1117,7 +1093,7 @@ Table of Contents
    to enable PR-SCTP, the user will need to call this API option with
    the enable flag set to "true".
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Guidelines%20for%20defining%20other%20PR-SCTP%20Services"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Guidelines for defining other PR-SCTP Services</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Guidelines%20for%20defining%20other%20PR-SCTP%20Services"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Guidelines for defining other PR-SCTP Services</span>
 
    Other PR-SCTP services may be defined and implemented as dictated by
    the needs of upper layer protocols.  If such upper layer protocols
@@ -1131,7 +1107,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -1187,7 +1163,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -1201,7 +1177,7 @@ Table of Contents
    apply.  The canonical service name for the PR-SCTP service defined in
    <a href="#section-4.1">Section 4.1</a> is "timed reliability".
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Usage%20Notes"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Usage Notes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Usage%20Notes"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Usage Notes</span>
 
    Detecting missing data in a PR-SCTP stream is useful for some
    applications (e.g., Fibre channel or SCSI over IP).  With PR-SCTP,
@@ -1211,7 +1187,7 @@ Table of Contents
    the messages on that stream are sent in order, i.e., the "U" bit is
    not set.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Variables"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Variables</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Variables"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Variables</span>
 
    This section defines variables used throughout this document:
 
@@ -1219,13 +1195,13 @@ Table of Contents
    implementation and used to indicate when a message is to be
    considered fully reliable.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Acknowledgments</span>
 
    The authors would like to thank Brian Bidulock, Scott Bradner, Jon
    Berger, Armando L. Caro Jr., John Loughney, Jon Peterson, Ivan Arias
    Rodriguez, Ian Rytina, Chip Sharp, and others for their comments.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    This document does not introduce any new security concerns to SCTP
    other than the ones already documented in <a href="./rfc2960.html">RFC 2960</a> [<a href="#ref-2" title='"Stream Control Transmission Protocol"'>2</a>].  In
@@ -1243,41 +1219,41 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
    MIM to skip selective messages when the application has this feature
    enabled since the MIM would have less state to maintain.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  IANA Considerations</span>
 
    IANA has assigned 192 as a new chunk type to SCTP.
 
    IANA has assigned 49152 as a new parameter type code to SCTP.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-1" name="ref-1">1</a>]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
-        Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-1">1</a>]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
+        Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-2" name="ref-2">2</a>]  Stewart, R., Xie, Q., Morneault, K., Sharp, C., Schwarzbauer,
+   [<a id="ref-2">2</a>]  Stewart, R., Xie, Q., Morneault, K., Sharp, C., Schwarzbauer,
         H., Taylor, T., Rytina, I., Kalla, M., Zhang, L. and V. Paxson,
         "Stream Control Transmission Protocol", <a href="./rfc2960.html">RFC 2960</a>, October 2000.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-3" name="ref-3">3</a>]  Clark, D. and D. Tennenhouse, "Architectural Considerations for
+   [<a id="ref-3">3</a>]  Clark, D. and D. Tennenhouse, "Architectural Considerations for
         a New Generation of Protocols", SIGCOMM 1990 pp. 200-208,
         September 1990.
 
-   [<a id="ref-4" name="ref-4">4</a>]  Jungmaier, A., Rescorla, E. and M. Tuexen, "Transport Layer
+   [<a id="ref-4">4</a>]  Jungmaier, A., Rescorla, E. and M. Tuexen, "Transport Layer
         Security over Stream Control Transmission Protocol", <a href="./rfc3436.html">RFC 3436</a>,
         December 2002.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Authors%27%20Addresses"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Authors' Addresses</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Authors%27%20Addresses"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Authors' Addresses</span>
 
    Randall R. Stewart
    Cisco Systems, Inc.
@@ -1299,7 +1275,7 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
@@ -1355,14 +1331,14 @@ Table of Contents
 
 
 <span class="grey">Stewart, et al.             Standards Track                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc3758.html">RFC 3758</a>           SCTP Partial Reliability Extension           May 2004</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Full%20Copyright%20Statement"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  Full Copyright Statement</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Full%20Copyright%20Statement"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  Full Copyright Statement</span>
 
    Copyright (C) The Internet Society (2004).  This document is subject
-   to the rights, licenses and restrictions contained in <a href="./bcp78.html">BCP 78</a>, and
+   to the rights, licenses and restrictions contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and
    except as set forth therein, the authors retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1382,7 +1358,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1411,11 +1387,6 @@ Acknowledgement
 
 
 Stewart, et al.             Standards Track                    [Page 22]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

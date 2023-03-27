@@ -1,36 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:6606" name="DC.Identifier"/>
-<meta content="IPv6 over Low-Power Wireless Personal Area Networks (6LoWPANs) are
-formed by devices that are compatible with the IEEE 802.15.4 standard.
-However, neither the IEEE 802.15.4 standard nor the 6LoWPAN format
-specification defines how mesh topologies could be obtained and
-maintained. Thus, it should be considered how 6LoWPAN formation and
-multi-hop routing could be supported.  This document provides the
-problem statement and design space for 6LoWPAN routing. It defines the
-routing requirements for 6LoWPANs, considering the low-power and other
-particular characteristics of the devices and links. The purpose of
-this document is not to recommend specific solutions but to provide
-general, layer-agnostic guidelines about the design of 6LoWPAN routing
-that can lead to further analysis and protocol design. This document
-is intended as input to groups working on routing protocols relevant
-to 6LoWPANs, such as the IETF ROLL WG. This document is not an
-Internet Standards Track specification; it is published for
-informational purposes." name="DC.Description.Abstract"/>
-<meta content="Gomez, Carles" name="DC.Creator"/>
-<meta content="Kim, Eunsook" name="DC.Creator"/>
-<meta content="Kaspar, Dominik" name="DC.Creator"/>
-<meta content="Bormann, Carsten" name="DC.Creator"/>
-<meta content="May, 2012" name="DC.Date.Issued"/>
-<meta content="Problem Statement and Requirements for IPv6 over Low-Power Wireless Personal Area Network (6LoWPAN) Routing" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6606 - Problem Statement and Requirements for IPv6 over Low-Power Wireless Personal Area Network (6LoWPAN) Routing</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="E. Kim" name="citation_author"/>
+<meta content="D. Kaspar" name="citation_author"/>
+<meta content="C. Gomez" name="citation_author"/>
+<meta content="C. Bormann" name="citation_author"/>
+<meta content="May, 2012" name="citation_publication_date"/>
+<meta content="Problem Statement and Requirements for IPv6 over Low-Power Wireless Personal Area Network (6LoWPAN) Routing" name="citation_title"/>
+<meta content="10.17487/RFC6606" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6606" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6606.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6606: Problem Statement and Requirements for IPv6 over Low-Power Wireless Personal Area Network (6LoWPAN) Routing</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -59,7 +43,7 @@ informational purposes." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -68,7 +52,7 @@ informational purposes." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -147,19 +131,18 @@ informational purposes." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -173,21 +156,9 @@ informational purposes." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6606.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6606" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-6lowpan-routing-requirements.html" title="draft-ietf-6lowpan-routing-requirements">draft-ietf-6lowpa...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6606" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6606" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                            E. Kim
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6606.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6606.txt.pdf">PDF</a>|<a href="/rfc/rfc6606.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6606" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6606&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6606" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                            E. Kim
 Request for Comments: 6606                                          ETRI
 Category: Informational                                        D. Kaspar
 ISSN: 2070-1721                               Simula Research Laboratory
@@ -239,7 +210,7 @@ Status of This Memo
 
 
 <span class="grey">Kim, et al.                   Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -248,7 +219,7 @@ Copyright Notice
    Copyright (c) 2012 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -278,7 +249,7 @@ Table of Contents
       <a href="#section-8.1">8.1</a>. Normative References ......................................<a href="#page-28">28</a>
       <a href="#section-8.2">8.2</a>. Informative References ....................................<a href="#page-29">29</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Problem%20Statement"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Problem Statement</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Problem%20Statement"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Problem Statement</span>
 
    6LoWPANs are formed by devices that are compatible with the
    IEEE 802.15.4 standard [<a href="#ref-IEEE802.15.4">IEEE802.15.4</a>].  Most of the LoWPAN devices
@@ -295,7 +266,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -351,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -407,11 +378,11 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -426,7 +397,7 @@ Table of Contents
    This specification makes use of the terminology defined in
    [<a href="#ref-6LoWPAN-ND">6LoWPAN-ND</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Design%20Space"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Design Space</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Design%20Space"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Design Space</span>
 
    Apart from a wide variety of conceivable routing algorithms for
    6LoWPANs, it is possible to perform routing in the IP layer (using a
@@ -463,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -499,7 +470,7 @@ Table of Contents
    physical frame, and application data should not be expanded to an
    extent that they no longer fit.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Reference%20Network%20Model"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Reference Network Model</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Reference%20Network%20Model"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Reference Network Model</span>
 
    For multi-hop communication in 6LoWPANs, when a route-over mechanism
    is in use, all routers (i.e., 6LoWPAN Border Routers (6LBRs) and
@@ -519,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -575,11 +546,11 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Scenario%20Considerations%20and%20Parameters%20for%206LoWPAN%20Routing"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Scenario Considerations and Parameters for 6LoWPAN Routing</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Scenario%20Considerations%20and%20Parameters%20for%206LoWPAN%20Routing"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Scenario Considerations and Parameters for 6LoWPAN Routing</span>
 
    IP-based LoWPAN technology is still in its early stage of
    development, but the range of conceivable usage scenarios is
@@ -631,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -687,7 +658,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -743,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -799,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -855,11 +826,11 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%206LoWPAN%20Routing%20Requirements"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  6LoWPAN Routing Requirements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%206LoWPAN%20Routing%20Requirements"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  6LoWPAN Routing Requirements</span>
 
    This section defines a list of requirements for 6LoWPAN routing.  An
    important design property specific to low-power networks is that
@@ -896,7 +867,7 @@ Table of Contents
    low-power requirements of LoWPANs, they need to meet the requirements
    described below.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Support%20of%206LoWPAN%20Device%20Properties"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Support of 6LoWPAN Device Properties</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Support%20of%206LoWPAN%20Device%20Properties"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Support of 6LoWPAN Device Properties</span>
 
    The general objectives listed in this section should be met by
    6LoWPAN routing protocols.  The importance of each requirement is
@@ -911,11 +882,11 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
-   [<a id="ref-R01" name="ref-R01">R01</a>] 6LoWPAN routing protocols <em>SHOULD</em> allow implementation with
+   [<a id="ref-R01">R01</a>] 6LoWPAN routing protocols <em>SHOULD</em> allow implementation with
    small code size and require low routing state to fit the typical
    6LoWPAN node capacity.  Generally speaking, the code size is bounded
    by available flash memory size, and the routing table is bounded by
@@ -946,7 +917,7 @@ Table of Contents
       there should be at least one mode of operation that can function
       with 32 forwarding entries or less.
 
-   [<a id="ref-R02" name="ref-R02">R02</a>] 6LoWPAN routing protocols <em>SHOULD</em> cause minimal power
+   [<a id="ref-R02">R02</a>] 6LoWPAN routing protocols <em>SHOULD</em> cause minimal power
    consumption by efficiently using control packets (e.g., minimizing
    expensive IP multicast, which causes link broadcast to the entire
    LoWPAN) and by efficiently routing data packets.
@@ -967,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -986,13 +957,13 @@ Table of Contents
       Control cost of routing protocols in low-power and lossy networks
       is discussed in more detail in [<a href="#ref-ROLL-PROTOCOLS">ROLL-PROTOCOLS</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Support%20of%206LoWPAN%20Link%20Properties"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Support of 6LoWPAN Link Properties</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Support%20of%206LoWPAN%20Link%20Properties"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Support of 6LoWPAN Link Properties</span>
 
    6LoWPAN links have the characteristics of low data rate and possibly
    high loss rates.  The routing requirements described in this section
    are derived from the link properties.
 
-   [<a id="ref-R03" name="ref-R03">R03</a>] 6LoWPAN routing protocol control messages <em>SHOULD NOT</em> exceed a
+   [<a id="ref-R03">R03</a>] 6LoWPAN routing protocol control messages <em>SHOULD NOT</em> exceed a
    single IEEE 802.15.4 frame size, in order to avoid packet
    fragmentation and the overhead for reassembly.
 
@@ -1009,7 +980,7 @@ Table of Contents
       and/or algorithms that can work on small increments of routing
       information.
 
-   [<a id="ref-R04" name="ref-R04">R04</a>] The design of routing protocols for LoWPANs must consider the
+   [<a id="ref-R04">R04</a>] The design of routing protocols for LoWPANs must consider the
    fact that packets are to be delivered with sufficient probability
    according to application requirements.
 
@@ -1023,7 +994,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -1051,7 +1022,7 @@ Table of Contents
       excessive retransmissions may be detrimental; see <a href="./rfc3819.html">RFC 3819</a>
       [<a href="./rfc3819.html" title='"Advice for Internet Subnetwork Designers"'>RFC3819</a>].
 
-   [<a id="ref-R05" name="ref-R05">R05</a>] The design of routing protocols for LoWPANs must consider the
+   [<a id="ref-R05">R05</a>] The design of routing protocols for LoWPANs must consider the
    latency requirements of applications and IEEE 802.15.4 link latency
    characteristics.
 
@@ -1079,7 +1050,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -1093,7 +1064,7 @@ Table of Contents
 
       Note that a tradeoff exists between [<a href="#ref-R05">R05</a>] and [<a href="#ref-R04">R04</a>].
 
-   [<a id="ref-R06" name="ref-R06">R06</a>] 6LoWPAN routing protocols <em>SHOULD</em> be robust to dynamic loss
+   [<a id="ref-R06">R06</a>] 6LoWPAN routing protocols <em>SHOULD</em> be robust to dynamic loss
    caused by link failure or device unavailability either in the short
    term (approx. 30 ms) -- due to Received Signal Strength Indication
    (RSSI) variation, interference variation, noise, and asynchrony -- or
@@ -1135,11 +1106,11 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
-   [<a id="ref-R07" name="ref-R07">R07</a>] 6LoWPAN routing protocols <em>SHOULD</em> be designed to correctly
+   [<a id="ref-R07">R07</a>] 6LoWPAN routing protocols <em>SHOULD</em> be designed to correctly
    operate in the presence of link asymmetry.
 
       Link asymmetry occurs when the probability of successful
@@ -1148,7 +1119,7 @@ Table of Contents
       a large number of experimental studies, and it is expected that
       6LoWPANs will exhibit link asymmetry.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Support%20of%206LoWPAN%20Characteristics"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Support of 6LoWPAN Characteristics</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Support%20of%206LoWPAN%20Characteristics"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Support of 6LoWPAN Characteristics</span>
 
    6LoWPANs can be deployed in different sizes and topologies, adhere to
    various models of mobility, be exposed to various levels of
@@ -1156,7 +1127,7 @@ Table of Contents
    consumption.  The requirements described in this subsection are
    derived from the network attributes of 6LoWPANs.
 
-   [<a id="ref-R08" name="ref-R08">R08</a>] The design of 6LoWPAN routing protocols <em>SHOULD</em> take into
+   [<a id="ref-R08">R08</a>] The design of 6LoWPAN routing protocols <em>SHOULD</em> take into
    account that some nodes may be unresponsive during certain time
    intervals, due to periodic hibernation.
 
@@ -1191,7 +1162,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -1199,7 +1170,7 @@ Table of Contents
       delivery, which in this case also should be available as an input
       into the path computation.
 
-   [<a id="ref-R09" name="ref-R09">R09</a>] The metric used by 6LoWPAN routing protocols <em>SHOULD</em> provide
+   [<a id="ref-R09">R09</a>] The metric used by 6LoWPAN routing protocols <em>SHOULD</em> provide
    some flexibility with respect to the inputs provided by the lower
    layers and other measures to optimize path selection, considering
    energy balance and link qualities.
@@ -1247,7 +1218,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -1282,7 +1253,7 @@ Table of Contents
 
    Note that a tradeoff exists between [<a href="#ref-R09">R09</a>] and [<a href="#ref-R01" title="the code size is bounded by available flash memory size">R01</a>].
 
-   [<a id="ref-R10" name="ref-R10">R10</a>] 6LoWPAN routing protocols <em>SHOULD</em> be designed to achieve both
+   [<a id="ref-R10">R10</a>] 6LoWPAN routing protocols <em>SHOULD</em> be designed to achieve both
    scalability -- from a few nodes to maybe millions of nodes -- and
    minimal use of system resources.
 
@@ -1303,7 +1274,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -1311,7 +1282,7 @@ Table of Contents
       <em>MUST</em> be designed in such a way that the number of routers is
       smaller than the number of hosts.
 
-   [<a id="ref-R11" name="ref-R11">R11</a>] The procedure of route repair and related control messages
+   [<a id="ref-R11">R11</a>] The procedure of route repair and related control messages
    <em>SHOULD NOT</em> harm overall energy consumption from the routing
    protocols.
 
@@ -1323,7 +1294,7 @@ Table of Contents
       important consideration here may be to avoid premature energy
       depletion, even if that impairs other requirements.
 
-   [<a id="ref-R12" name="ref-R12">R12</a>] 6LoWPAN routing protocols <em>SHOULD</em> allow for dynamically adaptive
+   [<a id="ref-R12">R12</a>] 6LoWPAN routing protocols <em>SHOULD</em> allow for dynamically adaptive
    topologies and mobile nodes.  When supporting dynamic topologies and
    mobile nodes, route maintenance should keep in mind the goal of a
    minimal routing state and routing protocol message overhead.
@@ -1359,7 +1330,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -1388,7 +1359,7 @@ Table of Contents
          closest edge router or to a specific node (if any) that takes
          charge of local association and disassociation.
 
-   [<a id="ref-R13" name="ref-R13">R13</a>] A 6LoWPAN routing protocol <em>SHOULD</em> support various traffic
+   [<a id="ref-R13">R13</a>] A 6LoWPAN routing protocol <em>SHOULD</em> support various traffic
    patterns -- point-to-point, point-to-multipoint, and multipoint-to-
    point -- while avoiding excessive multicast traffic in a LoWPAN.
 
@@ -1404,7 +1375,7 @@ Table of Contents
       problems arising from resource constraints or variation in
       connectivity.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Support%20of%20Security"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Support of Security</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Support%20of%20Security"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Support of Security</span>
 
    The routing requirement described in this subsection allows secure
    transmission of routing messages.  As in traditional networks,
@@ -1415,7 +1386,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -1426,7 +1397,7 @@ Table of Contents
    such as a laptop.  It can also easily drain the batteries of 6LoWPAN
    devices by sending broadcast messages, redirecting routes, etc.
 
-   [<a id="ref-R14" name="ref-R14">R14</a>] 6LoWPAN routing protocols <em>MUST</em> support confidentiality,
+   [<a id="ref-R14">R14</a>] 6LoWPAN routing protocols <em>MUST</em> support confidentiality,
    authentication, and integrity services as required for secure
    delivery of control messages.
 
@@ -1471,7 +1442,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -1527,7 +1498,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -1545,7 +1516,7 @@ Table of Contents
       must not exploit feedback from acknowledgments (e.g., to keep
       track of neighbor connectivity, see [<a href="#ref-R16" title='"Hello"'>R16</a>]).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20Support%20of%20Mesh-Under%20Forwarding"></a></body></html><a class="selflink" href="#section-5.5" name="section-5.5">5.5</a>.  Support of Mesh-Under Forwarding</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20Support%20of%20Mesh-Under%20Forwarding"></a></body></html><a class="selflink" href="#section-5.5" id="section-5.5">5.5</a>.  Support of Mesh-Under Forwarding</span>
 
    One LoWPAN may be built as one IPv6 link.  In this case, mesh-under
    forwarding mechanisms must be supported.  While this document
@@ -1557,11 +1528,11 @@ Table of Contents
    correct operation of routing solutions, taking into account the
    specific features of the mesh-under configuration.
 
-   [<a id="ref-R15" name="ref-R15">R15</a>] Mesh-under requires the development of a routing protocol
+   [<a id="ref-R15">R15</a>] Mesh-under requires the development of a routing protocol
    operating below IP.  This protocol <em>MUST</em> support 16-bit short and
    64-bit extended MAC addresses.
 
-   [<a id="ref-R16" name="ref-R16">R16</a>] In order to perform discovery and maintenance of neighbors
+   [<a id="ref-R16">R16</a>] In order to perform discovery and maintenance of neighbors
    (i.e., neighborhood discovery as opposed to ND-style neighbor
    discovery), LoWPAN nodes <em>SHOULD</em> avoid sending separate "Hello"
    messages.  Instead, link-layer mechanisms (such as acknowledgments)
@@ -1573,7 +1544,7 @@ Table of Contents
       may be used as an input to evaluate the connectivity between the
       sender and receiver of that frame.
 
-   [<a id="ref-R17" name="ref-R17">R17</a>] If the routing protocol functionality includes enabling IP
+   [<a id="ref-R17">R17</a>] If the routing protocol functionality includes enabling IP
    multicast, then it <em>MAY</em> employ structure in the network for efficient
    distribution in order to minimize link-layer broadcast.
 
@@ -1583,18 +1554,18 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.%20%20Support%20of%20Management"></a></body></html><a class="selflink" href="#section-5.6" name="section-5.6">5.6</a>.  Support of Management</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.%20%20Support%20of%20Management"></a></body></html><a class="selflink" href="#section-5.6" id="section-5.6">5.6</a>.  Support of Management</span>
 
    When a new protocol is designed, the operational environment and
    manageability of the protocol should be considered from the start
    [<a href="./rfc5706.html" title='"Guidelines for Considering Operations and Management of New Protocols and Protocol Extensions"'>RFC5706</a>].  This subsection provides a requirement for the
    manageability of 6LoWPAN routing protocols.
 
-   [<a id="ref-R18" name="ref-R18">R18</a>] A 6LoWPAN routing protocol <em>SHOULD</em> be designed according to the
+   [<a id="ref-R18">R18</a>] A 6LoWPAN routing protocol <em>SHOULD</em> be designed according to the
    guidelines for operations and management stated in [<a href="./rfc5706.html" title='"Guidelines for Considering Operations and Management of New Protocols and Protocol Extensions"'>RFC5706</a>].
 
       The management operations that a 6LoWPAN routing protocol
@@ -1626,7 +1597,7 @@ Table of Contents
       be sent to a valid next hop, the duration of each period without
       connectivity, memory overflow and its causes, etc.
 
-      [<a id="ref-RFC5706" name="ref-RFC5706">RFC5706</a>] -- in particular its <a href="#section-3">Section 3</a> -- provides a
+      [<a id="ref-RFC5706">RFC5706</a>] -- in particular its <a href="#section-3">Section 3</a> -- provides a
       comprehensive guide to properly designing the management solution
       for a 6LoWPAN routing protocol.
 
@@ -1639,11 +1610,11 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    Security issues are described in <a href="#section-5.4">Section 5.4</a>.  The security
    considerations in <a href="./rfc4919.html">RFC 4919</a> [<a href="./rfc4919.html" title='"IPv6 over Low-Power Wireless Personal Area Networks (6LoWPANs): Overview, Assumptions, Problem Statement, and Goals"'>RFC4919</a>], <a href="./rfc4944.html">RFC 4944</a> [<a href="./rfc4944.html" title='"Transmission of IPv6 Packets over IEEE 802.15.4 Networks"'>RFC4944</a>], and
@@ -1676,7 +1647,7 @@ Table of Contents
    6LoWPANs already have high resource constraints, so that 6LBR and
    LoWPAN nodes may require different security solutions.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgments</span>
 
    The authors of this document highly appreciate the authors of "IPv6
    over Low Power WPAN Security Analysis" [<a href="#ref-6LoWPAN-SEC">6LoWPAN-SEC</a>].  Although their
@@ -1695,49 +1666,49 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Normative References</span>
 
-   [<a id="ref-IEEE802.15.4" name="ref-IEEE802.15.4">IEEE802.15.4</a>]
+   [<a id="ref-IEEE802.15.4">IEEE802.15.4</a>]
               IEEE Computer Society, "IEEE Standard for Local and
               Metropolitan Area Networks -- Part 15.4: Low-Rate
               Wireless Personal Area Networks (LR-WPANs)", IEEE
               Std. 802.15.4-2011, September 2011.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC3756" name="ref-RFC3756">RFC3756</a>]  Nikander, P., Ed., Kempf, J., and E. Nordmark, "IPv6
+   [<a id="ref-RFC3756">RFC3756</a>]  Nikander, P., Ed., Kempf, J., and E. Nordmark, "IPv6
               Neighbor Discovery (ND) Trust Models and Threats",
               <a href="./rfc3756.html">RFC 3756</a>, May 2004.
 
-   [<a id="ref-RFC3819" name="ref-RFC3819">RFC3819</a>]  Karn, P., Ed., Bormann, C., Fairhurst, G., Grossman, D.,
+   [<a id="ref-RFC3819">RFC3819</a>]  Karn, P., Ed., Bormann, C., Fairhurst, G., Grossman, D.,
               Ludwig, R., Mahdavi, J., Montenegro, G., Touch, J., and L.
-              Wood, "Advice for Internet Subnetwork Designers", <a href="./bcp89.html">BCP 89</a>,
+              Wood, "Advice for Internet Subnetwork Designers", <a href="https://www.rfc-editor.org/bcp/bcp89">BCP 89</a>,
               <a href="./rfc3819.html">RFC 3819</a>, July 2004.
 
-   [<a id="ref-RFC4593" name="ref-RFC4593">RFC4593</a>]  Barbir, A., Murphy, S., and Y. Yang, "Generic Threats to
+   [<a id="ref-RFC4593">RFC4593</a>]  Barbir, A., Murphy, S., and Y. Yang, "Generic Threats to
               Routing Protocols", <a href="./rfc4593.html">RFC 4593</a>, October 2006.
 
-   [<a id="ref-RFC4919" name="ref-RFC4919">RFC4919</a>]  Kushalnagar, N., Montenegro, G., and C. Schumacher, "IPv6
+   [<a id="ref-RFC4919">RFC4919</a>]  Kushalnagar, N., Montenegro, G., and C. Schumacher, "IPv6
               over Low-Power Wireless Personal Area Networks (6LoWPANs):
               Overview, Assumptions, Problem Statement, and Goals",
               <a href="./rfc4919.html">RFC 4919</a>, August 2007.
 
-   [<a id="ref-RFC4944" name="ref-RFC4944">RFC4944</a>]  Montenegro, G., Kushalnagar, N., Hui, J., and D. Culler,
+   [<a id="ref-RFC4944">RFC4944</a>]  Montenegro, G., Kushalnagar, N., Hui, J., and D. Culler,
               "Transmission of IPv6 Packets over IEEE 802.15.4
               Networks", <a href="./rfc4944.html">RFC 4944</a>, September 2007.
 
-   [<a id="ref-RFC5548" name="ref-RFC5548">RFC5548</a>]  Dohler, M., Ed., Watteyne, T., Ed., Winter, T., Ed., and
+   [<a id="ref-RFC5548">RFC5548</a>]  Dohler, M., Ed., Watteyne, T., Ed., Winter, T., Ed., and
               D. Barthel, Ed., "Routing Requirements for Urban Low-Power
               and Lossy Networks", <a href="./rfc5548.html">RFC 5548</a>, May 2009.
 
-   [<a id="ref-RFC5673" name="ref-RFC5673">RFC5673</a>]  Pister, K., Ed., Thubert, P., Ed., Dwars, S., and T.
+   [<a id="ref-RFC5673">RFC5673</a>]  Pister, K., Ed., Thubert, P., Ed., Dwars, S., and T.
               Phinney, "Industrial Routing Requirements in Low-Power and
               Lossy Networks", <a href="./rfc5673.html">RFC 5673</a>, October 2009.
 
@@ -1751,52 +1722,52 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Informative References</span>
 
-   [<a id="ref-6LoWPAN-ND" name="ref-6LoWPAN-ND">6LoWPAN-ND</a>]
+   [<a id="ref-6LoWPAN-ND">6LoWPAN-ND</a>]
               Shelby, Z., Ed., Chakrabarti, S., and E. Nordmark,
               "Neighbor Discovery Optimization for Low Power and Lossy
               Networks (6LoWPAN)", Work in Progress, October 2011.
 
-   [<a id="ref-6LoWPAN-SEC" name="ref-6LoWPAN-SEC">6LoWPAN-SEC</a>]
+   [<a id="ref-6LoWPAN-SEC">6LoWPAN-SEC</a>]
               Park, S., Kim, K., Haddad, W., Ed., Chakrabarti, S., and
               J. Laganier, "IPv6 over Low Power WPAN Security Analysis",
               Work in Progress, March 2011.
 
-   [<a id="ref-Bulusu" name="ref-Bulusu">Bulusu</a>]   Bulusu, N., Ed., and S. Jha, Ed., "Wireless Sensor
+   [<a id="ref-Bulusu">Bulusu</a>]   Bulusu, N., Ed., and S. Jha, Ed., "Wireless Sensor
               Networks: A Systems Perspective", Artech House,
               ISBN 9781580538671, July 2005.
 
-   [<a id="ref-Chen" name="ref-Chen">Chen</a>]     Chen, B., Muniswamy-Reddy, K., and M. Welsh, "Ad-Hoc
+   [<a id="ref-Chen">Chen</a>]     Chen, B., Muniswamy-Reddy, K., and M. Welsh, "Ad-Hoc
               Multicast Routing on Resource-Limited Sensor Nodes", Proc.
               2nd International Workshop on Multi-hop Ad Hoc Networks,
               May 2006.
 
-   [<a id="ref-Doherty" name="ref-Doherty">Doherty</a>]  Doherty, L., Warneke, B., Boser, B., and K. Pister,
+   [<a id="ref-Doherty">Doherty</a>]  Doherty, L., Warneke, B., Boser, B., and K. Pister,
               "Energy and Performance Considerations for Smart Dust",
               International Journal of Parallel and Distributed Systems
               and Networks, Vol. 4, No. 3, 2001.
 
-   [<a id="ref-Hill" name="ref-Hill">Hill</a>]     Hill, J., "System Architecture for Wireless Sensor
+   [<a id="ref-Hill">Hill</a>]     Hill, J., "System Architecture for Wireless Sensor
               Networks", Ph.D. Thesis, UC Berkeley, 2003.
 
-   [<a id="ref-Ikram" name="ref-Ikram">Ikram</a>]    Ikram, M., Chowdhury, A., Zafar, B., Cha, H., Kim, K.,
+   [<a id="ref-Ikram">Ikram</a>]    Ikram, M., Chowdhury, A., Zafar, B., Cha, H., Kim, K.,
               Yoo, S., and D. Kim, "A Simple Lightweight Authentic
               Bootstrapping Protocol for IPv6-based Low Rate Wireless
               Personal Area Networks (6LoWPANs)", Proc. International
               Conference on Wireless Communications and
               Mobile Computing, June 2009.
 
-   [<a id="ref-KARP-THREATS" name="ref-KARP-THREATS">KARP-THREATS</a>]
+   [<a id="ref-KARP-THREATS">KARP-THREATS</a>]
               Lebovitz, G. and M. Bhatia, "Keying and Authentication for
               Routing Protocols (KARP) Overview, Threats, and
               Requirements", Work in Progress, May 2012.
 
-   [<a id="ref-Kuhn" name="ref-Kuhn">Kuhn</a>]     Kuhn, F., Wattenhofer, R., and A. Zollinger, "Worst-Case
+   [<a id="ref-Kuhn">Kuhn</a>]     Kuhn, F., Wattenhofer, R., and A. Zollinger, "Worst-Case
               Optimal and Average-Case Efficient Ad-Hoc Geometric
               Routing", MobiHoc '03: Proceedings of the 4th ACM
               International Symposium on Mobile Ad Hoc Networking and
@@ -1807,51 +1778,51 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
-   [<a id="ref-Latre" name="ref-Latre">Latre</a>]    Latre, B., De Mil, P., Moerman, I., Dhoedt, B., and P.
+   [<a id="ref-Latre">Latre</a>]    Latre, B., De Mil, P., Moerman, I., Dhoedt, B., and P.
               Demeester, "Throughput and Delay Analysis of Unslotted
               IEEE 802.15.4", Journal of Networks, Vol. 1, No. 1,
               May 2006.
 
-   [<a id="ref-Lee" name="ref-Lee">Lee</a>]      Lee, S., Belding-Royer, E., and C. Perkins, "Scalability
+   [<a id="ref-Lee">Lee</a>]      Lee, S., Belding-Royer, E., and C. Perkins, "Scalability
               Study of the Ad Hoc On-Demand Distance-Vector Routing
               Protocol", International Journal of Network Management,
               Vol. 13, pp. 97-114, March 2003.
 
-   [<a id="ref-RFC1958" name="ref-RFC1958">RFC1958</a>]  Carpenter, B., Ed., "Architectural Principles of the
+   [<a id="ref-RFC1958">RFC1958</a>]  Carpenter, B., Ed., "Architectural Principles of the
               Internet", <a href="./rfc1958.html">RFC 1958</a>, June 1996.
 
-   [<a id="ref-RFC5556" name="ref-RFC5556">RFC5556</a>]  Touch, J. and R. Perlman, "Transparent Interconnection of
+   [<a id="ref-RFC5556">RFC5556</a>]  Touch, J. and R. Perlman, "Transparent Interconnection of
               Lots of Links (TRILL): Problem and Applicability
               Statement", <a href="./rfc5556.html">RFC 5556</a>, May 2009.
 
-   [<a id="ref-RFC5706" name="ref-RFC5706">RFC5706</a>]  Harrington, D., "Guidelines for Considering Operations and
+   [<a id="ref-RFC5706">RFC5706</a>]  Harrington, D., "Guidelines for Considering Operations and
               Management of New Protocols and Protocol Extensions",
               <a href="./rfc5706.html">RFC 5706</a>, November 2009.
 
-   [<a id="ref-RFC5826" name="ref-RFC5826">RFC5826</a>]  Brandt, A., Buron, J., and G. Porcu, "Home Automation
+   [<a id="ref-RFC5826">RFC5826</a>]  Brandt, A., Buron, J., and G. Porcu, "Home Automation
               Routing Requirements in Low-Power and Lossy Networks",
               <a href="./rfc5826.html">RFC 5826</a>, April 2010.
 
-   [<a id="ref-RFC5867" name="ref-RFC5867">RFC5867</a>]  Martocci, J., Ed., De Mil, P., Riou, N., and W. Vermeylen,
+   [<a id="ref-RFC5867">RFC5867</a>]  Martocci, J., Ed., De Mil, P., Riou, N., and W. Vermeylen,
               "Building Automation Routing Requirements in Low-Power and
               Lossy Networks", <a href="./rfc5867.html">RFC 5867</a>, June 2010.
 
-   [<a id="ref-RFC5996" name="ref-RFC5996">RFC5996</a>]  Kaufman, C., Hoffman, P., Nir, Y., and P. Eronen,
+   [<a id="ref-RFC5996">RFC5996</a>]  Kaufman, C., Hoffman, P., Nir, Y., and P. Eronen,
               "Internet Key Exchange Protocol Version 2 (IKEv2)",
               <a href="./rfc5996.html">RFC 5996</a>, September 2010.
 
-   [<a id="ref-RFC6282" name="ref-RFC6282">RFC6282</a>]  Hui, J., Ed., and P. Thubert, "Compression Format for IPv6
+   [<a id="ref-RFC6282">RFC6282</a>]  Hui, J., Ed., and P. Thubert, "Compression Format for IPv6
               Datagrams over IEEE 802.15.4-Based Networks", <a href="./rfc6282.html">RFC 6282</a>,
               September 2011.
 
-   [<a id="ref-RFC6434" name="ref-RFC6434">RFC6434</a>]  Jankiewicz, E., Loughney, J., and T. Narten, "IPv6 Node
+   [<a id="ref-RFC6434">RFC6434</a>]  Jankiewicz, E., Loughney, J., and T. Narten, "IPv6 Node
               Requirements", <a href="./rfc6434.html">RFC 6434</a>, December 2011.
 
-   [<a id="ref-ROLL-PROTOCOLS" name="ref-ROLL-PROTOCOLS">ROLL-PROTOCOLS</a>]
+   [<a id="ref-ROLL-PROTOCOLS">ROLL-PROTOCOLS</a>]
               Levis, P., Tavakoli, A., and S. Dawson-Haggerty, "Overview
               of Existing Routing Protocols for Low Power and Lossy
               Networks", Work in Progress, April 2009.
@@ -1863,18 +1834,18 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
-   [<a id="ref-Shih" name="ref-Shih">Shih</a>]     Shih, E., Cho, S., Ickes, N., Min, R., Sinha, A., Wang,
+   [<a id="ref-Shih">Shih</a>]     Shih, E., Cho, S., Ickes, N., Min, R., Sinha, A., Wang,
               A., and A. Chandrakasan, "Physical Layer Driven Protocols
               and Algorithm Design for Energy-Efficient Wireless Sensor
               Networks", MobiCom '01: Proceedings of the 7th ACM Annual
               International Conference on Mobile Computing and
               Networking, July 2001.
 
-   [<a id="ref-Watteyne" name="ref-Watteyne">Watteyne</a>] Watteyne, T., Molinaro, A., Richichi, M., and M. Dohler,
+   [<a id="ref-Watteyne">Watteyne</a>] Watteyne, T., Molinaro, A., Richichi, M., and M. Dohler,
               "From MANET To IETF ROLL Standardization: A Paradigm Shift
               in WSN Routing Protocols", IEEE Communications Surveys and
               Tutorials, Vol. 13, Issue 4, pp. 688-707, 2011,
@@ -1919,7 +1890,7 @@ Table of Contents
 
 
 <span class="grey">Kim, et al.                   Informational                    [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc6606.html">RFC 6606</a>              6LoWPAN Routing Requirements              May 2012</span>
 
 
@@ -1975,11 +1946,6 @@ Authors' Addresses
 
 
 Kim, et al.                   Informational                    [Page 32]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,26 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:5468" name="DC.Identifier"/>
-<meta content="This document presents a performance comparison between the per-domain
-path computation method and the Path Computation Element (PCE)
-Architecture-based Backward Recursive Path Computation (BRPC)
-procedure. Metrics to capture the significant performance aspects are
-identified, and detailed simulations are carried out on realistic
-scenarios. A performance analysis for each of the path computation
-methods is then undertaken. This memo provides information for the
-Internet community." name="DC.Description.Abstract"/>
-<meta content="Oliveira, Jaudelice" name="DC.Creator"/>
-<meta content="Dasgupta, Sukrit" name="DC.Creator"/>
-<meta content="April, 2009" name="DC.Date.Issued"/>
-<meta content="Performance Analysis of Inter-Domain Path Computation Methodologies" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5468 - Performance Analysis of Inter-Domain Path Computation Methodologies</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="S. Dasgupta" name="citation_author"/>
+<meta content="J. de Oliveira" name="citation_author"/>
+<meta content="JP. Vasseur" name="citation_author"/>
+<meta content="April, 2009" name="citation_publication_date"/>
+<meta content="Performance Analysis of Inter-Domain Path Computation Methodologies" name="citation_title"/>
+<meta content="10.17487/RFC5468" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5468" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5468.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5468: Performance Analysis of Inter-Domain Path Computation Methodologies</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -49,7 +42,7 @@ Internet community." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -58,7 +51,7 @@ Internet community." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -137,19 +130,18 @@ Internet community." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -163,21 +155,9 @@ Internet community." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5468.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5468" title="PDF version of this document">pdf</a>] [<a href="./draft-dasgupta-ccamp-path-comp-analysis.html" title="draft-dasgupta-ccamp-path-comp-analysis">draft-dasgupta-cc...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5468" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5468" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                        S. Dasgupta
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5468.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5468.txt.pdf">PDF</a>|<a href="/rfc/rfc5468.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5468" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5468&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc5468" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                        S. Dasgupta
 Request for Comments: 5468                                J. de Oliveira
 Category: Informational                                Drexel University
                                                              JP. Vasseur
@@ -198,7 +178,7 @@ Copyright Notice
    Copyright (c) 2009 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents in effect on the date of
    publication of this document (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>).
    Please review these documents carefully, as they describe your rights
@@ -229,7 +209,7 @@ Abstract
 
 
 <span class="grey">Dasgupta, et al.             Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5468.html">RFC 5468</a>       Analysis of Inter-Domain Path Computation      April 2009</span>
 
 
@@ -249,7 +229,7 @@ Table of Contents
    <a href="#section-7">7</a>. Acknowledgment ..................................................<a href="#page-9">9</a>
    <a href="#section-8">8</a>. Informative References ..........................................<a href="#page-9">9</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    The IETF has specified two approaches for the computation of inter-
    domain (Generalized) Multi-Protocol Label Switching ((G)MPLS) Traffic
@@ -285,7 +265,7 @@ Table of Contents
 
 
 <span class="grey">Dasgupta, et al.             Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5468.html">RFC 5468</a>       Analysis of Inter-Domain Path Computation      April 2009</span>
 
 
@@ -304,7 +284,7 @@ Table of Contents
    Note that this document refers to multiple figures that are only
    available in the PDF version.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    Terminology used in this document:
 
@@ -341,13 +321,13 @@ Table of Contents
 
 
 <span class="grey">Dasgupta, et al.             Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5468.html">RFC 5468</a>       Analysis of Inter-Domain Path Computation      April 2009</span>
 
 
    PD: Per-Domain
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Evaluation%20Metrics"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Evaluation Metrics</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Evaluation%20Metrics"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Evaluation Metrics</span>
 
    This section discusses the metrics that are used to quantify and
    compare the performance of the two approaches.
@@ -397,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Dasgupta, et al.             Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5468.html">RFC 5468</a>       Analysis of Inter-Domain Path Computation      April 2009</span>
 
 
@@ -421,7 +401,7 @@ Table of Contents
       corresponding bandwidth that failed to find a route when one or
       more links lying on its path failed.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Simulation%20Setup"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Simulation Setup</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Simulation%20Setup"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Simulation Setup</span>
 
    A very detailed simulator has been developed to replicate a real-life
    network scenario accurately.  Following is the set of entities used
@@ -453,7 +433,7 @@ Table of Contents
 
 
 <span class="grey">Dasgupta, et al.             Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5468.html">RFC 5468</a>       Analysis of Inter-Domain Path Computation      April 2009</span>
 
 
@@ -499,7 +479,7 @@ Table of Contents
       never fail.  This step has been taken to concentrate only on how
       link failures within domains affect the performance.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Results%20and%20Analysis"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Results and Analysis</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Results%20and%20Analysis"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Results and Analysis</span>
 
    Simulations were carried out on the two topologies previously
    described.  The results are presented and discussed in this section.
@@ -509,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Dasgupta, et al.             Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5468.html">RFC 5468</a>       Analysis of Inter-Domain Path Computation      April 2009</span>
 
 
@@ -521,7 +501,7 @@ Table of Contents
    illustrate the behavior of the metrics for topologies MESH-CORE and
    SYM-CORE, respectively.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Path%20Cost"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Path Cost</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Path%20Cost"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Path Cost</span>
 
    Figures 2a and 3a show the distribution of the average path cost of
    the TE LSPs for MESH-CORE and SYM-CORE, respectively.  During the
@@ -546,7 +526,7 @@ Table of Contents
    are larger for 30% and 100% of the TE LSPs for MESH-CORE and SYM-
    CORE, respectively.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Crankback/Setup%20Delay"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Crankback/Setup Delay</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Crankback/Setup%20Delay"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Crankback/Setup Delay</span>
 
    Due to crankbacks that take place in the per-domain approach of path
    computation, TE LSP setup time is significantly increased.  This
@@ -565,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Dasgupta, et al.             Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5468.html">RFC 5468</a>       Analysis of Inter-Domain Path Computation      April 2009</span>
 
 
@@ -580,7 +560,7 @@ Table of Contents
    lack of routes and often several cycles of crankback signaling are
    required to find a constrained path.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Signaling%20Failures"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Signaling Failures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Signaling%20Failures"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Signaling Failures</span>
 
    As discussed in the previous sections, signaling failures occur
    either due to an outdated TED or when a path cannot be found from the
@@ -594,7 +574,7 @@ Table of Contents
    failures experienced with the PCE correspond only to the TEDs being
    out of date.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Failed%20TE-LSPs/Bandwidth%20on%20Link%20Failures"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Failed TE-LSPs/Bandwidth on Link Failures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Failed%20TE-LSPs/Bandwidth%20on%20Link%20Failures"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Failed TE-LSPs/Bandwidth on Link Failures</span>
 
    Figures 2f and 3f show the number of TE LSPs and the associated
    required bandwidth that fail to find a route when link failures are
@@ -608,7 +588,7 @@ Table of Contents
    clearly visible that the PCE allows more TE LSPs to find a route thus
    leading to better performance during link failures.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20TE%20LSP/Bandwidth%20Setup%20Capacity"></a></body></html><a class="selflink" href="#section-5.5" name="section-5.5">5.5</a>.  TE LSP/Bandwidth Setup Capacity</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20TE%20LSP/Bandwidth%20Setup%20Capacity"></a></body></html><a class="selflink" href="#section-5.5" id="section-5.5">5.5</a>.  TE LSP/Bandwidth Setup Capacity</span>
 
    Since PCE and the per-domain path computation approach differ in how
    path computation takes place, more bandwidth can be set up with PCE.
@@ -621,7 +601,7 @@ Table of Contents
 
 
 <span class="grey">Dasgupta, et al.             Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5468.html">RFC 5468</a>       Analysis of Inter-Domain Path Computation      April 2009</span>
 
 
@@ -631,43 +611,43 @@ Table of Contents
    986 Mbps.  The amount of extra bandwidth that can be set up on SYM-
    CORE is lesser due to its restricted nature and limited capacity.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    This document does not raise any security issues.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgment"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgment</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgment"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgment</span>
 
    The authors would like to acknowledge Dimitri Papadimitriou for his
    helpful comments to clarify the text.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Informative References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Informative References</span>
 
-   [<a id="ref-DEF-DES" name="ref-DEF-DES">DEF-DES</a>]    J. Guichard, F. Le Faucheur, and J.-P. Vasseur,
+   [<a id="ref-DEF-DES">DEF-DES</a>]    J. Guichard, F. Le Faucheur, and J.-P. Vasseur,
                 "Definitive MPLS Network Designs", Cisco Press, 2005.
 
-   [<a id="ref-RFC5152" name="ref-RFC5152">RFC5152</a>]    Vasseur, JP., Ed., Ayyangar, A., Ed., and R. Zhang, "A
+   [<a id="ref-RFC5152">RFC5152</a>]    Vasseur, JP., Ed., Ayyangar, A., Ed., and R. Zhang, "A
                 Per-Domain Path Computation Method for Establishing
                 Inter-Domain Traffic Engineering (TE) Label Switched
                 Paths (LSPs)", <a href="./rfc5152.html">RFC 5152</a>, February 2008.
 
-   [<a id="ref-RFC5441" name="ref-RFC5441">RFC5441</a>]    Vasseur, JP., Zhang, R., Bitar, N., and JL. Le Roux, "A
+   [<a id="ref-RFC5441">RFC5441</a>]    Vasseur, JP., Zhang, R., Bitar, N., and JL. Le Roux, "A
                 Backward Recursive PCE-Based Computation (BRPC)
                 Procedure to Compute  Shortest Constrained Inter-Domain
                 Traffic Engineering Label Switched Paths", <a href="./rfc5441.html">RFC 5441</a>,
                 April 2009.
 
-   [<a id="ref-RFC3630" name="ref-RFC3630">RFC3630</a>]    Katz, D., Kompella, K., and D. Yeung, "Traffic
+   [<a id="ref-RFC3630">RFC3630</a>]    Katz, D., Kompella, K., and D. Yeung, "Traffic
                 Engineering (TE) Extensions to OSPF Version 2", <a href="./rfc3630.html">RFC</a>
                 <a href="./rfc3630.html">3630</a>, September 2003.
 
-   [<a id="ref-RFC5305" name="ref-RFC5305">RFC5305</a>]    Li, T. and H. Smit, "IS-IS Extensions for Traffic
+   [<a id="ref-RFC5305">RFC5305</a>]    Li, T. and H. Smit, "IS-IS Extensions for Traffic
                 Engineering", <a href="./rfc5305.html">RFC 5305</a>, October 2008.
 
-   [<a id="ref-RFC4090" name="ref-RFC4090">RFC4090</a>]    Pan, P., Ed., Swallow, G., Ed., and A. Atlas, Ed., "Fast
+   [<a id="ref-RFC4090">RFC4090</a>]    Pan, P., Ed., Swallow, G., Ed., and A. Atlas, Ed., "Fast
                 Reroute Extensions to RSVP-TE for LSP Tunnels", <a href="./rfc4090.html">RFC</a>
                 <a href="./rfc4090.html">4090</a>, May 2005.
 
-   [<a id="ref-RFC4655" name="ref-RFC4655">RFC4655</a>]    Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
+   [<a id="ref-RFC4655">RFC4655</a>]    Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
                 Computation Element (PCE)-Based Architecture", <a href="./rfc4655.html">RFC 4655</a>,
                 August 2006.
 
@@ -677,15 +657,15 @@ Table of Contents
 
 
 <span class="grey">Dasgupta, et al.             Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5468.html">RFC 5468</a>       Analysis of Inter-Domain Path Computation      April 2009</span>
 
 
-   [<a id="ref-RFC4920" name="ref-RFC4920">RFC4920</a>]    Farrel, A., Ed., Satyanarayana, A., Iwata, A., Fujita,
+   [<a id="ref-RFC4920">RFC4920</a>]    Farrel, A., Ed., Satyanarayana, A., Iwata, A., Fujita,
                 N., and G. Ash, "Crankback Signaling Extensions for MPLS
                 and GMPLS RSVP-TE", <a href="./rfc4920.html">RFC 4920</a>, July 2007.
 
-   [<a id="ref-ROCKETFUEL" name="ref-ROCKETFUEL">ROCKETFUEL</a>] N. Spring, R. Mahajan, and D. Wehterall, "Measuring ISP
+   [<a id="ref-ROCKETFUEL">ROCKETFUEL</a>] N. Spring, R. Mahajan, and D. Wehterall, "Measuring ISP
                 Topologies with Rocketfuel", Proceedings of ACM SIGCOMM,
                 2002.
 
@@ -733,11 +713,6 @@ Authors' Addresses
 
 
 Dasgupta, et al.             Informational                     [Page 10]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

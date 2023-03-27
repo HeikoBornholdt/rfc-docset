@@ -1,40 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-aruns-ccamp-rsvp-restart-ext" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5063" name="DC.Identifier"/>
-<meta content="October, 2007" name="DC.Date.Issued"/>
-<meta content="Rahman, Reshad" name="DC.Creator"/>
-<meta content="Satyanarayana, Arun" name="DC.Creator"/>
-<meta content="This document describes extensions to the Resource Reservation
-Protocol (RSVP) Graceful Restart mechanisms defined in RFC 3473. The
-extensions enable the recovery of RSVP signaling state based on the
-Path message last sent by the node being restarted.  Previously
-defined Graceful Restart mechanisms, also called recovery from nodal
-faults, permit recovery of signaling state from adjacent nodes when
-the data plane has retained the associated forwarding state across a
-restart. Those mechanisms do not fully support signaling state
-recovery on ingress nodes or recovery of all RSVP objects.  The
-extensions defined in this document build on the RSVP Hello extensions
-defined in RFC 3209, and extensions for state recovery on nodal faults
-defined in RFC 3473. Using these extensions, the restarting node can
-recover all previously transmitted Path state, including the Explicit
-Route Object and the downstream (outgoing) interface identifiers. The
-extensions can also be used to recover signaling state after the
-restart of an ingress node.  These extensions are not used to create
-or restore data plane state.  The extensions optionally support the
-use of Summary Refresh, defined in RFC 2961, to reduce the number of
-messages exchanged during the Recovery Phase when the restarting node
-has recovered signaling state locally for one or more Label Switched
-Paths (LSPs). [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
-<meta content="Extensions to GMPLS Resource Reservation Protocol (RSVP) Graceful Restart" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5063 - Extensions to GMPLS Resource Reservation Protocol (RSVP) Graceful Restart</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="A. Satyanarayana" name="citation_author"/>
+<meta content="R. Rahman" name="citation_author"/>
+<meta content="October, 2007" name="citation_publication_date"/>
+<meta content="Extensions to GMPLS Resource Reservation Protocol (RSVP) Graceful Restart" name="citation_title"/>
+<meta content="10.17487/RFC5063" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5063" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5063.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5063: Extensions to GMPLS Resource Reservation Protocol (RSVP) Graceful Restart</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -63,7 +41,7 @@ Paths (LSPs). [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -72,7 +50,7 @@ Paths (LSPs). [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -151,19 +129,18 @@ Paths (LSPs). [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -177,21 +154,9 @@ Paths (LSPs). [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5063.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5063" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-ccamp-rsvp-restart-ext.html" title="draft-ietf-ccamp-rsvp-restart-ext">draft-ietf-ccamp-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5063" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5063" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5063">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                              A. Satyanarayana, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5063.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5063.txt.pdf">PDF</a>|<a href="/rfc/rfc5063.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5063" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5063&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5063" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5063" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                              A. Satyanarayana, Ed.
 Request for Comments: 5063                                R. Rahman, Ed.
 Updates: <a href="./rfc2961.html">2961</a>, <a href="./rfc3473.html">3473</a>                                        Cisco Systems
 Category: Standards Track                                   October 2007
@@ -243,7 +208,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -299,11 +264,11 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    RSVP Graceful Restart is defined in [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>] and uses mechanisms
    defined in [<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>].  When data/forwarding plane state can be
@@ -355,7 +320,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -411,7 +376,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -425,13 +390,13 @@ Abstract
    Restarting egress nodes, and Resv message processing are not impacted
    by the presented extensions, see [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>] for details.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Conventions Used in This Document</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Conventions Used in This Document</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Terminology"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Terminology"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Terminology</span>
 
    The reader is assumed to be familiar with the terminology defined in
    [<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>] and [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>].
@@ -441,12 +406,12 @@ Abstract
    plane component, which is the signaling controller for a data plane
    switch.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Extensions%20to%20Nodal%20Fault%20Handling"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Extensions to Nodal Fault Handling</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Extensions%20to%20Nodal%20Fault%20Handling"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Extensions to Nodal Fault Handling</span>
 
    This section presents the protocol modifications to <a href="./rfc3473.html#section-9">Section 9 of
    [RFC3473]</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20RecoveryPath%20Message%20Format"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  RecoveryPath Message Format</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20RecoveryPath%20Message%20Format"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  RecoveryPath Message Format</span>
 
    The format of a RecoveryPath message is the same as the format of a
    Path message, as defined in [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>], but uses a new message number
@@ -467,11 +432,11 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Capability%20Object"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Capability Object</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Capability%20Object"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Capability Object</span>
 
    Capability objects are carried in RSVP Hello messages.  The
    Capability object uses Class-Number 134 (of form 10bbbbbb) and C-Type
@@ -523,11 +488,11 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Conformance"></a></body></html><a class="selflink" href="#section-4.2.1" name="section-4.2.1">4.2.1</a>.  Conformance</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Conformance"></a></body></html><a class="selflink" href="#section-4.2.1" id="section-4.2.1">4.2.1</a>.  Conformance</span>
 
    All nodes supporting the extensions defined in this document <em>MUST</em> be
    able to transmit, and properly receive and process RecoveryPath
@@ -543,7 +508,7 @@ Abstract
    sets the Refresh-Reduction-Capable bit [<a href="./rfc2961.html" title='"RSVP Refresh Overhead Reduction Extensions"'>RFC2961</a>] <em>SHOULD</em> support
    setting of the S-bit and support the mechanisms defined in <a href="#section-5">Section 5</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Related%20Procedures"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Related Procedures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Related%20Procedures"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Related Procedures</span>
 
    This document does not modify existing procedures for sending and
    receiving RSVP Hello messages, as defined in [<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>], and the
@@ -579,13 +544,13 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Procedures%20for%20the%20Capability%20Object"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Procedures for the Capability Object</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Procedures%20for%20the%20Capability%20Object"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Procedures for the Capability Object</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Procedures%20for%20the%20Downstream%20Neighbor"></a></body></html><a class="selflink" href="#section-4.4.1" name="section-4.4.1">4.4.1</a>.  Procedures for the Downstream Neighbor</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Procedures%20for%20the%20Downstream%20Neighbor"></a></body></html><a class="selflink" href="#section-4.4.1" id="section-4.4.1">4.4.1</a>.  Procedures for the Downstream Neighbor</span>
 
    If a node is capable of sending RecoveryPath messages, it <em>MUST</em>
    include the Capability object with the RecoveryPath Transmit Enabled
@@ -611,7 +576,7 @@ Abstract
    RecoveryPath message procedures defined in this document, and <em>MUST</em>
    revert to recovery procedures as defined in [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Procedures%20for%20the%20Restarting%20Node"></a></body></html><a class="selflink" href="#section-4.4.2" name="section-4.4.2">4.4.2</a>.  Procedures for the Restarting Node</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Procedures%20for%20the%20Restarting%20Node"></a></body></html><a class="selflink" href="#section-4.4.2" id="section-4.4.2">4.4.2</a>.  Procedures for the Restarting Node</span>
 
    A node that expects to recover RSVP state by the receipt and
    processing of RecoveryPath messages according to procedures defined
@@ -635,7 +600,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -653,9 +618,9 @@ Abstract
    procedures defined in [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>] immediately, with the downstream RSVP
    neighbor.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Procedures%20for%20the%20RecoveryPath%20Message"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  Procedures for the RecoveryPath Message</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Procedures%20for%20the%20RecoveryPath%20Message"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  Procedures for the RecoveryPath Message</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.1.%20%20Procedures%20for%20the%20Downstream%20Neighbor"></a></body></html><a class="selflink" href="#section-4.5.1" name="section-4.5.1">4.5.1</a>.  Procedures for the Downstream Neighbor</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.1.%20%20Procedures%20for%20the%20Downstream%20Neighbor"></a></body></html><a class="selflink" href="#section-4.5.1" id="section-4.5.1">4.5.1</a>.  Procedures for the Downstream Neighbor</span>
 
    After a downstream RSVP neighbor has detected that its upstream node
    has restarted, is capable of recovery as defined in [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>], and,
@@ -691,7 +656,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -733,7 +698,7 @@ Abstract
    messages are suppressed during this recovery period until a
    corresponding Path message is received.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.%20%20Procedures%20for%20the%20Restarting%20Node"></a></body></html><a class="selflink" href="#section-4.5.2" name="section-4.5.2">4.5.2</a>.  Procedures for the Restarting Node</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.%20%20Procedures%20for%20the%20Restarting%20Node"></a></body></html><a class="selflink" href="#section-4.5.2" id="section-4.5.2">4.5.2</a>.  Procedures for the Restarting Node</span>
 
    These procedures apply during the "state recovery process" and
    "Recovery Period" as defined in <a href="./rfc3473.html#section-9.5.2">Section 9.5.2 of [RFC3473]</a>.  Any
@@ -747,7 +712,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -767,10 +732,10 @@ Abstract
    follow corresponding procedures defined below.  Further, recovery
    procedures defined below may be overridden by local policy.
 
-   Again, there are no changes to the procedures defined in <a href="#section-9.5.2">Section</a>
-   <a href="#section-9.5.2">9.5.2</a> in [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>] if the restarting node is an egress node.
+   Again, there are no changes to the procedures defined in <a href="./rfc3473.html#section-9.5.2">Section</a>
+   <a href="./rfc3473.html#section-9.5.2">9.5.2 in [RFC3473]</a> if the restarting node is an egress node.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.1.%20%20Path%20and%20RecoveryPath%20Message%20Procedures"></a></body></html><a class="selflink" href="#section-4.5.2.1" name="section-4.5.2.1">4.5.2.1</a>.  Path and RecoveryPath Message Procedures</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.1.%20%20Path%20and%20RecoveryPath%20Message%20Procedures"></a></body></html><a class="selflink" href="#section-4.5.2.1" id="section-4.5.2.1">4.5.2.1</a>.  Path and RecoveryPath Message Procedures</span>
 
    When a node receives a RecoveryPath message during the Recovery
    Period, the node first checks if it has resynchronized RSVP state
@@ -803,7 +768,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -821,7 +786,7 @@ Abstract
    Recovery_Label object, the node saves the information contained in
    the Path message, including the Recovery_Label object for later use.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.2.%20%20Re-Synchronization%20Procedures"></a></body></html><a class="selflink" href="#section-4.5.2.2" name="section-4.5.2.2">4.5.2.2</a>.  Re-Synchronization Procedures</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.2.%20%20Re-Synchronization%20Procedures"></a></body></html><a class="selflink" href="#section-4.5.2.2" id="section-4.5.2.2">4.5.2.2</a>.  Re-Synchronization Procedures</span>
 
    After receipt of the RecoveryPath message and, for non-ingress LSPs,
    the corresponding Path message with a Recovery Label object, the
@@ -859,7 +824,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -879,7 +844,7 @@ Abstract
    the information received from downstream in the RecoveryPath message
    is treated only as advisory.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.3.%20%20Procedures%20on%20Expiration%20of%20Recovery%20Period"></a></body></html><a class="selflink" href="#section-4.5.2.3" name="section-4.5.2.3">4.5.2.3</a>.  Procedures on Expiration of Recovery Period</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.3.%20%20Procedures%20on%20Expiration%20of%20Recovery%20Period"></a></body></html><a class="selflink" href="#section-4.5.2.3" id="section-4.5.2.3">4.5.2.3</a>.  Procedures on Expiration of Recovery Period</span>
 
    There are several cleanup steps to follow at the end of the Recovery
    Period.  At the end of the Recovery Period, any state that was
@@ -893,7 +858,7 @@ Abstract
    Per [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>], any other state that is not resynchronized during the
    Recovery Period <em>SHOULD</em> be removed at the end of the Period.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Compatibility"></a></body></html><a class="selflink" href="#section-4.6" name="section-4.6">4.6</a>.  Compatibility</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Compatibility"></a></body></html><a class="selflink" href="#section-4.6" id="section-4.6">4.6</a>.  Compatibility</span>
 
    This document introduces a new RSVP signaling message called the
    RecoveryPath message to be generated by the downstream RSVP neighbor
@@ -915,7 +880,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -928,7 +893,7 @@ Abstract
    this document and will revert to recovery processing as defined in
    [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20RecoveryPath%20Summary%20Refresh"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  RecoveryPath Summary Refresh</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20RecoveryPath%20Summary%20Refresh"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  RecoveryPath Summary Refresh</span>
 
    This section describes a mechanism to control which LSP state is
    communicated in RecoveryPath messages.  This mechanism enhances the
@@ -971,7 +936,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -1004,7 +969,7 @@ Abstract
    the MESSAGE_ID LIST.  The procedures defined in <a href="#section-4">Section 4</a> above are
    then followed by the restarted node and the downstream RSVP neighbor.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20MESSAGE_ID%20ACK/NACK%20and%20MESSAGE_ID%20LIST%20Objects"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  MESSAGE_ID ACK/NACK and MESSAGE_ID LIST Objects</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20MESSAGE_ID%20ACK/NACK%20and%20MESSAGE_ID%20LIST%20Objects"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  MESSAGE_ID ACK/NACK and MESSAGE_ID LIST Objects</span>
 
    The MESSAGE_ID ACK/NACK objects and the MESSAGE_ID LIST object,
    defined in [<a href="./rfc2961.html" title='"RSVP Refresh Overhead Reduction Extensions"'>RFC2961</a>], are updated by this document.  A new bit within
@@ -1027,7 +992,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -1048,12 +1013,12 @@ Abstract
          information related to one or more Path messages that can be
          recovered using a RecoveryPath message.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20RecoveryPath%20Srefresh%20Capable%20Bit"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  RecoveryPath Srefresh Capable Bit</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20RecoveryPath%20Srefresh%20Capable%20Bit"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  RecoveryPath Srefresh Capable Bit</span>
 
    The Capability object and the RecoveryPath Srefresh Capable (S) bit
    are defined in <a href="#section-4.2">Section 4.2</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.1.%20%20Procedures"></a></body></html><a class="selflink" href="#section-5.2.1" name="section-5.2.1">5.2.1</a>.  Procedures</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.1.%20%20Procedures"></a></body></html><a class="selflink" href="#section-5.2.1" id="section-5.2.1">5.2.1</a>.  Procedures</span>
 
    To support the selective receipt of RecoveryPath messages as defined
    in this section, a restarting node <em>MUST</em> support the receipt and
@@ -1083,7 +1048,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -1091,7 +1056,7 @@ Abstract
    was received with the S-bit cleared.  See <a href="#section-4.4">Section 4.4</a> for handling of
    Hello messages without the Capability object.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.2.%20%20Compatibility"></a></body></html><a class="selflink" href="#section-5.2.2" name="section-5.2.2">5.2.2</a>.  Compatibility</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.2.%20%20Compatibility"></a></body></html><a class="selflink" href="#section-5.2.2" id="section-5.2.2">5.2.2</a>.  Compatibility</span>
 
    There are no compatibility issues introduced in the procedures
    defined in <a href="#section-5.2.1">Section 5.2.1</a>.
@@ -1103,7 +1068,7 @@ Abstract
    (1).  When this occurs, any received RecoveryPath messages <em>MUST</em> be
    processed as defined in <a href="#section-4">Section 4</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20RecoveryPath%20Summary%20Refresh%20Procedures"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  RecoveryPath Summary Refresh Procedures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20RecoveryPath%20Summary%20Refresh%20Procedures"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  RecoveryPath Summary Refresh Procedures</span>
 
    Related processing occurs in the following logical order:
 
@@ -1122,7 +1087,7 @@ Abstract
    node and the downstream RSVP neighbor <em>MUST</em> be able to process in this
    fashion.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.1.%20%20Generation%20of%20RecoveryPath-Related%20Srefresh%20Messages"></a></body></html><a class="selflink" href="#section-5.3.1" name="section-5.3.1">5.3.1</a>.  Generation of RecoveryPath-Related Srefresh Messages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.1.%20%20Generation%20of%20RecoveryPath-Related%20Srefresh%20Messages"></a></body></html><a class="selflink" href="#section-5.3.1" id="section-5.3.1">5.3.1</a>.  Generation of RecoveryPath-Related Srefresh Messages</span>
 
    A neighbor of a restarting node generates one or more RecoveryPath-
    related Srefresh messages when the S-bit is set in the restarted
@@ -1139,7 +1104,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -1195,7 +1160,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -1205,7 +1170,7 @@ Abstract
    mutually exclusive sets of Message Identifiers spread across 1/4 of
    the Recovery Time advertised by the restarted node.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.2.%20%20RecoveryPath-Related%20Srefresh%20Receive%20Processing%20and%20NACK"></a></body></html><a class="selflink" href="#section-5.3.2" name="section-5.3.2">5.3.2</a>.  RecoveryPath-Related Srefresh Receive Processing and NACK</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.2.%20%20RecoveryPath-Related%20Srefresh%20Receive%20Processing%20and%20NACK"></a></body></html><a class="selflink" href="#section-5.3.2" id="section-5.3.2">5.3.2</a>.  RecoveryPath-Related Srefresh Receive Processing and NACK</span>
 <span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20%20%20Generation"></a></body></html>        Generation</span>
 
    Upon receiving an Srefresh message containing a MESSAGE_ID LIST
@@ -1234,7 +1199,7 @@ Abstract
    It is recommended that the restarted node combine multiple such
    MESSAGE_ID NACKs into a single ACK message, per [<a href="./rfc2961.html" title='"RSVP Refresh Overhead Reduction Extensions"'>RFC2961</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.3.%20%20RecoveryPath-Related%20MESSAGE_ID%20NACK%20Receive%20Processing"></a></body></html><a class="selflink" href="#section-5.3.3" name="section-5.3.3">5.3.3</a>.  RecoveryPath-Related MESSAGE_ID NACK Receive Processing</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.3.%20%20RecoveryPath-Related%20MESSAGE_ID%20NACK%20Receive%20Processing"></a></body></html><a class="selflink" href="#section-5.3.3" id="section-5.3.3">5.3.3</a>.  RecoveryPath-Related MESSAGE_ID NACK Receive Processing</span>
 
    This section defines the procedures associated with the processing of
    received MESSAGE_ID NACKs that have the RecoveryPath Flag set (1).
@@ -1251,7 +1216,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -1260,7 +1225,7 @@ Abstract
    is ignored.  An example where this may occur is when the restarted
    node has already generated an updated Path message after its restart.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    This document introduces a new RSVP message that is restricted to one
    RSVP hop.  This document introduces no new security considerations
@@ -1284,7 +1249,7 @@ Abstract
    an external attack without perturbing the data/forwarding plane
    state.
 
-   [<a id="ref-RFC2747" name="ref-RFC2747">RFC2747</a>] provides mechanisms to protect against external agents
+   [<a id="ref-RFC2747">RFC2747</a>] provides mechanisms to protect against external agents
    compromising the RSVP signaling state in an RSVP agent.  These
    mechanisms, when used with the new message and procedures introduced
    in this document, provide the same degree of protection to the
@@ -1307,7 +1272,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -1327,7 +1292,7 @@ Abstract
    restarting node <em>SHOULD</em> log such an event or otherwise notify the
    operator since it might represent an attack.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgments</span>
 
    The authors would like to thank participants of the CCAMP WG for
    comments and suggestions.  Also thanks to Arthi Ayyangar, Adrian
@@ -1341,9 +1306,9 @@ Abstract
    Adrian Farrel edited the final revisions of this document as it
    progressed through IESG review.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  IANA Considerations</span>
 
-   [<a id="ref-RFC2205" name="ref-RFC2205">RFC2205</a>] defines the Class-Number name space for RSVP objects.  The
+   [<a id="ref-RFC2205">RFC2205</a>] defines the Class-Number name space for RSVP objects.  The
    name space is managed by IANA.
 
    A new RSVP object using a Class-Number of form 10bbbbbb called the
@@ -1356,14 +1321,14 @@ Abstract
    This document creates a new name space in the Capability object
    defined in <a href="#section-4.2">Section 4.2</a>.  The new name space is a 32-bit-wide field.
    New registrations in this name space are to be allocated by IANA
-   through an IETF Consensus action, per [<a href="./rfc2434.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC2434</a>].  IANA also serves as
+   through an IETF Consensus action, per [<a href="./rfc2434.html" title="">RFC2434</a>].  IANA also serves as
    the repository for this name space.
 
 
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -1374,35 +1339,35 @@ Abstract
       RecoveryPath Desired (R): 1 bit
       RecoveryPath Srefresh Capable (S): 1 bit
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Normative References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC2205" name="ref-RFC2205">RFC2205</a>]  Braden, B., Zhang, L., Berson, S., Herzog, S., and S.
+   [<a id="ref-RFC2205">RFC2205</a>]  Braden, B., Zhang, L., Berson, S., Herzog, S., and S.
               Jamin, "Resource ReSerVation Protocol (RSVP) -- Version 1
               Functional Specification", <a href="./rfc2205.html">RFC 2205</a>, September 1997.
 
-   [<a id="ref-RFC2434" name="ref-RFC2434">RFC2434</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
-              IANA Considerations Section in RFCs", <a href="./bcp26.html">BCP 26</a>, <a href="./rfc2434.html">RFC 2434</a>,
+   [<a id="ref-RFC2434">RFC2434</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", <a href="https://www.rfc-editor.org/bcp/bcp26">BCP 26</a>, <a href="./rfc2434.html">RFC 2434</a>,
               October 1998.
 
-   [<a id="ref-RFC2747" name="ref-RFC2747">RFC2747</a>]  Baker, F., Lindell, B., and M. Talwar, "RSVP Cryptographic
+   [<a id="ref-RFC2747">RFC2747</a>]  Baker, F., Lindell, B., and M. Talwar, "RSVP Cryptographic
               Authentication", <a href="./rfc2747.html">RFC 2747</a>, January 2000.
 
-   [<a id="ref-RFC2961" name="ref-RFC2961">RFC2961</a>]  Berger, L., Gan, D., Swallow, G., Pan, P., Tommasi, F.,
+   [<a id="ref-RFC2961">RFC2961</a>]  Berger, L., Gan, D., Swallow, G., Pan, P., Tommasi, F.,
               and S. Molendini, "RSVP Refresh Overhead Reduction
               Extensions", <a href="./rfc2961.html">RFC 2961</a>, April 2001.
 
-   [<a id="ref-RFC3209" name="ref-RFC3209">RFC3209</a>]  Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan, V.,
+   [<a id="ref-RFC3209">RFC3209</a>]  Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan, V.,
               and G. Swallow, "RSVP-TE: Extensions to RSVP for LSP
               Tunnels", <a href="./rfc3209.html">RFC 3209</a>, December 2001.
 
-   [<a id="ref-RFC3471" name="ref-RFC3471">RFC3471</a>]  Berger, L., "Generalized Multi-Protocol Label Switching
+   [<a id="ref-RFC3471">RFC3471</a>]  Berger, L., "Generalized Multi-Protocol Label Switching
               (GMPLS) Signaling Functional Description", <a href="./rfc3471.html">RFC 3471</a>,
               January 2003.
 
-   [<a id="ref-RFC3473" name="ref-RFC3473">RFC3473</a>]  Berger, L., "Generalized Multi-Protocol Label Switching
+   [<a id="ref-RFC3473">RFC3473</a>]  Berger, L., "Generalized Multi-Protocol Label Switching
               (GMPLS) Signaling Resource ReserVation Protocol-Traffic
               Engineering (RSVP-TE) Extensions", <a href="./rfc3473.html">RFC 3473</a>, January 2003.
 
@@ -1419,7 +1384,7 @@ Abstract
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -1475,7 +1440,7 @@ Authors' Addresses
 
 
 <span class="grey">Satyanarayana &amp; Rahman      Standards Track                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc5063.html">RFC 5063</a>         GMPLS RSVP Graceful Restart Extensions     October 2007</span>
 
 
@@ -1484,7 +1449,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2007).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1504,7 +1469,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1531,11 +1496,6 @@ Intellectual Property
 
 
 Satyanarayana &amp; Rahman      Standards Track                    [Page 24]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

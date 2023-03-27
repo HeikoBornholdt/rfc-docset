@@ -1,40 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-waehlisch-sam-common-api" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:7046" name="DC.Identifier"/>
-<meta content="December, 2013" name="DC.Date.Issued"/>
-<meta content="Waehlisch, Matthias" name="DC.Creator"/>
-<meta content="Venaas, Stig" name="DC.Creator"/>
-<meta content="Schmidt, Thomas" name="DC.Creator"/>
-<meta content="Group communication services exist in a large variety of flavors and
-technical implementations at different protocol layers. Multicast data
-distribution is most efficiently performed on the lowest available
-layer, but a heterogeneous deployment status of multicast technologies
-throughout the Internet requires an adaptive service binding at
-runtime. Today, it is difficult to write an application that runs
-everywhere and at the same time makes use of the most efficient
-multicast service available in the network. Facing robustness
-requirements, developers are frequently forced to use a stable upper-
-layer protocol provided by the application itself. This document
-describes a common multicast API that is suitable for transparent
-communication in underlay and overlay and that grants access to the
-different flavors of multicast. It proposes an abstract naming scheme
-that uses multicast URIs, and it discusses mapping mechanisms between
-different namespaces and distribution technologies. Additionally, this
-document describes the application of this API for building gateways
-that interconnect current Multicast Domains throughout the Internet.
-It reports on an implementation of the programming Interface,
-including service middleware. This document is a product of the
-Scalable Adaptive Multicast (SAM) Research Group." name="DC.Description.Abstract"/>
-<meta content="A Common API for Transparent Hybrid Multicast" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7046 - A Common API for Transparent Hybrid Multicast</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="M. Waehlisch" name="citation_author"/>
+<meta content="T. Schmidt" name="citation_author"/>
+<meta content="S. Venaas" name="citation_author"/>
+<meta content="December, 2013" name="citation_publication_date"/>
+<meta content="A Common API for Transparent Hybrid Multicast" name="citation_title"/>
+<meta content="10.17487/RFC7046" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7046" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7046.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7046: A Common API for Transparent Hybrid Multicast</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -63,7 +42,7 @@ Scalable Adaptive Multicast (SAM) Research Group." name="DC.Description.Abstract
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -72,7 +51,7 @@ Scalable Adaptive Multicast (SAM) Research Group." name="DC.Description.Abstract
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -151,19 +130,18 @@ Scalable Adaptive Multicast (SAM) Research Group." name="DC.Description.Abstract
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -177,21 +155,9 @@ Scalable Adaptive Multicast (SAM) Research Group." name="DC.Description.Abstract
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgyellow" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7046.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7046" title="PDF version of this document">pdf</a>] [<a href="./draft-irtf-samrg-common-api.html" title="draft-irtf-samrg-common-api">draft-irtf-samrg-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc7046" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc7046" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Research Task Force (IRTF)                         M. Waehlisch
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7046.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7046.txt.pdf">PDF</a>|<a href="/rfc/rfc7046.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7046" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7046&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc7046" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Research Task Force (IRTF)                         M. Waehlisch
 Request for Comments: 7046                          link-lab &amp; FU Berlin
 Category: Experimental                                        T. Schmidt
 ISSN: 2070-1721                                              HAW Hamburg
@@ -243,7 +209,7 @@ Abstract
 
 
 <span class="grey">Waehlisch, et al.             Experimental                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -272,7 +238,7 @@ Copyright Notice
    Copyright (c) 2013 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -299,7 +265,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -355,7 +321,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -370,7 +336,7 @@ Table of Contents
      <a href="#appendix-C.3">C.3</a>. PIM-SSM ....................................................<a href="#page-39">39</a>
      <a href="#appendix-C.4">C.4</a>. BIDIR-PIM ..................................................<a href="#page-40">40</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Currently, group application programmers need to choose the
    distribution technology that the application will require at runtime.
@@ -411,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -467,7 +433,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -477,7 +443,7 @@ Table of Contents
    comprehensively reviewed by people who are not "in" the Research
    Group but are experts in the area.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Use%20Cases%20for%20the%20Common%20API"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Use Cases for the Common API</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Use%20Cases%20for%20the%20Common%20API"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Use Cases for the Common API</span>
 
    The following generic use cases can be identified; these use cases
    require an abstract common API for multicast services:
@@ -523,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -542,9 +508,9 @@ Table of Contents
       provided at the network or transport layer (see [<a href="./rfc5757.html" title='"Multicast Mobility in Mobile IP Version 6 (MIPv6): Problem Statement and Brief Survey"'>RFC5757</a>] for
       mobility-related aspects).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Illustrative%20Examples"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Illustrative Examples</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Illustrative%20Examples"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Illustrative Examples</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.1.%20%20Support%20of%20Multiple%20Underlying%20Technologies"></a></body></html><a class="selflink" href="#section-1.2.1" name="section-1.2.1">1.2.1</a>.  Support of Multiple Underlying Technologies</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.1.%20%20Support%20of%20Multiple%20Underlying%20Technologies"></a></body></html><a class="selflink" href="#section-1.2.1" id="section-1.2.1">1.2.1</a>.  Support of Multiple Underlying Technologies</span>
 
    On a very high level, the common multicast API provides the
    application programmer with one single Interface to manage multicast
@@ -579,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -635,7 +601,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -659,7 +625,7 @@ Table of Contents
 
               Gateway example using the common multicast API
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.2.%20%20Support%20of%20Multi-Resolution%20Multicast"></a></body></html><a class="selflink" href="#section-1.2.2" name="section-1.2.2">1.2.2</a>.  Support of Multi-Resolution Multicast</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.2.%20%20Support%20of%20Multi-Resolution%20Multicast"></a></body></html><a class="selflink" href="#section-1.2.2" id="section-1.2.2">1.2.2</a>.  Support of Multi-Resolution Multicast</span>
 
    Multi-resolution multicast adjusts the multicast stream to consider
    heterogeneous end devices.  The multicast data (e.g., available by
@@ -691,11 +657,11 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    This document uses the terminology as defined for the multicast
    protocols discussed in [<a href="./rfc2710.html" title='"Multicast Listener Discovery (MLD) for IPv6"'>RFC2710</a>], [<a href="./rfc3376.html" title='"Internet Group Management Protocol, Version 3"'>RFC3376</a>], [<a href="./rfc3810.html" title='"Multicast Listener Discovery Version 2 (MLDv2) for IPv6"'>RFC3810</a>], [<a href="./rfc4601.html" title='"Protocol Independent Multicast - Sparse Mode (PIM-SM): Protocol Specification (Revised)"'>RFC4601</a>],
@@ -733,9 +699,9 @@ Table of Contents
       forward data between these domains, e.g., between an IP layer and
       overlay multicast.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Overview"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Overview</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Overview"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Overview</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Objectives%20and%20Reference%20Scenarios"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Objectives and Reference Scenarios</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Objectives%20and%20Reference%20Scenarios"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Objectives and Reference Scenarios</span>
 
    The default use case addressed in this document targets applications
    that participate in a group by using some common identifier taken
@@ -747,7 +713,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -803,7 +769,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -835,7 +801,7 @@ Table of Contents
     Figure 2: Reference Scenarios for Hybrid Multicast, Interconnecting
      Group Members from Isolated Homogeneous and Heterogeneous Domains
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Group%20Communication%20API%20and%20Protocol%20Stack"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Group Communication API and Protocol Stack</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Group%20Communication%20API%20and%20Protocol%20Stack"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Group Communication API and Protocol Stack</span>
 
    The group communication API abstracts the socket concept and consists
    of four parts.  Two parts combine the essential communication
@@ -859,7 +825,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -915,7 +881,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -948,7 +914,7 @@ Table of Contents
    Figure 3: Architecture of a Group Communication Stack with Middleware
        Offering Uniform Access to Multicast in Underlay and Overlay
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Naming%20and%20Addressing"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Naming and Addressing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Naming%20and%20Addressing"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Naming and Addressing</span>
 
    Applications use Group Names to identify groups.  Names can uniquely
    determine a group in a global communication context and hide
@@ -971,7 +937,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -984,7 +950,7 @@ Table of Contents
    namespace.  The details of automatic namespace identification or
    service handling are out of scope for this document.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Namespaces"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Namespaces</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Namespaces"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Namespaces</span>
 
    Namespace identifiers in URIs are placed in the scheme element and
    characterize syntax and semantics of the group identifier.  They
@@ -998,7 +964,7 @@ Table of Contents
    Examples of schemes are generic (see <a href="#section-4.2.3">Section 4.2.3</a>) or inherited from
    applications (see <a href="#section-4.2.4">Section 4.2.4</a>).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Name-to-Address%20Mapping"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  Name-to-Address Mapping</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Name-to-Address%20Mapping"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  Name-to-Address Mapping</span>
 
    The multicast communication paradigm requires all group members to
    subscribe to the same Group Name, taken from a common Multicast
@@ -1027,7 +993,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -1039,7 +1005,7 @@ Table of Contents
    possible address collisions.  However, some namespaces facilitate a
    canonical, invertible transformation to default address spaces.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.1.%20%20Canonical%20Mapping"></a></body></html><a class="selflink" href="#section-3.5.1" name="section-3.5.1">3.5.1</a>.  Canonical Mapping</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.1.%20%20Canonical%20Mapping"></a></body></html><a class="selflink" href="#section-3.5.1" id="section-3.5.1">3.5.1</a>.  Canonical Mapping</span>
 
    Some Multicast Namespaces defined in <a href="#section-3.4">Section 3.4</a> can express a
    canonical default mapping.  For example, ham:ip:224.1.2.3:5000
@@ -1050,7 +1016,7 @@ Table of Contents
    multicast URI can be completely recovered from any data message
    received within this group.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.2.%20%20Mapping%20at%20End%20Points"></a></body></html><a class="selflink" href="#section-3.5.2" name="section-3.5.2">3.5.2</a>.  Mapping at End Points</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.2.%20%20Mapping%20at%20End%20Points"></a></body></html><a class="selflink" href="#section-3.5.2" id="section-3.5.2">3.5.2</a>.  Mapping at End Points</span>
 
    Multicast listeners or senders require a name-to-address conversion
    for all technologies they actively run in a group.  Even though a
@@ -1060,7 +1026,7 @@ Table of Contents
    point will always be aware of the name-to-address correspondence and
    thus can autonomously invert the mapping.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.3.%20%20Mapping%20at%20Inter-Domain%20Multicast%20Gateways"></a></body></html><a class="selflink" href="#section-3.5.3" name="section-3.5.3">3.5.3</a>.  Mapping at Inter-Domain Multicast Gateways</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.3.%20%20Mapping%20at%20Inter-Domain%20Multicast%20Gateways"></a></body></html><a class="selflink" href="#section-3.5.3" id="section-3.5.3">3.5.3</a>.  Mapping at Inter-Domain Multicast Gateways</span>
 
    Multicast data may arrive at an IMG via one technology and request
    that the gateway re-address packets for another distribution system.
@@ -1070,7 +1036,7 @@ Table of Contents
    source registration or may have been learned from a neighboring node,
    the details of which are beyond the scope of this document.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20A%20Note%20on%20Explicit%20Multicast%20%28Xcast%29"></a></body></html><a class="selflink" href="#section-3.6" name="section-3.6">3.6</a>.  A Note on Explicit Multicast (Xcast)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20A%20Note%20on%20Explicit%20Multicast%20%28Xcast%29"></a></body></html><a class="selflink" href="#section-3.6" id="section-3.6">3.6</a>.  A Note on Explicit Multicast (Xcast)</span>
 
    In Explicit Multicast (Xcast) [<a href="./rfc5058.html" title='"Explicit Multicast (Xcast) Concepts and Options"'>RFC5058</a>], the multicast source
    explicitly predefines the receivers.  From a conceptual perspective,
@@ -1083,7 +1049,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -1095,7 +1061,7 @@ Table of Contents
    of the Group Name to the set of subscribers.  The defining details of
    this multi-destination mapping are out of scope for this document.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.%20%20MTU%20Handling"></a></body></html><a class="selflink" href="#section-3.7" name="section-3.7">3.7</a>.  MTU Handling</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.%20%20MTU%20Handling"></a></body></html><a class="selflink" href="#section-3.7" id="section-3.7">3.7</a>.  MTU Handling</span>
 
    This API considers a multi-technology scenario in which different
    technologies may have different Maximum Transmission Unit (MTU)
@@ -1139,7 +1105,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -1154,9 +1120,9 @@ Table of Contents
    detailed selection scheme of MTU values is out of scope for this
    document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Common%20Multicast%20API"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Common Multicast API</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Common%20Multicast%20API"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Common Multicast API</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Notation"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Notation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Notation"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Notation</span>
 
    The following description of the common multicast API is expressed in
    pseudo-syntax.  Variables that are passed to function calls are
@@ -1166,14 +1132,14 @@ Table of Contents
 
    The corresponding C signatures are defined in <a href="#appendix-A">Appendix A</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20URI%20Scheme%20Definition"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  URI Scheme Definition</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20URI%20Scheme%20Definition"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  URI Scheme Definition</span>
 
    Multicast Names and Multicast Addresses used in this API are
    represented by a URI scheme that is specified in the following
    subsections.  A corresponding ham-URI denotes a multicast channel and
    may be dereferenced to retrieve data published to that channel.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Syntax"></a></body></html><a class="selflink" href="#section-4.2.1" name="section-4.2.1">4.2.1</a>.  Syntax</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Syntax"></a></body></html><a class="selflink" href="#section-4.2.1" id="section-4.2.1">4.2.1</a>.  Syntax</span>
 
    The syntax of the multicast URI is specified using the Augmented
    Backus-Naur Form (ABNF) [<a href="./rfc5234.html" title='"Augmented BNF for Syntax Specifications: ABNF"'>RFC5234</a>] and is defined as follows:
@@ -1195,7 +1161,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -1203,7 +1169,7 @@ Table of Contents
    unreserved assignments of the same character in the same ham-URI
    component (cf. [<a href="./rfc3986.html" title='"Uniform Resource Identifier (URI): Generic Syntax"'>RFC3986</a>]).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Semantic"></a></body></html><a class="selflink" href="#section-4.2.2" name="section-4.2.2">4.2.2</a>.  Semantic</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Semantic"></a></body></html><a class="selflink" href="#section-4.2.2" id="section-4.2.2">4.2.2</a>.  Semantic</span>
 
    The semantic of the different parts of the URI is defined as follows:
 
@@ -1251,11 +1217,11 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.3.%20%20Generic%20Namespaces"></a></body></html><a class="selflink" href="#section-4.2.3" name="section-4.2.3">4.2.3</a>.  Generic Namespaces</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.3.%20%20Generic%20Namespaces"></a></body></html><a class="selflink" href="#section-4.2.3" id="section-4.2.3">4.2.3</a>.  Generic Namespaces</span>
 
    IP:  This namespace is comprised of regular IP node naming, i.e., DNS
       names and addresses taken from any version of the Internet
@@ -1277,7 +1243,7 @@ Table of Contents
       mechanisms.  The corresponding syntax for the group and
       instantiation part of the ham-URI is defined in <a href="#section-4.2.1">Section 4.2.1</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.4.%20%20Application-Centric%20Namespaces"></a></body></html><a class="selflink" href="#section-4.2.4" name="section-4.2.4">4.2.4</a>.  Application-Centric Namespaces</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.4.%20%20Application-Centric%20Namespaces"></a></body></html><a class="selflink" href="#section-4.2.4" id="section-4.2.4">4.2.4</a>.  Application-Centric Namespaces</span>
 
    SIP:  The SIP namespace is an example of an application-layer scheme
       that bears inherent group functions (conferencing).  SIP
@@ -1293,7 +1259,7 @@ Table of Contents
       a corresponding overlay that may manage multicast distribution
       according to [<a href="./rfc7019.html" title='"Application-Layer Multicast Extensions to REsource LOcation And Discovery (RELOAD)"'>RFC7019</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.5.%20%20Future%20Namespaces"></a></body></html><a class="selflink" href="#section-4.2.5" name="section-4.2.5">4.2.5</a>.  Future Namespaces</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.5.%20%20Future%20Namespaces"></a></body></html><a class="selflink" href="#section-4.2.5" id="section-4.2.5">4.2.5</a>.  Future Namespaces</span>
 
    The concept of the common multicast API allows for any namespace that
    complies with the superset syntax defined in <a href="#section-4.2.1">Section 4.2.1</a>.  This
@@ -1307,13 +1273,13 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Additional%20Abstract%20Data%20Types"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Additional Abstract Data Types</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Additional%20Abstract%20Data%20Types"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Additional Abstract Data Types</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.%20%20Interface"></a></body></html><a class="selflink" href="#section-4.3.1" name="section-4.3.1">4.3.1</a>.  Interface</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.%20%20Interface"></a></body></html><a class="selflink" href="#section-4.3.1" id="section-4.3.1">4.3.1</a>.  Interface</span>
 
    The Interface denotes the layer and instance on which the
    corresponding call takes effect.  In agreement with [<a href="./rfc3493.html" title='"Basic Socket Interface Extensions for IPv6"'>RFC3493</a>], we
@@ -1340,7 +1306,7 @@ Table of Contents
 
        struct ifProp(out IfProp &lt;ifsProps&gt;);
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.2.%20%20Membership%20Events"></a></body></html><a class="selflink" href="#section-4.3.2" name="section-4.3.2">4.3.2</a>.  Membership Events</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.2.%20%20Membership%20Events"></a></body></html><a class="selflink" href="#section-4.3.2" id="section-4.3.2">4.3.2</a>.  Membership Events</span>
 
    A membership event is triggered by a multicast state change that is
    observed by the current node.  It is related to a specific Group Name
@@ -1363,16 +1329,16 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
    An event will be created by the group communication stack and passed
    to applications that have registered for events.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Group%20Management%20Calls"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Group Management Calls</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Group%20Management%20Calls"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Group Management Calls</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Create"></a></body></html><a class="selflink" href="#section-4.4.1" name="section-4.4.1">4.4.1</a>.  Create</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Create"></a></body></html><a class="selflink" href="#section-4.4.1" id="section-4.4.1">4.4.1</a>.  Create</span>
 
    The create call initiates a multicast socket and provides the
    application programmer with a corresponding handle.  If no Interfaces
@@ -1390,7 +1356,7 @@ Table of Contents
    On success, a multicast socket identifier is returned; otherwise, it
    is NULL.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Delete"></a></body></html><a class="selflink" href="#section-4.4.2" name="section-4.4.2">4.4.2</a>.  Delete</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Delete"></a></body></html><a class="selflink" href="#section-4.4.2" id="section-4.4.2">4.4.2</a>.  Delete</span>
 
    The delete call removes the multicast socket.
 
@@ -1400,7 +1366,7 @@ Table of Contents
 
    On success, the out parameter error is 0; otherwise, -1 is returned.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.%20%20Join"></a></body></html><a class="selflink" href="#section-4.4.3" name="section-4.4.3">4.4.3</a>.  Join</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.%20%20Join"></a></body></html><a class="selflink" href="#section-4.4.3" id="section-4.4.3">4.4.3</a>.  Join</span>
 
    The join call initiates a subscription for the given Group Name.
    Depending on the Interfaces that are associated with the socket, this
@@ -1419,11 +1385,11 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.4.%20%20Leave"></a></body></html><a class="selflink" href="#section-4.4.4" name="section-4.4.4">4.4.4</a>.  Leave</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.4.%20%20Leave"></a></body></html><a class="selflink" href="#section-4.4.4" id="section-4.4.4">4.4.4</a>.  Leave</span>
 
    The leave call results in an unsubscription for the given Group Name.
 
@@ -1435,7 +1401,7 @@ Table of Contents
 
    On success, the out parameter error is 0; otherwise, -1 is returned.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.5.%20%20Source%20Register"></a></body></html><a class="selflink" href="#section-4.4.5" name="section-4.4.5">4.4.5</a>.  Source Register</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.5.%20%20Source%20Register"></a></body></html><a class="selflink" href="#section-4.4.5" id="section-4.4.5">4.4.5</a>.  Source Register</span>
 
    The srcRegister call registers a source for a group on all active
    Interfaces of the socket s.  This call may assist group distribution
@@ -1458,7 +1424,7 @@ Table of Contents
    If source registration succeeded for all Interfaces associated with
    the socket, the out parameter error is 0; otherwise, -1 is returned.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.6.%20%20Source%20Deregister"></a></body></html><a class="selflink" href="#section-4.4.6" name="section-4.4.6">4.4.6</a>.  Source Deregister</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.6.%20%20Source%20Deregister"></a></body></html><a class="selflink" href="#section-4.4.6" id="section-4.4.6">4.4.6</a>.  Source Deregister</span>
 
    The srcDeregister call indicates that a source no longer intends to
    send data to the Multicast Group.  This call may remain without
@@ -1475,7 +1441,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -1486,9 +1452,9 @@ Table of Contents
    If source deregistration succeeded for all Interfaces associated with
    the socket, the out parameter error is 0; otherwise, -1 is returned.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Send%20and%20Receive%20Calls"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  Send and Receive Calls</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Send%20and%20Receive%20Calls"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  Send and Receive Calls</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.1.%20%20Send"></a></body></html><a class="selflink" href="#section-4.5.1" name="section-4.5.1">4.5.1</a>.  Send</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.1.%20%20Send"></a></body></html><a class="selflink" href="#section-4.5.1" id="section-4.5.1">4.5.1</a>.  Send</span>
 
    The send call passes multicast data destined for a Multicast Name
    from the application to the multicast socket.
@@ -1515,7 +1481,7 @@ Table of Contents
    A message that is too long is indicated by an implementation-specific
    error code (e.g., EMSGSIZE in C).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.%20%20Receive"></a></body></html><a class="selflink" href="#section-4.5.2" name="section-4.5.2">4.5.2</a>.  Receive</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.%20%20Receive"></a></body></html><a class="selflink" href="#section-4.5.2" id="section-4.5.2">4.5.2</a>.  Receive</span>
 
    The receive call passes multicast data and the corresponding Group
    Name to the application.  This may come in a blocking or non-blocking
@@ -1531,7 +1497,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -1553,11 +1519,11 @@ Table of Contents
    A message that is too long is indicated by an implementation-specific
    error code (e.g., EMSGSIZE).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Socket%20Options"></a></body></html><a class="selflink" href="#section-4.6" name="section-4.6">4.6</a>.  Socket Options</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Socket%20Options"></a></body></html><a class="selflink" href="#section-4.6" id="section-4.6">4.6</a>.  Socket Options</span>
 
    The following calls configure an existing multicast socket.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.1.%20%20Get%20Interfaces"></a></body></html><a class="selflink" href="#section-4.6.1" name="section-4.6.1">4.6.1</a>.  Get Interfaces</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.1.%20%20Get%20Interfaces"></a></body></html><a class="selflink" href="#section-4.6.1" id="section-4.6.1">4.6.1</a>.  Get Interfaces</span>
 
    The getInterfaces call returns an array of all available multicast
    communication Interfaces associated with the multicast socket.
@@ -1571,7 +1537,7 @@ Table of Contents
 
    On success, the out parameter error is 0; otherwise, -1 is returned.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.2.%20%20Add%20Interface"></a></body></html><a class="selflink" href="#section-4.6.2" name="section-4.6.2">4.6.2</a>.  Add Interface</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.2.%20%20Add%20Interface"></a></body></html><a class="selflink" href="#section-4.6.2" id="section-4.6.2">4.6.2</a>.  Add Interface</span>
 
    The addInterface call adds a distribution channel to the socket.
    This may be an overlay or underlay Interface, e.g., IPv6 or
@@ -1587,7 +1553,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -1596,7 +1562,7 @@ Table of Contents
 
    On success, the value 0 is returned; otherwise, -1 is returned.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.3.%20%20Delete%20Interface"></a></body></html><a class="selflink" href="#section-4.6.3" name="section-4.6.3">4.6.3</a>.  Delete Interface</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.3.%20%20Delete%20Interface"></a></body></html><a class="selflink" href="#section-4.6.3" id="section-4.6.3">4.6.3</a>.  Delete Interface</span>
 
    The delInterface call removes the Interface from the multicast
    socket.
@@ -1609,7 +1575,7 @@ Table of Contents
 
    On success, the out parameter error is 0; otherwise, -1 is returned.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.4.%20%20Set%20TTL"></a></body></html><a class="selflink" href="#section-4.6.4" name="section-4.6.4">4.6.4</a>.  Set TTL</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.4.%20%20Set%20TTL"></a></body></html><a class="selflink" href="#section-4.6.4" id="section-4.6.4">4.6.4</a>.  Set TTL</span>
 
    The setTTL call configures the maximum hop count for the socket that
    a multicast message is allowed to traverse.
@@ -1626,7 +1592,7 @@ Table of Contents
 
    On success, the out parameter error is 0; otherwise, -1 is returned.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.5.%20%20Get%20TTL"></a></body></html><a class="selflink" href="#section-4.6.5" name="section-4.6.5">4.6.5</a>.  Get TTL</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.5.%20%20Get%20TTL"></a></body></html><a class="selflink" href="#section-4.6.5" id="section-4.6.5">4.6.5</a>.  Get TTL</span>
 
    The getTTL call returns the maximum hop count that a multicast
    message is allowed to traverse for the interface bound to the socket.
@@ -1643,7 +1609,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -1652,7 +1618,7 @@ Table of Contents
 
    On success, the out parameter error is 0; otherwise, -1 is returned.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.6.%20%20Atomic%20Message%20Size"></a></body></html><a class="selflink" href="#section-4.6.6" name="section-4.6.6">4.6.6</a>.  Atomic Message Size</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.6.%20%20Atomic%20Message%20Size"></a></body></html><a class="selflink" href="#section-4.6.6" id="section-4.6.6">4.6.6</a>.  Atomic Message Size</span>
 
    The getAtomicMsgSize function returns the maximum message size that
    an application is allowed to transmit per socket at once without
@@ -1665,9 +1631,9 @@ Table of Contents
    On success, the function returns a positive value of appropriate
    message size; otherwise, -1 is returned.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Service%20Calls"></a></body></html><a class="selflink" href="#section-4.7" name="section-4.7">4.7</a>.  Service Calls</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Service%20Calls"></a></body></html><a class="selflink" href="#section-4.7" id="section-4.7">4.7</a>.  Service Calls</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.1.%20%20Group%20Set"></a></body></html><a class="selflink" href="#section-4.7.1" name="section-4.7.1">4.7.1</a>.  Group Set</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.1.%20%20Group%20Set"></a></body></html><a class="selflink" href="#section-4.7.1" id="section-4.7.1">4.7.1</a>.  Group Set</span>
 
    The groupSet call returns all Multicast Groups registered at a given
    Interface.  This information can be provided by group management
@@ -1699,11 +1665,11 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.2.%20%20Neighbor%20Set"></a></body></html><a class="selflink" href="#section-4.7.2" name="section-4.7.2">4.7.2</a>.  Neighbor Set</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.2.%20%20Neighbor%20Set"></a></body></html><a class="selflink" href="#section-4.7.2" id="section-4.7.2">4.7.2</a>.  Neighbor Set</span>
 
    The neighborSet function returns the set of neighboring nodes for a
    given Interface as seen by the multicast routing protocol.
@@ -1719,7 +1685,7 @@ Table of Contents
 
    On success, the out parameter error is 0; otherwise, -1 is returned.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.3.%20%20Children%20Set"></a></body></html><a class="selflink" href="#section-4.7.3" name="section-4.7.3">4.7.3</a>.  Children Set</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.3.%20%20Children%20Set"></a></body></html><a class="selflink" href="#section-4.7.3" id="section-4.7.3">4.7.3</a>.  Children Set</span>
 
    The childrenSet function returns the set of child nodes that receive
    multicast data from a specified Interface for a given group.  For a
@@ -1740,7 +1706,7 @@ Table of Contents
 
    On success, the out parameter error is 0; otherwise, -1 is returned.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.4.%20%20Parent%20Set"></a></body></html><a class="selflink" href="#section-4.7.4" name="section-4.7.4">4.7.4</a>.  Parent Set</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.4.%20%20Parent%20Set"></a></body></html><a class="selflink" href="#section-4.7.4" id="section-4.7.4">4.7.4</a>.  Parent Set</span>
 
    The parentSet function returns the set of neighbors from which the
    current node receives multicast data at a given Interface for the
@@ -1755,7 +1721,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -1767,7 +1733,7 @@ Table of Contents
 
    On success, the out parameter error is 0; otherwise, -1 is returned.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.5.%20%20Designated%20Host"></a></body></html><a class="selflink" href="#section-4.7.5" name="section-4.7.5">4.7.5</a>.  Designated Host</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.5.%20%20Designated%20Host"></a></body></html><a class="selflink" href="#section-4.7.5" id="section-4.7.5">4.7.5</a>.  Designated Host</span>
 
    The designatedHost function inquires about whether this host has the
    role of a designated forwarder (or querier), or not.  Such
@@ -1788,7 +1754,7 @@ Table of Contents
    querier.  The return value -1 indicates an error.  Otherwise, 0 is
    returned.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.6.%20%20Enable%20Membership%20Events"></a></body></html><a class="selflink" href="#section-4.7.6" name="section-4.7.6">4.7.6</a>.  Enable Membership Events</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.6.%20%20Enable%20Membership%20Events"></a></body></html><a class="selflink" href="#section-4.7.6" id="section-4.7.6">4.7.6</a>.  Enable Membership Events</span>
 
    The enableEvents function registers an application at the group
    communication stack to receive information about group changes.
@@ -1811,11 +1777,11 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.7.%20%20Disable%20Membership%20Events"></a></body></html><a class="selflink" href="#section-4.7.7" name="section-4.7.7">4.7.7</a>.  Disable Membership Events</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.7.%20%20Disable%20Membership%20Events"></a></body></html><a class="selflink" href="#section-4.7.7" id="section-4.7.7">4.7.7</a>.  Disable Membership Events</span>
 
    The disableEvents function deactivates the information about group
    state changes.
@@ -1825,7 +1791,7 @@ Table of Contents
    On success, the stack will not pass membership events to the
    application.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.8.%20%20Maximum%20Message%20Size"></a></body></html><a class="selflink" href="#section-4.7.8" name="section-4.7.8">4.7.8</a>.  Maximum Message Size</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.8.%20%20Maximum%20Message%20Size"></a></body></html><a class="selflink" href="#section-4.7.8" id="section-4.7.8">4.7.8</a>.  Maximum Message Size</span>
 
    The getMaxMsgSize function returns the maximum message size that an
    application is allowed to transmit per socket at once.  This value is
@@ -1836,7 +1802,7 @@ Table of Contents
    On success, the function returns a positive value of allowed message
    size; otherwise, -1 is returned.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Implementation"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Implementation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Implementation"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Implementation</span>
 
    A reference implementation of the Common API for Transparent Hybrid
    Multicast is available with the HAMcast stack [<a href="#ref-HAMcast-DEV">HAMcast-DEV</a>] [<a href="#ref-GC2010" title='"System-assisted Service Evolution for a Future Internet - The HAMcast Approach to Pervasive Multicast"'>GC2010</a>]
@@ -1849,7 +1815,7 @@ Table of Contents
    gathered in the HAMcast project, and by additional users of the
    stack.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  IANA Considerations</span>
 
    This document specifies the "ham" URI scheme that has been registered
    by IANA as one of the "Provisional URI Schemes" according to
@@ -1867,7 +1833,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -1891,12 +1857,12 @@ Table of Contents
 
    References             As specified in this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    This document does not introduce additional messages or novel
    protocol operations.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgements</span>
 
    We would like to thank the HAMcast team at the HAW Hamburg -- Nora
    Berg, Gabriel Hege, Fabian Holler, Alexander Knauf, Sebastian
@@ -1923,55 +1889,55 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC1075" name="ref-RFC1075">RFC1075</a>]  Waitzman, D., Partridge, C., and S. Deering, "Distance
+   [<a id="ref-RFC1075">RFC1075</a>]  Waitzman, D., Partridge, C., and S. Deering, "Distance
               Vector Multicast Routing Protocol", <a href="./rfc1075.html">RFC 1075</a>,
               November 1988.
 
-   [<a id="ref-RFC2710" name="ref-RFC2710">RFC2710</a>]  Deering, S., Fenner, W., and B. Haberman, "Multicast
+   [<a id="ref-RFC2710">RFC2710</a>]  Deering, S., Fenner, W., and B. Haberman, "Multicast
               Listener Discovery (MLD) for IPv6", <a href="./rfc2710.html">RFC 2710</a>,
               October 1999.
 
-   [<a id="ref-RFC3261" name="ref-RFC3261">RFC3261</a>]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
+   [<a id="ref-RFC3261">RFC3261</a>]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
               A., Peterson, J., Sparks, R., Handley, M., and E.
               Schooler, "SIP: Session Initiation Protocol", <a href="./rfc3261.html">RFC 3261</a>,
               June 2002.
 
-   [<a id="ref-RFC3376" name="ref-RFC3376">RFC3376</a>]  Cain, B., Deering, S., Kouvelas, I., Fenner, B., and A.
+   [<a id="ref-RFC3376">RFC3376</a>]  Cain, B., Deering, S., Kouvelas, I., Fenner, B., and A.
               Thyagarajan, "Internet Group Management Protocol,
               Version 3", <a href="./rfc3376.html">RFC 3376</a>, October 2002.
 
-   [<a id="ref-RFC3493" name="ref-RFC3493">RFC3493</a>]  Gilligan, R., Thomson, S., Bound, J., McCann, J., and W.
+   [<a id="ref-RFC3493">RFC3493</a>]  Gilligan, R., Thomson, S., Bound, J., McCann, J., and W.
               Stevens, "Basic Socket Interface Extensions for IPv6",
               <a href="./rfc3493.html">RFC 3493</a>, February 2003.
 
-   [<a id="ref-RFC3678" name="ref-RFC3678">RFC3678</a>]  Thaler, D., Fenner, B., and B. Quinn, "Socket Interface
+   [<a id="ref-RFC3678">RFC3678</a>]  Thaler, D., Fenner, B., and B. Quinn, "Socket Interface
               Extensions for Multicast Source Filters", <a href="./rfc3678.html">RFC 3678</a>,
               January 2004.
 
-   [<a id="ref-RFC3810" name="ref-RFC3810">RFC3810</a>]  Vida, R. and L. Costa, "Multicast Listener Discovery
+   [<a id="ref-RFC3810">RFC3810</a>]  Vida, R. and L. Costa, "Multicast Listener Discovery
               Version 2 (MLDv2) for IPv6", <a href="./rfc3810.html">RFC 3810</a>, June 2004.
 
-   [<a id="ref-RFC3986" name="ref-RFC3986">RFC3986</a>]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+   [<a id="ref-RFC3986">RFC3986</a>]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66,
               <a href="./rfc3986.html">RFC 3986</a>, January 2005.
 
-   [<a id="ref-RFC4395" name="ref-RFC4395">RFC4395</a>]  Hansen, T., Hardie, T., and L. Masinter, "Guidelines and
-              Registration Procedures for New URI Schemes", <a href="./bcp35.html">BCP 35</a>,
+   [<a id="ref-RFC4395">RFC4395</a>]  Hansen, T., Hardie, T., and L. Masinter, "Guidelines and
+              Registration Procedures for New URI Schemes", <a href="https://www.rfc-editor.org/bcp/bcp35">BCP 35</a>,
               <a href="./rfc4395.html">RFC 4395</a>, February 2006.
 
-   [<a id="ref-RFC4601" name="ref-RFC4601">RFC4601</a>]  Fenner, B., Handley, M., Holbrook, H., and I. Kouvelas,
+   [<a id="ref-RFC4601">RFC4601</a>]  Fenner, B., Handley, M., Holbrook, H., and I. Kouvelas,
               "Protocol Independent Multicast - Sparse Mode (PIM-SM):
               Protocol Specification (Revised)", <a href="./rfc4601.html">RFC 4601</a>, August 2006.
 
-   [<a id="ref-RFC4604" name="ref-RFC4604">RFC4604</a>]  Holbrook, H., Cain, B., and B. Haberman, "Using Internet
+   [<a id="ref-RFC4604">RFC4604</a>]  Holbrook, H., Cain, B., and B. Haberman, "Using Internet
               Group Management Protocol Version 3 (IGMPv3) and Multicast
               Listener Discovery Protocol Version 2 (MLDv2) for Source-
               Specific Multicast", <a href="./rfc4604.html">RFC 4604</a>, August 2006.
@@ -1979,80 +1945,80 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-   [<a id="ref-RFC5015" name="ref-RFC5015">RFC5015</a>]  Handley, M., Kouvelas, I., Speakman, T., and L. Vicisano,
+   [<a id="ref-RFC5015">RFC5015</a>]  Handley, M., Kouvelas, I., Speakman, T., and L. Vicisano,
               "Bidirectional Protocol Independent Multicast
               (BIDIR-PIM)", <a href="./rfc5015.html">RFC 5015</a>, October 2007.
 
-   [<a id="ref-RFC5058" name="ref-RFC5058">RFC5058</a>]  Boivie, R., Feldman, N., Imai, Y., Livens, W., and D.
+   [<a id="ref-RFC5058">RFC5058</a>]  Boivie, R., Feldman, N., Imai, Y., Livens, W., and D.
               Ooms, "Explicit Multicast (Xcast) Concepts and Options",
               <a href="./rfc5058.html">RFC 5058</a>, November 2007.
 
-   [<a id="ref-RFC5234" name="ref-RFC5234">RFC5234</a>]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
+   [<a id="ref-RFC5234">RFC5234</a>]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
               Specifications: ABNF", STD 68, <a href="./rfc5234.html">RFC 5234</a>, January 2008.
 
-   [<a id="ref-RFC6920" name="ref-RFC6920">RFC6920</a>]  Farrell, S., Kutscher, D., Dannewitz, C., Ohlman, B.,
+   [<a id="ref-RFC6920">RFC6920</a>]  Farrell, S., Kutscher, D., Dannewitz, C., Ohlman, B.,
               Keranen, A., and P. Hallam-Baker, "Naming Things with
               Hashes", <a href="./rfc6920.html">RFC 6920</a>, April 2013.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-AMT" name="ref-AMT">AMT</a>]      Bumgardner, G., <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22Automatic+Multicast+Tunneling%22" style="text-decoration: none">"Automatic Multicast Tunneling"</a>, Work
+   [<a id="ref-AMT">AMT</a>]      Bumgardner, G., <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22Automatic+Multicast+Tunneling%22" style="text-decoration: none">"Automatic Multicast Tunneling"</a>, Work
               in Progress, October 2013.
 
-   [<a id="ref-GC2010" name="ref-GC2010">GC2010</a>]   Meiling, S., Charousset, D., Schmidt, T., and M.
+   [<a id="ref-GC2010">GC2010</a>]   Meiling, S., Charousset, D., Schmidt, T., and M.
               Waehlisch, "System-assisted Service Evolution for a Future
               Internet - The HAMcast Approach to Pervasive Multicast",
               Proc. IEEE GLOBECOM 2010 Workshops, MCS 2010, pp. 913-917,
               Piscataway, NJ, USA, IEEE Press, December 2010.
 
-   [<a id="ref-HAMcast-DEV" name="ref-HAMcast-DEV">HAMcast-DEV</a>]
+   [<a id="ref-HAMcast-DEV">HAMcast-DEV</a>]
               "HAMcast developers",
               &lt;<a href="http://hamcast.realmv6.org/developers">http://hamcast.realmv6.org/developers</a>&gt;.
 
-   [<a id="ref-LCN2012" name="ref-LCN2012">LCN2012</a>]  Meiling, S., Schmidt, T., and M. Waehlisch, "Large-Scale
+   [<a id="ref-LCN2012">LCN2012</a>]  Meiling, S., Schmidt, T., and M. Waehlisch, "Large-Scale
               Measurement and Analysis of One-Way Delay in Hybrid
               Multicast Networks", Proc. 37th Annual IEEE Conference on
               Local Computer Networks (LCN 2012), Piscataway, NJ, USA,
               IEEE Press, October 2012.
 
-   [<a id="ref-MCAST-v4v6" name="ref-MCAST-v4v6">MCAST-v4v6</a>]
+   [<a id="ref-MCAST-v4v6">MCAST-v4v6</a>]
               Venaas, S., Asaeda, H., SUZUKI, S., and T. Fujisaki, "An
               IPv4 - IPv6 multicast translator", Work in Progress,
               December 2010.
 
-   [<a id="ref-MCAST-v4v6-FRAMEWORK" name="ref-MCAST-v4v6-FRAMEWORK">MCAST-v4v6-FRAMEWORK</a>]
+   [<a id="ref-MCAST-v4v6-FRAMEWORK">MCAST-v4v6-FRAMEWORK</a>]
               Venaas, S., Li, X., and C. Bao, "Framework for IPv4/IPv6
               Multicast Translation", Work in Progress, June 2011.
 
-   [<a id="ref-RELOAD" name="ref-RELOAD">RELOAD</a>]   Jennings, C., Lowekamp, B., Ed., Rescorla, E., Baset, S.,
+   [<a id="ref-RELOAD">RELOAD</a>]   Jennings, C., Lowekamp, B., Ed., Rescorla, E., Baset, S.,
               and H. Schulzrinne, "REsource LOcation And Discovery
               (RELOAD) Base Protocol", Work in Progress, February 2013.
 
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-   [<a id="ref-RFC5757" name="ref-RFC5757">RFC5757</a>]  Schmidt, T., Waehlisch, M., and G. Fairhurst, "Multicast
+   [<a id="ref-RFC5757">RFC5757</a>]  Schmidt, T., Waehlisch, M., and G. Fairhurst, "Multicast
               Mobility in Mobile IP Version 6 (MIPv6): Problem Statement
               and Brief Survey", <a href="./rfc5757.html">RFC 5757</a>, February 2010.
 
-   [<a id="ref-RFC6219" name="ref-RFC6219">RFC6219</a>]  Li, X., Bao, C., Chen, M., Zhang, H., and J. Wu, "The
+   [<a id="ref-RFC6219">RFC6219</a>]  Li, X., Bao, C., Chen, M., Zhang, H., and J. Wu, "The
               China Education and Research Network (CERNET) IVI
               Translation Design and Deployment for the IPv4/IPv6
               Coexistence and Transition", <a href="./rfc6219.html">RFC 6219</a>, May 2011.
 
-   [<a id="ref-RFC7019" name="ref-RFC7019">RFC7019</a>]  Buford, J. and M. Kolberg, "Application-Layer Multicast
+   [<a id="ref-RFC7019">RFC7019</a>]  Buford, J. and M. Kolberg, "Application-Layer Multicast
               Extensions to REsource LOcation And Discovery (RELOAD)",
               <a href="./rfc7019.html">RFC 7019</a>, September 2013.
 
-   [<a id="ref-SIP-RELOAD" name="ref-SIP-RELOAD">SIP-RELOAD</a>]
+   [<a id="ref-SIP-RELOAD">SIP-RELOAD</a>]
               Jennings, C., Lowekamp, B., Rescorla, E., Baset, S.,
               Schulzrinne, H., and T. Schmidt, Ed., "A SIP Usage for
               RELOAD", Work in Progress, July 2013.
@@ -2091,11 +2057,11 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20C%20Signatures"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  C Signatures</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20C%20Signatures"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  C Signatures</span>
 
    This section describes the C signatures of the common multicast API
    (<a href="#section-4">Section 4</a>).
@@ -2147,7 +2113,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -2203,11 +2169,11 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Use%20Case%20for%20the%20API"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Use Case for the API</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Use%20Case%20for%20the%20API"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Use Case for the API</span>
 
    For the sake of readability, we demonstrate development of
    applications using the API based on a high-level Java-like syntax; we
@@ -2259,16 +2225,16 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20C.%20%20Deployment%20Use%20Cases%20for%20Hybrid%20Multicast"></a></body></html><a class="selflink" href="#appendix-C" name="appendix-C">Appendix C</a>.  Deployment Use Cases for Hybrid Multicast</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20C.%20%20Deployment%20Use%20Cases%20for%20Hybrid%20Multicast"></a></body></html><a class="selflink" href="#appendix-C" id="appendix-C">Appendix C</a>.  Deployment Use Cases for Hybrid Multicast</span>
 
    This section describes the application of the defined API to
    implement an IMG.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.1.%20%20DVMRP"></a></body></html><a class="selflink" href="#appendix-C.1" name="appendix-C.1">C.1</a>.  DVMRP</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.1.%20%20DVMRP"></a></body></html><a class="selflink" href="#appendix-C.1" id="appendix-C.1">C.1</a>.  DVMRP</span>
 
    The following procedure describes a transparent mapping of a
    DVMRP-based any-source multicast service to another many-to-many
@@ -2299,7 +2265,7 @@ Table of Contents
    multicast receivers.  Subsequent prunes may limit unwanted data
    distribution thereafter.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.2.%20%20PIM-SM"></a></body></html><a class="selflink" href="#appendix-C.2" name="appendix-C.2">C.2</a>.  PIM-SM</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.2.%20%20PIM-SM"></a></body></html><a class="selflink" href="#appendix-C.2" id="appendix-C.2">C.2</a>.  PIM-SM</span>
 
    The following procedure describes a transparent mapping of a
    PIM-SM-based any-source multicast service to another many-to-many
@@ -2315,7 +2281,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -2331,7 +2297,7 @@ Table of Contents
    forwarded in the underlay network and distributed through the RP
    instance.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.3.%20%20PIM-SSM"></a></body></html><a class="selflink" href="#appendix-C.3" name="appendix-C.3">C.3</a>.  PIM-SSM</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.3.%20%20PIM-SSM"></a></body></html><a class="selflink" href="#appendix-C.3" id="appendix-C.3">C.3</a>.  PIM-SSM</span>
 
    The following procedure describes a transparent mapping of a
    PIM-SSM-based source-specific multicast service to another
@@ -2371,11 +2337,11 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.4.%20%20BIDIR-PIM"></a></body></html><a class="selflink" href="#appendix-C.4" name="appendix-C.4">C.4</a>.  BIDIR-PIM</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.4.%20%20BIDIR-PIM"></a></body></html><a class="selflink" href="#appendix-C.4" id="appendix-C.4">C.4</a>.  BIDIR-PIM</span>
 
    The following procedure describes a transparent mapping of a
    BIDIR-PIM-based any-source multicast service to another many-to-many
@@ -2427,7 +2393,7 @@ Table of Contents
 
 
 <span class="grey">Waehlisch, et al.             Experimental                     [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc7046.html">RFC 7046</a>                    Common Mcast API               December 2013</span>
 
 
@@ -2483,11 +2449,6 @@ Authors' Addresses
 
 
 Waehlisch, et al.             Experimental                     [Page 41]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

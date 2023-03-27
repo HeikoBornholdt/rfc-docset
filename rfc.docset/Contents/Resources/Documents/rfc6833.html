@@ -1,33 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-fuller-lisp-ms" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:6833" name="DC.Identifier"/>
-<meta content="January, 2013" name="DC.Date.Issued"/>
-<meta content="Fuller, Vince" name="DC.Creator"/>
-<meta content="Farinacci, Dino" name="DC.Creator"/>
-<meta content='This document describes the Mapping Service for the Locator/ID
-Separation Protocol (LISP), implemented by two new types of LISP-
-speaking devices -- the LISP Map-Resolver and LISP Map-Server -- that
-provides a simplified "front end" for one or more Endpoint ID to
-Routing Locator mapping databases.  By using this service interface
-and communicating with Map-Resolvers and Map-Servers, LISP Ingress
-Tunnel Routers and Egress Tunnel Routers are not dependent on the
-details of mapping database systems, which facilitates experimentation
-with different database designs. Since these devices implement the
-"edge" of the LISP infrastructure, connect directly to LISP-capable
-Internet end sites, and comprise the bulk of LISP-speaking devices,
-reducing their implementation and operational complexity should also
-reduce the overall cost and effort of deploying LISP. This document
-defines an Experimental Protocol for the Internet community.' name="DC.Description.Abstract"/>
-<meta content="Locator/ID Separation Protocol (LISP) Map-Server Interface" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6833 - Locator/ID Separation Protocol (LISP) Map-Server Interface</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="V. Fuller" name="citation_author"/>
+<meta content="D. Farinacci" name="citation_author"/>
+<meta content="January, 2013" name="citation_publication_date"/>
+<meta content="Locator/ID Separation Protocol (LISP) Map-Server Interface" name="citation_title"/>
+<meta content="10.17487/RFC6833" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6833" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6833.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6833: Locator/ID Separation Protocol (LISP) Map-Server Interface</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -56,7 +41,7 @@ defines an Experimental Protocol for the Internet community.' name="DC.Descripti
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -65,7 +50,7 @@ defines an Experimental Protocol for the Internet community.' name="DC.Descripti
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -144,19 +129,18 @@ defines an Experimental Protocol for the Internet community.' name="DC.Descripti
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -170,21 +154,9 @@ defines an Experimental Protocol for the Internet community.' name="DC.Descripti
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgyellow" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6833.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6833" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-lisp-ms.html" title="draft-ietf-lisp-ms">draft-ietf-lisp-ms</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6833" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6833" title="Side-by-side diff">Diff2</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6833&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>]             </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                         V. Fuller
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6833.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6833.txt.pdf">PDF</a>|<a href="/rfc/rfc6833.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6833" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6833&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6833" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">Obsoleted by: <a href="/rfc/rfc9301" target="_blank">9301</a>                                          EXPERIMENTAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                         V. Fuller
 Request for Comments: 6833
 Category: Experimental                                      D. Farinacci
 ISSN: 2070-1721                                            Cisco Systems
@@ -236,7 +208,7 @@ Status of This Memo
 
 
 <span class="grey">Fuller &amp; Farinacci            Experimental                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6833.html">RFC 6833</a>                LISP Map-Server Interface           January 2013</span>
 
 
@@ -245,7 +217,7 @@ Copyright Notice
    Copyright (c) 2013 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -273,7 +245,7 @@ Table of Contents
       <a href="#section-7.2">7.2</a>. Informative References ....................................<a href="#page-12">12</a>
    <a href="#appendix-A">Appendix A</a>. Acknowledgments .......................................<a href="#page-13">13</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    The Locator/ID Separation Protocol [<a href="./rfc6830.html" title='"The Locator/ID Separation Protocol (LISP)"'>RFC6830</a>] specifies an
    architecture and mechanism for replacing the addresses currently used
@@ -292,7 +264,7 @@ Table of Contents
 
 
 <span class="grey">Fuller &amp; Farinacci            Experimental                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6833.html">RFC 6833</a>                LISP Map-Server Interface           January 2013</span>
 
 
@@ -324,7 +296,7 @@ Table of Contents
    toolset.  Issues and concerns about the deployment of LISP for
    Internet traffic are discussed in [<a href="./rfc6830.html" title='"The Locator/ID Separation Protocol (LISP)"'>RFC6830</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Definition%20of%20Terms"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Definition of Terms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Definition%20of%20Terms"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Definition of Terms</span>
 
    Map-Server:   A network infrastructure component that learns of
       EID-Prefix mapping entries from an ETR, via the registration
@@ -348,7 +320,7 @@ Table of Contents
 
 
 <span class="grey">Fuller &amp; Farinacci            Experimental                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6833.html">RFC 6833</a>                LISP Map-Server Interface           January 2013</span>
 
 
@@ -385,7 +357,7 @@ Table of Contents
    Ingress Tunnel Router (ITR), and Egress Tunnel Router (ETR) -- please
    consult the LISP specification [<a href="./rfc6830.html" title='"The Locator/ID Separation Protocol (LISP)"'>RFC6830</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Basic%20Overview"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Basic Overview</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Basic%20Overview"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Basic Overview</span>
 
    A Map-Server is a device that publishes EID-Prefixes in a LISP
    mapping database on behalf of a set of ETRs.  When it receives a Map
@@ -404,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Fuller &amp; Farinacci            Experimental                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6833.html">RFC 6833</a>                LISP Map-Server Interface           January 2013</span>
 
 
@@ -438,9 +410,9 @@ Table of Contents
    Detailed descriptions of the LISP packet types referenced by this
    document may be found in [<a href="./rfc6830.html" title='"The Locator/ID Separation Protocol (LISP)"'>RFC6830</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Interactions%20with%20Other%20LISP%20Components"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Interactions with Other LISP Components</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Interactions%20with%20Other%20LISP%20Components"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Interactions with Other LISP Components</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20ITR%20EID-to-RLOC%20Mapping%20Resolution"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  ITR EID-to-RLOC Mapping Resolution</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20ITR%20EID-to-RLOC%20Mapping%20Resolution"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  ITR EID-to-RLOC Mapping Resolution</span>
 
    An ITR is configured with one or more Map-Resolver addresses.  These
    addresses are "Locators" (or RLOCs) and must be routable on the
@@ -460,7 +432,7 @@ Table of Contents
 
 
 <span class="grey">Fuller &amp; Farinacci            Experimental                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6833.html">RFC 6833</a>                LISP Map-Server Interface           January 2013</span>
 
 
@@ -502,7 +474,7 @@ Table of Contents
    database to verify that an EID-Prefix is present before sending that
    Map-Request.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20EID-Prefix%20Configuration%20and%20ETR%20Registration"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  EID-Prefix Configuration and ETR Registration</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20EID-Prefix%20Configuration%20and%20ETR%20Registration"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  EID-Prefix Configuration and ETR Registration</span>
 
    An ETR publishes its EID-Prefixes on a Map-Server by sending LISP
    Map-Register messages.  A Map-Register message includes
@@ -516,7 +488,7 @@ Table of Contents
 
 
 <span class="grey">Fuller &amp; Farinacci            Experimental                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6833.html">RFC 6833</a>                LISP Map-Server Interface           January 2013</span>
 
 
@@ -572,7 +544,7 @@ Table of Contents
 
 
 <span class="grey">Fuller &amp; Farinacci            Experimental                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6833.html">RFC 6833</a>                LISP Map-Server Interface           January 2013</span>
 
 
@@ -604,7 +576,7 @@ Table of Contents
    as the whole purpose of using a Map-Server is to avoid the complexity
    of the mapping database protocols.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Map-Server%20Processing"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Map-Server Processing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Map-Server%20Processing"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Map-Server Processing</span>
 
    Once a Map-Server has EID-Prefixes registered by its client ETRs, it
    can accept and process Map-Requests for them.
@@ -628,7 +600,7 @@ Table of Contents
 
 
 <span class="grey">Fuller &amp; Farinacci            Experimental                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6833.html">RFC 6833</a>                LISP Map-Server Interface           January 2013</span>
 
 
@@ -647,7 +619,7 @@ Table of Contents
    perhaps accompanied by the logging of a diagnostic message if the
    rate of Map-Replies is suggestive of malicious traffic.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Map-Resolver%20Processing"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Map-Resolver Processing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Map-Resolver%20Processing"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Map-Resolver Processing</span>
 
    Upon receipt of an Encapsulated Map-Request, a Map-Resolver
    decapsulates the enclosed message and then searches for the requested
@@ -684,11 +656,11 @@ Table of Contents
 
 
 <span class="grey">Fuller &amp; Farinacci            Experimental                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6833.html">RFC 6833</a>                LISP Map-Server Interface           January 2013</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Anycast%20Map-Resolver%20Operation"></a></body></html><a class="selflink" href="#section-4.4.1" name="section-4.4.1">4.4.1</a>.  Anycast Map-Resolver Operation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Anycast%20Map-Resolver%20Operation"></a></body></html><a class="selflink" href="#section-4.4.1" id="section-4.4.1">4.4.1</a>.  Anycast Map-Resolver Operation</span>
 
    A Map-Resolver can be set up to use "anycast", where the same address
    is assigned to multiple Map-Resolvers and is propagated through IGP
@@ -700,7 +672,7 @@ Table of Contents
    a specific set of Map-Servers, each identified by a specific
    registration association.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Open%20Issues%20and%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Open Issues and Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Open%20Issues%20and%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Open Issues and Considerations</span>
 
    There are a number of issues with the Map-Server and Map-Resolver
    design that are not yet completely understood.  Among these are:
@@ -740,11 +712,11 @@ Table of Contents
 
 
 <span class="grey">Fuller &amp; Farinacci            Experimental                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6833.html">RFC 6833</a>                LISP Map-Server Interface           January 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    The 2-way LISP header nonce exchange documented in [<a href="./rfc6830.html" title='"The Locator/ID Separation Protocol (LISP)"'>RFC6830</a>] can be
    used to avoid ITR spoofing attacks.
@@ -758,7 +730,7 @@ Table of Contents
    During experimental and prototype deployment, all authentication key
    configuration will be manual.  Should LISP and its components be
    considered for IETF standardization, further work will be required to
-   follow the <a href="./bcp107.html">BCP 107</a> [<a href="./rfc4107.html" title='"Guidelines for Cryptographic Key Management"'>RFC4107</a>] recommendations on automated key
+   follow the <a href="https://www.rfc-editor.org/bcp/bcp107">BCP 107</a> [<a href="./rfc4107.html" title='"Guidelines for Cryptographic Key Management"'>RFC4107</a>] recommendations on automated key
    management.
 
    As noted in <a href="#section-4.2">Section 4.2</a>, a Map-Server should verify that all
@@ -769,7 +741,7 @@ Table of Contents
    messages does not provide protection against "replay" attacks by a
    "man-in-the-middle".  Additional work is needed in this area.
 
-   [<a id="ref-LISP-SEC" name="ref-LISP-SEC">LISP-SEC</a>] defines a proposed mechanism for providing origin
+   [<a id="ref-LISP-SEC">LISP-SEC</a>] defines a proposed mechanism for providing origin
    authentication, integrity, anti-replay protection, and prevention of
    man-in-the-middle and "overclaiming" attacks on the Map-Request/
    Map-Reply exchange.  Work is ongoing on this and other proposals for
@@ -796,51 +768,51 @@ Table of Contents
 
 
 <span class="grey">Fuller &amp; Farinacci            Experimental                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6833.html">RFC 6833</a>                LISP Map-Server Interface           January 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC1035" name="ref-RFC1035">RFC1035</a>]    Mockapetris, P., "Domain names - implementation and
+   [<a id="ref-RFC1035">RFC1035</a>]    Mockapetris, P., "Domain names - implementation and
                 specification", STD 13, <a href="./rfc1035.html">RFC 1035</a>, November 1987.
 
-   [<a id="ref-RFC2104" name="ref-RFC2104">RFC2104</a>]    Krawczyk, H., Bellare, M., and R. Canetti, "HMAC: Keyed-
+   [<a id="ref-RFC2104">RFC2104</a>]    Krawczyk, H., Bellare, M., and R. Canetti, "HMAC: Keyed-
                 Hashing for Message Authentication", <a href="./rfc2104.html">RFC 2104</a>,
                 February 1997.
 
-   [<a id="ref-RFC6234" name="ref-RFC6234">RFC6234</a>]    Eastlake, D. and T. Hansen, "US Secure Hash Algorithms
+   [<a id="ref-RFC6234">RFC6234</a>]    Eastlake, D. and T. Hansen, "US Secure Hash Algorithms
                 (SHA and SHA-based HMAC and HKDF)", <a href="./rfc6234.html">RFC 6234</a>, May 2011.
 
-   [<a id="ref-RFC6830" name="ref-RFC6830">RFC6830</a>]    Farinacci, D., Fuller, V., Meyer, D., and D. Lewis, "The
+   [<a id="ref-RFC6830">RFC6830</a>]    Farinacci, D., Fuller, V., Meyer, D., and D. Lewis, "The
                 Locator/ID Separation Protocol (LISP)", <a href="./rfc6830.html">RFC 6830</a>,
                 January 2013.
 
-   [<a id="ref-RFC6836" name="ref-RFC6836">RFC6836</a>]    Farinacci, D., Fuller, V., Meyer, D., and D. Lewis,
+   [<a id="ref-RFC6836">RFC6836</a>]    Farinacci, D., Fuller, V., Meyer, D., and D. Lewis,
                 "Locator/ID Separation Protocol Alternative Logical
                 Topology (LISP+ALT)", <a href="./rfc6836.html">RFC 6836</a>, January 2013.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Informative References</span>
 
-   [<a id="ref-LISP-CONS" name="ref-LISP-CONS">LISP-CONS</a>]  Brim, S., Chiappa, N., Farinacci, D., Fuller, V., Lewis,
+   [<a id="ref-LISP-CONS">LISP-CONS</a>]  Brim, S., Chiappa, N., Farinacci, D., Fuller, V., Lewis,
                 D., and D. Meyer, "LISP-CONS: A Content distribution
                 Overlay Network Service for LISP", Work in Progress,
                 April 2008.
 
-   [<a id="ref-LISP-MN" name="ref-LISP-MN">LISP-MN</a>]    Farinacci, D., Lewis, D., Meyer, D., and C. White, "LISP
+   [<a id="ref-LISP-MN">LISP-MN</a>]    Farinacci, D., Lewis, D., Meyer, D., and C. White, "LISP
                 Mobile Node", Work in Progress, October 2012.
 
-   [<a id="ref-LISP-SEC" name="ref-LISP-SEC">LISP-SEC</a>]   Maino, F., Ermagan, V., Cabellos, A., Saucez, D., and O.
+   [<a id="ref-LISP-SEC">LISP-SEC</a>]   Maino, F., Ermagan, V., Cabellos, A., Saucez, D., and O.
                 Bonaventure, "LISP-Security (LISP-SEC)", Work
                 in Progress, October 2012.
 
-   [<a id="ref-RFC4107" name="ref-RFC4107">RFC4107</a>]    Bellovin, S. and R. Housley, "Guidelines for
-                Cryptographic Key Management", <a href="./bcp107.html">BCP 107</a>, <a href="./rfc4107.html">RFC 4107</a>,
+   [<a id="ref-RFC4107">RFC4107</a>]    Bellovin, S. and R. Housley, "Guidelines for
+                Cryptographic Key Management", <a href="https://www.rfc-editor.org/bcp/bcp107">BCP 107</a>, <a href="./rfc4107.html">RFC 4107</a>,
                 June 2005.
 
-   [<a id="ref-RFC6837" name="ref-RFC6837">RFC6837</a>]    Lear, E., "NERD: A Not-so-novel Endpoint ID (EID) to
+   [<a id="ref-RFC6837">RFC6837</a>]    Lear, E., "NERD: A Not-so-novel Endpoint ID (EID) to
                 Routing Locator (RLOC) Database", <a href="./rfc6837.html">RFC 6837</a>,
                 January 2013.
 
@@ -852,11 +824,11 @@ Table of Contents
 
 
 <span class="grey">Fuller &amp; Farinacci            Experimental                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6833.html">RFC 6833</a>                LISP Map-Server Interface           January 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Acknowledgments</span>
 
    The authors would like to thank Gregg Schudel, Darrel Lewis, John
    Zwiebel, Andrew Partan, Dave Meyer, Isidor Kouvelas, Jesper Skriver,
@@ -908,11 +880,6 @@ Authors' Addresses
 
 
 Fuller &amp; Farinacci            Experimental                     [Page 13]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,34 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-mahy-sip-connect-reuse" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5923" name="DC.Identifier"/>
-<meta content="June, 2010" name="DC.Date.Issued"/>
-<meta content="Gurbani, Vijay K." name="DC.Creator"/>
-<meta content="Mahy, Rohan" name="DC.Creator"/>
-<meta content="Tate, Brett" name="DC.Creator"/>
-<meta content="This document enables a pair of communicating proxies to reuse a
-congestion-controlled connection between themselves for sending
-requests in the forward and backwards direction. Because the
-connection is essentially aliased for requests going in the backwards
-direction, reuse should be predicated upon both the communicating
-endpoints authenticating themselves using X.509 certificates through
-TLS. For this reason, we only consider connection reuse for TLS over
-TCP and TLS over SCTP. A single connection should not be reused for
-the TCP or SCTP transport between two peers, and this document
-provides insight into why this is the case. As a remedy, it suggests
-using two TCP connections (or two SCTP associations), each opened pro-
-actively towards the recipient by the sender. Finally, this document
-also provides guidelines on connection reuse and virtual SIP servers
-and the interaction of connection reuse and DNS SRV lookups in SIP." name="DC.Description.Abstract"/>
-<meta content="Connection Reuse in the Session Initiation Protocol (SIP)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5923 - Connection Reuse in the Session Initiation Protocol (SIP)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="V. Gurbani" name="citation_author"/>
+<meta content="R. Mahy" name="citation_author"/>
+<meta content="B. Tate" name="citation_author"/>
+<meta content="June, 2010" name="citation_publication_date"/>
+<meta content="Connection Reuse in the Session Initiation Protocol (SIP)" name="citation_title"/>
+<meta content="10.17487/RFC5923" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5923" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5923.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5923: Connection Reuse in the Session Initiation Protocol (SIP)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -57,7 +42,7 @@ and the interaction of connection reuse and DNS SRV lookups in SIP." name="DC.De
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -66,7 +51,7 @@ and the interaction of connection reuse and DNS SRV lookups in SIP." name="DC.De
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -145,19 +130,18 @@ and the interaction of connection reuse and DNS SRV lookups in SIP." name="DC.De
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -171,21 +155,9 @@ and the interaction of connection reuse and DNS SRV lookups in SIP." name="DC.De
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5923.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5923" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-sip-connect-reuse.html" title="draft-ietf-sip-connect-reuse">draft-ietf-sip-co...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5923" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5923" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5923">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                   V. Gurbani, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5923.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5923.txt.pdf">PDF</a>|<a href="/rfc/rfc5923.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5923" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5923&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5923" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5923" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Engineering Task Force (IETF)                   V. Gurbani, Ed.
 Request for Comments: 5923             Bell Laboratories, Alcatel-Lucent
 Category: Standards Track                                        R. Mahy
 ISSN: 2070-1721                                             Unaffiliated
@@ -237,7 +209,7 @@ Status of This Memo
 
 
 <span class="grey">Gurbani, et al.              Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
@@ -246,7 +218,7 @@ Copyright Notice
    Copyright (c) 2010 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -293,11 +265,11 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    SIP entities can communicate using either unreliable/connectionless
    (e.g., UDP) or reliable/connection-oriented (e.g., TCP, SCTP
@@ -349,7 +321,7 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
@@ -357,7 +329,7 @@ Table of Contents
    send a request to B, it will reuse this connection, and when B wants
    to send a request to A, it will reuse the same connection.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -405,11 +377,11 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Applicability%20Statement"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Applicability Statement</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Applicability%20Statement"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Applicability Statement</span>
 
    The applicability of the mechanism described in this document is for
    two adjacent SIP entities to reuse connections when they are agnostic
@@ -431,7 +403,7 @@ Table of Contents
    certificates can be reused because they authoritatively establish
    identities of the communicating parties (see <a href="#section-5">Section 5</a>).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Benefits%20of%20TLS%20Connection%20Reuse"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Benefits of TLS Connection Reuse</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Benefits%20of%20TLS%20Connection%20Reuse"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Benefits of TLS Connection Reuse</span>
 
    Opening an extra connection where an existing one is sufficient can
    result in potential scaling and performance problems.  Each new
@@ -461,7 +433,7 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
@@ -504,7 +476,7 @@ Table of Contents
    The mechanism described in this document can mitigate the delays
    associated with subsequent requests.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Overview%20of%20Operation"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Overview of Operation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Overview%20of%20Operation"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Overview of Operation</span>
 
    This section is tutorial in nature, and does not specify any
    normative behavior.
@@ -517,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
@@ -573,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
@@ -629,7 +601,7 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
@@ -685,7 +657,7 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                    [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
@@ -718,7 +690,7 @@ Table of Contents
        However, the aliased connection is to be established with the
        original sender of the request.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Requirements"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Requirements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Requirements"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Requirements</span>
 
    The following are the requirements that motivated this specification:
 
@@ -741,7 +713,7 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                   [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
@@ -752,7 +724,7 @@ Table of Contents
        connection reuse.  Hop-by-hop connection sharing is more
        appropriate.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Formal%20Syntax"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Formal Syntax</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Formal%20Syntax"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Formal Syntax</span>
 
    The following syntax specification uses the augmented Backus-Naur
    Form (BNF) as described in <a href="./rfc5234.html">RFC 5234</a> [<a href="./rfc5234.html" title='"Augmented BNF for Syntax Specifications: ABNF"'>RFC5234</a>].  This document extends
@@ -761,9 +733,9 @@ Table of Contents
       via-params =/ via-alias
       via-alias  =  "alias"
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Normative%20Behavior"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Normative Behavior</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Normative%20Behavior"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Normative Behavior</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Client%20Behavior"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Client Behavior</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Client%20Behavior"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Client Behavior</span>
 
    Clients <em>SHOULD</em> keep connections up as long as they are needed.
    Connection reuse works best when the client and the server maintain
@@ -797,7 +769,7 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                   [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
@@ -853,11 +825,11 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                   [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Server%20Behavior"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Server Behavior</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Server%20Behavior"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Server Behavior</span>
 
    Servers <em>SHOULD</em> keep connections up unless they need to reclaim
    resources.  Connection reuse works best when the client and the
@@ -909,7 +881,7 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                   [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
@@ -931,7 +903,7 @@ Table of Contents
        identities stored in the alias table row corresponding to that
        resolved address.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.3.%20%20Closing%20a%20TLS%20connection"></a></body></html><a class="selflink" href="#section-8.3" name="section-8.3">8.3</a>.  Closing a TLS connection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.3.%20%20Closing%20a%20TLS%20connection"></a></body></html><a class="selflink" href="#section-8.3" id="section-8.3">8.3</a>.  Closing a TLS connection</span>
 
    Either the client or the server may terminate a TLS session by
    sending a TLS closure alert.  Before closing a TLS connection, the
@@ -943,7 +915,7 @@ Table of Contents
    its peer.  The receiver of the closure alert <em>MUST NOT</em> start any new
    SIP transactions after the receipt of the closure alert.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Security Considerations</span>
 
    This document presents requirements and a mechanism for reusing
    existing connections easily.  Unauthenticated connection reuse would
@@ -953,7 +925,7 @@ Table of Contents
    multiuser system could attempt to hijack SIP requests destined for
    the well-known SIP port from a large relay proxy.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Authenticating%20TLS%20Connections%3A%20Client%20View"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Authenticating TLS Connections: Client View</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Authenticating%20TLS%20Connections%3A%20Client%20View"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Authenticating TLS Connections: Client View</span>
 
    When a TLS client establishes a connection with a server, it is
    presented with the server's X.509 certificate.  Authentication
@@ -965,11 +937,11 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                   [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Authenticating%20TLS%20Connections%3A%20Server%20View"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Authenticating TLS Connections: Server View</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Authenticating%20TLS%20Connections%3A%20Server%20View"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Authenticating TLS Connections: Server View</span>
 
    A TLS server conformant to this specification <em>MUST</em> ask for a client
    certificate; if the client possesses a certificate, it will be
@@ -982,7 +954,7 @@ Table of Contents
    topmost Via header.  In this case, the server <em>MUST NOT</em> update the
    alias table.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.3.%20%20Connection%20Reuse%20and%20Virtual%20Servers"></a></body></html><a class="selflink" href="#section-9.3" name="section-9.3">9.3</a>.  Connection Reuse and Virtual Servers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.3.%20%20Connection%20Reuse%20and%20Virtual%20Servers"></a></body></html><a class="selflink" href="#section-9.3" id="section-9.3">9.3</a>.  Connection Reuse and Virtual Servers</span>
 
    Virtual servers present special considerations for connection reuse.
    Under the name-based virtual server scheme, one SIP proxy can host
@@ -1021,7 +993,7 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                   [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
@@ -1077,11 +1049,11 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                   [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Connection%20Reuse%20and%20SRV%20Interaction"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Connection Reuse and SRV Interaction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Connection%20Reuse%20and%20SRV%20Interaction"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Connection Reuse and SRV Interaction</span>
 
    Connection reuse has an interaction with the DNS SRV load balancing
    mechanism.  To understand the interaction, consider the following
@@ -1102,7 +1074,7 @@ Table of Contents
    done, subsequent traffic is load balanced across the three downstream
    servers in the normal manner.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  IANA Considerations</span>
 
    This specification defines a new Via header field parameter called
    "alias" in the "Header Field Parameters and Parameter Values" sub-
@@ -1113,7 +1085,7 @@ Table of Contents
    ___________________________________________________________________
    Via           alias                 No           <a href="./rfc5923.html">RFC5923</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-12" name="section-12">12</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-12" id="section-12">12</a>.  Acknowledgments</span>
 
    Thanks to Jon Peterson for helpful answers about certificate behavior
    with SIP, Jonathan Rosenberg for his initial support of this concept,
@@ -1133,63 +1105,63 @@ Table of Contents
 
 
 <span class="grey">Gurbani, et al.              Standards Track                   [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.%20%20References"></a></body></html><a class="selflink" href="#section-13" name="section-13">13</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.%20%20References"></a></body></html><a class="selflink" href="#section-13" id="section-13">13</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-13.1" name="section-13.1">13.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-13.1" id="section-13.1">13.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC3261" name="ref-RFC3261">RFC3261</a>]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
+   [<a id="ref-RFC3261">RFC3261</a>]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
               A., Peterson, J., Sparks, R., Handley, M., and E.
               Schooler, "SIP: Session Initiation Protocol", <a href="./rfc3261.html">RFC 3261</a>,
               June 2002.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC5246" name="ref-RFC5246">RFC5246</a>]  Dierks, T. and E. Rescorla, "The Transport Layer Security
+   [<a id="ref-RFC5246">RFC5246</a>]  Dierks, T. and E. Rescorla, "The Transport Layer Security
               (TLS) Protocol Version 1.2", <a href="./rfc5246.html">RFC 5246</a>, August 2008.
 
-   [<a id="ref-RFC3263" name="ref-RFC3263">RFC3263</a>]  Rosenberg, J. and H. Schulzrinne, "Session Initiation
+   [<a id="ref-RFC3263">RFC3263</a>]  Rosenberg, J. and H. Schulzrinne, "Session Initiation
               Protocol (SIP): Locating SIP Servers", <a href="./rfc3263.html">RFC 3263</a>,
               June 2002.
 
-   [<a id="ref-RFC5234" name="ref-RFC5234">RFC5234</a>]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
+   [<a id="ref-RFC5234">RFC5234</a>]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
               Specifications: ABNF", <a href="./rfc5234.html">RFC 5234</a>, January 2008.
 
-   [<a id="ref-RFC5922" name="ref-RFC5922">RFC5922</a>]  Gurbani, V., Lawrence, S., and B. Laboratories, "Domain
+   [<a id="ref-RFC5922">RFC5922</a>]  Gurbani, V., Lawrence, S., and B. Laboratories, "Domain
               Certificates in the Session Initiation Protocol (SIP)",
               <a href="./rfc5922.html">RFC 5922</a>, June 2010.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-13.2" name="section-13.2">13.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-13.2" id="section-13.2">13.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC3968" name="ref-RFC3968">RFC3968</a>]  Camarillo, G., "The Internet Assigned Number Authority
+   [<a id="ref-RFC3968">RFC3968</a>]  Camarillo, G., "The Internet Assigned Number Authority
               (IANA) Header Field Parameter Registry for the Session
-              Initiation Protocol (SIP)", <a href="./bcp98.html">BCP 98</a>, <a href="./rfc3968.html">RFC 3968</a>,
+              Initiation Protocol (SIP)", <a href="https://www.rfc-editor.org/bcp/bcp98">BCP 98</a>, <a href="./rfc3968.html">RFC 3968</a>,
               December 2004.
 
-   [<a id="ref-RFC5626" name="ref-RFC5626">RFC5626</a>]  Jennings, C., Mahy, R., and F. Audet, "Managing Client-
+   [<a id="ref-RFC5626">RFC5626</a>]  Jennings, C., Mahy, R., and F. Audet, "Managing Client-
               Initiated Connections in the Session Initiation Protocol
               (SIP)", <a href="./rfc5626.html">RFC 5626</a>, October 2009.
 
-   [<a id="ref-Book-Rescorla-TLS" name="ref-Book-Rescorla-TLS">Book-Rescorla-TLS</a>]
+   [<a id="ref-Book-Rescorla-TLS">Book-Rescorla-TLS</a>]
               Rescorla, E., "SSL and TLS: Designing and Building Secure
               Systems", Addison-Wesley Publishing, 2001.
 
-   [<a id="ref-RFC3725" name="ref-RFC3725">RFC3725</a>]  Rosenberg, J., Peterson, J., Schulzrinne, H., and G.
+   [<a id="ref-RFC3725">RFC3725</a>]  Rosenberg, J., Peterson, J., Schulzrinne, H., and G.
               Camarillo, "Best Current Practices for Third Party Call
               Control (3pcc) in the Session Initiation Protocol (SIP)",
-              <a href="./bcp85.html">BCP 85</a>, <a href="./rfc3725.html">RFC 3725</a>, April 2004.
+              <a href="https://www.rfc-editor.org/bcp/bcp85">BCP 85</a>, <a href="./rfc3725.html">RFC 3725</a>, April 2004.
 
-   [<a id="ref-RFC4960" name="ref-RFC4960">RFC4960</a>]  Stewart, R., "Stream Control Transmission Protocol",
+   [<a id="ref-RFC4960">RFC4960</a>]  Stewart, R., "Stream Control Transmission Protocol",
               <a href="./rfc4960.html">RFC 4960</a>, September 2007.
 
 
 
 <span class="grey">Gurbani, et al.              Standards Track                   [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5923.html">RFC 5923</a>                  SIP Connection Reuse                 June 2010</span>
 
 
@@ -1245,11 +1217,6 @@ Authors' Addresses
 
 
 Gurbani, et al.              Standards Track                   [Page 19]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

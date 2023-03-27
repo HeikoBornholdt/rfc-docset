@@ -1,34 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-bhargavan-tls-session-hash" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:7627" name="DC.Identifier"/>
-<meta content="September, 2015" name="DC.Date.Issued"/>
-<meta content="Ray, Marsh" name="DC.Creator"/>
-<meta content="Pironti, Alfredo" name="DC.Creator"/>
-<meta content="Langley, Adam" name="DC.Creator"/>
-<meta content="Bhargavan, Karthikeyan" name="DC.Creator"/>
-<meta content="Delignat-Lavaud, Antoine" name="DC.Creator"/>
-<meta content="The Transport Layer Security (TLS) master secret is not
-cryptographically bound to important session parameters such as the
-server certificate. Consequently, it is possible for an active
-attacker to set up two sessions, one with a client and another with a
-server, such that the master secrets on the two sessions are the same.
-Thereafter, any mechanism that relies on the master secret for
-authentication, including session resumption, becomes vulnerable to a
-man-in-the-middle attack, where the attacker can simply forward
-messages back and forth between the client and server. This
-specification defines a TLS extension that contextually binds the
-master secret to a log of the full handshake that computes it, thus
-preventing such attacks." name="DC.Description.Abstract"/>
-<meta content="Transport Layer Security (TLS) Session Hash and Extended Master Secret Extension" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7627 - Transport Layer Security (TLS) Session Hash and Extended Master Secret Extension</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="K. Bhargavan" name="citation_author"/>
+<meta content="A. Delignat-Lavaud" name="citation_author"/>
+<meta content="A. Pironti" name="citation_author"/>
+<meta content="A. Langley" name="citation_author"/>
+<meta content="M. Ray" name="citation_author"/>
+<meta content="September, 2015" name="citation_publication_date"/>
+<meta content="Transport Layer Security (TLS) Session Hash and Extended Master Secret Extension" name="citation_title"/>
+<meta content="10.17487/RFC7627" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7627" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7627.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7627: Transport Layer Security (TLS) Session Hash and Extended Master Secret Extension</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -57,7 +44,7 @@ preventing such attacks." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -66,7 +53,7 @@ preventing such attacks." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -145,19 +132,18 @@ preventing such attacks." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -171,21 +157,9 @@ preventing such attacks." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7627.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7627" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-tls-session-hash.html" title="draft-ietf-tls-session-hash">draft-ietf-tls-se...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc7627" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc7627" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                 K. Bhargavan, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7627.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7627.txt.pdf">PDF</a>|<a href="/rfc/rfc7627.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7627" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7627&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc7627" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                 K. Bhargavan, Ed.
 Request for Comments: 7627                            A. Delignat-Lavaud
 Updates: <a href="./rfc5246.html">5246</a>                                                 A. Pironti
 Category: Standards Track                       Inria Paris-Rocquencourt
@@ -237,7 +211,7 @@ Status of This Memo
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
@@ -246,7 +220,7 @@ Copyright Notice
    Copyright (c) 2015 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -293,11 +267,11 @@ Table of Contents
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    In TLS [<a href="./rfc5246.html" title='"The Transport Layer Security (TLS) Protocol Version 1.2"'>RFC5246</a>], every session has a "master_secret" computed as:
 
@@ -349,7 +323,7 @@ Table of Contents
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
@@ -405,7 +379,7 @@ Table of Contents
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
@@ -426,7 +400,7 @@ Table of Contents
    have different master secrets.  This prevents the attacks described
    in [<a href="#ref-TRIPLE-HS" title='"Triple Handshakes and Cookie Cutters: Breaking and Fixing Authentication over TLS"'>TRIPLE-HS</a>] and documented in <a href="./rfc7457.html#section-2.11">Section 2.11 of [RFC7457]</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Requirements Notation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Requirements Notation</span>
 
    This document uses the same notation and terminology used in the TLS
    protocol specification [<a href="./rfc5246.html" title='"The Transport Layer Security (TLS) Protocol Version 1.2"'>RFC5246</a>].
@@ -436,7 +410,7 @@ Table of Contents
    "<em>OPTIONAL</em>" in this document are to be interpreted as described in <a href="./rfc2119.html">RFC</a>
    <a href="./rfc2119.html">2119</a> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20The%20TLS%20Session%20Hash"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  The TLS Session Hash</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20The%20TLS%20Session%20Hash"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  The TLS Session Hash</span>
 
    When a full TLS handshake takes place, we define
 
@@ -461,11 +435,11 @@ Table of Contents
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20The%20Extended%20Master%20Secret"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  The Extended Master Secret</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20The%20Extended%20Master%20Secret"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  The Extended Master Secret</span>
 
    When the extended master secret extension is negotiated in a full
    handshake, the "master_secret" is computed as
@@ -500,9 +474,9 @@ Table of Contents
    compound authentication that fall into the vulnerable cases described
    in <a href="#section-6.1">Section 6.1</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Extension%20Negotiation"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Extension Negotiation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Extension%20Negotiation"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Extension Negotiation</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Extension%20Definition"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Extension Definition</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Extension%20Definition"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Extension Definition</span>
 
    This document defines a new TLS extension, "extended_master_secret"
    (with extension type 0x0017), which is used to signal both client and
@@ -517,7 +491,7 @@ Table of Contents
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
@@ -526,7 +500,7 @@ Table of Contents
    secret derivation algorithm, as defined in <a href="#section-4">Section 4</a>.  All other
    cryptographic computations remain unchanged.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Client%20and%20Server%20Behavior%3A%20Full%20Handshake"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Client and Server Behavior: Full Handshake</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Client%20and%20Server%20Behavior%3A%20Full%20Handshake"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Client and Server Behavior: Full Handshake</span>
 
    In the following, we use the phrase "abort the handshake" as
    shorthand for terminating the handshake by sending a fatal
@@ -559,7 +533,7 @@ Table of Contents
    scenarios.  In particular, the master secret derived from the new
    session should not be used for application-level authentication.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Client%20and%20Server%20Behavior%3A%20Abbreviated%20Handshake"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Client and Server Behavior: Abbreviated Handshake</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Client%20and%20Server%20Behavior%3A%20Abbreviated%20Handshake"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Client and Server Behavior: Abbreviated Handshake</span>
 
    The client <em>SHOULD NOT</em> offer an abbreviated handshake to resume a
    session that does not use an extended master secret.  Instead, it
@@ -573,7 +547,7 @@ Table of Contents
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
@@ -629,11 +603,11 @@ Table of Contents
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Interoperability%20Considerations"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Interoperability Considerations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Interoperability%20Considerations"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Interoperability Considerations</span>
 
    To allow interoperability with legacy clients and servers, a TLS peer
    may decide to accept full handshakes that use the legacy master
@@ -671,9 +645,9 @@ Table of Contents
    document recommends that the client and server <em>MUST</em> abort such
    handshakes.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Triple%20Handshake%20Preconditions%20and%20Impact"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Triple Handshake Preconditions and Impact</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Triple%20Handshake%20Preconditions%20and%20Impact"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Triple Handshake Preconditions and Impact</span>
 
    One way to mount a triple handshake attack is described in <a href="#section-1">Section 1</a>,
    along with a mention of the security mechanisms that break due to the
@@ -685,7 +659,7 @@ Table of Contents
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                    [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
@@ -741,7 +715,7 @@ Table of Contents
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                   [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
@@ -753,7 +727,7 @@ Table of Contents
    same peer.  A symbolic cryptographic protocol analysis justifying the
    extended master secret extension appears in [<a href="#ref-VERIFIED-BINDINGS">VERIFIED-BINDINGS</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Cryptographic%20Properties%20of%20the%20Hash%20Function"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Cryptographic Properties of the Hash Function</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Cryptographic%20Properties%20of%20the%20Hash%20Function"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Cryptographic Properties of the Hash Function</span>
 
    The session hashes of two different sessions need to be distinct;
    hence, the "Hash" function used to compute the "session_hash" needs
@@ -774,7 +748,7 @@ Table of Contents
    support for new hash functions.  In these versions, the session hash
    uses the concatenation of MD5 and SHA1, as in the Finished message.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Handshake%20Messages%20Included%20in%20the%20Session%20Hash"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  Handshake Messages Included in the Session Hash</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Handshake%20Messages%20Included%20in%20the%20Session%20Hash"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  Handshake Messages Included in the Session Hash</span>
 
    The "session_hash" is intended to encompass all relevant session
    information, including ciphersuite negotiation, key exchange
@@ -797,7 +771,7 @@ Table of Contents
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                   [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
@@ -814,7 +788,7 @@ Table of Contents
    additional information in session tickets beyond those covered in the
    session hash require careful analysis.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20No%20SSL%203.0%20Support"></a></body></html><a class="selflink" href="#section-6.4" name="section-6.4">6.4</a>.  No SSL 3.0 Support</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20No%20SSL%203.0%20Support"></a></body></html><a class="selflink" href="#section-6.4" id="section-6.4">6.4</a>.  No SSL 3.0 Support</span>
 
    The Secure Sockets Layer (SSL) protocol version 3.0 [<a href="./rfc6101.html" title='"The Secure Sockets Layer (SSL) Protocol Version 3.0"'>RFC6101</a>] is a
    predecessor of the TLS protocol, and it is equally vulnerable to
@@ -829,23 +803,23 @@ Table of Contents
    master secret computation, and the interoperability considerations of
    <a href="#section-5.4">Section 5.4</a> apply.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  IANA Considerations</span>
 
    IANA has added the extension code point 23 (0x0017), which has been
    used by prototype implementations, for the "extended_master_secret"
    extension to the "ExtensionType Values" registry specified in the TLS
    specification [<a href="./rfc5246.html" title='"The Transport Layer Security (TLS) Protocol Version 1.2"'>RFC5246</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]   Bradner, S., "Key words for use in RFCs to Indicate
-               Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
+   [<a id="ref-RFC2119">RFC2119</a>]   Bradner, S., "Key words for use in RFCs to Indicate
+               Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
                DOI 10.17487/RFC2119, March 1997,
                &lt;<a href="http://www.rfc-editor.org/info/rfc2119">http://www.rfc-editor.org/info/rfc2119</a>&gt;.
 
-   [<a id="ref-RFC5246" name="ref-RFC5246">RFC5246</a>]   Dierks, T. and E. Rescorla, "The Transport Layer Security
+   [<a id="ref-RFC5246">RFC5246</a>]   Dierks, T. and E. Rescorla, "The Transport Layer Security
                (TLS) Protocol Version 1.2", <a href="./rfc5246.html">RFC 5246</a>,
                DOI 10.17487/RFC5246, August 2008,
                &lt;<a href="http://www.rfc-editor.org/info/rfc5246">http://www.rfc-editor.org/info/rfc5246</a>&gt;.
@@ -853,53 +827,53 @@ Table of Contents
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                   [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Informative References</span>
 
-   [<a id="ref-COMPOUND-AUTH" name="ref-COMPOUND-AUTH">COMPOUND-AUTH</a>]
+   [<a id="ref-COMPOUND-AUTH">COMPOUND-AUTH</a>]
                Asokan, N., Valtteri, N., and K. Nyberg, "Man-in-the-
                Middle in Tunnelled Authentication Protocols", Security
                Protocols, LNCS, Volume 3364, DOI 10.1007/11542322_6,
                2005.
 
-   [<a id="ref-Ray09" name="ref-Ray09">Ray09</a>]     Ray, M., "Authentication Gap in TLS Renegotiation", 2009.
+   [<a id="ref-Ray09">Ray09</a>]     Ray, M., "Authentication Gap in TLS Renegotiation", 2009.
 
-   [<a id="ref-RFC4251" name="ref-RFC4251">RFC4251</a>]   Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+   [<a id="ref-RFC4251">RFC4251</a>]   Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
                Protocol Architecture", <a href="./rfc4251.html">RFC 4251</a>, DOI 10.17487/RFC4251,
                January 2006, &lt;<a href="http://www.rfc-editor.org/info/rfc4251">http://www.rfc-editor.org/info/rfc4251</a>&gt;.
 
-   [<a id="ref-RFC5077" name="ref-RFC5077">RFC5077</a>]   Salowey, J., Zhou, H., Eronen, P., and H. Tschofenig,
+   [<a id="ref-RFC5077">RFC5077</a>]   Salowey, J., Zhou, H., Eronen, P., and H. Tschofenig,
                "Transport Layer Security (TLS) Session Resumption
                without Server-Side State", <a href="./rfc5077.html">RFC 5077</a>,
                DOI 10.17487/RFC5077, January 2008,
                &lt;<a href="http://www.rfc-editor.org/info/rfc5077">http://www.rfc-editor.org/info/rfc5077</a>&gt;.
 
-   [<a id="ref-RFC5705" name="ref-RFC5705">RFC5705</a>]   Rescorla, E., "Keying Material Exporters for Transport
+   [<a id="ref-RFC5705">RFC5705</a>]   Rescorla, E., "Keying Material Exporters for Transport
                Layer Security (TLS)", <a href="./rfc5705.html">RFC 5705</a>, DOI 10.17487/RFC5705,
                March 2010, &lt;<a href="http://www.rfc-editor.org/info/rfc5705">http://www.rfc-editor.org/info/rfc5705</a>&gt;.
 
-   [<a id="ref-RFC5746" name="ref-RFC5746">RFC5746</a>]   Rescorla, E., Ray, M., Dispensa, S., and N. Oskov,
+   [<a id="ref-RFC5746">RFC5746</a>]   Rescorla, E., Ray, M., Dispensa, S., and N. Oskov,
                "Transport Layer Security (TLS) Renegotiation Indication
                Extension", <a href="./rfc5746.html">RFC 5746</a>, DOI 10.17487/RFC5746, February
                2010, &lt;<a href="http://www.rfc-editor.org/info/rfc5746">http://www.rfc-editor.org/info/rfc5746</a>&gt;.
 
-   [<a id="ref-RFC5929" name="ref-RFC5929">RFC5929</a>]   Altman, J., Williams, N., and L. Zhu, "Channel Bindings
+   [<a id="ref-RFC5929">RFC5929</a>]   Altman, J., Williams, N., and L. Zhu, "Channel Bindings
                for TLS", <a href="./rfc5929.html">RFC 5929</a>, DOI 10.17487/RFC5929, July 2010,
                &lt;<a href="http://www.rfc-editor.org/info/rfc5929">http://www.rfc-editor.org/info/rfc5929</a>&gt;.
 
-   [<a id="ref-RFC6101" name="ref-RFC6101">RFC6101</a>]   Freier, A., Karlton, P., and P. Kocher, "The Secure
+   [<a id="ref-RFC6101">RFC6101</a>]   Freier, A., Karlton, P., and P. Kocher, "The Secure
                Sockets Layer (SSL) Protocol Version 3.0", <a href="./rfc6101.html">RFC 6101</a>,
                DOI 10.17487/RFC6101, August 2011,
                &lt;<a href="http://www.rfc-editor.org/info/rfc6101">http://www.rfc-editor.org/info/rfc6101</a>&gt;.
 
-   [<a id="ref-RFC6347" name="ref-RFC6347">RFC6347</a>]   Rescorla, E. and N. Modadugu, "Datagram Transport Layer
+   [<a id="ref-RFC6347">RFC6347</a>]   Rescorla, E. and N. Modadugu, "Datagram Transport Layer
                Security Version 1.2", <a href="./rfc6347.html">RFC 6347</a>, DOI 10.17487/RFC6347,
                January 2012, &lt;<a href="http://www.rfc-editor.org/info/rfc6347">http://www.rfc-editor.org/info/rfc6347</a>&gt;.
 
-   [<a id="ref-RFC7457" name="ref-RFC7457">RFC7457</a>]   Sheffer, Y., Holz, R., and P. Saint-Andre, "Summarizing
+   [<a id="ref-RFC7457">RFC7457</a>]   Sheffer, Y., Holz, R., and P. Saint-Andre, "Summarizing
                Known Attacks on Transport Layer Security (TLS) and
                Datagram TLS (DTLS)", <a href="./rfc7457.html">RFC 7457</a>, DOI 10.17487/RFC7457,
                February 2015, &lt;<a href="http://www.rfc-editor.org/info/rfc7457">http://www.rfc-editor.org/info/rfc7457</a>&gt;.
@@ -909,26 +883,26 @@ Table of Contents
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                   [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
-   [<a id="ref-RFC7568" name="ref-RFC7568">RFC7568</a>]   Barnes, R., Thomson, M., Pironti, A., and A. Langley,
+   [<a id="ref-RFC7568">RFC7568</a>]   Barnes, R., Thomson, M., Pironti, A., and A. Langley,
                "Deprecating Secure Sockets Layer Version 3.0", <a href="./rfc7568.html">RFC 7568</a>,
                DOI 10.17487/RFC7568, June 2015,
                &lt;<a href="http://www.rfc-editor.org/info/rfc7568">http://www.rfc-editor.org/info/rfc7568</a>&gt;.
 
-   [<a id="ref-SP800-108" name="ref-SP800-108">SP800-108</a>] Chen, L., "Recommendation for Key Derivation Using
+   [<a id="ref-SP800-108">SP800-108</a>] Chen, L., "Recommendation for Key Derivation Using
                Pseudorandom Functions (Revised)", NIST Special
                Publication 800-108, 2009.
 
-   [<a id="ref-TRIPLE-HS" name="ref-TRIPLE-HS">TRIPLE-HS</a>] Bhargavan, K., Delignat-Lavaud, A., Fournet, C., Pironti,
+   [<a id="ref-TRIPLE-HS">TRIPLE-HS</a>] Bhargavan, K., Delignat-Lavaud, A., Fournet, C., Pironti,
                A., and P-Y. Strub, "Triple Handshakes and Cookie
                Cutters: Breaking and Fixing Authentication over TLS",
                IEEE Symposium on Security and Privacy,
                DOI 10.1109/SP.2014.14, 2014.
 
-   [<a id="ref-VERIFIED-BINDINGS" name="ref-VERIFIED-BINDINGS">VERIFIED-BINDINGS</a>]
+   [<a id="ref-VERIFIED-BINDINGS">VERIFIED-BINDINGS</a>]
                Bhargavan, K., Delignat-Lavaud, A., and A. Pironti,
                "Verified Contributive Channel Bindings for Compound
                Authentication", Network and Distributed System Security
@@ -965,7 +939,7 @@ Acknowledgments
 
 
 <span class="grey">Bhargavan, et al.            Standards Track                   [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7627.html">RFC 7627</a>               TLS Session Hash Extension         September 2015</span>
 
 
@@ -1021,11 +995,6 @@ Authors' Addresses
 
 
 Bhargavan, et al.            Standards Track                   [Page 15]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

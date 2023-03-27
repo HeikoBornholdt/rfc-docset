@@ -1,29 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:6329" name="DC.Identifier"/>
-<meta content="802.1aq Shortest Path Bridging (SPB) has been standardized by the IEEE
-as the next step in the evolution of the various spanning tree and
-registration protocols. 802.1aq allows for true shortest path
-forwarding in a mesh Ethernet network context utilizing multiple equal
-cost paths. This permits it to support much larger Layer 2 topologies,
-with faster convergence, and vastly improved use of the mesh topology.
-Combined with this is single point provisioning for logical
-connectivity membership, which includes point-to-point, point-to-
-multipoint, and multipoint-to-multipoint variations. This memo
-documents the IS-IS changes required to support this IEEE protocol and
-provides some context and examples. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
-<meta content="Ashwood-Smith, Peter" name="DC.Creator"/>
-<meta content="Fedyk, Don" name="DC.Creator"/>
-<meta content="April, 2012" name="DC.Date.Issued"/>
-<meta content="IS-IS Extensions Supporting IEEE 802.1aq Shortest Path Bridging" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6329 - IS-IS Extensions Supporting IEEE 802.1aq Shortest Path Bridging</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="D. Fedyk" name="citation_author"/>
+<meta content="P. Ashwood-Smith" name="citation_author"/>
+<meta content="D. Allan" name="citation_author"/>
+<meta content="A. Bragg" name="citation_author"/>
+<meta content="P. Unbehagen" name="citation_author"/>
+<meta content="April, 2012" name="citation_publication_date"/>
+<meta content="IS-IS Extensions Supporting IEEE 802.1aq Shortest Path Bridging" name="citation_title"/>
+<meta content="10.17487/RFC6329" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6329" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6329.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6329: IS-IS Extensions Supporting IEEE 802.1aq Shortest Path Bridging</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -52,7 +44,7 @@ provides some context and examples. [STANDARDS-TRACK]" name="DC.Description.Abst
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -61,7 +53,7 @@ provides some context and examples. [STANDARDS-TRACK]" name="DC.Description.Abst
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -140,19 +132,18 @@ provides some context and examples. [STANDARDS-TRACK]" name="DC.Description.Abst
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -166,21 +157,9 @@ provides some context and examples. [STANDARDS-TRACK]" name="DC.Description.Abst
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6329.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6329" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-isis-ieee-aq.html" title="draft-ietf-isis-ieee-aq">draft-ietf-isis-i...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6329" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6329" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=6329">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                     D. Fedyk, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6329.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6329.txt.pdf">PDF</a>|<a href="/rfc/rfc6329.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6329" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6329&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc6329" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc6329" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Engineering Task Force (IETF)                     D. Fedyk, Ed.
 Request for Comments: 6329                                Alcatel-Lucent
 Category: Standards Track                          P. Ashwood-Smith, Ed.
 ISSN: 2070-1721                                                   Huawei
@@ -232,7 +211,7 @@ Status of This Memo
 
 
 <span class="grey">Fedyk, et al.                Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -241,7 +220,7 @@ Copyright Notice
    Copyright (c) 2012 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -288,7 +267,7 @@ Copyright Notice
 
 
 <span class="grey">Fedyk, et al.                Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -344,11 +323,11 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    802.1aq Shortest Path Bridging (SPB) [<a href="#ref-802.1aq" title='"Standard for Local and Metropolitan Area Networks: Virtual Bridges and Virtual Bridged Local Area Networks - Amendment 9: Shortest Path Bridging"'>802.1aq</a>] has been standardized
    by the IEEE as the next step in the evolution of the various spanning
@@ -373,7 +352,7 @@ Table of Contents
    confusion between this document and [<a href="#ref-IS-IS" title='"Intermediate System to Intermediate System Intra-Domain Routing Exchange Protocol for use in Conjunction with the Protocol for Providing the Connectionless-mode Network Service (ISO 8473)"'>IS-IS</a>], [<a href="#ref-IS-IS" title='"Intermediate System to Intermediate System Intra-Domain Routing Exchange Protocol for use in Conjunction with the Protocol for Providing the Connectionless-mode Network Service (ISO 8473)"'>IS-IS</a>] should be taken
    as authoritative.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    In addition to well-understood IS-IS terms, this memo uses
    terminology from IEEE 802.1 and introduces a few terms:
@@ -400,7 +379,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -442,7 +421,7 @@ Table of Contents
    VID            VLAN ID: 12-bit logical identifier after MAC header
    VLAN           Virtual LAN: a logical network in the control plane
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Conventions Used in This Document</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Conventions Used in This Document</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -456,14 +435,14 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
    [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>], but are used where the normative behavior is defined in
    documents published by SDOs other than the IETF.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20802.1aq%20Overview"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  802.1aq Overview</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20802.1aq%20Overview"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  802.1aq Overview</span>
 
    This section provides an overview of the behavior of [<a href="#ref-802.1aq" title='"Standard for Local and Metropolitan Area Networks: Virtual Bridges and Virtual Bridged Local Area Networks - Amendment 9: Shortest Path Bridging"'>802.1aq</a>] and is
    not intended to be interpreted as normative text.  For the definitive
@@ -512,7 +491,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -568,7 +547,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -578,7 +557,7 @@ Table of Contents
    properties and parameters (e.g., ECMP, (*,G)) to also be supported
    without any changes in this or the IEEE documents.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Multi-Topology%20Support"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Multi-Topology Support</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Multi-Topology%20Support"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Multi-Topology Support</span>
 
    SPB incorporates the multi topology features of [<a href="#ref-MT" title='"M-ISIS: Multi Topology (MT) Routing in Intermediate System to Intermediate Systems (IS-ISs)"'>MT</a>] thereby allowing
    multiple logical SPB instances within a single IS-IS instance.
@@ -609,7 +588,7 @@ Table of Contents
 
    The use of [<a href="#ref-MT" title='"M-ISIS: Multi Topology (MT) Routing in Intermediate System to Intermediate Systems (IS-ISs)"'>MT</a>] to separate SPB from other NLPIDs is also <em>OPTIONAL</em>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Data%20Path%20SPBM%20-%20Unicast"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Data Path SPBM - Unicast</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Data%20Path%20SPBM%20-%20Unicast"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Data Path SPBM - Unicast</span>
 
    Unicast frames in SPBM are encapsulated as per 802.1ah [<a href="#ref-PBB" title='"Standard for Local and Metropolitan Area Networks / Virtual Bridged Local Area Networks / Amendment 7: Provider Backbone Bridges"'>PBB</a>].  A
    Backbone Source Address (B-SA), Backbone Destination Address (B-DA),
@@ -624,7 +603,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -644,7 +623,7 @@ Table of Contents
    This is referred to as an ingress check and serves as a very powerful
    loop mitigation mechanism.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Data%20Path%20SPBM%20-%20Multicast%20%28Head-End%20Replication%29"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Data Path SPBM - Multicast (Head-End Replication)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Data%20Path%20SPBM%20-%20Multicast%20%28Head-End%20Replication%29"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Data Path SPBM - Multicast (Head-End Replication)</span>
 
    Head-end replication is supported for instances where there is a
    sparse community of interest or a low likelihood of multicast
@@ -665,7 +644,7 @@ Table of Contents
    and Unicast Address (SPBM-SI) sub-TLV.  The packets are encapsulated
    as per the SPBM unicast forwarding above.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Data%20Path%20SPBM%20-%20Multicast%20%28Tandem%20Replication%29"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Data Path SPBM - Multicast (Tandem Replication)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Data%20Path%20SPBM%20-%20Multicast%20%28Tandem%20Replication%29"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Data Path SPBM - Multicast (Tandem Replication)</span>
 
    Tandem replication uses the shortest path tree to replicate frames
    only where the tree forks and there is at least one receiver on each
@@ -680,7 +659,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                    [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -736,7 +715,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -759,7 +738,7 @@ Table of Contents
    2) bridge the original customer frame to the set of local UNI ports
       that are associated with the I-SID.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Data%20Path%20SPBV%20Broadcast"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  Data Path SPBV Broadcast</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Data%20Path%20SPBV%20Broadcast"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  Data Path SPBV Broadcast</span>
 
    When a packet for an unknown DA arrives at an SPBV UNI port, VID
    translation (or VID encapsulation for untagged Frames) with the
@@ -777,7 +756,7 @@ Table of Contents
    is computed from the IS-IS database and is implied when the SPVID is
    associated with a specific incoming port.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Data%20Path%20SPBV%20Unicast"></a></body></html><a class="selflink" href="#section-4.6" name="section-4.6">4.6</a>.  Data Path SPBV Unicast</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Data%20Path%20SPBV%20Unicast"></a></body></html><a class="selflink" href="#section-4.6" id="section-4.6">4.6</a>.  Data Path SPBV Unicast</span>
 
    When a packet for a known DA arrives at an SPBV UNI port, VID
    translation (or VID encapsulation for untagged Frames) with the
@@ -792,11 +771,11 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Data%20Path%20SPBV%20Multicast"></a></body></html><a class="selflink" href="#section-4.7" name="section-4.7">4.7</a>.  Data Path SPBV Multicast</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Data%20Path%20SPBV%20Multicast"></a></body></html><a class="selflink" href="#section-4.7" id="section-4.7">4.7</a>.  Data Path SPBV Multicast</span>
 
    C-DA multicast addresses May be advertised from SPBV UNI ports.
    These may be configured or learned through the Multiple MAC
@@ -808,7 +787,7 @@ Table of Contents
 
    Ingress check is as per the previous two SPBV sections.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20SPBM%20Example"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  SPBM Example</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20SPBM%20Example"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  SPBM Example</span>
 
    Consider the small example network shown in Figure 2.  Nodes are
    drawn in boxes with the last nibble of their B-MAC address :1..:7.
@@ -848,7 +827,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -904,7 +883,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -944,7 +923,7 @@ Table of Contents
    which results in the last two multicast forwarding entries in Figure
    4.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20SPBV%20Example"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  SPBV Example</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20SPBV%20Example"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  SPBV Example</span>
 
    Using the same example network as Figure 2, we will look at the FDBs
    produced for SPBV mode forwarding.  Nodes :1, :5, :3, and :7 wish to
@@ -960,7 +939,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -1016,7 +995,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -1048,7 +1027,7 @@ Table of Contents
 
          Figure 7: SPBV Node :2 FDB Multicast (M)
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20SPB%20Supported%20Adjacency%20types"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  SPB Supported Adjacency types</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20SPB%20Supported%20Adjacency%20types"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  SPB Supported Adjacency types</span>
 
    IS-IS for SPB currently only supports peer-to-peer adjacencies.
    Other link types are for future study.  As a result, pseudonodes and
@@ -1059,7 +1038,7 @@ Table of Contents
    IS-IS for SPB Must use the IS-IS three-way handshake for IS-IS point-
    to-point adjacencies described in <a href="./rfc5303.html">RFC 5303</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20SPB%20IS-IS%20Adjacency%20Addressing"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  SPB IS-IS Adjacency Addressing</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20SPB%20IS-IS%20Adjacency%20Addressing"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  SPB IS-IS Adjacency Addressing</span>
 
    The default behavior of 802.1aq is to use the normal IS-IS Ethernet
    multicast addresses for IS-IS.
@@ -1072,14 +1051,14 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
    recommend and reserve different multicast addresses.  Refer to
    [<a href="#ref-802.1aq" title='"Standard for Local and Metropolitan Area Networks: Virtual Bridges and Virtual Bridged Local Area Networks - Amendment 9: Shortest Path Bridging"'>802.1aq</a>] for additional details.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20IS-IS%20Area%20Address%20and%20SYSID"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  IS-IS Area Address and SYSID</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20IS-IS%20Area%20Address%20and%20SYSID"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  IS-IS Area Address and SYSID</span>
 
    A stand-alone implementation (supporting ONLY the single NLPID=0xC1)
    of SPB Must use an IS-IS area address value of 0, and the SYSID Must
@@ -1091,7 +1070,7 @@ Table of Contents
    adjacencies share a common area address).  Level 2 operations of
    course place no such restriction on adjacent area addresses.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Level%201/2%20Adjacency"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Level 1/2 Adjacency</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Level%201/2%20Adjacency"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Level 1/2 Adjacency</span>
 
    SPBV and SPBM will operate within either an IS-IS level 1 or level 2.
    As a result, the TLVs specified here <em>MAY</em> propagate in either level 1
@@ -1100,7 +1079,7 @@ Table of Contents
    study; therefore, these TLVs Should Not be leaked between level 1 and
    level 2.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Shortest%20Path%20Default%20Tie-Breaking"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  Shortest Path Default Tie-Breaking</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Shortest%20Path%20Default%20Tie-Breaking"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  Shortest Path Default Tie-Breaking</span>
 
    The default algorithm is ECT-Algorithm = 00-80-c2-01.
 
@@ -1128,7 +1107,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -1146,7 +1125,7 @@ Table of Contents
    addition to having the critical property of transitivity (shortest
    path is made up of sub-shortest paths).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20Shortest%20Path%20ECT"></a></body></html><a class="selflink" href="#section-12" name="section-12">12</a>.  Shortest Path ECT</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20Shortest%20Path%20ECT"></a></body></html><a class="selflink" href="#section-12" id="section-12">12</a>.  Shortest Path ECT</span>
 
    Standard ECT Algorithms initially have been proposed ranging from
    00-80-c2-01 to 00-80-c2-10.
@@ -1184,7 +1163,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -1197,7 +1176,7 @@ Table of Contents
    service assignment to VID is consistent end to end through the
    network.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.%20%20Hello%20%28IIH%29%20Protocol%20Extensions"></a></body></html><a class="selflink" href="#section-13" name="section-13">13</a>.  Hello (IIH) Protocol Extensions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.%20%20Hello%20%28IIH%29%20Protocol%20Extensions"></a></body></html><a class="selflink" href="#section-13" id="section-13">13</a>.  Hello (IIH) Protocol Extensions</span>
 
    IEEE 802.1aq can run in parallel with other network layer protocols
    such as IPv4 and IPv6; therefore, failure of two SPB nodes to
@@ -1240,11 +1219,11 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.1.%20%20SPB-MCID%20Sub-TLV"></a></body></html><a class="selflink" href="#section-13.1" name="section-13.1">13.1</a>.  SPB-MCID Sub-TLV</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.1.%20%20SPB-MCID%20Sub-TLV"></a></body></html><a class="selflink" href="#section-13.1" id="section-13.1">13.1</a>.  SPB-MCID Sub-TLV</span>
 
    This sub-TLV is added to an IIH PDU to indicate the digest for the
    multiple spanning tree configuration a.k.a. MCID.  This TLV is a
@@ -1296,14 +1275,14 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
    The SPB-MCID sub-TLV is carried within the MT-Port-Cap TLV [<a href="./rfc6165.html" title='"Extensions to IS-IS for Layer-2 Systems"'>RFC6165</a>]
    with the MT ID value of 0, which in turn is carried in an IIH PDU.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.2.%20%20SPB-Digest%20Sub-TLV"></a></body></html><a class="selflink" href="#section-13.2" name="section-13.2">13.2</a>.  SPB-Digest Sub-TLV</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.2.%20%20SPB-Digest%20Sub-TLV"></a></body></html><a class="selflink" href="#section-13.2" id="section-13.2">13.2</a>.  SPB-Digest Sub-TLV</span>
 
    This sub-TLV is Optionally added to an IIH PDU to indicate the
    current SPB topology digest value.  It is always carried in an
@@ -1352,7 +1331,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -1408,14 +1387,14 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
    When one peer supports this TLV and the other does not, loop
    prevention by Agreement Digest Must Not be done by either side.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.3.%20%20SPB%20Base%20VLAN%20Identifiers%20%28SPB-B-VID%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-13.3" name="section-13.3">13.3</a>.  SPB Base VLAN Identifiers (SPB-B-VID) Sub-TLV</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.3.%20%20SPB%20Base%20VLAN%20Identifiers%20%28SPB-B-VID%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-13.3" id="section-13.3">13.3</a>.  SPB Base VLAN Identifiers (SPB-B-VID) Sub-TLV</span>
 
    This sub-TLV is added to an IIH PDU to indicate the mappings between
    ECT algorithms and Base VIDs (and by implication the VID(s) used on
@@ -1464,7 +1443,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -1482,7 +1461,7 @@ Table of Contents
    The SPB-B-VID sub-TLV is carried within the MT-Port-Cap TLV
    [<a href="./rfc6165.html" title='"Extensions to IS-IS for Layer-2 Systems"'>RFC6165</a>], which in turn is carried in an IIH PDU.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.%20%20Node%20Information%20Extensions"></a></body></html><a class="selflink" href="#section-14" name="section-14">14</a>.  Node Information Extensions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.%20%20Node%20Information%20Extensions"></a></body></html><a class="selflink" href="#section-14" id="section-14">14</a>.  Node Information Extensions</span>
 
    All SPB nodal information extensions travel within a new multi-
    topology capability TLV MT-Capability (type 144).
@@ -1507,7 +1486,7 @@ Table of Contents
    There can be multiple MT-Capability TLVs present, depending on the
    amount of information that needs to be carried.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.1.%20%20SPB%20Instance%20%28SPB-Inst%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-14.1" name="section-14.1">14.1</a>.  SPB Instance (SPB-Inst) Sub-TLV</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.1.%20%20SPB%20Instance%20%28SPB-Inst%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-14.1" id="section-14.1">14.1</a>.  SPB Instance (SPB-Inst) Sub-TLV</span>
 
    The SPB-Inst sub-TLV gives the SPSourceID for this node/topology
    instance.  This is the 20-bit value that is used in the formation of
@@ -1520,7 +1499,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -1576,7 +1555,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -1632,7 +1611,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -1688,11 +1667,11 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.1.1.%20%20SPB%20Instance%20Opaque%20ECT-ALGORITHM%20%28SPB-I-OALG%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-14.1.1" name="section-14.1.1">14.1.1</a>.  SPB Instance Opaque ECT-ALGORITHM (SPB-I-OALG) Sub-TLV</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.1.1.%20%20SPB%20Instance%20Opaque%20ECT-ALGORITHM%20%28SPB-I-OALG%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-14.1.1" id="section-14.1.1">14.1.1</a>.  SPB Instance Opaque ECT-ALGORITHM (SPB-I-OALG) Sub-TLV</span>
 
    There are multiple ECT algorithms defined for SPB; however, for the
    future, additional algorithms may be defined including but not
@@ -1744,13 +1723,13 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.%20%20Adjacency%20Information%20Extensions"></a></body></html><a class="selflink" href="#section-15" name="section-15">15</a>.  Adjacency Information Extensions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.%20%20Adjacency%20Information%20Extensions"></a></body></html><a class="selflink" href="#section-15" id="section-15">15</a>.  Adjacency Information Extensions</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.1.%20%20SPB%20Link%20Metric%20%28SPB-Metric%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-15.1" name="section-15.1">15.1</a>.  SPB Link Metric (SPB-Metric) Sub-TLV</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.1.%20%20SPB%20Link%20Metric%20%28SPB-Metric%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-15.1" id="section-15.1">15.1</a>.  SPB Link Metric (SPB-Metric) Sub-TLV</span>
 
    The SPB-Metric sub-TLV (type 29) occurs within the Multi-Topology
    Intermediate System Neighbor (MT-ISN) TLV (type 222) or within the
@@ -1800,11 +1779,11 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.1.1.%20%20SPB%20Adjacency%20Opaque%20ECT-ALGORITHM%20%28SPB-A-OALG%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-15.1.1" name="section-15.1.1">15.1.1</a>.  SPB Adjacency Opaque ECT-ALGORITHM (SPB-A-OALG) Sub-TLV</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.1.1.%20%20SPB%20Adjacency%20Opaque%20ECT-ALGORITHM%20%28SPB-A-OALG%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-15.1.1" id="section-15.1.1">15.1.1</a>.  SPB Adjacency Opaque ECT-ALGORITHM (SPB-A-OALG) Sub-TLV</span>
 
    There are multiple ECT algorithms defined for SPB; however, for the
    future, additional algorithms may be defined.  The SPB-A-OALG sub-TLV
@@ -1836,9 +1815,9 @@ Table of Contents
    o  ECT Information: ECT-ALGORITHM Information of variable length in
       sub-TLV format using new IANA type values as appropriate.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/16.%20%20Service%20Information%20Extensions"></a></body></html><a class="selflink" href="#section-16" name="section-16">16</a>.  Service Information Extensions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/16.%20%20Service%20Information%20Extensions"></a></body></html><a class="selflink" href="#section-16" id="section-16">16</a>.  Service Information Extensions</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/16.1.%20%20SPBM%20Service%20Identifier%20and%20Unicast%20Address%20%28SPBM-SI%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-16.1" name="section-16.1">16.1</a>.  SPBM Service Identifier and Unicast Address (SPBM-SI) Sub-TLV</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/16.1.%20%20SPBM%20Service%20Identifier%20and%20Unicast%20Address%20%28SPBM-SI%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-16.1" id="section-16.1">16.1</a>.  SPBM Service Identifier and Unicast Address (SPBM-SI) Sub-TLV</span>
 
    The SPBM-SI sub-TLV (type 3) is used to introduce service group
    membership on the originating node and/or to advertise an additional
@@ -1856,7 +1835,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -1912,7 +1891,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -1927,7 +1906,7 @@ Table of Contents
    The SPBM-SI sub-TLV, when present, <em>MUST</em> be carried within the
    MT-Capability TLV and can occur multiple times in any LSP fragment.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/16.2.%20%20SPBV%20MAC%20Address%20%28SPBV-ADDR%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-16.2" name="section-16.2">16.2</a>.  SPBV MAC Address (SPBV-ADDR) Sub-TLV</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/16.2.%20%20SPBV%20MAC%20Address%20%28SPBV-ADDR%29%20Sub-TLV"></a></body></html><a class="selflink" href="#section-16.2" id="section-16.2">16.2</a>.  SPBV MAC Address (SPBV-ADDR) Sub-TLV</span>
 
    The SPBV-ADDR sub-TLV is IS-IS sub-TLV type 4.  It Should be used for
    advertisement of Group MAC addresses in SPBV mode.  Unicast MAC
@@ -1968,7 +1947,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -2024,11 +2003,11 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/17.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-17" name="section-17">17</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/17.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-17" id="section-17">17</a>.  Security Considerations</span>
 
    This document adds no additional security risks to IS-IS, nor does it
    provide any additional security for IS-IS when used in a configured
@@ -2052,7 +2031,7 @@ Table of Contents
    denial-of-service attack [<a href="./rfc4732.html" title='"Internet Denial-of-Service Considerations"'>RFC4732</a>] in a zero-configuration
    environment.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/18.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-18" name="section-18">18</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/18.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-18" id="section-18">18</a>.  IANA Considerations</span>
 
    Note that the NLPID value 0xC1 [<a href="./rfc6328.html" title='"IANA Considerations for Network Layer Protocol Identifiers"'>RFC6328</a>] used in the IIH PDUs has
    already been assigned by IANA for the purpose of 802.1aq; therefore,
@@ -2080,7 +2059,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -2105,67 +2084,67 @@ Table of Contents
    *               SPB-Metric                 29      1
    *               SPB-A-OALG                 30      &gt;=0
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/19.%20%20References"></a></body></html><a class="selflink" href="#section-19" name="section-19">19</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/19.%20%20References"></a></body></html><a class="selflink" href="#section-19" id="section-19">19</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/19.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-19.1" name="section-19.1">19.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/19.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-19.1" id="section-19.1">19.1</a>.  Normative References</span>
 
-   [<a id="ref-802.1aq" name="ref-802.1aq">802.1aq</a>]  "Standard for Local and Metropolitan Area Networks:
+   [<a id="ref-802.1aq">802.1aq</a>]  "Standard for Local and Metropolitan Area Networks:
               Virtual Bridges and Virtual Bridged Local Area Networks -
               Amendment 9: Shortest Path Bridging", IEEE P802.1aq, Draft
               4.6, 2012.
 
-   [<a id="ref-IS-IS" name="ref-IS-IS">IS-IS</a>]    ISO/IEC 10589:2002, Second Edition, "Intermediate System
+   [<a id="ref-IS-IS">IS-IS</a>]    ISO/IEC 10589:2002, Second Edition, "Intermediate System
               to Intermediate System Intra-Domain Routing Exchange
               Protocol for use in Conjunction with the Protocol for
               Providing the Connectionless-mode Network Service (ISO
               8473)", 2002.
 
-   [<a id="ref-MT" name="ref-MT">MT</a>]       Przygienda, T., Shen, N., and N. Sheth, "M-ISIS: Multi
+   [<a id="ref-MT">MT</a>]       Przygienda, T., Shen, N., and N. Sheth, "M-ISIS: Multi
               Topology (MT) Routing in Intermediate System to
               Intermediate Systems (IS-ISs)", <a href="./rfc5120.html">RFC 5120</a>, February 2008.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC6165" name="ref-RFC6165">RFC6165</a>]  Banerjee, A. and D. Ward, "Extensions to IS-IS for Layer-2
+   [<a id="ref-RFC6165">RFC6165</a>]  Banerjee, A. and D. Ward, "Extensions to IS-IS for Layer-2
               Systems", <a href="./rfc6165.html">RFC 6165</a>, April 2011.
 
-   [<a id="ref-RFC6328" name="ref-RFC6328">RFC6328</a>]  Eastlake 3rd, D., "IANA Considerations for Network Layer
-              Protocol Identifiers", <a href="./bcp164.html">BCP 164</a>, <a href="./rfc6328.html">RFC 6328</a>, July 2011.
+   [<a id="ref-RFC6328">RFC6328</a>]  Eastlake 3rd, D., "IANA Considerations for Network Layer
+              Protocol Identifiers", <a href="https://www.rfc-editor.org/bcp/bcp164">BCP 164</a>, <a href="./rfc6328.html">RFC 6328</a>, July 2011.
 
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/19.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-19.2" name="section-19.2">19.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/19.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-19.2" id="section-19.2">19.2</a>.  Informative References</span>
 
-   [<a id="ref-802.1ag" name="ref-802.1ag">802.1ag</a>]  "Standard for Local and Metropolitan Area Networks /
+   [<a id="ref-802.1ag">802.1ag</a>]  "Standard for Local and Metropolitan Area Networks /
               Virtual Bridged Local Area Networks / Amendment 5:
               Connectivity Fault Management", IEEE STD 802.1ag, 2007.
 
-   [<a id="ref-MMRP" name="ref-MMRP">MMRP</a>]     "Standard for Local and Metropolitan Area Networks Virtual
+   [<a id="ref-MMRP">MMRP</a>]     "Standard for Local and Metropolitan Area Networks Virtual
               Bridged Local Area Networks - Amendment 07: Multiple
               Registration Protocol", IEEE STD 802.1ak, 2007.
 
-   [<a id="ref-PB" name="ref-PB">PB</a>]       "Standard for Local and Metropolitan Area Networks /
+   [<a id="ref-PB">PB</a>]       "Standard for Local and Metropolitan Area Networks /
               Virtual Bridged Local Area Networks / Amendment 4:
               Provider Bridges", IEEE STD 802.1ad, 2005.
 
-   [<a id="ref-PBB" name="ref-PBB">PBB</a>]      "Standard for Local and Metropolitan Area Networks /
+   [<a id="ref-PBB">PBB</a>]      "Standard for Local and Metropolitan Area Networks /
               Virtual Bridged Local Area Networks / Amendment 7:
               Provider Backbone Bridges", IEEE STD 802.1ah, 2008.
 
-   [<a id="ref-RFC4732" name="ref-RFC4732">RFC4732</a>]  Handley, M., Ed., Rescorla, E., Ed., and IAB, "Internet
+   [<a id="ref-RFC4732">RFC4732</a>]  Handley, M., Ed., Rescorla, E., Ed., and IAB, "Internet
               Denial-of-Service Considerations", <a href="./rfc4732.html">RFC 4732</a>, December
               2006.
 
-   [<a id="ref-Y.1731" name="ref-Y.1731">Y.1731</a>]   ITU-T, "OAM Functions and Mechanisms for Ethernet based
+   [<a id="ref-Y.1731">Y.1731</a>]   ITU-T, "OAM Functions and Mechanisms for Ethernet based
               networks", ITU-T Y.1731, 2006.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/20.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-20" name="section-20">20</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/20.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-20" id="section-20">20</a>.  Acknowledgments</span>
 
    The authors would like to thank Ayan Banerjee, Mick Seaman, Janos
    Farkas, Les Ginsberg, Stewart Bryant , Donald Eastlake, Matthew Bocci
@@ -2192,7 +2171,7 @@ Table of Contents
 
 
 <span class="grey">Fedyk, et al.                Standards Track                   [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc6329.html">RFC 6329</a>              IS-IS Support of IEEE 802.1aq           April 2012</span>
 
 
@@ -2248,11 +2227,6 @@ Authors' Addresses
 
 
 Fedyk, et al.                Standards Track                   [Page 37]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

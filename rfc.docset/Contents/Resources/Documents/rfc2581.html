@@ -1,26 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="rfc2001" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:2581" name="DC.Identifier"/>
-<meta content="April, 1999" name="DC.Date.Issued"/>
-<meta content="Stevens, W. Richard" name="DC.Creator"/>
-<meta content="Allman, Mark" name="DC.Creator"/>
-<meta content="Paxson, Vern" name="DC.Creator"/>
-<meta content="This document defines TCP's four intertwined congestion control
-algorithms: slow start, congestion avoidance, fast retransmit, and
-fast recovery. In addition, the document specifies how TCP should
-begin transmission after a relatively long idle period, as well as
-discussing various acknowledgment generation methods. [STANDARDS-
-TRACK]" name="DC.Description.Abstract"/>
-<meta content="TCP Congestion Control" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 2581 - TCP Congestion Control</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="M. Allman" name="citation_author"/>
+<meta content="V. Paxson" name="citation_author"/>
+<meta content="W. Stevens" name="citation_author"/>
+<meta content="April, 1999" name="citation_publication_date"/>
+<meta content="TCP Congestion Control" name="citation_title"/>
+<meta content="10.17487/RFC2581" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc2581" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc2581.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 2581: TCP Congestion Control</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -49,7 +42,7 @@ TRACK]" name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -58,7 +51,7 @@ TRACK]" name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -137,19 +130,18 @@ TRACK]" name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -163,21 +155,9 @@ TRACK]" name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgbrown" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc2581.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc2581" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-tcpimpl-cong-control.html" title="draft-ietf-tcpimpl-cong-control">draft-ietf-tcpimp...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc2581" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc2581" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=2581">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">Obsoleted by: <a href="./rfc5681.html">5681</a>                                     PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo">Updated by: <a href="./rfc3390.html">3390</a> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                          M. Allman
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc2581.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc2581.txt.pdf">PDF</a>|<a href="/rfc/rfc2581.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc2581" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=2581&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc2581" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc2581" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">Obsoleted by: <a href="/rfc/rfc5681" target="_blank">5681</a>                                     PROPOSED STANDARD</span><br/><span class="pre noprint docinfo">Updated by: <a href="/rfc/rfc3390" target="_blank">3390</a> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                          M. Allman
 Request for Comments: 2581                  NASA Glenn/Sterling Software
 Obsoletes: <a href="./rfc2001.html">2001</a>                                                V. Paxson
 Category: Standards Track                                   ACIRI / ICSI
@@ -208,7 +188,7 @@ Abstract
    begin transmission after a relatively long idle period, as well as
    discussing various acknowledgment generation methods.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>. Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>. Introduction</span>
 
    This document specifies four TCP [<a href="#ref-Pos81" title='"Transmission Control Protocol"'>Pos81</a>] congestion control
    algorithms: slow start, congestion avoidance, fast retransmit and
@@ -229,7 +209,7 @@ Abstract
 
 
 <span class="grey">Allman, et. al.             Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
@@ -243,7 +223,7 @@ Abstract
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in [<a href="#ref-Bra97" title='"Key words for use in RFCs to Indicate Requirement Levels"'>Bra97</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20Definitions"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>. Definitions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20Definitions"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>. Definitions</span>
 
    This section provides the definition of several terms that will be
    used throughout the remainder of this document.
@@ -285,7 +265,7 @@ Abstract
 
 
 <span class="grey">Allman, et. al.             Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
@@ -301,7 +281,7 @@ Abstract
    FLIGHT SIZE:  The amount of data that has been sent but not yet
       acknowledged.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Congestion%20Control%20Algorithms"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>. Congestion Control Algorithms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Congestion%20Control%20Algorithms"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>. Congestion Control Algorithms</span>
 
    This section defines the four congestion control algorithms: slow
    start, congestion avoidance, fast retransmit and fast recovery,
@@ -312,7 +292,7 @@ Abstract
    value of cwnd computed by the following algorithms would not allow
    the data to be sent).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1%20Slow%20Start%20and%20Congestion%20Avoidance"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a> Slow Start and Congestion Avoidance</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1%20Slow%20Start%20and%20Congestion%20Avoidance"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a> Slow Start and Congestion Avoidance</span>
 
    The slow start and congestion avoidance algorithms <em>MUST</em> be used by a
    TCP sender to control the amount of outstanding data being injected
@@ -341,7 +321,7 @@ Abstract
 
 
 <span class="grey">Allman, et. al.             Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
@@ -397,7 +377,7 @@ Abstract
 
 
 <span class="grey">Allman, et. al.             Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
@@ -453,11 +433,11 @@ Abstract
 
 
 <span class="grey">Allman, et. al.             Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2%20Fast%20Retransmit/Fast%20Recovery"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a> Fast Retransmit/Fast Recovery</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2%20Fast%20Retransmit/Fast%20Recovery"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a> Fast Retransmit/Fast Recovery</span>
 
    A TCP receiver <em>SHOULD</em> send an immediate duplicate ACK when an out-
    of-order segment arrives.  The purpose of this ACK is to inform the
@@ -509,7 +489,7 @@ Abstract
 
 
 <span class="grey">Allman, et. al.             Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
@@ -542,9 +522,9 @@ Abstract
    [<a href="#ref-FF96" title='"Simulation-based Comparisons of Tahoe, Reno and SACK TCP"'>FF96</a>].  One proposed set of modifications to address this problem
    can be found in [<a href="#ref-FH98" title="&quot;The NewReno Modification to TCP's Fast Recovery Algorithm&quot;">FH98</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Additional%20Considerations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>. Additional Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Additional%20Considerations"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>. Additional Considerations</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1%20Re-starting%20Idle%20Connections"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a> Re-starting Idle Connections</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1%20Re-starting%20Idle%20Connections"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a> Re-starting Idle Connections</span>
 
    A known problem with the TCP congestion control algorithms described
    above is that they allow a potentially inappropriate burst of traffic
@@ -555,7 +535,7 @@ Abstract
    send a cwnd-size line-rate burst into the network after an idle
    period.
 
-   [<a id="ref-Jac88" name="ref-Jac88">Jac88</a>] recommends that a TCP use slow start to restart transmission
+   [<a id="ref-Jac88">Jac88</a>] recommends that a TCP use slow start to restart transmission
    after a relatively long idle period.  Slow start serves to restart
    the ACK clock, just as it does at the beginning of a transfer.  This
    mechanism has been widely deployed in the following manner.  When TCP
@@ -565,7 +545,7 @@ Abstract
 
 
 <span class="grey">Allman, et. al.             Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
@@ -589,7 +569,7 @@ Abstract
    transmission if the TCP has not sent data in an interval exceeding
    the retransmission timeout.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2%20Generating%20Acknowledgments"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a> Generating Acknowledgments</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2%20Generating%20Acknowledgments"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a> Generating Acknowledgments</span>
 
    The delayed ACK algorithm specified in [<a href="#ref-Bra89" title='"Requirements for Internet Hosts -- Communication Layers"'>Bra89</a>] <em>SHOULD</em> be used by a
    TCP receiver.  When used, a TCP receiver <em>MUST NOT</em> excessively delay
@@ -621,7 +601,7 @@ Abstract
 
 
 <span class="grey">Allman, et. al.             Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
@@ -648,7 +628,7 @@ Abstract
    segment, other than to update the offered window as the receiving
    application consumes new data [page 42, Pos81][<a href="#ref-Cla82" title='"Window and Acknowledgment Strategy in TCP"'>Cla82</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3%20Loss%20Recovery%20Mechanisms"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a> Loss Recovery Mechanisms</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3%20Loss%20Recovery%20Mechanisms"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a> Loss Recovery Mechanisms</span>
 
    A number of loss recovery algorithms that augment fast retransmit and
    fast recovery have been suggested by TCP researchers.  While some of
@@ -677,7 +657,7 @@ Abstract
 
 
 <span class="grey">Allman, et. al.             Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
@@ -685,7 +665,7 @@ Abstract
    principles of the basic four congestion control algorithms outlined
    in this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    This document requires a TCP to diminish its sending rate in the
    presence of retransmission timeouts and the arrival of duplicate
@@ -705,7 +685,7 @@ Abstract
    acknowledgments for new data.  Conceivably, such an attack could
    drive a portion of the network into congestion collapse.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Changes%20Relative%20to%20RFC%202001"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Changes Relative to <a href="./rfc2001.html">RFC 2001</a></span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Changes%20Relative%20to%20RFC%202001"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Changes Relative to <a href="./rfc2001.html">RFC 2001</a></span>
 
    This document has been extensively rewritten editorially and it is
    not feasible to itemize the list of changes between the two
@@ -733,7 +713,7 @@ Acknowledgments
 
 
 <span class="grey">Allman, et. al.             Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
@@ -742,44 +722,44 @@ Acknowledgments
 
 References
 
-   [<a id="ref-AFP98" name="ref-AFP98">AFP98</a>]  Allman, M., Floyd, S. and C. Partridge, "Increasing TCP's
+   [<a id="ref-AFP98">AFP98</a>]  Allman, M., Floyd, S. and C. Partridge, "Increasing TCP's
             Initial Window Size, <a href="./rfc2414.html">RFC 2414</a>, September 1998.
 
-   [<a id="ref-Bra89" name="ref-Bra89">Bra89</a>]  Braden, R., "Requirements for Internet Hosts --
+   [<a id="ref-Bra89">Bra89</a>]  Braden, R., "Requirements for Internet Hosts --
             Communication Layers", STD 3, <a href="./rfc1122.html">RFC 1122</a>, October 1989.
 
-   [<a id="ref-Bra97" name="ref-Bra97">Bra97</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-            Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-Bra97">Bra97</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+            Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-Cla82" name="ref-Cla82">Cla82</a>]  Clark, D., "Window and Acknowledgment Strategy in TCP", <a href="./rfc813.html">RFC</a>
+   [<a id="ref-Cla82">Cla82</a>]  Clark, D., "Window and Acknowledgment Strategy in TCP", <a href="./rfc813.html">RFC</a>
             <a href="./rfc813.html">813</a>, July 1982.
 
-   [<a id="ref-FF96" name="ref-FF96">FF96</a>]   Fall, K. and S. Floyd, "Simulation-based Comparisons of
+   [<a id="ref-FF96">FF96</a>]   Fall, K. and S. Floyd, "Simulation-based Comparisons of
             Tahoe, Reno and SACK TCP", Computer Communication Review,
             July 1996. <a href="ftp://ftp.ee.lbl.gov/papers/sacks.ps.Z">ftp://ftp.ee.lbl.gov/papers/sacks.ps.Z</a>.
 
-   [<a id="ref-FH98" name="ref-FH98">FH98</a>]   Floyd, S. and T. Henderson, "The NewReno Modification to
+   [<a id="ref-FH98">FH98</a>]   Floyd, S. and T. Henderson, "The NewReno Modification to
             TCP's Fast Recovery Algorithm", <a href="./rfc2582.html">RFC 2582</a>, April 1999.
 
-   [<a id="ref-Flo94" name="ref-Flo94">Flo94</a>]  Floyd, S., "TCP and Successive Fast Retransmits. Technical
+   [<a id="ref-Flo94">Flo94</a>]  Floyd, S., "TCP and Successive Fast Retransmits. Technical
             report", October 1994.
             <a href="ftp://ftp.ee.lbl.gov/papers/fastretrans.ps">ftp://ftp.ee.lbl.gov/papers/fastretrans.ps</a>.
 
-   [<a id="ref-Hoe96" name="ref-Hoe96">Hoe96</a>]  Hoe, J., "Improving the Start-up Behavior of a Congestion
+   [<a id="ref-Hoe96">Hoe96</a>]  Hoe, J., "Improving the Start-up Behavior of a Congestion
             Control Scheme for TCP", In ACM SIGCOMM, August 1996.
 
-   [<a id="ref-HTH98" name="ref-HTH98">HTH98</a>]  Hughes, A., Touch, J. and J. Heidemann, "Issues in TCP
+   [<a id="ref-HTH98">HTH98</a>]  Hughes, A., Touch, J. and J. Heidemann, "Issues in TCP
             Slow-Start Restart After Idle", Work in Progress.
 
-   [<a id="ref-Jac88" name="ref-Jac88">Jac88</a>]  Jacobson, V., "Congestion Avoidance and Control", Computer
+   [<a id="ref-Jac88">Jac88</a>]  Jacobson, V., "Congestion Avoidance and Control", Computer
             Communication Review, vol. 18, no. 4, pp. 314-329, Aug.
             1988.  <a href="ftp://ftp.ee.lbl.gov/papers/congavoid.ps.Z">ftp://ftp.ee.lbl.gov/papers/congavoid.ps.Z</a>.
 
-   [<a id="ref-Jac90" name="ref-Jac90">Jac90</a>]  Jacobson, V., "Modified TCP Congestion Avoidance Algorithm",
+   [<a id="ref-Jac90">Jac90</a>]  Jacobson, V., "Modified TCP Congestion Avoidance Algorithm",
             end2end-interest mailing list, April 30, 1990.
             <a href="ftp://ftp.isi.edu/end2end/end2end-interest-1990.mail">ftp://ftp.isi.edu/end2end/end2end-interest-1990.mail</a>.
 
-   [<a id="ref-MD90" name="ref-MD90">MD90</a>]   Mogul, J. and S. Deering, "Path MTU Discovery", <a href="./rfc1191.html">RFC 1191</a>,
+   [<a id="ref-MD90">MD90</a>]   Mogul, J. and S. Deering, "Path MTU Discovery", <a href="./rfc1191.html">RFC 1191</a>,
             November 1990.
 
 
@@ -789,40 +769,40 @@ References
 
 
 <span class="grey">Allman, et. al.             Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
-   [<a id="ref-MM96a" name="ref-MM96a">MM96a</a>]  Mathis, M. and J. Mahdavi, "Forward Acknowledgment: Refining
+   [<a id="ref-MM96a">MM96a</a>]  Mathis, M. and J. Mahdavi, "Forward Acknowledgment: Refining
             TCP Congestion Control", Proceedings of SIGCOMM'96, August,
             1996, Stanford, CA.  Available
             fromhttp://www.psc.edu/networking/papers/papers.html
 
-   [<a id="ref-MM96b" name="ref-MM96b">MM96b</a>]  Mathis, M. and J. Mahdavi, "TCP Rate-Halving with Bounding
+   [<a id="ref-MM96b">MM96b</a>]  Mathis, M. and J. Mahdavi, "TCP Rate-Halving with Bounding
             Parameters", Technical report.  Available from
             <a href="http://www.psc.edu/networking/papers/FACKnotes/current">http://www.psc.edu/networking/papers/FACKnotes/current</a>.
 
-   [<a id="ref-MMFR96" name="ref-MMFR96">MMFR96</a>] Mathis, M., Mahdavi, J., Floyd, S. and A. Romanow, "TCP
+   [<a id="ref-MMFR96">MMFR96</a>] Mathis, M., Mahdavi, J., Floyd, S. and A. Romanow, "TCP
             Selective Acknowledgement Options", <a href="./rfc2018.html">RFC 2018</a>, October 1996.
 
    [PAD+98] Paxson, V., Allman, M., Dawson, S., Fenner, W., Griner, J.,
             Heavens, I., Lahey, K., Semke, J. and B. Volz, "Known TCP
             Implementation Problems", <a href="./rfc2525.html">RFC 2525</a>, March 1999.
 
-   [<a id="ref-Pax97" name="ref-Pax97">Pax97</a>]  Paxson, V., "End-to-End Internet Packet Dynamics",
+   [<a id="ref-Pax97">Pax97</a>]  Paxson, V., "End-to-End Internet Packet Dynamics",
             Proceedings of SIGCOMM '97, Cannes, France, Sep. 1997.
 
-   [<a id="ref-Pos81" name="ref-Pos81">Pos81</a>]  Postel, J., "Transmission Control Protocol", STD 7, <a href="./rfc793.html">RFC 793</a>,
+   [<a id="ref-Pos81">Pos81</a>]  Postel, J., "Transmission Control Protocol", STD 7, <a href="./rfc793.html">RFC 793</a>,
             September 1981.
 
-   [<a id="ref-Ste94" name="ref-Ste94">Ste94</a>]  Stevens, W., "TCP/IP Illustrated, Volume 1: The Protocols",
+   [<a id="ref-Ste94">Ste94</a>]  Stevens, W., "TCP/IP Illustrated, Volume 1: The Protocols",
             Addison-Wesley, 1994.
 
-   [<a id="ref-Ste97" name="ref-Ste97">Ste97</a>]  Stevens, W., "TCP Slow Start, Congestion Avoidance, Fast
+   [<a id="ref-Ste97">Ste97</a>]  Stevens, W., "TCP Slow Start, Congestion Avoidance, Fast
             Retransmit, and Fast Recovery Algorithms", <a href="./rfc2001.html">RFC 2001</a>, January
             1997.
 
-   [<a id="ref-WS95" name="ref-WS95">WS95</a>]   Wright, G. and W. Stevens, "TCP/IP Illustrated, Volume 2:
+   [<a id="ref-WS95">WS95</a>]   Wright, G. and W. Stevens, "TCP/IP Illustrated, Volume 2:
             The Implementation", Addison-Wesley, 1995.
 
 
@@ -845,7 +825,7 @@ References
 
 
 <span class="grey">Allman, et. al.             Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
@@ -901,7 +881,7 @@ Authors' Addresses
 
 
 <span class="grey">Allman, et. al.             Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc2581.html">RFC 2581</a>                 TCP Congestion Control               April 1999</span>
 
 
@@ -957,11 +937,6 @@ Full Copyright Statement
 
 
 Allman, et. al.             Standards Track                    [Page 14]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

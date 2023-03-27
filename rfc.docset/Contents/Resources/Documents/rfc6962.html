@@ -1,29 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:6962" name="DC.Identifier"/>
-<meta content="This document describes an experimental protocol for publicly logging
-the existence of Transport Layer Security (TLS) certificates as they
-are issued or observed, in a manner that allows anyone to audit
-certificate authority (CA) activity and notice the issuance of suspect
-certificates as well as to audit the certificate logs themselves. The
-intent is that eventually clients would refuse to honor certificates
-that do not appear in a log, effectively forcing CAs to add all issued
-certificates to the logs.  Logs are network services that implement
-the protocol operations for submissions and queries that are defined
-in this document." name="DC.Description.Abstract"/>
-<meta content="Langley, Adam" name="DC.Creator"/>
-<meta content="Kasper, Emilia" name="DC.Creator"/>
-<meta content="Laurie, Ben" name="DC.Creator"/>
-<meta content="June, 2013" name="DC.Date.Issued"/>
-<meta content="Certificate Transparency" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6962 - Certificate Transparency</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="B. Laurie" name="citation_author"/>
+<meta content="A. Langley" name="citation_author"/>
+<meta content="E. Kasper" name="citation_author"/>
+<meta content="June, 2013" name="citation_publication_date"/>
+<meta content="Certificate Transparency" name="citation_title"/>
+<meta content="10.17487/RFC6962" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6962" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6962.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6962: Certificate Transparency</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -52,7 +42,7 @@ in this document." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -61,7 +51,7 @@ in this document." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -140,19 +130,18 @@ in this document." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -166,21 +155,9 @@ in this document." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgyellow" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6962.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6962" title="PDF version of this document">pdf</a>] [<a href="./draft-laurie-pki-sunlight.html" title="draft-laurie-pki-sunlight">draft-laurie-pki-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6962" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6962" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=6962">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                         B. Laurie
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6962.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6962.txt.pdf">PDF</a>|<a href="/rfc/rfc6962.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6962" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6962&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc6962" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc6962" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">Obsoleted by: <a href="/rfc/rfc9162" target="_blank">9162</a>                                          EXPERIMENTAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Engineering Task Force (IETF)                         B. Laurie
 Request for Comments: 6962                                    A. Langley
 Category: Experimental                                         E. Kasper
 ISSN: 2070-1721                                                   Google
@@ -232,7 +209,7 @@ Status of This Memo
 
 
 <span class="grey">Laurie, et al.                Experimental                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -241,7 +218,7 @@ Copyright Notice
    Copyright (c) 2013 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -288,7 +265,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -305,7 +282,7 @@ Table of Contents
       <a href="#section-11.1">11.1</a>. Normative Reference ......................................<a href="#page-25">25</a>
       <a href="#section-11.2">11.2</a>. Informative References ...................................<a href="#page-26">26</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Informal%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Informal Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Informal%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Informal Introduction</span>
 
    Certificate transparency aims to mitigate the problem of misissued
    certificates by providing publicly auditable, append-only, untrusted
@@ -344,7 +321,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -367,20 +344,20 @@ Table of Contents
    timestamps for certificates they then don't log) can be efficiently
    detected and proved to the world at large.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Language"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Requirements Language</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Language"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Requirements Language</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in <a href="./rfc2119.html">RFC 2119</a> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Data%20Structures"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Data Structures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Data%20Structures"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Data Structures</span>
 
    Data structures are defined according to the conventions laid out in
    <a href="./rfc5246.html#section-4">Section 4 of [RFC5246]</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Cryptographic%20Components"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Cryptographic Components</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Cryptographic%20Components"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Cryptographic Components</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Merkle%20Hash%20Trees"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Merkle Hash Trees</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Merkle%20Hash%20Trees"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Merkle Hash Trees</span>
 
    Logs use a binary Merkle Hash Tree for efficient auditing.  The
    hashing algorithm is SHA-256 [<a href="#ref-FIPS.180-4" title='"Secure Hash Standard"'>FIPS.180-4</a>] (note that this is fixed
@@ -400,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -426,7 +403,7 @@ Table of Contents
    [<a href="#ref-CrosbyWallach" title='"Efficient Data Structures for Tamper-Evident Logging"'>CrosbyWallach</a>] proposal, except our definition handles non-full
    trees differently.)
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.1.%20%20Merkle%20Audit%20Paths"></a></body></html><a class="selflink" href="#section-2.1.1" name="section-2.1.1">2.1.1</a>.  Merkle Audit Paths</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.1.%20%20Merkle%20Audit%20Paths"></a></body></html><a class="selflink" href="#section-2.1.1" id="section-2.1.1">2.1.1</a>.  Merkle Audit Paths</span>
 
    A Merkle audit path for a leaf in a Merkle Hash Tree is the shortest
    list of additional nodes in the Merkle Tree required to compute the
@@ -456,7 +433,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -471,7 +448,7 @@ Table of Contents
    where : is concatenation of lists and D[k1:k2] denotes the length
    (k2 - k1) list {d(k1), d(k1+1),..., d(k2-1)} as before.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.2.%20%20Merkle%20Consistency%20Proofs"></a></body></html><a class="selflink" href="#section-2.1.2" name="section-2.1.2">2.1.2</a>.  Merkle Consistency Proofs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.2.%20%20Merkle%20Consistency%20Proofs"></a></body></html><a class="selflink" href="#section-2.1.2" id="section-2.1.2">2.1.2</a>.  Merkle Consistency Proofs</span>
 
    Merkle consistency proofs prove the append-only property of the tree.
    A Merkle consistency proof for a Merkle Tree Hash MTH(D[n]) and a
@@ -512,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -528,7 +505,7 @@ Table of Contents
    The number of nodes in the resulting proof is bounded above by
    ceil(log2(n)) + 1.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.3.%20%20Example"></a></body></html><a class="selflink" href="#section-2.1.3" name="section-2.1.3">2.1.3</a>.  Example</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.3.%20%20Example"></a></body></html><a class="selflink" href="#section-2.1.3" id="section-2.1.3">2.1.3</a>.  Example</span>
 
    The binary Merkle Tree with 7 leaves:
 
@@ -568,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -611,7 +588,7 @@ Table of Contents
    j, k].  k, i are used to verify hash2, and j is additionally used to
    show hash is consistent with hash2.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.4.%20%20Signatures"></a></body></html><a class="selflink" href="#section-2.1.4" name="section-2.1.4">2.1.4</a>.  Signatures</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.4.%20%20Signatures"></a></body></html><a class="selflink" href="#section-2.1.4" id="section-2.1.4">2.1.4</a>.  Signatures</span>
 
    Various data structures are signed.  A log <em>MUST</em> use either elliptic
    curve signatures using the NIST P-256 curve (Section D.1.2.3 of the
@@ -624,11 +601,11 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Log%20Format%20and%20Operation"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Log Format and Operation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Log%20Format%20and%20Operation"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Log Format and Operation</span>
 
    Anyone can submit certificates to certificate logs for public
    auditing; however, since certificates will not be accepted by TLS
@@ -655,7 +632,7 @@ Table of Contents
    Log operators <em>MUST NOT</em> impose any conditions on retrieving or sharing
    data from the log.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Log%20Entries"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Log Entries</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Log%20Entries"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Log Entries</span>
 
    Anyone can submit a certificate to any log.  In order to enable
    attribution of each logged certificate to its issuer, the log <em>SHALL</em>
@@ -680,7 +657,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -736,7 +713,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -792,11 +769,11 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Structure%20of%20the%20Signed%20Certificate%20Timestamp"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Structure of the Signed Certificate Timestamp</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Structure%20of%20the%20Signed%20Certificate%20Timestamp"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Structure of the Signed Certificate Timestamp</span>
 
        enum { certificate_timestamp(0), tree_hash(1), (255) }
          SignatureType;
@@ -848,7 +825,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -889,7 +866,7 @@ Table of Contents
    "extensions" are future extensions to this protocol version (v1).
    Currently, no extensions are specified.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Including%20the%20Signed%20Certificate%20Timestamp%20in%20the%20TLS%20Handshake"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Including the Signed Certificate Timestamp in the TLS Handshake</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Including%20the%20Signed%20Certificate%20Timestamp%20in%20the%20TLS%20Handshake"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Including the Signed Certificate Timestamp in the TLS Handshake</span>
 
    The SCT data corresponding to the end-entity certificate from at
    least one log must be included in the TLS handshake, either by using
@@ -904,7 +881,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -960,11 +937,11 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20TLS%20Extension"></a></body></html><a class="selflink" href="#section-3.3.1" name="section-3.3.1">3.3.1</a>.  TLS Extension</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20TLS%20Extension"></a></body></html><a class="selflink" href="#section-3.3.1" id="section-3.3.1">3.3.1</a>.  TLS Extension</span>
 
    The SCT can be sent during the TLS handshake using a TLS extension
    with type "signed_certificate_timestamp".
@@ -981,7 +958,7 @@ Table of Contents
    session is resumed, the server is not expected to process it or
    include the extension in the ServerHello.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Merkle%20Tree"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Merkle Tree</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Merkle%20Tree"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Merkle Tree</span>
 
    The hashing algorithm for the Merkle Tree Hash is SHA-256.
 
@@ -1016,7 +993,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -1035,7 +1012,7 @@ Table of Contents
    The leaves of the Merkle Tree are the leaf hashes of the
    corresponding "MerkleTreeLeaf" structures.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Signed%20Tree%20Head"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  Signed Tree Head</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Signed%20Tree%20Head"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  Signed Tree Head</span>
 
    Every time a log appends new entries to the tree, the log <em>SHOULD</em> sign
    the corresponding tree hash and tree information (see the
@@ -1072,11 +1049,11 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Log%20Client%20Messages"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Log Client Messages</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Log%20Client%20Messages"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Log Client Messages</span>
 
    Messages are sent as HTTPS GET or POST requests.  Parameters for
    POSTs and all responses are encoded as JavaScript Object Notation
@@ -1098,7 +1075,7 @@ Table of Contents
    Any errors will be returned as HTTP 4xx or 5xx responses, with human-
    readable error messages.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Add%20Chain%20to%20Log"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Add Chain to Log</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Add%20Chain%20to%20Log"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Add Chain to Log</span>
 
    POST https://&lt;log server&gt;/ct/v1/add-chain
 
@@ -1128,7 +1105,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -1147,7 +1124,7 @@ Table of Contents
    we could completely change it without requiring an upgrade to v1
    clients.)
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Add%20PreCertChain%20to%20Log"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Add PreCertChain to Log</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Add%20PreCertChain%20to%20Log"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Add PreCertChain to Log</span>
 
    POST https://&lt;log server&gt;/ct/v1/add-pre-chain
 
@@ -1161,7 +1138,7 @@ Table of Contents
 
    Outputs are the same as in <a href="#section-4.1">Section 4.1</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Retrieve%20Latest%20Signed%20Tree%20Head"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Retrieve Latest Signed Tree Head</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Retrieve%20Latest%20Signed%20Tree%20Head"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Retrieve Latest Signed Tree Head</span>
 
    GET https://&lt;log server&gt;/ct/v1/get-sth
 
@@ -1184,11 +1161,11 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Retrieve%20Merkle%20Consistency%20Proof%20between%20Two%20Signed%20Tree%20Heads"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Retrieve Merkle Consistency Proof between Two Signed Tree Heads</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Retrieve%20Merkle%20Consistency%20Proof%20between%20Two%20Signed%20Tree%20Heads"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Retrieve Merkle Consistency Proof between Two Signed Tree Heads</span>
 
    GET https://&lt;log server&gt;/ct/v1/get-sth-consistency
 
@@ -1207,7 +1184,7 @@ Table of Contents
    Note that no signature is required on this data, as it is used to
    verify an STH, which is signed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Retrieve%20Merkle%20Audit%20Proof%20from%20Log%20by%20Leaf%20Hash"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  Retrieve Merkle Audit Proof from Log by Leaf Hash</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Retrieve%20Merkle%20Audit%20Proof%20from%20Log%20by%20Leaf%20Hash"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  Retrieve Merkle Audit Proof from Log by Leaf Hash</span>
 
    GET https://&lt;log server&gt;/ct/v1/get-proof-by-hash
 
@@ -1240,11 +1217,11 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Retrieve%20Entries%20from%20Log"></a></body></html><a class="selflink" href="#section-4.6" name="section-4.6">4.6</a>.  Retrieve Entries from Log</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Retrieve%20Entries%20from%20Log"></a></body></html><a class="selflink" href="#section-4.6" id="section-4.6">4.6</a>.  Retrieve Entries from Log</span>
 
    GET https://&lt;log server&gt;/ct/v1/get-entries
 
@@ -1296,11 +1273,11 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Retrieve%20Accepted%20Root%20Certificates"></a></body></html><a class="selflink" href="#section-4.7" name="section-4.7">4.7</a>.  Retrieve Accepted Root Certificates</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Retrieve%20Accepted%20Root%20Certificates"></a></body></html><a class="selflink" href="#section-4.7" id="section-4.7">4.7</a>.  Retrieve Accepted Root Certificates</span>
 
    GET https://&lt;log server&gt;/ct/v1/get-roots
 
@@ -1311,7 +1288,7 @@ Table of Contents
       certificates:  An array of base64-encoded root certificates that
          are acceptable to the log.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.%20%20Retrieve%20Entry%2BMerkle%20Audit%20Proof%20from%20Log"></a></body></html><a class="selflink" href="#section-4.8" name="section-4.8">4.8</a>.  Retrieve Entry+Merkle Audit Proof from Log</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.%20%20Retrieve%20Entry%2BMerkle%20Audit%20Proof%20from%20Log"></a></body></html><a class="selflink" href="#section-4.8" id="section-4.8">4.8</a>.  Retrieve Entry+Merkle Audit Proof from Log</span>
 
    GET https://&lt;log server&gt;/ct/v1/get-entry-and-proof
 
@@ -1336,7 +1313,7 @@ Table of Contents
 
    This API is probably only useful for debugging.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Clients"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Clients</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Clients"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Clients</span>
 
    There are various different functions clients of logs might perform.
    We describe here some typical clients and how they could function.
@@ -1352,17 +1329,17 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Submitters"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Submitters</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Submitters"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Submitters</span>
 
    Submitters submit certificates or Precertificates to the log as
    described above.  They may go on to use the returned SCT to construct
    a certificate or use it directly in a TLS handshake.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20TLS%20Client"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  TLS Client</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20TLS%20Client"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  TLS Client</span>
 
    TLS clients are not directly clients of the log, but they receive
    SCTs alongside or in server certificates.  In addition to normal
@@ -1374,7 +1351,7 @@ Table of Contents
 
    TLS clients <em>MUST</em> reject SCTs whose timestamp is in the future.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Monitor"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Monitor</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Monitor"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Monitor</span>
 
    Monitors watch logs and check that they behave correctly.  They also
    watch for certificates of interest.
@@ -1408,7 +1385,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -1429,7 +1406,7 @@ Table of Contents
 
    9.  Go to Step 5.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Auditor"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Auditor</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Auditor"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Auditor</span>
 
    Auditors take partial information about a log as input and verify
    that this information is consistent with other partial information
@@ -1447,12 +1424,12 @@ Table of Contents
    Auditors can fetch STHs from time to time of their own accord, of
    course (<a href="#section-4.3">Section 4.3</a>).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  IANA Considerations</span>
 
    IANA has allocated an <a href="./rfc5246.html">RFC 5246</a> ExtensionType value (18) for the SCT
    TLS extension.  The extension name is "signed_certificate_timestamp".
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    With CAs, logs, and servers performing the actions described here,
    TLS clients can use logs and signed timestamps to reduce the
@@ -1464,7 +1441,7 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
@@ -1479,7 +1456,7 @@ Table of Contents
    to logs, possibly with the assistance of their CA, increasing the
    overall transparency of the system.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Misissued%20Certificates"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Misissued Certificates</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Misissued%20Certificates"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Misissued Certificates</span>
 
    Misissued certificates that have not been publicly logged, and thus
    do not have a valid SCT, will be rejected by TLS clients.  Misissued
@@ -1489,13 +1466,13 @@ Table of Contents
    misissued certificate can be used without being available for audit
    is the MMD.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Detection%20of%20Misissue"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Detection of Misissue</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Detection%20of%20Misissue"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Detection of Misissue</span>
 
    The logs do not themselves detect misissued certificates; they rely
    instead on interested parties, such as domain owners, to monitor them
    and take corrective action when a misissue is detected.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Misbehaving%20Logs"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  Misbehaving Logs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Misbehaving%20Logs"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  Misbehaving Logs</span>
 
    A log can misbehave in two ways: (1) by failing to incorporate a
    certificate with an SCT in the Merkle Tree within the MMD and (2) by
@@ -1520,14 +1497,14 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
    Heads for the same log are detected, this is cryptographic proof of
    that log's misbehavior.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Efficiency%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Efficiency Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Efficiency%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Efficiency Considerations</span>
 
    The Merkle Tree design serves the purpose of keeping communication
    overhead low.
@@ -1540,7 +1517,7 @@ Table of Contents
    only property of updates to their Merkle Trees, without auditing the
    entire tree.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Future%20Changes"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Future Changes</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Future%20Changes"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Future Changes</span>
 
    This section lists things we might address in a Standards Track
    version of this document.
@@ -1552,7 +1529,7 @@ Table of Contents
 
    o  We may describe some gossip protocols.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Acknowledgements</span>
 
    The authors would like to thank Erwann Abelea, Robin Alden, Al
    Cutter, Francis Dupont, Stephen Farrell, Brad Hill, Jeff Hodges, Paul
@@ -1560,12 +1537,12 @@ Table of Contents
    Perrin, Ryan Sleevi, Rob Stradling, and Carl Wallace for their
    valuable contributions.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20References"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20References"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20Normative%20Reference"></a></body></html><a class="selflink" href="#section-11.1" name="section-11.1">11.1</a>.  Normative Reference</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20Normative%20Reference"></a></body></html><a class="selflink" href="#section-11.1" id="section-11.1">11.1</a>.  Normative Reference</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]        Bradner, S., "Key words for use in RFCs to Indicate
-                    Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]        Bradner, S., "Key words for use in RFCs to Indicate
+                    Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
 
 
@@ -1576,54 +1553,54 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-11.2" name="section-11.2">11.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-11.2" id="section-11.2">11.2</a>.  Informative References</span>
 
-   [<a id="ref-CrosbyWallach" name="ref-CrosbyWallach">CrosbyWallach</a>]  Crosby, S. and D. Wallach, "Efficient Data
+   [<a id="ref-CrosbyWallach">CrosbyWallach</a>]  Crosby, S. and D. Wallach, "Efficient Data
                     Structures for Tamper-Evident Logging", Proceedings
                     of the 18th USENIX Security Symposium, Montreal,
                     August 2009, &lt;<a href="http://static.usenix.org/event/sec09/tech/full_papers/crosby.pdf">http://static.usenix.org/event/sec09/</a>
                     <a href="http://static.usenix.org/event/sec09/tech/full_papers/crosby.pdf">tech/full_papers/crosby.pdf</a>&gt;.
 
-   [<a id="ref-DSS" name="ref-DSS">DSS</a>]            National Institute of Standards and Technology,
+   [<a id="ref-DSS">DSS</a>]            National Institute of Standards and Technology,
                     "Digital Signature Standard (DSS)", FIPS 186-3,
                     June 2009, &lt;<a href="http://csrc.nist.gov/publications/fips/fips186-3/fips_186-3.pdf">http://csrc.nist.gov/publications/fips/</a>
                     <a href="http://csrc.nist.gov/publications/fips/fips186-3/fips_186-3.pdf">fips186-3/fips_186-3.pdf</a>&gt;.
 
-   [<a id="ref-FIPS.180-4" name="ref-FIPS.180-4">FIPS.180-4</a>]     National Institute of Standards and Technology,
+   [<a id="ref-FIPS.180-4">FIPS.180-4</a>]     National Institute of Standards and Technology,
                     "Secure Hash Standard", FIPS PUB 180-4, March 2012,
                     &lt;<a href="http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf">http://csrc.nist.gov/publications/fips/fips180-4/</a>
                     <a href="http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf">fips-180-4.pdf</a>&gt;.
 
-   [<a id="ref-HTML401" name="ref-HTML401">HTML401</a>]        Raggett, D., Le Hors, A., and I. Jacobs, "HTML 4.01
+   [<a id="ref-HTML401">HTML401</a>]        Raggett, D., Le Hors, A., and I. Jacobs, "HTML 4.01
                     Specification", World Wide Web Consortium
                     Recommendation REC-html401-19991224, December 1999,
                     &lt;<a href="http://www.w3.org/TR/1999/REC-html401-19991224">http://www.w3.org/TR/1999/REC-html401-19991224</a>&gt;.
 
-   [<a id="ref-RFC2560" name="ref-RFC2560">RFC2560</a>]        Myers, M., Ankney, R., Malpani, A., Galperin, S.,
+   [<a id="ref-RFC2560">RFC2560</a>]        Myers, M., Ankney, R., Malpani, A., Galperin, S.,
                     and C. Adams, "X.509 Internet Public Key
                     Infrastructure Online Certificate Status Protocol -
                     OCSP", <a href="./rfc2560.html">RFC 2560</a>, June 1999.
 
-   [<a id="ref-RFC3447" name="ref-RFC3447">RFC3447</a>]        Jonsson, J. and B. Kaliski, "Public-Key Cryptography
+   [<a id="ref-RFC3447">RFC3447</a>]        Jonsson, J. and B. Kaliski, "Public-Key Cryptography
                     Standards (PKCS) #1: RSA Cryptography Specifications
                     Version 2.1", <a href="./rfc3447.html">RFC 3447</a>, February 2003.
 
-   [<a id="ref-RFC4627" name="ref-RFC4627">RFC4627</a>]        Crockford, D., "The application/json Media Type for
+   [<a id="ref-RFC4627">RFC4627</a>]        Crockford, D., "The application/json Media Type for
                     JavaScript Object Notation (JSON)", <a href="./rfc4627.html">RFC 4627</a>,
                     July 2006.
 
-   [<a id="ref-RFC4648" name="ref-RFC4648">RFC4648</a>]        Josefsson, S., "The Base16, Base32, and Base64 Data
+   [<a id="ref-RFC4648">RFC4648</a>]        Josefsson, S., "The Base16, Base32, and Base64 Data
                     Encodings", <a href="./rfc4648.html">RFC 4648</a>, October 2006.
 
-   [<a id="ref-RFC5246" name="ref-RFC5246">RFC5246</a>]        Dierks, T. and E. Rescorla, "The Transport Layer
+   [<a id="ref-RFC5246">RFC5246</a>]        Dierks, T. and E. Rescorla, "The Transport Layer
                     Security (TLS) Protocol Version 1.2", <a href="./rfc5246.html">RFC 5246</a>,
                     August 2008.
 
-   [<a id="ref-RFC5280" name="ref-RFC5280">RFC5280</a>]        Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+   [<a id="ref-RFC5280">RFC5280</a>]        Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
                     Housley, R., and W. Polk, "Internet X.509 Public Key
                     Infrastructure Certificate and Certificate
                     Revocation List (CRL) Profile", <a href="./rfc5280.html">RFC 5280</a>, May 2008.
@@ -1632,15 +1609,15 @@ Table of Contents
 
 
 <span class="grey">Laurie, et al.                Experimental                     [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc6962.html">RFC 6962</a>                Certificate Transparency               June 2013</span>
 
 
-   [<a id="ref-RFC5905" name="ref-RFC5905">RFC5905</a>]        Mills, D., Martin, J., Burbank, J., and W. Kasch,
+   [<a id="ref-RFC5905">RFC5905</a>]        Mills, D., Martin, J., Burbank, J., and W. Kasch,
                     "Network Time Protocol Version 4: Protocol and
                     Algorithms Specification", <a href="./rfc5905.html">RFC 5905</a>, June 2010.
 
-   [<a id="ref-RFC6066" name="ref-RFC6066">RFC6066</a>]        Eastlake, D., "Transport Layer Security (TLS)
+   [<a id="ref-RFC6066">RFC6066</a>]        Eastlake, D., "Transport Layer Security (TLS)
                     Extensions: Extension Definitions", <a href="./rfc6066.html">RFC 6066</a>,
                     January 2011.
 
@@ -1688,11 +1665,6 @@ Authors' Addresses
 
 
 Laurie, et al.                Experimental                     [Page 27]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

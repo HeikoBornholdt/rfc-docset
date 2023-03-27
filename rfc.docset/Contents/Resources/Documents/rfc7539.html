@@ -1,25 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-nir-cfrg-chacha20-poly1305" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:7539" name="DC.Identifier"/>
-<meta content="May, 2015" name="DC.Date.Issued"/>
-<meta content="Langley, Adam" name="DC.Creator"/>
-<meta content="Nir, Yoav" name="DC.Creator"/>
-<meta content='This document defines the ChaCha20 stream cipher as well as the use of
-the Poly1305 authenticator, both as stand-alone algorithms and as a
-"combined mode", or Authenticated Encryption with Associated Data
-(AEAD) algorithm.  This document does not introduce any new crypto,
-but is meant to serve as a stable reference and an implementation
-guide. It is a product of the Crypto Forum Research Group (CFRG).' name="DC.Description.Abstract"/>
-<meta content="ChaCha20 and Poly1305 for IETF Protocols" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7539 - ChaCha20 and Poly1305 for IETF Protocols</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="Y. Nir" name="citation_author"/>
+<meta content="A. Langley" name="citation_author"/>
+<meta content="May, 2015" name="citation_publication_date"/>
+<meta content="ChaCha20 and Poly1305 for IETF Protocols" name="citation_title"/>
+<meta content="10.17487/RFC7539" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7539" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7539.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7539: ChaCha20 and Poly1305 for IETF Protocols</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -48,7 +41,7 @@ guide. It is a product of the Crypto Forum Research Group (CFRG).' name="DC.Desc
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -57,7 +50,7 @@ guide. It is a product of the Crypto Forum Research Group (CFRG).' name="DC.Desc
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -136,19 +129,18 @@ guide. It is a product of the Crypto Forum Research Group (CFRG).' name="DC.Desc
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -162,21 +154,9 @@ guide. It is a product of the Crypto Forum Research Group (CFRG).' name="DC.Desc
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7539.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7539" title="PDF version of this document">pdf</a>] [<a href="./draft-irtf-cfrg-chacha20-poly1305.html" title="draft-irtf-cfrg-chacha20-poly1305">draft-irtf-cfrg-c...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc7539" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc7539" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=7539">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Internet Research Task Force (IRTF)                               Y. Nir
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7539.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7539.txt.pdf">PDF</a>|<a href="/rfc/rfc7539.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7539" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7539&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc7539" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc7539" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">Obsoleted by: <a href="/rfc/rfc8439" target="_blank">8439</a>                                         INFORMATIONAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Research Task Force (IRTF)                               Y. Nir
 Request for Comments: 7539                                   Check Point
 Category: Informational                                       A. Langley
 ISSN: 2070-1721                                             Google, Inc.
@@ -218,7 +198,7 @@ Copyright Notice
    Copyright (c) 2015 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -228,7 +208,7 @@ Copyright Notice
 
 
 <span class="grey">Nir &amp; Langley                 Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -284,11 +264,11 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    The Advanced Encryption Standard (AES -- [<a href="#ref-FIPS-197" title='"Advanced Encryption Standard (AES)"'>FIPS-197</a>]) has become the
    gold standard in encryption.  Its efficient design, widespread
@@ -340,14 +320,14 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
    This document represents the consensus of the Crypto Forum Research
    Group (CFRG).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Conventions Used in This Document</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Conventions Used in This Document</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -375,12 +355,12 @@ Table of Contents
    document we only describe the 20-round ChaCha, so the names "ChaCha"
    and "ChaCha20" will be used interchangeably.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20The%20Algorithms"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  The Algorithms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20The%20Algorithms"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  The Algorithms</span>
 
    The subsections below describe the algorithms used and the AEAD
    construction.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20The%20ChaCha%20Quarter%20Round"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  The ChaCha Quarter Round</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20The%20ChaCha%20Quarter%20Round"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  The ChaCha Quarter Round</span>
 
    The basic operation of the ChaCha algorithm is the quarter round.  It
    operates on four 32-bit unsigned integers, denoted a, b, c, and d.
@@ -396,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -415,7 +395,7 @@ Table of Contents
    o  b = b ^ c = 0x01020304 ^ 0x789abcde = 0x7998bfda
    o  b = b &lt;&lt;&lt; 7 = 0x7998bfda &lt;&lt;&lt; 7 = 0xcc5fed3c
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.1.%20%20Test%20Vector%20for%20the%20ChaCha%20Quarter%20Round"></a></body></html><a class="selflink" href="#section-2.1.1" name="section-2.1.1">2.1.1</a>.  Test Vector for the ChaCha Quarter Round</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.1.%20%20Test%20Vector%20for%20the%20ChaCha%20Quarter%20Round"></a></body></html><a class="selflink" href="#section-2.1.1" id="section-2.1.1">2.1.1</a>.  Test Vector for the ChaCha Quarter Round</span>
 
    For a test vector, we will use the same numbers as in the example,
    adding something random for c.
@@ -432,7 +412,7 @@ Table of Contents
    o  c = 0x4581472e
    o  d = 0x5881c4bb
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20A%20Quarter%20Round%20on%20the%20ChaCha%20State"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  A Quarter Round on the ChaCha State</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20A%20Quarter%20Round%20on%20the%20ChaCha%20State"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  A Quarter Round on the ChaCha State</span>
 
    The ChaCha state does not have four integer numbers: it has 16.  So
    the quarter-round operation works on only four of them -- hence the
@@ -452,14 +432,14 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
    Note that this run of quarter round is part of what is called a
    "column round".
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.1.%20%20Test%20Vector%20for%20the%20Quarter%20Round%20on%20the%20ChaCha%20State"></a></body></html><a class="selflink" href="#section-2.2.1" name="section-2.2.1">2.2.1</a>.  Test Vector for the Quarter Round on the ChaCha State</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.1.%20%20Test%20Vector%20for%20the%20Quarter%20Round%20on%20the%20ChaCha%20State"></a></body></html><a class="selflink" href="#section-2.2.1" id="section-2.2.1">2.2.1</a>.  Test Vector for the Quarter Round on the ChaCha State</span>
 
    For a test vector, we will use a ChaCha state that was generated
    randomly:
@@ -484,7 +464,7 @@ Table of Contents
 
    Note that only the numbers in positions 2, 7, 8, and 13 changed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20The%20ChaCha20%20Block%20Function"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  The ChaCha20 Block Function</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20The%20ChaCha20%20Block%20Function"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  The ChaCha20 Block Function</span>
 
    The ChaCha block function transforms a ChaCha state by running
    multiple quarter rounds.
@@ -508,7 +488,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -564,7 +544,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -580,7 +560,7 @@ Table of Contents
    machine languages, this is called carryless addition on a 32-bit
    word.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.%20%20The%20ChaCha20%20Block%20Function%20in%20Pseudocode"></a></body></html><a class="selflink" href="#section-2.3.1" name="section-2.3.1">2.3.1</a>.  The ChaCha20 Block Function in Pseudocode</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.%20%20The%20ChaCha20%20Block%20Function%20in%20Pseudocode"></a></body></html><a class="selflink" href="#section-2.3.1" id="section-2.3.1">2.3.1</a>.  The ChaCha20 Block Function in Pseudocode</span>
 
    Note: This section and a few others contain pseudocode for the
    algorithm explained in a previous section.  Every effort was made for
@@ -620,11 +600,11 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.2.%20%20Test%20Vector%20for%20the%20ChaCha20%20Block%20Function"></a></body></html><a class="selflink" href="#section-2.3.2" name="section-2.3.2">2.3.2</a>.  Test Vector for the ChaCha20 Block Function</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.2.%20%20Test%20Vector%20for%20the%20ChaCha20%20Block%20Function"></a></body></html><a class="selflink" href="#section-2.3.2" id="section-2.3.2">2.3.2</a>.  Test Vector for the ChaCha20 Block Function</span>
 
    For a test vector, we will use the following inputs to the ChaCha20
    block function:
@@ -676,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -688,7 +668,7 @@ Table of Contents
   032  d2 82 64 46 07 9f aa 09 14 c2 d7 05 d9 8b 02 a2  ..dF............
   048  b5 12 9c d1 de 16 4e b9 cb d0 83 e8 a2 50 3c 4e  ......N......P&lt;N
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20The%20ChaCha20%20Encryption%20Algorithm"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  The ChaCha20 Encryption Algorithm</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20The%20ChaCha20%20Encryption%20Algorithm"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  The ChaCha20 Encryption Algorithm</span>
 
    ChaCha20 is a stream cipher designed by D. J. Bernstein.  It is a
    refinement of the Salsa20 algorithm, and it uses a 256-bit key.
@@ -732,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -740,7 +720,7 @@ Table of Contents
    used to expand the key into a keystream, which is XORed with the
    ciphertext giving back the plaintext.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.1.%20%20The%20ChaCha20%20Encryption%20Algorithm%20in%20Pseudocode"></a></body></html><a class="selflink" href="#section-2.4.1" name="section-2.4.1">2.4.1</a>.  The ChaCha20 Encryption Algorithm in Pseudocode</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.1.%20%20The%20ChaCha20%20Encryption%20Algorithm%20in%20Pseudocode"></a></body></html><a class="selflink" href="#section-2.4.1" id="section-2.4.1">2.4.1</a>.  The ChaCha20 Encryption Algorithm in Pseudocode</span>
 
      chacha20_encrypt(key, counter, nonce, plaintext):
         for j = 0 upto floor(len(plaintext)/64)-1
@@ -757,7 +737,7 @@ Table of Contents
         return encrypted_message
         end
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.2.%20%20Example%20and%20Test%20Vector%20for%20the%20ChaCha20%20Cipher"></a></body></html><a class="selflink" href="#section-2.4.2" name="section-2.4.2">2.4.2</a>.  Example and Test Vector for the ChaCha20 Cipher</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.2.%20%20Example%20and%20Test%20Vector%20for%20the%20ChaCha20%20Cipher"></a></body></html><a class="selflink" href="#section-2.4.2" id="section-2.4.2">2.4.2</a>.  Example and Test Vector for the ChaCha20 Cipher</span>
 
    For a test vector, we will use the following inputs to the ChaCha20
    block function:
@@ -788,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -844,7 +824,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -861,7 +841,7 @@ Table of Contents
   096  5a f9 0b bf 74 a3 5b e6 b4 0b 8e ed f2 78 5e 42  Z...t.[......x^B
   112  87 4d                                            .M
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20The%20Poly1305%20Algorithm"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  The Poly1305 Algorithm</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20The%20Poly1305%20Algorithm"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  The Poly1305 Algorithm</span>
 
    Poly1305 is a one-time authenticator designed by D. J. Bernstein.
    Poly1305 takes a 32-byte one-time key and a message and produces a
@@ -900,7 +880,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -956,7 +936,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -980,7 +960,7 @@ Table of Contents
    and the 128 least significant bits are serialized in little-endian
    order to form the tag.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.%20%20The%20Poly1305%20Algorithms%20in%20Pseudocode"></a></body></html><a class="selflink" href="#section-2.5.1" name="section-2.5.1">2.5.1</a>.  The Poly1305 Algorithms in Pseudocode</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.%20%20The%20Poly1305%20Algorithms%20in%20Pseudocode"></a></body></html><a class="selflink" href="#section-2.5.1" id="section-2.5.1">2.5.1</a>.  The Poly1305 Algorithms in Pseudocode</span>
 
       clamp(r): r &amp;= 0x0ffffffc0ffffffc0ffffffc0fffffff
       poly1305_mac(msg, key):
@@ -998,7 +978,7 @@ Table of Contents
          return num_to_16_le_bytes(a)
          end
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.%20%20Poly1305%20Example%20and%20Test%20Vector"></a></body></html><a class="selflink" href="#section-2.5.2" name="section-2.5.2">2.5.2</a>.  Poly1305 Example and Test Vector</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.%20%20Poly1305%20Example%20and%20Test%20Vector"></a></body></html><a class="selflink" href="#section-2.5.2" id="section-2.5.2">2.5.2</a>.  Poly1305 Example and Test Vector</span>
 
    For our example, we will dispense with generating the one-time key
    using AES, and assume that we got the following keying material:
@@ -1012,7 +992,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -1068,7 +1048,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -1078,7 +1058,7 @@ Table of Contents
 
    Tag: a8:06:1d:c1:30:51:36:c6:c2:2b:8b:af:0c:01:27:a9
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20Generating%20the%20Poly1305%20Key%20Using%20ChaCha20"></a></body></html><a class="selflink" href="#section-2.6" name="section-2.6">2.6</a>.  Generating the Poly1305 Key Using ChaCha20</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20Generating%20the%20Poly1305%20Key%20Using%20ChaCha20"></a></body></html><a class="selflink" href="#section-2.6" id="section-2.6">2.6</a>.  Generating the Poly1305 Key Using ChaCha20</span>
 
    As said in <a href="#section-2.5">Section 2.5</a>, it is acceptable to generate the one-time
    Poly1305 pseudorandomly.  This section defines such a method.
@@ -1124,7 +1104,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -1134,7 +1114,7 @@ Table of Contents
    that case, the per-invocation nonce will have to come from somewhere
    else, such as a message counter.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.1.%20%20Poly1305%20Key%20Generation%20in%20Pseudocode"></a></body></html><a class="selflink" href="#section-2.6.1" name="section-2.6.1">2.6.1</a>.  Poly1305 Key Generation in Pseudocode</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.1.%20%20Poly1305%20Key%20Generation%20in%20Pseudocode"></a></body></html><a class="selflink" href="#section-2.6.1" id="section-2.6.1">2.6.1</a>.  Poly1305 Key Generation in Pseudocode</span>
 
       poly1305_key_gen(key,nonce):
          counter = 0
@@ -1142,7 +1122,7 @@ Table of Contents
          return block[0..31]
          end
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.2.%20%20Poly1305%20Key%20Generation%20Test%20Vector"></a></body></html><a class="selflink" href="#section-2.6.2" name="section-2.6.2">2.6.2</a>.  Poly1305 Key Generation Test Vector</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.2.%20%20Poly1305%20Key%20Generation%20Test%20Vector"></a></body></html><a class="selflink" href="#section-2.6.2" id="section-2.6.2">2.6.2</a>.  Poly1305 Key Generation Test Vector</span>
 
    For this example, we'll set:
 
@@ -1171,7 +1151,7 @@ Table of Contents
 
    And that output is also the 32-byte one-time key used for Poly1305.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.%20%20A%20Pseudorandom%20Function%20for%20Crypto%20Suites%20based%20on%20ChaCha/Poly1305"></a></body></html><a class="selflink" href="#section-2.7" name="section-2.7">2.7</a>.  A Pseudorandom Function for Crypto Suites based on ChaCha/Poly1305</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.%20%20A%20Pseudorandom%20Function%20for%20Crypto%20Suites%20based%20on%20ChaCha/Poly1305"></a></body></html><a class="selflink" href="#section-2.7" id="section-2.7">2.7</a>.  A Pseudorandom Function for Crypto Suites based on ChaCha/Poly1305</span>
 
    Some protocols, such as IKEv2 ([<a href="./rfc7296.html" title='"Internet Key Exchange Protocol Version 2 (IKEv2)"'>RFC7296</a>]), require a Pseudorandom
    Function (PRF), mostly for key derivation.  In the IKEv2 definition,
@@ -1180,7 +1160,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -1203,7 +1183,7 @@ Table of Contents
    that crypto suites use some other PRF such as PRF_HMAC_SHA2_256 (see
    <a href="./rfc4868.html#section-2.1.2">Section 2.1.2 of [RFC4868]</a>).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.8.%20%20AEAD%20Construction"></a></body></html><a class="selflink" href="#section-2.8" name="section-2.8">2.8</a>.  AEAD Construction</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.8.%20%20AEAD%20Construction"></a></body></html><a class="selflink" href="#section-2.8" id="section-2.8">2.8</a>.  AEAD Construction</span>
 
    AEAD_CHACHA20_POLY1305 is an authenticated encryption with additional
    data algorithm.  The inputs to AEAD_CHACHA20_POLY1305 are:
@@ -1236,7 +1216,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -1292,7 +1272,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -1334,7 +1314,7 @@ Table of Contents
    up to the application to create a structure in the AAD input if it is
    needed.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.8.1.%20%20Pseudocode%20for%20the%20AEAD%20Construction"></a></body></html><a class="selflink" href="#section-2.8.1" name="section-2.8.1">2.8.1</a>.  Pseudocode for the AEAD Construction</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.8.1.%20%20Pseudocode%20for%20the%20AEAD%20Construction"></a></body></html><a class="selflink" href="#section-2.8.1" id="section-2.8.1">2.8.1</a>.  Pseudocode for the AEAD Construction</span>
 
       pad16(x):
          if (len(x) % 16)==0
@@ -1348,7 +1328,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -1363,7 +1343,7 @@ Table of Contents
          tag = poly1305_mac(mac_data, otk)
          return (ciphertext, tag)
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.8.2.%20%20Example%20and%20Test%20Vector%20for%20AEAD_CHACHA20_POLY1305"></a></body></html><a class="selflink" href="#section-2.8.2" name="section-2.8.2">2.8.2</a>.  Example and Test Vector for AEAD_CHACHA20_POLY1305</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.8.2.%20%20Example%20and%20Test%20Vector%20for%20AEAD_CHACHA20_POLY1305"></a></body></html><a class="selflink" href="#section-2.8.2" id="section-2.8.2">2.8.2</a>.  Example and Test Vector for AEAD_CHACHA20_POLY1305</span>
 
    For a test vector, we will use the following inputs to the
    AEAD_CHACHA20_POLY1305 function:
@@ -1404,7 +1384,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -1460,14 +1440,14 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
    Tag:
    1a:e1:0b:59:4f:09:e2:6a:7e:90:2e:cb:d0:60:06:91
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Implementation%20Advice"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Implementation Advice</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Implementation%20Advice"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Implementation Advice</span>
 
    Each block of ChaCha20 involves 16 move operations and one increment
    operation for loading the state, 80 each of XOR, addition and Roll
@@ -1494,7 +1474,7 @@ Table of Contents
    time implementation can be found in the public domain library
    poly1305-donna ([<a href="#ref-Poly1305_Donna">Poly1305_Donna</a>]).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Security Considerations</span>
 
    The ChaCha20 cipher is designed to provide 256-bit security.
 
@@ -1516,7 +1496,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -1572,7 +1552,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -1580,42 +1560,42 @@ Table of Contents
    than relying on optimized but insecure library functions such as the
    C language's memcmp().
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  IANA Considerations</span>
 
    IANA has assigned an entry in the "Authenticated Encryption with
    Associated Data (AEAD) Parameters" registry with 29 as the Numeric
    ID, "AEAD_CHACHA20_POLY1305" as the name, and this document as
    reference.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Normative References</span>
 
-   [<a id="ref-ChaCha" name="ref-ChaCha">ChaCha</a>]   Bernstein, D., "ChaCha, a variant of Salsa20", January
+   [<a id="ref-ChaCha">ChaCha</a>]   Bernstein, D., "ChaCha, a variant of Salsa20", January
               2008, &lt;<a href="http://cr.yp.to/chacha/chacha-20080128.pdf">http://cr.yp.to/chacha/chacha-20080128.pdf</a>&gt;.
 
-   [<a id="ref-Poly1305" name="ref-Poly1305">Poly1305</a>] Bernstein, D., "The Poly1305-AES message-authentication
+   [<a id="ref-Poly1305">Poly1305</a>] Bernstein, D., "The Poly1305-AES message-authentication
               code", March 2005,
               &lt;<a href="http://cr.yp.to/mac/poly1305-20050329.pdf">http://cr.yp.to/mac/poly1305-20050329.pdf</a>&gt;.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
               DOI 10.17487/RFC2119, March 1997,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2119">http://www.rfc-editor.org/info/rfc2119</a>&gt;.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Informative References</span>
 
-   [<a id="ref-AE" name="ref-AE">AE</a>]       Bellare, M. and C. Namprempre, "Authenticated Encryption:
+   [<a id="ref-AE">AE</a>]       Bellare, M. and C. Namprempre, "Authenticated Encryption:
               Relations among notions and analysis of the generic
               composition paradigm", September 2008,
               &lt;<a href="http://dl.acm.org/citation.cfm?id=1410269">http://dl.acm.org/citation.cfm?id=1410269</a>&gt;.
 
-   [<a id="ref-Cache-Collisions" name="ref-Cache-Collisions">Cache-Collisions</a>]
+   [<a id="ref-Cache-Collisions">Cache-Collisions</a>]
               Bonneau, J. and I. Mironov, "Cache-Collision Timing
               Attacks Against AES", 2006,
               &lt;<a href="http://research.microsoft.com/pubs/64024/aes-timing.pdf">http://research.microsoft.com/pubs/64024/aes-timing.pdf</a>&gt;.
 
-   [<a id="ref-FIPS-197" name="ref-FIPS-197">FIPS-197</a>] National Institute of Standards and Technology, "Advanced
+   [<a id="ref-FIPS-197">FIPS-197</a>] National Institute of Standards and Technology, "Advanced
               Encryption Standard (AES)", FIPS PUB 197, November 2001,
               &lt;<a href="http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf">http://csrc.nist.gov/publications/fips/fips197/</a>
               <a href="http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf">fips-197.pdf</a>&gt;.
@@ -1628,49 +1608,49 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
-   [<a id="ref-LatinDances" name="ref-LatinDances">LatinDances</a>]
+   [<a id="ref-LatinDances">LatinDances</a>]
               Aumasson, J., Fischer, S., Khazaei, S., Meier, W., and C.
               Rechberger, "New Features of Latin Dances: Analysis of
               Salsa, ChaCha, and Rumba", December 2007,
               &lt;<a href="http://cr.yp.to/rumba20/newfeatures-20071218.pdf">http://cr.yp.to/rumba20/newfeatures-20071218.pdf</a>&gt;.
 
-   [<a id="ref-LatinDances2" name="ref-LatinDances2">LatinDances2</a>]
+   [<a id="ref-LatinDances2">LatinDances2</a>]
               Ishiguro, T., Kiyomoto, S., and Y. Miyake, "Modified
               version of 'Latin Dances Revisited: New Analytic Results
               of Salsa20 and ChaCha'", February 2012,
               &lt;<a href="https://eprint.iacr.org/2012/065.pdf">https://eprint.iacr.org/2012/065.pdf</a>&gt;.
 
-   [<a id="ref-NaCl" name="ref-NaCl">NaCl</a>]     Bernstein, D., Lange, T., and P. Schwabe, "NaCl:
+   [<a id="ref-NaCl">NaCl</a>]     Bernstein, D., Lange, T., and P. Schwabe, "NaCl:
               Networking and Cryptography library", July 2012,
               &lt;<a href="http://nacl.cr.yp.to">http://nacl.cr.yp.to</a>&gt;.
 
-   [<a id="ref-Poly1305_Donna" name="ref-Poly1305_Donna">Poly1305_Donna</a>]
+   [<a id="ref-Poly1305_Donna">Poly1305_Donna</a>]
               Floodyberry, A., "poly1305-donna", February 2014,
               &lt;<a href="https://github.com/floodyberry/poly1305-donna">https://github.com/floodyberry/poly1305-donna</a>&gt;.
 
-   [<a id="ref-Procter" name="ref-Procter">Procter</a>]  Procter, G., "A Security Analysis of the Composition of
+   [<a id="ref-Procter">Procter</a>]  Procter, G., "A Security Analysis of the Composition of
               ChaCha20 and Poly1305", August 2014,
               &lt;<a href="http://eprint.iacr.org/2014/613.pdf">http://eprint.iacr.org/2014/613.pdf</a>&gt;.
 
-   [<a id="ref-RFC4868" name="ref-RFC4868">RFC4868</a>]  Kelly, S. and S. Frankel, "Using HMAC-SHA-256, HMAC-SHA-
+   [<a id="ref-RFC4868">RFC4868</a>]  Kelly, S. and S. Frankel, "Using HMAC-SHA-256, HMAC-SHA-
               384, and HMAC-SHA-512 with IPsec", <a href="./rfc4868.html">RFC 4868</a>,
               DOI 10.17487/RFC4868, May 2007,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4868">http://www.rfc-editor.org/info/rfc4868</a>&gt;.
 
-   [<a id="ref-RFC5116" name="ref-RFC5116">RFC5116</a>]  McGrew, D., "An Interface and Algorithms for Authenticated
+   [<a id="ref-RFC5116">RFC5116</a>]  McGrew, D., "An Interface and Algorithms for Authenticated
               Encryption", <a href="./rfc5116.html">RFC 5116</a>, DOI 10.17487/RFC5116, January 2008,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5116">http://www.rfc-editor.org/info/rfc5116</a>&gt;.
 
-   [<a id="ref-RFC7296" name="ref-RFC7296">RFC7296</a>]  Kaufman, C., Hoffman, P., Nir, Y., Eronen, P., and T.
+   [<a id="ref-RFC7296">RFC7296</a>]  Kaufman, C., Hoffman, P., Nir, Y., Eronen, P., and T.
               Kivinen, "Internet Key Exchange Protocol Version 2
               (IKEv2)", STD 79, <a href="./rfc7296.html">RFC 7296</a>, DOI 10.17487/RFC7296, October
               2014, &lt;<a href="http://www.rfc-editor.org/info/rfc7296">http://www.rfc-editor.org/info/rfc7296</a>&gt;.
 
-   [<a id="ref-SP800-67" name="ref-SP800-67">SP800-67</a>] National Institute of Standards and Technology,
+   [<a id="ref-SP800-67">SP800-67</a>] National Institute of Standards and Technology,
               "Recommendation for the Triple Data Encryption Algorithm
               (TDEA) Block Cipher", NIST 800-67, January 2012,
               &lt;<a href="http://csrc.nist.gov/publications/nistpubs/800-67-Rev1/SP-800-67-Rev1.pdf">http://csrc.nist.gov/publications/nistpubs/800-67-Rev1/</a>
@@ -1684,16 +1664,16 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
-   [<a id="ref-Standby-Cipher" name="ref-Standby-Cipher">Standby-Cipher</a>]
+   [<a id="ref-Standby-Cipher">Standby-Cipher</a>]
               McGrew, D., Grieco, A., and Y. Sheffer, "Selection of
               Future Cryptographic Standards", Work in Progress,
               <a href="./draft-mcgrew-standby-cipher-00.html">draft-mcgrew-standby-cipher-00</a>, January 2013.
 
-   [<a id="ref-Zhenqing2012" name="ref-Zhenqing2012">Zhenqing2012</a>]
+   [<a id="ref-Zhenqing2012">Zhenqing2012</a>]
               Zhenqing, S., Bin, Z., Dengguo, F., and W. Wenling,
               "Improved Key Recovery Attacks on Reduced-Round Salsa20
               and ChaCha*", 2012.
@@ -1740,16 +1720,16 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Additional%20Test%20Vectors"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Additional Test Vectors</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Additional%20Test%20Vectors"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Additional Test Vectors</span>
 
    The subsections of this appendix contain more test vectors for the
    algorithms in the sub-sections of <a href="#section-2">Section 2</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20The%20ChaCha20%20Block%20Functions"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>.  The ChaCha20 Block Functions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20The%20ChaCha20%20Block%20Functions"></a></body></html><a class="selflink" href="#appendix-A.1" id="appendix-A.1">A.1</a>.  The ChaCha20 Block Functions</span>
 
   Test Vector #1:
   ==============
@@ -1796,7 +1776,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -1852,7 +1832,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -1908,11 +1888,11 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20ChaCha20%20Encryption"></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>.  ChaCha20 Encryption</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20ChaCha20%20Encryption"></a></body></html><a class="selflink" href="#appendix-A.2" id="appendix-A.2">A.2</a>.  ChaCha20 Encryption</span>
 
   Test Vector #1:
   ==============
@@ -1964,7 +1944,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2020,7 +2000,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2056,7 +2036,7 @@ Table of Contents
   096  04 c6 a8 d1 bc d1 bf 4d 50 d6 15 4b 6d a7 31 b1  .......MP..Km.1.
   112  87 b5 8d fd 72 8a fa 36 75 7a 79 7a c1 88 d1     ....r..6uzyz...
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20%20Poly1305%20Message%20Authentication%20Code"></a></body></html><a class="selflink" href="#appendix-A.3" name="appendix-A.3">A.3</a>.  Poly1305 Message Authentication Code</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20%20Poly1305%20Message%20Authentication%20Code"></a></body></html><a class="selflink" href="#appendix-A.3" id="appendix-A.3">A.3</a>.  Poly1305 Message Authentication Code</span>
 
    Notice how, in test vector #2, r is equal to zero.  The part of the
    Poly1305 algorithm where the accumulator is multiplied by r means
@@ -2076,7 +2056,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2132,7 +2112,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2188,7 +2168,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2244,7 +2224,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2300,7 +2280,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2356,7 +2336,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2389,7 +2369,7 @@ Table of Contents
    tag:
    13 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.%20%20Poly1305%20Key%20Generation%20Using%20ChaCha20"></a></body></html><a class="selflink" href="#appendix-A.4" name="appendix-A.4">A.4</a>.  Poly1305 Key Generation Using ChaCha20</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.%20%20Poly1305%20Key%20Generation%20Using%20ChaCha20"></a></body></html><a class="selflink" href="#appendix-A.4" id="appendix-A.4">A.4</a>.  Poly1305 Key Generation Using ChaCha20</span>
 
   Test Vector #1:
   ==============
@@ -2412,7 +2392,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2444,7 +2424,7 @@ Table of Contents
   000  96 5e 3b c6 f9 ec 7e d9 56 08 08 f4 d2 29 f9 4b  .^;...~.V....).K
   016  13 7f f2 75 ca 9b 3f cb dd 59 de aa d2 33 10 ae  ...u..?..Y...3..
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.5.%20%20ChaCha20-Poly1305%20AEAD%20Decryption"></a></body></html><a class="selflink" href="#appendix-A.5" name="appendix-A.5">A.5</a>.  ChaCha20-Poly1305 AEAD Decryption</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.5.%20%20ChaCha20-Poly1305%20AEAD%20Decryption"></a></body></html><a class="selflink" href="#appendix-A.5" id="appendix-A.5">A.5</a>.  ChaCha20-Poly1305 AEAD Decryption</span>
 
    Below we see decrypting a message.  We receive a ciphertext, a nonce,
    and a tag.  We know the key.  We will check the tag and then
@@ -2468,7 +2448,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2524,7 +2504,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 42]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-43" id="page-43" name="page-43"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-43"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2580,7 +2560,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 43]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-44" id="page-44" name="page-44"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-44"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2610,7 +2590,7 @@ Table of Contents
   240  2f e2 80 9c 77 6f 72 6b 20 69 6e 20 70 72 6f 67  /...work in prog
   256  72 65 73 73 2e 2f e2 80 9d                       ress./...
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Performance%20Measurements%20of%20ChaCha20"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Performance Measurements of ChaCha20</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Performance%20Measurements%20of%20ChaCha20"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Performance Measurements of ChaCha20</span>
 
    The following measurements were made by Adam Langley for a blog post
    published on February 27th, 2014.  The original blog post was
@@ -2636,7 +2616,7 @@ Table of Contents
 
 
 <span class="grey">Nir &amp; Langley                 Informational                    [Page 44]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-45" id="page-45" name="page-45"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-45"></span>
 <span class="grey"><a href="./rfc7539.html">RFC 7539</a>                   ChaCha20 &amp; Poly1305                  May 2015</span>
 
 
@@ -2692,11 +2672,6 @@ Authors' Addresses
 
 
 Nir &amp; Langley                 Informational                    [Page 45]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,26 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:5351" name="DC.Identifier"/>
-<meta content='The Reliable Server Pooling effort (abbreviated "RSerPool") provides
-an application-independent set of services and protocols for building
-fault-tolerant and highly available client/server applications. This
-document provides an overview of the protocols and mechanisms in the
-Reliable Server Pooling suite. This memo provides information for the
-Internet community.' name="DC.Description.Abstract"/>
-<meta content="Tuexen, Michael" name="DC.Creator"/>
-<meta content="Lei, Peter" name="DC.Creator"/>
-<meta content="Dreibholz, Thomas" name="DC.Creator"/>
-<meta content="Ong, Lyndon" name="DC.Creator"/>
-<meta content="September, 2008" name="DC.Date.Issued"/>
-<meta content="An Overview of Reliable Server Pooling Protocols" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5351 - An Overview of Reliable Server Pooling Protocols</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="P. Lei" name="citation_author"/>
+<meta content="L. Ong" name="citation_author"/>
+<meta content="M. Tuexen" name="citation_author"/>
+<meta content="T. Dreibholz" name="citation_author"/>
+<meta content="September, 2008" name="citation_publication_date"/>
+<meta content="An Overview of Reliable Server Pooling Protocols" name="citation_title"/>
+<meta content="10.17487/RFC5351" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5351" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5351.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5351: An Overview of Reliable Server Pooling Protocols</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -49,7 +43,7 @@ Internet community.' name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -58,7 +52,7 @@ Internet community.' name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -137,19 +131,18 @@ Internet community.' name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -163,21 +156,9 @@ Internet community.' name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5351.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5351" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-rserpool-overview.html" title="draft-ietf-rserpool-overview">draft-ietf-rserpo...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5351" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5351" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                             P. Lei
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5351.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5351.txt.pdf">PDF</a>|<a href="/rfc/rfc5351.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5351" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5351&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc5351" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                             P. Lei
 Request for Comments: 5351                           Cisco Systems, Inc.
 Category: Informational                                           L. Ong
                                                        Ciena Corporation
@@ -229,7 +210,7 @@ Abstract
 
 
 <span class="grey">Lei, et al.                  Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
@@ -285,11 +266,11 @@ Table of Contents
 
 
 <span class="grey">Lei, et al.                  Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    The Reliable Server Pooling (RSerPool) protocol suite is designed to
    provide client applications ("pool users") with the ability to select
@@ -341,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">Lei, et al.                  Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
@@ -397,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">Lei, et al.                  Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
@@ -453,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Lei, et al.                  Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
@@ -470,7 +451,7 @@ Table of Contents
          policies) [<a href="./rfc5356.html" title='"Reliable Server Pooling Policies"'>RFC5356</a>], as well as a security threat analysis
          [<a href="./rfc5355.html" title='"Threats Introduced by Reliable Server Pooling (RSerPool) and Requirements for Security in Response to Threats"'>RFC5355</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Aggregate%20Server%20Access%20Protocol%20%28ASAP%29%20Overview"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Aggregate Server Access Protocol (ASAP) Overview</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Aggregate%20Server%20Access%20Protocol%20%28ASAP%29%20Overview"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Aggregate Server Access Protocol (ASAP) Overview</span>
 
    ASAP defines a straightforward set of mechanisms necessary to support
    the creation and maintenance of pools of redundant servers.  These
@@ -486,7 +467,7 @@ Table of Contents
 
    o  failover mechanisms for handling a server failure
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Pool%20Initialization"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Pool Initialization</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Pool%20Initialization"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Pool Initialization</span>
 
    Pools come into existence when a PE registers the first instance of
    the pool name with an ENRP server.  They disappear when the last PE
@@ -499,7 +480,7 @@ Table of Contents
    beforehand.  Methods of automating this configuration process are not
    addressed at this time.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Pool%20Entity%20Registration"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Pool Entity Registration</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Pool%20Entity%20Registration"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Pool Entity Registration</span>
 
    A new server joins an existing pool by sending a Registration message
    via ASAP to an ENRP server, indicating the pool handle of the pool
@@ -509,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Lei, et al.                  Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
@@ -523,7 +504,7 @@ Table of Contents
    it previously registered with expire, after which it is gracefully
    removed from the pool).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Pool%20Entity%20Selection"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Pool Entity Selection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Pool%20Entity%20Selection"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Pool Entity Selection</span>
 
    When an endpoint wishes to be connected to a server in the pool, it
    generates an ASAP Handle Resolution message and sends this to its
@@ -536,7 +517,7 @@ Table of Contents
    defines a few basic policies and allows the use of external server
    selection input for more complex policies.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Endpoint%20Keep-Alive"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Endpoint Keep-Alive</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Endpoint%20Keep-Alive"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Endpoint Keep-Alive</span>
 
    ENRP servers monitor the status of pool elements using the ASAP
    Endpoint Keep-Alive message.  A PE responds to the ASAP Keep-Alive
@@ -546,7 +527,7 @@ Table of Contents
    has become unresponsive by sending an ASAP Endpoint Unreachable
    message to the ENRP server.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Failover%20Services"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  Failover Services</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Failover%20Services"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  Failover Services</span>
 
    While maintaining application-independence, the RSerPool protocol
    suite provides some simple hooks for supporting failover of an
@@ -556,7 +537,7 @@ Table of Contents
    supported.  However, some simple mechanisms supported by RSerPool
    allow some level of failover that any application can use.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.%20%20Cookie%20Mechanism"></a></body></html><a class="selflink" href="#section-2.5.1" name="section-2.5.1">2.5.1</a>.  Cookie Mechanism</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.%20%20Cookie%20Mechanism"></a></body></html><a class="selflink" href="#section-2.5.1" id="section-2.5.1">2.5.1</a>.  Cookie Mechanism</span>
 
    Cookies may optionally be generated by the ASAP layer and
    periodically sent from the PE to the PU.  The PU only stores the last
@@ -565,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Lei, et al.                  Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
@@ -575,7 +556,7 @@ Table of Contents
    For the PU, the cookie has no structure and is only stored and
    transmitted to the new PE.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.%20%20Business%20Card%20Mechanism"></a></body></html><a class="selflink" href="#section-2.5.2" name="section-2.5.2">2.5.2</a>.  Business Card Mechanism</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.%20%20Business%20Card%20Mechanism"></a></body></html><a class="selflink" href="#section-2.5.2" id="section-2.5.2">2.5.2</a>.  Business Card Mechanism</span>
 
    A PE can send a business card to its peer (PE or PU) containing its
    pool handle and guidance concerning which other PEs the peer should
@@ -585,7 +566,7 @@ Table of Contents
    considerations, such as PEs that have the most up-to-date state
    information.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Endpoint%20Handlespace%20Redundancy%20Protocol%20%28ENRP%29%20Overview"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Endpoint Handlespace Redundancy Protocol (ENRP) Overview</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Endpoint%20Handlespace%20Redundancy%20Protocol%20%28ENRP%29%20Overview"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Endpoint Handlespace Redundancy Protocol (ENRP) Overview</span>
 
    A set of server pools, which is denoted as a handlespace, is managed
    by ENRP servers.  Pools are not valid in the whole Internet but only
@@ -595,7 +576,7 @@ Table of Contents
    each other for information exchange, such as pool membership changes,
    handlespace data synchronization, etc.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Initialization"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Initialization</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Initialization"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Initialization</span>
 
    Each ENRP server initially generates a 32-bit server ID that it uses
    in subsequent messaging and remains unchanged over the lifetime of
@@ -609,7 +590,7 @@ Table of Contents
    Handle Table Response messages is unpacked into the local database.
    After that, the ENRP server is ready to provide ENRP services.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Server%20Discovery%20and%20Home%20Server%20Selection"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Server Discovery and Home Server Selection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Server%20Discovery%20and%20Home%20Server%20Selection"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Server Discovery and Home Server Selection</span>
 
    PEs can now register their presence with the newly functioning ENRP
    server by using ASAP messages.  They discover the new ENRP server
@@ -621,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Lei, et al.                  Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
@@ -638,7 +619,7 @@ Table of Contents
    period, and when it hears an ENRP server, start an association.  The
    first server it gets up can then become its Home ENRP server.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Failure%20Detection%2C%20Handlespace%20Audit%2C%20and%20Synchronization"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Failure Detection, Handlespace Audit, and Synchronization</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Failure%20Detection%2C%20Handlespace%20Audit%2C%20and%20Synchronization"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Failure Detection, Handlespace Audit, and Synchronization</span>
 
    ENRP servers send ENRP Presence messages to all of their peers in
    order to show their liveness.  These Presence messages also include a
@@ -651,7 +632,7 @@ Table of Contents
    case, the handlespace -- restricted to the PEs owned by that peer --
    can be requested for synchronization, analogously to <a href="#section-3.2">Section 3.2</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Server%20Takeover"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Server Takeover</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Server%20Takeover"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Server Takeover</span>
 
    If the unresponsiveness of an ENRP server is detected, the remaining
    ENRP servers negotiate which other server takes over the Home ENRP
@@ -660,9 +641,9 @@ Table of Contents
    notification to its peers (via ENRP) as well as to the PEs taken over
    (via ASAP).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Example%20Scenarios"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Example Scenarios</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Example%20Scenarios"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Example Scenarios</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Example%20Scenario%20Using%20RSerPool%20Resolution%20Service"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Example Scenario Using RSerPool Resolution Service</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Example%20Scenario%20Using%20RSerPool%20Resolution%20Service"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Example Scenario Using RSerPool Resolution Service</span>
 
    RSerPool can be used in a 'standalone' manner, where the application
    uses RSerPool to determine the address of a primary server in the
@@ -677,7 +658,7 @@ Table of Contents
 
 
 <span class="grey">Lei, et al.                  Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
@@ -733,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Lei, et al.                  Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
@@ -750,7 +731,7 @@ Table of Contents
    other elements of the RSerPool architecture) that this server has
    failed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Example%20Scenario%20Using%20RSerPool%20Session%20Services"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Example Scenario Using RSerPool Session Services</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Example%20Scenario%20Using%20RSerPool%20Session%20Services"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Example Scenario Using RSerPool Session Services</span>
 
    When the full suite of RSerPool services is used, all communication
    between the pool user and the pool element is mediated by the
@@ -789,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Lei, et al.                  Informational                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
@@ -817,25 +798,25 @@ Table of Contents
       that list to the ASAP layer, and it will be included in A's
       business card (see <a href="#section-2.5.2">Section 2.5.2</a>).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Reference%20Implementation"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Reference Implementation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Reference%20Implementation"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Reference Implementation</span>
 
    A reference implementation of RSerPool is available at [<a href="#ref-RSerPoolPage" title="&quot;Thomas Dreibholz's RSerPool Page&quot;">RSerPoolPage</a>]
    and described in [<a href="#ref-Dre2006" title='"Reliable Server Pooling -- Evaluation, Optimization and Extension of a Novel IETF Architecture"'>Dre2006</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    This document does not identify security requirements beyond those
    already documented in the ENRP and ASAP protocol specifications.  A
    security threat analysis of RSerPool is provided in THREATS
    [<a href="./rfc5355.html" title='"Threats Introduced by Reliable Server Pooling (RSerPool) and Requirements for Security in Response to Threats"'>RFC5355</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  IANA Considerations</span>
 
    This document does not require additional IANA actions beyond those
    already identified in the ENRP [<a href="./rfc5353.html" title='"Endpoint Handlespace Redundancy Protocol (ENRP)"'>RFC5353</a>] and ASAP [<a href="./rfc5352.html" title='"Aggregate Server Access Protocol (ASAP)"'>RFC5352</a>] protocol
    specifications.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgements</span>
 
    The authors wish to thank Maureen Stillman, Qiaobing Xie, Randall
    Stewart, Scott Bradner, and many others for their invaluable
@@ -845,46 +826,46 @@ Table of Contents
 
 
 <span class="grey">Lei, et al.                  Informational                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC3237" name="ref-RFC3237">RFC3237</a>]       Tuexen, M., Xie, Q., Stewart, R., Shore, M., Ong, L.,
+   [<a id="ref-RFC3237">RFC3237</a>]       Tuexen, M., Xie, Q., Stewart, R., Shore, M., Ong, L.,
                    Loughney, J., and M. Stillman, "Requirements for
                    Reliable Server Pooling", <a href="./rfc3237.html">RFC 3237</a>, January 2002.
 
-   [<a id="ref-RFC5352" name="ref-RFC5352">RFC5352</a>]       Stewart, R., Xie, Q., Stillman, M., and M. Tuexen,
+   [<a id="ref-RFC5352">RFC5352</a>]       Stewart, R., Xie, Q., Stillman, M., and M. Tuexen,
                    "Aggregate Server Access Protocol (ASAP)", <a href="./rfc5352.html">RFC 5352</a>,
                    September 2008.
 
-   [<a id="ref-RFC5353" name="ref-RFC5353">RFC5353</a>]       Xie, Q., Stewart, R., Stillman, M., Tuexen, M., and
+   [<a id="ref-RFC5353">RFC5353</a>]       Xie, Q., Stewart, R., Stillman, M., Tuexen, M., and
                    A. Silverton, "Endpoint Handlespace Redundancy
                    Protocol (ENRP)", <a href="./rfc5353.html">RFC 5353</a>, September 2008.
 
-   [<a id="ref-RFC5354" name="ref-RFC5354">RFC5354</a>]       Stewart, R., Xie, Q., Stillman, M., and M. Tuexen,
+   [<a id="ref-RFC5354">RFC5354</a>]       Stewart, R., Xie, Q., Stillman, M., and M. Tuexen,
                    "Aggregate Server Access Protocol (ASAP) and Endpoint
                    Handlespace Redundancy Protocol (ENRP) Parameters",
                    <a href="./rfc5354.html">RFC 5354</a>, September 2008.
 
-   [<a id="ref-RFC5355" name="ref-RFC5355">RFC5355</a>]       Stillman, M., Ed., Gopal, R., Guttman, E., Holdrege,
+   [<a id="ref-RFC5355">RFC5355</a>]       Stillman, M., Ed., Gopal, R., Guttman, E., Holdrege,
                    M., and S. Sengodan, "Threats Introduced by Reliable
                    Server Pooling (RSerPool) and Requirements for
                    Security in Response to Threats", <a href="./rfc5355.html">RFC 5355</a>,
                    September 2008.
 
-   [<a id="ref-RFC5356" name="ref-RFC5356">RFC5356</a>]       Dreibholz, T. and M. Tuexen, "Reliable Server Pooling
+   [<a id="ref-RFC5356">RFC5356</a>]       Dreibholz, T. and M. Tuexen, "Reliable Server Pooling
                    Policies", <a href="./rfc5356.html">RFC 5356</a>, September 2008.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-RSerPoolPage" name="ref-RSerPoolPage">RSerPoolPage</a>]  Dreibholz, T., "Thomas Dreibholz's RSerPool Page",
+   [<a id="ref-RSerPoolPage">RSerPoolPage</a>]  Dreibholz, T., "Thomas Dreibholz's RSerPool Page",
                    &lt;<a href="http://tdrwww.iem.uni-due.de/dreibholz/rserpool/">http://tdrwww.iem.uni-due.de/dreibholz/rserpool/</a>&gt;.
 
-   [<a id="ref-Dre2006" name="ref-Dre2006">Dre2006</a>]       Dreibholz, T., "Reliable Server Pooling --
+   [<a id="ref-Dre2006">Dre2006</a>]       Dreibholz, T., "Reliable Server Pooling --
                    Evaluation, Optimization and Extension of a Novel
                    IETF Architecture", Ph.D. Thesis University of
                    Duisburg-Essen, Faculty of Economics, Institute for
@@ -901,7 +882,7 @@ Table of Contents
 
 
 <span class="grey">Lei, et al.                  Informational                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
@@ -957,7 +938,7 @@ Authors' Addresses
 
 
 <span class="grey">Lei, et al.                  Informational                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5351.html">RFC 5351</a>                   RSerPool Overview              September 2008</span>
 
 
@@ -966,7 +947,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2008).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -986,7 +967,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1013,11 +994,6 @@ Intellectual Property
 
 
 Lei, et al.                  Informational                     [Page 15]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,28 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:6202" name="DC.Identifier"/>
-<meta content="On today's Internet, the Hypertext Transfer Protocol (HTTP) is
-often used (some would say abused) to enable asynchronous, &quot;server-
-initiated&quot; communication from a server to a client as well as
-communication from a client to a server. This document describes known
-issues and best practices related to such &quot;bidirectional HTTP&quot;
-applications, focusing on the two most common mechanisms: HTTP long
-polling and HTTP streaming. This document is not an Internet Standards
-Track specification; it is published for informational purposes." name="DC.Description.Abstract"/>
-<meta content="Wilkins, Greg" name="DC.Creator"/>
-<meta content="Salsano, Stefano" name="DC.Creator"/>
-<meta content="Loreto, Salvatore" name="DC.Creator"/>
-<meta content="Saint-Andre, Peter" name="DC.Creator"/>
-<meta content="April, 2011" name="DC.Date.Issued"/>
-<meta content="Known Issues and Best Practices for the Use of Long Polling and Streaming in Bidirectional HTTP" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6202 - Known Issues and Best Practices for the Use of Long Polling and Streaming in Bidirectional HTTP</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="S. Loreto" name="citation_author"/>
+<meta content="P. Saint-Andre" name="citation_author"/>
+<meta content="S. Salsano" name="citation_author"/>
+<meta content="G. Wilkins" name="citation_author"/>
+<meta content="April, 2011" name="citation_publication_date"/>
+<meta content="Known Issues and Best Practices for the Use of Long Polling and Streaming in Bidirectional HTTP" name="citation_title"/>
+<meta content="10.17487/RFC6202" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6202" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6202.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6202: Known Issues and Best Practices for the Use of Long Polling and Streaming in Bidirectional HTTP</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -51,7 +43,7 @@ Track specification; it is published for informational purposes." name="DC.Descr
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -60,7 +52,7 @@ Track specification; it is published for informational purposes." name="DC.Descr
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -139,19 +131,18 @@ Track specification; it is published for informational purposes." name="DC.Descr
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -165,21 +156,9 @@ Track specification; it is published for informational purposes." name="DC.Descr
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6202.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6202" title="PDF version of this document">pdf</a>] [<a href="./draft-loreto-http-bidirectional.html" title="draft-loreto-http-bidirectional">draft-loreto-http...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6202" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6202" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                         S. Loreto
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6202.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6202.txt.pdf">PDF</a>|<a href="/rfc/rfc6202.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6202" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6202&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6202" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                         S. Loreto
 Request for Comments: 6202                                      Ericsson
 Category: Informational                                   P. Saint-Andre
 ISSN: 2070-1721                                                    Cisco
@@ -231,7 +210,7 @@ Status of This Memo
 
 
 <span class="grey">Loreto, et al.                Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
@@ -240,7 +219,7 @@ Copyright Notice
    Copyright (c) 2011 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -287,11 +266,11 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    The Hypertext Transfer Protocol [<a href="./rfc2616.html" title='"Hypertext Transfer Protocol -- HTTP/1.1"'>RFC2616</a>] is a request/response
    protocol.  HTTP defines the following entities: clients, proxies, and
@@ -343,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
@@ -367,9 +346,9 @@ Table of Contents
    lists best practices for bidirectional HTTP using existing
    technologies.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20HTTP%20Long%20Polling"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  HTTP Long Polling</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20HTTP%20Long%20Polling"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  HTTP Long Polling</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Definition"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Definition</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Definition"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Definition</span>
 
    With the traditional or "short polling" technique, a client sends
    regular requests to the server and each request attempts to "pull"
@@ -399,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
@@ -424,7 +403,7 @@ Table of Contents
    connections will avoid the additional overhead of establishing a new
    TCP/IP connection [<a href="#ref-TCP" title='"Transmission Control Protocol"'>TCP</a>] for every long poll request.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20HTTP%20Long%20Polling%20Issues"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  HTTP Long Polling Issues</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20HTTP%20Long%20Polling%20Issues"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  HTTP Long Polling Issues</span>
 
    The HTTP long polling mechanism introduces the following issues.
 
@@ -455,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
@@ -511,13 +490,13 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20HTTP%20Streaming"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  HTTP Streaming</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20HTTP%20Streaming"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  HTTP Streaming</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Definition"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Definition</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Definition"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Definition</span>
 
    The HTTP streaming mechanism keeps a request open indefinitely.  It
    never terminates the request or closes the connection, even after the
@@ -567,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
@@ -613,7 +592,7 @@ Table of Contents
    separated by HTTP protocol, and the end of the response is achieved
    by closing the connection).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20HTTP%20Streaming%20Issues"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  HTTP Streaming Issues</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20HTTP%20Streaming%20Issues"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  HTTP Streaming Issues</span>
 
    The HTTP streaming mechanism introduces the following issues.
 
@@ -623,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
@@ -679,17 +658,17 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Overview%20of%20Technologies"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Overview of Technologies</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Overview%20of%20Technologies"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Overview of Technologies</span>
 
    This section provides an overview of existing technologies that
    implement HTTP-based server-push mechanisms to asynchronously deliver
    messages from the server to the client.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Bayeux"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Bayeux</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Bayeux"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Bayeux</span>
 
    The Bayeux protocol [<a href="#ref-BAYEUX" title='"Bayeux Protocol -- Bayeux 1.0.0"'>BAYEUX</a>] was developed in 2006-2007 by the Dojo
    Foundation.  Bayeux can use both the HTTP long polling and HTTP
@@ -735,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
@@ -745,7 +724,7 @@ Table of Contents
    message JSON with a JavaScript function call to the already loaded
    Bayeux implementation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20BOSH"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  BOSH</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20BOSH"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  BOSH</span>
 
    BOSH, which stands for Bidirectional-streams Over Synchronous HTTP
    [<a href="#ref-BOSH" title='"Bidirectional-streams Over Synchronous HTTP (BOSH)"'>BOSH</a>], was developed by the XMPP Standards Foundation in 2003-2004.
@@ -791,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
@@ -847,11 +826,11 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Server-Sent%20Events"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Server-Sent Events</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Server-Sent%20Events"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Server-Sent Events</span>
 
    W3C Server-Sent Events specification [<a href="#ref-WD-eventsource" title='"Server-Sent Events"'>WD-eventsource</a>] defines an API
    that enables servers to push data to Web pages over HTTP in the form
@@ -867,9 +846,9 @@ Table of Contents
    EOF rather than chunking with regards to intermediaries, unless they
    support only HTTP/1.0.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20HTTP%20Best%20Practices"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  HTTP Best Practices</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20HTTP%20Best%20Practices"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  HTTP Best Practices</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Limits%20to%20the%20Maximum%20Number%20of%20Connections"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Limits to the Maximum Number of Connections</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Limits%20to%20the%20Maximum%20Number%20of%20Connections"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Limits to the Maximum Number of Connections</span>
 
    HTTP <a href="./rfc2616.html#section-8.1.4">[RFC2616], Section 8.1.4</a>, recommends that a single user client
    not maintain more than two connections to any server or proxy, in
@@ -903,11 +882,11 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Pipelined%20Connections"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Pipelined Connections</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Pipelined%20Connections"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Pipelined Connections</span>
 
    HTTP [<a href="./rfc2616.html" title='"Hypertext Transfer Protocol -- HTTP/1.1"'>RFC2616</a>] permits optional request pipelining over persistent
    connections.  Multiple requests can be enqueued before the responses
@@ -934,7 +913,7 @@ Table of Contents
    not available, they need to fall back to solutions without HTTP
    pipelining.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Proxies"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Proxies</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Proxies"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Proxies</span>
 
    Most proxies work well with HTTP long polling because a complete HTTP
    response will be sent either on an event or a timeout.  Proxies are
@@ -959,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
@@ -987,7 +966,7 @@ Table of Contents
    and many HTTP application servers also have a blocking model for
    their request handling (e.g., the Java servlet 2.5 specification).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20HTTP%20Responses"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  HTTP Responses</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20HTTP%20Responses"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  HTTP Responses</span>
 
    In accordance with [<a href="./rfc2616.html" title='"Hypertext Transfer Protocol -- HTTP/1.1"'>RFC2616</a>], the server responds to a request it has
    successfully received by sending a 200 OK answer, but only when a
@@ -995,7 +974,7 @@ Table of Contents
    section contains the actual event, status, or timeout that occurred.
    This "best practice" is simply standard HTTP.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20Timeouts"></a></body></html><a class="selflink" href="#section-5.5" name="section-5.5">5.5</a>.  Timeouts</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20Timeouts"></a></body></html><a class="selflink" href="#section-5.5" id="section-5.5">5.5</a>.  Timeouts</span>
 
    The HTTP long polling mechanism allows the server to respond to a
    request only when a particular event, status, or timeout has
@@ -1015,7 +994,7 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
@@ -1026,7 +1005,7 @@ Table of Contents
    substantially greater than 30 seconds (where "substantially" means
    several times more than the medium network transit time).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.%20%20Impact%20on%20Intermediary%20Entities"></a></body></html><a class="selflink" href="#section-5.6" name="section-5.6">5.6</a>.  Impact on Intermediary Entities</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.%20%20Impact%20on%20Intermediary%20Entities"></a></body></html><a class="selflink" href="#section-5.6" id="section-5.6">5.6</a>.  Impact on Intermediary Entities</span>
 
    There is no way for an end client or host to signal to HTTP
    intermediaries that long polling is in use; therefore, long poll
@@ -1041,7 +1020,7 @@ Table of Contents
    long poll request or response, i.e., the "Cache-Control" header is
    set to "no-cache".
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    This document is meant to describe current usage of HTTP to enable
    asynchronous or server-initiated communication.  It does not propose
@@ -1071,83 +1050,83 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC1945" name="ref-RFC1945">RFC1945</a>]         Berners-Lee, T., Fielding, R., and H. Nielsen,
+   [<a id="ref-RFC1945">RFC1945</a>]         Berners-Lee, T., Fielding, R., and H. Nielsen,
                      "Hypertext Transfer Protocol -- HTTP/1.0",
                      <a href="./rfc1945.html">RFC 1945</a>, May 1996.
 
-   [<a id="ref-RFC2616" name="ref-RFC2616">RFC2616</a>]         Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
+   [<a id="ref-RFC2616">RFC2616</a>]         Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
                      Masinter, L., Leach, P., and T. Berners-Lee,
                      "Hypertext Transfer Protocol -- HTTP/1.1",
                      <a href="./rfc2616.html">RFC 2616</a>, June 1999.
 
-   [<a id="ref-RFC4732" name="ref-RFC4732">RFC4732</a>]         Handley, M., Rescorla, E., and IAB, "Internet
+   [<a id="ref-RFC4732">RFC4732</a>]         Handley, M., Rescorla, E., and IAB, "Internet
                      Denial-of-Service Considerations", <a href="./rfc4732.html">RFC 4732</a>,
                      December 2006.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Informative References</span>
 
-   [<a id="ref-BAYEUX" name="ref-BAYEUX">BAYEUX</a>]          Russell, A., Wilkins, G., Davis, D., and M.
+   [<a id="ref-BAYEUX">BAYEUX</a>]          Russell, A., Wilkins, G., Davis, D., and M.
                      Nesbitt, "Bayeux Protocol -- Bayeux 1.0.0", 2007,
                      &lt;<a href="http://svn.cometd.com/trunk/bayeux/bayeux.html">http://svn.cometd.com/trunk/bayeux/bayeux.html</a>&gt;.
 
-   [<a id="ref-BOSH" name="ref-BOSH">BOSH</a>]            Paterson, I., Smith, D., and P. Saint-Andre,
+   [<a id="ref-BOSH">BOSH</a>]            Paterson, I., Smith, D., and P. Saint-Andre,
                      "Bidirectional-streams Over Synchronous HTTP
                      (BOSH)", XSF XEP 0124, February 2007.
 
-   [<a id="ref-COMET" name="ref-COMET">COMET</a>]           Russell, A., "Comet: Low Latency Data for the
+   [<a id="ref-COMET">COMET</a>]           Russell, A., "Comet: Low Latency Data for the
                      Browser", March 2006, &lt;<a href="http://infrequently.org/">http://infrequently.org/</a>
                      2006/03/comet-low-latency-data-for-the-browser/ &gt;.
 
-   [<a id="ref-COOKIE" name="ref-COOKIE">COOKIE</a>]          Barth, A., <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22HTTP+State+Management+Mechanism%22" style="text-decoration: none">"HTTP State Management Mechanism"</a>, Work
+   [<a id="ref-COOKIE">COOKIE</a>]          Barth, A., <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22HTTP+State+Management+Mechanism%22" style="text-decoration: none">"HTTP State Management Mechanism"</a>, Work
                      in Progress, March 2011.
 
-   [<a id="ref-CORS" name="ref-CORS">CORS</a>]            van Kesteren, A., "Cross-Origin Resource Sharing",
+   [<a id="ref-CORS">CORS</a>]            van Kesteren, A., "Cross-Origin Resource Sharing",
                      W3C Working Draft WD-cors-20100727, latest version
                      available at &lt;<a href="http://www.w3.org/TR/cors/">http://www.w3.org/TR/cors/</a>&gt;,
                      July 2010,
                      &lt;<a href="http://www.w3.org/TR/2010/WD-cors-20100727/">http://www.w3.org/TR/2010/WD-cors-20100727/</a>&gt;.
 
-   [<a id="ref-HTTPBIS" name="ref-HTTPBIS">HTTPBIS</a>]         Fielding, R., Ed., Gettys, J., Mogul, J., Nielsen,
+   [<a id="ref-HTTPBIS">HTTPBIS</a>]         Fielding, R., Ed., Gettys, J., Mogul, J., Nielsen,
                      H., Masinter, L., Leach, P., Berners-Lee, T.,
                      Lafon, Y., Ed., and J. Reschke, Ed., "HTTP/1.1,
                      part 1: URIs, Connections, and Message Parsing",
                      Work in Progress, March 2011.
 
-   [<a id="ref-JSONP" name="ref-JSONP">JSONP</a>]           Wikipedia, "JSON with padding",
+   [<a id="ref-JSONP">JSONP</a>]           Wikipedia, "JSON with padding",
                      &lt;<a href="http://en.wikipedia.org/wiki/JSONP#JSONP">http://en.wikipedia.org/wiki/JSONP#JSONP</a>&gt;.
 
 
 
 <span class="grey">Loreto, et al.                Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
-   [<a id="ref-RFC4627" name="ref-RFC4627">RFC4627</a>]         Crockford, D., "The application/json Media Type for
+   [<a id="ref-RFC4627">RFC4627</a>]         Crockford, D., "The application/json Media Type for
                      JavaScript Object Notation (JSON)", <a href="./rfc4627.html">RFC 4627</a>,
                      July 2006.
 
-   [<a id="ref-RFC6120" name="ref-RFC6120">RFC6120</a>]         Saint-Andre, P., "Extensible Messaging and Presence
+   [<a id="ref-RFC6120">RFC6120</a>]         Saint-Andre, P., "Extensible Messaging and Presence
                      Protocol (XMPP): Core", <a href="./rfc6120.html">RFC 6120</a>, March 2011.
 
-   [<a id="ref-TCP" name="ref-TCP">TCP</a>]             Postel, J., "Transmission Control Protocol", STD 7,
+   [<a id="ref-TCP">TCP</a>]             Postel, J., "Transmission Control Protocol", STD 7,
                      <a href="./rfc793.html">RFC 793</a>, September 1981.
 
-   [<a id="ref-WD-eventsource" name="ref-WD-eventsource">WD-eventsource</a>]  Hickson, I., "Server-Sent Events", W3C Working
+   [<a id="ref-WD-eventsource">WD-eventsource</a>]  Hickson, I., "Server-Sent Events", W3C Working
                      Draft WD-eventsource-20091222, latest version
                      available at &lt;<a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a>&gt;,
                      December 2009, &lt;<a href="http://www.w3.org/TR/2009/WD-eventsource-20091222/">http://www.w3.org/TR/2009/</a>
                      <a href="http://www.w3.org/TR/2009/WD-eventsource-20091222/">WD-eventsource-20091222/</a>&gt;.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgments</span>
 
    Thanks to Joe Hildebrand, Julien Laganier, Jack Moffitt, Subramanian
    Moonesamy, Mark Nottingham, Julian Reschke, Martin Thomson, and
@@ -1183,7 +1162,7 @@ Table of Contents
 
 
 <span class="grey">Loreto, et al.                Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6202.html">RFC 6202</a>                   Bidirectional HTTP                 April 2011</span>
 
 
@@ -1239,11 +1218,6 @@ Authors' Addresses
 
 
 Loreto, et al.                Informational                    [Page 19]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,27 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-gont-6man-nd-extension-headers" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:6980" name="DC.Identifier"/>
-<meta content="August, 2013" name="DC.Date.Issued"/>
-<meta content="Fernando Gont &lt;fgont@si6networks.com&gt;" name="DC.Creator"/>
-<meta content="This document analyzes the security implications of employing IPv6
-fragmentation with Neighbor Discovery (ND) messages. It updates RFC
-4861 such that use of the IPv6 Fragmentation Header is forbidden in
-all Neighbor Discovery messages, thus allowing for simple and
-effective countermeasures for Neighbor Discovery attacks. Finally, it
-discusses the security implications of using IPv6 fragmentation with
-SEcure Neighbor Discovery (SEND) and formally updates RFC 3971 to
-provide advice regarding how the aforementioned security implications
-can be mitigated." name="DC.Description.Abstract"/>
-<meta content="Security Implications of IPv6 Fragmentation with IPv6 Neighbor Discovery" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6980 - Security Implications of IPv6 Fragmentation with IPv6 Neighbor Discovery</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="F. Gont" name="citation_author"/>
+<meta content="August, 2013" name="citation_publication_date"/>
+<meta content="Security Implications of IPv6 Fragmentation with IPv6 Neighbor Discovery" name="citation_title"/>
+<meta content="10.17487/RFC6980" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6980" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6980.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6980: Security Implications of IPv6 Fragmentation with IPv6 Neighbor Discovery</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -50,7 +40,7 @@ can be mitigated." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -59,7 +49,7 @@ can be mitigated." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -138,19 +128,18 @@ can be mitigated." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -164,21 +153,9 @@ can be mitigated." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6980.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6980" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-6man-nd-extension-headers.html" title="draft-ietf-6man-nd-extension-headers">draft-ietf-6man-n...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6980" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6980" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                           F. Gont
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6980.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6980.txt.pdf">PDF</a>|<a href="/rfc/rfc6980.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6980" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6980&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6980" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                           F. Gont
 Request for Comments: 6980                        SI6 Networks / UTN-FRH
 Updates: <a href="./rfc3971.html">3971</a>, <a href="./rfc4861.html">4861</a>                                          August 2013
 Category: Standards Track
@@ -230,7 +207,7 @@ Status of This Memo
 
 
 <span class="grey">Gont                         Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6980.html">RFC 6980</a>                ND and IPv6 Fragmentation            August 2013</span>
 
 
@@ -239,7 +216,7 @@ Copyright Notice
    Copyright (c) 2013 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -265,7 +242,7 @@ Table of Contents
       <a href="#section-9.2">9.2</a>. Informative References .....................................<a href="#page-9">9</a>
    <a href="#appendix-A">Appendix A</a>. Message Size When Carrying Certificates ...............<a href="#page-10">10</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    The Neighbor Discovery Protocol (NDP) is specified in <a href="./rfc4861.html">RFC 4861</a>
    [<a href="./rfc4861.html" title='"Neighbor Discovery for IP version 6 (IPv6)"'>RFC4861</a>].  It is used by both hosts and routers.  Its functions
@@ -286,7 +263,7 @@ Table of Contents
 
 
 <span class="grey">Gont                         Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6980.html">RFC 6980</a>                ND and IPv6 Fragmentation            August 2013</span>
 
 
@@ -342,7 +319,7 @@ Table of Contents
 
 
 <span class="grey">Gont                         Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6980.html">RFC 6980</a>                ND and IPv6 Fragmentation            August 2013</span>
 
 
@@ -366,7 +343,7 @@ Table of Contents
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in <a href="./rfc2119.html">RFC 2119</a> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Traditional%20Neighbor%20Discovery%20and%20IPv6%20Fragmentation"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Traditional Neighbor Discovery and IPv6 Fragmentation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Traditional%20Neighbor%20Discovery%20and%20IPv6%20Fragmentation"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Traditional Neighbor Discovery and IPv6 Fragmentation</span>
 
    The only potential use case for IPv6 fragmentation with traditional
    (i.e., non-SEND) IPv6 Neighbor Discovery would be that in which a
@@ -398,11 +375,11 @@ Table of Contents
 
 
 <span class="grey">Gont                         Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6980.html">RFC 6980</a>                ND and IPv6 Fragmentation            August 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20SEcure%20Neighbor%20Discovery%20%28SEND%29%20and%20IPv6%20Fragmentation"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  SEcure Neighbor Discovery (SEND) and IPv6 Fragmentation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20SEcure%20Neighbor%20Discovery%20%28SEND%29%20and%20IPv6%20Fragmentation"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  SEcure Neighbor Discovery (SEND) and IPv6 Fragmentation</span>
 
    SEND packets typically carry more information than traditional
    Neighbor Discovery packets: for example, they include additional
@@ -454,11 +431,11 @@ Table of Contents
 
 
 <span class="grey">Gont                         Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6980.html">RFC 6980</a>                ND and IPv6 Fragmentation            August 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Rationale%20for%20Forbidding%20IPv6%20Fragmentation%20in%20Neighbor%20Discovery"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Rationale for Forbidding IPv6 Fragmentation in Neighbor Discovery</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Rationale%20for%20Forbidding%20IPv6%20Fragmentation%20in%20Neighbor%20Discovery"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Rationale for Forbidding IPv6 Fragmentation in Neighbor Discovery</span>
 
    A number of considerations should be made regarding the use of IPv6
    fragmentation with Neighbor Discovery:
@@ -481,7 +458,7 @@ Table of Contents
    Discovery normalizes existing behavior and sets the expectations of
    all implementations to the existing lowest common denominator.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Specification"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Specification</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Specification"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Specification</span>
 
    Nodes <em>MUST NOT</em> employ IPv6 fragmentation for sending any of the
    following Neighbor Discovery and SEcure Neighbor Discovery messages:
@@ -510,7 +487,7 @@ Table of Contents
 
 
 <span class="grey">Gont                         Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6980.html">RFC 6980</a>                ND and IPv6 Fragmentation            August 2013</span>
 
 
@@ -538,7 +515,7 @@ Table of Contents
    SEND nodes <em>SHOULD NOT</em> employ keys that would result in fragmented CPA
    messages.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Operational%20Advice"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Operational Advice</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Operational%20Advice"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Operational Advice</span>
 
    An operator detecting that Neighbor Discovery traffic is being
    silently dropped should find whether the corresponding Neighbor
@@ -552,7 +529,7 @@ Table of Contents
    to a version that does not employ IPv6 fragmentation with Neighbor
    Discovery.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    The IPv6 Fragmentation Header can be leveraged to circumvent network
    monitoring tools and current implementations of mechanisms such as
@@ -566,7 +543,7 @@ Table of Contents
 
 
 <span class="grey">Gont                         Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6980.html">RFC 6980</a>                ND and IPv6 Fragmentation            August 2013</span>
 
 
@@ -576,7 +553,7 @@ Table of Contents
    messages.  Therefore, to the extent that is possible, such use of
    fragmentation should be avoided.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgements</span>
 
    The author would like to thank (in alphabetical order) Mikael
    Abrahamsson, Ran Atkinson, Ron Bonica, Jean-Michel Combes, David
@@ -597,21 +574,21 @@ Table of Contents
    Fernando Gont on behalf of the UK Centre for the Protection of
    National Infrastructure (CPNI).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]   Bradner, S., "Key words for use in RFCs to Indicate
-               Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]   Bradner, S., "Key words for use in RFCs to Indicate
+               Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC3971" name="ref-RFC3971">RFC3971</a>]   Arkko, J., Kempf, J., Zill, B., and P. Nikander, "SEcure
+   [<a id="ref-RFC3971">RFC3971</a>]   Arkko, J., Kempf, J., Zill, B., and P. Nikander, "SEcure
                Neighbor Discovery (SEND)", <a href="./rfc3971.html">RFC 3971</a>, March 2005.
 
-   [<a id="ref-RFC4861" name="ref-RFC4861">RFC4861</a>]   Narten, T., Nordmark, E., Simpson, W., and H. Soliman,
+   [<a id="ref-RFC4861">RFC4861</a>]   Narten, T., Nordmark, E., Simpson, W., and H. Soliman,
                "Neighbor Discovery for IP version 6 (IPv6)", <a href="./rfc4861.html">RFC 4861</a>,
                September 2007.
 
-   [<a id="ref-RFC6494" name="ref-RFC6494">RFC6494</a>]   Gagliano, R., Krishnan, S., and A. Kukec, "Certificate
+   [<a id="ref-RFC6494">RFC6494</a>]   Gagliano, R., Krishnan, S., and A. Kukec, "Certificate
                Profile and Certificate Management for SEcure Neighbor
                Discovery (SEND)", <a href="./rfc6494.html">RFC 6494</a>, February 2012.
 
@@ -622,40 +599,40 @@ Table of Contents
 
 
 <span class="grey">Gont                         Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6980.html">RFC 6980</a>                ND and IPv6 Fragmentation            August 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-CPNI-IPv6" name="ref-CPNI-IPv6">CPNI-IPv6</a>] Gont, F., "Security Assessment of the Internet Protocol
+   [<a id="ref-CPNI-IPv6">CPNI-IPv6</a>] Gont, F., "Security Assessment of the Internet Protocol
                version 6 (IPv6)", UK Centre for the Protection of
                National Infrastructure, (available on request).
 
-   [<a id="ref-Gont-DPSC" name="ref-Gont-DPSC">Gont-DPSC</a>] Gont, F., "Results of a Security Assessment of the
+   [<a id="ref-Gont-DPSC">Gont-DPSC</a>] Gont, F., "Results of a Security Assessment of the
                Internet Protocol version 6 (IPv6)", DEEPSEC 2011
                Conference, Vienna, Austria, November 2011,
                &lt;<a href="http://www.si6networks.com/presentations/deepsec2011/fgont-deepsec2011-ipv6-security.pdf">http://www.si6networks.com/presentations/deepsec2011/</a>
                <a href="http://www.si6networks.com/presentations/deepsec2011/fgont-deepsec2011-ipv6-security.pdf">fgont-deepsec2011-ipv6-security.pdf</a>&gt;.
 
-   [<a id="ref-NDPMon" name="ref-NDPMon">NDPMon</a>]    SourceForge, "NDPMon - IPv6 Neighbor Discovery Protocol
+   [<a id="ref-NDPMon">NDPMon</a>]    SourceForge, "NDPMon - IPv6 Neighbor Discovery Protocol
                Monitor", July 2012, &lt;<a href="http://ndpmon.sourceforge.net/">http://ndpmon.sourceforge.net/</a>&gt;.
 
-   [<a id="ref-RA-GUARD" name="ref-RA-GUARD">RA-GUARD</a>]  Gont, F., "Implementation Advice for IPv6 Router
+   [<a id="ref-RA-GUARD">RA-GUARD</a>]  Gont, F., "Implementation Advice for IPv6 Router
                Advertisement Guard (RA-Guard)", Work in Progress,
                November 2012.
 
-   [<a id="ref-ramond" name="ref-ramond">ramond</a>]    SourceForge, "ramond", January 2009,
+   [<a id="ref-ramond">ramond</a>]    SourceForge, "ramond", January 2009,
                &lt;<a href="http://ramond.sourceforge.net/">http://ramond.sourceforge.net/</a>&gt;.
 
-   [<a id="ref-RFC3756" name="ref-RFC3756">RFC3756</a>]   Nikander, P., Kempf, J., and E. Nordmark, "IPv6 Neighbor
+   [<a id="ref-RFC3756">RFC3756</a>]   Nikander, P., Kempf, J., and E. Nordmark, "IPv6 Neighbor
                Discovery (ND) Trust Models and Threats", <a href="./rfc3756.html">RFC 3756</a>,
                May 2004.
 
-   [<a id="ref-RFC6104" name="ref-RFC6104">RFC6104</a>]   Chown, T. and S. Venaas, "Rogue IPv6 Router Advertisement
+   [<a id="ref-RFC6104">RFC6104</a>]   Chown, T. and S. Venaas, "Rogue IPv6 Router Advertisement
                Problem Statement", <a href="./rfc6104.html">RFC 6104</a>, February 2011.
 
-   [<a id="ref-RFC6105" name="ref-RFC6105">RFC6105</a>]   Levy-Abegnoli, E., Van de Velde, G., Popoviciu, C., and
+   [<a id="ref-RFC6105">RFC6105</a>]   Levy-Abegnoli, E., Van de Velde, G., Popoviciu, C., and
                J. Mohacsi, "IPv6 Router Advertisement Guard", <a href="./rfc6105.html">RFC 6105</a>,
                February 2011.
 
@@ -678,11 +655,11 @@ Table of Contents
 
 
 <span class="grey">Gont                         Standards Track                    [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6980.html">RFC 6980</a>                ND and IPv6 Fragmentation            August 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Message%20Size%20When%20Carrying%20Certificates"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Message Size When Carrying Certificates</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Message%20Size%20When%20Carrying%20Certificates"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Message Size When Carrying Certificates</span>
 
    This section aims at estimating the size of normal Certification Path
    Advertisement messages.
@@ -734,11 +711,6 @@ Author's Address
 
 
 Gont                         Standards Track                   [Page 10]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

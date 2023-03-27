@@ -1,32 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="rfc3782" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:6582" name="DC.Identifier"/>
-<meta content="April, 2012" name="DC.Date.Issued"/>
-<meta content="Floyd, Sally" name="DC.Creator"/>
-<meta content="Gurtov, Andrei" name="DC.Creator"/>
-<meta content="Nishida, Yoshifumi" name="DC.Creator"/>
-<meta content="Henderson, Tom" name="DC.Creator"/>
-<meta content='RFC 5681 documents the following four intertwined TCP congestion
-control algorithms: slow start, congestion avoidance, fast retransmit,
-and fast recovery. RFC 5681 explicitly allows certain modifications of
-these algorithms, including modifications that use the TCP Selective
-Acknowledgment (SACK) option (RFC 2883), and modifications that
-respond to "partial acknowledgments" (ACKs that cover new data, but
-not all the data outstanding when loss was detected) in the absence of
-SACK. This document describes a specific algorithm for responding to
-partial acknowledgments, referred to as "NewReno". This response to
-partial acknowledgments was first proposed by Janey Hoe. This document
-obsoletes RFC 3782. [STANDARDS-TRACK]' name="DC.Description.Abstract"/>
-<meta content="The NewReno Modification to TCP's Fast Recovery Algorithm" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6582 - The NewReno Modification to TCP's Fast Recovery Algorithm</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="T. Henderson" name="citation_author"/>
+<meta content="S. Floyd" name="citation_author"/>
+<meta content="A. Gurtov" name="citation_author"/>
+<meta content="Y. Nishida" name="citation_author"/>
+<meta content="April, 2012" name="citation_publication_date"/>
+<meta content="The NewReno Modification to TCP's Fast Recovery Algorithm" name="citation_title"/>
+<meta content="10.17487/RFC6582" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6582" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6582.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6582: The NewReno Modification to TCP's Fast Recovery Algorithm</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -55,7 +43,7 @@ obsoletes RFC 3782. [STANDARDS-TRACK]' name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -64,7 +52,7 @@ obsoletes RFC 3782. [STANDARDS-TRACK]' name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -143,19 +131,18 @@ obsoletes RFC 3782. [STANDARDS-TRACK]' name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -169,21 +156,9 @@ obsoletes RFC 3782. [STANDARDS-TRACK]' name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6582.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6582" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-tcpm-rfc3782-bis.html" title="draft-ietf-tcpm-rfc3782-bis">draft-ietf-tcpm-r...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6582" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6582" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                      T. Henderson
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6582.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6582.txt.pdf">PDF</a>|<a href="/rfc/rfc6582.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6582" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6582&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc6582" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc6582" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Engineering Task Force (IETF)                      T. Henderson
 Request for Comments: 6582                                        Boeing
 Obsoletes: <a href="./rfc3782.html">3782</a>                                                 S. Floyd
 Category: Standards Track                                           ICSI
@@ -235,7 +210,7 @@ Status of This Memo
 
 
 <span class="grey">Henderson, et al.            Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
@@ -244,7 +219,7 @@ Copyright Notice
    Copyright (c) 2012 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -266,7 +241,7 @@ Copyright Notice
    it for publication as an RFC or to translate it into languages other
    than English.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    For the typical implementation of the TCP fast recovery algorithm
    described in [<a href="./rfc5681.html" title='"TCP Congestion Control"'>RFC5681</a>] (first implemented in the 1990 BSD Reno
@@ -291,7 +266,7 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
@@ -347,7 +322,7 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
@@ -355,7 +330,7 @@ Copyright Notice
    RFC [<a href="./rfc2582.html" title="&quot;The NewReno Modification to TCP's Fast Recovery Algorithm&quot;">RFC2582</a>] [<a href="./rfc3782.html" title="&quot;The NewReno Modification to TCP's Fast Recovery Algorithm&quot;">RFC3782</a>] provide simulation-based evidence of the
    possible performance gains.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology%20and%20Definitions"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology and Definitions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology%20and%20Definitions"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology and Definitions</span>
 
    This document assumes that the reader is familiar with the terms
    SENDER MAXIMUM SEGMENT SIZE (SMSS), CONGESTION WINDOW (cwnd), and
@@ -369,9 +344,9 @@ Copyright Notice
          number that must be acknowledged before the fast recovery
          procedure is declared to be over.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20The%20Fast%20Retransmit%20and%20Fast%20Recovery%20Algorithms%20in%20NewReno"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  The Fast Retransmit and Fast Recovery Algorithms in NewReno</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20The%20Fast%20Retransmit%20and%20Fast%20Recovery%20Algorithms%20in%20NewReno"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  The Fast Retransmit and Fast Recovery Algorithms in NewReno</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Protocol%20Overview"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Protocol Overview</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Protocol%20Overview"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Protocol Overview</span>
 
    The basic idea of these extensions to the fast retransmit and fast
    recovery algorithms described in <a href="./rfc5681.html#section-3.2">Section 3.2 of [RFC5681]</a> is as
@@ -403,11 +378,11 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Specification"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Specification</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Specification"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Specification</span>
 
    The procedures specified in <a href="./rfc5681.html#section-3.2">Section 3.2 of [RFC5681]</a> are followed,
    with the modifications listed below.  Note that this specification
@@ -459,7 +434,7 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
@@ -515,7 +490,7 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
@@ -534,7 +509,7 @@ Copyright Notice
    window of data is of particular importance, the best alternative
    would be to use the SACK option.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Handling%20Duplicate%20Acknowledgments%20after%20a%20Timeout"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Handling Duplicate Acknowledgments after a Timeout</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Handling%20Duplicate%20Acknowledgments%20after%20a%20Timeout"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Handling Duplicate Acknowledgments after a Timeout</span>
 
    After each retransmit timeout, the highest sequence number
    transmitted so far is recorded in the variable recover.  If, after a
@@ -571,7 +546,7 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
@@ -589,7 +564,7 @@ Copyright Notice
    duplicate acknowledgments from the unnecessary retransmission of
    three packets.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20ACK%20Heuristic"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  ACK Heuristic</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20ACK%20Heuristic"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  ACK Heuristic</span>
 
    If the ACK-based heuristic is used, then following the advancement of
    the Cumulative Acknowledgment field, the sender stores the value of
@@ -627,11 +602,11 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Timestamp%20Heuristic"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Timestamp Heuristic</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Timestamp%20Heuristic"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Timestamp Heuristic</span>
 
    If this heuristic is used, the sender stores the timestamp of the
    last acknowledged segment.  In addition, the last sentence of step 2
@@ -652,9 +627,9 @@ Copyright Notice
    This can be prevented by detection algorithms such as the Eifel
    detection algorithm [<a href="./rfc3522.html" title='"The Eifel Detection Algorithm for TCP"'>RFC3522</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Implementation%20Issues%20for%20the%20Data%20Receiver"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Implementation Issues for the Data Receiver</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Implementation%20Issues%20for%20the%20Data%20Receiver"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Implementation Issues for the Data Receiver</span>
 
-   [<a id="ref-RFC5681" name="ref-RFC5681">RFC5681</a>] specifies that "Out-of-order data segments <em>SHOULD</em> be
+   [<a id="ref-RFC5681">RFC5681</a>] specifies that "Out-of-order data segments <em>SHOULD</em> be
    acknowledged immediately, in order to accelerate loss recovery".
    Neal Cardwell has noted that some data receivers do not send an
    immediate acknowledgment when they send a partial acknowledgment, but
@@ -666,7 +641,7 @@ Copyright Notice
    segment, even when that out-of-order segment fills a hole in the
    buffer.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Implementation%20Issues%20for%20the%20Data%20Sender"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Implementation Issues for the Data Sender</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Implementation%20Issues%20for%20the%20Data%20Sender"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Implementation Issues for the Data Sender</span>
 
    In <a href="#section-3.2">Section 3.2</a>, step 3 above, it is noted that implementations should
    take measures to avoid a possible burst of data when leaving fast
@@ -683,7 +658,7 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                    [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
@@ -739,19 +714,19 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                   [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
-   [<a id="ref-RFC5681" name="ref-RFC5681">RFC5681</a>] discusses general security considerations concerning TCP
+   [<a id="ref-RFC5681">RFC5681</a>] discusses general security considerations concerning TCP
    congestion control.  This document describes a specific algorithm
    that conforms with the congestion control requirements of [<a href="./rfc5681.html" title='"TCP Congestion Control"'>RFC5681</a>],
    and so those considerations apply to this algorithm, too.  There are
    no known additional security concerns for this specific algorithm.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Conclusions"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Conclusions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Conclusions"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Conclusions</span>
 
    This document specifies the NewReno fast retransmit and fast recovery
    algorithms for TCP.  This NewReno modification to TCP can even be
@@ -771,7 +746,7 @@ Copyright Notice
    implement NewReno instead of Reno for a TCP connection without SACK;
    it is less important exactly which variant of NewReno is implemented.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Acknowledgments</span>
 
    Many thanks to Anil Agarwal, Mark Allman, Armando Caro, Jeffrey Hsu,
    Vern Paxson, Kacheong Poon, Keyur Shah, and Bernie Volz for detailed
@@ -795,55 +770,55 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                   [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" id="section-10.1">10.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>] Bradner, S., "Key words for use in RFCs to Indicate
-             Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>] Bradner, S., "Key words for use in RFCs to Indicate
+             Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC5681" name="ref-RFC5681">RFC5681</a>] Allman, M., Paxson, V., and E. Blanton, "TCP Congestion
+   [<a id="ref-RFC5681">RFC5681</a>] Allman, M., Paxson, V., and E. Blanton, "TCP Congestion
              Control", <a href="./rfc5681.html">RFC 5681</a>, September 2009.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" id="section-10.2">10.2</a>.  Informative References</span>
 
-   [<a id="ref-C98" name="ref-C98">C98</a>]     Cardwell, N., "delayed ACKs for retransmitted packets:
+   [<a id="ref-C98">C98</a>]     Cardwell, N., "delayed ACKs for retransmitted packets:
              ouch!".  November 1998, Email to the tcpimpl mailing list,
              archived at
              &lt;<a href="http://groups.yahoo.com/group/tcp-impl/message/1428">http://groups.yahoo.com/group/tcp-impl/message/1428</a>&gt;.
 
-   [<a id="ref-F94" name="ref-F94">F94</a>]     Floyd, S., "TCP and Successive Fast Retransmits", Technical
+   [<a id="ref-F94">F94</a>]     Floyd, S., "TCP and Successive Fast Retransmits", Technical
              report, May 1995.
              &lt;<a href="ftp://ftp.ee.lbl.gov/papers/fastretrans.ps">ftp://ftp.ee.lbl.gov/papers/fastretrans.ps</a>&gt;.
 
-   [<a id="ref-FF96" name="ref-FF96">FF96</a>]    Fall, K. and S. Floyd, "Simulation-based Comparisons of
+   [<a id="ref-FF96">FF96</a>]    Fall, K. and S. Floyd, "Simulation-based Comparisons of
              Tahoe, Reno and SACK TCP", Computer Communication Review,
              July 1996.  &lt;<a href="ftp://ftp.ee.lbl.gov/papers/sacks.ps.Z">ftp://ftp.ee.lbl.gov/papers/sacks.ps.Z</a>&gt;.
 
-   [<a id="ref-GF04" name="ref-GF04">GF04</a>]    Gurtov, A. and S. Floyd, "Resolving Acknowledgment
+   [<a id="ref-GF04">GF04</a>]    Gurtov, A. and S. Floyd, "Resolving Acknowledgment
              Ambiguity in non-SACK TCP", NExt Generation Teletraffic and
              Wired/Wireless Advanced Networking (NEW2AN'04),
              February 2004.  &lt;<a href="http://www.cs.helsinki.fi/u/gurtov/papers/heuristics.html">http://www.cs.helsinki.fi/u/gurtov/</a>
              <a href="http://www.cs.helsinki.fi/u/gurtov/papers/heuristics.html">papers/heuristics.html</a>&gt;.
 
-   [<a id="ref-Gur03" name="ref-Gur03">Gur03</a>]   Gurtov, A., "[Tsvwg] resolving the problem of unnecessary
+   [<a id="ref-Gur03">Gur03</a>]   Gurtov, A., "[Tsvwg] resolving the problem of unnecessary
              fast retransmits in go-back-N", email to the tsvwg mailing
              list, July 28, 2003.  &lt;<a href="http://www.ietf.org/mail-archive/web/tsvwg/current/msg04334.html">http://www.ietf.org/mail-archive/</a>
              <a href="http://www.ietf.org/mail-archive/web/tsvwg/current/msg04334.html">web/tsvwg/current/msg04334.html</a>&gt;.
 
-   [<a id="ref-Hen98" name="ref-Hen98">Hen98</a>]   Henderson, T., "Re: NewReno and the 2001 Revision",
+   [<a id="ref-Hen98">Hen98</a>]   Henderson, T., "Re: NewReno and the 2001 Revision",
              September 1998.  Email to the tcpimpl mailing list,
              archived at
              &lt;<a href="http://groups.yahoo.com/group/tcp-impl/message/1321">http://groups.yahoo.com/group/tcp-impl/message/1321</a>&gt;.
 
-   [<a id="ref-Hoe95" name="ref-Hoe95">Hoe95</a>]   Hoe, J., "Startup Dynamics of TCP's Congestion Control and
+   [<a id="ref-Hoe95">Hoe95</a>]   Hoe, J., "Startup Dynamics of TCP's Congestion Control and
              Avoidance Schemes", Master's Thesis, MIT, June 1995.
 
-   [<a id="ref-Hoe96" name="ref-Hoe96">Hoe96</a>]   Hoe, J., "Improving the Start-up Behavior of a Congestion
+   [<a id="ref-Hoe96">Hoe96</a>]   Hoe, J., "Improving the Start-up Behavior of a Congestion
              Control Scheme for TCP", ACM SIGCOMM, August 1996.
              &lt;<a href="http://ccr.sigcomm.org/archive/1996/conf/hoe.pdf">http://ccr.sigcomm.org/archive/1996/conf/hoe.pdf</a>&gt;.
 
@@ -851,34 +826,34 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                   [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
-   [<a id="ref-LM97" name="ref-LM97">LM97</a>]    Lin, D. and R. Morris, "Dynamics of Random Early
+   [<a id="ref-LM97">LM97</a>]    Lin, D. and R. Morris, "Dynamics of Random Early
              Detection", SIGCOMM 97, October 1997.
 
-   [<a id="ref-NS" name="ref-NS">NS</a>]      "The Network Simulator version 2 (ns-2)",
+   [<a id="ref-NS">NS</a>]      "The Network Simulator version 2 (ns-2)",
              &lt;<a href="http://www.isi.edu/nsnam/ns/">http://www.isi.edu/nsnam/ns/</a>&gt;.
 
-   [<a id="ref-RFC1323" name="ref-RFC1323">RFC1323</a>] Jacobson, V., Braden, R., and D. Borman, "TCP Extensions
+   [<a id="ref-RFC1323">RFC1323</a>] Jacobson, V., Braden, R., and D. Borman, "TCP Extensions
              for High Performance", <a href="./rfc1323.html">RFC 1323</a>, May 1992.
 
-   [<a id="ref-RFC2582" name="ref-RFC2582">RFC2582</a>] Floyd, S. and T. Henderson, "The NewReno Modification to
+   [<a id="ref-RFC2582">RFC2582</a>] Floyd, S. and T. Henderson, "The NewReno Modification to
              TCP's Fast Recovery Algorithm", <a href="./rfc2582.html">RFC 2582</a>, April 1999.
 
-   [<a id="ref-RFC2883" name="ref-RFC2883">RFC2883</a>] Floyd, S., Mahdavi, J., Mathis, M., and M. Podolsky, "An
+   [<a id="ref-RFC2883">RFC2883</a>] Floyd, S., Mahdavi, J., Mathis, M., and M. Podolsky, "An
              Extension to the Selective Acknowledgement (SACK) Option
              for TCP", <a href="./rfc2883.html">RFC 2883</a>, July 2000.
 
-   [<a id="ref-RFC3042" name="ref-RFC3042">RFC3042</a>] Allman, M., Balakrishnan, H., and S. Floyd, "Enhancing
+   [<a id="ref-RFC3042">RFC3042</a>] Allman, M., Balakrishnan, H., and S. Floyd, "Enhancing
              TCP's Loss Recovery Using Limited Transmit", <a href="./rfc3042.html">RFC 3042</a>,
              January 2001.
 
-   [<a id="ref-RFC3522" name="ref-RFC3522">RFC3522</a>] Ludwig, R. and M. Meyer, "The Eifel Detection Algorithm for
+   [<a id="ref-RFC3522">RFC3522</a>] Ludwig, R. and M. Meyer, "The Eifel Detection Algorithm for
              TCP", <a href="./rfc3522.html">RFC 3522</a>, April 2003.
 
-   [<a id="ref-RFC3782" name="ref-RFC3782">RFC3782</a>] Floyd, S., Henderson, T., and A. Gurtov, "The NewReno
+   [<a id="ref-RFC3782">RFC3782</a>] Floyd, S., Henderson, T., and A. Gurtov, "The NewReno
              Modification to TCP's Fast Recovery Algorithm", <a href="./rfc3782.html">RFC 3782</a>,
              April 2004.
 
@@ -907,11 +882,11 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                   [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Additional%20Information"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Additional Information</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Additional%20Information"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Additional Information</span>
 
    Previous versions of this RFC ([<a href="./rfc2582.html" title="&quot;The NewReno Modification to TCP's Fast Recovery Algorithm&quot;">RFC2582</a>] [<a href="./rfc3782.html" title="&quot;The NewReno Modification to TCP's Fast Recovery Algorithm&quot;">RFC3782</a>]) contained
    additional informative material on the following subjects, and may be
@@ -937,7 +912,7 @@ Copyright Notice
 
    <a href="./rfc3782.html#section-11">Section 11 of [RFC3782]</a> lists changes relative to [<a href="./rfc2582.html" title="&quot;The NewReno Modification to TCP's Fast Recovery Algorithm&quot;">RFC2582</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Changes%20Relative%20to%20RFC%203782"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Changes Relative to <a href="./rfc3782.html">RFC 3782</a></span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Changes%20Relative%20to%20RFC%203782"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Changes Relative to <a href="./rfc3782.html">RFC 3782</a></span>
 
    In [<a href="./rfc3782.html" title="&quot;The NewReno Modification to TCP's Fast Recovery Algorithm&quot;">RFC3782</a>], the cwnd after Full ACK reception will be set to
    (1) min (ssthresh, FlightSize + SMSS) or (2) ssthresh.  However, the
@@ -963,7 +938,7 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                   [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
@@ -1019,7 +994,7 @@ Copyright Notice
 
 
 <span class="grey">Henderson, et al.            Standards Track                   [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6582.html">RFC 6582</a>                      TCP NewReno                     April 2012</span>
 
 
@@ -1075,11 +1050,6 @@ Authors' Addresses
 
 
 Henderson, et al.            Standards Track                   [Page 16]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

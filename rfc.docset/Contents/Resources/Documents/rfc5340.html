@@ -1,44 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="rfc2740" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5340" name="DC.Identifier"/>
-<meta content="July, 2008" name="DC.Date.Issued"/>
-<meta content="Ferguson, Dennis" name="DC.Creator"/>
-<meta content="Moy, John" name="DC.Creator"/>
-<meta content="Lindem, Acee" name="DC.Creator"/>
-<meta content="This document describes the modifications to OSPF to support version 6
-of the Internet Protocol (IPv6). The fundamental mechanisms of OSPF
-(flooding, Designated Router (DR) election, area support, Short Path
-First (SPF) calculations, etc.) remain unchanged. However, some
-changes have been necessary, either due to changes in protocol
-semantics between IPv4 and IPv6, or simply to handle the increased
-address size of IPv6. These modifications will necessitate
-incrementing the protocol version from version 2 to version 3. OSPF
-for IPv6 is also referred to as OSPF version 3 (OSPFv3).  Changes
-between OSPF for IPv4, OSPF Version 2, and OSPF for IPv6 as described
-herein include the following. Addressing semantics have been removed
-from OSPF packets and the basic Link State Advertisements (LSAs). New
-LSAs have been created to carry IPv6 addresses and prefixes. OSPF now
-runs on a per-link basis rather than on a per-IP-subnet basis.
-Flooding scope for LSAs has been generalized. Authentication has been
-removed from the OSPF protocol and instead relies on IPv6's
-Authentication Header and Encapsulating Security Payload (ESP).  Even
-with larger IPv6 addresses, most packets in OSPF for IPv6 are almost
-as compact as those in OSPF for IPv4. Most fields and packet- size
-limitations present in OSPF for IPv4 have been relaxed. In addition,
-option handling has been made more flexible.  All of OSPF for
-IPv4's optional capabilities, including demand circuit support and
-Not-So-Stubby Areas (NSSAs), are also supported in OSPF for IPv6.
-[STANDARDS-TRACK]" name="DC.Description.Abstract"/>
-<meta content="OSPF for IPv6" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5340 - OSPF for IPv6</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="R. Coltun" name="citation_author"/>
+<meta content="D. Ferguson" name="citation_author"/>
+<meta content="J. Moy" name="citation_author"/>
+<meta content="A. Lindem" name="citation_author"/>
+<meta content="July, 2008" name="citation_publication_date"/>
+<meta content="OSPF for IPv6" name="citation_title"/>
+<meta content="10.17487/RFC5340" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5340" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5340.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5340: OSPF for IPv6</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -67,7 +43,7 @@ Not-So-Stubby Areas (NSSAs), are also supported in OSPF for IPv6.
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -76,7 +52,7 @@ Not-So-Stubby Areas (NSSAs), are also supported in OSPF for IPv6.
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -155,19 +131,18 @@ Not-So-Stubby Areas (NSSAs), are also supported in OSPF for IPv6.
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -181,21 +156,9 @@ Not-So-Stubby Areas (NSSAs), are also supported in OSPF for IPv6.
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5340.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5340" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-ospf-ospfv3-update.html" title="draft-ietf-ospf-ospfv3-update">draft-ietf-ospf-o...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5340" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5340" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5340">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">Updated by: <a href="./rfc6845.html">6845</a>, <a href="./rfc6860.html">6860</a>, <a href="./rfc7503.html">7503</a>                           PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                          R. Coltun
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5340.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5340.txt.pdf">PDF</a>|<a href="/rfc/rfc5340.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5340" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5340&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5340" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5340" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo">Updated by: <a href="/rfc/rfc6845" target="_blank">6845</a>, <a href="/rfc/rfc6860" target="_blank">6860</a>, <a href="/rfc/rfc7503" target="_blank">7503</a>, <a href="/rfc/rfc8362" target="_blank">8362</a> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                          R. Coltun
 Request for Comments: 5340                          Acoustra Productions
 Obsoletes: <a href="./rfc2740.html">2740</a>                                              D. Ferguson
 Category: Standards Track                               Juniper Networks
@@ -247,7 +210,7 @@ Abstract
 
 
 <span class="grey">Coltun, et al.              Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -303,7 +266,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -359,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -378,7 +341,7 @@ Table of Contents
      <a href="#appendix-C.6">C.6</a>.  Point-to-Multipoint Network Parameters . . . . . . . . . . <a href="#page-92">92</a>
      <a href="#appendix-C.7">C.7</a>.  Host Route Parameters  . . . . . . . . . . . . . . . . . . <a href="#page-92">92</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This document describes the modifications to OSPF to support version
    6 of the Internet Protocol (IPv6).  The fundamental mechanisms of
@@ -399,13 +362,13 @@ Table of Contents
    <a href="#appendix-B">B</a> lists the OSPF architectural constants.  <a href="#appendix-C">Appendix C</a> describes
    configuration parameters.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Requirements Notation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Requirements Notation</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in [<a href="#ref-RFC-KEYWORDS" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC-KEYWORDS</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Terminology</span>
 
    This document attempts to use terms from both the OSPF for IPv4
    specification ([<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>]) and the IPv6 protocol specifications
@@ -415,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -434,7 +397,7 @@ Table of Contents
    (e.g., areas, interfaces, neighbors), link-state database, protocol
    state machines, and protocol processing (e.g., SPF calculation).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Differences%20from%20OSPF%20for%20IPv4"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Differences from OSPF for IPv4</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Differences%20from%20OSPF%20for%20IPv4"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Differences from OSPF for IPv4</span>
 
    Most of the algorithms from OSPF for IPv4 [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>] have been
    preserved in OSPF for IPv6.  However, some changes have been
@@ -444,7 +407,7 @@ Table of Contents
    The following subsections describe the differences between this
    document and [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Protocol%20Processing%20Per-Link%2C%20Not%20Per-Subnet"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Protocol Processing Per-Link, Not Per-Subnet</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Protocol%20Processing%20Per-Link%2C%20Not%20Per-Subnet"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Protocol Processing Per-Link, Not Per-Subnet</span>
 
    IPv6 uses the term "link" to indicate "a communication facility or
    medium over which nodes can communicate at the link layer" ([<a href="#ref-IPV6" title='"Internet Protocol, Version 6 (IPv6) Specification"'>IPV6</a>]).
@@ -461,7 +424,7 @@ Table of Contents
    This change affects the receiving of OSPF protocol packets, the
    contents of Hello packets, and the contents of network-LSAs.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Removal%20of%20Addressing%20Semantics"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Removal of Addressing Semantics</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Removal%20of%20Addressing%20Semantics"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Removal of Addressing Semantics</span>
 
    In OSPF for IPv6, addressing semantics have been removed from the
    OSPF protocol packets and the main LSA types, leaving a network-
@@ -471,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -492,7 +455,7 @@ Table of Contents
       broadcast, NBMA (Non-Broadcast Multi-Access), and point-to-
       multipoint links.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Addition%20of%20Flooding%20Scope"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Addition of Flooding Scope</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Addition%20of%20Flooding%20Scope"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Addition of Flooding Scope</span>
 
    Flooding scope for LSAs has been generalized and is now explicitly
    coded in the LSA's LS type field.  There are now three separate
@@ -511,7 +474,7 @@ Table of Contents
       considered an AS Boundary Router (ASBR) and will set its E-bit in
       router-LSAs for regular areas.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Explicit%20Support%20for%20Multiple%20Instances%20per%20Link"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Explicit Support for Multiple Instances per Link</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Explicit%20Support%20for%20Multiple%20Instances%20per%20Link"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Explicit Support for Multiple Instances per Link</span>
 
    OSPF now supports the ability to run multiple OSPF protocol instances
    on a single link.  For example, this may be required on a NAP segment
@@ -527,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -541,7 +504,7 @@ Table of Contents
    of OSPF packets and applies to normal OSPF interfaces and virtual
    links.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Use%20of%20Link-Local%20Addresses"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  Use of Link-Local Addresses</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Use%20of%20Link-Local%20Addresses"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  Use of Link-Local Addresses</span>
 
    IPv6 link-local addresses are for use on a single link, for purposes
    of neighbor discovery, auto-configuration, etc.  IPv6 routers do not
@@ -567,7 +530,7 @@ Table of Contents
    (<a href="#section-4.4.3.6">Section 4.4.3.6</a>), NSSA-LSAs (<a href="#section-4.4.3.7">Section 4.4.3.7</a>), or intra-area-prefix-
    LSAs (<a href="#section-4.4.3.9">Section 4.4.3.9</a>).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20Authentication%20Changes"></a></body></html><a class="selflink" href="#section-2.6" name="section-2.6">2.6</a>.  Authentication Changes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20Authentication%20Changes"></a></body></html><a class="selflink" href="#section-2.6" id="section-2.6">2.6</a>.  Authentication Changes</span>
 
    In OSPF for IPv6, authentication has been removed from the OSPF
    protocol.  The "AuType" and "Authentication" fields have been removed
@@ -583,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -592,7 +555,7 @@ Table of Contents
    described in Section 8.1 of [<a href="#ref-IPV6" title='"Internet Protocol, Version 6 (IPv6) Specification"'>IPV6</a>]), covering the entire OSPF packet
    and prepended IPv6 pseudo-header (see <a href="#appendix-A.3.1">Appendix A.3.1</a>).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.%20%20Packet%20Format%20Changes"></a></body></html><a class="selflink" href="#section-2.7" name="section-2.7">2.7</a>.  Packet Format Changes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.%20%20Packet%20Format%20Changes"></a></body></html><a class="selflink" href="#section-2.7" id="section-2.7">2.7</a>.  Packet Format Changes</span>
 
    OSPF for IPv6 runs directly over IPv6.  Aside from this, all
    addressing semantics have been removed from the OSPF packet headers,
@@ -639,11 +602,11 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.8.%20%20LSA%20Format%20Changes"></a></body></html><a class="selflink" href="#section-2.8" name="section-2.8">2.8</a>.  LSA Format Changes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.8.%20%20LSA%20Format%20Changes"></a></body></html><a class="selflink" href="#section-2.8" id="section-2.8">2.8</a>.  LSA Format Changes</span>
 
    All addressing semantics have been removed from the LSA header,
    router-LSAs, and network-LSAs.  These two LSAs now describe the
@@ -695,7 +658,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -737,7 +700,7 @@ Table of Contents
       example, this reference could be used to attach BGP path
       attributes to external routes.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.9.%20%20Handling%20Unknown%20LSA%20Types"></a></body></html><a class="selflink" href="#section-2.9" name="section-2.9">2.9</a>.  Handling Unknown LSA Types</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.9.%20%20Handling%20Unknown%20LSA%20Types"></a></body></html><a class="selflink" href="#section-2.9" id="section-2.9">2.9</a>.  Handling Unknown LSA Types</span>
 
    Handling of unknown LSA types has been made more flexible so that,
    based on the LS type, unknown LSA types are either treated as having
@@ -751,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -760,7 +723,7 @@ Table of Contents
    link.  Discarding unknown types causes problems when the Designated
    Router supports fewer options than the other routers on the link.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.10.%20%20Stub/NSSA%20Area%20Support"></a></body></html><a class="selflink" href="#section-2.10" name="section-2.10">2.10</a>.  Stub/NSSA Area Support</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.10.%20%20Stub/NSSA%20Area%20Support"></a></body></html><a class="selflink" href="#section-2.10" id="section-2.10">2.10</a>.  Stub/NSSA Area Support</span>
 
    In OSPF for IPv4, stub and NSSA areas were designed to minimize link-
    state database and routing table sizes for the areas' internal
@@ -775,7 +738,7 @@ Table of Contents
    carried in IPv4 stub areas: router-LSAs, network-LSAs, type 3
    summary-LSAs and for NSSA areas: stub area types and NSSA-LSAs.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.11.%20%20Identifying%20Neighbors%20by%20Router%20ID"></a></body></html><a class="selflink" href="#section-2.11" name="section-2.11">2.11</a>.  Identifying Neighbors by Router ID</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.11.%20%20Identifying%20Neighbors%20by%20Router%20ID"></a></body></html><a class="selflink" href="#section-2.11" id="section-2.11">2.11</a>.  Identifying Neighbors by Router ID</span>
 
    In OSPF for IPv6, neighboring routers on a given link are always
    identified by their OSPF Router ID.  This contrasts with the IPv4
@@ -790,14 +753,14 @@ Table of Contents
 
    The Router ID of 0.0.0.0 is reserved and <em>SHOULD NOT</em> be used.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Differences%20with%20RFC%202740"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Differences with <a href="./rfc2740.html">RFC 2740</a></span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Differences%20with%20RFC%202740"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Differences with <a href="./rfc2740.html">RFC 2740</a></span>
 
    OSPFv3 implementations based on <a href="./rfc2740.html">RFC 2740</a> will fully interoperate with
    implementations based on this specification.  There are, however,
    some protocol additions and changes (all of which are backward
    compatible).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Support%20for%20Multiple%20Interfaces%20on%20the%20Same%20Link"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Support for Multiple Interfaces on the Same Link</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Support%20for%20Multiple%20Interfaces%20on%20the%20Same%20Link"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Support for Multiple Interfaces on the Same Link</span>
 
    This protocol feature was only partially specified in the <a href="./rfc2740.html">RFC 2740</a>.
    The level of specification was insufficient to implement the feature.
@@ -807,11 +770,11 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Deprecation%20of%20MOSPF%20for%20IPv6"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Deprecation of MOSPF for IPv6</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Deprecation%20of%20MOSPF%20for%20IPv6"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Deprecation of MOSPF for IPv6</span>
 
    This protocol feature was only partially specified in <a href="./rfc2740.html">RFC 2740</a>.  The
    level of specification was insufficient to implement the feature.
@@ -821,7 +784,7 @@ Table of Contents
    <a href="#section-4.4.3.6">Section 4.4.3.6</a>, <a href="#section-4.4.3.7">Section 4.4.3.7</a>, <a href="#appendix-A.2">Appendix A.2</a>, <a href="#appendix-A.4.2.1">Appendix A.4.2.1</a>,
    <a href="#appendix-A.4.3">Appendix A.4.3</a>, <a href="#appendix-A.4.1.1">Appendix A.4.1.1</a>, and <a href="#section-7.1">Section 7.1</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20NSSA%20Specification"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  NSSA Specification</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20NSSA%20Specification"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  NSSA Specification</span>
 
    This protocol feature was only partially specified in <a href="./rfc2740.html">RFC 2740</a>.  The
    level of specification was insufficient to implement the function.
@@ -830,7 +793,7 @@ Table of Contents
    for implementation.  Refer to <a href="#section-4.8.5">Section 4.8.5</a>, <a href="#appendix-A.4.3">Appendix A.4.3</a>,
    <a href="#appendix-A.4.8">Appendix A.4.8</a>, and [<a href="#ref-NSSA" title='"The OSPF Not-So-Stubby Area (NSSA) Option"'>NSSA</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Stub%20Area%20Unknown%20LSA%20Flooding%20Restriction%20Deprecated"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Stub Area Unknown LSA Flooding Restriction Deprecated</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Stub%20Area%20Unknown%20LSA%20Flooding%20Restriction%20Deprecated"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Stub Area Unknown LSA Flooding Restriction Deprecated</span>
 
    In <a href="./rfc2740.html">RFC 2740</a> [<a href="#ref-OSPFV3" title='"OSPF for IPv6"'>OSPFV3</a>], flooding of unknown LSA was restricted within
    stub and NSSA areas.  The text describing this restriction is
@@ -854,7 +817,7 @@ Table of Contents
    compatibility issues other than OSPFv3 routers still supporting the
    restriction may not propagate newly defined LSA types.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Link%20LSA%20Suppression"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  Link LSA Suppression</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Link%20LSA%20Suppression"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  Link LSA Suppression</span>
 
    The LinkLSASuppression interface configuration parameter has been
    added.  If LinkLSASuppression is configured for an interface and the
@@ -863,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -871,7 +834,7 @@ Table of Contents
    parameter is described in <a href="#appendix-C.3">Appendix C.3</a>.  <a href="#section-4.8.2">Section 4.8.2</a> and
    <a href="#section-4.4.3.8">Section 4.4.3.8</a> were updated to reflect the parameter's usage.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20LSA%20Options%20and%20Prefix%20Options%20Updates"></a></body></html><a class="selflink" href="#section-3.6" name="section-3.6">3.6</a>.  LSA Options and Prefix Options Updates</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20LSA%20Options%20and%20Prefix%20Options%20Updates"></a></body></html><a class="selflink" href="#section-3.6" id="section-3.6">3.6</a>.  LSA Options and Prefix Options Updates</span>
 
    The LSA Options and Prefix Options fields have been updated to
    reflect recent protocol additions.  Specifically, bits related to
@@ -879,11 +842,11 @@ Table of Contents
    have been reserved, and the DN-bit has been added to the prefix-
    options.  Refer to <a href="#appendix-A.2">Appendix A.2</a> and <a href="#appendix-A.4.1.1">Appendix A.4.1.1</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.%20%20IPv6%20Site-Local%20Addresses"></a></body></html><a class="selflink" href="#section-3.7" name="section-3.7">3.7</a>.  IPv6 Site-Local Addresses</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.%20%20IPv6%20Site-Local%20Addresses"></a></body></html><a class="selflink" href="#section-3.7" id="section-3.7">3.7</a>.  IPv6 Site-Local Addresses</span>
 
    All references to IPv6 site-local addresses have been removed.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Implementation%20Details"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Implementation Details</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Implementation%20Details"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Implementation Details</span>
 
    When going from IPv4 to IPv6, the basic OSPF mechanisms remain
    unchanged from those documented in [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>].  These mechanisms are
@@ -919,7 +882,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -960,7 +923,7 @@ Table of Contents
    The following subsections provide a recipe for turning an IPv4 OSPF
    implementation into an IPv6 OSPF implementation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Protocol%20Data%20Structures"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Protocol Data Structures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Protocol%20Data%20Structures"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Protocol Data Structures</span>
 
    The major OSPF data structures are the same for both IPv4 and IPv6:
    areas, interfaces, neighbors, the link-state database, and the
@@ -975,14 +938,14 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
       type, U-bit set to 1 (flood even when unrecognized), and AS
       flooding scope also appear in the top-level data structure.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20The%20Area%20Data%20Structure"></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a>.  The Area Data Structure</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20The%20Area%20Data%20Structure"></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a>.  The Area Data Structure</span>
 
    The IPv6 area data structure contains all elements defined for IPv4
    areas in Section 6 of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>].  In addition, all LSAs of known type
@@ -994,7 +957,7 @@ Table of Contents
    area data structure.  NSSA-LSAs are also included in an NSSA area's
    data structure.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20The%20Interface%20Data%20Structure"></a></body></html><a class="selflink" href="#section-4.1.2" name="section-4.1.2">4.1.2</a>.  The Interface Data Structure</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20The%20Interface%20Data%20Structure"></a></body></html><a class="selflink" href="#section-4.1.2" id="section-4.1.2">4.1.2</a>.  The Interface Data Structure</span>
 
    In OSPF for IPv6, an interface connects a router to a link.  The IPv6
    interface structure modifies the IPv4 interface structure (as defined
@@ -1031,7 +994,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1066,7 +1029,7 @@ Table of Contents
    Router election algorithm also remains unchanged from the IPv4
    election in Section 9.4 of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3.%20%20The%20Neighbor%20Data%20Structure"></a></body></html><a class="selflink" href="#section-4.1.3" name="section-4.1.3">4.1.3</a>.  The Neighbor Data Structure</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3.%20%20The%20Neighbor%20Data%20Structure"></a></body></html><a class="selflink" href="#section-4.1.3" id="section-4.1.3">4.1.3</a>.  The Neighbor Data Structure</span>
 
    The neighbor structure performs the same function in both IPv6 and
    IPv4.  Namely, it collects all information required to form an
@@ -1087,7 +1050,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1110,7 +1073,7 @@ Table of Contents
    also remains unchanged from the IPv4 logic documented in Section 10.4
    of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Protocol%20Packet%20Processing"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Protocol Packet Processing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Protocol%20Packet%20Processing"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Protocol Packet Processing</span>
 
    OSPF for IPv6 runs directly over IPv6's network layer.  As such, it
    is encapsulated in one or more IPv6 headers with the Next Header
@@ -1123,7 +1086,7 @@ Table of Contents
    functions are the same in both IPv4 and IPv6, encoded by the Type
    field of the standard OSPF packet header.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Sending%20Protocol%20Packets"></a></body></html><a class="selflink" href="#section-4.2.1" name="section-4.2.1">4.2.1</a>.  Sending Protocol Packets</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Sending%20Protocol%20Packets"></a></body></html><a class="selflink" href="#section-4.2.1" id="section-4.2.1">4.2.1</a>.  Sending Protocol Packets</span>
 
    When an IPv6 router sends an OSPF routing protocol packet, it fills
    in the fields of the standard OSPF for IPv6 packet header (see
@@ -1143,7 +1106,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1181,7 +1144,7 @@ Table of Contents
    sending of Database Description packets in <a href="#section-4.2.1.2">Section 4.2.1.2</a>.  The
    sending of Link State Update packets is documented in <a href="#section-4.5.2">Section 4.5.2</a>.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.1.%20%20Sending%20Hello%20Packets"></a></body></html><a class="selflink" href="#section-4.2.1.1" name="section-4.2.1.1">4.2.1.1</a>.  Sending Hello Packets</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.1.%20%20Sending%20Hello%20Packets"></a></body></html><a class="selflink" href="#section-4.2.1.1" id="section-4.2.1.1">4.2.1.1</a>.  Sending Hello Packets</span>
 
    IPv6 changes the way OSPF Hello packets are sent in the following
    ways (compare to Section 9.5 of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>]):
@@ -1199,7 +1162,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1221,7 +1184,7 @@ Table of Contents
    Sending Hello packets on NBMA networks proceeds for IPv6 in exactly
    the same way as for IPv4, as documented in Section 9.5.1 of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>].
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.2.%20%20Sending%20Database%20Description%20Packets"></a></body></html><a class="selflink" href="#section-4.2.1.2" name="section-4.2.1.2">4.2.1.2</a>.  Sending Database Description Packets</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.2.%20%20Sending%20Database%20Description%20Packets"></a></body></html><a class="selflink" href="#section-4.2.1.2" id="section-4.2.1.2">4.2.1.2</a>.  Sending Database Description Packets</span>
 
    The sending of Database Description packets differs from Section 10.8
    of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>] in the following ways:
@@ -1234,7 +1197,7 @@ Table of Contents
       interface (see [<a href="#ref-DEMAND" title='"Extending OSPF to Support Demand Circuits"'>DEMAND</a>]).  Unrecognized bits in the Database
       Description packet's Options field should be cleared.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Receiving%20Protocol%20Packets"></a></body></html><a class="selflink" href="#section-4.2.2" name="section-4.2.2">4.2.2</a>.  Receiving Protocol Packets</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Receiving%20Protocol%20Packets"></a></body></html><a class="selflink" href="#section-4.2.2" id="section-4.2.2">4.2.2</a>.  Receiving Protocol Packets</span>
 
    Whenever a router receives an OSPF protocol packet, it is marked with
    the interface on which it was received.  For routers that have
@@ -1255,7 +1218,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1311,7 +1274,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1350,7 +1313,7 @@ Table of Contents
    the receiving of Link State Update packets is documented in
    <a href="#section-4.5.1">Section 4.5.1</a>.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.1.%20%20Receiving%20Hello%20Packets"></a></body></html><a class="selflink" href="#section-4.2.2.1" name="section-4.2.2.1">4.2.2.1</a>.  Receiving Hello Packets</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.1.%20%20Receiving%20Hello%20Packets"></a></body></html><a class="selflink" href="#section-4.2.2.1" id="section-4.2.2.1">4.2.2.1</a>.  Receiving Hello Packets</span>
 
    The receive processing of Hello packets differs from Section 10.5 of
    [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>] in the following ways:
@@ -1367,7 +1330,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1375,7 +1338,7 @@ Table of Contents
       Router is now encoded as an OSPF Router ID instead of an IP
       interface address.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20The%20Routing%20table%20Structure"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  The Routing table Structure</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20The%20Routing%20table%20Structure"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  The Routing table Structure</span>
 
    The routing table used by OSPF for IPv4 is defined in Section 11 of
    [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>].  For IPv6, there are analogous routing table entries: there
@@ -1423,16 +1386,16 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.%20%20Routing%20Table%20Lookup"></a></body></html><a class="selflink" href="#section-4.3.1" name="section-4.3.1">4.3.1</a>.  Routing Table Lookup</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.%20%20Routing%20Table%20Lookup"></a></body></html><a class="selflink" href="#section-4.3.1" id="section-4.3.1">4.3.1</a>.  Routing Table Lookup</span>
 
    Routing table lookup (i.e., determining the best matching routing
    table entry during IP forwarding) is the same for IPv6 as for IPv4.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Link%20State%20Advertisements"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Link State Advertisements</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Link%20State%20Advertisements"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Link State Advertisements</span>
 
    For IPv6, the OSPF LSA header has changed slightly, with the LS type
    field expanding and the Options field being moved into the body of
@@ -1448,7 +1411,7 @@ Table of Contents
    These changes will be described in detail in the following
    subsections.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20The%20LSA%20Header"></a></body></html><a class="selflink" href="#section-4.4.1" name="section-4.4.1">4.4.1</a>.  The LSA Header</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20The%20LSA%20Header"></a></body></html><a class="selflink" href="#section-4.4.1" id="section-4.4.1">4.4.1</a>.  The LSA Header</span>
 
    In both IPv4 and IPv6, all OSPF LSAs begin with a standard 20-byte
    LSA header.  However, the contents of this 20-byte header have
@@ -1479,7 +1442,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1498,7 +1461,7 @@ Table of Contents
       link-LSA for a given link, its Link State ID is set equal to the
       router's Interface ID on the link.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20The%20Link-State%20Database"></a></body></html><a class="selflink" href="#section-4.4.2" name="section-4.4.2">4.4.2</a>.  The Link-State Database</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20The%20Link-State%20Database"></a></body></html><a class="selflink" href="#section-4.4.2" id="section-4.4.2">4.4.2</a>.  The Link-State Database</span>
 
    In IPv6, as in IPv4, individual LSAs are identified by a combination
    of their LS type, Link State ID, and Advertising Router fields.
@@ -1535,11 +1498,11 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.%20%20Originating%20LSAs"></a></body></html><a class="selflink" href="#section-4.4.3" name="section-4.4.3">4.4.3</a>.  Originating LSAs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.%20%20Originating%20LSAs"></a></body></html><a class="selflink" href="#section-4.4.3" id="section-4.4.3">4.4.3</a>.  Originating LSAs</span>
 
    The process of reoriginating an LSA in IPv6 is the same as in IPv4:
    the LSA's LS sequence number is incremented, its LS age is set to 0,
@@ -1591,7 +1554,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1647,7 +1610,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1665,7 +1628,7 @@ Table of Contents
 
                                  Figure 1
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.1.%20%20LSA%20Options"></a></body></html><a class="selflink" href="#section-4.4.3.1" name="section-4.4.3.1">4.4.3.1</a>.  LSA Options</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.1.%20%20LSA%20Options"></a></body></html><a class="selflink" href="#section-4.4.3.1" id="section-4.4.3.1">4.4.3.1</a>.  LSA Options</span>
 
    The Options field in LSAs should be coded as follows.  The V6-bit
    should be set unless the router will not participate in transit IPv6
@@ -1682,7 +1645,7 @@ Table of Contents
    computation.  In other LSA types containing options, they are set for
    informational purposes only.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.2.%20%20Router-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.2" name="section-4.4.3.2">4.4.3.2</a>.  Router-LSAs</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.2.%20%20Router-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.2" id="section-4.4.3.2">4.4.3.2</a>.  Router-LSAs</span>
 
    The LS type of a router-LSA is set to the value 0x2001.  Router-LSAs
    have area flooding scope.  A router <em>MAY</em> originate one or more router-
@@ -1703,7 +1666,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1759,7 +1722,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1791,7 +1754,7 @@ Table of Contents
    Host routes for stub networks no longer appear in the router-LSA.
    Rather, they are included in intra-area-prefix-LSAs.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.3.%20%20Network-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.3" name="section-4.4.3.3">4.4.3.3</a>.  Network-LSAs</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.3.%20%20Network-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.3" id="section-4.4.3.3">4.4.3.3</a>.  Network-LSAs</span>
 
    The LS type of a network-LSA is set to the value 0x2002.  Network-
    LSAs have area flooding scope.  A network-LSA is originated for every
@@ -1815,7 +1778,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1844,7 +1807,7 @@ Table of Contents
 
                         Network-LSA for Network N3
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.4.%20%20Inter-Area-Prefix-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.4" name="section-4.4.3.4">4.4.3.4</a>.  Inter-Area-Prefix-LSAs</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.4.%20%20Inter-Area-Prefix-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.4" id="section-4.4.3.4">4.4.3.4</a>.  Inter-Area-Prefix-LSAs</span>
 
    The LS type of an inter-area-prefix-LSA is set to the value 0x2003.
    Inter-area-prefix-LSAs have area flooding scope.  In IPv4, inter-
@@ -1871,7 +1834,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1901,7 +1864,7 @@ Table of Contents
        by Router
                            RT4 into the backbone
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.5.%20%20Inter-Area-Router-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.5" name="section-4.4.3.5">4.4.3.5</a>.  Inter-Area-Router-LSAs</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.5.%20%20Inter-Area-Router-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.5" id="section-4.4.3.5">4.4.3.5</a>.  Inter-Area-Router-LSAs</span>
 
    The LS type of an inter-area-router-LSA is set to the value 0x2004.
    Inter-area-router-LSAs have area flooding scope.  In IPv4, inter-
@@ -1927,7 +1890,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -1953,7 +1916,7 @@ Table of Contents
    Inter-area-router-LSA for AS boundary router RT7 originated by Router
                               RT4 into Area 1
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.6.%20%20AS-External-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.6" name="section-4.4.3.6">4.4.3.6</a>.  AS-External-LSAs</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.6.%20%20AS-External-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.6" id="section-4.4.3.6">4.4.3.6</a>.  AS-External-LSAs</span>
 
    The LS type of an AS-external-LSA is set to the value 0x4005.  AS-
    external-LSAs have AS flooding scope.  Each AS-external-LSA describes
@@ -1983,7 +1946,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2026,7 +1989,7 @@ Table of Contents
 
          AS-external-LSA for Network N12, originated by Router RT7
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.7.%20%20NSSA-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.7" name="section-4.4.3.7">4.4.3.7</a>.  NSSA-LSAs</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.7.%20%20NSSA-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.7" id="section-4.4.3.7">4.4.3.7</a>.  NSSA-LSAs</span>
 
    The LS type of an NSSA-LSA is set to the value 0x2007.  NSSA-LSAs
    have area flooding scope.  Each NSSA-LSA describes a path to a prefix
@@ -2039,7 +2002,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2072,7 +2035,7 @@ Table of Contents
    An example of an NSSA-LSA would only differ from an AS-external-LSA
    in that the LS type would be 0x2007 rather than 0x4005.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.8.%20%20Link-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.8" name="section-4.4.3.8">4.4.3.8</a>.  Link-LSAs</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.8.%20%20Link-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.8" id="section-4.4.3.8">4.4.3.8</a>.  Link-LSAs</span>
 
    The LS type of a link-LSA is set to the value 0x0008.  Link-LSAs have
    link-local flooding scope.  A router originates a separate link-LSA
@@ -2095,7 +2058,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2151,7 +2114,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2171,7 +2134,7 @@ Table of Contents
 
                            RT3's link-LSA for N3
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.9.%20%20Intra-Area-Prefix-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.9" name="section-4.4.3.9">4.4.3.9</a>.  Intra-Area-Prefix-LSAs</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.9.%20%20Intra-Area-Prefix-LSAs"></a></body></html><a class="selflink" href="#section-4.4.3.9" id="section-4.4.3.9">4.4.3.9</a>.  Intra-Area-Prefix-LSAs</span>
 
    The LS type of an intra-area-prefix-LSA is set to the value 0x2009.
    Intra-area-prefix-LSAs have area flooding scope.  An intra-area-
@@ -2207,7 +2170,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2263,7 +2226,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2319,7 +2282,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2375,7 +2338,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2384,7 +2347,7 @@ Table of Contents
    case, the Referenced Advertising Router and Advertising Router would
    be different.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.4.%20%20Future%20LSA%20Validation"></a></body></html><a class="selflink" href="#section-4.4.4" name="section-4.4.4">4.4.4</a>.  Future LSA Validation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.4.%20%20Future%20LSA%20Validation"></a></body></html><a class="selflink" href="#section-4.4.4" id="section-4.4.4">4.4.4</a>.  Future LSA Validation</span>
 
    It is expected that new LSAs will be defined that will not be
    processed during the Shortest Path First (SPF) calculation as
@@ -2400,7 +2363,7 @@ Table of Contents
    originating AS scoped LSAs is considered an AS Boundary Router
    (ASBR).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Flooding"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  Flooding</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Flooding"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  Flooding</span>
 
    Most of the flooding algorithm remains unchanged from the IPv4
    flooding mechanisms described in Section 13 of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>].  In
@@ -2422,7 +2385,7 @@ Table of Contents
    of LSA types and the IPv6 LSA contents.  These changes are described
    in detail below.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.1.%20%20Receiving%20Link%20State%20Update%20Packets"></a></body></html><a class="selflink" href="#section-4.5.1" name="section-4.5.1">4.5.1</a>.  Receiving Link State Update Packets</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.1.%20%20Receiving%20Link%20State%20Update%20Packets"></a></body></html><a class="selflink" href="#section-4.5.1" id="section-4.5.1">4.5.1</a>.  Receiving Link State Update Packets</span>
 
    The encoding of flooding scope in the LS type and the need to process
    unknown LS types cause modifications to the processing of received
@@ -2431,7 +2394,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2458,7 +2421,7 @@ Table of Contents
    somewhat different for IPv6, as described in Sections <a href="#section-4.5.2">4.5.2</a> and <a href="#section-4.5.3">4.5.3</a>
    below.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.%20%20Sending%20Link%20State%20Update%20Packets"></a></body></html><a class="selflink" href="#section-4.5.2" name="section-4.5.2">4.5.2</a>.  Sending Link State Update Packets</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.%20%20Sending%20Link%20State%20Update%20Packets"></a></body></html><a class="selflink" href="#section-4.5.2" id="section-4.5.2">4.5.2</a>.  Sending Link State Update Packets</span>
 
    The sending of Link State Update packets is described in Section 13.3
    of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>].  For IPv4 and IPv6, the steps for sending a Link State
@@ -2487,7 +2450,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2543,7 +2506,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 42]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-43" id="page-43" name="page-43"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-43"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2552,7 +2515,7 @@ Table of Contents
    order to have the new LSA types flooded across broadcast and NBMA
    networks.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.3.%20%20Installing%20LSAs%20in%20the%20Database"></a></body></html><a class="selflink" href="#section-4.5.3" name="section-4.5.3">4.5.3</a>.  Installing LSAs in the Database</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.3.%20%20Installing%20LSAs%20in%20the%20Database"></a></body></html><a class="selflink" href="#section-4.5.3" id="section-4.5.3">4.5.3</a>.  Installing LSAs in the Database</span>
 
    There are three separate places to store LSAs, depending on their
    flooding scope.  LSAs with AS flooding scope are stored in the global
@@ -2589,7 +2552,7 @@ Table of Contents
    database when the new LSA is installed.  This old instance must also
    be removed from all neighbors' link-state retransmission lists.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Definition%20of%20Self-Originated%20LSAs"></a></body></html><a class="selflink" href="#section-4.6" name="section-4.6">4.6</a>.  Definition of Self-Originated LSAs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Definition%20of%20Self-Originated%20LSAs"></a></body></html><a class="selflink" href="#section-4.6" id="section-4.6">4.6</a>.  Definition of Self-Originated LSAs</span>
 
    In IPv6, the definition of a self-originated LSA has been simplified
    from the IPv4 definition appearing in Sections <a href="#section-13.4">13.4</a> and <a href="#section-14.1">14.1</a> of
@@ -2599,11 +2562,11 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 43]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-44" id="page-44" name="page-44"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-44"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Virtual%20Links"></a></body></html><a class="selflink" href="#section-4.7" name="section-4.7">4.7</a>.  Virtual Links</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Virtual%20Links"></a></body></html><a class="selflink" href="#section-4.7" id="section-4.7">4.7</a>.  Virtual Links</span>
 
    OSPF virtual links for IPv4 are described in Section 15 of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>].
    Virtual links are the same in IPv6, with the following exceptions:
@@ -2632,7 +2595,7 @@ Table of Contents
       unique (within the router) Interface IDs.  These are advertised in
       Hellos sent over the virtual link and in the router's router-LSAs.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.%20%20Routing%20Table%20Calculation"></a></body></html><a class="selflink" href="#section-4.8" name="section-4.8">4.8</a>.  Routing Table Calculation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.%20%20Routing%20Table%20Calculation"></a></body></html><a class="selflink" href="#section-4.8" id="section-4.8">4.8</a>.  Routing Table Calculation</span>
 
    The IPv6 OSPF routing calculation proceeds along the same lines as
    the IPv4 OSPF routing calculation, following the five steps specified
@@ -2655,7 +2618,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 44]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-45" id="page-45" name="page-45"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-45"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2677,7 +2640,7 @@ Table of Contents
    of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>]) and the equal-cost multipath logic (<a href="#section-16.8">Section 16.8</a> of
    [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>]) are identical for both IPv4 and IPv6.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.1.%20%20Calculating%20the%20Shortest-Path%20Tree%20for%20an%20Area"></a></body></html><a class="selflink" href="#section-4.8.1" name="section-4.8.1">4.8.1</a>.  Calculating the Shortest-Path Tree for an Area</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.1.%20%20Calculating%20the%20Shortest-Path%20Tree%20for%20an%20Area"></a></body></html><a class="selflink" href="#section-4.8.1" id="section-4.8.1">4.8.1</a>.  Calculating the Shortest-Path Tree for an Area</span>
 
    The IPv4 shortest-path calculation is contained in Section 16.1 of
    [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>].  The graph used by the shortest-path tree calculation is
@@ -2711,7 +2674,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 45]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-46" id="page-46" name="page-46"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-46"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2767,14 +2730,14 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 46]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-47" id="page-47" name="page-47"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-47"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
    be bidirectional for inclusion in the tree.  Alternate algorithms and
    optimizations are beyond the scope of this specification.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.2.%20%20The%20Next-Hop%20Calculation"></a></body></html><a class="selflink" href="#section-4.8.2" name="section-4.8.2">4.8.2</a>.  The Next-Hop Calculation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.2.%20%20The%20Next-Hop%20Calculation"></a></body></html><a class="selflink" href="#section-4.8.2" id="section-4.8.2">4.8.2</a>.  The Next-Hop Calculation</span>
 
    In IPv6, the calculation of the next-hop's IPv6 address (which will
    be a link-local address) proceeds along the same lines as the IPv4
@@ -2799,7 +2762,7 @@ Table of Contents
    also considered to be directly connected.  In this case, the next hop
    is solely the outgoing link and no IPv6 next-hop address is selected.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.3.%20%20Calculating%20the%20Inter-Area%20Routes"></a></body></html><a class="selflink" href="#section-4.8.3" name="section-4.8.3">4.8.3</a>.  Calculating the Inter-Area Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.3.%20%20Calculating%20the%20Inter-Area%20Routes"></a></body></html><a class="selflink" href="#section-4.8.3" id="section-4.8.3">4.8.3</a>.  Calculating the Inter-Area Routes</span>
 
    Calculation of inter-area routes for IPv6 proceeds along the same
    lines as the IPv4 calculation in Section 16.2 of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>], with the
@@ -2823,7 +2786,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 47]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-48" id="page-48" name="page-48"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-48"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2832,14 +2795,14 @@ Table of Contents
    [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>] can be performed instead of recalculating the entire routing
    table.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.4.%20%20Examining%20Transit%20Areas%27%20Summary-LSAs"></a></body></html><a class="selflink" href="#section-4.8.4" name="section-4.8.4">4.8.4</a>.  Examining Transit Areas' Summary-LSAs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.4.%20%20Examining%20Transit%20Areas%27%20Summary-LSAs"></a></body></html><a class="selflink" href="#section-4.8.4" id="section-4.8.4">4.8.4</a>.  Examining Transit Areas' Summary-LSAs</span>
 
    Examination of transit areas' summary-LSAs in IPv6 proceeds along the
    same lines as the IPv4 calculation in Section 16.3 of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>],
    modified in the same way as the IPv6 inter-area route calculation in
    <a href="#section-4.8.3">Section 4.8.3</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.5.%20%20Calculating%20AS%20External%20and%20NSSA%20Routes"></a></body></html><a class="selflink" href="#section-4.8.5" name="section-4.8.5">4.8.5</a>.  Calculating AS External and NSSA Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.5.%20%20Calculating%20AS%20External%20and%20NSSA%20Routes"></a></body></html><a class="selflink" href="#section-4.8.5" id="section-4.8.5">4.8.5</a>.  Calculating AS External and NSSA Routes</span>
 
    The IPv6 AS external route calculation proceeds along the same lines
    as the IPv4 calculation in Section 16.4 of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>] and <a href="#section-2.5">Section 2.5</a>
@@ -2870,7 +2833,7 @@ Table of Contents
    incremental calculations outlined in Section 16.6 of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>] can be
    performed instead of recalculating the entire routing table.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.9.%20%20Multiple%20Interfaces%20to%20a%20Single%20Link"></a></body></html><a class="selflink" href="#section-4.9" name="section-4.9">4.9</a>.  Multiple Interfaces to a Single Link</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.9.%20%20Multiple%20Interfaces%20to%20a%20Single%20Link"></a></body></html><a class="selflink" href="#section-4.9" id="section-4.9">4.9</a>.  Multiple Interfaces to a Single Link</span>
 
    In OSPF for IPv6, a router may have multiple interfaces to a single
    link associated with the same OSPF instance and area.  All interfaces
@@ -2879,7 +2842,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 48]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-49" id="page-49" name="page-49"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-49"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2935,7 +2898,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 49]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-50" id="page-50" name="page-50"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-50"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -2973,7 +2936,7 @@ Table of Contents
    o  The interface state machine is modified to add the state Standby.
       See <a href="#section-4.9.1">Section 4.9.1</a> for a description of the Standby state.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.9.1.%20%20Standby%20Interface%20State"></a></body></html><a class="selflink" href="#section-4.9.1" name="section-4.9.1">4.9.1</a>.  Standby Interface State</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.9.1.%20%20Standby%20Interface%20State"></a></body></html><a class="selflink" href="#section-4.9.1" id="section-4.9.1">4.9.1</a>.  Standby Interface State</span>
 
    In this state, the interface is one of multiple interfaces to a link
    and this interface is designated Standby and is not sending or
@@ -2991,7 +2954,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 50]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-51" id="page-51" name="page-51"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-51"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3047,11 +3010,11 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 51]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-52" id="page-52" name="page-52"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-52"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    When running over IPv6, OSPFv3 relies on the IP Authentication Header
    (see [<a href="#ref-IPAUTH" title='"IP Authentication Header"'>IPAUTH</a>]) and the IP Encapsulating Security Payload (see
@@ -3075,12 +3038,12 @@ Table of Contents
    consult [<a href="#ref-GENERIC-THREATS" title='"Generic Threats to Routing Protocols"'>GENERIC-THREATS</a>] for a more comprehensive description of
    threats to routing protocols.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Manageability%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Manageability Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Manageability%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Manageability Considerations</span>
 
    The Management Information Base (MIB) for OSPFv3 is defined in
    [<a href="#ref-OSPFV3-MIB" title='"Management Information Base for OSPFv3"'>OSPFV3-MIB</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  IANA Considerations</span>
 
    Most OSPF for IPv6 IANA considerations are documented in [<a href="#ref-OSPF-IANA" title='"IANA Considerations for OSPF"'>OSPF-IANA</a>].
    IANA has updated the reference for <a href="./rfc2740.html">RFC 2740</a> to this document.
@@ -3103,7 +3066,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 52]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-53" id="page-53" name="page-53"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-53"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3111,7 +3074,7 @@ Table of Contents
       Options registry defined in [<a href="#ref-OSPF-IANA" title='"IANA Considerations for OSPF"'>OSPF-IANA</a>].  For information on
       OSPFv3 Prefix Options, refer to <a href="#appendix-A.4.1.1">Appendix A.4.1.1</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20MOSPF%20for%20OSPFv3%20Deprecation%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  MOSPF for OSPFv3 Deprecation IANA Considerations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20MOSPF%20for%20OSPFv3%20Deprecation%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  MOSPF for OSPFv3 Deprecation IANA Considerations</span>
 
    With the deprecation of MOSPF for OSPFv3, the following code points
    are available for reassignment.  Refer to [<a href="#ref-OSPF-IANA" title='"IANA Considerations for OSPF"'>OSPF-IANA</a>] for information
@@ -3145,7 +3108,7 @@ Table of Contents
 
                      OSPFv3 Router Properties Registry
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgments</span>
 
    The RFC text was produced using Marshall Rose's xml2rfc tool.
 
@@ -3159,7 +3122,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 53]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-54" id="page-54" name="page-54"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-54"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3215,7 +3178,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 54]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-55" id="page-55" name="page-55"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-55"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3227,43 +3190,43 @@ Table of Contents
       thanks to Pasi for the text in <a href="#section-5">Section 5</a> relating to routing
       threats.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-DEMAND" name="ref-DEMAND">DEMAND</a>]           Moy, J., "Extending OSPF to Support Demand
+   [<a id="ref-DEMAND">DEMAND</a>]           Moy, J., "Extending OSPF to Support Demand
                       Circuits", <a href="./rfc1793.html">RFC 1793</a>, April 1995.
 
-   [<a id="ref-DIFF-SERV" name="ref-DIFF-SERV">DIFF-SERV</a>]        Nichols, K., Blake, S., Baker, F., and D. Black,
+   [<a id="ref-DIFF-SERV">DIFF-SERV</a>]        Nichols, K., Blake, S., Baker, F., and D. Black,
                       "Definition of the Differentiated Services Field
                       (DS Field) in the IPv4 and IPv6 Headers",
                       <a href="./rfc2474.html">RFC 2474</a>, December 1998.
 
-   [<a id="ref-DN-BIT" name="ref-DN-BIT">DN-BIT</a>]           Rosen, E., Peter, P., and P. Pillay-Esnault,
+   [<a id="ref-DN-BIT">DN-BIT</a>]           Rosen, E., Peter, P., and P. Pillay-Esnault,
                       "Using a Link State Advertisement (LSA) Options
                       Bit to Prevent Looping in BGP/MPLS IP Virtual
                       Private Networks (VPNs)", <a href="./rfc4576.html">RFC 4576</a>, June 2006.
 
-   [<a id="ref-INTFMIB" name="ref-INTFMIB">INTFMIB</a>]          McCloghrie, K. and F. Kastenholz, "The Interfaces
+   [<a id="ref-INTFMIB">INTFMIB</a>]          McCloghrie, K. and F. Kastenholz, "The Interfaces
                       Group MIB", <a href="./rfc2863.html">RFC 2863</a>, June 2000.
 
-   [<a id="ref-IP6ADDR" name="ref-IP6ADDR">IP6ADDR</a>]          Hinden, R. and S. Deering, "IP Version 6
+   [<a id="ref-IP6ADDR">IP6ADDR</a>]          Hinden, R. and S. Deering, "IP Version 6
                       Addressing Architecture", <a href="./rfc4291.html">RFC 4291</a>, February 2006.
 
-   [<a id="ref-IPAUTH" name="ref-IPAUTH">IPAUTH</a>]           Kent, S., "IP Authentication Header", <a href="./rfc4302.html">RFC 4302</a>,
+   [<a id="ref-IPAUTH">IPAUTH</a>]           Kent, S., "IP Authentication Header", <a href="./rfc4302.html">RFC 4302</a>,
                       December 2005.
 
-   [<a id="ref-IPESP" name="ref-IPESP">IPESP</a>]            Kent, S., "IP Encapsulating Security Payload
+   [<a id="ref-IPESP">IPESP</a>]            Kent, S., "IP Encapsulating Security Payload
                       (ESP)", <a href="./rfc4303.html">RFC 4303</a>, December 2005.
 
-   [<a id="ref-IPV4" name="ref-IPV4">IPV4</a>]             Postal, J., "Internet Protocol", STD 5, <a href="./rfc791.html">RFC 791</a>,
+   [<a id="ref-IPV4">IPV4</a>]             Postal, J., "Internet Protocol", STD 5, <a href="./rfc791.html">RFC 791</a>,
                       September 1981.
 
-   [<a id="ref-IPV6" name="ref-IPV6">IPV6</a>]             Deering, S. and R. Hinden, "Internet Protocol,
+   [<a id="ref-IPV6">IPV6</a>]             Deering, S. and R. Hinden, "Internet Protocol,
                       Version 6 (IPv6) Specification", <a href="./rfc2460.html">RFC 2460</a>,
                       December 1998.
 
-   [<a id="ref-NSSA" name="ref-NSSA">NSSA</a>]             Murphy, P., "The OSPF Not-So-Stubby Area (NSSA)
+   [<a id="ref-NSSA">NSSA</a>]             Murphy, P., "The OSPF Not-So-Stubby Area (NSSA)
                       Option", <a href="./rfc3101.html">RFC 3101</a>, January 2003.
 
 
@@ -3271,46 +3234,46 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 55]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-56" id="page-56" name="page-56"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-56"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
-   [<a id="ref-OSPF-IANA" name="ref-OSPF-IANA">OSPF-IANA</a>]        Kompella, K. and B. Fenner, "IANA Considerations
-                      for OSPF", <a href="./bcp130.html">BCP 130</a>, <a href="./rfc4940.html">RFC 4940</a>, July 2007.
+   [<a id="ref-OSPF-IANA">OSPF-IANA</a>]        Kompella, K. and B. Fenner, "IANA Considerations
+                      for OSPF", <a href="https://www.rfc-editor.org/bcp/bcp130">BCP 130</a>, <a href="./rfc4940.html">RFC 4940</a>, July 2007.
 
-   [<a id="ref-OSPFV2" name="ref-OSPFV2">OSPFV2</a>]           Moy, J., "OSPF Version 2", STD 54, <a href="./rfc2328.html">RFC 2328</a>,
+   [<a id="ref-OSPFV2">OSPFV2</a>]           Moy, J., "OSPF Version 2", STD 54, <a href="./rfc2328.html">RFC 2328</a>,
                       April 1998.
 
-   [<a id="ref-OSPFV3-AUTH" name="ref-OSPFV3-AUTH">OSPFV3-AUTH</a>]      Gupta, M. and N. Melam, "Authentication/
+   [<a id="ref-OSPFV3-AUTH">OSPFV3-AUTH</a>]      Gupta, M. and N. Melam, "Authentication/
                       Confidentiality for OSPFv3", <a href="./rfc4552.html">RFC 4552</a>, June 2006.
 
-   [<a id="ref-RFC-KEYWORDS" name="ref-RFC-KEYWORDS">RFC-KEYWORDS</a>]     Bradner, S., "Key words for use in RFCs to
-                      Indicate Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
+   [<a id="ref-RFC-KEYWORDS">RFC-KEYWORDS</a>]     Bradner, S., "Key words for use in RFCs to
+                      Indicate Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
                       March 1997.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-GENERIC-THREATS" name="ref-GENERIC-THREATS">GENERIC-THREATS</a>]  Barbir, A., Murphy, S., and Y. Yang, "Generic
+   [<a id="ref-GENERIC-THREATS">GENERIC-THREATS</a>]  Barbir, A., Murphy, S., and Y. Yang, "Generic
                       Threats to Routing Protocols", <a href="./rfc4593.html">RFC 4593</a>,
                       October 2006.
 
-   [<a id="ref-MOSPF" name="ref-MOSPF">MOSPF</a>]            Moy, J., "Multicast Extensions to OSPF", <a href="./rfc1584.html">RFC 1584</a>,
+   [<a id="ref-MOSPF">MOSPF</a>]            Moy, J., "Multicast Extensions to OSPF", <a href="./rfc1584.html">RFC 1584</a>,
                       March 1994.
 
-   [<a id="ref-MTUDISC" name="ref-MTUDISC">MTUDISC</a>]          Mogul, J. and S. Deering, "Path MTU discovery",
+   [<a id="ref-MTUDISC">MTUDISC</a>]          Mogul, J. and S. Deering, "Path MTU discovery",
                       <a href="./rfc1191.html">RFC 1191</a>, November 1990.
 
-   [<a id="ref-OPAQUE" name="ref-OPAQUE">OPAQUE</a>]           Coltun, R., "The OSPF Opaque LSA Option",
+   [<a id="ref-OPAQUE">OPAQUE</a>]           Coltun, R., "The OSPF Opaque LSA Option",
                       <a href="./rfc2370.html">RFC 2370</a>, July 1998.
 
-   [<a id="ref-OSPFV3" name="ref-OSPFV3">OSPFV3</a>]           Coltun, R., Ferguson, D., and J. Moy, "OSPF for
+   [<a id="ref-OSPFV3">OSPFV3</a>]           Coltun, R., Ferguson, D., and J. Moy, "OSPF for
                       IPv6", <a href="./rfc2740.html">RFC 2740</a>, December 1999.
 
-   [<a id="ref-OSPFV3-MIB" name="ref-OSPFV3-MIB">OSPFV3-MIB</a>]       Joyal, D. and V. Manral, "Management Information
+   [<a id="ref-OSPFV3-MIB">OSPFV3-MIB</a>]       Joyal, D. and V. Manral, "Management Information
                       Base for OSPFv3", Work in Progress,
                       September 2007.
 
-   [<a id="ref-SERV-CLASS" name="ref-SERV-CLASS">SERV-CLASS</a>]       Babiarz, J., Chan, K., and F. Baker,
+   [<a id="ref-SERV-CLASS">SERV-CLASS</a>]       Babiarz, J., Chan, K., and F. Baker,
                       "Configuration Guidelines for DiffServ Service
                       Classes", <a href="./rfc4594.html">RFC 4594</a>, August 2006.
 
@@ -3327,11 +3290,11 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 56]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-57" id="page-57" name="page-57"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-57"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20OSPF%20Data%20Formats"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  OSPF Data Formats</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20OSPF%20Data%20Formats"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  OSPF Data Formats</span>
 
    This appendix describes the format of OSPF protocol packets and OSPF
    LSAs.  The OSPF protocol runs directly over the IPv6 network layer.
@@ -3350,7 +3313,7 @@ Table of Contents
    details the standard LSA header, and then provides formats for each
    of the specific LSA types.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Encapsulation%20of%20OSPF%20Packets"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>.  Encapsulation of OSPF Packets</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Encapsulation%20of%20OSPF%20Packets"></a></body></html><a class="selflink" href="#appendix-A.1" id="appendix-A.1">A.1</a>.  Encapsulation of OSPF Packets</span>
 
    OSPF runs directly over the IPv6's network layer.  OSPF packets are
    therefore encapsulated solely by IPv6 and local data-link headers.
@@ -3383,7 +3346,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 57]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-58" id="page-58" name="page-58"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-58"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3414,7 +3377,7 @@ Table of Contents
       supporting this mapping, OSPF packets will be given precedence
       over IPv6 data traffic.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20The%20Options%20Field"></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>.  The Options Field</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20The%20Options%20Field"></a></body></html><a class="selflink" href="#appendix-A.2" id="appendix-A.2">A.2</a>.  The Options Field</span>
 
    The 24-bit OSPF Options field is present in OSPF Hello packets,
    Database Description packets, and certain LSAs (router-LSAs, network-
@@ -3439,7 +3402,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 58]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-59" id="page-59" name="page-59"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-59"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3495,7 +3458,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 59]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-60" id="page-60" name="page-60"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-60"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3503,7 +3466,7 @@ Table of Contents
       These bits are reserved for migration of OSPFv2 protocol
       extensions.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20%20OSPF%20Packet%20Formats"></a></body></html><a class="selflink" href="#appendix-A.3" name="appendix-A.3">A.3</a>.  OSPF Packet Formats</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20%20OSPF%20Packet%20Formats"></a></body></html><a class="selflink" href="#appendix-A.3" id="appendix-A.3">A.3</a>.  OSPF Packet Formats</span>
 
    There are five distinct OSPF packet types.  All OSPF packet types
    begin with a standard 16-byte header.  This header is described
@@ -3519,7 +3482,7 @@ Table of Contents
    The receive processing of OSPF packets is detailed in <a href="#section-4.2.2">Section 4.2.2</a>.
    The sending of OSPF packets is explained in <a href="#section-4.2.1">Section 4.2.1</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.1.%20%20The%20OSPF%20Packet%20Header"></a></body></html><a class="selflink" href="#appendix-A.3.1" name="appendix-A.3.1">A.3.1</a>.  The OSPF Packet Header</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.1.%20%20The%20OSPF%20Packet%20Header"></a></body></html><a class="selflink" href="#appendix-A.3.1" id="appendix-A.3.1">A.3.1</a>.  The OSPF Packet Header</span>
 
    Every OSPF packet starts with a standard 16-byte header.  Together
    with the encapsulating IPv6 headers, the OSPF header contains all the
@@ -3551,7 +3514,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 60]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-61" id="page-61" name="page-61"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-61"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3607,7 +3570,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 61]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-62" id="page-62" name="page-62"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-62"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3616,7 +3579,7 @@ Table of Contents
       protocol packets and <em>MUST</em> be ignored when receiving protocol
       packets.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.2.%20%20The%20Hello%20Packet"></a></body></html><a class="selflink" href="#appendix-A.3.2" name="appendix-A.3.2">A.3.2</a>.  The Hello Packet</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.2.%20%20The%20Hello%20Packet"></a></body></html><a class="selflink" href="#appendix-A.3.2" id="appendix-A.3.2">A.3.2</a>.  The Hello Packet</span>
 
    Hello packets are OSPF packet type 1.  These packets are sent
    periodically on all interfaces (including virtual links) in order to
@@ -3663,7 +3626,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 62]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-63" id="page-63" name="page-63"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-63"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3703,7 +3666,7 @@ Table of Contents
       The Router IDs of each router on the network with neighbor state
       1-Way or greater.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.3.%20%20The%20Database%20Description%20Packet"></a></body></html><a class="selflink" href="#appendix-A.3.3" name="appendix-A.3.3">A.3.3</a>.  The Database Description Packet</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.3.%20%20The%20Database%20Description%20Packet"></a></body></html><a class="selflink" href="#appendix-A.3.3" id="appendix-A.3.3">A.3.3</a>.  The Database Description Packet</span>
 
    Database Description packets are OSPF packet type 2.  These packets
    are exchanged when an adjacency is being initialized.  They describe
@@ -3719,7 +3682,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 63]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-64" id="page-64" name="page-64"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-64"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3775,7 +3738,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 64]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-65" id="page-65" name="page-65"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-65"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3808,7 +3771,7 @@ Table of Contents
    It contains all the information required to uniquely identify both
    the LSA and the LSA's current instance.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.4.%20%20The%20Link%20State%20Request%20Packet"></a></body></html><a class="selflink" href="#appendix-A.3.4" name="appendix-A.3.4">A.3.4</a>.  The Link State Request Packet</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.4.%20%20The%20Link%20State%20Request%20Packet"></a></body></html><a class="selflink" href="#appendix-A.3.4" id="appendix-A.3.4">A.3.4</a>.  The Link State Request Packet</span>
 
    Link State Request packets are OSPF packet type 3.  After exchanging
    Database Description packets with a neighboring router, a router may
@@ -3831,7 +3794,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 65]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-66" id="page-66" name="page-66"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-66"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3861,7 +3824,7 @@ Table of Contents
    specifying its instance.  Link State Request packets are understood
    to be requests for the most recent instance of the specified LSAs.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.5.%20%20The%20Link%20State%20Update%20Packet"></a></body></html><a class="selflink" href="#appendix-A.3.5" name="appendix-A.3.5">A.3.5</a>.  The Link State Update Packet</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.5.%20%20The%20Link%20State%20Update%20Packet"></a></body></html><a class="selflink" href="#appendix-A.3.5" id="appendix-A.3.5">A.3.5</a>.  The Link State Update Packet</span>
 
    Link State Update packets are OSPF packet type 4.  These packets
    implement the flooding of LSAs.  Each Link State Update packet
@@ -3887,7 +3850,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 66]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-67" id="page-67" name="page-67"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-67"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3921,7 +3884,7 @@ Table of Contents
    <a href="#appendix-A.4.2">Appendix A.4.2</a>.  Detailed formats of the different types of LSAs are
    described <a href="#appendix-A.4">Appendix A.4</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.6.%20%20The%20Link%20State%20Acknowledgment%20Packet"></a></body></html><a class="selflink" href="#appendix-A.3.6" name="appendix-A.3.6">A.3.6</a>.  The Link State Acknowledgment Packet</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.6.%20%20The%20Link%20State%20Acknowledgment%20Packet"></a></body></html><a class="selflink" href="#appendix-A.3.6" id="appendix-A.3.6">A.3.6</a>.  The Link State Acknowledgment Packet</span>
 
    Link State Acknowledgment packets are OSPF packet type 5.  To make
    the flooding of LSAs reliable, flooded LSAs are explicitly or
@@ -3943,7 +3906,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 67]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-68" id="page-68" name="page-68"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-68"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -3980,7 +3943,7 @@ Table of Contents
    required to uniquely identify both the LSA and the LSA's current
    instance.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.%20%20LSA%20Formats"></a></body></html><a class="selflink" href="#appendix-A.4" name="appendix-A.4">A.4</a>.  LSA Formats</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.%20%20LSA%20Formats"></a></body></html><a class="selflink" href="#appendix-A.4" id="appendix-A.4">A.4</a>.  LSA Formats</span>
 
    This document defines eight distinct types of LSAs.  Each LSA begins
    with a standard 20-byte LSA header.  This header is explained in
@@ -3999,7 +3962,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 68]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-69" id="page-69" name="page-69"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-69"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4014,7 +3977,7 @@ Table of Contents
    <a href="#section-11">11</a> of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>]).  For details on the routing table build process, see
    <a href="#section-4.8">Section 4.8</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.1.%20%20IPv6%20Prefix%20Representation"></a></body></html><a class="selflink" href="#appendix-A.4.1" name="appendix-A.4.1">A.4.1</a>.  IPv6 Prefix Representation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.1.%20%20IPv6%20Prefix%20Representation"></a></body></html><a class="selflink" href="#appendix-A.4.1" id="appendix-A.4.1">A.4.1</a>.  IPv6 Prefix Representation</span>
 
    IPv6 addresses are bit strings of length 128.  IPv6 routing
    protocols, and OSPF for IPv6 in particular, advertise IPv6 address
@@ -4036,7 +3999,7 @@ Table of Contents
    <a href="#appendix-A.4.5">Appendix A.4.5</a>, <a href="#appendix-A.4.7">Appendix A.4.7</a>, <a href="#appendix-A.4.8">Appendix A.4.8</a>, <a href="#appendix-A.4.9">Appendix A.4.9</a>, and
    <a href="#appendix-A.4.10">Appendix A.4.10</a>.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.1.1.%20%20Prefix%20Options"></a></body></html><a class="selflink" href="#appendix-A.4.1.1" name="appendix-A.4.1.1">A.4.1.1</a>.  Prefix Options</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.1.1.%20%20Prefix%20Options"></a></body></html><a class="selflink" href="#appendix-A.4.1.1" id="appendix-A.4.1.1">A.4.1.1</a>.  Prefix Options</span>
 
    Each prefix is advertised along with an 8-bit field of capabilities.
    These serve as input to the various routing calculations.  For
@@ -4055,7 +4018,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 69]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-70" id="page-70" name="page-70"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-70"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4085,7 +4048,7 @@ Table of Contents
       This bit controls an inter-area-prefix-LSAs or AS-external-LSAs
       re-advertisement in a VPN environment as specified in [<a href="#ref-DN-BIT" title='"Using a Link State Advertisement (LSA) Options Bit to Prevent Looping in BGP/MPLS IP Virtual Private Networks (VPNs)"'>DN-BIT</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.2.%20%20The%20LSA%20Header"></a></body></html><a class="selflink" href="#appendix-A.4.2" name="appendix-A.4.2">A.4.2</a>.  The LSA Header</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.2.%20%20The%20LSA%20Header"></a></body></html><a class="selflink" href="#appendix-A.4.2" id="appendix-A.4.2">A.4.2</a>.  The LSA Header</span>
 
    All LSAs begin with a common 20-byte header.  This header contains
    enough information to uniquely identify the LSA (LS type, Link State
@@ -4111,7 +4074,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 70]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-71" id="page-71" name="page-71"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-71"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4167,7 +4130,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 71]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-72" id="page-72" name="page-72"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-72"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4175,7 +4138,7 @@ Table of Contents
       The length in bytes of the LSA.  This includes the 20-byte LSA
       header.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.2.1.%20%20LSA%20Type"></a></body></html><a class="selflink" href="#appendix-A.4.2.1" name="appendix-A.4.2.1">A.4.2.1</a>.  LSA Type</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.2.1.%20%20LSA%20Type"></a></body></html><a class="selflink" href="#appendix-A.4.2.1" id="appendix-A.4.2.1">A.4.2.1</a>.  LSA Type</span>
 
    The LS type field indicates the function performed by the LSA.  The
    high-order three bits of LS type encode generic properties of the
@@ -4223,7 +4186,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 72]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-73" id="page-73" name="page-73"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-73"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4241,7 +4204,7 @@ Table of Contents
 
                              LSA Function Code
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.3.%20%20Router-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.3" name="appendix-A.4.3">A.4.3</a>.  Router-LSAs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.3.%20%20Router-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.3" id="appendix-A.4.3">A.4.3</a>.  Router-LSAs</span>
 
    Router-LSAs have LS type equal to 0x2001.  Each router in an area
    originates one or more router-LSAs.  The complete collection of
@@ -4279,7 +4242,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 73]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-74" id="page-74" name="page-74"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-74"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4335,7 +4298,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 74]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-75" id="page-75" name="page-75"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-75"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4391,7 +4354,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 75]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-76" id="page-76" name="page-76"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-76"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4417,7 +4380,7 @@ Table of Contents
    and Neighbor Router ID allows the network-LSA for the attached link
    to be found in the link-state database.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.4.%20%20Network-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.4" name="appendix-A.4.4">A.4.4</a>.  Network-LSAs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.4.%20%20Network-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.4" id="appendix-A.4.4">A.4.4</a>.  Network-LSAs</span>
 
    Network-LSAs have LS type equal to 0x2002.  A network-LSA is
    originated for each broadcast and NBMA link in the area that includes
@@ -4447,7 +4410,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 76]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-77" id="page-77" name="page-77"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-77"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4479,7 +4442,7 @@ Table of Contents
       itself in this list.  The number of routers included can be
       deduced from the LSA header's length field.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.5.%20%20Inter-Area-Prefix-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.5" name="appendix-A.4.5">A.4.5</a>.  Inter-Area-Prefix-LSAs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.5.%20%20Inter-Area-Prefix-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.5" id="appendix-A.4.5">A.4.5</a>.  Inter-Area-Prefix-LSAs</span>
 
    Inter-area-prefix-LSAs have LS type equal to 0x2003.  These LSAs are
    the IPv6 equivalent of OSPF for IPv4's type 3 summary-LSAs (see
@@ -4503,7 +4466,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 77]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-78" id="page-78" name="page-78"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-78"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4541,7 +4504,7 @@ Table of Contents
       Representation of the IPv6 address prefix, as described in
       <a href="#appendix-A.4.1">Appendix A.4.1</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.6.%20%20Inter-Area-Router-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.6" name="appendix-A.4.6">A.4.6</a>.  Inter-Area-Router-LSAs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.6.%20%20Inter-Area-Router-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.6" id="appendix-A.4.6">A.4.6</a>.  Inter-Area-Router-LSAs</span>
 
    Inter-area-router-LSAs have LS type equal to 0x2004.  These LSAs are
    the IPv6 equivalent of OSPF for IPv4's type 4 summary-LSAs (see
@@ -4559,7 +4522,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 78]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-79" id="page-79" name="page-79"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-79"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4596,7 +4559,7 @@ Table of Contents
    Destination Router ID
       The Router ID of the router being described by the LSA.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.7.%20%20AS-External-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.7" name="appendix-A.4.7">A.4.7</a>.  AS-External-LSAs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.7.%20%20AS-External-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.7" id="appendix-A.4.7">A.4.7</a>.  AS-External-LSAs</span>
 
    AS-external-LSAs have LS type equal to 0x4005.  These LSAs are
    originated by AS boundary routers and describe destinations external
@@ -4615,7 +4578,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 79]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-80" id="page-80" name="page-80"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-80"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4671,7 +4634,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 80]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-81" id="page-81" name="page-81"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-81"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4727,11 +4690,11 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 81]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-82" id="page-82" name="page-82"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-82"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.8.%20%20NSSA-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.8" name="appendix-A.4.8">A.4.8</a>.  NSSA-LSAs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.8.%20%20NSSA-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.8" id="appendix-A.4.8">A.4.8</a>.  NSSA-LSAs</span>
 
    NSSA-LSAs have LS type equal to 0x2007.  These LSAs are originated by
    AS boundary routers within an NSSA and describe destinations external
@@ -4745,7 +4708,7 @@ Table of Contents
    additional checking to ensure IPv6 link-local address are not
    selected.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.9.%20%20Link-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.9" name="appendix-A.4.9">A.4.9</a>.  Link-LSAs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.9.%20%20Link-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.9" id="appendix-A.4.9">A.4.9</a>.  Link-LSAs</span>
 
    Link-LSAs have LS type equal to 0x0008.  A router originates a
    separate link-LSA for each attached physical link.  These LSAs have
@@ -4783,7 +4746,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 82]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-83" id="page-83" name="page-83"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-83"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4839,7 +4802,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 83]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-84" id="page-84" name="page-84"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-84"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4856,7 +4819,7 @@ Table of Contents
       Representation of an IPv6 address prefix, as described in
       <a href="#appendix-A.4.1">Appendix A.4.1</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.10.%20%20Intra-Area-Prefix-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.10" name="appendix-A.4.10">A.4.10</a>.  Intra-Area-Prefix-LSAs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.10.%20%20Intra-Area-Prefix-LSAs"></a></body></html><a class="selflink" href="#appendix-A.4.10" id="appendix-A.4.10">A.4.10</a>.  Intra-Area-Prefix-LSAs</span>
 
    Intra-area-prefix-LSAs have LS type equal to 0x2009.  A router uses
    intra-area-prefix-LSAs to advertise one or more IPv6 address prefixes
@@ -4895,7 +4858,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 84]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-85" id="page-85" name="page-85"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-85"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4951,7 +4914,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 85]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-86" id="page-86" name="page-86"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-86"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -4967,14 +4930,14 @@ Table of Contents
       The cost of this prefix.  Expressed in the same units as the
       interface costs in router-LSAs.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Architectural%20Constants"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Architectural Constants</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Architectural%20Constants"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Architectural Constants</span>
 
    Architectural constants for the OSPF protocol are defined in <a href="#appendix-B">Appendix</a>
    <a href="#appendix-B">B</a> of [<a href="#ref-OSPFV2" title='"OSPF Version 2"'>OSPFV2</a>].  The only difference for OSPF for IPv6 is that
    DefaultDestination is encoded as a prefix with length 0 (see
    <a href="#appendix-A.4.1">Appendix A.4.1</a>).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20C.%20%20Configurable%20Constants"></a></body></html><a class="selflink" href="#appendix-C" name="appendix-C">Appendix C</a>.  Configurable Constants</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20C.%20%20Configurable%20Constants"></a></body></html><a class="selflink" href="#appendix-C" id="appendix-C">Appendix C</a>.  Configurable Constants</span>
 
    The OSPF protocol has quite a few configurable parameters.  These
    parameters are listed below.  They are grouped into general
@@ -4991,7 +4954,7 @@ Table of Contents
    router via a SLIP line).  From OSPF's point of view, these items are
    still configurable.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.1.%20%20Global%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.1" name="appendix-C.1">C.1</a>.  Global Parameters</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.1.%20%20Global%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.1" id="appendix-C.1">C.1</a>.  Global Parameters</span>
 
    In general, a separate copy of the OSPF protocol is run for each
    area.  Because of this, most configuration parameters are defined on
@@ -5007,7 +4970,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 86]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-87" id="page-87" name="page-87"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-87"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -5030,7 +4993,7 @@ Table of Contents
 
    The Router ID of 0.0.0.0 is reserved and <em>SHOULD NOT</em> be used.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.2.%20%20Area%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.2" name="appendix-C.2">C.2</a>.  Area Parameters</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.2.%20%20Area%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.2" id="appendix-C.2">C.2</a>.  Area Parameters</span>
 
    All routers belonging to an area must agree on that area's
    configuration.  Disagreements between two routers will lead to an
@@ -5063,7 +5026,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 87]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-88" id="page-88" name="page-88"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-88"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -5098,7 +5061,7 @@ Table of Contents
       area.  The default setting is enabled.  This parameter is only
       valid for stub or NSSA areas.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.3.%20%20Router%20Interface%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.3" name="appendix-C.3">C.3</a>.  Router Interface Parameters</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.3.%20%20Router%20Interface%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.3" id="appendix-C.3">C.3</a>.  Router Interface Parameters</span>
 
    Some of the configurable router interface parameters (such as Area
    ID, HelloInterval, and RouterDeadInterval) actually imply properties
@@ -5119,7 +5082,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 88]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-89" id="page-89" name="page-89"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-89"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -5175,7 +5138,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 89]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-90" id="page-90" name="page-90"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-90"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -5208,7 +5171,7 @@ Table of Contents
       "disabled" if the interface type is broadcast or NBMA.  Future
       interface types <em>MAY</em> specify a different default.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.4.%20%20Virtual%20Link%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.4" name="appendix-C.4">C.4</a>.  Virtual Link Parameters</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.4.%20%20Virtual%20Link%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.4" id="appendix-C.4">C.4</a>.  Virtual Link Parameters</span>
 
    Virtual links are used to restore/increase connectivity of the
    backbone.  Virtual links may be configured between any pair of area
@@ -5231,7 +5194,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 90]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-91" id="page-91" name="page-91"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-91"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -5248,7 +5211,7 @@ Table of Contents
    in order to utilize the same transit area (without requiring
    different Router IDs for demultiplexing).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.5.%20%20NBMA%20Network%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.5" name="appendix-C.5">C.5</a>.  NBMA Network Parameters</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.5.%20%20NBMA%20Network%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.5" id="appendix-C.5">C.5</a>.  NBMA Network Parameters</span>
 
    OSPF treats an NBMA network much like it treats a broadcast network.
    Since there may be many routers attached to the network, a Designated
@@ -5287,11 +5250,11 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 91]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-92" id="page-92" name="page-92"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-92"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.6.%20%20Point-to-Multipoint%20Network%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.6" name="appendix-C.6">C.6</a>.  Point-to-Multipoint Network Parameters</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.6.%20%20Point-to-Multipoint%20Network%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.6" id="appendix-C.6">C.6</a>.  Point-to-Multipoint Network Parameters</span>
 
    On point-to-multipoint networks, it may be necessary to configure the
    set of neighbors that are directly reachable over the point-to-
@@ -5300,7 +5263,7 @@ Table of Contents
    not elected on point-to-multipoint networks, so the Designated Router
    eligibility of configured neighbors is not defined.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.7.%20%20Host%20Route%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.7" name="appendix-C.7">C.7</a>.  Host Route Parameters</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.7.%20%20Host%20Route%20Parameters"></a></body></html><a class="selflink" href="#appendix-C.7" id="appendix-C.7">C.7</a>.  Host Route Parameters</span>
 
    Host prefixes are advertised in intra-area-prefix-LSAs.  They
    indicate either local router addresses, router interfaces to point-
@@ -5343,7 +5306,7 @@ Table of Contents
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 92]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-93" id="page-93" name="page-93"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-93"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -5399,7 +5362,7 @@ Authors' Addresses
 
 
 <span class="grey">Coltun, et al.              Standards Track                    [Page 93]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-94" id="page-94" name="page-94"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-94"></span>
 <span class="grey"><a href="./rfc5340.html">RFC 5340</a>                     OSPF for IPv6                     July 2008</span>
 
 
@@ -5408,7 +5371,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2008).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -5428,7 +5391,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -5455,11 +5418,6 @@ Intellectual Property
 
 
 Coltun, et al.              Standards Track                    [Page 94]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

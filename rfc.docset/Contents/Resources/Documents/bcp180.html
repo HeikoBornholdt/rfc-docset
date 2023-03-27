@@ -1,1066 +1,1173 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-<meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<link href="" rel="icon" type="image/png"/>
-<link href="" rel="shortcut icon" type="image/png"/>
-<title>BCP 180 - DHCPv6 Redundancy Deployment Considerations</title>
-<style type="text/css">
-	@media only screen 
-	  and (min-width: 992px)
-	  and (max-width: 1199px) {
-	    body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 768px)
-	  and (max-width: 991px) {
-            body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 480px)
-	  and (max-width: 767px) {
-            body { font-size: 11pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (max-width: 479px) {
-            body { font-size: 8pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-device-width : 375px) 
-	  and (max-device-width : 667px) {
-            body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
-        }
-	@media only screen 
-	  and (min-device-width: 1200px) {
-            body { font-size: 10pt; margin: 0 4em; }
-            div.content { width: 96ex; margin: 0; }
-        }
-        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-	    font-weight: bold;
-            line-height: 0pt;
-            display: inline;
-            white-space: pre;
-            font-family: monospace;
-            font-size: 1em;
-	    font-weight: bold;
-        }
-        pre {
-            font-size: 1em;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-	.pre {
-	    white-space: pre;
-	    font-family: monospace;
-	}
-	.header{
-	    font-weight: bold;
-	}
-        .newpage {
-            page-break-before: always;
-        }
-        .invisible {
-            text-decoration: none;
-            color: white;
-        }
-        a.selflink {
-          color: black;
-          text-decoration: none;
-        }
-        @media print {
-            body {
-                font-family: monospace;
-                font-size: 10.5pt;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                font-size: 1em;
-            }
-        
-            a:link, a:visited {
-                color: inherit;
-                text-decoration: none;
-            }
-            .noprint {
-                display: none;
-            }
-        }
-	@media screen {
-	    .grey, .grey a:link, .grey a:visited {
-		color: #777;
-	    }
-            .docinfo {
-                background-color: #EEE;
-            }
-            .top {
-                border-top: 7px solid #EEE;
-            }
-            .bgwhite  { background-color: white; }
-            .bgred    { background-color: #F44; }
-            .bggrey   { background-color: #666; }
-            .bgbrown  { background-color: #840; }            
-            .bgorange { background-color: #FA0; }
-            .bgyellow { background-color: #EE0; }
-            .bgmagenta{ background-color: #F4F; }
-            .bgblue   { background-color: #66F; }
-            .bgcyan   { background-color: #4DD; }
-            .bggreen  { background-color: #4F4; }
-
-            .legend   { font-size: 90%; }
-            .cplate   { font-size: 70%; border: solid grey 1px; }
-	}
-    </style>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="http://gmpg.org/xfn/11" rel="profile"/>
+<meta charset="utf-8"/>
+<meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/> <title>Information on BCP 180 » RFC Editor</title>
+<meta content="WordPress 6.0.3" name="generator"/> <!-- leave this for stats -->
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/style.css" media="screen" rel="stylesheet" type="text/css"/>
 <!--[if IE]>
-    <style>
-    body {
-       font-size: 13px;
-       margin: 10px 10px;
-    }
+                <style type="text/css">
+                #headerimg{ filter:alpha(opacity=80);}
+                .top img{ filter:alpha(opacity=60);}
+                .top img:hover{ filter:alpha(opacity=100);}
+                ul.comment-preview li{ filter:alpha(opacity=70);}
+                ul.comment-preview li:hover{ filter:alpha(opacity=100);}
+                #commentform input[type="text"],#commentform .comment-form-author .required, 
+                #commentform .comment-form-email .required{padding-left: 65px !important;}
+                .top a {position: relative;top: 2px;}
+                </style>
+        <![endif]-->
+<!--[if IE 7]>
+                <style type="text/css">
+                #headerimgwrap{ position:absolute;left:20%}
+                .hleft{position:absolute;}
+                .hright{position:absolute; right:0;}
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<!--[if IE 8 ]>
+                <style type="text/css">
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<link href="https://www.rfc-editor.org/xmlrpc.php" rel="pingback"/>
+<meta content="max-image-preview:large" name="robots"/>
+<link href="./fonts.googleapis.com.html" rel="dns-prefetch"/>
+<link href="./s.w.org.html" rel="dns-prefetch"/>
+<link href="https://www.rfc-editor.org/feed/" rel="alternate" title="RFC Editor » Feed" type="application/rss+xml"/>
+<link href="https://www.rfc-editor.org/comments/feed/" rel="alternate" title="RFC Editor » Comments Feed" type="application/rss+xml"/>
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.rfc-editor.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.3"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dist/block-library/style.min.css?ver=6.0.3" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<style id="responsive-menu-inline-css" type="text/css">
+/** This file is major component of this plugin so please don't try to edit here. */
+#rmp_menu_trigger-2538 {
+  width: 55px;
+  height: 55px;
+  position: fixed;
+  top: 15px;
+  border-radius: 5px;
+  display: none;
+  text-decoration: none;
+  right: 5%;
+  background: #000000;
+  transition: transform 0.5s, background-color 0.5s;
+}
+#rmp_menu_trigger-2538:hover, #rmp_menu_trigger-2538:focus {
+  background: #000000;
+  text-decoration: unset;
+}
+#rmp_menu_trigger-2538.is-active {
+  background: #000000;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-box {
+  width: 25px;
+  color: #ffffff;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-icon-active, #rmp_menu_trigger-2538 .rmp-trigger-text-open {
+  display: none;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-active, #rmp_menu_trigger-2538.is-active .rmp-trigger-text-open {
+  display: inline;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-inactive, #rmp_menu_trigger-2538.is-active .rmp-trigger-text {
+  display: none;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label {
+  color: #ffffff;
+  pointer-events: none;
+  line-height: 13px;
+  font-family: inherit;
+  font-size: 14px;
+  display: inline;
+  text-transform: inherit;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-top {
+  display: block;
+  margin-bottom: 12px;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-bottom {
+  display: block;
+  margin-top: 12px;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner {
+  display: block;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::after {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  position: absolute;
+}
+#rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+#rmp_menu_trigger-2538:hover .responsive-menu-pro-inner, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+/* Hamburger menu styling */
+@media screen and (max-width: 1024px) {
+  /** Menu Title Style */
+  /** Menu Additional Content Style */
+  #l_sidebar {
+    display: none !important;
+  }
+  #rmp_menu_trigger-2538 {
+    display: block;
+  }
+  #rmp-container-2538 {
+    position: fixed;
+    top: 0;
+    margin: 0;
+    transition: transform 0.5s;
+    overflow: auto;
+    display: block;
+    width: 75%;
+    background-color: #212121;
+    background-image: url("");
+    height: 100%;
+    left: 0;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+  }
+  #rmp-menu-wrap-2538 {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu, #rmp-menu-wrap-2538 .rmp-submenu {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-1 .rmp-menu-item-link {
+    padding-left: 10%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-2 .rmp-menu-item-link {
+    padding-left: 15%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-3 .rmp-menu-item-link {
+    padding-left: 20%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-4 .rmp-menu-item-link {
+    padding-left: 25%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu.rmp-submenu-open {
+    display: block;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+    font-weight: normal;
+    letter-spacing: 0px;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.5s, border-color 0.5s, 0.5s;
+    padding: 0 5%;
+    padding-right: 50px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:after, #rmp-menu-wrap-2538 .rmp-menu-item-link:before {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:focus {
+    outline: none;
+    border-color: unset;
+    box-shadow: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link .rmp-font-icon {
+    height: 40px;
+    line-height: 40px;
+    margin-right: 10px;
+    font-size: 13px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    overflow: hidden;
+    background-size: cover;
+    overflow: hidden;
+    right: 0;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow .rmp-font-icon {
+    margin-right: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow * {
+    vertical-align: middle;
+    line-height: 40px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active {
+    display: block;
+    background-size: cover;
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow {
+    right: 0;
+    border-right: unset;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-description {
+    margin: 0;
+    padding: 5px 5%;
+    opacity: 0.8;
+    color: #ffffff;
+  }
+  #rmp-search-box-2538 {
+    display: block;
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+  }
+  #rmp-search-box-2538 .rmp-search-form {
+    margin: 0;
+  }
+  #rmp-search-box-2538 .rmp-search-box {
+    background: #ffffff;
+    border: 1px solid #dadada;
+    color: #333333;
+    width: 100%;
+    padding: 0 5%;
+    border-radius: 30px;
+    height: 45px;
+    -webkit-appearance: none;
+  }
+  #rmp-search-box-2538 .rmp-search-box::placeholder {
+    color: #c7c7cd;
+  }
+  #rmp-search-box-2538 .rmp-search-box:focus {
+    background-color: #ffffff;
+    outline: 2px solid #dadada;
+    color: #333333;
+  }
+  #rmp-menu-title-2538 {
+    background-color: #212121;
+    color: #ffffff;
+    text-align: left;
+    font-size: 13px;
+    padding-top: 10%;
+    padding-left: 5%;
+    padding-bottom: 0%;
+    padding-right: 5%;
+    font-weight: 400;
+    transition: background-color 0.5s, border-color 0.5s, color 0.5s;
+  }
+  #rmp-menu-title-2538:hover {
+    background-color: #212121;
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 > a {
+    color: #ffffff;
+    width: 100%;
+    background-color: unset;
+    text-decoration: none;
+  }
+  #rmp-menu-title-2538 > a:hover {
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 .rmp-font-icon {
+    font-size: 13px;
+  }
+  #rmp-menu-additional-content-2538 {
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+    color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+/**
+This file contents common styling of menus.
+*/
+.rmp-container {
+  display: none;
+  visibility: visible;
+  padding: 0px 0px 0px 0px;
+  z-index: 99998;
+  transition: all 0.3s;
+  /** Scrolling bar in menu setting box **/
+}
+.rmp-container.rmp-fade-top, .rmp-container.rmp-fade-left, .rmp-container.rmp-fade-right, .rmp-container.rmp-fade-bottom {
+  display: none;
+}
+.rmp-container.rmp-slide-left, .rmp-container.rmp-push-left {
+  transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+}
+.rmp-container.rmp-slide-left.rmp-menu-open, .rmp-container.rmp-push-left.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-right, .rmp-container.rmp-push-right {
+  transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+}
+.rmp-container.rmp-slide-right.rmp-menu-open, .rmp-container.rmp-push-right.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-top, .rmp-container.rmp-push-top {
+  transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+}
+.rmp-container.rmp-slide-top.rmp-menu-open, .rmp-container.rmp-push-top.rmp-menu-open {
+  transform: translateY(0);
+  -ms-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+}
+.rmp-container.rmp-slide-bottom, .rmp-container.rmp-push-bottom {
+  transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+  -moz-transform: translateY(100%);
+}
+.rmp-container.rmp-slide-bottom.rmp-menu-open, .rmp-container.rmp-push-bottom.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container::-webkit-scrollbar {
+  width: 0px;
+}
+.rmp-container ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+.rmp-container .rmp-menu-wrap .rmp-menu {
+  transition: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  border: 0;
+  bottom: auto;
+  box-sizing: border-box;
+  clip: auto;
+  color: #666;
+  display: block;
+  float: none;
+  font-family: inherit;
+  font-size: 14px;
+  height: auto;
+  left: auto;
+  line-height: 1.7;
+  list-style-type: none;
+  margin: 0;
+  min-height: auto;
+  max-height: none;
+  opacity: 1;
+  outline: none;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  pointer-events: auto;
+  right: auto;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  transform: none;
+  top: auto;
+  visibility: inherit;
+  width: auto;
+  word-wrap: break-word;
+  white-space: normal;
+}
+.rmp-container .rmp-menu-additional-content {
+  display: block;
+  word-break: break-word;
+}
+.rmp-container .rmp-menu-title {
+  display: flex;
+  flex-direction: column;
+}
+.rmp-container .rmp-menu-title .rmp-menu-title-image {
+  max-width: 100%;
+  margin-bottom: 15px;
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+}
+button.rmp_menu_trigger {
+  z-index: 999999;
+  overflow: hidden;
+  outline: none;
+  border: 0;
+  display: none;
+  margin: 0;
+  transition: transform 0.5s, background-color 0.5s;
+  padding: 0;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before, button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  content: "";
+  display: block;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before {
+  top: 10px;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  bottom: 10px;
+}
+button.rmp_menu_trigger .rmp-trigger-box {
+  width: 40px;
+  display: inline-block;
+  position: relative;
+  pointer-events: none;
+  vertical-align: super;
+}
+.admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+  margin-top: 32px !important;
+}
+@media screen and (max-width: 782px) {
+  .admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+    margin-top: 46px !important;
+  }
+}
+/*  Menu Trigger Boring Animation */
+.rmp-menu-trigger-boring .responsive-menu-pro-inner {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring .responsive-menu-pro-inner::after, .rmp-menu-trigger-boring .responsive-menu-pro-inner::before {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner {
+  transform: rotate(45deg);
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:before {
+  top: 0;
+  opacity: 0;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:after {
+  bottom: 0;
+  transform: rotate(-90deg);
+}
+
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dashicons.min.css?ver=6.0.3" id="dashicons-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/css/mobile.css?ver=0.1" id="tech-mobile-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans%7C&amp;ver=6.0.3" id="google_fonts-css" media="screen" rel="stylesheet" type="text/css"/>
+<script id="jquery-core-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" type="text/javascript"></script>
+<script id="jquery-migrate-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" type="text/javascript"></script>
+<script id="rmp_menu_scripts-js-extra" type="text/javascript">
+/* <![CDATA[ */
+var rmp_menu = {"ajaxURL":"https:\/\/www.rfc-editor.org\/wp-admin\/admin-ajax.php","wp_nonce":"2262d2d074","menu":[{"menu_theme":null,"theme_type":"default","theme_location_menu":"","submenu_submenu_arrow_width":"40","submenu_submenu_arrow_width_unit":"px","submenu_submenu_arrow_height":"40","submenu_submenu_arrow_height_unit":"px","submenu_arrow_position":"right","submenu_sub_arrow_background_colour":"#212121","submenu_sub_arrow_background_hover_colour":"#3f3f3f","submenu_sub_arrow_background_colour_active":"#212121","submenu_sub_arrow_background_hover_colour_active":"#3f3f3f","submenu_sub_arrow_border_width":"1","submenu_sub_arrow_border_width_unit":"px","submenu_sub_arrow_border_colour":"#212121","submenu_sub_arrow_border_hover_colour":"#3f3f3f","submenu_sub_arrow_border_colour_active":"#212121","submenu_sub_arrow_border_hover_colour_active":"#3f3f3f","submenu_sub_arrow_shape_colour":"#ffffff","submenu_sub_arrow_shape_hover_colour":"#ffffff","submenu_sub_arrow_shape_colour_active":"#ffffff","submenu_sub_arrow_shape_hover_colour_active":"#ffffff","use_header_bar":"off","header_bar_items_order":"{\"logo\":\"on\",\"title\":\"on\",\"search\":\"on\",\"html content\":\"on\"}","header_bar_title":"","header_bar_html_content":"","header_bar_logo":"","header_bar_logo_link":"","header_bar_logo_width":null,"header_bar_logo_width_unit":"%","header_bar_logo_height":null,"header_bar_logo_height_unit":"%","header_bar_height":"80","header_bar_height_unit":"px","header_bar_padding":{"top":"0px","right":"5%","bottom":"0px","left":"5%"},"header_bar_font":"","header_bar_font_size":"14","header_bar_font_size_unit":"px","header_bar_text_color":"#ffffff","header_bar_background_color":"#ffffff","header_bar_breakpoint":"800","header_bar_position_type":"fixed","header_bar_adjust_page":null,"header_bar_scroll_enable":"off","header_bar_scroll_background_color":"#36bdf6","mobile_breakpoint":"600","tablet_breakpoint":"1024","transition_speed":"0.5","sub_menu_speed":"0.2","show_menu_on_page_load":"","menu_disable_scrolling":"off","menu_overlay":"off","menu_overlay_colour":"rgba(0, 0, 0, 0.7)","desktop_menu_width":"","desktop_menu_width_unit":"px","desktop_menu_positioning":"fixed","desktop_menu_side":"","desktop_menu_to_hide":"","use_current_theme_location":"off","mega_menu":{"225":"off","227":"off","229":"off","228":"off","226":"off"},"desktop_submenu_open_animation":"none","desktop_submenu_open_animation_speed":"100ms","desktop_submenu_open_on_click":"off","desktop_menu_hide_and_show":"off","menu_name":"Default Menu","menu_to_use":"responsive-menu","different_menu_for_mobile":"off","menu_to_use_in_mobile":"main-menu","use_mobile_menu":"on","use_tablet_menu":"on","use_desktop_menu":null,"menu_display_on":"all-pages","menu_to_hide":"#l_sidebar,.hright,#r_sidebar","submenu_descriptions_on":"","custom_walker":"","menu_background_colour":"#212121","menu_depth":"5","smooth_scroll_on":"off","smooth_scroll_speed":"500","menu_font_icons":[],"menu_links_height":"40","menu_links_height_unit":"px","menu_links_line_height":"40","menu_links_line_height_unit":"px","menu_depth_0":"5","menu_depth_0_unit":"%","menu_font_size":"13","menu_font_size_unit":"px","menu_font":"","menu_font_weight":"normal","menu_text_alignment":"left","menu_text_letter_spacing":"","menu_word_wrap":"off","menu_link_colour":"#ffffff","menu_link_hover_colour":"#ffffff","menu_current_link_colour":"#ffffff","menu_current_link_hover_colour":"#ffffff","menu_item_background_colour":"#212121","menu_item_background_hover_colour":"#3f3f3f","menu_current_item_background_colour":"#212121","menu_current_item_background_hover_colour":"#3f3f3f","menu_border_width":"1","menu_border_width_unit":"px","menu_item_border_colour":"#212121","menu_item_border_colour_hover":"#212121","menu_current_item_border_colour":"#212121","menu_current_item_border_hover_colour":"#3f3f3f","submenu_links_height":"40","submenu_links_height_unit":"px","submenu_links_line_height":"40","submenu_links_line_height_unit":"px","menu_depth_side":"left","menu_depth_1":"10","menu_depth_1_unit":"%","menu_depth_2":"15","menu_depth_2_unit":"%","menu_depth_3":"20","menu_depth_3_unit":"%","menu_depth_4":"25","menu_depth_4_unit":"%","submenu_item_background_colour":"#212121","submenu_item_background_hover_colour":"#3f3f3f","submenu_current_item_background_colour":"#212121","submenu_current_item_background_hover_colour":"#3f3f3f","submenu_border_width":"1","submenu_border_width_unit":"px","submenu_item_border_colour":"#212121","submenu_item_border_colour_hover":"#212121","submenu_current_item_border_colour":"#212121","submenu_current_item_border_hover_colour":"#3f3f3f","submenu_font_size":"13","submenu_font_size_unit":"px","submenu_font":"","submenu_font_weight":"normal","submenu_text_letter_spacing":"","submenu_text_alignment":"left","submenu_link_colour":"#ffffff","submenu_link_hover_colour":"#ffffff","submenu_current_link_colour":"#ffffff","submenu_current_link_hover_colour":"#ffffff","inactive_arrow_shape":"\u25bc","active_arrow_shape":"\u25b2","inactive_arrow_font_icon":"","active_arrow_font_icon":"","inactive_arrow_image":"","active_arrow_image":"","submenu_arrow_width":"40","submenu_arrow_width_unit":"px","submenu_arrow_height":"40","submenu_arrow_height_unit":"px","arrow_position":"right","menu_sub_arrow_shape_colour":"#ffffff","menu_sub_arrow_shape_hover_colour":"#ffffff","menu_sub_arrow_shape_colour_active":"#ffffff","menu_sub_arrow_shape_hover_colour_active":"#ffffff","menu_sub_arrow_border_width":"1","menu_sub_arrow_border_width_unit":"px","menu_sub_arrow_border_colour":"#212121","menu_sub_arrow_border_hover_colour":"#3f3f3f","menu_sub_arrow_border_colour_active":"#212121","menu_sub_arrow_border_hover_colour_active":"#3f3f3f","menu_sub_arrow_background_colour":"#212121","menu_sub_arrow_background_hover_colour":"#3f3f3f","menu_sub_arrow_background_colour_active":"#212121","menu_sub_arrow_background_hover_colour_active":"#3f3f3f","fade_submenus":"off","fade_submenus_side":"left","fade_submenus_delay":"100","fade_submenus_speed":"500","use_slide_effect":"off","slide_effect_back_to_text":"Back","accordion_animation":"off","auto_expand_all_submenus":"off","auto_expand_current_submenus":"off","menu_item_click_to_trigger_submenu":"off","button_width":"55","button_width_unit":"px","button_height":"55","button_height_unit":"px","button_background_colour":"#000000","button_background_colour_hover":"#000000","button_background_colour_active":"#000000","toggle_button_border_radius":"5","button_transparent_background":"off","button_left_or_right":"right","button_position_type":"fixed","button_distance_from_side":"5","button_distance_from_side_unit":"%","button_top":"15","button_top_unit":"px","button_push_with_animation":"off","button_click_animation":"boring","button_line_margin":"5","button_line_margin_unit":"px","button_line_width":"25","button_line_width_unit":"px","button_line_height":"3","button_line_height_unit":"px","button_line_colour":"#ffffff","button_line_colour_hover":"#ffffff","button_line_colour_active":"#ffffff","button_font_icon":"","button_font_icon_when_clicked":"","button_image":"","button_image_when_clicked":"","button_title":"","button_title_open":"","button_title_position":"left","button_font":"","button_font_size":"14","button_font_size_unit":"px","button_title_line_height":"13","button_title_line_height_unit":"px","button_text_colour":"#ffffff","button_trigger_type_click":"on","button_trigger_type_hover":"off","button_click_trigger":"#responsive-menu-button","items_order":{"title":"on","menu":"on","search":"","additional content":"on"},"menu_title":"","menu_title_link":"","menu_title_link_location":"_self","menu_title_image":"","menu_title_font_icon":"","menu_title_section_padding":{"top":"10%","right":"5%","bottom":"0%","left":"5%"},"menu_title_background_colour":"#212121","menu_title_background_hover_colour":"#212121","menu_title_font_size":"13","menu_title_font_size_unit":"px","menu_title_alignment":"left","menu_title_font_weight":"400","menu_title_font_family":"","menu_title_colour":"#ffffff","menu_title_hover_colour":"#ffffff","menu_title_image_width":null,"menu_title_image_width_unit":"%","menu_title_image_height":null,"menu_title_image_height_unit":"px","menu_additional_content":"<a href=\"\/search\/rfc_search.php\">Advanced Search<\/a>\r\n<form id=\"search_query_separator_id\" name=\"search_query_separator_name\"  action=\"\/search\/rfc_search_detail.php\" method=\"POST\" onsubmit=\"return validateComboBox(this);\"> \r\n<input type=\"text\" id =\"combo_box_id\" name=\"combo_box\"  maxlength=\"20\" size =\"35\" placeholder=\"number, title, keyword, or author surname\"><\/form>\r\n","menu_additional_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_additional_content_font_size":"16","menu_additional_content_font_size_unit":"px","menu_additional_content_alignment":"center","menu_additional_content_colour":"#ffffff","menu_search_box_text":"Search","menu_search_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_search_box_height":"45","menu_search_box_height_unit":"px","menu_search_box_border_radius":"30","menu_search_box_text_colour":"#333333","menu_search_box_background_colour":"#ffffff","menu_search_box_placeholder_colour":"#c7c7cd","menu_search_box_border_colour":"#dadada","menu_section_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_width":"75","menu_width_unit":"%","menu_maximum_width":"","menu_maximum_width_unit":"px","menu_minimum_width":"","menu_minimum_width_unit":"px","menu_auto_height":"off","menu_container_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_container_background_colour":"#212121","menu_background_image":"","animation_type":"slide","menu_appear_from":"left","animation_speed":"0.5","page_wrapper":"","menu_close_on_body_click":"off","menu_close_on_scroll":"off","menu_close_on_link_click":"off","enable_touch_gestures":"","breakpoint":"1024","menu_depth_5":"30","menu_depth_5_unit":"%","keyboard_shortcut_close_menu":"27,37","keyboard_shortcut_open_menu":"32,39","button_image_alt":"","button_image_alt_when_clicked":"","button_font_icon_type":"font-awesome","button_font_icon_when_clicked_type":"font-awesome","button_trigger_type":"click","active_arrow_image_alt":"","inactive_arrow_image_alt":"","active_arrow_font_icon_type":"font-awesome","inactive_arrow_font_icon_type":"font-awesome","menu_adjust_for_wp_admin_bar":"off","menu_title_image_alt":"","menu_title_font_icon_type":"font-awesome","minify_scripts":"off","scripts_in_footer":"off","external_files":"off","remove_fontawesome":"","remove_bootstrap":"","shortcode":"off","mobile_only":"off","custom_css":"","single_menu_height":"80","single_menu_height_unit":"px","single_menu_font":"","single_menu_font_size":"14","single_menu_font_size_unit":"px","single_menu_submenu_height":"40","single_menu_submenu_height_unit":"px","single_menu_submenu_font":"","single_menu_submenu_font_size":"12","single_menu_submenu_font_size_unit":"px","single_menu_item_link_colour":"#000000","single_menu_item_link_colour_hover":"#000000","single_menu_item_background_colour":"#ffffff","single_menu_item_background_colour_hover":"#ffffff","single_menu_item_submenu_link_colour":"#000000","single_menu_item_submenu_link_colour_hover":"#000000","single_menu_item_submenu_background_colour":"#ffffff","single_menu_item_submenu_background_colour_hover":"#ffffff","header_bar_logo_alt":"","desktop_menu_options":"{}","admin_theme":"light","single_menu_line_height":"80","single_menu_line_height_unit":"px","single_menu_submenu_line_height":"40","single_menu_submenu_line_height_unit":"px","hide_on_mobile":"off","hide_on_desktop":"off","menu_title_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_id":2538,"active_toggle_contents":"\u25b2","inactive_toggle_contents":"\u25bc"}]};
+/* ]]> */
+</script>
+<script id="rmp_menu_scripts-js" src="https://www.rfc-editor.org/wp-content/plugins/responsive-menu/v4.0.0/assets/js/rmp-menu.js?ver=4.1.11" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-json/" rel="https://api.w.org/"/><link href="https://www.rfc-editor.org/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+<link href="https://www.rfc-editor.org/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+<meta content="WordPress 6.0.3" name="generator"/>
+<script type="text/javascript">
+        jQuery(document).ready(function($){
+	/* toggle nav */
+	$("#menu-icon").on("click", function(){
+		$(".top-menu").slideToggle();
+		$(this).toggleClass("active");
+	});
+
+        });
+        </script><script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/matomo-tracking.js" type="text/javascript"></script>
+<style type="text/css">/*Variable Styles*/
+#page{ 
+background:#FFFFFF url() repeat top center scroll;
+}
+body{
+font:normal 14px/1.3em Noto Sans, Sans-Serif;
+background:#FFFFFF url() repeat top center scroll;
+}
+.techozoic_font_size{
+font-size: 14px;
+}
+.narrowcolumn .entry,.widecolumn .entry, .top {
+font:normal 14px/1.5em Noto Sans, Sans-Serif;
+color: #2C4353;
+}
+.noclass,.home .narrowcolumn .entry, home .widecolumn .entry, .top,.post .singlepost,.archive .narrowcolumn .entry, .archive .widecolumn .entry, .top{
+background-color:#E3E3E3;
+border-top:1px #A0B3C2 solid;
+}
+.top{
+border:none;
+}
+.blog_title, .blog_title a, .blog_title a:hover, .blog_title a:visited{
+font:normal 40px/1.3em Courier, Sans-Serif;
+color:  	#000000;
+}
+h1.post_title{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.post_title a{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.entry h1{
+font:bold 3em/2.2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h2{
+font:bold 2em/2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h3{
+font:bold 1.4em/1.6em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h4{
+font:bold 1.3em/1.4em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h5{
+font:bold 1.2em/1.3em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.sidebar h2, .sidebar h3, #footer h2{
+font: bold 18px/1.3em Noto Sans, Sans-Serif;
+color:#2C4353;
+}
+.widgettitle {
+font-size: 18px;
+margin: 1px 0;
+}
+#content {
+font-size: 14px;
+}
+acronym,abbr,span.caps,small,.trackback li,.sidebar, .postmetadata {
+font-size: 12px;
+}
+.postmetadata{
+font: normal 12px/1.3em Noto Sans, Sans-Serif;
+color: #777777;
+}
+ul#nav a, ul#admin a, #dropdown li.current_page_item a:hover, .top-menu li.current-menu-item a:hover, #dropdown li.current_page_item ul a, .top-menu li.current-menu-item ul a, ul#nav li.current_page_item a:hover, {
+color: #A0B3C2;
+}
+.commenlist .author,#searchform #s, #searchsubmit:hover,#catsubmit:hover,#wp-submit:hover,#TB_ajaxContent {
+background-color: #A0B3C2 ;
+}
+ul#admin li, ul#dropdown li, #navmenu .top-menu li{
+/*background-color: #E3E3E3;*/
+}
+ul#admin li a, ul#dropdown li a, #navmenu .top-menu li a{
+font-style: bold; 
+font-size:14px;
+font-family: Noto Sans, Sans-Serif;
+color:#A0B3C2;
+}
+ul#admin li a:hover, ul#dropdown li a:hover, #navmenu .top-menu li a:hover{
+color: #A0B3C2;
+}
+#dropdown > li, ul.top-menu > li{
+margin: 0 3px;
+}
+.ribbon ul.top-menu > li, .square ul.top-menu > li, #dropdown > li{
+margin: 0;
+padding: 0 3px;
+}
+.ribbon ul.top-menu > li.has_children:hover:after, .square ul.top-menu > li.has_children:hover:after, #dropdown > li.has_children:hover:after {
+border-bottom: 5px solid #E3E3E3;
+}
+#dropdown ul, .top-menu ul{
+background-color: #E3E3E3;
+}
+.ribbon, .square, #dropdown{
+background-color: #E3E3E3;
+background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E3E3E3), to(#CCCCCC));
+background-image: -webkit-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:    -moz-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:     -ms-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:      -o-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:         linear-gradient(top, #E3E3E3, #CCCCCC);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E3E3E3', endColorstr='#CCCCCC');
+}
+.ribbon ul.top-menu:before{
+border-right: 10px solid #CCCCCC;
+}
+.ribbon ul.top-menu:after{
+border-left: 10px solid #CCCCCC;
+}.ribbon ul.top-menu > li:last-child, .square ul.top-menu > li:last-child, #dropdown > li:last-child{
+margin-right: 100px;
+}#navmenu .top-menu li, #navmenu .top-menu ul.sub-menu, ul#admin li, #navmenu #dropdown li{
+background-color: #E3E3E3;
+}       
+#navmenu #dropdown li.current_page_item, #navmenu .top-menu li.current-menu-item, #navmenu .top-menu ul.sub-menu li.current-menu-item {
+background-color: #A0B3C2 ;
+}
+#navmenu #dropdown li:hover, #navmenu .top-menu li:hover, #navmenu .top-menu ul.sub-menu > li:hover {
+background-color:#EFEFEF;
+}
+#navmenu #dropdown li.current_page_item > a:hover, #navmenu .top-menu li.current-menu-item > a:hover, #navmenu .top-menu li.current-menu-item:hover > a, #navmenu .top-menu li:hover > a, #navmenu #dropdown li:hover > a {
+color:#A0B3C2;
+}
+#navmenu #dropdown li.current_page_item > a, #navmenu .top-menu li.current-menu-item > a{
+color:#F7F7F7;
+}
+ul#admin li:hover{
+background:#EFEFEF;
+box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-moz-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-webkit-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+}#dropdown li ul li, .top-menu li ul li, #dropdown li ul , .top-menu li ul{
+width: 250px !important;
+}
+#dropdown li ul ul, .top-menu li ul ul{
+left:250px ; 
+}
+.tags {
+border-bottom:1px #A0B3C2 solid;
+border-top:1px #A0B3C2 solid;
+}
+a,h2 a:hover,h3 a:hover,#user_login,#user_pass, #sidenav a:visited {
+color:#597EAA; 
+text-decoration:none;
+}
+#searchform #s {
+color:#E3E3E3; 
+text-decoration:none;
+}
+a:hover {
+color:#114477; 
+text-decoration:underline;
+}
+a:visited{
+color:#476588;
+}
+.description {
+color:#A0B3C2;
+}
+#headerimg {
+;
+float:left;margin-left:10px;
+}
+#header-logo{
+float:left;margin-left:10px;
+padding-top:0px;
+padding-left:0px;
+}
+.single .blog_title a:hover {
+cursor:default;
+text-decoration:none;
+}
+.noclass{
+-moz-box-shadow:none !important;
+box-shadow:none !important;
+-webkit-box-shadow: none !important;
+opacity:1 !important;
+border: none !important;
+}#headerimgwrap{
+top:20%;
+}  #page {
+width: 90%;
+}
+.narrowcolumn {
+float:left;
+margin:0;
+padding:25px 3% 20px 2%;
+width:75%;
+}
+#l_sidebar {
+float:left;
+padding:25px 1% 0 2%;
+width:17%
+}#dropdown, .top-menu{
+text-align:left;
+}#header {
+background-repeat: no-repeat;  
+background-position: center center;
+height: 110px;
+}
+.hleft, .hright {
+height: 70px;
+}table.statictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.statictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #CACACA;
+}
+table.statictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+
+
+table.statictable tr{
+        background-color: #F6F6F6;
+}
+
+table.statictable td.special {
+          font-weight: bold;
+          color:grey
+}
+table.statictable td.title {
+         font-weight: bold;
+         letter-spacing: inherit
+}
+
+table.statictable .boldtext {
+       font-weight: bold;
+       color: #597eaa;
+}
+
+table.dynamictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.dynamictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #FEFEFEFE;
+}
+table.dynamictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+table.dynamictable tr.even{
+        background-color: #ffffff;
+}
+table.dynamictable tr.odd{
+        background-color: #F6F6F6;
+}
+table.erratasearch {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-color: #666666;
+        border-collapse: collapse;
+        text-align:center;
+}
+table.erratasearch th {
+        border-width: 1px;
+        padding: 8px;
+        
+        text-decoration: underline;
+        border-color: #666666;
+        //background-color: #ffffff;
+        background-color: silver;
+}
+
+table.erratasearch td {
+        border-width: 1px;
+        padding: 8px;
+        border-color: #666666;
+        background-color: #ffffff;
+        text-align:left;
+}
+table.erratasearch td.sbar { 
+          background-color: silver;
+          text-align: center;
+        }
+
+
+.nosidebar{
+    float:left;
+    margin:0 10%;
+    padding:0 0 10px;
+    width:70%;
+}
+
+input[type="button"], .button, div#infinite-handle span {
+    display: inline-block;
+    zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+    *display: inline;
+    vertical-align: baseline;
+    margin: 0 2px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    padding: .3em 1em .35em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .25em; 
+    -moz-border-radius: .25em;
+    border-radius: .25em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    color: #505050;
+    border: solid 1px #b7b7b7;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+    background: -moz-linear-gradient(top,  #fff,  #ededed);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+}
+input[type="button"]:hover, .button:hover, div#infinite-handle span:hover {
+    text-decoration: none;
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+    background: -moz-linear-gradient(top,  #fff,  #dcdcdc);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+}
+input[type="button"]:active, .button:active, div#infinite-handle span: active {
+    position: relative;
+    top: 1px;
+    color: #999;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+    background: -moz-linear-gradient(top,  #ededed,  #fff);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
+}
+
+.search_label_bold { text-align: left;
+                     border-style: none;
+                     font-weight: bold;
+                   }
+
+.error { font-weight: bold; color: red; }
+
+textarea {
+   font-family: inherit;
+   font-size: inherit;
+}
+/*DIV to hold scroll tables*/
+.scrolltable{
+   width:95%
+
+}
+
+/*--------------------------------------------------------------------------------
+----------------------------RFCMETA PAGE  Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+ body.rfcmeta {
+font-family: 'Noto Sans', sans-serif;
+color: #2C4353;
+width: 100%;}
+
+ body.rfcmeta #page {
+width: 100%;
+box-shadow:none;
+margin-top: 0px;}
+
+ body.rfcmeta .hright { height:120px;}
+
+ body.rfcmeta #header {width: 100%;
+ background-color: #fff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 0px;;}
+
+ body.rfcmeta .singlepost.entry {padding-top: 0px!important;}
+ body.rfcmeta .singlepost.entry dl,  body.rfcmeta .singlepost.entry p, body.rfcmeta .singlepost.entry h2, body.rfcmeta .singlepost.entry h3 { margin-left:40px;
+ margin-right: 20px; }
+
+ body.rfcmeta .singlepost.entry dt{
+         font-weight: bold!important;
+         margin-top: 15px;}
+
+          body.rfcmeta .singlepost.entry dd{
+         margin-left: 15px;}
+
+ body.rfcmeta a{
+color: #597eaa;}
+  body.rfcmeta .entryheader {background-color:#2C4353 !important;
+  border-bottom: 10px solid #FFF !important;
+  margin-top: 0px;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;}
+
+   body.rfcmeta .entryheader h2 a, body.rfcmeta .entryheader h2 {color: #fff  !important;
+   font-size: 50px;
+   padding: 0px !important;
+   line-height: 1.2;
+   font:bold !important;}
+
+   body.rfcmeta .entryheader h2 a:hover {color: #aob3c2 !important;}
+
+   body.rfcmeta .entryheader h3 {color: #fff  !important;
+   font-size: 18px;
+   padding: 0px;
+   line-height: 1.2;
+   padding-top: 10px;
+   }
+
+      body.rfcmeta .entryheader h3 span {font-weight: normal;
+          font-size: 14px;
+          text-transform: uppercase;}
+    h2 {font-weight: bold;}
+
+ body.rfcmeta   #search_query_separator_id  {padding-bottom: 5px;
+ padding-top: 5px;}
+
+ body.rfcmeta .page {margin-top: 0px!important;
+ padding-top: 0px!important;}
+
+    /*--------------------------------------------------------------------------------
+----------------------------end RFCMETA PAGE Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+
+.cluster_heading {
+ font-size: 14px;
+}
+</style> <style type="text/css">
+        #header {
+            background-image: url();
+        }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
-    function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
-                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
-                }
-	    }
-	}
-    }
-    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
-    function showElem(id) {
-        var elem = document.getElementById(id);
-        elem.innerHTML = eval(id+"_html");
-        elem.style.visibility='visible';
-    }
-    function hideElem(id) {
-        var elem = document.getElementById(id);
-        elem.style.visibility='hidden';        
-        elem.innerHTML = "";
-    }
-    // -->
-    </script>
+<script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/iterate-survey.js" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="32x32"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="192x192"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="apple-touch-icon"/>
+<meta content="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" name="msapplication-TileImage"/>
 </head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo " onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
+<body class="rfcmeta">
+<a id="top"></a>
+<div id="page">
+<div id="header">
+<div class="hright">
+<div class="hwidget widget_text"><h2 class="widgettitle">Search RFCs</h2> <div class="textwidget"><form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="40" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+<a href="/search/rfc_search.php">Advanced Search</a>
+</div>
+</div></div>
+<div id="headerimgwrap">
+<div id="headerimg">
+<h1 class="blog_title"> <a href="https://www.rfc-editor.org/">RFC Editor</a>
+</h1> </div><!--end headerimg-->
+</div><!--end headerimgwrap-->
+</div><!--end header-->
+<div class="nosidebar" id="content">
+<h1 class="post_title"></h1>
+<div class="post-127 page type-page status-publish hentry post clear" id="post-127">
+<div class="singlepost entry">
+<div class="entryheader"><h2><a href="https://www.rfc-editor.org/bcp/bcp180.txt">BCP 180</a></h2><h2><a href="https://www.rfc-editor.org/rfc/rfc6853.txt">RFC 6853</a></h2>
+<h3>DHCPv6 Redundancy Deployment Considerations, <span>February 2013</span></h3>
+</div><dl>
+<dt><b>File formats:</b></dt><dd><a href="https://www.rfc-editor.org/rfc/rfc6853.txt"><img alt="icon for text file" src="/rfcscripts/images/RFC_ICONS_Text_40x50.png" title="text"/></a> <a href="https://www.rfc-editor.org/rfc/pdfrfc/rfc6853.txt.pdf"><img alt="icon for PDF" src="/rfcscripts/images/RFC_ICONS_PDF_2019_50x40.png" title="PDF"/></a> <a href="https://www.rfc-editor.org/rfc/rfc6853.html"><img alt="icon for HTML" src="/rfcscripts/images/RFC_ICONS_HTML_40x50.png" title="HTML"/></a></dd>
+<dt><b>Status:</b></dt><dd>BEST CURRENT PRACTICE</dd>
+<dt><b>Authors:</b></dt><dd>J. Brzozowski<br/>J. Tremblay<br/>J. Chen<br/>T. Mrugalski</dd>
+<dt><b>Stream:</b></dt><dd><a href="https://www.ietf.org">IETF</a></dd>
+<dt><b>Source:</b></dt><dd><a href="./datatracker.ietf.org/wg/dhc/about/.html">dhc</a> 
+                                      (<a href="./datatracker.ietf.org/wg/.html#int">int</a>)</dd>
+</dl>
+<p>
+<b>Cite this BCP</b>: 
+<a href="/refs/ref-bcp180.txt">TXT</a></p>
+<p><b>Discuss this RFC</b>: Send questions or comments to the mailing list <a href="mailto:iesg@ietf.org?subject=Question regarding RFC  ">iesg@ietf.org</a></p><p>
+<b>Other actions</b>: 
+<a href="/errata.php#reportnew">Submit Errata</a>  | 
+<a href="https://datatracker.ietf.org/ipr/search/?draft=&amp;rfc=rfc6853&amp;submit=rfc">
+Find IPR Disclosures from the IETF</a>  | 
+<a href="https://datatracker.ietf.org/doc/rfc/">
+View History of RFC </a>
+</p>
+<hr/>
+<h2>Abstract</h2>
+<p>This document provides information for those wishing to use DHCPv6 to
+support their deployment of IPv6.  In particular, it discusses the
+provision of semi-redundant DHCPv6 services.</p> <hr/>
+<p>
+For the definition of <b>Status</b>,
+see <a href="/info/rfc2026">RFC 2026</a>.
+</p><p>
+For the definition of <b>Stream</b>, see <a href="/info/rfc8729">RFC 8729</a>.
+</p>
+<hr/> </div>
 </div>
 </div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/bcp/bcp180.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/bcp180" title="PDF version of this document">pdf</a>]                                                        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                     J. Brzozowski
-Request for Comments: 6853                  Comcast Cable Communications
-BCP: 180                                                     J. Tremblay
-Category: Best Current Practice                           Videotron G.P.
-ISSN: 2070-1721                                                  J. Chen
-                                                       Time Warner Cable
-                                                            T. Mrugalski
-                                                                     ISC
-                                                           February 2013
-
-
-              <span class="h1">DHCPv6 Redundancy Deployment Considerations</span>
-
-Abstract
-
-   This document provides information for those wishing to use DHCPv6 to
-   support their deployment of IPv6.  In particular, it discusses the
-   provision of semi-redundant DHCPv6 services.
-
-Status of This Memo
-
-   This memo documents an Internet Best Current Practice.
-
-   This document is a product of the Internet Engineering Task Force
-   (IETF).  It represents the consensus of the IETF community.  It has
-   received public review and has been approved for publication by the
-   Internet Engineering Steering Group (IESG).  Further information on
-   BCPs is available in <a href="./rfc5741.html#section-2">Section 2 of RFC 5741</a>.
-
-   Information about the current status of this document, any errata,
-   and how to provide feedback on it may be obtained at
-   <a href="http://www.rfc-editor.org/info/rfc6853">http://www.rfc-editor.org/info/rfc6853</a>.
-
-Copyright Notice
-
-   Copyright (c) 2013 IETF Trust and the persons identified as the
-   document authors.  All rights reserved.
-
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
-   Provisions Relating to IETF Documents
-   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
-   publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
-   to this document.  Code Components extracted from this document must
-   include Simplified BSD License text as described in Section 4.e of
-   the Trust Legal Provisions and are provided without warranty as
-   described in the Simplified BSD License.
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                 [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-Table of Contents
-
-   <a href="#section-1">1</a>.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-2">2</a>
-   <a href="#section-2">2</a>.  Scope and Assumptions  . . . . . . . . . . . . . . . . . . . .  <a href="#page-2">2</a>
-     <a href="#section-2.1">2.1</a>.  Applicability to Prefix Delegation . . . . . . . . . . . .  <a href="#page-3">3</a>
-   <a href="#section-3">3</a>.  Service Provider Deployment  . . . . . . . . . . . . . . . . .  <a href="#page-3">3</a>
-   <a href="#section-4">4</a>.  Enterprise Deployment  . . . . . . . . . . . . . . . . . . . .  <a href="#page-4">4</a>
-   <a href="#section-5">5</a>.  Protocol Requirements  . . . . . . . . . . . . . . . . . . . .  <a href="#page-5">5</a>
-     <a href="#section-5.1">5.1</a>.  DHCPv6 Servers . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-5">5</a>
-     <a href="#section-5.2">5.2</a>.  DHCPv6 Relays  . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-5">5</a>
-     <a href="#section-5.3">5.3</a>.  DHCPv6 Clients . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-5">5</a>
-   <a href="#section-6">6</a>.  Deployment Models  . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-6">6</a>
-     <a href="#section-6.1">6.1</a>.  Split Prefixes . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-6">6</a>
-     <a href="#section-6.2">6.2</a>.  Multiple Unique Prefixes . . . . . . . . . . . . . . . . .  <a href="#page-8">8</a>
-     <a href="#section-6.3">6.3</a>.  Identical Prefixes . . . . . . . . . . . . . . . . . . . . <a href="#page-10">10</a>
-   <a href="#section-7">7</a>.  Challenges and Issues  . . . . . . . . . . . . . . . . . . . . <a href="#page-12">12</a>
-   <a href="#section-8">8</a>.  Security Considerations  . . . . . . . . . . . . . . . . . . . <a href="#page-14">14</a>
-   <a href="#section-9">9</a>.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . <a href="#page-14">14</a>
-   <a href="#section-10">10</a>. References . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="#page-15">15</a>
-     <a href="#section-10.1">10.1</a>. Normative References . . . . . . . . . . . . . . . . . . . <a href="#page-15">15</a>
-     <a href="#section-10.2">10.2</a>. Informative References . . . . . . . . . . . . . . . . . . <a href="#page-15">15</a>
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
-
-   Redundancy and high availability for many components of IPv6
-   infrastructure are desirable and, in some deployments, mandatory.
-   Unfortunately, for DHCPv6 there is currently no standards-based
-   failover or redundancy protocol.  An interim solution is to provide
-   semi-redundant services: this document specifies an architecture by
-   which this can be achieved.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Scope%20and%20Assumptions"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Scope and Assumptions</span>
-
-   DHCPv6 redundancy may be useful in a wide range of scenarios.
-   Although the architecture suggested in this document is able to be
-   used in a wide range of networks, just two deployment environments
-   are discussed here: service provider and enterprise network.  All
-   other scenarios may be generalized to one of these two cases.
-
-   In the rest of the document, the following assumptions are made with
-   regards to the existing DHCPv6 infrastructure, regardless of the
-   environment being considered:
-
-   1.  At least two DHCPv6 servers provide a service to the same
-       clients.  (The architecture does not limit the number of servers,
-       and more may be provided if required.)
-
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                 [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-   2.  The existing DHCPv6 servers will not directly communicate or
-       interact with one another in the assignment of IPv6 addresses and
-       the provision of configuration information to requesting clients.
-
-   3.  DHCPv6 clients are instructed to run stateful DHCPv6 to request
-       at least one IPv6 address.  Configuration information and other
-       options (such as a delegated IPv6 prefix) may also be requested
-       as part of the stateful DHCPv6 operation.
-
-   4.  Clients participating in DHCPv6 configuration have to properly
-       handle the preference option, including the processing of
-       ADVERTISE messages as required by [<a href="./rfc3315.html" title='"Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>RFC3315</a>].
-
-   5.  A DHCPv6 server failure does not imply a failure of any other
-       network service or protocol (e.g., TFTP servers).  The redundancy
-       of any additional services configured by means of DHCPv6 are
-       outside the scope of this document.  (For example, a single
-       DHCPv6 server may configure multiple TFTP servers, with
-       preference for each TFTP server, as specified in [<a href="./rfc5970.html" title='"DHCPv6 Options for Network Boot"'>RFC5970</a>].)
-
-   While the techniques described in this document provide some aspects
-   of redundancy, it should be noted that complete redundancy will not
-   be available until a DHCPv6 failover protocol is standardized.  The
-   requirements for such a protocol are described in [<a href="#ref-FAILREQ" title='"DHCPv6 Failover Requirements"'>FAILREQ</a>].
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Applicability%20to%20Prefix%20Delegation"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Applicability to Prefix Delegation</span>
-
-   The same approaches discussed in this document can potentially be
-   applied to prefix delegation (PD) [<a href="./rfc3633.html" title='"IPv6 Prefix Options for Dynamic Host Configuration Protocol (DHCP) version 6"'>RFC3633</a>].  One obvious drawback of
-   using a split prefix model for PD is that use of resources is
-   doubled.  It should be noted that such applicability remains
-   theoretical and was not investigated thoroughly during work on this
-   document.  As such, the applicability of presented mechanisms to the
-   prefix delegation is outside of the scope of this document.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Service%20Provider%20Deployment"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Service Provider Deployment</span>
-
-   The service provider model represents cases where the network and
-   end-user devices may be administered by separate entities.
-
-   The DHCPv6 clients include cable modems, customer gateways or home
-   routers, and end-user devices: these are collectively referred to as
-   Customer Premises Equipment (CPE).  In some cases hosts may be
-   configured directly using the service provider DHCPv6 infrastructure;
-   in others, configuration may be via an intermediate router that is
-   being configured by the provider DHCPv6 infrastructure.  Either way,
-   the service provider DHCPv6 infrastructure may be semi-redundant.
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                 [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-   In discussing this environment, additional assumptions to those
-   listed in <a href="#section-2">Section 2</a> have been made:
-
-   1.  The service provider edge routers and access routers are IPv6
-       enabled when required.  These routers are, for example, CMTS
-       (Cable Modem Termination System) for cable or DSLAM/BRAS (Digital
-       Subscriber Link Access Multiplexer / Broadband Remote Access
-       Server) for DSL.
-
-   2.  CPE devices are instructed to perform stateful DHCPv6 to request
-       at least one IPv6 address, delegated prefix, and/or configuration
-       information.  CPE devices may also be instructed to use stateless
-       DHCPv6 [<a href="./rfc3736.html" title='"Stateless Dynamic Host Configuration Protocol (DHCP) Service for IPv6"'>RFC3736</a>] to acquire configuration information only, a
-       situation that assumes the IPv6 address and prefix information
-       has been acquired using other means.
-
-   3.  The primary application of this architecture is for native IPv6
-       services.  (Use and applicability to transition mechanisms are
-       out of scope for this document.)
-
-   4.  The CPE devices must implement a stateful DHCPv6 client
-       [<a href="./rfc3315.html" title='"Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>RFC3315</a>].  Support for DHCPv6 prefix delegation [<a href="./rfc3633.html" title='"IPv6 Prefix Options for Dynamic Host Configuration Protocol (DHCP) version 6"'>RFC3633</a>] or
-       stateless DHCPv6 [<a href="./rfc3736.html" title='"Stateless Dynamic Host Configuration Protocol (DHCP) Service for IPv6"'>RFC3736</a>] may also be implemented.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Enterprise%20Deployment"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Enterprise Deployment</span>
-
-   The enterprise deployment environment covers cases where end-user
-   devices are direct consumers of the configuration provided by the
-   DHCP servers without any intermediate devices (as was the case with
-   home routers used in the service provider environment).  Although
-   enterprise IPv6 environments quite often use or require DHCPv6 relay
-   agents, the relays do not influence or process the configuration in
-   any way and merely act as a transport mechanism.
-
-   The additional assumptions made for this model beyond those listed in
-   <a href="#section-2">Section 2</a> are:
-
-   1.  DHCPv6 clients are hosts and are considered end nodes, i.e., they
-       consume provided configuration and do not use it to provision
-       other devices.  Examples of such clients include desktop
-       computers, laptops, printers, other typical office equipment, and
-       some mobile devices.
-
-   2.  The DHCPv6 clients generally do not require the assignment of an
-       IPv6 prefix delegation, and as such they typically do not support
-       DHCPv6 prefix delegation [<a href="./rfc3633.html" title='"IPv6 Prefix Options for Dynamic Host Configuration Protocol (DHCP) version 6"'>RFC3633</a>].
-
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                 [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Protocol%20Requirements"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Protocol Requirements</span>
-
-   Implementation of the architecture for semi-redundant DHCPv6 services
-   using existing protocols requires the component DHCPv6 clients,
-   relays, and servers to have certain capabilities.  The following
-   sections describe the requirements of such devices.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20DHCPv6%20Servers"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  DHCPv6 Servers</span>
-
-   This interim architecture requires the DHCPv6 servers that are
-   [<a href="./rfc3315.html" title='"Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>RFC3315</a>] compliant and support the necessary options.  Support for
-   stateful DHCPv6 and the DHCPv6 preference option [<a href="./rfc3315.html" title='"Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>RFC3315</a>] is
-   essential to the architecture.  For deployment scenarios where IPv6
-   prefix delegation is needed, DHCPv6 servers must support DHCPv6
-   prefix delegation as defined by [<a href="./rfc3633.html" title='"IPv6 Prefix Options for Dynamic Host Configuration Protocol (DHCP) version 6"'>RFC3633</a>].  Furthermore, the DHCPv6
-   servers must support [<a href="./rfc3736.html" title='"Stateless Dynamic Host Configuration Protocol (DHCP) Service for IPv6"'>RFC3736</a>] if stateless DHCPv6 is used.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20DHCPv6%20Relays"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  DHCPv6 Relays</span>
-
-   DHCPv6 relay agents must be [<a href="./rfc3315.html" title='"Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>RFC3315</a>] compliant and must support the
-   ability to relay DHCPv6 messages to more than one destination.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20DHCPv6%20Clients"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  DHCPv6 Clients</span>
-
-   DHCPv6 clients are required to be compliant with [<a href="./rfc3315.html" title='"Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>RFC3315</a>] and
-   support the necessary options required to support the solution
-   depending on the mode of operations and desired behavior:
-
-   o  If prefix delegation is required, DHCPv6 clients must support
-      DHCPv6 prefix delegation as defined in [<a href="./rfc3633.html" title='"IPv6 Prefix Options for Dynamic Host Configuration Protocol (DHCP) version 6"'>RFC3633</a>].
-
-   o  Clients must support the acquisition of at least one IPv6 address
-      and configuration information using stateful DHCPv6 as specified
-      by [<a href="./rfc3315.html" title='"Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>RFC3315</a>].
-
-   o  Stateless DHCPv6 [<a href="./rfc3736.html" title='"Stateless Dynamic Host Configuration Protocol (DHCP) Service for IPv6"'>RFC3736</a>] may also be supported.
-
-   o  DHCPv6 clients must recognize and adhere to the processing of the
-      advertised DHCPv6 preference option sent by the DHCPv6 servers.
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                 [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Deployment%20Models"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Deployment Models</span>
-
-   At the time of writing, a standards-based DHCPv6 redundancy protocol
-   is not available.  In the interim solution presented here, existing
-   DHCPv6 server implementations are used as-is to provide best effort,
-   semi-redundant DHCPv6 services.  The behavior of these services will,
-   in part, be governed by the configuration of each of the servers.
-   Various aspects of the DHCPv6 protocol [<a href="./rfc3315.html" title='"Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>RFC3315</a>] are used to yield
-   the desired behavior, although there is no inter-server or inter-
-   process communication to coordinate DHCPv6 events and/or activities.
-
-   The solution does not impact DHCPv4, so DHCP services for both IPv4
-   and IPv6 may operate simultaneously on the same physical server(s) or
-   may operate on different ones.
-
-   This section defines three semi-redundant models.  Although /64
-   prefixes are used throughout the following sections as examples,
-   other prefix lengths may be used as well.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Split%20Prefixes"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Split Prefixes</span>
-
-   In the split prefixes model, each DHCPv6 server is configured with a
-   unique, non-overlapping pool derived from the /64 prefix deployed for
-   use within an IPv6 network.  For example, distributing an allocated
-   /64 such as 2001:db8:1:1::/64 between two servers would require that
-   it be split into two /65 pools, 2001:db8:1:1:0000::/65 and 2001:db8:
-   1:1:8000::/65.
-
-   Both DHCPv6 servers are simultaneously active and operational, and
-   each allocates IPv6 addresses from the corresponding pools per device
-   class.  The address allocation is governed largely through the use of
-   the DHCPv6 preference option, so the server with the higher
-   preference value is always preferred.  Additional proprietary
-   mechanisms can be used to further enforce the favoring of one DHCP
-   server over another.  An example of such a scenario is presented in
-   Figure 1.
-
-   It is important to note that, over time, it is possible that bindings
-   will be unevenly distributed amongst the DHCPv6 servers, and no one
-   server will be authoritative for all of them.
-
-   As defined in [<a href="./rfc3315.html" title='"Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>RFC3315</a>], a DHCPv6 ADVERTISE message with a preference
-   option of 255 is an indicator to a DHCPv6 client to immediately begin
-   a client-initiated message exchange by transmitting a REQUEST message
-   to the server that sent the ADVERTISE.  Alternatively, a DHCPv6
-   ADVERTISE message with no preference option (or one with a value less
-
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                 [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-   than 255) is an indicator to the client that it must wait for
-   subsequent ADVERTISE messages before choosing the server to which is
-   responds, as described in <a href="./rfc3315.html#section-17.1.2">Section 17.1.2 of [RFC3315]</a>.
-
-   In the event of a DHCPv6 server failure, it is desirable (but not
-   essential) for a server other than the server that originally
-   responded to be able to rebind the client's lease.  Given the
-   proposed architecture, the remaining active DHCPv6 server will have a
-   different address pool configured, making it technically incorrect to
-   rebind the client in its current state.  Ultimately, the rebinding
-   will fail and the client will acquire a new binding from the pool
-   configured in the active server.
-
-   To reduce the possibility that a client or some other element on the
-   network will experience a disruption in service or access to relevant
-   binding data, shorter values for T1, T2, valid, and preferred
-   lifetimes can be used.  The values for the last three can be adjusted
-   or configured to minimize service disruption.  Ideally, setting them
-   equal (or nearly equal) can be used to trigger a DHCPv6 client to
-   reacquire the IPv6 address, prefix, and/or configuration information
-   almost immediately after the rebinding fails.  It is important to
-   note, however, that shorter values will create an additional load on
-   the DHCPv6 servers.
-
-   While using a split prefix configuration model, the dynamic updates
-   to DNS [<a href="./rfc2136.html" title='"Dynamic Updates in the Domain Name System (DNS UPDATE)"'>RFC2136</a>] can be coordinated to ensure that the DNS is
-   properly updated with the current binding information.  Challenges
-   arise with regards to the update of the PTR resource record for IPv6
-   addresses since the DNS information may need to be overwritten in a
-   failure condition.  The use of split prefixes enables the
-   differentiation of bindings and binding timing to determine which
-   represents the current state.  This becomes particularly important
-   when DHCPv6 Leasequery [<a href="./rfc5007.html" title='"DHCPv6 Leasequery"'>RFC5007</a>] and/or DHCPv6 Bulk Leasequery
-   [<a href="./rfc5460.html" title='"DHCPv6 Bulk Leasequery"'>RFC5460</a>] are used to determine lease or binding state.
-
-   Finally, a benefit of this scheme is that the use of separate pools
-   per DHCPv6 server makes failure conditions more obvious and
-   detectable.
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                 [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-                 +----------+                 +-----------+
-                 | Client 1 +-\            +--+ Server 1  |
-                 +----------+  \           |  +-----------+
-                                \          |
-                                 \         |
-                                  \        |
-                 +----------+      \       |  +-----------+
-                 | Client 2 +--------------+--| Server 2  |
-                 +----------+      /       |  +-----------+
-                       .          /        .
-                       .         /         .
-                       .        /          .
-                 +----------+  /           .  +-----------+
-                 | Client N +-/            .--| n+1 Server|
-                 +----------+                 +-----------+
-
-                 Server 1
-                 ========
-                 Prefix = 2001:db8:1:1::/64
-                 Pool = 2001:db8:1:1:0000::/65
-                 Preference = 255
-
-                 Server 2
-                 ========
-                 Prefix = 2001:db8:1:1::/64
-                 Pool = 2001:db8:1:1:8000::/65
-                 Preference = 0
-
-                 Server n+1
-                 ==========
-                 Prefix, pool, and preference would
-                 vary based on prefix definition
-
-                     Figure 1: Split prefixes approach
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Multiple%20Unique%20Prefixes"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Multiple Unique Prefixes</span>
-
-   In the multiple prefix model, each DHCPv6 server is configured with a
-   unique, non-overlapping prefix.  A /64 pool equal to the prefix is
-   configured on each server.  For example, the 2001:db8:1:1::/64 pool
-   would be assigned to a single DHCPv6 server for allocation to clients
-   equal to its parent prefix 2001:db8:1:1::/64.  The second DHCPv6
-   server could use 2001:db8:1:5::/64 as both pool and prefix.  This
-   would be repeated for each active DHCP server.  An example of this
-   scenario is presented in Figure 2.
-
-
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                 [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-   The major difference between the split prefixes approach and the
-   multiple unique prefixes approach is that the latter does not require
-   prefixes to be adjacent.  In fact, the split prefixes approach can be
-   considered a special case of the multiple unique prefixes approach.
-
-   This approach uses a unique prefix and ultimately a single pool per
-   DHCPv6 server with the corresponding prefixes configured for use in
-   the network.  The corresponding network infrastructure must in turn
-   be configured to use multiple prefixes on the interface(s) facing the
-   DHCPv6 clients.  The configuration is similar on all the servers, but
-   a different prefix and a different preference are used for each
-   DHCPv6 server.
-
-   This approach drastically increases the rate of consumption of IPv6
-   prefixes and also yields operational and management challenges
-   related to the underlying network since a significantly higher number
-   of prefixes need to be configured and routed.  It also does not
-   provide a clean migration path to the desired solution using a
-   standards-based DHCPv6 redundancy or failover protocol (which, of
-   course, has yet to be specified).
-
-   The use of multiple unique prefixes provides benefits related to
-   dynamic updates to DNS similar to those referred to in <a href="#section-6.1">Section 6.1</a>.
-   The use of multiple unique prefixes enables the differentiation of
-   bindings and binding timing to determine which represents the current
-   state.  This becomes particularly important when DHCPv6 Leasequery
-   [<a href="./rfc5007.html" title='"DHCPv6 Leasequery"'>RFC5007</a>] and/or DHCPv6 Bulk Leasequery [<a href="./rfc5460.html" title='"DHCPv6 Bulk Leasequery"'>RFC5460</a>] are used to
-   determine lease or binding state.  The use of separate prefixes and
-   pools per DHCPv6 server makes failure conditions more obvious and
-   detectable.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                 [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-                 +----------+                 +-----------+
-                 | Client 1 +-\            +--+ Server 1  |
-                 +----------+  \           |  +-----------+
-                                \          |
-                                 \         |
-                                  \        |
-                 +----------+      \       |  +-----------+
-                 | Client 2 +--------------+--| Server 2  |
-                 +----------+      /       |  +-----------+
-                       .          /        .
-                       .         /         .
-                       .        /          .
-                 +----------+  /           .  +-----------+
-                 | Client N +-/            .--| n+1 Server|
-                 +----------+                 +-----------+
-
-                 Server 1
-                 ========
-                 Prefix = 2001:db8:1:1::/64
-                 Pool = 2001:db8:1:1::/64
-                 Preference = 255
-
-                 Server 2
-                 ========
-                 Prefix = 2001:db8:1:5::/64
-                 Pool = 2001:db8:1:5::/64
-                 Preference = 0
-
-                 Server 3
-                 ========
-                 Prefix = 2001:db8:1:f::/64
-                 Pool = 2001:db8:1:f::/64
-                 Preference = [1..254]
-
-                 Figure 2: Multiple unique prefix approach
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Identical%20Prefixes"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  Identical Prefixes</span>
-
-   In the identical prefix model, each DHCPv6 server is configured with
-   the same overlapping prefix and pool deployed for use within an IPv6
-   network.  Distribution between two or more servers, for example,
-   would require that the same /64 prefix and pool be configured on all
-   DHCP servers.  For instance, the 2001:db8:1:1::/64 pool would be
-   assigned to all the DHCPv6 servers for allocation to clients derived
-   from the 2001:db8:1:1::/64 prefix.  This would be repeated for each
-   active DHCP server.  An example of such a scenario is presented in
-   Figure 3.
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-   This approach uses the same prefix, length, and pool definition
-   across multiple DHCPv6 servers.  All other configuration parameters
-   remain the same, with the exception of the DHCPv6 preference.  Such
-   an approach conceivably eases the migration of DHCPv6 services to
-   fully support a standards-based redundancy or failover protocol once
-   such solution becomes available.  Similar to the split prefix
-   architecture described above, this approach does not place any
-   additional addressing requirements on the network infrastructure.
-
-   The use of identical prefixes provides no benefit or advantage
-   related to dynamic DNS updates, support of DHCPv6 Leasequery
-   [<a href="./rfc5007.html" title='"DHCPv6 Leasequery"'>RFC5007</a>] or DHCPv6 Bulk Leasequery [<a href="./rfc5460.html" title='"DHCPv6 Bulk Leasequery"'>RFC5460</a>].  In this case, all
-   DHCP servers will use the same prefix and pool configurations making
-   it less obvious that a failure condition or event has occurred.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-                 +----------+                 +-----------+
-                 | Client 1 +-\            +--+ Server 1  |
-                 +----------+  \           |  +-----------+
-                                \          |
-                                 \         |
-                                  \        |
-                 +----------+      \       |  +-----------+
-                 | Client 2 +--------------+--| Server 2  |
-                 +----------+      /       |  +-----------+
-                       .          /        .
-                       .         /         .
-                       .        /          .
-                 +----------+  /           .  +-----------+
-                 | Client N +-/            .--| n+1 Server|
-                 +----------+                 +-----------+
-
-                 Server 1
-                 ========
-                 Prefix = 2001:db8:1:1::/64
-                 Pool = 2001:db8:1:1::/64
-                 Preference = 255
-
-                 Server 2
-                 ========
-                 Prefix = 2001:db8:1:1::/64
-                 Pool = 2001:db8:1:1::/64
-                 Preference = 0
-
-                 Server 3
-                 ========
-                 Prefix = 2001:db8:1:1::/64
-                 Pool = 2001:db8:1:1::/64
-                 Preference = [1..254]
-
-                    Figure 3: Identical prefix approach
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Challenges%20and%20Issues"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Challenges and Issues</span>
-
-   The lack of interaction between DHCPv6 servers introduces a number of
-   challenges related to the operations of the same service instances in
-   a production environment.  The following areas are of particular
-   concern:
-
-   o  In the identical prefixes scenario, both servers must follow the
-      same address allocation procedure, i.e., they both must use the
-      same algorithm and the same policy to determine which address is
-      going to be assigned to a specific client.  Otherwise, there is a
-      distinct chance that each server will assign the same address to
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-      two different clients.  It is expected that both servers will
-      receive each incoming REQUEST message.  Usually, no special action
-      is required to achieve this as REQUEST messages are sent to a
-      multicast address by clients.  Relays are expected to forward
-      incoming client messages to all servers.  The client indicates the
-      chosen server by including its DHCP Unique Identifier (DUID) in
-      the Server-ID option.  The chosen server assigns the address and
-      other configuration options, while the other server discards the
-      incoming request.  In case of a failure of one server, the other
-      server will assign the same address by following the same
-      algorithm and the same policy.
-
-   o  Interactions with DNS server(s) using dynamic update for the same
-      address when one or more DHCPv6 servers have become unavailable.
-      This specifically becomes a challenge when (or if) nodes that were
-      initially granted a lease:
-
-      1.  Attempt to renew or rebind the lease originally granted, or
-
-      2.  Attempt to obtain a new lease
-
-      The DHCID resource record [<a href="./rfc4701.html" title='"A DNS Resource Record (RR) for Encoding Dynamic Host Configuration Protocol (DHCP) Information (DHCID RR)"'>RFC4701</a>] allows identification of the
-      current owner of the specific DNS data that is the target of an
-      update [<a href="./rfc2136.html" title='"Dynamic Updates in the Domain Name System (DNS UPDATE)"'>RFC2136</a>].  [<a href="./rfc4704.html" title='"The Dynamic Host Configuration Protocol for IPv6 (DHCPv6) Client Fully Qualified Domain Name (FQDN) Option"'>RFC4704</a>] specifies how DHCPv6 servers and/or
-      clients may perform updates.  [<a href="./rfc4703.html" title='"Resolution of Fully Qualified Domain Name (FQDN) Conflicts among Dynamic Host Configuration Protocol (DHCP) Clients"'>RFC4703</a>] provides a way to solve
-      conflicts between clients.  Although [<a href="./rfc4703.html" title='"Resolution of Fully Qualified Domain Name (FQDN) Conflicts among Dynamic Host Configuration Protocol (DHCP) Clients"'>RFC4703</a>] deals with most
-      cases, it is still possible to leave abandoned resource records.
-      Consider the following scenario: there are two independent
-      servers, A and B.  Server A assigns a lease to a client and
-      updates the DNS with an AAAA record for the assigned address.
-      When the client renews, server A is not available and server B
-      assigns a different lease.  The DNS is again updated, so now two
-      AAAA resource records are present for the client: there is no
-      indication as to which of the two leases is active.  If server A
-      never recovers, its information may never be removed (although it
-      should be noted that this case is somewhat similar to that of a
-      single server crashing and leaving abandoned resource records).
-
-   o  Interactions with DHCPv6 servers to facilitate the acquisition of
-      IPv6 lease data by way of the DHCPv6 Leasequery [<a href="./rfc5007.html" title='"DHCPv6 Leasequery"'>RFC5007</a>] or
-      DHCPv6 Bulk Leasequery [<a href="./rfc5460.html" title='"DHCPv6 Bulk Leasequery"'>RFC5460</a>] protocols when one or more DHCPv6
-      servers have granted leases to DHCPv6 clients and later became
-      unavailable.  If the lease data is required and the granting
-      server is unavailable, it will not be possible to obtain any
-      information about leases granted until one of the following has
-      taken place:
-
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-      1.  The granting DHCPv6 server becomes available with all lease
-          information restored.
-
-      2.  The client has renewed or rebound its lease against a
-          different DHCPv6 server.
-
-      It is important to note that any exchange of available leases and
-      synchronization between DHCPv6 servers is not possible until a
-      redundancy or failover protocol is standardized or proprietary
-      solutions become available.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Security Considerations</span>
-
-   Additional security considerations are created through the use of
-   this interim architecture beyond what has been cited in <a href="./rfc3315.html#section-23">Section 23 of
-   [RFC3315]</a>.  In particular, the dynamic DNS update using the models
-   defined in this document allows for the possibility of not removing
-   abandoned DNS records even when using the conflict resolution
-   mechanism defined in [<a href="./rfc4703.html" title='"Resolution of Fully Qualified Domain Name (FQDN) Conflicts among Dynamic Host Configuration Protocol (DHCP) Clients"'>RFC4703</a>].  However, this is no worse than a
-   case where a single deployed server crashes and its lease database
-   cannot be recovered.
-
-   When using the identical prefixes model, care must be taken to ensure
-   that all servers use the same lease allocation procedure and are
-   configured with the same policy.  If this guidance is not followed,
-   there is a risk of assignment of the same lease to two separate
-   clients.  In some cases, that situation can be recovered by using
-   Duplicate Address Detection (Neighbor Discovery) and the DECLINE
-   mechanism (DHCPv6).
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Acknowledgements</span>
-
-   The authors would like to thank Bernie Volz, Kim Kinnear, Ralph
-   Droms, David Hankins, Chuck Anderson, Ted Lemon, Stephen Farrel, Pete
-   McCann, Robert Sparks, Martin Stiemerling, Brian Haberman, and Barry
-   Leiba for their input and review.
-
-   Special thanks to Stephen Morris for his numerous spelling, grammar
-   corrections, and proofreading.
-
-   This work has been partially supported by Department of Computer
-   Communications (a division of Gdansk University of Technology) and
-   the National Centre for Research and Development (Poland) under the
-   European Regional Development Fund, Grant No. POIG.01.01.02-00-045/
-   09-00 (Future Internet Engineering Project).
-
-
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  References</span>
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>.  Normative References</span>
-
-   [<a id="ref-RFC2136" name="ref-RFC2136">RFC2136</a>]  Vixie, P., Thomson, S., Rekhter, Y., and J. Bound,
-              "Dynamic Updates in the Domain Name System (DNS UPDATE)",
-              <a href="./rfc2136.html">RFC 2136</a>, April 1997.
-
-   [<a id="ref-RFC3315" name="ref-RFC3315">RFC3315</a>]  Droms, R., Bound, J., Volz, B., Lemon, T., Perkins, C.,
-              and M. Carney, "Dynamic Host Configuration Protocol for
-              IPv6 (DHCPv6)", <a href="./rfc3315.html">RFC 3315</a>, July 2003.
-
-   [<a id="ref-RFC3633" name="ref-RFC3633">RFC3633</a>]  Troan, O. and R. Droms, "IPv6 Prefix Options for Dynamic
-              Host Configuration Protocol (DHCP) version 6", <a href="./rfc3633.html">RFC 3633</a>,
-              December 2003.
-
-   [<a id="ref-RFC3736" name="ref-RFC3736">RFC3736</a>]  Droms, R., "Stateless Dynamic Host Configuration Protocol
-              (DHCP) Service for IPv6", <a href="./rfc3736.html">RFC 3736</a>, April 2004.
-
-   [<a id="ref-RFC4701" name="ref-RFC4701">RFC4701</a>]  Stapp, M., Lemon, T., and A. Gustafsson, "A DNS Resource
-              Record (RR) for Encoding Dynamic Host Configuration
-              Protocol (DHCP) Information (DHCID RR)", <a href="./rfc4701.html">RFC 4701</a>,
-              October 2006.
-
-   [<a id="ref-RFC4703" name="ref-RFC4703">RFC4703</a>]  Stapp, M. and B. Volz, "Resolution of Fully Qualified
-              Domain Name (FQDN) Conflicts among Dynamic Host
-              Configuration Protocol (DHCP) Clients", <a href="./rfc4703.html">RFC 4703</a>,
-              October 2006.
-
-   [<a id="ref-RFC4704" name="ref-RFC4704">RFC4704</a>]  Volz, B., "The Dynamic Host Configuration Protocol for
-              IPv6 (DHCPv6) Client Fully Qualified Domain Name (FQDN)
-              Option", <a href="./rfc4704.html">RFC 4704</a>, October 2006.
-
-   [<a id="ref-RFC5007" name="ref-RFC5007">RFC5007</a>]  Brzozowski, J., Kinnear, K., Volz, B., and S. Zeng,
-              "DHCPv6 Leasequery", <a href="./rfc5007.html">RFC 5007</a>, September 2007.
-
-   [<a id="ref-RFC5460" name="ref-RFC5460">RFC5460</a>]  Stapp, M., "DHCPv6 Bulk Leasequery", <a href="./rfc5460.html">RFC 5460</a>,
-              February 2009.
-
-   [<a id="ref-RFC5970" name="ref-RFC5970">RFC5970</a>]  Huth, T., Freimann, J., Zimmer, V., and D. Thaler, "DHCPv6
-              Options for Network Boot", <a href="./rfc5970.html">RFC 5970</a>, September 2010.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>.  Informative References</span>
-
-   [<a id="ref-FAILREQ" name="ref-FAILREQ">FAILREQ</a>]  Mrugalski, T. and K. Kinnear, "DHCPv6 Failover
-              Requirements", Work in Progress, September 2012.
-
-
-
-
-
-<span class="grey">Brzozowski, et al.        Best Current Practice                [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
-<span class="grey"><a href="./rfc6853.html">RFC 6853</a>            DHCPv6 Redundancy Considerations       February 2013</span>
-
-
-Authors' Addresses
-
-   John Jason Brzozowski
-   Comcast Cable Communications
-   1306 Goshen Parkway
-   West Chester, PA  19380
-   USA
-
-   Phone: +1-609-377-6594
-   EMail: john_brzozowski@cable.comcast.com
-
-
-   Jean-Francois Tremblay
-   Videotron G.P.
-   612 Saint-Jacques
-   Montreal, Quebec  H3C 4M8
-   Canada
-
-   EMail: jf@jftremblay.com
-
-
-   Jack Chen
-   Time Warner Cable
-   13820 Sunrise Valley Drive
-   Herndon, VA  20171
-   USA
-
-   EMail: jack.chen@twcable.com
-
-
-   Tomasz Mrugalski
-   Internet Systems Consortium, Inc.
-   950 Charter St.
-   Redwood City, CA  94063
-   USA
-
-   Phone: +1 650 423 1345
-   EMail: tomasz.mrugalski@gmail.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-Brzozowski, et al.        Best Current Practice                [Page 16]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
+<br/><br/><div id="footer">
+<div id="footerdivs">
+</div>
+<div style="clear:both"></div>
+<p class="credit">
+<a href="./www.iab.org/.html">IAB</a> • <a href="./www.iana.org/.html">IANA</a>  • <a href="./www.ietf.org.html">IETF</a> • <a href="./www.irtf.org.html">IRTF</a> • <a href="/about/independent">ISE</a> • <a href="./www.internetsociety.org.html">ISOC</a> • <a href="./trustee.ietf.org/.html">IETF Trust</a>
+<br/>
+<a href="/report-summary">Reports</a> • <a href="./www.ietf.org/privacy-statement/.html">Privacy Statement</a> • <a href="/sitemap">Site Map</a> • <a href="/contact">Contact Us</a> </p>
+</div><!--footer-->
+</div><!--page-->
+<button aria-controls="rmp-container-2538" aria-label="Menu Trigger" class="rmp_menu_trigger rmp-menu-trigger-boring" id="rmp_menu_trigger-2538" type="button">
+<span class="rmp-trigger-box">
+<span class="responsive-menu-pro-inner"></span>
+</span>
+</button>
+<div class="rmp-container rmp-container rmp-slide-left" id="rmp-container-2538">
+<div class="rmp-menu-title" id="rmp-menu-title-2538">
+<a href="" id="rmp-menu-title-link" target="_self">
+<span></span>
+</a>
+</div>
+<div class="rmp-menu-wrap" id="rmp-menu-wrap-2538"><ul aria-label="Default Menu" class="rmp-menu" id="rmp-menu-2538" role="menubar"><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-632" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/retrieve/" role="menuitem">Document Retrieval</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-633" role="none"><a class="rmp-menu-item-link" href="/errata.php" role="menuitem">Errata</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-634" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/faq/" role="menuitem">Frequently Asked Questions</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-636" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/rse/format-faq/" role="menuitem">Future Format FAQ</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-637" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/history/" role="menuitem">History</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-638" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/about/" role="menuitem">About Us</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-639" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/other/" role="menuitem">Other Information</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-640" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/pubprocess/" role="menuitem">Publication Process</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-641" role="none"><a class="rmp-menu-item-link" href="/current_queue.php" role="menuitem">Publication Queue</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-642" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/styleguide/" role="menuitem">Style Guide</a></li></ul></div> <div class="rmp-menu-additional-content" id="rmp-menu-additional-content-2538">
+<a href="/search/rfc_search.php">Advanced Search</a>
+<form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="20" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+</div>
 </div>
 </body>
 </html>

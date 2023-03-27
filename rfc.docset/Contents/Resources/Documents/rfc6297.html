@@ -1,25 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-welzl-ledbat-survey" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:6297" name="DC.Identifier"/>
-<meta content="June, 2011" name="DC.Date.Issued"/>
-<meta content="Welzl, Michael" name="DC.Creator"/>
-<meta content="Ros, David" name="DC.Creator"/>
-<meta content='This document provides a survey of transport protocols which are
-designed to have a smaller bandwidth and/or delay impact on standard
-TCP than standard TCP itself when they share a bottleneck with it.
-Such protocols could be used for low-priority "background" traffic, as
-they provide what is sometimes called a "less than" (or "lower than")
-best-effort service.' name="DC.Description.Abstract"/>
-<meta content="A Survey of Lower-than-Best-Effort Transport Protocols" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6297 - A Survey of Lower-than-Best-Effort Transport Protocols</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="M. Welzl" name="citation_author"/>
+<meta content="D. Ros" name="citation_author"/>
+<meta content="June, 2011" name="citation_publication_date"/>
+<meta content="A Survey of Lower-than-Best-Effort Transport Protocols" name="citation_title"/>
+<meta content="10.17487/RFC6297" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6297" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6297.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6297: A Survey of Lower-than-Best-Effort Transport Protocols</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -48,7 +41,7 @@ best-effort service.' name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -57,7 +50,7 @@ best-effort service.' name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -136,19 +129,18 @@ best-effort service.' name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -162,21 +154,9 @@ best-effort service.' name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6297.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6297" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-ledbat-survey.html" title="draft-ietf-ledbat-survey">draft-ietf-ledbat...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6297" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6297" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                          M. Welzl
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6297.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6297.txt.pdf">PDF</a>|<a href="/rfc/rfc6297.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6297" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6297&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6297" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                          M. Welzl
 Request for Comments: 6297                            University of Oslo
 Category: Informational                                           D. Ros
 ISSN: 2070-1721                                    IT / Telecom Bretagne
@@ -215,7 +195,7 @@ Copyright Notice
    Copyright (c) 2011 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -228,7 +208,7 @@ Copyright Notice
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
@@ -248,7 +228,7 @@ Table of Contents
    <a href="#section-8">8</a>.  Security Considerations  . . . . . . . . . . . . . . . . . . . <a href="#page-12">12</a>
    <a href="#section-9">9</a>.  Informative References . . . . . . . . . . . . . . . . . . . . <a href="#page-12">12</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This document presents a brief survey of proposals to attain a Less-
    than-Best-Effort (LBE) service by means of end-host mechanisms.  We
@@ -284,7 +264,7 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
@@ -302,7 +282,7 @@ Table of Contents
    developing a mechanism which can incentivize LEDBAT-like
    applications).  Such work is outside the scope of this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Delay-Based%20Transport%20Protocols"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Delay-Based Transport Protocols</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Delay-Based%20Transport%20Protocols"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Delay-Based Transport Protocols</span>
 
    It is wrong to generally equate "little impact on standard TCP" with
    "small sending rate".  Without Explicit Congestion Notification (ECN)
@@ -340,7 +320,7 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
@@ -396,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
@@ -452,7 +432,7 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
@@ -463,7 +443,7 @@ Table of Contents
    mechanisms, whereas others (e.g., NewVegas [<a href="#ref-Dev03" title='"Analysis and enhancement of TCP Vegas congestion control in a mixed TCP Vegas and TCP Reno network scenario"'>Dev03</a>], FAST TCP [<a href="#ref-Wei06" title='"FAST TCP: Motivation, architecture, algorithms, performance"'>Wei06</a>],
    or CODE TCP [<a href="#ref-Cha10" title='"CODE TCP: A competitive delay-based TCP"'>Cha10</a>]) are variants of Vegas based primarily on delays.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Accuracy%20of%20Delay-Based%20Congestion%20Predictors"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Accuracy of Delay-Based Congestion Predictors</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Accuracy%20of%20Delay-Based%20Congestion%20Predictors"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Accuracy of Delay-Based Congestion Predictors</span>
 
    The accuracy of delay-based congestion predictors has been the
    subject of a good deal of research, see, e.g., [<a href="#ref-Bia03" title='"Is the round-trip time correlated with the number of packets in flight?"'>Bia03</a>], [<a href="#ref-Mar03" title='"Delay-based congestion avoidance for TCP"'>Mar03</a>],
@@ -508,7 +488,7 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
@@ -524,7 +504,7 @@ Table of Contents
    errors by means of a probabilistic response mechanism to congestion-
    detection events.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Potential%20Issues%20with%20Delay-Based%20Congestion%20Control%20for%20LBE"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Potential Issues with Delay-Based Congestion Control for LBE</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Potential%20Issues%20with%20Delay-Based%20Congestion%20Control%20for%20LBE"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Potential Issues with Delay-Based Congestion Control for LBE</span>
 <span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20Transport"></a></body></html>      Transport</span>
 
    Whether a delay-based protocol behaves in its intended manner (e.g.,
@@ -564,11 +544,11 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Non-Delay-Based%20Transport%20Protocols"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Non-Delay-Based Transport Protocols</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Non-Delay-Based%20Transport%20Protocols"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Non-Delay-Based Transport Protocols</span>
 
    There exist a few transport-layer proposals that achieve an LBE
    service without relying on delay as an indicator of congestion.  In
@@ -608,7 +588,7 @@ Table of Contents
    is less likely to be prone to starvation, as its aggressiveness is
    tunable at a fine granularity, even when N is between 0 and 1.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Upper-Layer%20Approaches"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Upper-Layer Approaches</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Upper-Layer%20Approaches"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Upper-Layer Approaches</span>
 
    The proposals described in this section do not require modifying
    transport-protocol standards.  Most of them can be regarded as
@@ -620,7 +600,7 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
@@ -656,7 +636,7 @@ Table of Contents
    originates from any host where the presented scheduling scheme may
    not be implemented.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Receiver-Oriented%2C%20Flow-Control-Based%20Approaches"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Receiver-Oriented, Flow-Control-Based Approaches</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Receiver-Oriented%2C%20Flow-Control-Based%20Approaches"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Receiver-Oriented, Flow-Control-Based Approaches</span>
 
    Some proposals for achieving an LBE behavior work by exploiting
    existing transport-layer features -- typically, at the "receiving"
@@ -676,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
@@ -712,7 +692,7 @@ Table of Contents
    disturbing other flows as little as possible while respecting a
    deadline for the transfer of the data).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Network-Assisted%20Approaches"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Network-Assisted Approaches</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Network-Assisted%20Approaches"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Network-Assisted Approaches</span>
 
    Network-layer mechanisms, like active queue management (AQM) and
    packet scheduling in routers, can be exploited by a transport
@@ -732,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
@@ -788,11 +768,11 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20LEDBAT%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  LEDBAT Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20LEDBAT%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  LEDBAT Considerations</span>
 
    The previous sections have shown that there is a large amount of work
    on attaining an LBE service, and that it is quite heterogeneous in
@@ -809,7 +789,7 @@ Table of Contents
    be examined with care: at the time of writing, LEDBAT was still a
    moving target.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgements</span>
 
    The authors would like to thank Melissa Chavez, Dragana Damjanovic,
    and Yinxia Zhao for reference pointers, as well as Jari Arkko,
@@ -817,13 +797,13 @@ Table of Contents
    Mirja Kuehlewind, Tina Tsou, and Rolf Winter for their detailed
    reviews and suggestions.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Security Considerations</span>
 
    This document introduces no new security considerations.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Informative References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Informative References</span>
 
-   [<a id="ref-Aru10" name="ref-Aru10">Aru10</a>]    Arumaithurai, M., Fu, X., and K. Ramakrishnan, "NF-TCP: A
+   [<a id="ref-Aru10">Aru10</a>]    Arumaithurai, M., Fu, X., and K. Ramakrishnan, "NF-TCP: A
               Network Friendly TCP Variant for Background Delay-
               Insensitive Applications", Technical Report No. IFI-TB-
               2010-05, Institute of Computer Science, University of
@@ -831,11 +811,11 @@ Table of Contents
               <a href="http://www.net.informatik.uni-goettingen.de/publications/1718/NF-TCP-techreport.pdf">www.net.informatik.uni-goettingen.de/publications/1718/</a>
               <a href="http://www.net.informatik.uni-goettingen.de/publications/1718/NF-TCP-techreport.pdf">NF-TCP-techreport.pdf</a>&gt;.
 
-   [<a id="ref-BITS" name="ref-BITS">BITS</a>]     Microsoft, "Windows Background Intelligent Transfer
+   [<a id="ref-BITS">BITS</a>]     Microsoft, "Windows Background Intelligent Transfer
               Service",
               &lt;<a href="http://msdn.microsoft">http://msdn.microsoft</a>.com/library/bb968799(VS.85).aspx&gt;.
 
-   [<a id="ref-Bha07" name="ref-Bha07">Bha07</a>]    Bhandarkar, S., Reddy, A., Zhang, Y., and D. Loguinov,
+   [<a id="ref-Bha07">Bha07</a>]    Bhandarkar, S., Reddy, A., Zhang, Y., and D. Loguinov,
               "Emulating AQM from end hosts", Proceedings of ACM
               SIGCOMM 2007, 2007.
 
@@ -844,106 +824,106 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
-   [<a id="ref-Bia03" name="ref-Bia03">Bia03</a>]    Biaz, S. and N. Vaidya, "Is the round-trip time correlated
+   [<a id="ref-Bia03">Bia03</a>]    Biaz, S. and N. Vaidya, "Is the round-trip time correlated
               with the number of packets in flight?", Proceedings of the
               3rd ACM SIGCOMM conference on Internet measurement (IMC
               '03), pages 273-278, 2003.
 
-   [<a id="ref-Bra94" name="ref-Bra94">Bra94</a>]    Brakmo, L., O'Malley, S., and L. Peterson, "TCP Vegas: New
+   [<a id="ref-Bra94">Bra94</a>]    Brakmo, L., O'Malley, S., and L. Peterson, "TCP Vegas: New
               techniques for congestion detection and avoidance",
               Proceedings of SIGCOMM '94, pages 24-35, August 1994.
 
-   [<a id="ref-Car10" name="ref-Car10">Car10</a>]    Carofiglio, G., Muscariello, L., Rossi, D., and S.
+   [<a id="ref-Car10">Car10</a>]    Carofiglio, G., Muscariello, L., Rossi, D., and S.
               Valenti, "The quest for LEDBAT fairness", Proceedings of
               IEEE GLOBECOM 2010, December 2010.
 
-   [<a id="ref-Cha10" name="ref-Cha10">Cha10</a>]    Chan, Y., Lin, C., Chan, C., and C. Ho, "CODE TCP: A
+   [<a id="ref-Cha10">Cha10</a>]    Chan, Y., Lin, C., Chan, C., and C. Ho, "CODE TCP: A
               competitive delay-based TCP", Computer
               Communications, 33(9):1013-1029, June 2010.
 
-   [<a id="ref-Cro98" name="ref-Cro98">Cro98</a>]    Crowcroft, J. and P. Oechslin, "Differentiated end-to-end
+   [<a id="ref-Cro98">Cro98</a>]    Crowcroft, J. and P. Oechslin, "Differentiated end-to-end
               Internet services using a weighted proportional fair
               sharing TCP", ACM SIGCOMM Computer Communication
               Review, vol. 28, no. 3, pp. 53-69, July 1998.
 
-   [<a id="ref-Cro98b" name="ref-Cro98b">Cro98b</a>]   Crovella, M. and P. Barford, "The network effects of
+   [<a id="ref-Cro98b">Cro98b</a>]   Crovella, M. and P. Barford, "The network effects of
               prefetching", Proceedings of IEEE INFOCOM 1998,
               April 1998.
 
-   [<a id="ref-Dam09" name="ref-Dam09">Dam09</a>]    Damjanovic, D. and M. Welzl, "MulTFRC: Providing Weighted
+   [<a id="ref-Dam09">Dam09</a>]    Damjanovic, D. and M. Welzl, "MulTFRC: Providing Weighted
               Fairness for Multimedia Applications (and others too!)",
               ACM Computer Communication Review, vol. 39, no. 3,
               July 2009.
 
-   [<a id="ref-Dev03" name="ref-Dev03">Dev03</a>]    De Vendictis, A., Baiocchi, A., and M. Bonacci, "Analysis
+   [<a id="ref-Dev03">Dev03</a>]    De Vendictis, A., Baiocchi, A., and M. Bonacci, "Analysis
               and enhancement of TCP Vegas congestion control in a mixed
               TCP Vegas and TCP Reno network scenario", Performance
               Evaluation, 53(3-4):225-253, 2003.
 
-   [<a id="ref-Dyk02" name="ref-Dyk02">Dyk02</a>]    Dykes, S. and K. Robbins, "Limitations and benefits of
+   [<a id="ref-Dyk02">Dyk02</a>]    Dykes, S. and K. Robbins, "Limitations and benefits of
               cooperative proxy caching", IEEE Journal on Selected Areas
               in Communications, 20(7):1290-1304, September 2002.
 
-   [<a id="ref-Egg05" name="ref-Egg05">Egg05</a>]    Eggert, L. and J. Touch, "Idletime Scheduling with
+   [<a id="ref-Egg05">Egg05</a>]    Eggert, L. and J. Touch, "Idletime Scheduling with
               Preemption Intervals", Proceedings of 20th ACM Symposium
               on Operating Systems Principles, SOSP 2005, Brighton,
               United Kingdom, pp. 249/262, October 2005.
 
-   [<a id="ref-Gur04" name="ref-Gur04">Gur04</a>]    Gurtov, A. and S. Floyd, "Modeling wireless links for
+   [<a id="ref-Gur04">Gur04</a>]    Gurtov, A. and S. Floyd, "Modeling wireless links for
               transport protocols", ACM SIGCOMM Computer Communications
               Review, 34(2):85-96, April 2004.
 
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
-   [<a id="ref-Hac04" name="ref-Hac04">Hac04</a>]    Hacker, T., Noble, B., and B. Athey, "Improving Throughput
+   [<a id="ref-Hac04">Hac04</a>]    Hacker, T., Noble, B., and B. Athey, "Improving Throughput
               and Maintaining Fairness using Parallel TCP", Proceedings
               of IEEE INFOCOM 2004, March 2004.
 
-   [<a id="ref-Hac08" name="ref-Hac08">Hac08</a>]    Hacker, T. and P. Smith, "Stochastic TCP: A Statistical
+   [<a id="ref-Hac08">Hac08</a>]    Hacker, T. and P. Smith, "Stochastic TCP: A Statistical
               Approach to Congestion Avoidance", Proceedings of
               PFLDnet 2008, March 2008.
 
-   [<a id="ref-Hay10" name="ref-Hay10">Hay10</a>]    Hayes, D., "Timing enhancements to the FreeBSD kernel to
+   [<a id="ref-Hay10">Hay10</a>]    Hayes, D., "Timing enhancements to the FreeBSD kernel to
               support delay and rate based TCP mechanisms", Technical
               Report 100219A, Centre for Advanced Internet
               Architectures, Swinburne University of Technology,
               February 2010.
 
-   [<a id="ref-Hen00" name="ref-Hen00">Hen00</a>]    Hengartner, U., Bolliger, J., and T. Gross, "TCP Vegas
+   [<a id="ref-Hen00">Hen00</a>]    Hengartner, U., Bolliger, J., and T. Gross, "TCP Vegas
               revisited", Proceedings of IEEE INFOCOM 2000, March 2000.
 
-   [<a id="ref-Jai89" name="ref-Jai89">Jai89</a>]    Jain, R., "A delay-based approach for congestion avoidance
+   [<a id="ref-Jai89">Jai89</a>]    Jain, R., "A delay-based approach for congestion avoidance
               in interconnected heterogeneous computer networks", ACM
               Computer Communication Review, 19(5):56-71, October 1989.
 
-   [<a id="ref-Key04" name="ref-Key04">Key04</a>]    Key, P., Massoulie, L., and B. Wang, "Emulating Low-
+   [<a id="ref-Key04">Key04</a>]    Key, P., Massoulie, L., and B. Wang, "Emulating Low-
               Priority Transport at the Application Layer: a Background
               Transfer Service", Proceedings of ACM SIGMETRICS 2004,
               January 2004.
 
-   [<a id="ref-Kok04" name="ref-Kok04">Kok04</a>]    Kokku, R., Bohra, A., Ganguly, S., and A. Venkataramani,
+   [<a id="ref-Kok04">Kok04</a>]    Kokku, R., Bohra, A., Ganguly, S., and A. Venkataramani,
               "A Multipath Background Network Architecture", Proceedings
               of IEEE INFOCOM 2007, May 2007.
 
-   [<a id="ref-Kon09" name="ref-Kon09">Kon09</a>]    Konda, V. and J. Kaur, "RAPID: Shrinking the Congestion-
+   [<a id="ref-Kon09">Kon09</a>]    Konda, V. and J. Kaur, "RAPID: Shrinking the Congestion-
               control Timescale", Proceedings of IEEE INFOCOM 2009,
               April 2009.
 
-   [<a id="ref-Kuo08" name="ref-Kuo08">Kuo08</a>]    Kuo, F. and X. Fu, "Probe-Aided MulTCP: an aggregate
+   [<a id="ref-Kuo08">Kuo08</a>]    Kuo, F. and X. Fu, "Probe-Aided MulTCP: an aggregate
               congestion control mechanism", ACM SIGCOMM Computer
               Communication Review, vol. 38, no. 1, pp. 17-28,
               January 2008.
 
-   [<a id="ref-Kur00" name="ref-Kur00">Kur00</a>]    Kurata, K., Hasegawa, G., and M. Murata, "Fairness
+   [<a id="ref-Kur00">Kur00</a>]    Kurata, K., Hasegawa, G., and M. Murata, "Fairness
               Comparisons Between TCP Reno and TCP Vegas for Future
               Deployment of TCP Vegas", Proceedings of INET 2000,
               July 2000.
@@ -956,51 +936,51 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
-   [<a id="ref-Kuz06" name="ref-Kuz06">Kuz06</a>]    Kuzmanovic, A. and E. Knightly, "TCP-LP: low-priority
+   [<a id="ref-Kuz06">Kuz06</a>]    Kuzmanovic, A. and E. Knightly, "TCP-LP: low-priority
               service via end-point congestion control", IEEE/ACM
               Transactions on Networking (ToN),  Volume 14, Issue 4, pp.
               739-752., August 2006,
               &lt;<a href="http://www.ece.rice.edu/networks/TCP-LP/">http://www.ece.rice.edu/networks/TCP-LP/</a>&gt;.
 
-   [<a id="ref-Liu07" name="ref-Liu07">Liu07</a>]    Liu, S., Vojnovic, M., and D. Gunawardena, "Competitive
+   [<a id="ref-Liu07">Liu07</a>]    Liu, S., Vojnovic, M., and D. Gunawardena, "Competitive
               and Considerate Congestion Control for Bulk Data
               Transfers", Proceedings of IWQoS 2007, June 2007.
 
-   [<a id="ref-Liu08" name="ref-Liu08">Liu08</a>]    Liu, S., Basar, T., and R. Srikant, "TCP-Illinois: A loss-
+   [<a id="ref-Liu08">Liu08</a>]    Liu, S., Basar, T., and R. Srikant, "TCP-Illinois: A loss-
               and delay-based congestion control algorithm for high-
               speed networks", Performance Evaluation, 65(6-7):417-440,
               2008.
 
-   [<a id="ref-Mar03" name="ref-Mar03">Mar03</a>]    Martin, J., Nilsson, A., and I. Rhee, "Delay-based
+   [<a id="ref-Mar03">Mar03</a>]    Martin, J., Nilsson, A., and I. Rhee, "Delay-based
               congestion avoidance for TCP", IEEE/ACM Transactions on
               Networking, 11(3):356-369, June 2003.
 
-   [<a id="ref-McC08" name="ref-McC08">McC08</a>]    McCullagh, G. and D. Leith, "Delay-based congestion
+   [<a id="ref-McC08">McC08</a>]    McCullagh, G. and D. Leith, "Delay-based congestion
               control: Sampling and correlation issues revisited",
               Technical report, Hamilton Institute, 2008.
 
-   [<a id="ref-Meh03" name="ref-Meh03">Meh03</a>]    Mehra, P., Zakhor, A., and C. De Vleeschouwer, "Receiver-
+   [<a id="ref-Meh03">Meh03</a>]    Mehra, P., Zakhor, A., and C. De Vleeschouwer, "Receiver-
               Driven Bandwidth Sharing for TCP", Proceedings of IEEE
               INFOCOM 2003, April 2003.
 
-   [<a id="ref-Mo99" name="ref-Mo99">Mo99</a>]     Mo, J., La, R., Anantharam, V., and J. Walrand, "Analysis
+   [<a id="ref-Mo99">Mo99</a>]     Mo, J., La, R., Anantharam, V., and J. Walrand, "Analysis
               and Comparison of TCP Reno and TCP Vegas", Proceedings of
               IEEE INFOCOM 1999, March 1999.
 
-   [<a id="ref-Ott03" name="ref-Ott03">Ott03</a>]    Ott, B., Warnky, T., and V. Liberatore, "Congestion
+   [<a id="ref-Ott03">Ott03</a>]    Ott, B., Warnky, T., and V. Liberatore, "Congestion
               control for low-priority filler traffic", SPIE QoS 2003
               (Quality of Service over Next-Generation Internet), In
               Proc. SPIE, Vol. 5245, 154, Monterey (CA), USA, July 2003.
 
-   [<a id="ref-Pra04" name="ref-Pra04">Pra04</a>]    Prasad, R., Jain, M., and C. Dovrolis, "On the
+   [<a id="ref-Pra04">Pra04</a>]    Prasad, R., Jain, M., and C. Dovrolis, "On the
               effectiveness of delay-based congestion avoidance",
               Proceedings of PFLDnet, 2004.
 
-   [<a id="ref-RFC1323" name="ref-RFC1323">RFC1323</a>]  Jacobson, V., Braden, B., and D. Borman, "TCP Extensions
+   [<a id="ref-RFC1323">RFC1323</a>]  Jacobson, V., Braden, B., and D. Borman, "TCP Extensions
               for High Performance", <a href="./rfc1323.html">RFC 1323</a>, May 1992.
 
 
@@ -1012,52 +992,52 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
-   [<a id="ref-RFC2309" name="ref-RFC2309">RFC2309</a>]  Braden, B., Clark, D., Crowcroft, J., Davie, B., Deering,
+   [<a id="ref-RFC2309">RFC2309</a>]  Braden, B., Clark, D., Crowcroft, J., Davie, B., Deering,
               S., Estrin, D., Floyd, S., Jacobson, V., Minshall, G.,
               Partridge, C., Peterson, L., Ramakrishnan, K., Shenker,
               S., Wroclawski, J., and L. Zhang, "Recommendations on
               Queue Management and Congestion Avoidance in the
               Internet", <a href="./rfc2309.html">RFC 2309</a>, April 1998.
 
-   [<a id="ref-RFC3168" name="ref-RFC3168">RFC3168</a>]  Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
+   [<a id="ref-RFC3168">RFC3168</a>]  Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
               of Explicit Congestion Notification (ECN) to IP",
               <a href="./rfc3168.html">RFC 3168</a>, September 2001.
 
-   [<a id="ref-RFC3662" name="ref-RFC3662">RFC3662</a>]  Bless, R., Nichols, K., and K. Wehrle, "A Lower Effort
+   [<a id="ref-RFC3662">RFC3662</a>]  Bless, R., Nichols, K., and K. Wehrle, "A Lower Effort
               Per-Domain Behavior (PDB) for Differentiated Services",
               <a href="./rfc3662.html">RFC 3662</a>, December 2003.
 
-   [<a id="ref-RFC5348" name="ref-RFC5348">RFC5348</a>]  Floyd, S., Handley, M., Padhye, J., and J. Widmer, "TCP
+   [<a id="ref-RFC5348">RFC5348</a>]  Floyd, S., Handley, M., Padhye, J., and J. Widmer, "TCP
               Friendly Rate Control (TFRC): Protocol Specification",
               <a href="./rfc5348.html">RFC 5348</a>, September 2008.
 
-   [<a id="ref-RFC5681" name="ref-RFC5681">RFC5681</a>]  Allman, M., Paxson, V., and E. Blanton, "TCP Congestion
+   [<a id="ref-RFC5681">RFC5681</a>]  Allman, M., Paxson, V., and E. Blanton, "TCP Congestion
               Control", <a href="./rfc5681.html">RFC 5681</a>, September 2009.
 
-   [<a id="ref-Rew06" name="ref-Rew06">Rew06</a>]    Rewaskar, S., Kaur, J., and D. Smith, "Why don't delay-
+   [<a id="ref-Rew06">Rew06</a>]    Rewaskar, S., Kaur, J., and D. Smith, "Why don't delay-
               based congestion estimators work in the real-world?",
               Technical report TR06-001, University of North Carolina at
               Chapel Hill, Dept. of Computer Science, January 2006.
 
-   [<a id="ref-Sch10" name="ref-Sch10">Sch10</a>]    Schneider, J., Wagner, J., Winter, R., and H. Kolbe, "Out
+   [<a id="ref-Sch10">Sch10</a>]    Schneider, J., Wagner, J., Winter, R., and H. Kolbe, "Out
               of my Way -- Evaluating Low Extra Delay Background
               Transport in an ADSL Access Network", Proceedings of the
               22nd International Teletraffic Congress ITC22, 2010.
 
-   [<a id="ref-Sha05" name="ref-Sha05">Sha05</a>]    Shalunov, S., Dunn, L., Gu, Y., Low, S., Rhee, I., Senger,
+   [<a id="ref-Sha05">Sha05</a>]    Shalunov, S., Dunn, L., Gu, Y., Low, S., Rhee, I., Senger,
               S., Wydrowski, B., and L. Xu, "Design Space for a Bulk
               Transport Tool", Technical Report, Internet2 Transport
               Group, May 2005.
 
-   [<a id="ref-Sha11" name="ref-Sha11">Sha11</a>]    Shalunov, S., Hazel, G., Iyengar, J., and M. Kuehlewind,
+   [<a id="ref-Sha11">Sha11</a>]    Shalunov, S., Hazel, G., Iyengar, J., and M. Kuehlewind,
               "Low Extra Delay Background Transport (LEDBAT)", Work
               in Progress, May 2011.
 
-   [<a id="ref-Spr00" name="ref-Spr00">Spr00</a>]    Spring, N., Chesire, M., Berryman, M., Sahasranaman, V.,
+   [<a id="ref-Spr00">Spr00</a>]    Spring, N., Chesire, M., Berryman, M., Sahasranaman, V.,
               Anderson, T., and B. Bershad, "Receiver based management
               of low bandwidth access links", Proceedings of IEEE
               INFOCOM 2000, pp. 245-254, vol. 1, 2000.
@@ -1068,44 +1048,44 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
-   [<a id="ref-Sri08" name="ref-Sri08">Sri08</a>]    Sridharan, M., Tan, K., Bansala, D., and D. Thaler,
+   [<a id="ref-Sri08">Sri08</a>]    Sridharan, M., Tan, K., Bansala, D., and D. Thaler,
               "Compound TCP: A New TCP Congestion Control for High-Speed
               and Long Distance Networks", Work in Progress,
               November 2008.
 
-   [<a id="ref-Tan06" name="ref-Tan06">Tan06</a>]    Tan, K., Song, J., Zhang, Q., and M. Sridharan, "A
+   [<a id="ref-Tan06">Tan06</a>]    Tan, K., Song, J., Zhang, Q., and M. Sridharan, "A
               Compound TCP approach for high-speed and long distance
               networks", Proceedings of IEEE INFOCOM 2006, Barcelona,
               Spain, April 2008.
 
-   [<a id="ref-Ven02" name="ref-Ven02">Ven02</a>]    Venkataramani, A., Kokku, R., and M. Dahlin, "TCP Nice: a
+   [<a id="ref-Ven02">Ven02</a>]    Venkataramani, A., Kokku, R., and M. Dahlin, "TCP Nice: a
               mechanism for background transfers", Proceedings of
               OSDI '02, 2002.
 
-   [<a id="ref-Ven08" name="ref-Ven08">Ven08</a>]    Venkataraman, V., Francis, P., Kodialam, M., and T.
+   [<a id="ref-Ven08">Ven08</a>]    Venkataraman, V., Francis, P., Kodialam, M., and T.
               Lakshman, "A priority-layered approach to transport for
               high bandwidth-delay product networks", Proceedings of ACM
               CoNEXT, Madrid, December 2008.
 
-   [<a id="ref-Wan91" name="ref-Wan91">Wan91</a>]    Wang, Z. and J. Crowcroft, "A new congestion control
+   [<a id="ref-Wan91">Wan91</a>]    Wang, Z. and J. Crowcroft, "A new congestion control
               scheme: slow start and search (Tri-S)", ACM Computer
               Communication Review, 21(1):56-71, January 1991.
 
-   [<a id="ref-Wan92" name="ref-Wan92">Wan92</a>]    Wang, Z. and J. Crowcroft, "Eliminating periodic packet
+   [<a id="ref-Wan92">Wan92</a>]    Wang, Z. and J. Crowcroft, "Eliminating periodic packet
               losses in the 4.3-Tahoe BSD TCP congestion control
               algorithm", ACM Computer Communication Review, 22(2):9-16,
               January 1992.
 
-   [<a id="ref-Wei05" name="ref-Wei05">Wei05</a>]    Weigle, M., Jeffay, K., and F. Smith, "Delay-based early
+   [<a id="ref-Wei05">Wei05</a>]    Weigle, M., Jeffay, K., and F. Smith, "Delay-based early
               congestion detection and adaptation in TCP: impact on web
               performance", Computer Communications, 28(8):837-850,
               May 2005.
 
-   [<a id="ref-Wei06" name="ref-Wei06">Wei06</a>]    Wei, D., Jin, C., Low, S., and S. Hegde, "FAST TCP:
+   [<a id="ref-Wei06">Wei06</a>]    Wei, D., Jin, C., Low, S., and S. Hegde, "FAST TCP:
               Motivation, architecture, algorithms, performance", IEEE/
               ACM Transactions on Networking, 14(6):1246-1259,
               December 2006.
@@ -1124,7 +1104,7 @@ Table of Contents
 
 
 <span class="grey">Welzl &amp; Ros                   Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6297.html">RFC 6297</a>                  LBE Transport Survey                 June 2011</span>
 
 
@@ -1180,11 +1160,6 @@ Authors' Addresses
 
 
 Welzl &amp; Ros                   Informational                    [Page 18]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

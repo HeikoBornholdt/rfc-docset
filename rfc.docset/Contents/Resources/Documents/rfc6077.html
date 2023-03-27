@@ -1,29 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:6077" name="DC.Identifier"/>
-<meta content="This document describes some of the open problems in Internet
-congestion control that are known today. This includes several new
-challenges that are becoming important as the network grows, as well
-as some issues that have been known for many years. These challenges
-are generally considered to be open research topics that may require
-more study or application of innovative techniques before Internet-
-scale solutions can be confidently engineered and deployed. This
-document is not an Internet Standards Track specification; it is
-published for informational purposes." name="DC.Description.Abstract"/>
-<meta content="&lt;&gt;, Bob Briscoe" name="DC.Creator"/>
-<meta content="&lt;&gt;, Michael Welzl" name="DC.Creator"/>
-<meta content="Papadimitriou, Dimitri" name="DC.Creator"/>
-<meta content="&lt;&gt;, Michael Scharf" name="DC.Creator"/>
-<meta content="February, 2011" name="DC.Date.Issued"/>
-<meta content="Open Research Issues in Internet Congestion Control" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6077 - Open Research Issues in Internet Congestion Control</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="D. Papadimitriou" name="citation_author"/>
+<meta content="M. Welzl" name="citation_author"/>
+<meta content="M. Scharf" name="citation_author"/>
+<meta content="B. Briscoe" name="citation_author"/>
+<meta content="February, 2011" name="citation_publication_date"/>
+<meta content="Open Research Issues in Internet Congestion Control" name="citation_title"/>
+<meta content="10.17487/RFC6077" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6077" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6077.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6077: Open Research Issues in Internet Congestion Control</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -52,7 +43,7 @@ published for informational purposes." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -61,7 +52,7 @@ published for informational purposes." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -140,19 +131,18 @@ published for informational purposes." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -166,21 +156,9 @@ published for informational purposes." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6077.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6077" title="PDF version of this document">pdf</a>] [<a href="./draft-irtf-iccrg-welzl-congestion-control-open-research.html" title="draft-irtf-iccrg-welzl-congestion-control-open-research">draft-irtf-iccrg-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6077" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6077" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Research Task Force (IRTF)                D. Papadimitriou, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6077.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6077.txt.pdf">PDF</a>|<a href="/rfc/rfc6077.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6077" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6077&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6077" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Research Task Force (IRTF)                D. Papadimitriou, Ed.
 Request for Comments: 6077                                Alcatel-Lucent
 Category: Informational                                         M. Welzl
 ISSN: 2070-1721                                       University of Oslo
@@ -232,7 +210,7 @@ Status of This Memo
 
 
 <span class="grey">Papadimitriou, et al.         Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -241,7 +219,7 @@ Copyright Notice
    Copyright (c) 2011 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -288,7 +266,7 @@ Copyright Notice
 
 
 <span class="grey">Papadimitriou, et al.         Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -330,7 +308,7 @@ Table of Contents
    <a href="#section-6">6</a>. Acknowledgments ................................................<a href="#page-50">50</a>
    <a href="#section-7">7</a>. Contributors ...................................................<a href="#page-50">50</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This document, the result of the Internet Congestion Control Research
    Group (ICCRG), describes some of the open research topics in the
@@ -344,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -400,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -428,12 +406,12 @@ Table of Contents
    confidently engineered and deployed.  In what follows, an overview of
    some of these challenges is given.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Global%20Challenges"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Global Challenges</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Global%20Challenges"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Global Challenges</span>
 
    This section describes the global challenges to be addressed in the
    domain of Internet congestion control.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Heterogeneity"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Heterogeneity</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Heterogeneity"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Heterogeneity</span>
 
    The Internet encompasses a large variety of heterogeneous IP networks
    that are realized by a multitude of technologies, which result in a
@@ -456,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -512,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -527,7 +505,7 @@ Table of Contents
    has to be very carefully examined for all new congestion control
    schemes.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Stability"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Stability</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Stability"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Stability</span>
 
    Control theory is a mathematical tool for describing dynamic systems.
    It lends itself to modeling congestion control -- TCP is a perfect
@@ -568,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -606,7 +584,7 @@ Table of Contents
    short-lived HTTP flows often never leave this phase) is not entirely
    clear.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Fairness"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Fairness</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Fairness"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Fairness</span>
 
    Recently, the way the Internet community reasons about fairness has
    been called deeply into question [<a href="#ref-Bri07" title='"Flow Rate Fairness: Dismantling a Religion"'>Bri07</a>].  Much of the community has
@@ -624,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -680,7 +658,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -725,9 +703,9 @@ Table of Contents
    fairness can be seen as a special case of cost fairness.  One can be
    used to build the other, but not vice-versa.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Detailed%20Challenges"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Detailed Challenges</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Detailed%20Challenges"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Detailed Challenges</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Challenge%201%3A%20Network%20Support"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Challenge 1: Network Support</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Challenge%201%3A%20Network%20Support"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Challenge 1: Network Support</span>
 
    This challenge is perhaps the most critical to get right.  Changes to
    the balance of functions between the endpoints and network equipment
@@ -736,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -792,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -848,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -904,7 +882,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -936,7 +914,7 @@ Table of Contents
    In general, network support of congestion control raises many issues
    that have not been completely solved yet.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Performance%20and%20Robustness"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  Performance and Robustness</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Performance%20and%20Robustness"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  Performance and Robustness</span>
 
    Congestion control is subject to some tradeoffs: on the one hand, it
    must allow high link utilizations and fair resource sharing, but on
@@ -960,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -980,7 +958,7 @@ Table of Contents
       to-end mechanisms and the current IP header limitations that
       provide at most unary ECN signals?
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Granularity%20of%20Network%20Component%20Functions"></a></body></html><a class="selflink" href="#section-3.1.2" name="section-3.1.2">3.1.2</a>.  Granularity of Network Component Functions</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Granularity%20of%20Network%20Component%20Functions"></a></body></html><a class="selflink" href="#section-3.1.2" id="section-3.1.2">3.1.2</a>.  Granularity of Network Component Functions</span>
 
    There are several degrees of freedom concerning the involvement of
    network entities, ranging from some few additional functions in
@@ -1016,11 +994,11 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.%20%20Information%20Acquisition"></a></body></html><a class="selflink" href="#section-3.1.3" name="section-3.1.3">3.1.3</a>.  Information Acquisition</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.%20%20Information%20Acquisition"></a></body></html><a class="selflink" href="#section-3.1.3" id="section-3.1.3">3.1.3</a>.  Information Acquisition</span>
 
    In order to support congestion control, network components have to
    obtain at least a subset of the following information.  Obtaining
@@ -1072,7 +1050,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1085,7 +1063,7 @@ Table of Contents
       machine architecture research should focus on designing to
       provide it?
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.4.%20%20Feedback%20Signaling"></a></body></html><a class="selflink" href="#section-3.1.4" name="section-3.1.4">3.1.4</a>.  Feedback Signaling</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.4.%20%20Feedback%20Signaling"></a></body></html><a class="selflink" href="#section-3.1.4" id="section-3.1.4">3.1.4</a>.  Feedback Signaling</span>
 
    Explicit notification mechanisms can be realized either by in-band
    signaling (notifications piggybacked along with the data traffic) or
@@ -1107,7 +1085,7 @@ Table of Contents
    -  What direction should feedback take (from network resource via
       receiver to sender, or directly back to sender)?
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Challenge%202%3A%20Corruption%20Loss"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Challenge 2: Corruption Loss</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Challenge%202%3A%20Corruption%20Loss"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Challenge 2: Corruption Loss</span>
 
    It is common for congestion control mechanisms to interpret packet
    loss as a sign of congestion.  This is appropriate when packets are
@@ -1128,7 +1106,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1184,7 +1162,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1220,7 +1198,7 @@ Table of Contents
       the transport does not know whether all queues on the path are
       ECN-capable or not?
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Challenge%203%3A%20Packet%20Size"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Challenge 3: Packet Size</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Challenge%203%3A%20Packet%20Size"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Challenge 3: Packet Size</span>
 
    TCP does not take packet size into account when responding to losses
    or ECN.  Over past years, the performance of TCP congestion avoidance
@@ -1240,7 +1218,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1296,7 +1274,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1352,7 +1330,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1408,7 +1386,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1444,7 +1422,7 @@ Table of Contents
       This issue is discussed at length in [<a href="#ref-Bri10" title='"Byte and Packet Congestion Notification,"'>Bri10</a>], along with other
       aspects of packet size and congestion control.
 
-      [<a id="ref-Bri10" name="ref-Bri10">Bri10</a>] makes the strong recommendation that network equipment
+      [<a id="ref-Bri10">Bri10</a>] makes the strong recommendation that network equipment
       should drop or mark packets with a probability independent of each
       specific packet's size, while congestion controls should respond
       to dropped or marked packets in proportion to the packet's size.
@@ -1464,7 +1442,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1489,7 +1467,7 @@ Table of Contents
       of what it means for a congestion control mechanism to scale with
       packet size.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Challenge%204%3A%20Flow%20Startup"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Challenge 4: Flow Startup</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Challenge%204%3A%20Flow%20Startup"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Challenge 4: Flow Startup</span>
 
    The beginning of data transmissions imposes some further, unique
    challenges: when a connection to a new destination is established,
@@ -1520,7 +1498,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1576,7 +1554,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1584,14 +1562,14 @@ Table of Contents
       uncertainty by additional network feedback, particularly if the
       path characteristics are very dynamic.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Challenge%205%3A%20Multi-Domain%20Congestion%20Control"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  Challenge 5: Multi-Domain Congestion Control</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Challenge%205%3A%20Multi-Domain%20Congestion%20Control"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  Challenge 5: Multi-Domain Congestion Control</span>
 
    Transport protocols such as TCP operate over the Internet, which is
    divided into autonomous systems.  These systems are characterized by
    their heterogeneity as IP networks are realized by a multitude of
    technologies.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.1.%20%20Multi-Domain%20Transport%20of%20Explicit%20Congestion%20Notification"></a></body></html><a class="selflink" href="#section-3.5.1" name="section-3.5.1">3.5.1</a>.  Multi-Domain Transport of Explicit Congestion Notification</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.1.%20%20Multi-Domain%20Transport%20of%20Explicit%20Congestion%20Notification"></a></body></html><a class="selflink" href="#section-3.5.1" id="section-3.5.1">3.5.1</a>.  Multi-Domain Transport of Explicit Congestion Notification</span>
 
    Different conditions and their variations lead to correlation effects
    between policers that regulate traffic against certain conformance
@@ -1632,7 +1610,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1667,7 +1645,7 @@ Table of Contents
    view of fairness in the network, and would prevent evolution to forms
    of fairness based on congestion-volume (<a href="#section-2.3">Section 2.3</a>).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.2.%20%20Multi-Domain%20Exchange%20of%20Topology%20or%20Explicit%20Rate%20Information"></a></body></html><a class="selflink" href="#section-3.5.2" name="section-3.5.2">3.5.2</a>.  Multi-Domain Exchange of Topology or Explicit Rate Information</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.2.%20%20Multi-Domain%20Exchange%20of%20Topology%20or%20Explicit%20Rate%20Information"></a></body></html><a class="selflink" href="#section-3.5.2" id="section-3.5.2">3.5.2</a>.  Multi-Domain Exchange of Topology or Explicit Rate Information</span>
 
    Security is a challenge for multi-domain exchange of explicit rate
    signals, whether in-band or out-of-band.  At domain boundaries,
@@ -1688,7 +1666,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1716,7 +1694,7 @@ Table of Contents
    information about the internal network dimensioning than TCP does
    today.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.3.%20%20Multi-Domain%20Pseudowires"></a></body></html><a class="selflink" href="#section-3.5.3" name="section-3.5.3">3.5.3</a>.  Multi-Domain Pseudowires</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.3.%20%20Multi-Domain%20Pseudowires"></a></body></html><a class="selflink" href="#section-3.5.3" id="section-3.5.3">3.5.3</a>.  Multi-Domain Pseudowires</span>
 
    Extending pseudowires across multiple domains poses specific issues.
    Pseudowires (PWs) [<a href="./rfc3985.html" title='"Pseudo Wire Emulation Edge-to-Edge (PWE3) Architecture"'>RFC3985</a>] may carry non-TCP data flows (e.g., Time-
@@ -1744,7 +1722,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1800,7 +1778,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1814,7 +1792,7 @@ Table of Contents
    would harm evolvability.  So designing the corresponding mechanisms
    in the data and control planes still requires further investigation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20Challenge%206%3A%20Precedence%20for%20Elastic%20Traffic"></a></body></html><a class="selflink" href="#section-3.6" name="section-3.6">3.6</a>.  Challenge 6: Precedence for Elastic Traffic</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20Challenge%206%3A%20Precedence%20for%20Elastic%20Traffic"></a></body></html><a class="selflink" href="#section-3.6" id="section-3.6">3.6</a>.  Challenge 6: Precedence for Elastic Traffic</span>
 
    Traffic initiated by so-called elastic applications adapts to the
    available bandwidth using feedback about the state of the network.
@@ -1856,7 +1834,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1897,7 +1875,7 @@ Table of Contents
    the two approaches might co-exist or how one might evolve into the
    other.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.%20%20Challenge%207%3A%20Misbehaving%20Senders%20and%20Receivers"></a></body></html><a class="selflink" href="#section-3.7" name="section-3.7">3.7</a>.  Challenge 7: Misbehaving Senders and Receivers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.%20%20Challenge%207%3A%20Misbehaving%20Senders%20and%20Receivers"></a></body></html><a class="selflink" href="#section-3.7" id="section-3.7">3.7</a>.  Challenge 7: Misbehaving Senders and Receivers</span>
 
    In the current Internet architecture, congestion control depends on
    parties acting against their own interests.  It is not in a
@@ -1912,7 +1890,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -1968,18 +1946,18 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.%20%20Other%20Challenges"></a></body></html><a class="selflink" href="#section-3.8" name="section-3.8">3.8</a>.  Other Challenges</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.%20%20Other%20Challenges"></a></body></html><a class="selflink" href="#section-3.8" id="section-3.8">3.8</a>.  Other Challenges</span>
 
    This section provides additional challenges and open research issues
    that are not (at this point in time) deemed so significant, or they
    are of a different nature compared to the main challenges depicted
    so far.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.1.%20%20RTT%20Estimation"></a></body></html><a class="selflink" href="#section-3.8.1" name="section-3.8.1">3.8.1</a>.  RTT Estimation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.1.%20%20RTT%20Estimation"></a></body></html><a class="selflink" href="#section-3.8.1" id="section-3.8.1">3.8.1</a>.  RTT Estimation</span>
 
    Several congestion control schemes have to precisely know the round-
    trip time (RTT) of a path.  The RTT is a measure of the current delay
@@ -2024,7 +2002,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -2080,7 +2058,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -2104,7 +2082,7 @@ Table of Contents
       (particularly on low-cost devices) may still prevent highly
       accurate RTT estimations.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.2.%20%20Malfunctioning%20Devices"></a></body></html><a class="selflink" href="#section-3.8.2" name="section-3.8.2">3.8.2</a>.  Malfunctioning Devices</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.2.%20%20Malfunctioning%20Devices"></a></body></html><a class="selflink" href="#section-3.8.2" id="section-3.8.2">3.8.2</a>.  Malfunctioning Devices</span>
 
    There is a long history of malfunctioning devices harming the
    deployment of new and potentially beneficial functionality in the
@@ -2136,7 +2114,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -2146,7 +2124,7 @@ Table of Contents
    with a new standard, older devices encountering unusual fields should
    at least behave predictably.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.3.%20%20Dependence%20on%20RTT"></a></body></html><a class="selflink" href="#section-3.8.3" name="section-3.8.3">3.8.3</a>.  Dependence on RTT</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.3.%20%20Dependence%20on%20RTT"></a></body></html><a class="selflink" href="#section-3.8.3" id="section-3.8.3">3.8.3</a>.  Dependence on RTT</span>
 
    AIMD window algorithms that have the goal of packet conservation end
    up converging on a rate that is inversely proportional to RTT.
@@ -2162,7 +2140,7 @@ Table of Contents
    theory allows for stability.  Research giving deeper insight into
    these aspects would be very useful.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.4.%20%20Congestion%20Control%20in%20Multi-Layered%20Networks"></a></body></html><a class="selflink" href="#section-3.8.4" name="section-3.8.4">3.8.4</a>.  Congestion Control in Multi-Layered Networks</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.4.%20%20Congestion%20Control%20in%20Multi-Layered%20Networks"></a></body></html><a class="selflink" href="#section-3.8.4" id="section-3.8.4">3.8.4</a>.  Congestion Control in Multi-Layered Networks</span>
 
    A network of IP nodes is just as vulnerable to congestion in the
    lower layers between IP-capable nodes as it is to congestion on the
@@ -2171,7 +2149,7 @@ Table of Contents
    techniques will either need to be deployed at lower layers as well,
    or they will need to interwork with lower-layer mechanisms.
 
-   [<a id="ref-RFC5129" name="ref-RFC5129">RFC5129</a>] shows how to propagate ECN from lower layers upwards for
+   [<a id="ref-RFC5129">RFC5129</a>] shows how to propagate ECN from lower layers upwards for
    the specific case of MPLS, but to the authors' knowledge the layering
    problem has not been addressed for explicit rate protocol proposals
    such as XCP and RCP.  Some issues are straightforward matters of
@@ -2192,7 +2170,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -2222,7 +2200,7 @@ Table of Contents
    with congestion control problems in multi-layer networks without
    harming evolvability is absolutely necessary.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.5.%20%20Multipath%20End-to-End%20Congestion%20Control%20and%20Traffic%20Engineering"></a></body></html><a class="selflink" href="#section-3.8.5" name="section-3.8.5">3.8.5</a>.  Multipath End-to-End Congestion Control and Traffic Engineering</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.5.%20%20Multipath%20End-to-End%20Congestion%20Control%20and%20Traffic%20Engineering"></a></body></html><a class="selflink" href="#section-3.8.5" id="section-3.8.5">3.8.5</a>.  Multipath End-to-End Congestion Control and Traffic Engineering</span>
 
    Recent work has shown that multipath endpoint congestion control
    [<a href="#ref-Kelly05" title='"Stability of end-to-end algorithms for joint routing and rate control"'>Kelly05</a>] offers considerable benefits in terms of resilience and
@@ -2237,7 +2215,7 @@ Table of Contents
    engineering than the network itself, given the right incentives
    [<a href="#ref-Arkko09" title='"Dagstuhl Perspectives Workshop on End-to-End Protocols for the Future Internet,"'>Arkko09</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.6.%20%20ALGs%20and%20Middleboxes"></a></body></html><a class="selflink" href="#section-3.8.6" name="section-3.8.6">3.8.6</a>.  ALGs and Middleboxes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.8.6.%20%20ALGs%20and%20Middleboxes"></a></body></html><a class="selflink" href="#section-3.8.6" id="section-3.8.6">3.8.6</a>.  ALGs and Middleboxes</span>
 
    An increasing number of application layer gateways (ALGs),
    middleboxes, and proxies (see <a href="./rfc2775.html#section-3.6">Section 3.6 of [RFC2775]</a>) are deployed
@@ -2248,7 +2226,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -2282,7 +2260,7 @@ Table of Contents
       transport, and application layer protocols on both sides, which
       individually can be congestion controlled.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Security Considerations</span>
 
    Misbehavior may be driven by pure malice, or malice may in turn be
    driven by wider selfish interests, e.g., using distributed denial-of-
@@ -2304,7 +2282,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -2321,35 +2299,35 @@ Table of Contents
    and receivers also discuss some information security issues suffered
    by various congestion control approaches.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20References"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20References"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Informative References</span>
 
-   [<a id="ref-Allman99" name="ref-Allman99">Allman99</a>]  Allman, M. and V. Paxson, "On Estimating End-to-End
+   [<a id="ref-Allman99">Allman99</a>]  Allman, M. and V. Paxson, "On Estimating End-to-End
                Network Path Properties", Proceedings of ACM SIGCOMM'99,
                September 1999.
 
-   [<a id="ref-Andrew05" name="ref-Andrew05">Andrew05</a>]  Andrew, L., Wydrowski, B., and S. Low, "An Example of
+   [<a id="ref-Andrew05">Andrew05</a>]  Andrew, L., Wydrowski, B., and S. Low, "An Example of
                Instability in XCP", Manuscript available at
                &lt;<a href="http://netlab.caltech.edu/maxnet/XCP_instability.pdf">http://netlab.caltech.edu/maxnet/XCP_instability.pdf</a>&gt;.
 
-   [<a id="ref-Arkko09" name="ref-Arkko09">Arkko09</a>]   Arkko, J., Briscoe, B., Eggert, L., Feldmann, A., and M.
+   [<a id="ref-Arkko09">Arkko09</a>]   Arkko, J., Briscoe, B., Eggert, L., Feldmann, A., and M.
                Handley, "Dagstuhl Perspectives Workshop on End-to-End
                Protocols for the Future Internet," ACM SIGCOMM Computer
                Communication Review, Vol. 39, No. 2, pp. 42-47, April
                2009.
 
-   [<a id="ref-Ath01" name="ref-Ath01">Ath01</a>]     Athuraliya, S., Low, S., Li, V., and Q. Yin, "REM: Active
+   [<a id="ref-Ath01">Ath01</a>]     Athuraliya, S., Low, S., Li, V., and Q. Yin, "REM: Active
                Queue Management", IEEE Network Magazine, Vol. 15, No. 3,
                pp. 48-53, May 2001.
 
-   [<a id="ref-Balan01" name="ref-Balan01">Balan01</a>]   Balan, R.K., Lee, B.P., Kumar, K.R.R., Jacob, L., Seah,
+   [<a id="ref-Balan01">Balan01</a>]   Balan, R.K., Lee, B.P., Kumar, K.R.R., Jacob, L., Seah,
                W.K.G., and A.L. Ananda, "TCP HACK: TCP Header Checksum
                Option to Improve Performance over Lossy Links",
                Proceedings of IEEE INFOCOM'01, Anchorage (Alaska), USA,
                April 2001.
 
-   [<a id="ref-Bonald00" name="ref-Bonald00">Bonald00</a>]  Bonald, T., May, M., and J.-C. Bolot, "Analytic
+   [<a id="ref-Bonald00">Bonald00</a>]  Bonald, T., May, M., and J.-C. Bolot, "Analytic
                Evaluation of RED Performance", Proceedings of IEEE
                INFOCOM'00, Tel Aviv, Israel, March 2000.
 
@@ -2360,109 +2338,109 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-   [<a id="ref-Bri06" name="ref-Bri06">Bri06</a>]     Briscoe, B., "Using Self-interest to Prevent Malice;
+   [<a id="ref-Bri06">Bri06</a>]     Briscoe, B., "Using Self-interest to Prevent Malice;
                Fixing the Denial of Service Flaw of the Internet",
                Workshop on the Economics of Securing the Information
                Infrastructure, October 2006,
                &lt;<a href="http://wesii.econinfosec.org/draft.php?paper_id=19">http://wesii.econinfosec.org/draft.php?paper_id=19</a>&gt;.
 
-   [<a id="ref-Bri07" name="ref-Bri07">Bri07</a>]     Briscoe, B., "Flow Rate Fairness: Dismantling a
+   [<a id="ref-Bri07">Bri07</a>]     Briscoe, B., "Flow Rate Fairness: Dismantling a
                Religion", ACM SIGCOMM Computer Communication Review,
                Vol. 37, No. 2, pp. 63-74, April 2007.
 
-   [<a id="ref-Bri08" name="ref-Bri08">Bri08</a>]     Briscoe, B., Moncaster, T. and L. Burness, "Problem
+   [<a id="ref-Bri08">Bri08</a>]     Briscoe, B., Moncaster, T. and L. Burness, "Problem
                Statement: Transport Protocols Don't Have To Do
                Fairness", Work in Progress, July 2008.
 
-   [<a id="ref-Bri09" name="ref-Bri09">Bri09</a>]     Briscoe, B., "Re-feedback: Freedom with Accountability
+   [<a id="ref-Bri09">Bri09</a>]     Briscoe, B., "Re-feedback: Freedom with Accountability
                for Causing Congestion in a Connectionless Internetwork",
                UCL PhD Thesis (2009).
 
-   [<a id="ref-Bri10" name="ref-Bri10">Bri10</a>]     Briscoe, B. and J. Manner, "Byte and Packet Congestion
+   [<a id="ref-Bri10">Bri10</a>]     Briscoe, B. and J. Manner, "Byte and Packet Congestion
                Notification," Work in Progress, October 2010.
 
-   [<a id="ref-Chester04" name="ref-Chester04">Chester04</a>] Chesterfield, J., Chakravorty, R., Banerjee, S.,
+   [<a id="ref-Chester04">Chester04</a>] Chesterfield, J., Chakravorty, R., Banerjee, S.,
                Rodriguez, P., Pratt, I., and J. Crowcroft, "Transport
                level optimisations for streaming media over wide-area
                wireless networks", WIOPT'04, March 2004.
 
-   [<a id="ref-Chhabra02" name="ref-Chhabra02">Chhabra02</a>] Chhabra, P., Chuig, S., Goel, A., John, A., Kumar, A.,
+   [<a id="ref-Chhabra02">Chhabra02</a>] Chhabra, P., Chuig, S., Goel, A., John, A., Kumar, A.,
                Saran, H., and R. Shorey, "XCHOKe: Malicious Source
                Control for Congestion Avoidance at Internet Gateways,"
                Proceedings of IEEE International Conference on Network
                Protocols (ICNP'02), Paris, France, November 2002.
 
-   [<a id="ref-Chiu89" name="ref-Chiu89">Chiu89</a>]    Chiu, D.M. and R. Jain, "Analysis of the increase and
+   [<a id="ref-Chiu89">Chiu89</a>]    Chiu, D.M. and R. Jain, "Analysis of the increase and
                decrease algorithms for congestion avoidance in computer
                networks", Computer Networks and ISDN Systems, Vol. 17,
                pp. 1-14, 1989.
 
-   [<a id="ref-Clark88" name="ref-Clark88">Clark88</a>]   Clark, D., "The design philosophy of the DARPA internet
+   [<a id="ref-Clark88">Clark88</a>]   Clark, D., "The design philosophy of the DARPA internet
                protocols", ACM SIGCOMM Computer Communication Review,
                Vol. 18, No. 4, pp. 106-114, August 1988.
 
-   [<a id="ref-Clark98" name="ref-Clark98">Clark98</a>]   Clark, D. and W. Fang, "Explicit Allocation of Best-
+   [<a id="ref-Clark98">Clark98</a>]   Clark, D. and W. Fang, "Explicit Allocation of Best-
                Effort Packet Delivery Service", IEEE/ACM Transactions on
                Networking, Vol. 6, No. 4, pp. 362-373, August 1998.
 
-   [<a id="ref-Chu10" name="ref-Chu10">Chu10</a>]     Chu, J., Dukkipati, N., Cheng, Y., and M. Mathis,
+   [<a id="ref-Chu10">Chu10</a>]     Chu, J., Dukkipati, N., Cheng, Y., and M. Mathis,
                "Increasing TCP's Initial Window", Work in Progress,
                October 2010.
 
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-   [<a id="ref-CONEX" name="ref-CONEX">CONEX</a>]     IETF WG Action: Congestion Exposure (conex).
+   [<a id="ref-CONEX">CONEX</a>]     IETF WG Action: Congestion Exposure (conex).
 
-   [<a id="ref-Dukki05" name="ref-Dukki05">Dukki05</a>]   Dukkipati, N., Kobayashi, M., Zhang-Shen, R., and N.
+   [<a id="ref-Dukki05">Dukki05</a>]   Dukkipati, N., Kobayashi, M., Zhang-Shen, R., and N.
                McKeown, "Processor Sharing Flows in the Internet",
                Proceedings of International Workshop on Quality of
                Service (IWQoS'05), Passau, Germany, June 2005.
 
-   [<a id="ref-Dukki06" name="ref-Dukki06">Dukki06</a>]   Dukkipati, N. and N. McKeown, "Why Flow-Completion Time
+   [<a id="ref-Dukki06">Dukki06</a>]   Dukkipati, N. and N. McKeown, "Why Flow-Completion Time
                is the Right Metric for Congestion Control", ACM SIGCOMM
                Computer Communication Review, Vol. 36, No. 1, January
                2006.
 
-   [<a id="ref-ECODE" name="ref-ECODE">ECODE</a>]     "ECODE Project", European Commission Seventh Framework
+   [<a id="ref-ECODE">ECODE</a>]     "ECODE Project", European Commission Seventh Framework
                Program, Grant No. 223936, &lt;<a href="http://www.ecode-project.eu">http://www.ecode-project.eu</a>&gt;.
 
-   [<a id="ref-Falk07" name="ref-Falk07">Falk07</a>]    Falk, A., Pryadkin, Y., and D. Katabi, "Specification for
+   [<a id="ref-Falk07">Falk07</a>]    Falk, A., Pryadkin, Y., and D. Katabi, "Specification for
                the Explicit Control Protocol (XCP)", Work in Progress,
                January 2007.
 
-   [<a id="ref-Feldman04" name="ref-Feldman04">Feldman04</a>]
+   [<a id="ref-Feldman04">Feldman04</a>]
                Feldman, M., Papadimitriou, C., Chuang, J., and I.
                Stoica, "Free-Riding and Whitewashing in Peer-to-Peer
                Systems" Proceedings of ACM SIGCOMM Workshop on Practice
                and Theory of Incentives in Networked Systems (PINS'04)
                2004.
 
-   [<a id="ref-Firoiu00" name="ref-Firoiu00">Firoiu00</a>]  Firoiu, V. and M. Borden, "A Study of Active Queue
+   [<a id="ref-Firoiu00">Firoiu00</a>]  Firoiu, V. and M. Borden, "A Study of Active Queue
                Management for Congestion Control", Proceedings of IEEE
                INFOCOM'00, Tel Aviv, Israel, March 2000.
 
-   [<a id="ref-Floyd93" name="ref-Floyd93">Floyd93</a>]   Floyd, S. and V. Jacobson, "Random early detection
+   [<a id="ref-Floyd93">Floyd93</a>]   Floyd, S. and V. Jacobson, "Random early detection
                gateways for congestion avoidance", IEEE/ACM Transactions
                on Networking, Vol. 1, No. 4, pp. 397-413, August 1993.
 
-   [<a id="ref-Floyd94" name="ref-Floyd94">Floyd94</a>]   Floyd, S., "TCP and Explicit Congestion Notification",
+   [<a id="ref-Floyd94">Floyd94</a>]   Floyd, S., "TCP and Explicit Congestion Notification",
                ACM Computer Communication Review, Vol. 24, No. 5,
                pp. 10-23, October 1994.
 
-   [<a id="ref-Gibbens02" name="ref-Gibbens02">Gibbens02</a>] Gibbens, R. and Kelly, F., "On Packet Marking at Priority
+   [<a id="ref-Gibbens02">Gibbens02</a>] Gibbens, R. and Kelly, F., "On Packet Marking at Priority
                Queues", IEEE Transactions on Automatic Control, Vol. 47,
                No. 6, pp. 1016-1020, 2002.
 
-   [<a id="ref-Ha08" name="ref-Ha08">Ha08</a>]      Ha, S., Rhee, I., and L. Xu, "CUBIC: A new TCP-friendly
+   [<a id="ref-Ha08">Ha08</a>]      Ha, S., Rhee, I., and L. Xu, "CUBIC: A new TCP-friendly
                high-speed TCP variant", ACM SIGOPS Operating System
                Review, Vol. 42, No. 5, pp. 64-74, 2008.
 
@@ -2472,51 +2450,51 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-   [<a id="ref-Hilt08" name="ref-Hilt08">Hilt08</a>]    Hilt, V. and I. Widjaja, "Controlling Overload in
+   [<a id="ref-Hilt08">Hilt08</a>]    Hilt, V. and I. Widjaja, "Controlling Overload in
                Networks of SIP Servers", Proceedings of IEEE
                International Conference on Network Protocols (ICNP'08),
                Orlando (Florida), USA, October 2008.
 
-   [<a id="ref-Hollot01" name="ref-Hollot01">Hollot01</a>]  Hollot, C., Misra, V., Towsley, D., and W.-B. Gong, "A
+   [<a id="ref-Hollot01">Hollot01</a>]  Hollot, C., Misra, V., Towsley, D., and W.-B. Gong, "A
                Control Theoretic Analysis of RED", Proceedings of IEEE
                INFOCOM'01, Anchorage (Alaska), USA, April 2001.
 
-   [<a id="ref-Jacobson88" name="ref-Jacobson88">Jacobson88</a>]
+   [<a id="ref-Jacobson88">Jacobson88</a>]
                Jacobson, V., "Congestion Avoidance and Control",
                Proceedings of ACM SIGCOMM'88 Symposium, August 1988.
 
-   [<a id="ref-Jain88" name="ref-Jain88">Jain88</a>]    Jain, R. and K. Ramakrishnan, "Congestion Avoidance in
+   [<a id="ref-Jain88">Jain88</a>]    Jain, R. and K. Ramakrishnan, "Congestion Avoidance in
                Computer Networks with a Connectionless Network Layer:
                Concepts, Goals, and Methodology", Proceedings of IEEE
                Computer Networking Symposium, Washington DC, USA, April
                1988.
 
-   [<a id="ref-Jain90" name="ref-Jain90">Jain90</a>]    Jain, R., "Congestion Control in Computer Networks:
+   [<a id="ref-Jain90">Jain90</a>]    Jain, R., "Congestion Control in Computer Networks:
                Trends and Issues", IEEE Network, pp. 24-30, May 1990.
 
-   [<a id="ref-Jin04" name="ref-Jin04">Jin04</a>]     Jin, Ch., Wei, D.X., and S. Low, "FAST TCP: Motivation,
+   [<a id="ref-Jin04">Jin04</a>]     Jin, Ch., Wei, D.X., and S. Low, "FAST TCP: Motivation,
                Architecture, Algorithms, Performance", Proceedings of
                IEEE INFOCOM'04, Hong-Kong, China, March 2004.
 
-   [<a id="ref-Jourjon08" name="ref-Jourjon08">Jourjon08</a>] Jourjon, G., Lochin, E., and P. Senac, "Design,
+   [<a id="ref-Jourjon08">Jourjon08</a>] Jourjon, G., Lochin, E., and P. Senac, "Design,
                Implementation and Evaluation of a QoS-aware Transport
                Protocol", Elsevier Computer Communications, Vol. 31,
                No. 9, pp. 1713-1722, June 2008.
 
-   [<a id="ref-Katabi02" name="ref-Katabi02">Katabi02</a>]  Katabi, D., M. Handley, and C. Rohrs, "Internet
+   [<a id="ref-Katabi02">Katabi02</a>]  Katabi, D., M. Handley, and C. Rohrs, "Internet
                Congestion Control for Future High Bandwidth-Delay
                Product Environments", Proceedings of ACM SIGCOMM'02
                Symposium, August 2002.
 
-   [<a id="ref-Katabi04" name="ref-Katabi04">Katabi04</a>]  Katabi, D., "XCP Performance in the Presence of Malicious
+   [<a id="ref-Katabi04">Katabi04</a>]  Katabi, D., "XCP Performance in the Presence of Malicious
                Flows", Proceedings of PFLDnet'04 Workshop, Argonne
                (Illinois), USA, February 2004.
 
-   [<a id="ref-Kelly05" name="ref-Kelly05">Kelly05</a>]   Kelly, F. and Th. Voice, "Stability of end-to-end
+   [<a id="ref-Kelly05">Kelly05</a>]   Kelly, F. and Th. Voice, "Stability of end-to-end
                algorithms for joint routing and rate control", ACM
                SIGCOMM Computer Communication Review, Vol. 35, No. 2,
                pp. 5-12, April 2005.
@@ -2528,54 +2506,54 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 42]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-43" id="page-43" name="page-43"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-43"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-   [<a id="ref-Kelly98" name="ref-Kelly98">Kelly98</a>]   Kelly, F., Maulloo, A., and D. Tan, "Rate control in
+   [<a id="ref-Kelly98">Kelly98</a>]   Kelly, F., Maulloo, A., and D. Tan, "Rate control in
                communication networks: shadow prices, proportional
                fairness, and stability", Journal of the Operational
                Research Society, Vol. 49, pp. 237-252, 1998.
 
-   [<a id="ref-Keshav07" name="ref-Keshav07">Keshav07</a>]  Keshav, S., "What is congestion and what is congestion
+   [<a id="ref-Keshav07">Keshav07</a>]  Keshav, S., "What is congestion and what is congestion
                control", Presentation at IRTF ICCRG Workshop, PFLDnet
                2007, Los Angeles (California), USA, February 2007.
 
-   [<a id="ref-Key04" name="ref-Key04">Key04</a>]     Key, P., Massoulie, L., Bain, A., and F. Kelly, "Fair
+   [<a id="ref-Key04">Key04</a>]     Key, P., Massoulie, L., Bain, A., and F. Kelly, "Fair
                Internet Traffic Integration: Network Flow Models and
                Analysis", Annales des Telecommunications, Vol. 59,
                No. 11-12, pp. 1338-1352, November-December 2004.
 
-   [<a id="ref-Krishnan04" name="ref-Krishnan04">Krishnan04</a>]
+   [<a id="ref-Krishnan04">Krishnan04</a>]
                Krishnan, R., Sterbenz, J., Eddy, W., Partridge, C., and
                M. Allman, "Explicit Transport Error Notification (ETEN)
                for Error-Prone Wireless and Satellite Networks",
                Computer Networks, Vol. 46, No. 3, October 2004.
 
-   [<a id="ref-Kuzmanovic03" name="ref-Kuzmanovic03">Kuzmanovic03</a>]
+   [<a id="ref-Kuzmanovic03">Kuzmanovic03</a>]
                Kuzmanovic, A. and E.W. Knightly, "TCP-LP: A Distributed
                Algorithm for Low Priority Data Transfer", Proceedings of
                IEEE INFOCOM'03, San Francisco (California), USA, April
                2003.
 
-   [<a id="ref-LEDBAT" name="ref-LEDBAT">LEDBAT</a>]    IETF WG Action: Low Extra Delay Background Transport
+   [<a id="ref-LEDBAT">LEDBAT</a>]    IETF WG Action: Low Extra Delay Background Transport
                (ledbat).
 
-   [<a id="ref-Lochin06" name="ref-Lochin06">Lochin06</a>]  Lochin, E., Dairaine, L., and G. Jourjon, "Guaranteed TCP
+   [<a id="ref-Lochin06">Lochin06</a>]  Lochin, E., Dairaine, L., and G. Jourjon, "Guaranteed TCP
                Friendly Rate Control (gTFRC) for DiffServ/AF Network",
                Work in Progress, August 2006.
 
-   [<a id="ref-Lochin07" name="ref-Lochin07">Lochin07</a>]  Lochin, E., Jourjon, G., and L. Dairaine, "Study and
+   [<a id="ref-Lochin07">Lochin07</a>]  Lochin, E., Jourjon, G., and L. Dairaine, "Study and
                enhancement of DCCP over DiffServ Assured Forwarding
                class", 4th Conference on Universal Multiservice Networks
                (ECUMN 2007), Toulouse, France, February 2007.
 
-   [<a id="ref-Low02" name="ref-Low02">Low02</a>]     Low, S., Paganini, F., Wang, J., Adlakha, S., and J.C.
+   [<a id="ref-Low02">Low02</a>]     Low, S., Paganini, F., Wang, J., Adlakha, S., and J.C.
                Doyle, "Dynamics of TCP/RED and a Scalable Control",
                Proceedings of IEEE INFOCOM'02, New York (New Jersey),
                2002.
 
-   [<a id="ref-Low03.1" name="ref-Low03.1">Low03.1</a>]   Low, S., "A duality model of TCP and queue management
+   [<a id="ref-Low03.1">Low03.1</a>]   Low, S., "A duality model of TCP and queue management
                algorithms", IEEE/ACM Transactions on Networking,
                Vol. 11, No. 4, pp. 525-536, August 2003.
 
@@ -2584,52 +2562,52 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 43]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-44" id="page-44" name="page-44"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-44"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-   [<a id="ref-Low03.2" name="ref-Low03.2">Low03.2</a>]   Low, S., Paganini, F., Wang, J., and J. Doyle, "Linear
+   [<a id="ref-Low03.2">Low03.2</a>]   Low, S., Paganini, F., Wang, J., and J. Doyle, "Linear
                stability of TCP/RED and a scalable control", Computer
                Networks Journal, Vol. 43, No. 5, pp. 633-647, December
                2003.
 
-   [<a id="ref-Low05" name="ref-Low05">Low05</a>]     Low, S., Andrew, L., and B. Wydrowski, "Understanding
+   [<a id="ref-Low05">Low05</a>]     Low, S., Andrew, L., and B. Wydrowski, "Understanding
                XCP: equilibrium and fairness", Proceedings of IEEE
                INFOCOM'05, Miami (Florida), USA, March 2005.
 
-   [<a id="ref-MacK95" name="ref-MacK95">MacK95</a>]    MacKie-Mason, J. and H. Varian, "Pricing Congestible
+   [<a id="ref-MacK95">MacK95</a>]    MacKie-Mason, J. and H. Varian, "Pricing Congestible
                Network Resources", IEEE Journal on Selected Areas in
                Communications, Advances in the Fundamentals of
                Networking, Vol. 13, No. 7, pp. 1141-1149, 1995.
 
-   [<a id="ref-Mascolo01" name="ref-Mascolo01">Mascolo01</a>] Mascolo, S., Casetti, Cl., Gerla M., Sanadidi, M.Y., and
+   [<a id="ref-Mascolo01">Mascolo01</a>] Mascolo, S., Casetti, Cl., Gerla M., Sanadidi, M.Y., and
                R. Wang, "TCP Westwood: Bandwidth estimation for enhanced
                transport over wireless links", Proceedings of MOBICOM
                2001, Rome, Italy, July 2001.
 
-   [<a id="ref-Moors02" name="ref-Moors02">Moors02</a>]   Moors, T., "A critical review of "End-to-end arguments in
+   [<a id="ref-Moors02">Moors02</a>]   Moors, T., "A critical review of "End-to-end arguments in
                system design"", Proceedings of IEEE International
                Conference on Communications (ICC) 2002, New York City
                (New Jersey), USA, April/May 2002.
 
-   [<a id="ref-MPTCP" name="ref-MPTCP">MPTCP</a>]     IETF WG Action: Multipath TCP (mptcp).
+   [<a id="ref-MPTCP">MPTCP</a>]     IETF WG Action: Multipath TCP (mptcp).
 
-   [<a id="ref-Noel07" name="ref-Noel07">Noel07</a>]    Noel, E. and C. Johnson, "Initial Simulation Results That
+   [<a id="ref-Noel07">Noel07</a>]    Noel, E. and C. Johnson, "Initial Simulation Results That
                Analyze SIP Based VoIP Networks Under Overload",
                International Teletraffic Congress (ITC'07), Ottawa,
                Canada, June 2007.
 
-   [<a id="ref-Padhye98" name="ref-Padhye98">Padhye98</a>]  Padhye, J., Firoiu, V., Towsley, D., and J. Kurose,
+   [<a id="ref-Padhye98">Padhye98</a>]  Padhye, J., Firoiu, V., Towsley, D., and J. Kurose,
                "Modeling TCP Throughput: A Simple Model and Its
                Empirical Validation", University of Massachusetts
                (UMass), CMPSCI Tech. Report TR98-008, February 1998.
 
-   [<a id="ref-Pan00" name="ref-Pan00">Pan00</a>]     Pan, R., Prabhakar, B., and K. Psounis, "CHOKe: a
+   [<a id="ref-Pan00">Pan00</a>]     Pan, R., Prabhakar, B., and K. Psounis, "CHOKe: a
                stateless AQM scheme for approximating fair bandwidth
                allocation", Proceedings of IEEE INFOCOM'00, Tel Aviv,
                Israel, March 2000.
 
-   [<a id="ref-Pap02" name="ref-Pap02">Pap02</a>]     Papadimitriou, I. and G. Mavromatis, "Stability of
+   [<a id="ref-Pap02">Pap02</a>]     Papadimitriou, I. and G. Mavromatis, "Stability of
                Congestion Control Algorithms using Control Theory with
                an application to XCP", Technical Report, 2002.
                &lt;<a href="http://www.stanford.edu/class/ee384y/projects/reports/ionnis.pdf">http://www.stanford.edu/class/ee384y/projects/</a>
@@ -2640,55 +2618,55 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 44]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-45" id="page-45" name="page-45"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-45"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-   [<a id="ref-RFC791" name="ref-RFC791">RFC791</a>]    Postel, J., "Internet Protocol", STD 5, <a href="./rfc791.html">RFC 791</a>,
+   [<a id="ref-RFC791">RFC791</a>]    Postel, J., "Internet Protocol", STD 5, <a href="./rfc791.html">RFC 791</a>,
                September 1981.
 
-   [<a id="ref-RFC793" name="ref-RFC793">RFC793</a>]    Postel, J., "Transmission Control Protocol", STD 7,
+   [<a id="ref-RFC793">RFC793</a>]    Postel, J., "Transmission Control Protocol", STD 7,
                <a href="./rfc793.html">RFC 793</a>, September 1981.
 
-   [<a id="ref-RFC1323" name="ref-RFC1323">RFC1323</a>]   Jacobson, V., Braden, R., and D. Borman, "TCP Extensions
+   [<a id="ref-RFC1323">RFC1323</a>]   Jacobson, V., Braden, R., and D. Borman, "TCP Extensions
                for High Performance", <a href="./rfc1323.html">RFC 1323</a>, May 1992.
 
-   [<a id="ref-RFC1701" name="ref-RFC1701">RFC1701</a>]   Hanks, S., Li, T., Farinacci, D., and P. Traina, "Generic
+   [<a id="ref-RFC1701">RFC1701</a>]   Hanks, S., Li, T., Farinacci, D., and P. Traina, "Generic
                Routing Encapsulation (GRE)", <a href="./rfc1701.html">RFC 1701</a>, October 1994.
 
-   [<a id="ref-RFC1958" name="ref-RFC1958">RFC1958</a>]   Carpenter, B., Ed., "Architectural Principles of the
+   [<a id="ref-RFC1958">RFC1958</a>]   Carpenter, B., Ed., "Architectural Principles of the
                Internet", <a href="./rfc1958.html">RFC 1958</a>, June 1996.
 
-   [<a id="ref-RFC2003" name="ref-RFC2003">RFC2003</a>]   Perkins, C., "IP Encapsulation within IP", <a href="./rfc2003.html">RFC 2003</a>,
+   [<a id="ref-RFC2003">RFC2003</a>]   Perkins, C., "IP Encapsulation within IP", <a href="./rfc2003.html">RFC 2003</a>,
                October 1996.
 
-   [<a id="ref-RFC2018" name="ref-RFC2018">RFC2018</a>]   Mathis, M., Mahdavi, J., Floyd, S., and A. Romanow, "TCP
+   [<a id="ref-RFC2018">RFC2018</a>]   Mathis, M., Mahdavi, J., Floyd, S., and A. Romanow, "TCP
                Selective Acknowledgment Options", <a href="./rfc2018.html">RFC 2018</a>, October
                1996.
 
-   [<a id="ref-RFC2208" name="ref-RFC2208">RFC2208</a>]   Mankin, A., Ed., Baker, F., Braden, B., Bradner, S.,
+   [<a id="ref-RFC2208">RFC2208</a>]   Mankin, A., Ed., Baker, F., Braden, B., Bradner, S.,
                O'Dell, M., Romanow, A., Weinrib, A., and L. Zhang,
                "Resource ReSerVation Protocol (RSVP) -- Version 1
                Applicability Statement Some Guidelines on Deployment",
                <a href="./rfc2208.html">RFC 2208</a>, September 1997.
 
-   [<a id="ref-RFC2474" name="ref-RFC2474">RFC2474</a>]   Nichols, K., Blake, S., Baker, F., and D. Black,
+   [<a id="ref-RFC2474">RFC2474</a>]   Nichols, K., Blake, S., Baker, F., and D. Black,
                "Definition of the Differentiated Services Field (DS
                Field) in the IPv4 and IPv6 Headers", <a href="./rfc2474.html">RFC 2474</a>, December
                1998.
 
-   [<a id="ref-RFC2475" name="ref-RFC2475">RFC2475</a>]   Blake, S., Black, D., Carlson, M., Davies, E., Wang, Z.,
+   [<a id="ref-RFC2475">RFC2475</a>]   Blake, S., Black, D., Carlson, M., Davies, E., Wang, Z.,
                and W. Weiss, "An Architecture for Differentiated
                Service", <a href="./rfc2475.html">RFC 2475</a>, December 1998.
 
-   [<a id="ref-RFC2581" name="ref-RFC2581">RFC2581</a>]   Allman, M., Paxson, V., and W. Stevens, "TCP Congestion
+   [<a id="ref-RFC2581">RFC2581</a>]   Allman, M., Paxson, V., and W. Stevens, "TCP Congestion
                Control", <a href="./rfc2581.html">RFC 2581</a>, April 1999.
 
-   [<a id="ref-RFC2637" name="ref-RFC2637">RFC2637</a>]   Hamzeh, K., Pall, G., Verthein, W., Taarud, J., Little,
+   [<a id="ref-RFC2637">RFC2637</a>]   Hamzeh, K., Pall, G., Verthein, W., Taarud, J., Little,
                W., and G. Zorn, "Point-to-Point Tunneling Protocol
                (PPTP)", <a href="./rfc2637.html">RFC 2637</a>, July 1999.
 
-   [<a id="ref-RFC2661" name="ref-RFC2661">RFC2661</a>]   Townsley, W., Valencia, A., Rubens, A., Pall, G., Zorn,
+   [<a id="ref-RFC2661">RFC2661</a>]   Townsley, W., Valencia, A., Rubens, A., Pall, G., Zorn,
                G., and B. Palter, "Layer Two Tunneling Protocol "L2TP"",
                <a href="./rfc2661.html">RFC 2661</a>, August 1999.
 
@@ -2696,111 +2674,111 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 45]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-46" id="page-46" name="page-46"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-46"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-   [<a id="ref-RFC2775" name="ref-RFC2775">RFC2775</a>]   Carpenter, B., "Internet Transparency", <a href="./rfc2775.html">RFC 2775</a>,
+   [<a id="ref-RFC2775">RFC2775</a>]   Carpenter, B., "Internet Transparency", <a href="./rfc2775.html">RFC 2775</a>,
                February 2000.
 
-   [<a id="ref-RFC2784" name="ref-RFC2784">RFC2784</a>]   Farinacci, D., Li, T., Hanks, S., Meyer, D., and P.
+   [<a id="ref-RFC2784">RFC2784</a>]   Farinacci, D., Li, T., Hanks, S., Meyer, D., and P.
                Traina, "Generic Routing Encapsulation (GRE)", <a href="./rfc2784.html">RFC 2784</a>,
                March 2000.
 
-   [<a id="ref-RFC2861" name="ref-RFC2861">RFC2861</a>]   Handley, M., Padhye, J., and S. Floyd, "TCP Congestion
+   [<a id="ref-RFC2861">RFC2861</a>]   Handley, M., Padhye, J., and S. Floyd, "TCP Congestion
                Window Validation", <a href="./rfc2861.html">RFC 2861</a>, June 2000.
 
-   [<a id="ref-RFC2914" name="ref-RFC2914">RFC2914</a>]   Floyd, S., "Congestion Control Principles", <a href="./bcp41.html">BCP 41</a>,
+   [<a id="ref-RFC2914">RFC2914</a>]   Floyd, S., "Congestion Control Principles", <a href="https://www.rfc-editor.org/bcp/bcp41">BCP 41</a>,
                <a href="./rfc2914.html">RFC 2914</a>, September 2000.
 
-   [<a id="ref-RFC2988" name="ref-RFC2988">RFC2988</a>]   Paxson, V. and M. Allman, "Computing TCP's Retransmission
+   [<a id="ref-RFC2988">RFC2988</a>]   Paxson, V. and M. Allman, "Computing TCP's Retransmission
                Timer", <a href="./rfc2988.html">RFC 2988</a>, November 2000.
 
-   [<a id="ref-RFC2990" name="ref-RFC2990">RFC2990</a>]   Huston, G., "Next Steps for the IP QoS Architecture",
+   [<a id="ref-RFC2990">RFC2990</a>]   Huston, G., "Next Steps for the IP QoS Architecture",
                <a href="./rfc2990.html">RFC 2990</a>, November 2000.
 
-   [<a id="ref-RFC3031" name="ref-RFC3031">RFC3031</a>]   Rosen, E., Viswanathan, A., and R. Callon, "Multiprotocol
+   [<a id="ref-RFC3031">RFC3031</a>]   Rosen, E., Viswanathan, A., and R. Callon, "Multiprotocol
                Label Switching Architecture", <a href="./rfc3031.html">RFC 3031</a>, January 2001.
 
-   [<a id="ref-RFC3032" name="ref-RFC3032">RFC3032</a>]   Rosen, E., Tappan, D., Fedorkow, G., Rekhter, Y.,
+   [<a id="ref-RFC3032">RFC3032</a>]   Rosen, E., Tappan, D., Fedorkow, G., Rekhter, Y.,
                Farinacci, D., Li, T., and A. Conta, "MPLS Label Stack
                Encoding", <a href="./rfc3032.html">RFC 3032</a>, January 2001.
 
-   [<a id="ref-RFC3168" name="ref-RFC3168">RFC3168</a>]   Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
+   [<a id="ref-RFC3168">RFC3168</a>]   Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
                of Explicit Congestion Notification (ECN) to IP",
                <a href="./rfc3168.html">RFC 3168</a>, September 2001.
 
-   [<a id="ref-RFC3260" name="ref-RFC3260">RFC3260</a>]   Grossman, D., "New Terminology and Clarifications for
+   [<a id="ref-RFC3260">RFC3260</a>]   Grossman, D., "New Terminology and Clarifications for
                Diffserv", <a href="./rfc3260.html">RFC 3260</a>, April 2002.
 
-   [<a id="ref-RFC3517" name="ref-RFC3517">RFC3517</a>]   Blanton, E., Allman, M., Fall, K., and L. Wang, "A
+   [<a id="ref-RFC3517">RFC3517</a>]   Blanton, E., Allman, M., Fall, K., and L. Wang, "A
                Conservative Selective Acknowledgment (SACK)-based Loss
                Recovery Algorithm for TCP", <a href="./rfc3517.html">RFC 3517</a>, April 2003.
 
-   [<a id="ref-RFC3540" name="ref-RFC3540">RFC3540</a>]   Spring, N., Wetherall, D., and D. Ely, "Robust Explicit
+   [<a id="ref-RFC3540">RFC3540</a>]   Spring, N., Wetherall, D., and D. Ely, "Robust Explicit
                Congestion Notification (ECN) Signaling with Nonces",
                <a href="./rfc3540.html">RFC 3540</a>, June 2003.
 
-   [<a id="ref-RFC3662" name="ref-RFC3662">RFC3662</a>]   Bless, R., Nichols, K., and K. Wehrle, "A Lower Effort
+   [<a id="ref-RFC3662">RFC3662</a>]   Bless, R., Nichols, K., and K. Wehrle, "A Lower Effort
                Per-Domain Behavior (PDB) for Differentiated Services",
                <a href="./rfc3662.html">RFC 3662</a>, December 2003.
 
-   [<a id="ref-RFC3714" name="ref-RFC3714">RFC3714</a>]   Floyd, S., Ed., and J. Kempf, Ed., "IAB Concerns
+   [<a id="ref-RFC3714">RFC3714</a>]   Floyd, S., Ed., and J. Kempf, Ed., "IAB Concerns
                Regarding Congestion Control for Voice Traffic in the
                Internet", <a href="./rfc3714.html">RFC 3714</a>, March 2004.
 
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 46]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-47" id="page-47" name="page-47"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-47"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-   [<a id="ref-RFC3742" name="ref-RFC3742">RFC3742</a>]   Floyd, S., "Limited Slow-Start for TCP with Large
+   [<a id="ref-RFC3742">RFC3742</a>]   Floyd, S., "Limited Slow-Start for TCP with Large
                Congestion Windows", <a href="./rfc3742.html">RFC 3742</a>, March 2004.
 
-   [<a id="ref-RFC3985" name="ref-RFC3985">RFC3985</a>]   Bryant, S., Ed., and P. Pate, Ed., "Pseudo Wire Emulation
+   [<a id="ref-RFC3985">RFC3985</a>]   Bryant, S., Ed., and P. Pate, Ed., "Pseudo Wire Emulation
                Edge-to-Edge (PWE3) Architecture", <a href="./rfc3985.html">RFC 3985</a>, March 2005.
 
-   [<a id="ref-RFC4301" name="ref-RFC4301">RFC4301</a>]   Kent, S. and K. Seo, "Security Architecture for the
+   [<a id="ref-RFC4301">RFC4301</a>]   Kent, S. and K. Seo, "Security Architecture for the
                Internet Protocol", <a href="./rfc4301.html">RFC 4301</a>, December 2005.
 
-   [<a id="ref-RFC4340" name="ref-RFC4340">RFC4340</a>]   Kohler, E., Handley, M., and S. Floyd, "Datagram
+   [<a id="ref-RFC4340">RFC4340</a>]   Kohler, E., Handley, M., and S. Floyd, "Datagram
                Congestion Control Protocol (DCCP)", <a href="./rfc4340.html">RFC 4340</a>, March
                2006.
 
-   [<a id="ref-RFC4341" name="ref-RFC4341">RFC4341</a>]   Floyd, S. and E. Kohler, "Profile for Datagram Congestion
+   [<a id="ref-RFC4341">RFC4341</a>]   Floyd, S. and E. Kohler, "Profile for Datagram Congestion
                Control Protocol (DCCP) Congestion Control ID 2: TCP-like
                Congestion Control", <a href="./rfc4341.html">RFC 4341</a>, March 2006.
 
-   [<a id="ref-RFC4342" name="ref-RFC4342">RFC4342</a>]   Floyd, S., Kohler, E., and J. Padhye, "Profile for
+   [<a id="ref-RFC4342">RFC4342</a>]   Floyd, S., Kohler, E., and J. Padhye, "Profile for
                Datagram Congestion Control Protocol (DCCP) Congestion
                Control ID 3: TCP-Friendly Rate Control (TFRC)",
                <a href="./rfc4342.html">RFC 4342</a>, March 2006.
 
-   [<a id="ref-RFC4553" name="ref-RFC4553">RFC4553</a>]   Vainshtein, A., Ed., and YJ. Stein, Ed., "Structure-
+   [<a id="ref-RFC4553">RFC4553</a>]   Vainshtein, A., Ed., and YJ. Stein, Ed., "Structure-
                Agnostic Time Division Multiplexing (TDM) over Packet
                (SAToP)", <a href="./rfc4553.html">RFC 4553</a>, June 2006.
 
-   [<a id="ref-RFC4614" name="ref-RFC4614">RFC4614</a>]   Duke, M., Braden, R., Eddy, W., and E. Blanton, "A
+   [<a id="ref-RFC4614">RFC4614</a>]   Duke, M., Braden, R., Eddy, W., and E. Blanton, "A
                Roadmap for Transmission Control Protocol (TCP)
                Specification Documents", <a href="./rfc4614.html">RFC 4614</a>, September 2006.
 
-   [<a id="ref-RFC4782" name="ref-RFC4782">RFC4782</a>]   Floyd, S., Allman, M., Jain, A., and P. Sarolahti,
+   [<a id="ref-RFC4782">RFC4782</a>]   Floyd, S., Allman, M., Jain, A., and P. Sarolahti,
                "Quick-Start for TCP and IP", <a href="./rfc4782.html">RFC 4782</a>, January 2007.
 
-   [<a id="ref-RFC4828" name="ref-RFC4828">RFC4828</a>]   Floyd, S. and E. Kohler, "TCP Friendly Rate Control
+   [<a id="ref-RFC4828">RFC4828</a>]   Floyd, S. and E. Kohler, "TCP Friendly Rate Control
                (TFRC): The Small-Packet (SP) Variant", <a href="./rfc4828.html">RFC 4828</a>, April
                2007.
 
-   [<a id="ref-RFC4948" name="ref-RFC4948">RFC4948</a>]   Andersson, L., Davies, E., and L. Zhang, "Report from the
+   [<a id="ref-RFC4948">RFC4948</a>]   Andersson, L., Davies, E., and L. Zhang, "Report from the
                IAB workshop on Unwanted Traffic March 9-10, 2006",
                <a href="./rfc4948.html">RFC 4948</a>, August 2007.
 
-   [<a id="ref-RFC5033" name="ref-RFC5033">RFC5033</a>]   Floyd, S. and M. Allman, "Specifying New Congestion
-               Control Algorithms", <a href="./bcp133.html">BCP 133</a>, <a href="./rfc5033.html">RFC 5033</a>, August 2007.
+   [<a id="ref-RFC5033">RFC5033</a>]   Floyd, S. and M. Allman, "Specifying New Congestion
+               Control Algorithms", <a href="https://www.rfc-editor.org/bcp/bcp133">BCP 133</a>, <a href="./rfc5033.html">RFC 5033</a>, August 2007.
 
-   [<a id="ref-RFC5086" name="ref-RFC5086">RFC5086</a>]   Vainshtein, A., Ed., Sasson, I., Metz, E., Frost, T., and
+   [<a id="ref-RFC5086">RFC5086</a>]   Vainshtein, A., Ed., Sasson, I., Metz, E., Frost, T., and
                P. Pate, "Structure-Aware Time Division Multiplexed (TDM)
                Circuit Emulation Service over Packet Switched Network
                (CESoPSN)", <a href="./rfc5086.html">RFC 5086</a>, December 2007.
@@ -2808,53 +2786,53 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 47]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-48" id="page-48" name="page-48"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-48"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-   [<a id="ref-RFC5087" name="ref-RFC5087">RFC5087</a>]   Stein, Y(J)., Shashoua, R., Insler, R., and M. Anavi,
+   [<a id="ref-RFC5087">RFC5087</a>]   Stein, Y(J)., Shashoua, R., Insler, R., and M. Anavi,
                "Time Division Multiplexing over IP (TDMoIP)", <a href="./rfc5087.html">RFC 5087</a>,
                December 2007.
 
-   [<a id="ref-RFC5129" name="ref-RFC5129">RFC5129</a>]   Davie, B., Briscoe, B., and J. Tay, "Explicit Congestion
+   [<a id="ref-RFC5129">RFC5129</a>]   Davie, B., Briscoe, B., and J. Tay, "Explicit Congestion
                Marking in MPLS", <a href="./rfc5129.html">RFC 5129</a>, January 2008.
 
-   [<a id="ref-RFC5290" name="ref-RFC5290">RFC5290</a>]   Floyd, S. and M. Allman, "Comments on the Usefulness of
+   [<a id="ref-RFC5290">RFC5290</a>]   Floyd, S. and M. Allman, "Comments on the Usefulness of
                Simple Best-Effort Traffic", <a href="./rfc5290.html">RFC 5290</a>, July 2008.
 
-   [<a id="ref-RFC5348" name="ref-RFC5348">RFC5348</a>]   Floyd, S., Handley, M., Padhye, J., and J. Widmer, "TCP
+   [<a id="ref-RFC5348">RFC5348</a>]   Floyd, S., Handley, M., Padhye, J., and J. Widmer, "TCP
                Friendly Rate Control (TFRC): Protocol Specification",
                <a href="./rfc5348.html">RFC 5348</a>, September 2008.
 
-   [<a id="ref-RFC5405" name="ref-RFC5405">RFC5405</a>]   Eggert, L. and G. Fairhurst, "Unicast UDP Usage
-               Guidelines for Application Designers", <a href="./bcp145.html">BCP 145</a>, <a href="./rfc5405.html">RFC 5405</a>,
+   [<a id="ref-RFC5405">RFC5405</a>]   Eggert, L. and G. Fairhurst, "Unicast UDP Usage
+               Guidelines for Application Designers", <a href="https://www.rfc-editor.org/bcp/bcp145">BCP 145</a>, <a href="./rfc5405.html">RFC 5405</a>,
                November 2008.
 
-   [<a id="ref-RFC5622" name="ref-RFC5622">RFC5622</a>]   Floyd, S. and E. Kohler, "Profile for Datagram Congestion
+   [<a id="ref-RFC5622">RFC5622</a>]   Floyd, S. and E. Kohler, "Profile for Datagram Congestion
                Control Protocol (DCCP) Congestion ID 4: TCP-Friendly
                Rate Control for Small Packets (TFRC-SP)", <a href="./rfc5622.html">RFC 5622</a>,
                August 2009.
 
-   [<a id="ref-RFC5681" name="ref-RFC5681">RFC5681</a>]   Allman, M., Paxson, V., and E. Blanton, "TCP Congestion
+   [<a id="ref-RFC5681">RFC5681</a>]   Allman, M., Paxson, V., and E. Blanton, "TCP Congestion
                Control", <a href="./rfc5681.html">RFC 5681</a> (Obsoletes <a href="./rfc2581.html">RFC 2581</a>), September 2009.
 
-   [<a id="ref-RFC5783" name="ref-RFC5783">RFC5783</a>]   Welzl, M. and W. Eddy, "Congestion Control in the RFC
+   [<a id="ref-RFC5783">RFC5783</a>]   Welzl, M. and W. Eddy, "Congestion Control in the RFC
                Series", <a href="./rfc5783.html">RFC 5783</a>, February 2010.
 
-   [<a id="ref-RFC6040" name="ref-RFC6040">RFC6040</a>]   Briscoe, B., "Tunnelling of Explicit Congestion
+   [<a id="ref-RFC6040">RFC6040</a>]   Briscoe, B., "Tunnelling of Explicit Congestion
                Notification", <a href="./rfc6040.html">RFC 6040</a>, November 2010.
 
-   [<a id="ref-Rossi06" name="ref-Rossi06">Rossi06</a>]   Rossi, M., "Evaluating TCP with Corruption Notification
+   [<a id="ref-Rossi06">Rossi06</a>]   Rossi, M., "Evaluating TCP with Corruption Notification
                in an IEEE 802.11 Wireless LAN", Master Thesis,
                University of Innsbruck, November 2006.  Available from
                <a href="http://heim.ifi.uio.no/michawe/research/projects/corruption/">http://heim.ifi.uio.no/michawe/research/projects/</a>
                <a href="http://heim.ifi.uio.no/michawe/research/projects/corruption/">corruption/</a>.
 
-   [<a id="ref-Saltzer84" name="ref-Saltzer84">Saltzer84</a>] Saltzer, J., Reed, D., and D. Clark, "End-to-end
+   [<a id="ref-Saltzer84">Saltzer84</a>] Saltzer, J., Reed, D., and D. Clark, "End-to-end
                arguments in system design", ACM Transactions on Computer
                Systems, Vol. 2, No. 4, November 1984.
 
-   [<a id="ref-Sarola02" name="ref-Sarola02">Sarola02</a>]  Sarolahti, P. and A. Kuznetsov, "Congestion Control in
+   [<a id="ref-Sarola02">Sarola02</a>]  Sarolahti, P. and A. Kuznetsov, "Congestion Control in
                Linux TCP", Proceedings of the USENIX Annual Technical
                Conference, 2002.
 
@@ -2864,55 +2842,55 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 48]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-49" id="page-49" name="page-49"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-49"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-   [<a id="ref-Sarola07" name="ref-Sarola07">Sarola07</a>]  Sarolahti, P., Floyd, S., and M. Kojo, "Transport-layer
+   [<a id="ref-Sarola07">Sarola07</a>]  Sarolahti, P., Floyd, S., and M. Kojo, "Transport-layer
                Considerations for Explicit Cross-layer Indications",
                Work in Progress, March 2007.
 
-   [<a id="ref-Savage99" name="ref-Savage99">Savage99</a>]  Savage, S., Cardwell, N., Wetherall, D., and T.
+   [<a id="ref-Savage99">Savage99</a>]  Savage, S., Cardwell, N., Wetherall, D., and T.
                Anderson, "TCP Congestion Control with a Misbehaving
                Receiver", ACM SIGCOMM Computer Communication Review,
                1999.
 
-   [<a id="ref-Shal10" name="ref-Shal10">Shal10</a>]    Shalunov, S., Hazel, G., and J. Iyengar, "Low Extra Delay
+   [<a id="ref-Shal10">Shal10</a>]    Shalunov, S., Hazel, G., and J. Iyengar, "Low Extra Delay
                Background Transport (LEDBAT)", Work in Progress, October
                2010.
 
-   [<a id="ref-Shen08" name="ref-Shen08">Shen08</a>]    Shen, C., Schulzrinne, H., and E. Nahum, "Session
+   [<a id="ref-Shen08">Shen08</a>]    Shen, C., Schulzrinne, H., and E. Nahum, "Session
                Initiation Protocol (SIP) Server Overload Control: Design
                and Evaluation, Principles", Systems and Applications of
                IP Telecommunications (IPTComm'08), Heidelberg, Germany,
                July 2008.
 
-   [<a id="ref-Shin08" name="ref-Shin08">Shin08</a>]    Shin, M., Chong, S., and I. Rhee, "Dual-Resource TCP/AQM
+   [<a id="ref-Shin08">Shin08</a>]    Shin, M., Chong, S., and I. Rhee, "Dual-Resource TCP/AQM
                for Processing-Constrained Networks", IEEE/ACM
                Transactions on Networking, Vol. 16, No. 2, pp. 435-449,
                April 2008.
 
-   [<a id="ref-Thaler07" name="ref-Thaler07">Thaler07</a>]  Thaler, D., Sridharan, M., and D. Bansal, "Implementation
+   [<a id="ref-Thaler07">Thaler07</a>]  Thaler, D., Sridharan, M., and D. Bansal, "Implementation
                Report on Experiences with Various TCP RFCs",
                Presentation to the IETF Transport Area, March 2007.
                &lt;<a href="http://www.ietf.org/proceedings/07mar/slides/tsvarea-3/">http://www.ietf.org/proceedings/07mar/</a>
                <a href="http://www.ietf.org/proceedings/07mar/slides/tsvarea-3/">slides/tsvarea-3/</a>&gt;.
 
-   [<a id="ref-Tickoo05" name="ref-Tickoo05">Tickoo05</a>]  Tickoo, O., Subramanian, V., Kalyanaraman, S., and K.K.
+   [<a id="ref-Tickoo05">Tickoo05</a>]  Tickoo, O., Subramanian, V., Kalyanaraman, S., and K.K.
                Ramakrishnan, "LT-TCP: End-to-End Framework to Improve
                TCP Performance over Networks with Lossy Channels",
                Proceedings of International Workshop on QoS (IWQoS),
                Passau, Germany, June 2005.
 
-   [<a id="ref-TRILOGY" name="ref-TRILOGY">TRILOGY</a>]   "Trilogy Project", European Commission Seventh Framework
+   [<a id="ref-TRILOGY">TRILOGY</a>]   "Trilogy Project", European Commission Seventh Framework
                Program (FP7), Grant No: 216372, &lt;<a href="http://www.trilogy-project.org">http://www.trilogy-</a>
                <a href="http://www.trilogy-project.org">project.org</a>&gt;.
 
-   [<a id="ref-Vinnic02" name="ref-Vinnic02">Vinnic02</a>]  Vinnicombe, G., "On the stability of networks operating
+   [<a id="ref-Vinnic02">Vinnic02</a>]  Vinnicombe, G., "On the stability of networks operating
                TCP-like congestion control," Proceedings of IFAC World
                Congress, Barcelona, Spain, 2002.
 
-   [<a id="ref-Welzl03" name="ref-Welzl03">Welzl03</a>]   Welzl, M., "Scalable Performance Signalling and
+   [<a id="ref-Welzl03">Welzl03</a>]   Welzl, M., "Scalable Performance Signalling and
                Congestion Avoidance", Springer (ISBN 1-4020-7570-7),
                September 2003.
 
@@ -2920,27 +2898,27 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 49]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-50" id="page-50" name="page-50"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-50"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
-   [<a id="ref-Welzl08" name="ref-Welzl08">Welzl08</a>]   Welzl, M., Rossi, M., Fumagalli, A., and M. Tacca,
+   [<a id="ref-Welzl08">Welzl08</a>]   Welzl, M., Rossi, M., Fumagalli, A., and M. Tacca,
                "TCP/IP over IEEE 802.11b WLAN: the Challenge of
                Harnessing Known-Corrupt Data", Proceedings of IEEE
                International Conference on Communications (ICC) 2008,
                Beijing, China, May 2008.
 
-   [<a id="ref-Xia05" name="ref-Xia05">Xia05</a>]     Xia, Y., Subramanian, L., Stoica, I., and S.
+   [<a id="ref-Xia05">Xia05</a>]     Xia, Y., Subramanian, L., Stoica, I., and S.
                Kalyanaraman, "One more bit is enough", ACM SIGCOMM
                Computer Communication Review, Vol. 35, No. 4, pp. 37-48,
                2005.
 
-   [<a id="ref-Zhang03" name="ref-Zhang03">Zhang03</a>]   Zhang, H., Towsley, D., Hollot, C., and V. Misra, "A
+   [<a id="ref-Zhang03">Zhang03</a>]   Zhang, H., Towsley, D., Hollot, C., and V. Misra, "A
                Self-Tuning Structure for Adaptation in TCP/AQM
                Networks", Proceedings of ACM SIGMETRICS'03 Conference,
                San Diego (California), USA, June 2003.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Acknowledgments</span>
 
    The authors would like to thank the following people whose feedback
    and comments contributed to this document: Keith Moore, Jan
@@ -2957,7 +2935,7 @@ Table of Contents
 
    Michael Scharf is now with Alcatel-Lucent.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Contributors"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Contributors</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Contributors"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Contributors</span>
 
    The following additional people have contributed to this document:
 
@@ -2976,7 +2954,7 @@ Table of Contents
 
 
 <span class="grey">Papadimitriou, et al.         Informational                    [Page 50]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-51" id="page-51" name="page-51"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-51"></span>
 <span class="grey"><a href="./rfc6077.html">RFC 6077</a>       Open Issues in Internet Congestion Control  February 2011</span>
 
 
@@ -3032,11 +3010,6 @@ Authors' Addresses
 
 
 Papadimitriou, et al.         Informational                    [Page 51]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

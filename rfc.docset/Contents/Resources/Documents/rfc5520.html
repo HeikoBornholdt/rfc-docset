@@ -1,37 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-bradford-pce-path-key" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5520" name="DC.Identifier"/>
-<meta content="April, 2009" name="DC.Date.Issued"/>
-<meta content="Farrel, Adrian" name="DC.Creator"/>
-<meta content="Bradford, Rich" name="DC.Creator"/>
-<meta content="Multiprotocol Label Switching (MPLS) and Generalized MPLS (GMPLS)
-Traffic Engineering (TE) Label Switched Paths (LSPs) may be computed
-by Path Computation Elements (PCEs). Where the TE LSP crosses multiple
-domains, such as Autonomous Systems (ASes), the path may be computed
-by multiple PCEs that cooperate, with each responsible for computing a
-segment of the path. However, in some cases (e.g. when ASes are
-administered by separate Service Providers), it would break
-confidentiality rules for a PCE to supply a path segment to a PCE in
-another domain, thus disclosing internal topology information. This
-issue may be circumvented by returning a loose hop and by invoking a
-new path computation from the domain boundary LSR during TE LSP setup
-as the signaling message enters the second domain, but this technique
-has several issues including the problem of maintaining path
-diversity.  This document defines a mechanism to hide the contents of
-a segment of a path, called the Confidential Path Segment (CPS). The
-CPS may be replaced by a path-key that can be conveyed in the PCE
-Communication Protocol (PCEP) and signaled within in a Resource
-Reservation Protocol TE (RSVP-TE) explicit route object." name="DC.Description.Abstract"/>
-<meta content="Intended Status: Standards Track Expires: March 12, 2008 September 12, 2007" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5520 - Intended Status: Standards Track Expires: March 12, 2008 September 12, 2007</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="R. Bradford" name="citation_author"/>
+<meta content="JP. Vasseur" name="citation_author"/>
+<meta content="A. Farrel" name="citation_author"/>
+<meta content="April, 2009" name="citation_publication_date"/>
+<meta content="Preserving Topology Confidentiality in Inter-Domain Path Computation Using a Path-Key-Based Mechanism" name="citation_title"/>
+<meta content="10.17487/RFC5520" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5520" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5520.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5520: Preserving Topology Confidentiality in Inter-Domain Path Computation Using a Path-Key-Based Mechanism</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -60,7 +42,7 @@ Reservation Protocol TE (RSVP-TE) explicit route object." name="DC.Description.A
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -69,7 +51,7 @@ Reservation Protocol TE (RSVP-TE) explicit route object." name="DC.Description.A
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -148,19 +130,18 @@ Reservation Protocol TE (RSVP-TE) explicit route object." name="DC.Description.A
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -174,21 +155,9 @@ Reservation Protocol TE (RSVP-TE) explicit route object." name="DC.Description.A
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5520.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5520" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-pce-path-key.html" title="draft-ietf-pce-path-key">draft-ietf-pce-pa...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5520" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5520" title="Side-by-side diff">Diff2</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5520&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5520">Errata</a>]  </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                   R. Bradford, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5520.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5520.txt.pdf">PDF</a>|<a href="/rfc/rfc5520.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5520" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5520&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5520" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5520" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                   R. Bradford, Ed.
 Request for Comments: 5520                                   JP. Vasseur
 Category: Standards Track                            Cisco Systems, Inc.
                                                                A. Farrel
@@ -212,7 +181,7 @@ Copyright Notice
    Copyright (c) 2009 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents in effect on the date of
    publication of this document (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>).
    Please review these documents carefully, as they describe your rights
@@ -240,7 +209,7 @@ Abstract
 
 
 <span class="grey">Bradford, et al.            Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -296,11 +265,11 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Path computation techniques using the Path Computation Element (PCE)
    are described in [<a href="./rfc4655.html" title='"A Path Computation Element (PCE)-Based Architecture"'>RFC4655</a>] and allow for path computation of inter-
@@ -352,7 +321,7 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -386,7 +355,7 @@ Table of contents
    path.  This term has no relation to the term "cryptographic key" used
    in some documents that describe security mechanisms.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Terminology</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>",  "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -408,7 +377,7 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -427,7 +396,7 @@ Table of contents
 
    TE LSP: Traffic Engineering Label Switched Path.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Path-Key%20Solution"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Path-Key Solution</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Path-Key%20Solution"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Path-Key Solution</span>
 
    The Path-Key solution may be applied in the PCE-based path
    computation context as follows.  A PCE computes a path segment
@@ -443,7 +412,7 @@ Table of contents
    explicitly present in the returned path.  The exit node of a CPS <em>MAY</em>
    be present as a strict hop immediately following the PKS.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Mode%20of%20Operation"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Mode of Operation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Mode%20of%20Operation"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Mode of Operation</span>
 
    During path computation, when local policy dictates that
    confidentiality must be preserved for all or part of the path segment
@@ -464,7 +433,7 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -507,7 +476,7 @@ Table of contents
    the explicit hops into the ERO and continues to process the TE LSP
    setup as per [<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Example"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Example</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Example"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Example</span>
 
    Figure 1 shows a simple two-AS topology with a PCE responsible for
    the path computations in each AS.  An LSP is requested from the
@@ -520,7 +489,7 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -560,9 +529,9 @@ Table of contents
 
         Figure 1 : A Simple network to demonstrate the use of the PKS
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20PCEP%20Protocol%20Extensions"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  PCEP Protocol Extensions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20PCEP%20Protocol%20Extensions"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  PCEP Protocol Extensions</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Path-Keys%20in%20PCRep%20Messages"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Path-Keys in PCRep Messages</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Path-Keys%20in%20PCRep%20Messages"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Path-Keys in PCRep Messages</span>
 
    Path-Keys are carried in PCReq and PCRep messages as part of the
    various objects that carry path definitions.  In particular, a Path-
@@ -576,7 +545,7 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -598,7 +567,7 @@ Table of contents
    The Path-Key Subobject may be present in the PCEP ERO or the PCEP
    PATH-KEY object (see <a href="#section-3.2">Section 3.2</a>).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20PKS%20with%2032-Bit%20PCE%20ID"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  PKS with 32-Bit PCE ID</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20PKS%20with%2032-Bit%20PCE%20ID"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  PKS with 32-Bit PCE ID</span>
 
    The Subobject Type for the PKS with 32-bit PCE ID is 64.  The format
    of this subobject is as follows:
@@ -632,7 +601,7 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -650,7 +619,7 @@ Table of contents
          the Router ID of the PCE) <em>MAY</em> be used to increase security or
          confidentiality (see <a href="#section-5">Section 5</a>).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20PKS%20with%20128-Bit%20PCE%20ID"></a></body></html><a class="selflink" href="#section-3.1.2" name="section-3.1.2">3.1.2</a>.  PKS with 128-Bit PCE ID</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20PKS%20with%20128-Bit%20PCE%20ID"></a></body></html><a class="selflink" href="#section-3.1.2" id="section-3.1.2">3.1.2</a>.  PKS with 128-Bit PCE ID</span>
 
    The Subobject Type for the PKS with 128-bit PCE ID is 65.  The format
    of the subobject is as follows.
@@ -688,7 +657,7 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -701,7 +670,7 @@ Table of contents
          the IPv6 TE Router ID) <em>MAY</em> be used to increase security (see
          <a href="#section-5">Section 5</a>).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Unlocking%20Path-Keys"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Unlocking Path-Keys</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Unlocking%20Path-Keys"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Unlocking Path-Keys</span>
 
    When a network node needs to decode a Path-Key so that it can
    continue signaling for an LSP, it must send a PCReq to the designated
@@ -712,9 +681,9 @@ Table of contents
    in the PCReq.  These result in an update to the BNF for the message.
    The BNF used in this document is as described in [<a href="#ref-RBNF" title='"Reduced Backus-Naur Form (RBNF) A Syntax Used in Various Protocol Specifications"'>RBNF</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Path-Key%20Bit"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Path-Key Bit</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Path-Key%20Bit"></a></body></html><a class="selflink" href="#section-3.2.1" id="section-3.2.1">3.2.1</a>.  Path-Key Bit</span>
 
-   [<a id="ref-RFC5440" name="ref-RFC5440">RFC5440</a>] defines the Request Parameters (RP) object that is used to
+   [<a id="ref-RFC5440">RFC5440</a>] defines the Request Parameters (RP) object that is used to
    specify various characteristics of the Path Computation Request
    (PCReq).
 
@@ -728,7 +697,7 @@ Table of contents
    <em>MUST</em> be cleared when the path computation request is not related to a
    CPS retrieval.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20PATH-KEY%20Object"></a></body></html><a class="selflink" href="#section-3.2.2" name="section-3.2.2">3.2.2</a>.  PATH-KEY Object</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20PATH-KEY%20Object"></a></body></html><a class="selflink" href="#section-3.2.2" id="section-3.2.2">3.2.2</a>.  PATH-KEY Object</span>
 
    When a PCC needs to expand a path-key in order to expand a CPS, it
    issues a Path Computation Request (PCReq) to the PCE identified in
@@ -744,7 +713,7 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -758,7 +727,7 @@ Table of contents
    <a href="#section-3.1">Section 3.1</a>).  The first PKS <em>MUST</em> be processed by the PCE.
    Subsequent subobjects <em>SHOULD</em> be ignored.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Path%20Computation%20Request%20%28PCReq%29%20Message%20with%20Path-Key"></a></body></html><a class="selflink" href="#section-3.2.3" name="section-3.2.3">3.2.3</a>.  Path Computation Request (PCReq) Message with Path-Key</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Path%20Computation%20Request%20%28PCReq%29%20Message%20with%20Path-Key"></a></body></html><a class="selflink" href="#section-3.2.3" id="section-3.2.3">3.2.3</a>.  Path Computation Request (PCReq) Message with Path-Key</span>
 
    The format of a PCReq message including a PATH-KEY object is
    unchanged as follows:
@@ -800,11 +769,11 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20PCEP%20Mode%20of%20Operation%20for%20Path-Key%20Expansion"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  PCEP Mode of Operation for Path-Key Expansion</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20PCEP%20Mode%20of%20Operation%20for%20Path-Key%20Expansion"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  PCEP Mode of Operation for Path-Key Expansion</span>
 
    The retrieval of the explicit path (the CPS) associated with a PKS by
    a PCC is no different than any other path computation request with
@@ -830,7 +799,7 @@ Table of contents
    LSP setup and <em>SHOULD</em> use the procedures associated with loose hop
    expansion failure [<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    This document describes tunneling confidential path information
    across an untrusted domain (such as an AS).  There are many security
@@ -856,7 +825,7 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -896,9 +865,9 @@ Table of contents
    The former requires configuration of policy on the PCEs, the latter
    requires domain-wide policy.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Manageability%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Manageability Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Manageability%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Manageability Considerations</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Control%20of%20Function%20through%20Configuration%20and%20Policy"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Control of Function through Configuration and Policy</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Control%20of%20Function%20through%20Configuration%20and%20Policy"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Control of Function through Configuration and Policy</span>
 
    The treatment of a path segment as a CPS, and its substitution in a
    PCRep ERO with a PKS, is a function that <em>MUST</em> be under operator and
@@ -912,7 +881,7 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -947,7 +916,7 @@ Table of contents
    equal to the IGP Router ID into a routable address), or configured
    through a local or remote mapping table.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Information%20and%20Data%20Models"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Information and Data Models</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Information%20and%20Data%20Models"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Information and Data Models</span>
 
    A MIB module for PCEP is already defined in [<a href="#ref-PCEP-MIB" title='"PCE Communication Protocol (PCEP) Management Information Base"'>PCEP-MIB</a>].  The
    configurable items listed in <a href="#section-6.1">Section 6.1</a> <em>MUST</em> be added as readable
@@ -968,7 +937,7 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -980,7 +949,7 @@ Table of contents
 
    - How long until the path-key will be available for re-use.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Liveness%20Detection%20and%20Monitoring"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  Liveness Detection and Monitoring</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Liveness%20Detection%20and%20Monitoring"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  Liveness Detection and Monitoring</span>
 
    The procedures in this document extend PCEP, but do not introduce new
    interactions between network entities.  Thus, no new liveness
@@ -992,7 +961,7 @@ Table of contents
    a mechanism to poll the PCE that is responsible for the PKS, it is
    considered pragmatic to simply signal the associated LSP.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20Verifying%20Correct%20Operation"></a></body></html><a class="selflink" href="#section-6.4" name="section-6.4">6.4</a>.  Verifying Correct Operation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20Verifying%20Correct%20Operation"></a></body></html><a class="selflink" href="#section-6.4" id="section-6.4">6.4</a>.  Verifying Correct Operation</span>
 
    The procedures in this document extend PCEP, but do not introduce new
    interactions between network entities.  Thus, no new tools for
@@ -1010,7 +979,7 @@ Table of contents
 
    - Expiry of path-key without attempt to expand it.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.5.%20%20Requirements%20on%20Other%20Protocols%20and%20Functional%20Components"></a></body></html><a class="selflink" href="#section-6.5" name="section-6.5">6.5</a>.  Requirements on Other Protocols and Functional Components</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.5.%20%20Requirements%20on%20Other%20Protocols%20and%20Functional%20Components"></a></body></html><a class="selflink" href="#section-6.5" id="section-6.5">6.5</a>.  Requirements on Other Protocols and Functional Components</span>
 
    The procedures described in this document require that the LSRs
    signal PKSs as defined in [<a href="#ref-RSVP-PKS" title='"RSVP Extensions for Path Key Support"'>RSVP-PKS</a>].  Note that the only changes to
@@ -1024,11 +993,11 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.6.%20%20Impact%20on%20Network%20Operation"></a></body></html><a class="selflink" href="#section-6.6" name="section-6.6">6.6</a>.  Impact on Network Operation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.6.%20%20Impact%20on%20Network%20Operation"></a></body></html><a class="selflink" href="#section-6.6" id="section-6.6">6.6</a>.  Impact on Network Operation</span>
 
    As well as the security and confidentiality aspects addressed by the
    use of the PKS, there may be some scaling benefits associated with
@@ -1056,12 +1025,12 @@ Table of contents
    either fail the LSP setup, or request a new path computation avoiding
    the domain that has supplied it with unknown subobjects.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  IANA Considerations</span>
 
    IANA assigns values to PCEP parameters in registries defined in
    [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>].  IANA has made the following additional assignments.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20New%20Subobjects%20for%20the%20ERO%20Object"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  New Subobjects for the ERO Object</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20New%20Subobjects%20for%20the%20ERO%20Object"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  New Subobjects for the ERO Object</span>
 
    IANA has previously assigned an Object-Class and Object-Type to the
    ERO carried in PCEP messages [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>].  IANA also maintains a list
@@ -1080,11 +1049,11 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20New%20PCEP%20Object"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  New PCEP Object</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20New%20PCEP%20Object"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  New PCEP Object</span>
 
    IANA assigned a new object class in the registry of PCEP Objects as
    follows.
@@ -1101,7 +1070,7 @@ Table of contents
                   64   Path-Key with 32-bit PCE ID        [<a href="./rfc5520.html">RFC5520</a>]
                   65   Path-Key with 128-bit PCE ID       [<a href="./rfc5520.html">RFC5520</a>]
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20New%20RP%20Object%20Bit%20Flag"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  New RP Object Bit Flag</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20New%20RP%20Object%20Bit%20Flag"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  New RP Object Bit Flag</span>
 
    IANA maintains a registry of bit flags carried in the PCEP RP object
    as defined in [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>].  IANA assigned a new bit flag as follows:
@@ -1109,7 +1078,7 @@ Table of contents
    Bit Number  Hex       Name                             Reference
    23          0x000017  Path-Key (P-bit)                 [<a href="./rfc5520.html">RFC5520</a>]
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20New%20NO-PATH-VECTOR%20TLV%20Bit%20Flag"></a></body></html><a class="selflink" href="#section-7.4" name="section-7.4">7.4</a>.  New NO-PATH-VECTOR TLV Bit Flag</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20New%20NO-PATH-VECTOR%20TLV%20Bit%20Flag"></a></body></html><a class="selflink" href="#section-7.4" id="section-7.4">7.4</a>.  New NO-PATH-VECTOR TLV Bit Flag</span>
 
    IANA maintains a registry of bit flags carried in the PCEP NO-PATH-
    VECTOR TLV in the PCEP NO-PATH object as defined in [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>].  IANA
@@ -1118,14 +1087,14 @@ Table of contents
    Bit Number      Name Flag                    Reference
    27              PKS expansion failure        [<a href="./rfc5520.html">RFC5520</a>]
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC5440" name="ref-RFC5440">RFC5440</a>]  Vasseur, JP., Ed., and JL. Le Roux, Ed., "Path Computation
+   [<a id="ref-RFC5440">RFC5440</a>]  Vasseur, JP., Ed., and JL. Le Roux, Ed., "Path Computation
               Element (PCE) Communication Protocol (PCEP)", <a href="./rfc5440.html">RFC 5440</a>,
               March 2009.
 
@@ -1136,52 +1105,52 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Informative References</span>
 
-   [<a id="ref-PCEP-MIB" name="ref-PCEP-MIB">PCEP-MIB</a>] Koushik, K., and E. Stephan, "PCE Communication Protocol
+   [<a id="ref-PCEP-MIB">PCEP-MIB</a>] Koushik, K., and E. Stephan, "PCE Communication Protocol
               (PCEP) Management Information Base", Work in Progress,
               November 2008.
 
-   [<a id="ref-RBNF" name="ref-RBNF">RBNF</a>]     Farrel, A., "Reduced Backus-Naur Form (RBNF) A Syntax Used
+   [<a id="ref-RBNF">RBNF</a>]     Farrel, A., "Reduced Backus-Naur Form (RBNF) A Syntax Used
               in Various Protocol Specifications", Work in Progress,
               November 2008.
 
-   [<a id="ref-RFC3209" name="ref-RFC3209">RFC3209</a>]  Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan, V.,
+   [<a id="ref-RFC3209">RFC3209</a>]  Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan, V.,
               and G. Swallow, "RSVP-TE: Extensions to RSVP for LSP
               Tunnels", <a href="./rfc3209.html">RFC 3209</a>, December 2001.
 
-   [<a id="ref-RFC4105" name="ref-RFC4105">RFC4105</a>]  Le Roux, J.-L., Ed., Vasseur, J.-P., Ed., and J. Boyle,
+   [<a id="ref-RFC4105">RFC4105</a>]  Le Roux, J.-L., Ed., Vasseur, J.-P., Ed., and J. Boyle,
               Ed., "Requirements for Inter-Area MPLS Traffic
               Engineering", <a href="./rfc4105.html">RFC 4105</a>, June 2005.
 
-   [<a id="ref-RFC4216" name="ref-RFC4216">RFC4216</a>]  Zhang, R., Ed., and J.-P. Vasseur, Ed., "MPLS Inter-
+   [<a id="ref-RFC4216">RFC4216</a>]  Zhang, R., Ed., and J.-P. Vasseur, Ed., "MPLS Inter-
               Autonomous System (AS) Traffic Engineering (TE)
               Requirements", <a href="./rfc4216.html">RFC 4216</a>, November 2005.
 
-   [<a id="ref-RFC4655" name="ref-RFC4655">RFC4655</a>]  Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
+   [<a id="ref-RFC4655">RFC4655</a>]  Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
               Computation Element (PCE)-Based Architecture", <a href="./rfc4655.html">RFC 4655</a>,
               August 2006.
 
-   [<a id="ref-RFC5152" name="ref-RFC5152">RFC5152</a>]  Vasseur, JP., Ed., Ayyangar, A., Ed., and R. Zhang, "A
+   [<a id="ref-RFC5152">RFC5152</a>]  Vasseur, JP., Ed., Ayyangar, A., Ed., and R. Zhang, "A
               Per-Domain Path Computation Method for Establishing
               Inter-Domain Traffic Engineering (TE) Label Switched Paths
               (LSPs)", <a href="./rfc5152.html">RFC 5152</a>, February 2008.
 
-   [<a id="ref-RFC5298" name="ref-RFC5298">RFC5298</a>]  Takeda, T., Ed., Farrel, A., Ed., Ikejiri, Y., and JP.
+   [<a id="ref-RFC5298">RFC5298</a>]  Takeda, T., Ed., Farrel, A., Ed., Ikejiri, Y., and JP.
               Vasseur, "Analysis of Inter-Domain Label Switched Path
               (LSP) Recovery", <a href="./rfc5298.html">RFC 5298</a>, August 2008.
 
-   [<a id="ref-RFC5441" name="ref-RFC5441">RFC5441</a>]  Vasseur, JP., Ed., Zhang, R., Bitar, N., and JL. Le Roux,
+   [<a id="ref-RFC5441">RFC5441</a>]  Vasseur, JP., Ed., Zhang, R., Bitar, N., and JL. Le Roux,
               "A Backward-Recursive PCE-Based Computation (BRPC)
               Procedure to Compute Shortest Constrained Inter-Domain
               Traffic Engineering Label Switched Paths", <a href="./rfc5441.html">RFC 5441</a>, April
               2009.
 
-   [<a id="ref-RSVP-PKS" name="ref-RSVP-PKS">RSVP-PKS</a>] Bradford, R., Vasseur, JP., and A. Farrel, "RSVP
+   [<a id="ref-RSVP-PKS">RSVP-PKS</a>] Bradford, R., Vasseur, JP., and A. Farrel, "RSVP
               Extensions for Path Key Support", Work in Progress,
               February 2008.
 
@@ -1192,7 +1161,7 @@ Table of contents
 
 
 <span class="grey">Bradford, et al.            Standards Track                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5520.html">RFC 5520</a>          Preserving Topology Confidentiality         April 2009</span>
 
 
@@ -1248,11 +1217,6 @@ Authors' Addresses
 
 
 Bradford, et al.            Standards Track                    [Page 19]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

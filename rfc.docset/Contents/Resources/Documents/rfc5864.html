@@ -1,26 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:5864" name="DC.Identifier"/>
-<meta content="This document specifies how to use DNS (Domain Name Service) SRV RRs
-(Resource Records) to locate services for the AFS distributed file
-system and how the priority and weight values of the SRV RR should be
-interpreted in the server weighting system used by AFS. It deprecates
-use of the AFSDB RR to locate AFS cell database servers and provides
-guidance for backward compatibility.  Internet Draft Comments
-Comments are solicited. Please include the AFS Standardization mailing
-list at afs3-standardization@openafs.org as a recipient of any
-comments." name="DC.Description.Abstract"/>
-<meta content="Russ Allbery &lt;rra@stanford.edu&gt;" name="DC.Creator"/>
-<meta content="April, 2010" name="DC.Date.Issued"/>
-<meta content="DNS SRV Resource Records for AFS" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5864 - DNS SRV Resource Records for AFS</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="R. Allbery" name="citation_author"/>
+<meta content="April, 2010" name="citation_publication_date"/>
+<meta content="DNS SRV Resource Records for AFS" name="citation_title"/>
+<meta content="10.17487/RFC5864" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5864" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5864.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5864: DNS SRV Resource Records for AFS</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -49,7 +40,7 @@ comments." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -58,7 +49,7 @@ comments." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -137,19 +128,18 @@ comments." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -163,21 +153,9 @@ comments." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5864.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5864" title="PDF version of this document">pdf</a>] [<a href="./draft-allbery-afs-srv-records.html" title="draft-allbery-afs-srv-records">draft-allbery-afs...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5864" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5864" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5864">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                        R. Allbery
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5864.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5864.txt.pdf">PDF</a>|<a href="/rfc/rfc5864.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5864" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5864&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5864" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5864" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo">Updated by: <a href="/rfc/rfc8553" target="_blank">8553</a> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Engineering Task Force (IETF)                        R. Allbery
 Request for Comments: 5864                           Stanford University
 Updates: <a href="./rfc1183.html">1183</a>                                                 April 2010
 Category: Standards Track
@@ -214,7 +192,7 @@ Copyright Notice
    Copyright (c) 2010 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -229,7 +207,7 @@ Copyright Notice
 
 
 <span class="grey">Allbery                      Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5864.html">RFC 5864</a>                   DNS SRV RRs for AFS                April 2010</span>
 
 
@@ -247,7 +225,7 @@ Table of Contents
       <a href="#section-8.1">8.1</a>. Normative References .......................................<a href="#page-9">9</a>
       <a href="#section-8.2">8.2</a>. Informative References ....................................<a href="#page-10">10</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Overview%20and%20Rationale"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Overview and Rationale</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Overview%20and%20Rationale"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Overview and Rationale</span>
 
    AFS (a registered trademark of IBM Corporation) is a distributed file
    system (see [<a href="#ref-AFS1" title='"Scale and Performance in a Distributed File System"'>AFS1</a>] and [<a href="#ref-AFS2" title='"An Overview of the Andrew File System"'>AFS2</a>]).  Its most widely used implementations
@@ -285,7 +263,7 @@ Table of Contents
 
 
 <span class="grey">Allbery                      Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5864.html">RFC 5864</a>                   DNS SRV RRs for AFS                April 2010</span>
 
 
@@ -310,7 +288,7 @@ Table of Contents
    For those reasons, it is desirable to move AFS service location from
    the AFSDB RR to DNS SRV RRs.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Scope"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Scope</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Scope"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Scope</span>
 
    This document describes the format and use of DNS SRV RRs for AFS
    service location and deprecates the AFSDB RR.  It also provides
@@ -327,7 +305,7 @@ Table of Contents
    location for DCE servers is outside the scope of this document and is
    not modified by this specification.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Requirements Notation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Requirements Notation</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -341,11 +319,11 @@ Table of Contents
 
 
 <span class="grey">Allbery                      Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5864.html">RFC 5864</a>                   DNS SRV RRs for AFS                April 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20DNS%20SRV%20RRs%20for%20AFS"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  DNS SRV RRs for AFS</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20DNS%20SRV%20RRs%20for%20AFS"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  DNS SRV RRs for AFS</span>
 
    The label of a DNS SRV RR, as defined in [<a href="./rfc2782.html" title='"A DNS RR for specifying the location of services (DNS SRV)"'>RFC2782</a>], is:
 
@@ -397,7 +375,7 @@ Table of Contents
 
 
 <span class="grey">Allbery                      Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5864.html">RFC 5864</a>                   DNS SRV RRs for AFS                April 2010</span>
 
 
@@ -437,7 +415,7 @@ Table of Contents
    according to their current priority and weight if they become
    accessible again.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Interpretation%20as%20AFS%20Preference%20Ranks"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Interpretation as AFS Preference Ranks</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Interpretation%20as%20AFS%20Preference%20Ranks"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Interpretation as AFS Preference Ranks</span>
 
    Several AFS implementations use a ranking algorithm that assigns
    numbers representing a preference rank to each server when the client
@@ -453,7 +431,7 @@ Table of Contents
 
 
 <span class="grey">Allbery                      Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5864.html">RFC 5864</a>                   DNS SRV RRs for AFS                April 2010</span>
 
 
@@ -500,7 +478,7 @@ Table of Contents
    base ranks as described above for at least ten distinct priority
    values.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Use%20of%20AFSDB%20RRs"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Use of AFSDB RRs</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Use%20of%20AFSDB%20RRs"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Use of AFSDB RRs</span>
 
    Since many AFS client implementations currently support AFSDB RRs but
    do not support DNS SRV RRs, AFS cells providing DNS SRV RRs <em>SHOULD</em>
@@ -509,7 +487,7 @@ Table of Contents
 
 
 <span class="grey">Allbery                      Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5864.html">RFC 5864</a>                   DNS SRV RRs for AFS                April 2010</span>
 
 
@@ -565,11 +543,11 @@ Table of Contents
 
 
 <span class="grey">Allbery                      Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5864.html">RFC 5864</a>                   DNS SRV RRs for AFS                April 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Example"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Example</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Example"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Example</span>
 
    The following example includes TCP AFS services, separation of a PTS
    server from a VLDB server, and use of non-standard ports, all
@@ -621,7 +599,7 @@ Table of Contents
 
 
 <span class="grey">Allbery                      Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5864.html">RFC 5864</a>                   DNS SRV RRs for AFS                April 2010</span>
 
 
@@ -629,7 +607,7 @@ Table of Contents
    clients.  It lists only afsdb1, since only that host provides both
    VLDB and PTS service over UDP on the standard ports.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    Use of DNS SRV RRs for AFS service locations poses the same security
    issues as the existing AFSDB RRs.  Specifically, unless the integrity
@@ -663,48 +641,48 @@ Table of Contents
    DNS SRV RRs does not make this vulnerability more severe, only opens
    another equivalent point of attack.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC1034" name="ref-RFC1034">RFC1034</a>]  Mockapetris, P., "Domain names - concepts and facilities",
+   [<a id="ref-RFC1034">RFC1034</a>]  Mockapetris, P., "Domain names - concepts and facilities",
               STD 13, <a href="./rfc1034.html">RFC 1034</a>, November 1987.
 
-   [<a id="ref-RFC1183" name="ref-RFC1183">RFC1183</a>]  Everhart, C., Mamakos, L., Ullmann, R., and P.
+   [<a id="ref-RFC1183">RFC1183</a>]  Everhart, C., Mamakos, L., Ullmann, R., and P.
               Mockapetris, "New DNS RR Definitions", <a href="./rfc1183.html">RFC 1183</a>,
               October 1990.
 
 
 
 <span class="grey">Allbery                      Standards Track                    [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5864.html">RFC 5864</a>                   DNS SRV RRs for AFS                April 2010</span>
 
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC2782" name="ref-RFC2782">RFC2782</a>]  Gulbrandsen, A., Vixie, P., and L. Esibov, "A DNS RR for
+   [<a id="ref-RFC2782">RFC2782</a>]  Gulbrandsen, A., Vixie, P., and L. Esibov, "A DNS RR for
               specifying the location of services (DNS SRV)", <a href="./rfc2782.html">RFC 2782</a>,
               February 2000.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Informative References</span>
 
-   [<a id="ref-AFS1" name="ref-AFS1">AFS1</a>]     Howard, J., Kazar, M., Menees, S., Nichols, D.,
+   [<a id="ref-AFS1">AFS1</a>]     Howard, J., Kazar, M., Menees, S., Nichols, D.,
               Satyanarayanan, M., Sidebotham, R., and M. West, "Scale
               and Performance in a Distributed File System", ACM Trans.
               on Computer Systems 6(1), February 1988.
 
-   [<a id="ref-AFS2" name="ref-AFS2">AFS2</a>]     Howard, J., "An Overview of the Andrew File System", CMU-
+   [<a id="ref-AFS2">AFS2</a>]     Howard, J., "An Overview of the Andrew File System", CMU-
               ITC 88-062, February 1988.
 
-   [<a id="ref-ARLA" name="ref-ARLA">ARLA</a>]     Assar Westerlund, et al., "Arla", May 2001,
+   [<a id="ref-ARLA">ARLA</a>]     Assar Westerlund, et al., "Arla", May 2001,
               &lt;<a href="http://www.stacken.kth.se/project/arla/html/arla.html">http://www.stacken.kth.se/project/arla/html/arla.html</a>&gt;.
 
-   [<a id="ref-OPENAFS" name="ref-OPENAFS">OPENAFS</a>]  IBM Corporation, et al., "OpenAFS Documentation",
+   [<a id="ref-OPENAFS">OPENAFS</a>]  IBM Corporation, et al., "OpenAFS Documentation",
               April 2000, &lt;<a href="http://docs.openafs.org/">http://docs.openafs.org/</a>&gt;.
 
-   [<a id="ref-RFC4033" name="ref-RFC4033">RFC4033</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
+   [<a id="ref-RFC4033">RFC4033</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "DNS Security Introduction and Requirements",
               <a href="./rfc4033.html">RFC 4033</a>, March 2005.
 
@@ -733,11 +711,6 @@ Author's Address
 
 
 Allbery                      Standards Track                   [Page 10]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

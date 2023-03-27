@@ -1,35 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:2883" name="DC.Identifier"/>
-<meta content="This note defines an extension of the Selective Acknowledgement (SACK)
-Option [RFC2018] for TCP. RFC 2018 specified the use of the SACK
-option for acknowledging out-of-sequence data not covered by TCP's
-cumulative acknowledgement field. This note extends RFC 2018 by
-specifying the use of the SACK option for acknowledging duplicate
-packets. This note suggests that when duplicate packets are received,
-the first block of the SACK option field can be used to report the
-sequence numbers of the packet that triggered the acknowledgement.
-This extension to the SACK option allows the TCP sender to infer the
-order of packets received at the receiver, allowing the sender to
-infer when it has unnecessarily retransmitted a packet. A TCP sender
-could then use this information for more robust operation in an
-environment of reordered packets, ACK loss, packet replication, and/or
-early retransmit timeouts." name="DC.Description.Abstract"/>
-<meta content="Podolsky, Matthew" name="DC.Creator"/>
-<meta content="Mahdavi, Jamshid" name="DC.Creator"/>
-<meta content="Romanow, Allyn" name="DC.Creator"/>
-<meta content="Floyd, Sally" name="DC.Creator"/>
-<meta content="Mathis, Matt" name="DC.Creator"/>
-<meta content="July, 2000" name="DC.Date.Issued"/>
-<meta content="An Extension to the Selective Acknowledgement (SACK) Option for TCP" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 2883 - An Extension to the Selective Acknowledgement (SACK) Option for TCP</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="S. Floyd" name="citation_author"/>
+<meta content="J. Mahdavi" name="citation_author"/>
+<meta content="M. Mathis" name="citation_author"/>
+<meta content="M. Podolsky" name="citation_author"/>
+<meta content="July, 2000" name="citation_publication_date"/>
+<meta content=" An Extension to the Selective Acknowledgement (SACK) Option for TCP " name="citation_title"/>
+<meta content="10.17487/RFC2883" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc2883" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc2883.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 2883:  An Extension to the Selective Acknowledgement (SACK) Option for TCP </title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -58,7 +43,7 @@ early retransmit timeouts." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -67,7 +52,7 @@ early retransmit timeouts." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -146,19 +131,18 @@ early retransmit timeouts." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -172,21 +156,9 @@ early retransmit timeouts." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc2883.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc2883" title="PDF version of this document">pdf</a>] [<a href="./draft-floyd-sack.html" title="draft-floyd-sack">draft-floyd-sack</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc2883" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc2883" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=2883">Errata</a>]            </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                           S. Floyd
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc2883.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc2883.txt.pdf">PDF</a>|<a href="/rfc/rfc2883.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc2883" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=2883&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc2883" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc2883" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                           S. Floyd
 Request for Comments: 2883                                         ACIRI
 Category: Standards Track                                     J. Mahdavi
                                                                   Novell
@@ -228,7 +200,7 @@ Abstract
    robust operation in an environment of reordered packets [<a href="#ref-BPS99" title="and N. Shectman">BPS99</a>], ACK
    loss, packet replication, and/or early retransmit timeouts.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Conventions%20and%20Acronyms"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Conventions and Acronyms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Conventions%20and%20Acronyms"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Conventions and Acronyms</span>
 
    The keywords <em>MUST</em>, <em>MUST NOT</em>, <em>REQUIRED</em>, <em>SHALL</em>, <em>SHALL NOT</em>, <em>SHOULD</em>,
    <em>SHOULD NOT</em>, <em>RECOMMENDED</em>, <em>MAY</em>, and <em>OPTIONAL</em>, when they appear in this
@@ -238,11 +210,11 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20Introduction"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>. Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20Introduction"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>. Introduction</span>
 
    The Selective Acknowledgement (SACK) option defined in <a href="./rfc2018.html">RFC 2018</a> is
    used by the TCP data receiver to acknowledge non-contiguous blocks of
@@ -294,11 +266,11 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20The%20Sack%20Option%20Format%20as%20defined%20in%20RFC%202018"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>. The Sack Option Format as defined in <a href="./rfc2018.html">RFC 2018</a></span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20The%20Sack%20Option%20Format%20as%20defined%20in%20RFC%202018"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>. The Sack Option Format as defined in <a href="./rfc2018.html">RFC 2018</a></span>
 
    The SACK option as defined in <a href="./rfc2018.html">RFC 2018</a> is as follows:
 
@@ -350,11 +322,11 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Use%20of%20the%20SACK%20option%20for%20reporting%20a%20duplicate%20segment"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>. Use of the SACK option for reporting a duplicate segment</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Use%20of%20the%20SACK%20option%20for%20reporting%20a%20duplicate%20segment"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>. Use of the SACK option for reporting a duplicate segment</span>
 
    This section specifies the use of SACK blocks when the SACK option is
    used in reporting a duplicate segment.  When D-SACK is used, the
@@ -394,7 +366,7 @@ Abstract
    packet, information about that duplicate segment will be lost if that
    ACK packet is dropped in the network.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1%20%20Reporting%20Full%20Duplicate%20Segments"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>  Reporting Full Duplicate Segments</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1%20%20Reporting%20Full%20Duplicate%20Segments"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>  Reporting Full Duplicate Segments</span>
 
    We illustrate these guidelines with three examples.  In each example,
    we assume that the data receiver has first received eight segments of
@@ -406,11 +378,11 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Example%201%3A%20Reporting%20a%20duplicate%20segment."></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a>.  Example 1: Reporting a duplicate segment.</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Example%201%3A%20Reporting%20a%20duplicate%20segment."></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a>.  Example 1: Reporting a duplicate segment.</span>
 
    Because several ACK packets are lost, the data sender retransmits
    packet 3000-3499, and the data receiver subsequently receives a
@@ -426,7 +398,7 @@ Abstract
         3500-3999      3500-3999   4000 (ACK dropped)
         3000-3499      3000-3499   4000, SACK=3000-3500
                                               ---------
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20Example%202%3A%20%20"></a></body></html><a class="selflink" href="#section-4.1.2" name="section-4.1.2">4.1.2</a>.  Example 2:  </span>Reporting an out-of-order segment and a duplicate
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20Example%202%3A%20%20"></a></body></html><a class="selflink" href="#section-4.1.2" id="section-4.1.2">4.1.2</a>.  Example 2:  </span>Reporting an out-of-order segment and a duplicate
         segment.
 
    Following a lost data packet, the receiver receives an out-of-order
@@ -462,11 +434,11 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3.%20%20Example%203%3A%20%20"></a></body></html><a class="selflink" href="#section-4.1.3" name="section-4.1.3">4.1.3</a>.  Example 3:  </span>Reporting a duplicate of an out-of-order segment.
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3.%20%20Example%203%3A%20%20"></a></body></html><a class="selflink" href="#section-4.1.3" id="section-4.1.3">4.1.3</a>.  Example 3:  </span>Reporting a duplicate of an out-of-order segment.
 
    Because of a lost data packet, the receiver receives two out-of-order
    segments.  The receiver next receives a duplicate segment for one of
@@ -482,7 +454,7 @@ Abstract
                        (duplicated packet)
                        5000-5499   4000, SACK=5000-5500, 4500-5500
                                               ---------
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Reporting%20Partial%20Duplicate%20Segments"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Reporting Partial Duplicate Segments</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Reporting%20Partial%20Duplicate%20Segments"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Reporting Partial Duplicate Segments</span>
 
    It may be possible that a sender transmits a packet that includes one
    or more duplicate sub-segments--that is, only part but not all of the
@@ -501,7 +473,7 @@ Abstract
    sub-segment is reported in the SACK option.  We illustrate this with
    the examples below.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Example%204%3A%20%20"></a></body></html><a class="selflink" href="#section-4.2.1" name="section-4.2.1">4.2.1</a>.  Example 4:  </span>Reporting a single duplicate subsegment.
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Example%204%3A%20%20"></a></body></html><a class="selflink" href="#section-4.2.1" id="section-4.2.1">4.2.1</a>.  Example 4:  </span>Reporting a single duplicate subsegment.
 
    The sender increases the packet size from 500 bytes to 1000 bytes.
    The receiver subsequently receives a 1000-byte packet containing one
@@ -518,7 +490,7 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
@@ -533,7 +505,7 @@ Abstract
                        1000-2000   2500, SACK=1000-1500
                                               ---------
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Example%205%3A%20%20"></a></body></html><a class="selflink" href="#section-4.2.2" name="section-4.2.2">4.2.2</a>.  Example 5:  </span>Two non-contiguous duplicate subsegments covered by
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Example%205%3A%20%20"></a></body></html><a class="selflink" href="#section-4.2.2" id="section-4.2.2">4.2.2</a>.  Example 5:  </span>Two non-contiguous duplicate subsegments covered by
         the cumulative acknowledgement.
 
    After the sender increases its packet size from 500 bytes to 1500
@@ -556,7 +528,7 @@ Abstract
                         1000-2499   2500, SACK=1000-1500, 3000-3500
                                                ---------
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.3.%20%20Example%206%3A%20%20"></a></body></html><a class="selflink" href="#section-4.2.3" name="section-4.2.3">4.2.3</a>.  Example 6:  </span>Two non-contiguous duplicate subsegments not covered
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.3.%20%20Example%206%3A%20%20"></a></body></html><a class="selflink" href="#section-4.2.3" id="section-4.2.3">4.2.3</a>.  Example 6:  </span>Two non-contiguous duplicate subsegments not covered
         by the cumulative acknowledgement.
 
    This example is similar to Example 5, except that after the sender
@@ -574,7 +546,7 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
@@ -596,7 +568,7 @@ Abstract
                                                ---------
                                             3500-4000
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Interaction%20Between%20D-SACK%20and%20PAWS"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Interaction Between D-SACK and PAWS</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Interaction%20Between%20D-SACK%20and%20PAWS"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Interaction Between D-SACK and PAWS</span>
 
    <a href="./rfc1323.html">RFC 1323</a> [<a href="./rfc1323.html" title='"TCP Extensions for High Performance"'>RFC1323</a>] specifies an algorithm for Protection Against
    Wrapped Sequence Numbers (PAWS).  PAWS gives a method for
@@ -630,11 +602,11 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20Detection%20of%20Duplicate%20Packets"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>. Detection of Duplicate Packets</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20Detection%20of%20Duplicate%20Packets"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>. Detection of Duplicate Packets</span>
 
    This extension to the SACK option enables the receiver to accurately
    report the reception of duplicate data.  Because each receipt of a
@@ -686,11 +658,11 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Replication%20by%20the%20network"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Replication by the network</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Replication%20by%20the%20network"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Replication by the network</span>
 
    If a packet is replicated in the network, this extension to the SACK
    option can identify this.  For example:
@@ -730,7 +702,7 @@ Abstract
    refrain from using that duplicate ACKs to infer packet loss (e.g.,
    Fast Retransmit) or to send more data (e.g., Fast Recovery).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20False%20retransmit%20due%20to%20reordering"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  False retransmit due to reordering</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20False%20retransmit%20due%20to%20reordering"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  False retransmit due to reordering</span>
 
    If packets are reordered in the network such that a segment arrives
    more than 3 packets out of order, TCP's Fast Retransmit algorithm
@@ -742,7 +714,7 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
@@ -798,7 +770,7 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
@@ -814,7 +786,7 @@ Abstract
    have to address the possibility that the TCP receiver could be lying
    in its reports of received packets [<a href="#ref-SCWA99" title='"http://www.acm.org/sigcomm/ccr/archive/ccr-toc/ccr-toc- 99.html"'>SCWA99</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Retransmit%20Timeout%20Due%20to%20ACK%20Loss"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Retransmit Timeout Due to ACK Loss</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Retransmit%20Timeout%20Due%20to%20ACK%20Loss"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Retransmit Timeout Due to ACK Loss</span>
 
    If an entire window of ACKs is lost, a timeout will result.  An
    example of this is given below:
@@ -854,11 +826,11 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Early%20Retransmit%20Timeout"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Early Retransmit Timeout</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Early%20Retransmit%20Timeout"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Early Retransmit Timeout</span>
 
    If the sender's RTO is too short, an early retransmission timeout can
    occur when no packets have in fact been dropped in the network.  An
@@ -910,7 +882,7 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
@@ -927,36 +899,36 @@ Abstract
    it has made an unnecessary window reduction, the sender has the
    option of "undoing" that reduction in the congestion window.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>. Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>. Security Considerations</span>
 
    This document neither strengthens nor weakens TCP's current security
    properties.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20Acknowledgements"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>. Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20Acknowledgements"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>. Acknowledgements</span>
 
    We would like to thank Mark Handley, Reiner Ludwig, and Venkat
    Padmanabhan for conversations on these issues, and to thank Mark
    Allman for helpful feedback on this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>. References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>. References</span>
 
-   [<a id="ref-AP99" name="ref-AP99">AP99</a>]    Mark Allman and Vern Paxson, On Estimating End-to-End
+   [<a id="ref-AP99">AP99</a>]    Mark Allman and Vern Paxson, On Estimating End-to-End
              Network Path Properties, SIGCOMM 99, August 1999.  URL
              "<a href="http://www.acm.org/sigcomm/sigcomm99/papers/session7-3.html">http://www.acm.org/sigcomm/sigcomm99/papers/session7-</a>
              <a href="http://www.acm.org/sigcomm/sigcomm99/papers/session7-3.html">3.html</a>".
 
-   [<a id="ref-BPS99" name="ref-BPS99">BPS99</a>]   J.C.R. Bennett, C. Partridge, and N. Shectman, Packet
+   [<a id="ref-BPS99">BPS99</a>]   J.C.R. Bennett, C. Partridge, and N. Shectman, Packet
              Reordering is Not Pathological Network Behavior, IEEE/ACM
              Transactions on Networking, Vol. 7, No. 6, December 1999,
              pp. 789-798.
 
-   [<a id="ref-BPK97" name="ref-BPK97">BPK97</a>]   Hari Balakrishnan, Venkata Padmanabhan, and Randy H. Katz,
+   [<a id="ref-BPK97">BPK97</a>]   Hari Balakrishnan, Venkata Padmanabhan, and Randy H. Katz,
              The Effects of Asymmetry on TCP Performance, Third ACM/IEEE
              Mobicom Conference, Budapest, Hungary, Sep 1997.  URL
              "<a href="http://www.cs.berkeley.edu/~padmanab/index.html#Publications">http://www.cs.berkeley.edu/~padmanab/</a>
              <a href="http://www.cs.berkeley.edu/~padmanab/index.html#Publications">index.html#Publications</a>".
 
-   [<a id="ref-F99" name="ref-F99">F99</a>]     Floyd, S., Re: TCP and out-of-order delivery, Message ID
+   [<a id="ref-F99">F99</a>]     Floyd, S., Re: TCP and out-of-order delivery, Message ID
              &lt;199902030027.QAA06775@owl.ee.lbl.gov&gt; to the end-to-end-
              interest mailing list, February 1999.  URL
              "<a href="http://www.aciri.org/floyd/notes/TCP_Feb99.email">http://www.aciri.org/floyd/notes/TCP_Feb99.email</a>".
@@ -966,36 +938,36 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
-   [<a id="ref-ISO8073" name="ref-ISO8073">ISO8073</a>] ISO/IEC, Information-processing systems - Open Systems
+   [<a id="ref-ISO8073">ISO8073</a>] ISO/IEC, Information-processing systems - Open Systems
              Interconnection - Connection Oriented Transport Protocol
              Specification, Internation Standard ISO/IEC 8073, December
              1988.
 
-   [<a id="ref-L99" name="ref-L99">L99</a>]     Reiner Ludwig, A Case for Flow Adaptive Wireless links,
+   [<a id="ref-L99">L99</a>]     Reiner Ludwig, A Case for Flow Adaptive Wireless links,
              Technical Report UCB//CSD-99-1053, May 1999.  URL
              "<a href="http://iceberg.cs.berkeley.edu/papers/Ludwig-FlowAdaptive/">http://iceberg.cs.berkeley.edu/papers/Ludwig-</a>
              <a href="http://iceberg.cs.berkeley.edu/papers/Ludwig-FlowAdaptive/">FlowAdaptive/</a>".
 
-   [<a id="ref-LK00" name="ref-LK00">LK00</a>]    Reiner Ludwig and Randy H. Katz, The Eifel Algorithm:
+   [<a id="ref-LK00">LK00</a>]    Reiner Ludwig and Randy H. Katz, The Eifel Algorithm:
              Making TCP Robust Against Spurious Retransmissions, SIGCOMM
              Computer Communication Review, V. 30, N. 1, January 2000.
              URL "<a href="http://www.acm.org/sigcomm/ccr/archive/ccr-toc/ccr-toc-2000.html">http://www.acm.org/sigcomm/ccr/archive/ccr-toc/ccr-</a>
              <a href="http://www.acm.org/sigcomm/ccr/archive/ccr-toc/ccr-toc-2000.html">toc-2000.html</a>".
 
-   [<a id="ref-RFC1323" name="ref-RFC1323">RFC1323</a>] Jacobson, V., Braden, R. and D. Borman, "TCP Extensions for
+   [<a id="ref-RFC1323">RFC1323</a>] Jacobson, V., Braden, R. and D. Borman, "TCP Extensions for
              High Performance", <a href="./rfc1323.html">RFC 1323</a>, May 1992.
 
-   [<a id="ref-RFC2018" name="ref-RFC2018">RFC2018</a>] Mathis, M., Mahdavi, J., Floyd, S. and  A. Romanow, "TCP
+   [<a id="ref-RFC2018">RFC2018</a>] Mathis, M., Mahdavi, J., Floyd, S. and  A. Romanow, "TCP
              Selective Acknowledgement Options", <a href="./rfc2018.html">RFC 2018</a>, April 1996.
 
-   [<a id="ref-RFC2581" name="ref-RFC2581">RFC2581</a>] Allman, M., Paxson,V. and W. Stevens, "TCP Congestion
+   [<a id="ref-RFC2581">RFC2581</a>] Allman, M., Paxson,V. and W. Stevens, "TCP Congestion
              Control", <a href="./rfc2581.html">RFC 2581</a>, April 1999.
 
-   [<a id="ref-SCWA99" name="ref-SCWA99">SCWA99</a>]  Stefan Savage, Neal Cardwell, David Wetherall, Tom
+   [<a id="ref-SCWA99">SCWA99</a>]  Stefan Savage, Neal Cardwell, David Wetherall, Tom
              Anderson, TCP Congestion Control with a Misbehaving
              Receiver, ACM Computer Communications Review, pp. 71-78, V.
              29, N. 5, October, 1999.  URL
@@ -1022,7 +994,7 @@ Abstract
 
 
 <span class="grey">Floyd, et al.               Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
@@ -1078,7 +1050,7 @@ Authors' Addresses
 
 
 <span class="grey">Floyd, et al.               Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc2883.html">RFC 2883</a>                     SACK Extension                    July 2000</span>
 
 
@@ -1134,11 +1106,6 @@ Acknowledgement
 
 
 Floyd, et al.               Standards Track                    [Page 17]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,31 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-fuller-lisp-alt" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:6836" name="DC.Identifier"/>
-<meta content="January, 2013" name="DC.Date.Issued"/>
-<meta content="Farinacci, Dino" name="DC.Creator"/>
-<meta content="Lewis, Darrel" name="DC.Creator"/>
-<meta content="Meyer, David" name="DC.Creator"/>
-<meta content="Fuller, Vince" name="DC.Creator"/>
-<meta content="This document describes a simple distributed index system to be used
-by a Locator/ID Separation Protocol (LISP) Ingress Tunnel Router (ITR)
-or Map-Resolver (MR) to find the Egress Tunnel Router (ETR) that holds
-the mapping information for a particular Endpoint Identifier (EID).
-The MR can then query that ETR to obtain the actual mapping
-information, which consists of a list of Routing Locators (RLOCs) for
-the EID. Termed the Alternative Logical Topology (ALT), the index is
-built as an overlay network on the public Internet using the Border
-Gateway Protocol (BGP) and Generic Routing Encapsulation (GRE). This
-document defines an Experimental Protocol for the Internet community." name="DC.Description.Abstract"/>
-<meta content="Locator/ID Separation Protocol Alternative Logical Topology (LISP+ALT)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6836 - Locator/ID Separation Protocol Alternative Logical Topology (LISP+ALT)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="V. Fuller" name="citation_author"/>
+<meta content="D. Farinacci" name="citation_author"/>
+<meta content="D. Meyer" name="citation_author"/>
+<meta content="D. Lewis" name="citation_author"/>
+<meta content="January, 2013" name="citation_publication_date"/>
+<meta content="Locator/ID Separation Protocol Alternative Logical Topology (LISP+ALT)" name="citation_title"/>
+<meta content="10.17487/RFC6836" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6836" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6836.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6836: Locator/ID Separation Protocol Alternative Logical Topology (LISP+ALT)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -54,7 +43,7 @@ document defines an Experimental Protocol for the Internet community." name="DC.
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -63,7 +52,7 @@ document defines an Experimental Protocol for the Internet community." name="DC.
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -142,19 +131,18 @@ document defines an Experimental Protocol for the Internet community." name="DC.
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -168,21 +156,9 @@ document defines an Experimental Protocol for the Internet community." name="DC.
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgyellow" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6836.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6836" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-lisp-alt.html" title="draft-ietf-lisp-alt">draft-ietf-lisp-alt</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6836" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6836" title="Side-by-side diff">Diff2</a>]                  </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                         V. Fuller
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6836.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6836.txt.pdf">PDF</a>|<a href="/rfc/rfc6836.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6836" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6836&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6836" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                         V. Fuller
 Request for Comments: 6836
 Category: Experimental                                      D. Farinacci
 ISSN: 2070-1721                                                 D. Meyer
@@ -234,7 +210,7 @@ Status of This Memo
 
 
 <span class="grey">Fuller, et al.                Experimental                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -243,7 +219,7 @@ Copyright Notice
    Copyright (c) 2013 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -290,7 +266,7 @@ Copyright Notice
 
 
 <span class="grey">Fuller, et al.                Experimental                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -333,7 +309,7 @@ Table of Contents
       <a href="#section-11.1">11.1</a>. Normative References .....................................<a href="#page-24">24</a>
       <a href="#section-11.2">11.2</a>. Informative References ...................................<a href="#page-25">25</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This document describes the LISP+ALT system, used by an [<a href="./rfc6830.html" title='"The Locator/ID Separation Protocol (LISP)"'>RFC6830</a>]
    Ingress Tunnel Router (ITR) or MR to find the Egress Tunnel Router
@@ -346,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -402,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -433,7 +409,7 @@ Table of Contents
    connected to form the overlay network.  <a href="#section-9">Section 9</a> discusses security
    considerations relevant to LISP+ALT.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Definition%20of%20Terms"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Definition of Terms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Definition%20of%20Terms"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Definition of Terms</span>
 
    This section provides high-level definitions of LISP concepts and
    components involved with and affected by LISP+ALT.
@@ -458,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -514,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -570,11 +546,11 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20The%20LISP-ALT%20Model"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  The LISP-ALT Model</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20The%20LISP-ALT%20Model"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  The LISP-ALT Model</span>
 
    The LISP-ALT model uses the same basic query/response protocol that
    is documented in [<a href="./rfc6830.html" title='"The Locator/ID Separation Protocol (LISP)"'>RFC6830</a>].  In particular, LISP+ALT provides two
@@ -607,7 +583,7 @@ Table of Contents
    Detailed descriptions of the LISP packet types referenced by this
    document may be found in [<a href="./rfc6830.html" title='"The Locator/ID Separation Protocol (LISP)"'>RFC6830</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Routability%20of%20EIDs"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Routability of EIDs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Routability%20of%20EIDs"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Routability of EIDs</span>
 
    A LISP EID has the same syntax as an IP address and can be used,
    unaltered, as the source or destination of an IP datagram.  In
@@ -626,11 +602,11 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Mechanisms%20for%20an%20ETR%20to%20Originate%20EID-Prefixes"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  Mechanisms for an ETR to Originate EID-Prefixes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Mechanisms%20for%20an%20ETR%20to%20Originate%20EID-Prefixes"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  Mechanisms for an ETR to Originate EID-Prefixes</span>
 
    There are three ways that an ETR may originate its mappings into
    the ALT:
@@ -648,7 +624,7 @@ Table of Contents
        may configure its ETR(s) with tunnel and BGP connections to edge
        ALT-Routers.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Mechanisms%20for%20an%20ITR%20to%20Forward%20to%20EID-Prefixes"></a></body></html><a class="selflink" href="#section-3.1.2" name="section-3.1.2">3.1.2</a>.  Mechanisms for an ITR to Forward to EID-Prefixes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Mechanisms%20for%20an%20ITR%20to%20Forward%20to%20EID-Prefixes"></a></body></html><a class="selflink" href="#section-3.1.2" id="section-3.1.2">3.1.2</a>.  Mechanisms for an ITR to Forward to EID-Prefixes</span>
 
    There are three ways that an ITR may send ALT Datagrams:
 
@@ -663,7 +639,7 @@ Table of Contents
        knowledge of what prefixes exist on the ALT, it may configure its
        ITR(s) with tunnel and BGP connections to edge ALT-Routers.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.%20%20Map-Server%20Model%20Preferred"></a></body></html><a class="selflink" href="#section-3.1.3" name="section-3.1.3">3.1.3</a>.  Map-Server Model Preferred</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.%20%20Map-Server%20Model%20Preferred"></a></body></html><a class="selflink" href="#section-3.1.3" id="section-3.1.3">3.1.3</a>.  Map-Server Model Preferred</span>
 
    The ALT-connected ITR and ETR cases are expected to be rare, as the
    Map-Server/Map-Resolver model is simpler for an ITR/ETR operator to
@@ -682,11 +658,11 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Connectivity%20to%20Non-LISP%20Sites"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Connectivity to Non-LISP Sites</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Connectivity%20to%20Non-LISP%20Sites"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Connectivity to Non-LISP Sites</span>
 
    As stated above, EIDs used as IP addresses by LISP sites are not
    routable on the public Internet.  This implies that, absent a
@@ -695,7 +671,7 @@ Table of Contents
    an "interworking" technology has been defined; see [<a href="./rfc6832.html" title='"Interworking between Locator/ID Separation Protocol (LISP) and Non-LISP Sites"'>RFC6832</a>] for
    details.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Caveats%20on%20the%20Use%20of%20Data-Probes"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Caveats on the Use of Data-Probes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Caveats%20on%20the%20Use%20of%20Data-Probes"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Caveats on the Use of Data-Probes</span>
 
    It is worth noting that there has been a great deal of discussion and
    controversy about whether Data-Probes are a good idea.  On the one
@@ -715,7 +691,7 @@ Table of Contents
    configuration should only be enabled when performing experiments
    intended to test the viability of using Data-Probes.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20LISP%2BALT%3A%20Overview"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  LISP+ALT: Overview</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20LISP%2BALT%3A%20Overview"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  LISP+ALT: Overview</span>
 
    LISP+ALT is a hybrid push/pull architecture.  Aggregated EID-Prefixes
    are advertised among the ALT-Routers and to those (rare) ITRs that
@@ -738,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -783,7 +759,7 @@ Table of Contents
    received from ETRs or from other LISP-ALT Routers that are
    topologically "downstream" from it.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20ITR%20Traffic%20Handling"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  ITR Traffic Handling</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20ITR%20Traffic%20Handling"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  ITR Traffic Handling</span>
 
    When an ITR receives a packet originated by an end-system within its
    site (i.e., a host for which the ITR is the exit path out of the
@@ -794,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -829,7 +805,7 @@ Table of Contents
    Datagrams from ITRs and, if possible, should be configured to not
    accept packets that are not ALT Datagrams.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20EID%20Assignment%20-%20Hierarchy%20and%20Topology"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  EID Assignment - Hierarchy and Topology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20EID%20Assignment%20-%20Hierarchy%20and%20Topology"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  EID Assignment - Hierarchy and Topology</span>
 
    The ALT database is organized in a hierarchical manner with
    EID-Prefixes aggregated on power-of-2 block boundaries.  Where a LISP
@@ -850,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -906,7 +882,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -918,7 +894,7 @@ Table of Contents
    network; as testing and prototype deployment proceed, a guide to how
    to best build the ALT network will be developed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Use%20of%20GRE%20and%20BGP%20between%20LISP-ALT%20Routers"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Use of GRE and BGP between LISP-ALT Routers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Use%20of%20GRE%20and%20BGP%20between%20LISP-ALT%20Routers"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Use of GRE and BGP between LISP-ALT Routers</span>
 
    The ALT network is built using GRE tunnels between ALT-Routers.  BGP
    sessions are configured over those tunnels, with each ALT-Router
@@ -938,7 +914,7 @@ Table of Contents
    be reachable by each other; any addressing plan, including private
    addressing, can therefore be used for ALT tunnels.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20EID-Prefix%20Propagation%20and%20Map-Request%20Forwarding"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  EID-Prefix Propagation and Map-Request Forwarding</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20EID-Prefix%20Propagation%20and%20Map-Request%20Forwarding"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  EID-Prefix Propagation and Map-Request Forwarding</span>
 
    As described in <a href="#section-8.2">Section 8.2</a>, an ITR sends an ALT Datagram to a given
    EID-to-RLOC mapping.  The ALT provides the infrastructure that allows
@@ -962,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -978,7 +954,7 @@ Table of Contents
    consists of aggregated EID-Prefixes and their next hops toward the
    authoritative ETR for that EID-Prefix.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Changes%20to%20ITR%20Behavior%20with%20LISP%2BALT"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Changes to ITR Behavior with LISP+ALT</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Changes%20to%20ITR%20Behavior%20with%20LISP%2BALT"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Changes to ITR Behavior with LISP+ALT</span>
 
    As previously described, an ITR will usually use the Map-Resolver
    interface and will send its Map Requests to a Map-Resolver.  When an
@@ -995,7 +971,7 @@ Table of Contents
    information received.  If it is not running BGP, it uses a statically
    configured ALT Default Route to select an ALT-Router.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Changes%20to%20ETR%20Behavior%20with%20LISP%2BALT"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Changes to ETR Behavior with LISP+ALT</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Changes%20to%20ETR%20Behavior%20with%20LISP%2BALT"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Changes to ETR Behavior with LISP+ALT</span>
 
    As previously described, an ETR will usually use the Map-Server
    interface (see [<a href="./rfc6833.html" title='"Locator/ID Separation Protocol (LISP) Map-Server Interface"'>RFC6833</a>]) and will register its EID-Prefixes with its
@@ -1018,11 +994,11 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20ALT%20Datagram%20Forwarding%20Failure"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  ALT Datagram Forwarding Failure</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20ALT%20Datagram%20Forwarding%20Failure"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  ALT Datagram Forwarding Failure</span>
 
    Intermediate ALT-Routers forward ALT Datagrams using normal,
    hop-by-hop routing on the ALT overlay network.  Should an ALT-Router
@@ -1043,7 +1019,7 @@ Table of Contents
    o  A non-LISP-capable ALT-Router may also choose to silently drop the
       non-forwardable ALT Datagram.
 
-   [<a id="ref-RFC6830" name="ref-RFC6830">RFC6830</a>] and [<a href="./rfc6833.html" title='"Locator/ID Separation Protocol (LISP) Map-Server Interface"'>RFC6833</a>] define how the source of an ALT Datagram
+   [<a id="ref-RFC6830">RFC6830</a>] and [<a href="./rfc6833.html" title='"Locator/ID Separation Protocol (LISP) Map-Server Interface"'>RFC6833</a>] define how the source of an ALT Datagram
    should handle each of these cases.  The last case, where an ALT
    Datagram is silently discarded, will generally result in several
    retransmissions by the source, followed by treating the destination
@@ -1057,9 +1033,9 @@ Table of Contents
    intermediate MTU will be fragmented at that point and will be
    reassembled by the target of the GRE tunnel.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20BGP%20Configuration%20and%20Protocol%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  BGP Configuration and Protocol Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20BGP%20Configuration%20and%20Protocol%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  BGP Configuration and Protocol Considerations</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Autonomous%20System%20Numbers%20%28ASNs%29%20in%20LISP%2BALT"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Autonomous System Numbers (ASNs) in LISP+ALT</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Autonomous%20System%20Numbers%20%28ASNs%29%20in%20LISP%2BALT"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Autonomous System Numbers (ASNs) in LISP+ALT</span>
 
    The primary use of BGP today is to define the global Internet routing
    topology in terms of its participants, known as Autonomous Systems.
@@ -1074,7 +1050,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -1087,7 +1063,7 @@ Table of Contents
    topology is completely separate from, and independent of, the global
    Internet routing system.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Subsequent%20Address%20Family%20Identifier%20%28SAFI%29%20for%20LISP%2BALT"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Subsequent Address Family Identifier (SAFI) for LISP+ALT</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Subsequent%20Address%20Family%20Identifier%20%28SAFI%29%20for%20LISP%2BALT"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Subsequent Address Family Identifier (SAFI) for LISP+ALT</span>
 
    As defined by this document, LISP+ALT may be implemented using BGP
    without modification.  Given the fundamental operational difference
@@ -1104,7 +1080,7 @@ Table of Contents
    not request the assignment of a new SAFI; additional experimentation
    may suggest the need for one in the future.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20EID-Prefix%20Aggregation"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  EID-Prefix Aggregation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20EID-Prefix%20Aggregation"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  EID-Prefix Aggregation</span>
 
    To facilitate EID-Prefix aggregation, the ALT BGP topology is
    provisioned in a hierarchical manner; the fact that all inter-node
@@ -1130,11 +1106,11 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Stability%20of%20the%20ALT"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Stability of the ALT</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Stability%20of%20the%20ALT"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Stability of the ALT</span>
 
    It is worth noting that LISP+ALT does not directly propagate
    EID-to-RLOC mappings.  What it does is provide a mechanism for an ITR
@@ -1157,7 +1133,7 @@ Table of Contents
    likely and mapping information cannot become "stale" due to slow
    propagation through the ALT BGP mesh.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Traffic%20Engineering%20Using%20LISP"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Traffic Engineering Using LISP</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Traffic%20Engineering%20Using%20LISP"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Traffic Engineering Using LISP</span>
 
    Since an ITR learns an EID-to-RLOC mapping directly from the ETR that
    owns it, it is possible to perform site-to-site Traffic Engineering
@@ -1186,11 +1162,11 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Edge%20Aggregation%20and%20Dampening"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  Edge Aggregation and Dampening</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Edge%20Aggregation%20and%20Dampening"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  Edge Aggregation and Dampening</span>
 
    Normal BGP best common practices apply to the ALT network.  In
    particular, first-hop ALT-Routers will aggregate EID-Prefixes and
@@ -1211,7 +1187,7 @@ Table of Contents
    information on the ALT can be expected to be both better aggregated
    and considerably less volatile than the actual EID-to-RLOC mappings.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20EID%20Assignment%20Flexibility%20vs.%20ALT%20Scaling"></a></body></html><a class="selflink" href="#section-7.4" name="section-7.4">7.4</a>.  EID Assignment Flexibility vs. ALT Scaling</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20EID%20Assignment%20Flexibility%20vs.%20ALT%20Scaling"></a></body></html><a class="selflink" href="#section-7.4" id="section-7.4">7.4</a>.  EID Assignment Flexibility vs. ALT Scaling</span>
 
    There are major open questions regarding how the ALT will be deployed
    and what organization(s) will operate it.  In a simple,
@@ -1242,7 +1218,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -1276,9 +1252,9 @@ Table of Contents
    Registrar, be carefully considered when designing and deploying the
    ALT infrastructure.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Connecting%20Sites%20to%20the%20ALT%20Network"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Connecting Sites to the ALT Network</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Connecting%20Sites%20to%20the%20ALT%20Network"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Connecting Sites to the ALT Network</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20ETRs%20Originating%20Information%20into%20the%20ALT"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  ETRs Originating Information into the ALT</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20ETRs%20Originating%20Information%20into%20the%20ALT"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  ETRs Originating Information into the ALT</span>
 
    EID-Prefix information is originated into the ALT by three different
    mechanisms:
@@ -1298,7 +1274,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -1325,7 +1301,7 @@ Table of Contents
          cannot be aggregated by the same ALT-Router (i.e., are not
          topologically "close" to each other in the ALT).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20ITRs%20Using%20the%20ALT"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  ITRs Using the ALT</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20ITRs%20Using%20the%20ALT"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  ITRs Using the ALT</span>
 
    In the common configuration, an ITR does not need to know anything
    about the ALT, since it sends Map-Requests to one of its configured
@@ -1354,7 +1330,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -1374,7 +1350,7 @@ Table of Contents
    configurations described above.  Note that the use of Data-Probes is
    discouraged at this time (see <a href="#section-3.3">Section 3.3</a>).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Security Considerations</span>
 
    LISP+ALT shares many of the security characteristics of BGP.  Its
    security mechanisms are comprised of existing technologies in wide
@@ -1382,7 +1358,7 @@ Table of Contents
    of applying the same technology that is used to secure the BGP-based
    global routing system (see <a href="#section-9.3">Section 9.3</a> below).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Apparent%20LISP%2BALT%20Vulnerabilities"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Apparent LISP+ALT Vulnerabilities</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Apparent%20LISP%2BALT%20Vulnerabilities"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Apparent LISP+ALT Vulnerabilities</span>
 
    This section briefly lists the known potential vulnerabilities of
    LISP+ALT.
@@ -1410,7 +1386,7 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
@@ -1443,7 +1419,7 @@ Table of Contents
       <a href="#section-9.3">Section 9.3</a> describes an existing approach to solving this
       problem.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Survey%20of%20LISP%2BALT%20Security%20Mechanisms"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Survey of LISP+ALT Security Mechanisms</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Survey%20of%20LISP%2BALT%20Security%20Mechanisms"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Survey of LISP+ALT Security Mechanisms</span>
 
    Explicit peering:  The devices themselves can prioritize incoming
       packets as well as potentially do key checks in hardware to
@@ -1466,11 +1442,11 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.3.%20%20Use%20of%20Additional%20BGP%20Security%20Mechanisms"></a></body></html><a class="selflink" href="#section-9.3" name="section-9.3">9.3</a>.  Use of Additional BGP Security Mechanisms</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.3.%20%20Use%20of%20Additional%20BGP%20Security%20Mechanisms"></a></body></html><a class="selflink" href="#section-9.3" id="section-9.3">9.3</a>.  Use of Additional BGP Security Mechanisms</span>
 
    LISP+ALT's use of BGP allows it to take advantage of BGP security
    features designed for existing Internet BGP use.  This means that
@@ -1478,7 +1454,7 @@ Table of Contents
    to BGP (in the IETF SIDR working group or elsewhere) to provide
    authentication of EID-Prefix origination and EID-to-RLOC mappings.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Acknowledgments</span>
 
    The authors would like to specially thank J. Noel Chiappa, who was a
    key contributor to the design of the Content distribution Overlay
@@ -1488,30 +1464,30 @@ Table of Contents
    who have provided valuable contributions include John Zwiebel, Hannu
    Flinck, Amit Jain, John Scudder, Scott Brim, and Jari Arkko.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20References"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20References"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-11.1" name="section-11.1">11.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-11.1" id="section-11.1">11.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2784" name="ref-RFC2784">RFC2784</a>]  Farinacci, D., Li, T., Hanks, S., Meyer, D., and P.
+   [<a id="ref-RFC2784">RFC2784</a>]  Farinacci, D., Li, T., Hanks, S., Meyer, D., and P.
               Traina, "Generic Routing Encapsulation (GRE)", <a href="./rfc2784.html">RFC 2784</a>,
               March 2000.
 
-   [<a id="ref-RFC4271" name="ref-RFC4271">RFC4271</a>]  Rekhter, Y., Li, T., and S. Hares, "A Border Gateway
+   [<a id="ref-RFC4271">RFC4271</a>]  Rekhter, Y., Li, T., and S. Hares, "A Border Gateway
               Protocol 4 (BGP-4)", <a href="./rfc4271.html">RFC 4271</a>, January 2006.
 
-   [<a id="ref-RFC4632" name="ref-RFC4632">RFC4632</a>]  Fuller, V. and T. Li, "Classless Inter-domain Routing
+   [<a id="ref-RFC4632">RFC4632</a>]  Fuller, V. and T. Li, "Classless Inter-domain Routing
               (CIDR): The Internet Address Assignment and Aggregation
-              Plan", <a href="./bcp122.html">BCP 122</a>, <a href="./rfc4632.html">RFC 4632</a>, August 2006.
+              Plan", <a href="https://www.rfc-editor.org/bcp/bcp122">BCP 122</a>, <a href="./rfc4632.html">RFC 4632</a>, August 2006.
 
-   [<a id="ref-RFC4760" name="ref-RFC4760">RFC4760</a>]  Bates, T., Chandra, R., Katz, D., and Y. Rekhter,
+   [<a id="ref-RFC4760">RFC4760</a>]  Bates, T., Chandra, R., Katz, D., and Y. Rekhter,
               "Multiprotocol Extensions for BGP-4", <a href="./rfc4760.html">RFC 4760</a>,
               January 2007.
 
-   [<a id="ref-RFC6830" name="ref-RFC6830">RFC6830</a>]  Farinacci, D., Fuller, V., Meyer, D., and D. Lewis, "The
+   [<a id="ref-RFC6830">RFC6830</a>]  Farinacci, D., Fuller, V., Meyer, D., and D. Lewis, "The
               Locator/ID Separation Protocol (LISP)", <a href="./rfc6830.html">RFC 6830</a>,
               January 2013.
 
-   [<a id="ref-RFC6833" name="ref-RFC6833">RFC6833</a>]  Fuller, V. and D. Farinacci, "Locator/ID Separation
+   [<a id="ref-RFC6833">RFC6833</a>]  Fuller, V. and D. Farinacci, "Locator/ID Separation
               Protocol (LISP) Map-Server Interface", <a href="./rfc6833.html">RFC 6833</a>,
               January 2013.
 
@@ -1522,16 +1498,16 @@ Table of Contents
 
 
 <span class="grey">Fuller, et al.                Experimental                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc6836.html">RFC 6836</a>                        LISP+ALT                    January 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-11.2" name="section-11.2">11.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-11.2" id="section-11.2">11.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC5925" name="ref-RFC5925">RFC5925</a>]  Touch, J., Mankin, A., and R. Bonica, "The TCP
+   [<a id="ref-RFC5925">RFC5925</a>]  Touch, J., Mankin, A., and R. Bonica, "The TCP
               Authentication Option", <a href="./rfc5925.html">RFC 5925</a>, June 2010.
 
-   [<a id="ref-RFC6832" name="ref-RFC6832">RFC6832</a>]  Lewis, D., Meyer, D., Farinacci, D., and V. Fuller,
+   [<a id="ref-RFC6832">RFC6832</a>]  Lewis, D., Meyer, D., Farinacci, D., and V. Fuller,
               "Interworking between Locator/ID Separation Protocol
               (LISP) and Non-LISP Sites", <a href="./rfc6832.html">RFC 6832</a>, January 2013.
 
@@ -1578,11 +1554,6 @@ Authors' Addresses
 
 
 Fuller, et al.                Experimental                     [Page 25]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

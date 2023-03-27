@@ -1,22 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:5123" name="DC.Identifier"/>
-<meta content="This document examines the implications of hop-by-hop forwarding,
-route aggregation, and route filtering on the concept of validation
-within a BGP Autonomous System (AS) Path. This memo provides
-information for the Internet community." name="DC.Description.Abstract"/>
-<meta content="White, Russ" name="DC.Creator"/>
-<meta content="Akyol, Bora" name="DC.Creator"/>
-<meta content="February, 2008" name="DC.Date.Issued"/>
-<meta content="Considerations in Validating the Path in BGP" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5123 - Considerations in Validating the Path in BGP</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="R. White" name="citation_author"/>
+<meta content="B. Akyol" name="citation_author"/>
+<meta content="February, 2008" name="citation_publication_date"/>
+<meta content="Considerations in Validating the Path in BGP" name="citation_title"/>
+<meta content="10.17487/RFC5123" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5123" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5123.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5123: Considerations in Validating the Path in BGP</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -45,7 +41,7 @@ information for the Internet community." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -54,7 +50,7 @@ information for the Internet community." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -133,19 +129,18 @@ information for the Internet community." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -159,21 +154,9 @@ information for the Internet community." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5123.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5123" title="PDF version of this document">pdf</a>] [<a href="./draft-white-pathconsiderations.html" title="draft-white-pathconsiderations">draft-white-pathc...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5123" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5123" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5123">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                           R. White
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5123.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5123.txt.pdf">PDF</a>|<a href="/rfc/rfc5123.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5123" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5123&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5123" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5123" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                           R. White
 Request for Comments: 5123                                      B. Akyol
 Category: Informational                                    Cisco Systems
                                                            February 2008
@@ -208,7 +191,7 @@ Abstract
    route aggregation, and route filtering on the concept of validation
    within a BGP Autonomous System (AS) Path.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Background"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Background</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Background"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Background</span>
 
    A good deal of thought has gone into, and is currently being given
    to, validating the path to a destination advertised by BGP.  The
@@ -225,7 +208,7 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
@@ -262,7 +245,7 @@ Abstract
    10.1.1.0/24 from a BGP speaker in AS65001, with an AS Path of {65000,
    65001}.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Is%20the%20Originating%20AS%20Authorized%20to%20Advertise%20Reachability%20to%20the"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Is the Originating AS Authorized to Advertise Reachability to the</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Is%20the%20Originating%20AS%20Authorized%20to%20Advertise%20Reachability%20to%20the"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Is the Originating AS Authorized to Advertise Reachability to the</span>
 <span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20Destination%3F"></a></body></html>      Destination?</span>
 
    The most obvious question the receiving BGP speaker can ask about
@@ -281,11 +264,11 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Is%20the%20Path%20Contained%20in%20the%20Advertised%20Routing%20Information%20Valid%3F"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Is the Path Contained in the Advertised Routing Information Valid?</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Is%20the%20Path%20Contained%20in%20the%20Advertised%20Routing%20Information%20Valid%3F"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Is the Path Contained in the Advertised Routing Information Valid?</span>
 
    If a BGP speaker receives an advertisement from a peer outside the
    local autonomous system (AS), the peer sending the update has a path
@@ -301,7 +284,7 @@ Abstract
    can assume that AS65001 is attached to the local AS, and that AS65001
    is also attached to AS65000.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Is%20the%20Advertisement%20Authorized%3F"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>.  Is the Advertisement Authorized?</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Is%20the%20Advertisement%20Authorized%3F"></a></body></html><a class="selflink" href="#section-1.3" id="section-1.3">1.3</a>.  Is the Advertisement Authorized?</span>
 
    There are at least three senses in which the readvertisement of a
    received advertisement can be authorized in BGP:
@@ -337,7 +320,7 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
@@ -352,7 +335,7 @@ Abstract
    authorization is of questionable value because of the intertwined
    nature of these three types of authorization in a routing system.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.4.%20%20Will%20Traffic%20Forwarded%20to%20an%20Advertising%20Speaker%20Follow%20the"></a></body></html><a class="selflink" href="#section-1.4" name="section-1.4">1.4</a>.  Will Traffic Forwarded to an Advertising Speaker Follow the</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.4.%20%20Will%20Traffic%20Forwarded%20to%20an%20Advertising%20Speaker%20Follow%20the"></a></body></html><a class="selflink" href="#section-1.4" id="section-1.4">1.4</a>.  Will Traffic Forwarded to an Advertising Speaker Follow the</span>
 <span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20Described%20AS%20Path%3F"></a></body></html>      Described AS Path?</span>
 
    If a BGP speaker receives an advertisement from a peer not in the
@@ -366,14 +349,14 @@ Abstract
    forwarded to the BGP speaker in AS65001 actually be forwarded through
    routers within AS65001, then AS65000, to reach its destination?
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.5.%20%20Is%20a%20Withdrawing%20Speaker%20Authorized%20to%20Withdraw%20the%20Routing"></a></body></html><a class="selflink" href="#section-1.5" name="section-1.5">1.5</a>.  Is a Withdrawing Speaker Authorized to Withdraw the Routing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.5.%20%20Is%20a%20Withdrawing%20Speaker%20Authorized%20to%20Withdraw%20the%20Routing"></a></body></html><a class="selflink" href="#section-1.5" id="section-1.5">1.5</a>.  Is a Withdrawing Speaker Authorized to Withdraw the Routing</span>
 <span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20Information%3F"></a></body></html>      Information?</span>
 
    If an advertisement is withdrawn, the withdrawing BGP peer was
    originally advertising the prefix (or was authorized to advertise the
    prefix).  This assertion is out of the scope of this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Analysis"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Analysis</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Analysis"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Analysis</span>
 
    To begin, we review some of the concepts of routing, since we need to
    keep these concepts fixed firmly in place while we examine these
@@ -381,7 +364,7 @@ Abstract
    show the tension between the various types of authorization in a path
    vector routing system.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20A%20Short%20Analysis%20of%20Routing"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  A Short Analysis of Routing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20A%20Short%20Analysis%20of%20Routing"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  A Short Analysis of Routing</span>
 
    Routing protocols are designed, in short, to discover a set of
    loop-free paths to each reachable destination within a network (or
@@ -393,7 +376,7 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
@@ -418,7 +401,7 @@ Abstract
    receiving BGP speaker for setting policy or gauging the route's
    security level.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20First%20Example%3A%20Manual%20Intervention%20in%20the%20Path%20Choice"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  First Example: Manual Intervention in the Path Choice</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20First%20Example%3A%20Manual%20Intervention%20in%20the%20Path%20Choice"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  First Example: Manual Intervention in the Path Choice</span>
 
    In the small network:
 
@@ -449,7 +432,7 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
@@ -505,7 +488,7 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
@@ -514,7 +497,7 @@ Abstract
    which downstream routers can authorize the source to use available
    paths for transiting traffic.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Second%20Example%3A%20An%20Unintended%20Reachable%20Destination"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Second Example: An Unintended Reachable Destination</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Second%20Example%3A%20An%20Unintended%20Reachable%20Destination"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Second Example: An Unintended Reachable Destination</span>
 
    In this internetwork, we assume a single policy: the system
    administrator of AS65000 would not like the destination 10.1.1.0/24
@@ -561,7 +544,7 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
@@ -574,14 +557,14 @@ Abstract
       will actually traverse only ASes listed in the AS_PATH attribute
       of the route".
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.%20%20Advertisement%20Authorization"></a></body></html><a class="selflink" href="#section-2.3.1" name="section-2.3.1">2.3.1</a>.  Advertisement Authorization</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.%20%20Advertisement%20Authorization"></a></body></html><a class="selflink" href="#section-2.3.1" id="section-2.3.1">2.3.1</a>.  Advertisement Authorization</span>
 
    Is the advertisement authorized?  This example higlights the tension
    between the three different types of authorization.  The three
    following sections discuss issues with different advertisements
    AS65001 may send to AS65002.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.1.%20%20Valid%20Unauthorized%20Aggregates"></a></body></html><a class="selflink" href="#section-2.3.1.1" name="section-2.3.1.1">2.3.1.1</a>.  Valid Unauthorized Aggregates</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.1.%20%20Valid%20Unauthorized%20Aggregates"></a></body></html><a class="selflink" href="#section-2.3.1.1" id="section-2.3.1.1">2.3.1.1</a>.  Valid Unauthorized Aggregates</span>
 
    The first issue that comes up in this example is the case where there
    is no expectation of authorization for aggregation.  The most common
@@ -596,7 +579,7 @@ Abstract
    power and applicability of efforts to secure the AS path and AS
    policies.  It does not vitiate the underlying value in such efforts.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.2.%20%20Owner%20Aggregation"></a></body></html><a class="selflink" href="#section-2.3.1.2" name="section-2.3.1.2">2.3.1.2</a>.  Owner Aggregation</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.2.%20%20Owner%20Aggregation"></a></body></html><a class="selflink" href="#section-2.3.1.2" id="section-2.3.1.2">2.3.1.2</a>.  Owner Aggregation</span>
 
    In the current instantiation of IP address allocation, an AS may
    receive authorization to advertise 10.1.0.0/16, for instance, and may
@@ -617,7 +600,7 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
@@ -673,7 +656,7 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
@@ -702,7 +685,7 @@ Abstract
       origination, or as part of an aggregate.  This sort of solution
       would be an extreme burden on the routing system.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.3.%20%20Proxy%20Aggregation"></a></body></html><a class="selflink" href="#section-2.3.1.3" name="section-2.3.1.3">2.3.1.3</a>.  Proxy Aggregation</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.3.%20%20Proxy%20Aggregation"></a></body></html><a class="selflink" href="#section-2.3.1.3" id="section-2.3.1.3">2.3.1.3</a>.  Proxy Aggregation</span>
 
    It is also possible for AS65001 to have some form of agreement with
    AS65002 to aggregate blocks of address space it does not own towards
@@ -729,7 +712,7 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
@@ -737,7 +720,7 @@ Abstract
    available solution to this problem, other than to disallow proxy
    aggregation, even between two cooperating autonomous systems.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.2.%20%20Implications"></a></body></html><a class="selflink" href="#section-2.3.2" name="section-2.3.2">2.3.2</a>.  Implications</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.2.%20%20Implications"></a></body></html><a class="selflink" href="#section-2.3.2" id="section-2.3.2">2.3.2</a>.  Implications</span>
 
    The basic problem is that AS65002 assumes when AS65001 advertises an
    authorized route containing 10.1.1.0/24, either through a valid
@@ -750,7 +733,7 @@ Abstract
    way to untie destination and transit authorization from route
    advertisements, which are deeply intertwined today.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Third%20Example%3A%20Following%20a%20Specific%20Path"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Third Example: Following a Specific Path</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Third%20Example%3A%20Following%20a%20Specific%20Path"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Third Example: Following a Specific Path</span>
 
    This example is slightly more complex than the last two.  Given the
    following small network, assume that A and D have a mutually agreed
@@ -785,7 +768,7 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
@@ -841,11 +824,11 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Fourth%20Example%3A%20Interior%20and%20Exterior%20Paths%20Mismatch"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  Fourth Example: Interior and Exterior Paths Mismatch</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Fourth%20Example%3A%20Interior%20and%20Exterior%20Paths%20Mismatch"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  Fourth Example: Interior and Exterior Paths Mismatch</span>
 
    This is the most complex example we will cover in this document.  It
    can be argued that the configuration described in this example is a
@@ -897,7 +880,7 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
@@ -928,7 +911,7 @@ Abstract
       the traffic forwarded to the destination actually transits {2, 3,
       5}.  Forwarding is not consistent in this example.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Summary"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Summary</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Summary"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Summary</span>
 
    The examples given in this document are not the only possible
    examples of forwarding that is inconsistent with the advertised AS
@@ -953,43 +936,43 @@ Abstract
 
 
 <span class="grey">White &amp; Akyol                Informational                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
    There are no easy or obviously scalable solutions to this problem.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Acknowledgements</span>
 
    We would like to thank Steve Kent for his contributions and comments
    on this document.  We would also like to thank Joel Halpern for his
    work in clarifying many sections of the document, including
    additional text in critical sections.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    This document does not propose any new extensions or additions to
    existing or proposed protocols, and so does not impact the security
    of any protocol.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Informative References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Informative References</span>
 
-   [<a id="ref-ASTRACEROUTE" name="ref-ASTRACEROUTE">ASTRACEROUTE</a>] Feamster, N. and H. Balakrishnan, "Towards an Accurate
+   [<a id="ref-ASTRACEROUTE">ASTRACEROUTE</a>] Feamster, N. and H. Balakrishnan, "Towards an Accurate
                   ASLevel Traceroute Tool", SIGCOMM ACM SIGCOMM, 2003.
 
-   [<a id="ref-BGP-MD5" name="ref-BGP-MD5">BGP-MD5</a>]      Heffernan, A., "Protection of BGP Sessions via the TCP
+   [<a id="ref-BGP-MD5">BGP-MD5</a>]      Heffernan, A., "Protection of BGP Sessions via the TCP
                   MD5 Signature Option", <a href="./rfc2385.html">RFC 2385</a>, August 1998.
 
-   [<a id="ref-RFC4271" name="ref-RFC4271">RFC4271</a>]      Rekhter, Y., Ed., Li, T., Ed., and S. Hares, Ed., "A
+   [<a id="ref-RFC4271">RFC4271</a>]      Rekhter, Y., Ed., Li, T., Ed., and S. Hares, Ed., "A
                   Border Gateway Protocol 4 (BGP-4)", <a href="./rfc4271.html">RFC 4271</a>, January
                   2006.
 
-   [<a id="ref-ROUTINGLOGIC" name="ref-ROUTINGLOGIC">ROUTINGLOGIC</a>] Feamster, N. and H. Balakrishnan, "Towards a Logic for
+   [<a id="ref-ROUTINGLOGIC">ROUTINGLOGIC</a>] Feamster, N. and H. Balakrishnan, "Towards a Logic for
                   Wide Area Routing", SIGCOMM ACM SIGCOMM Worshop on
                   Future Directions in Network Architecture, Germany,
                   August 2003.
 
-   [<a id="ref-SOBGP" name="ref-SOBGP">SOBGP</a>]        White, R., "Architecture and Deployment Considerations
+   [<a id="ref-SOBGP">SOBGP</a>]        White, R., "Architecture and Deployment Considerations
                   for Secure Origin BGP (soBGP)", Work in Progress.
 
 Authors' Addresses
@@ -1009,7 +992,7 @@ Authors' Addresses
 
 
 <span class="grey">White &amp; Akyol                Informational                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5123.html">RFC 5123</a>             Path Validation Considerations        February 2008</span>
 
 
@@ -1018,7 +1001,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2008).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a> and at www.rfc-editor.org/copyright.html, and
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and at www.rfc-editor.org/copyright.html, and
    except as set forth therein, the authors retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1038,7 +1021,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1065,11 +1048,6 @@ Intellectual Property
 
 
 White &amp; Akyol                Informational                     [Page 16]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,28 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="   This document describes a method that allows parties to
-   electronically sign Routing Policy Specification Language objects and
-   validate such electronic signatures.  This allows relying parties to
-   detect accidental or malicious modifications of such objects.  It
-   also allows parties who run Internet Routing Registries or similar
-   databases, but do not yet have authentication (based on Routing
-   Policy System Security) of the maintainers of certain objects, to
-   verify that the additions or modifications of such database objects
-   are done by the legitimate holder(s) of the Internet resources
-   mentioned in those objects.  This document updates RFCs 2622 and 4012
-   to add the signature attribute to supported RPSL objects.
-" name="DC.Description.Abstract"/>
-<meta content="Kisteleki, Robert" name="DC.Creator"/>
-<meta content="Haberman, Brian" name="DC.Creator"/>
-<meta content="Securing Routing Policy Specification Language (RPSL) Objects with Resource Public Key Infrastructure (RPKI) Signatures" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7909 - Securing Routing Policy Specification Language (RPSL) Objects with Resource Public Key Infrastructure (RPKI) Signatures</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="R. Kisteleki" name="citation_author"/>
+<meta content="B. Haberman" name="citation_author"/>
+<meta content="June, 2016" name="citation_publication_date"/>
+<meta content="Securing Routing Policy Specification Language (RPSL) Objects with Resource Public Key Infrastructure (RPKI) Signatures" name="citation_title"/>
+<meta content="10.17487/RFC7909" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7909" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7909.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7909: Securing Routing Policy Specification Language (RPSL) Objects with Resource Public Key Infrastructure (RPKI) Signatures</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -51,7 +41,7 @@
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -60,7 +50,7 @@
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -139,19 +129,18 @@
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -165,21 +154,9 @@
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7909.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7909" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-sidr-rpsl-sig.html" title="draft-ietf-sidr-rpsl-sig">draft-ietf-sidr-r...</a>]                                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                      R. Kisteleki
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7909.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7909.txt.pdf">PDF</a>|<a href="/rfc/rfc7909.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7909" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7909&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc7909" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                      R. Kisteleki
 Request for Comments: 7909                                      RIPE NCC
 Updates: <a href="./rfc2622.html">2622</a>, <a href="./rfc4012.html">4012</a>                                          B. Haberman
 Category: Standards Track                                        JHU APL
@@ -231,7 +208,7 @@ Status of This Memo
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
@@ -240,7 +217,7 @@ Copyright Notice
    Copyright (c) 2016 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -287,11 +264,11 @@ Table of Contents
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Objects stored in resource databases, like the RIPE DB, are generally
    protected by an authentication mechanism: anyone creating or
@@ -343,7 +320,7 @@ Table of Contents
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
@@ -352,7 +329,7 @@ Table of Contents
    "<em>OPTIONAL</em>" in this document are to be interpreted as described in
    [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Signature%20Syntax%20and%20Semantics"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Signature Syntax and Semantics</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Signature%20Syntax%20and%20Semantics"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Signature Syntax and Semantics</span>
 
    When signing an RPSL object [<a href="./rfc2622.html" title='"Routing Policy Specification Language (RPSL)"'>RFC2622</a>] [<a href="./rfc4012.html" title='"Routing Policy Specification Language next generation (RPSLng)"'>RFC4012</a>], the input for the
    signature process is transformed into a sequence of strings of ASCII
@@ -361,7 +338,7 @@ Table of Contents
    be signed closely resembles an SMTP header, so it seems reasonable to
    adapt DKIM's relevant features.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20General%20Attributes%20and%20Meta%20Information"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  General Attributes and Meta Information</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20General%20Attributes%20and%20Meta%20Information"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  General Attributes and Meta Information</span>
 
    The digital signature associated with an RPSL object is itself a new
    attribute named "signature".  It consists of mandatory and optional
@@ -399,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
@@ -425,7 +402,7 @@ Table of Contents
       this field <em>MUST</em> be in the Internet Date/Time format [<a href="./rfc3339.html" title='"Date and Time on the Internet: Timestamps"'>RFC3339</a>].
       All times <em>MUST</em> be represented in UTC.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Signed%20Attributes"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Signed Attributes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Signed%20Attributes"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Signed Attributes</span>
 
    One can look at an RPSL object as an (ordered) set of attributes,
    each having a "key: value" syntax.  Understanding this structure can
@@ -455,11 +432,11 @@ Table of Contents
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Storage%20of%20the%20Signature%20Data"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Storage of the Signature Data</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Storage%20of%20the%20Signature%20Data"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Storage of the Signature Data</span>
 
    The result of applying the signature mechanism once is exactly one
    new attribute for the object.  As an illustration, the structure of a
@@ -474,7 +451,7 @@ Table of Contents
                   a=attribute1+attribute2+attribute3+...;
                   b=&lt;base64 data&gt;
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Number%20Resource%20Coverage"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Number Resource Coverage</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Number%20Resource%20Coverage"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Number Resource Coverage</span>
 
    Even if the signature over the object is valid according to the
    signature validation rules, it may not be relevant to the object; it
@@ -488,7 +465,7 @@ Table of Contents
    of the "inetnum:" attribute of an inetnum object, values of "route:",
    and "origin:" attributes of a route object, etc.).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Validity%20Time%20of%20the%20Signature"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  Validity Time of the Signature</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Validity%20Time%20of%20the%20Signature"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  Validity Time of the Signature</span>
 
    The validity time interval of a signature is the intersection of the
    validity time of the certificate used to verify the signature, the
@@ -499,9 +476,9 @@ Table of Contents
    When checking multiple signatures, these checks are individually
    applied to each signature.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Signature%20Creation%20and%20Validation%20Steps"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Signature Creation and Validation Steps</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Signature%20Creation%20and%20Validation%20Steps"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Signature Creation and Validation Steps</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Canonicalization"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Canonicalization</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Canonicalization"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Canonicalization</span>
 
    The notion of canonicalization is essential to digital signature
    generation and validation whenever data representations may change
@@ -511,7 +488,7 @@ Table of Contents
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
@@ -567,7 +544,7 @@ Table of Contents
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
@@ -593,7 +570,7 @@ Table of Contents
        ASCII code 10) character, (thus avoiding CR vs. CRLF
        differences).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Signature%20Creation"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Signature Creation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Signature%20Creation"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Signature Creation</span>
 
    Given an RPSL object and corresponding certificate, in order to
    create the digital signature, the following steps <em>MUST</em> be performed:
@@ -623,14 +600,14 @@ Table of Contents
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
    7.  Append the resulting "signature" attribute to the original
        object.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Signature%20Validation"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Signature Validation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Signature%20Validation"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Signature Validation</span>
 
    In order to validate a signature over such an object, the following
    steps <em>MUST</em> be performed:
@@ -667,7 +644,7 @@ Table of Contents
        the signature attribute, and the output of the canonicalization
        process.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Signed%20Object%20Types%20and%20Set%20of%20Signed%20Attributes"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Signed Object Types and Set of Signed Attributes</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Signed%20Object%20Types%20and%20Set%20of%20Signed%20Attributes"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Signed Object Types and Set of Signed Attributes</span>
 
    This section describes a list of object types that <em>MAY</em> be signed
    using this approach.  For each object type, the set of attributes
@@ -679,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                    [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
@@ -735,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                   [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
@@ -773,7 +750,7 @@ Table of Contents
    o  For the route[6] object type: the resource in the "route[6]" or
       "origin" (or both) attributes.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Keys%20and%20Certificates%20Used%20for%20Signature%20and%20Verification"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Keys and Certificates Used for Signature and Verification</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Keys%20and%20Certificates%20Used%20for%20Signature%20and%20Verification"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Keys and Certificates Used for Signature and Verification</span>
 
    The certificate that is referred to in the signature (in the "c"
    field):
@@ -791,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                   [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
@@ -800,7 +777,7 @@ Table of Contents
    rsync URI for the accessLocation form and RPSL currently does not
    support database access via rsync.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    RPSL objects stored in the Internet Routing Registry (IRR) databases
    are public, and as such there is no need for confidentiality.  Each
@@ -824,22 +801,22 @@ Table of Contents
    contents, or intercepts the transfer and drops the objects destined
    for the requester.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
               DOI 10.17487/RFC2119, March 1997,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2119">http://www.rfc-editor.org/info/rfc2119</a>&gt;.
 
-   [<a id="ref-RFC2622" name="ref-RFC2622">RFC2622</a>]  Alaettinoglu, C., Villamizar, C., Gerich, E., Kessens, D.,
+   [<a id="ref-RFC2622">RFC2622</a>]  Alaettinoglu, C., Villamizar, C., Gerich, E., Kessens, D.,
               Meyer, D., Bates, T., Karrenberg, D., and M. Terpstra,
               "Routing Policy Specification Language (RPSL)", <a href="./rfc2622.html">RFC 2622</a>,
               DOI 10.17487/RFC2622, June 1999,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2622">http://www.rfc-editor.org/info/rfc2622</a>&gt;.
 
-   [<a id="ref-RFC3339" name="ref-RFC3339">RFC3339</a>]  Klyne, G. and C. Newman, "Date and Time on the Internet:
+   [<a id="ref-RFC3339">RFC3339</a>]  Klyne, G. and C. Newman, "Date and Time on the Internet:
               Timestamps", <a href="./rfc3339.html">RFC 3339</a>, DOI 10.17487/RFC3339, July 2002,
               &lt;<a href="http://www.rfc-editor.org/info/rfc3339">http://www.rfc-editor.org/info/rfc3339</a>&gt;.
 
@@ -847,54 +824,54 @@ Table of Contents
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                   [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
-   [<a id="ref-RFC3779" name="ref-RFC3779">RFC3779</a>]  Lynn, C., Kent, S., and K. Seo, "X.509 Extensions for IP
+   [<a id="ref-RFC3779">RFC3779</a>]  Lynn, C., Kent, S., and K. Seo, "X.509 Extensions for IP
               Addresses and AS Identifiers", <a href="./rfc3779.html">RFC 3779</a>,
               DOI 10.17487/RFC3779, June 2004,
               &lt;<a href="http://www.rfc-editor.org/info/rfc3779">http://www.rfc-editor.org/info/rfc3779</a>&gt;.
 
-   [<a id="ref-RFC3986" name="ref-RFC3986">RFC3986</a>]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+   [<a id="ref-RFC3986">RFC3986</a>]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66,
               <a href="./rfc3986.html">RFC 3986</a>, DOI 10.17487/RFC3986, January 2005,
               &lt;<a href="http://www.rfc-editor.org/info/rfc3986">http://www.rfc-editor.org/info/rfc3986</a>&gt;.
 
-   [<a id="ref-RFC4012" name="ref-RFC4012">RFC4012</a>]  Blunk, L., Damas, J., Parent, F., and A. Robachevsky,
+   [<a id="ref-RFC4012">RFC4012</a>]  Blunk, L., Damas, J., Parent, F., and A. Robachevsky,
               "Routing Policy Specification Language next generation
               (RPSLng)", <a href="./rfc4012.html">RFC 4012</a>, DOI 10.17487/RFC4012, March 2005,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4012">http://www.rfc-editor.org/info/rfc4012</a>&gt;.
 
-   [<a id="ref-RFC4632" name="ref-RFC4632">RFC4632</a>]  Fuller, V. and T. Li, "Classless Inter-domain Routing
+   [<a id="ref-RFC4632">RFC4632</a>]  Fuller, V. and T. Li, "Classless Inter-domain Routing
               (CIDR): The Internet Address Assignment and Aggregation
-              Plan", <a href="./bcp122.html">BCP 122</a>, <a href="./rfc4632.html">RFC 4632</a>, DOI 10.17487/RFC4632, August
+              Plan", <a href="https://www.rfc-editor.org/bcp/bcp122">BCP 122</a>, <a href="./rfc4632.html">RFC 4632</a>, DOI 10.17487/RFC4632, August
               2006, &lt;<a href="http://www.rfc-editor.org/info/rfc4632">http://www.rfc-editor.org/info/rfc4632</a>&gt;.
 
-   [<a id="ref-RFC4648" name="ref-RFC4648">RFC4648</a>]  Josefsson, S., "The Base16, Base32, and Base64 Data
+   [<a id="ref-RFC4648">RFC4648</a>]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", <a href="./rfc4648.html">RFC 4648</a>, DOI 10.17487/RFC4648, October 2006,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4648">http://www.rfc-editor.org/info/rfc4648</a>&gt;.
 
-   [<a id="ref-RFC5396" name="ref-RFC5396">RFC5396</a>]  Huston, G. and G. Michaelson, "Textual Representation of
+   [<a id="ref-RFC5396">RFC5396</a>]  Huston, G. and G. Michaelson, "Textual Representation of
               Autonomous System (AS) Numbers", <a href="./rfc5396.html">RFC 5396</a>,
               DOI 10.17487/RFC5396, December 2008,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5396">http://www.rfc-editor.org/info/rfc5396</a>&gt;.
 
-   [<a id="ref-RFC5781" name="ref-RFC5781">RFC5781</a>]  Weiler, S., Ward, D., and R. Housley, "The rsync URI
+   [<a id="ref-RFC5781">RFC5781</a>]  Weiler, S., Ward, D., and R. Housley, "The rsync URI
               Scheme", <a href="./rfc5781.html">RFC 5781</a>, DOI 10.17487/RFC5781, February 2010,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5781">http://www.rfc-editor.org/info/rfc5781</a>&gt;.
 
-   [<a id="ref-RFC5952" name="ref-RFC5952">RFC5952</a>]  Kawamura, S. and M. Kawashima, "A Recommendation for IPv6
+   [<a id="ref-RFC5952">RFC5952</a>]  Kawamura, S. and M. Kawashima, "A Recommendation for IPv6
               Address Text Representation", <a href="./rfc5952.html">RFC 5952</a>,
               DOI 10.17487/RFC5952, August 2010,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5952">http://www.rfc-editor.org/info/rfc5952</a>&gt;.
 
-   [<a id="ref-RFC6481" name="ref-RFC6481">RFC6481</a>]  Huston, G., Loomans, R., and G. Michaelson, "A Profile for
+   [<a id="ref-RFC6481">RFC6481</a>]  Huston, G., Loomans, R., and G. Michaelson, "A Profile for
               Resource Certificate Repository Structure", <a href="./rfc6481.html">RFC 6481</a>,
               DOI 10.17487/RFC6481, February 2012,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6481">http://www.rfc-editor.org/info/rfc6481</a>&gt;.
 
-   [<a id="ref-RFC6485" name="ref-RFC6485">RFC6485</a>]  Huston, G., "The Profile for Algorithms and Key Sizes for
+   [<a id="ref-RFC6485">RFC6485</a>]  Huston, G., "The Profile for Algorithms and Key Sizes for
               Use in the Resource Public Key Infrastructure (RPKI)",
               <a href="./rfc6485.html">RFC 6485</a>, DOI 10.17487/RFC6485, February 2012,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6485">http://www.rfc-editor.org/info/rfc6485</a>&gt;.
@@ -903,28 +880,28 @@ Table of Contents
 
 
 <span class="grey">Kisteleki &amp; Haberman         Standards Track                   [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7909.html">RFC 7909</a>                      Securing RPSL                    June 2016</span>
 
 
-   [<a id="ref-RFC6487" name="ref-RFC6487">RFC6487</a>]  Huston, G., Michaelson, G., and R. Loomans, "A Profile for
+   [<a id="ref-RFC6487">RFC6487</a>]  Huston, G., Michaelson, G., and R. Loomans, "A Profile for
               X.509 PKIX Resource Certificates", <a href="./rfc6487.html">RFC 6487</a>,
               DOI 10.17487/RFC6487, February 2012,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6487">http://www.rfc-editor.org/info/rfc6487</a>&gt;.
 
-   [<a id="ref-RFC7230" name="ref-RFC7230">RFC7230</a>]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
+   [<a id="ref-RFC7230">RFC7230</a>]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
               Protocol (HTTP/1.1): Message Syntax and Routing",
               <a href="./rfc7230.html">RFC 7230</a>, DOI 10.17487/RFC7230, June 2014,
               &lt;<a href="http://www.rfc-editor.org/info/rfc7230">http://www.rfc-editor.org/info/rfc7230</a>&gt;.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC2725" name="ref-RFC2725">RFC2725</a>]  Villamizar, C., Alaettinoglu, C., Meyer, D., and S.
+   [<a id="ref-RFC2725">RFC2725</a>]  Villamizar, C., Alaettinoglu, C., Meyer, D., and S.
               Murphy, "Routing Policy System Security", <a href="./rfc2725.html">RFC 2725</a>,
               DOI 10.17487/RFC2725, December 1999,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2725">http://www.rfc-editor.org/info/rfc2725</a>&gt;.
 
-   [<a id="ref-RFC6376" name="ref-RFC6376">RFC6376</a>]  Crocker, D., Ed., Hansen, T., Ed., and M. Kucherawy, Ed.,
+   [<a id="ref-RFC6376">RFC6376</a>]  Crocker, D., Ed., Hansen, T., Ed., and M. Kucherawy, Ed.,
               "DomainKeys Identified Mail (DKIM) Signatures", STD 76,
               <a href="./rfc6376.html">RFC 6376</a>, DOI 10.17487/RFC6376, September 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6376">http://www.rfc-editor.org/info/rfc6376</a>&gt;.
@@ -959,11 +936,6 @@ Authors' Addresses
 
 
 Kisteleki &amp; Haberman         Standards Track                   [Page 14]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

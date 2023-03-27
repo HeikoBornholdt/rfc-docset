@@ -1,25 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-gont-tcpm-icmp-attacks" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5927" name="DC.Identifier"/>
-<meta content="July, 2010" name="DC.Date.Issued"/>
-<meta content="Fernando Gont &lt;fernando@gont.com.ar&gt;" name="DC.Creator"/>
-<meta content="This document discusses the use of the Internet Control Message
-Protocol (ICMP) to perform a variety of attacks against the
-Transmission Control Protocol (TCP). Additionally, this document
-describes a number of widely implemented modifications to TCP's
-handling of ICMP error messages that help to mitigate these issues.
-This document is not an Internet Standards Track specification; it is
-published for informational purposes." name="DC.Description.Abstract"/>
-<meta content="ICMP Attacks against TCP" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5927 - ICMP Attacks against TCP</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="F. Gont" name="citation_author"/>
+<meta content="July, 2010" name="citation_publication_date"/>
+<meta content="ICMP Attacks against TCP" name="citation_title"/>
+<meta content="10.17487/RFC5927" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5927" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5927.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5927: ICMP Attacks against TCP</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -48,7 +40,7 @@ published for informational purposes." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -57,7 +49,7 @@ published for informational purposes." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -136,19 +128,18 @@ published for informational purposes." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -162,21 +153,9 @@ published for informational purposes." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5927.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5927" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-tcpm-icmp-attacks.html" title="draft-ietf-tcpm-icmp-attacks">draft-ietf-tcpm-i...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5927" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5927" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                           F. Gont
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5927.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5927.txt.pdf">PDF</a>|<a href="/rfc/rfc5927.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5927" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5927&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc5927" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                           F. Gont
 Request for Comments: 5927                                       UTN/FRH
 Category: Informational                                        July 2010
 ISSN: 2070-1721
@@ -228,7 +207,7 @@ Status of This Memo
 
 
 <span class="grey">Gont                          Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -237,7 +216,7 @@ Copyright Notice
    Copyright (c) 2010 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -284,7 +263,7 @@ Copyright Notice
 
 
 <span class="grey">Gont                          Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -340,11 +319,11 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    ICMP [<a href="./rfc0792.html" title='"Internet Control Message Protocol"'>RFC0792</a>] [<a href="./rfc4443.html" title='"Internet Control Message Protocol (ICMPv6) for the Internet Protocol Version 6 (IPv6) Specification"'>RFC4443</a>] is a fundamental part of the TCP/IP protocol
    suite, and is used mainly for reporting network error conditions.
@@ -396,7 +375,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -410,9 +389,9 @@ Table of Contents
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in <a href="./rfc2119.html">RFC 2119</a> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Background"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Background</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Background"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Background</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20The%20Internet%20Control%20Message%20Protocol%20%28ICMP%29"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  The Internet Control Message Protocol (ICMP)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20The%20Internet%20Control%20Message%20Protocol%20%28ICMP%29"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  The Internet Control Message Protocol (ICMP)</span>
 
    The Internet Control Message Protocol (ICMP) is used in the Internet
    architecture mainly to perform the fault-isolation function, that is,
@@ -440,9 +419,9 @@ Table of Contents
    long delay.  For example, there are no existing requirements that a
    router flush any queued ICMP error messages when it is rebooted.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.1.%20%20ICMP%20for%20IP%20version%204%20%28ICMPv4%29"></a></body></html><a class="selflink" href="#section-2.1.1" name="section-2.1.1">2.1.1</a>.  ICMP for IP version 4 (ICMPv4)</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.1.%20%20ICMP%20for%20IP%20version%204%20%28ICMPv4%29"></a></body></html><a class="selflink" href="#section-2.1.1" id="section-2.1.1">2.1.1</a>.  ICMP for IP version 4 (ICMPv4)</span>
 
-   [<a id="ref-RFC0792" name="ref-RFC0792">RFC0792</a>] specifies the Internet Control Message Protocol (ICMP) to
+   [<a id="ref-RFC0792">RFC0792</a>] specifies the Internet Control Message Protocol (ICMP) to
    be used with the Internet Protocol version 4 (IPv4) -- henceforth
    "ICMPv4".  It defines, among other things, a number of error messages
    that can be used by end-systems and intermediate systems to report
@@ -452,7 +431,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -464,7 +443,7 @@ Table of Contents
    Quench message (type 4, code 0), which is meant to provide a
    mechanism for flow control and congestion control.
 
-   [<a id="ref-RFC1191" name="ref-RFC1191">RFC1191</a>] defines a mechanism called "Path MTU Discovery" (PMTUD),
+   [<a id="ref-RFC1191">RFC1191</a>] defines a mechanism called "Path MTU Discovery" (PMTUD),
    which makes use of ICMPv4 error messages of type 3 (Destination
    Unreachable), code 4 (fragmentation needed and DF bit set) to allow
    systems to determine the MTU of an arbitrary internet path.
@@ -477,12 +456,12 @@ Table of Contents
    <a href="./rfc4301.html#appendix-D">Appendix D of [RFC4301]</a> provides information about which ICMPv4 error
    messages are produced by hosts, intermediate routers, or both.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.2.%20%20ICMP%20for%20IP%20version%206%20%28ICMPv6%29"></a></body></html><a class="selflink" href="#section-2.1.2" name="section-2.1.2">2.1.2</a>.  ICMP for IP version 6 (ICMPv6)</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.2.%20%20ICMP%20for%20IP%20version%206%20%28ICMPv6%29"></a></body></html><a class="selflink" href="#section-2.1.2" id="section-2.1.2">2.1.2</a>.  ICMP for IP version 6 (ICMPv6)</span>
 
-   [<a id="ref-RFC4443" name="ref-RFC4443">RFC4443</a>] specifies the Internet Control Message Protocol (ICMPv6) to
+   [<a id="ref-RFC4443">RFC4443</a>] specifies the Internet Control Message Protocol (ICMPv6) to
    be used with the Internet Protocol version 6 (IPv6) [<a href="./rfc2460.html" title='"Internet Protocol, Version 6 (IPv6) Specification"'>RFC2460</a>].
 
-   [<a id="ref-RFC4443" name="ref-RFC4443">RFC4443</a>] defines the "Packet Too Big" (type 2, code 0) error
+   [<a id="ref-RFC4443">RFC4443</a>] defines the "Packet Too Big" (type 2, code 0) error
    message, which is analogous to the ICMPv4 "fragmentation needed and
    DF bit set" (type 3, code 4) error message.  [<a href="./rfc1981.html" title='"Path MTU Discovery for IP version 6"'>RFC1981</a>] defines the
    Path MTU Discovery mechanism for IP version 6, which makes use of
@@ -496,7 +475,7 @@ Table of Contents
    <a href="./rfc4301.html#appendix-D">Appendix D of [RFC4301]</a> provides information about which ICMPv6 error
    messages are produced by hosts, intermediate routers, or both.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Handling%20of%20ICMP%20Error%20Messages"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Handling of ICMP Error Messages</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Handling%20of%20ICMP%20Error%20Messages"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Handling of ICMP Error Messages</span>
 
    The Host Requirements RFC [<a href="./rfc1122.html" title='"Requirements for Internet Hosts - Communication Layers"'>RFC1122</a>] states in <a href="#section-4.2.3.9">Section 4.2.3.9</a> that
    TCP <em>MUST</em> act on an ICMP error message passed up from the IP layer,
@@ -508,7 +487,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -555,7 +534,7 @@ Table of Contents
    described in this RFC has been documented by the Internet
    Architecture Board (IAB) in [<a href="./rfc4907.html" title='"Architectural Implications of Link Indications"'>RFC4907</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Handling%20of%20ICMP%20Error%20Messages%20in%20the%20Context%20of%20IPsec"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Handling of ICMP Error Messages in the Context of IPsec</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Handling%20of%20ICMP%20Error%20Messages%20in%20the%20Context%20of%20IPsec"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Handling of ICMP Error Messages in the Context of IPsec</span>
 
    <a href="./rfc4301.html#section-5.2">Section 5.2 of [RFC4301]</a> describes the processing of inbound IP
    traffic in the case of "unprotected-to-protected".  In the case of
@@ -564,7 +543,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -598,7 +577,7 @@ Table of Contents
    Thus, the policy to apply for the processing of unprotected ICMP
    error messages is left up to the implementation and administrator.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Constraints%20in%20the%20Possible%20Solutions"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Constraints in the Possible Solutions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Constraints%20in%20the%20Possible%20Solutions"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Constraints in the Possible Solutions</span>
 
    If a host wants to perform validation checks on the received ICMP
    error messages before acting on them, it is limited by the piece of
@@ -620,7 +599,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -653,7 +632,7 @@ Table of Contents
    authentication header in the original packet could not be used as a
    counter-measure for ICMP-based attacks against TCP.
 
-   [<a id="ref-RFC4884" name="ref-RFC4884">RFC4884</a>] updated [<a href="./rfc0792.html" title='"Internet Control Message Protocol"'>RFC0792</a>] and specified that ICMPv4 Destination
+   [<a id="ref-RFC4884">RFC4884</a>] updated [<a href="./rfc0792.html" title='"Internet Control Message Protocol"'>RFC0792</a>] and specified that ICMPv4 Destination
    Unreachable (type 3), Time Exceeded (type 11), and Parameter Problem
    (type 12) messages that have an ICMP Extension Structure appended
    include at least 128 octets in the "original datagram" field.  This
@@ -676,7 +655,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -689,7 +668,7 @@ Table of Contents
    power requirements of authentication might not allow IPsec
    authentication to be implemented effectively.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20General%20Counter-Measures%20against%20ICMP%20Attacks"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  General Counter-Measures against ICMP Attacks</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20General%20Counter-Measures%20against%20ICMP%20Attacks"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  General Counter-Measures against ICMP Attacks</span>
 
    The following subsections describe a number of mitigation techniques
    that help to eliminate or mitigate the impact of the attacks
@@ -697,7 +676,7 @@ Table of Contents
    measures, they can be implemented together to increase the protection
    against these attacks.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20TCP%20Sequence%20Number%20Checking"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  TCP Sequence Number Checking</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20TCP%20Sequence%20Number%20Checking"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  TCP Sequence Number Checking</span>
 
    The current specifications do not impose any validity checks on the
    TCP segment that is contained in the ICMP payload.  For instance, no
@@ -732,7 +711,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -752,7 +731,7 @@ Table of Contents
    stale ICMP error messages (e.g., if the Sequence Number for the
    corresponding direction of the data transfer wraps around).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Port%20Randomization"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Port Randomization</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Port%20Randomization"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Port Randomization</span>
 
    As discussed in the previous sections, in order to perform any of the
    attacks described in this document, an attacker would need to guess
@@ -762,11 +741,11 @@ Table of Contents
    TCP connection, would make it harder for an attacker to perform any
    of the attacks discussed in this document.
 
-   [<a id="ref-PORT-RANDOM" name="ref-PORT-RANDOM">PORT-RANDOM</a>] recommends that transport protocols randomize the
+   [<a id="ref-PORT-RANDOM">PORT-RANDOM</a>] recommends that transport protocols randomize the
    ephemeral ports used by clients, and proposes a number of
    randomization algorithms.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Filtering%20ICMP%20Error%20Messages%20Based%20on%20the%20ICMP%20Payload"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Filtering ICMP Error Messages Based on the ICMP Payload</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Filtering%20ICMP%20Error%20Messages%20Based%20on%20the%20ICMP%20Payload"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Filtering ICMP Error Messages Based on the ICMP Payload</span>
 
    The source address of ICMP error messages does not need to be spoofed
    to perform the attacks described in this document, as the ICMP error
@@ -788,7 +767,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -803,9 +782,9 @@ Table of Contents
    Filter [<a href="#ref-OpenBSD-PF" title='"http://www.openbsd.org/faq/pf/"'>OpenBSD-PF</a>], which has in turn been ported to a number of
    systems, including FreeBSD [<a href="#ref-FreeBSD">FreeBSD</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Blind%20Connection-Reset%20Attack"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Blind Connection-Reset Attack</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Blind%20Connection-Reset%20Attack"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Blind Connection-Reset Attack</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Description"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Description</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Description"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Description</span>
 
    When TCP is handed an ICMP error message, it will perform its fault
    recovery function, as follows:
@@ -844,7 +823,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -861,7 +840,7 @@ Table of Contents
    in [<a href="#ref-TCPM-TCPSECURE" title="&quot;Improving TCP's Robustness to Blind In-Window Attacks&quot;">TCPM-TCPSECURE</a>], the blind connection-reset attack described in
    this document would still succeed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Attack-Specific%20Counter-Measures"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Attack-Specific Counter-Measures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Attack-Specific%20Counter-Measures"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Attack-Specific Counter-Measures</span>
 
    An analysis of the circumstances in which ICMP messages that indicate
    "hard errors" may be received can shed some light on opportunities to
@@ -900,7 +879,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -956,7 +935,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1012,13 +991,13 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Blind%20Throughput-Reduction%20Attack"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Blind Throughput-Reduction Attack</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Blind%20Throughput-Reduction%20Attack"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Blind Throughput-Reduction Attack</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Description"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Description</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Description"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Description</span>
 
    The Host Requirements RFC [<a href="./rfc1122.html" title='"Requirements for Internet Hosts - Communication Layers"'>RFC1122</a>] states in <a href="#section-4.2.3.9">Section 4.2.3.9</a> that
    hosts <em>MUST</em> react to ICMPv4 Source Quench messages by slowing
@@ -1035,7 +1014,7 @@ Table of Contents
    attack might be a little higher if a larger initial congestion window
    is in use [<a href="./rfc3390.html" title="&quot;Increasing TCP's Initial Window&quot;">RFC3390</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Attack-Specific%20Counter-Measures"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Attack-Specific Counter-Measures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Attack-Specific%20Counter-Measures"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Attack-Specific Counter-Measures</span>
 
    As discussed in the "Requirements for IP Version 4 Routers" RFC
    [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>], research seems to suggest that ICMPv4 Source Quench
@@ -1053,9 +1032,9 @@ Table of Contents
    the requirement in [<a href="./rfc1122.html" title='"Requirements for Internet Hosts - Communication Layers"'>RFC1122</a>] to react to ICMPv4 Source Quench
    messages by slowing transmission on the connection.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Blind%20Performance-Degrading%20Attack"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Blind Performance-Degrading Attack</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Blind%20Performance-Degrading%20Attack"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Blind Performance-Degrading Attack</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Description"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Description</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Description"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Description</span>
 
    When one IP system has a large amount of data to send to another
    system, the data will be transmitted as a series of IP datagrams.  It
@@ -1068,7 +1047,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1124,7 +1103,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1147,7 +1126,7 @@ Table of Contents
    required to include a fragmentation header in the outgoing packets to
    that destination from that moment on.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Attack-Specific%20Counter-Measures"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Attack-Specific Counter-Measures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Attack-Specific%20Counter-Measures"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Attack-Specific Counter-Measures</span>
 
    The IETF has standardized a Path-MTU Discovery mechanism called
    "Packetization Layer Path MTU Discovery" (PLPMTUD) that does not
@@ -1180,7 +1159,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1236,7 +1215,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1292,7 +1271,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1348,11 +1327,11 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20The%20Counter-Measure%20for%20the%20PMTUD%20Attack%20in%20Action"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  The Counter-Measure for the PMTUD Attack in Action</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20The%20Counter-Measure%20for%20the%20PMTUD%20Attack%20in%20Action"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  The Counter-Measure for the PMTUD Attack in Action</span>
 
    This section illustrates the operation of the counter-measure for the
    ICMP attack against the PMTUD mechanism that has been implemented in
@@ -1382,7 +1361,7 @@ Table of Contents
 
                       Figure 1: Hypothetical Scenario
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.1.%20%20Normal%20Operation%20for%20Bulk%20Transfers"></a></body></html><a class="selflink" href="#section-7.3.1" name="section-7.3.1">7.3.1</a>.  Normal Operation for Bulk Transfers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.1.%20%20Normal%20Operation%20for%20Bulk%20Transfers"></a></body></html><a class="selflink" href="#section-7.3.1" id="section-7.3.1">7.3.1</a>.  Normal Operation for Bulk Transfers</span>
 
    This subsection shows the counter-measure in normal operation, when a
    TCP connection is used for bulk transfers.  That is, it shows how the
@@ -1404,7 +1383,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1460,7 +1439,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1480,7 +1459,7 @@ Table of Contents
    maxsizeacked, setting it to 1500.  At this point, TCP has discovered
    the Path-MTU for this TCP connection.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.2.%20%20Operation%20during%20Path-MTU%20Changes"></a></body></html><a class="selflink" href="#section-7.3.2" name="section-7.3.2">7.3.2</a>.  Operation during Path-MTU Changes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.2.%20%20Operation%20during%20Path-MTU%20Changes"></a></body></html><a class="selflink" href="#section-7.3.2" id="section-7.3.2">7.3.2</a>.  Operation during Path-MTU Changes</span>
 
    Let us suppose a TCP connection between H1 and H2 has already been
    established, and that the PMTU for the connection has already been
@@ -1516,7 +1495,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1539,7 +1518,7 @@ Table of Contents
    At this point, TCP has discovered the new Path-MTU for this TCP
    connection.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.3.%20%20Idle%20Connection%20Being%20Attacked"></a></body></html><a class="selflink" href="#section-7.3.3" name="section-7.3.3">7.3.3</a>.  Idle Connection Being Attacked</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.3.%20%20Idle%20Connection%20Being%20Attacked"></a></body></html><a class="selflink" href="#section-7.3.3" id="section-7.3.3">7.3.3</a>.  Idle Connection Being Attacked</span>
 
    Let us suppose a TCP connection between H1 and H2 has already been
    established, and the PMTU for the connection has already been
@@ -1572,11 +1551,11 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.4.%20%20Active%20Connection%20Being%20Attacked%20after%20Discovery%20of%20the%20Path-MTU"></a></body></html><a class="selflink" href="#section-7.3.4" name="section-7.3.4">7.3.4</a>.  Active Connection Being Attacked after Discovery of the Path-MTU</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.4.%20%20Active%20Connection%20Being%20Attacked%20after%20Discovery%20of%20the%20Path-MTU"></a></body></html><a class="selflink" href="#section-7.3.4" id="section-7.3.4">7.3.4</a>.  Active Connection Being Attacked after Discovery of the Path-MTU</span>
 
    Let us suppose an attacker attacks a TCP connection for which the
    PMTU has already been discovered.  In this case, as illustrated in
@@ -1611,7 +1590,7 @@ Table of Contents
    condition is cleared, and the recorded ICMP "Packet Too Big" error
    message is ignored.  Therefore, the attack does not succeed.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.5.%20%20TCP%20Peer%20Attacked%20when%20Sending%20Small%20Packets%20Just%20after%20the"></a></body></html><a class="selflink" href="#section-7.3.5" name="section-7.3.5">7.3.5</a>.  TCP Peer Attacked when Sending Small Packets Just after the</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.5.%20%20TCP%20Peer%20Attacked%20when%20Sending%20Small%20Packets%20Just%20after%20the"></a></body></html><a class="selflink" href="#section-7.3.5" id="section-7.3.5">7.3.5</a>.  TCP Peer Attacked when Sending Small Packets Just after the</span>
 <span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20%20%20Three-Way%20Handshake"></a></body></html>        Three-Way Handshake</span>
 
    This section analyzes a scenario in which a TCP peer that is sending
@@ -1628,7 +1607,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1667,7 +1646,7 @@ Table of Contents
    maxsizesent, the ICMP error message is silently discarded.
    Therefore, the attack does not succeed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Pseudo-Code%20for%20the%20Counter-Measure%20for%20the%20Blind%20Performance-"></a></body></html><a class="selflink" href="#section-7.4" name="section-7.4">7.4</a>.  Pseudo-Code for the Counter-Measure for the Blind Performance-</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Pseudo-Code%20for%20the%20Counter-Measure%20for%20the%20Blind%20Performance-"></a></body></html><a class="selflink" href="#section-7.4" id="section-7.4">7.4</a>.  Pseudo-Code for the Counter-Measure for the Blind Performance-</span>
 <span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20Degrading%20Attack"></a></body></html>      Degrading Attack</span>
 
    This section contains a pseudo-code version of the counter-measure
@@ -1684,7 +1663,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1740,7 +1719,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1796,7 +1775,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1840,7 +1819,7 @@ Table of Contents
       validation check on the advertised Next-Hop MTU described in
       [<a href="./rfc1191.html" title='"Path MTU discovery"'>RFC1191</a>] and [<a href="./rfc1981.html" title='"Path MTU Discovery for IP version 6"'>RFC1981</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Security Considerations</span>
 
    This document describes the use of ICMP error messages to perform a
    number of attacks against TCP, and describes a number of widely
@@ -1852,7 +1831,7 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
@@ -1908,11 +1887,11 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Acknowledgements</span>
 
    This document was inspired by Mika Liljeberg, while discussing some
    issues related to [<a href="./rfc5461.html" title="&quot;TCP's Reaction to Soft Errors&quot;">RFC5461</a>] by private e-mail.  The author would like
@@ -1947,72 +1926,72 @@ Table of Contents
    Oscar Gont and Nelida Garcia, for their precious motivation and
    guidance.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" id="section-10.1">10.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC0791" name="ref-RFC0791">RFC0791</a>]         Postel, J., "Internet Protocol", STD 5, <a href="./rfc791.html">RFC 791</a>,
+   [<a id="ref-RFC0791">RFC0791</a>]         Postel, J., "Internet Protocol", STD 5, <a href="./rfc791.html">RFC 791</a>,
                      September 1981.
 
-   [<a id="ref-RFC0792" name="ref-RFC0792">RFC0792</a>]         Postel, J., "Internet Control Message Protocol",
+   [<a id="ref-RFC0792">RFC0792</a>]         Postel, J., "Internet Control Message Protocol",
                      STD 5, <a href="./rfc792.html">RFC 792</a>, September 1981.
 
-   [<a id="ref-RFC0793" name="ref-RFC0793">RFC0793</a>]         Postel, J., "Transmission Control Protocol", STD 7,
+   [<a id="ref-RFC0793">RFC0793</a>]         Postel, J., "Transmission Control Protocol", STD 7,
                      <a href="./rfc793.html">RFC 793</a>, September 1981.
 
 
 
 
 <span class="grey">Gont                          Informational                    [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
-   [<a id="ref-RFC1122" name="ref-RFC1122">RFC1122</a>]         Braden, R., "Requirements for Internet Hosts -
+   [<a id="ref-RFC1122">RFC1122</a>]         Braden, R., "Requirements for Internet Hosts -
                      Communication Layers", STD 3, <a href="./rfc1122.html">RFC 1122</a>,
                      October 1989.
 
-   [<a id="ref-RFC1191" name="ref-RFC1191">RFC1191</a>]         Mogul, J. and S. Deering, "Path MTU discovery",
+   [<a id="ref-RFC1191">RFC1191</a>]         Mogul, J. and S. Deering, "Path MTU discovery",
                      <a href="./rfc1191.html">RFC 1191</a>, November 1990.
 
-   [<a id="ref-RFC1812" name="ref-RFC1812">RFC1812</a>]         Baker, F., "Requirements for IP Version 4 Routers",
+   [<a id="ref-RFC1812">RFC1812</a>]         Baker, F., "Requirements for IP Version 4 Routers",
                      <a href="./rfc1812.html">RFC 1812</a>, June 1995.
 
-   [<a id="ref-RFC1981" name="ref-RFC1981">RFC1981</a>]         McCann, J., Deering, S., and J. Mogul, "Path MTU
+   [<a id="ref-RFC1981">RFC1981</a>]         McCann, J., Deering, S., and J. Mogul, "Path MTU
                      Discovery for IP version 6", <a href="./rfc1981.html">RFC 1981</a>, August 1996.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]         Bradner, S., "Key words for use in RFCs to Indicate
-                     Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]         Bradner, S., "Key words for use in RFCs to Indicate
+                     Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC2460" name="ref-RFC2460">RFC2460</a>]         Deering, S. and R. Hinden, "Internet Protocol,
+   [<a id="ref-RFC2460">RFC2460</a>]         Deering, S. and R. Hinden, "Internet Protocol,
                      Version 6 (IPv6) Specification", <a href="./rfc2460.html">RFC 2460</a>,
                      December 1998.
 
-   [<a id="ref-RFC4301" name="ref-RFC4301">RFC4301</a>]         Kent, S. and K. Seo, "Security Architecture for the
+   [<a id="ref-RFC4301">RFC4301</a>]         Kent, S. and K. Seo, "Security Architecture for the
                      Internet Protocol", <a href="./rfc4301.html">RFC 4301</a>, December 2005.
 
-   [<a id="ref-RFC4443" name="ref-RFC4443">RFC4443</a>]         Conta, A., Deering, S., and M. Gupta, "Internet
+   [<a id="ref-RFC4443">RFC4443</a>]         Conta, A., Deering, S., and M. Gupta, "Internet
                      Control Message Protocol (ICMPv6) for the Internet
                      Protocol Version 6 (IPv6) Specification", <a href="./rfc4443.html">RFC 4443</a>,
                      March 2006.
 
-   [<a id="ref-RFC4884" name="ref-RFC4884">RFC4884</a>]         Bonica, R., Gan, D., Tappan, D., and C. Pignataro,
+   [<a id="ref-RFC4884">RFC4884</a>]         Bonica, R., Gan, D., Tappan, D., and C. Pignataro,
                      "Extended ICMP to Support Multi-Part Messages",
                      <a href="./rfc4884.html">RFC 4884</a>, April 2007.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" id="section-10.2">10.2</a>.  Informative References</span>
 
-   [<a id="ref-CPNI-TCP" name="ref-CPNI-TCP">CPNI-TCP</a>]        CPNI, "Security Assessment of the Transmission
+   [<a id="ref-CPNI-TCP">CPNI-TCP</a>]        CPNI, "Security Assessment of the Transmission
                      Control Protocol (TCP)", <a href="http://www.cpni.gov.uk/Docs/tn-03-09-security-assessment-TCP.pdf">http://www.cpni.gov.uk/</a>
                      <a href="http://www.cpni.gov.uk/Docs/tn-03-09-security-assessment-TCP.pdf">Docs/tn-03-09-security-assessment-TCP.pdf</a>, 2009.
 
-   [<a id="ref-DClark" name="ref-DClark">DClark</a>]          Clark, D., "The Design Philosophy of the DARPA
+   [<a id="ref-DClark">DClark</a>]          Clark, D., "The Design Philosophy of the DARPA
                      Internet Protocols", Computer Communication
                      Review Vol. 18, No. 4, 1988.
 
-   [<a id="ref-FreeBSD" name="ref-FreeBSD">FreeBSD</a>]         The FreeBSD Project, <a href="http://www.freebsd.org">http://www.freebsd.org</a>.
+   [<a id="ref-FreeBSD">FreeBSD</a>]         The FreeBSD Project, <a href="http://www.freebsd.org">http://www.freebsd.org</a>.
 
-   [<a id="ref-ICMP-Filtering" name="ref-ICMP-Filtering">ICMP-Filtering</a>]  Gont, F., "Filtering of ICMP error messages",  http
+   [<a id="ref-ICMP-Filtering">ICMP-Filtering</a>]  Gont, F., "Filtering of ICMP error messages",  http
                      ://www.gont.com.ar/papers/
                      filtering-of-icmp-error-messages.pdf.
 
@@ -2020,123 +1999,123 @@ Table of Contents
 
 
 <span class="grey">Gont                          Informational                    [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
-   [<a id="ref-IP-filtering" name="ref-IP-filtering">IP-filtering</a>]    NISCC, "NISCC Technical Note 01/2006: Egress and
+   [<a id="ref-IP-filtering">IP-filtering</a>]    NISCC, "NISCC Technical Note 01/2006: Egress and
                      Ingress Filtering",
                       <a href="http://www.cpni.gov.uk/Docs/re-20060420-00294.pdf">http://www.cpni.gov.uk/Docs/re-20060420-00294.pdf</a>,
                      2006.
 
-   [<a id="ref-Linux" name="ref-Linux">Linux</a>]           The Linux Project, "<a href="http://www.kernel.org">http://www.kernel.org</a>".
+   [<a id="ref-Linux">Linux</a>]           The Linux Project, "<a href="http://www.kernel.org">http://www.kernel.org</a>".
 
-   [<a id="ref-McKusick" name="ref-McKusick">McKusick</a>]        McKusick, M., Bostic, K., Karels, M., and J.
+   [<a id="ref-McKusick">McKusick</a>]        McKusick, M., Bostic, K., Karels, M., and J.
                      Quarterman, "The Design and Implementation of the
                      4.4 BSD Operating System", Addison-Wesley, 1996.
 
-   [<a id="ref-NISCC" name="ref-NISCC">NISCC</a>]           NISCC, "NISCC Vulnerability Advisory 532967/NISCC/
+   [<a id="ref-NISCC">NISCC</a>]           NISCC, "NISCC Vulnerability Advisory 532967/NISCC/
                      ICMP: Vulnerability Issues in ICMP packets with TCP
                      payloads",  <a href="http://www.cpni.gov.uk/docs/re-20050412-00303.pdf?lang=en">http://www.cpni.gov.uk/docs/</a>
                      <a href="http://www.cpni.gov.uk/docs/re-20050412-00303.pdf?lang=en">re-20050412-00303.pdf?lang=en</a>, 2005.
 
-   [<a id="ref-NetBSD" name="ref-NetBSD">NetBSD</a>]          The NetBSD Project, "<a href="http://www.netbsd.org">http://www.netbsd.org</a>".
+   [<a id="ref-NetBSD">NetBSD</a>]          The NetBSD Project, "<a href="http://www.netbsd.org">http://www.netbsd.org</a>".
 
-   [<a id="ref-OpenBSD" name="ref-OpenBSD">OpenBSD</a>]         The OpenBSD Project, "<a href="http://www.openbsd.org">http://www.openbsd.org</a>".
+   [<a id="ref-OpenBSD">OpenBSD</a>]         The OpenBSD Project, "<a href="http://www.openbsd.org">http://www.openbsd.org</a>".
 
-   [<a id="ref-OpenBSD-PF" name="ref-OpenBSD-PF">OpenBSD-PF</a>]      The OpenBSD Packet Filter,
+   [<a id="ref-OpenBSD-PF">OpenBSD-PF</a>]      The OpenBSD Packet Filter,
                      "<a href="http://www.openbsd.org/faq/pf/">http://www.openbsd.org/faq/pf/</a>".
 
-   [<a id="ref-PORT-RANDOM" name="ref-PORT-RANDOM">PORT-RANDOM</a>]     Larsen, M. and F. Gont, "Transport Protocol Port
+   [<a id="ref-PORT-RANDOM">PORT-RANDOM</a>]     Larsen, M. and F. Gont, "Transport Protocol Port
                      Randomization Recommendations", Work in Progress,
                      April 2010.
 
-   [<a id="ref-RFC0816" name="ref-RFC0816">RFC0816</a>]         Clark, D., "Fault isolation and recovery", <a href="./rfc816.html">RFC 816</a>,
+   [<a id="ref-RFC0816">RFC0816</a>]         Clark, D., "Fault isolation and recovery", <a href="./rfc816.html">RFC 816</a>,
                      July 1982.
 
-   [<a id="ref-RFC1321" name="ref-RFC1321">RFC1321</a>]         Rivest, R., "The MD5 Message-Digest Algorithm",
+   [<a id="ref-RFC1321">RFC1321</a>]         Rivest, R., "The MD5 Message-Digest Algorithm",
                      <a href="./rfc1321.html">RFC 1321</a>, April 1992.
 
-   [<a id="ref-RFC1323" name="ref-RFC1323">RFC1323</a>]         Jacobson, V., Braden, B., and D. Borman, "TCP
+   [<a id="ref-RFC1323">RFC1323</a>]         Jacobson, V., Braden, B., and D. Borman, "TCP
                      Extensions for High Performance", <a href="./rfc1323.html">RFC 1323</a>,
                      May 1992.
 
-   [<a id="ref-RFC2385" name="ref-RFC2385">RFC2385</a>]         Heffernan, A., "Protection of BGP Sessions via the
+   [<a id="ref-RFC2385">RFC2385</a>]         Heffernan, A., "Protection of BGP Sessions via the
                      TCP MD5 Signature Option", <a href="./rfc2385.html">RFC 2385</a>, August 1998.
 
-   [<a id="ref-RFC2616" name="ref-RFC2616">RFC2616</a>]         Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
+   [<a id="ref-RFC2616">RFC2616</a>]         Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
                      Masinter, L., Leach, P., and T. Berners-Lee,
                      "Hypertext Transfer Protocol -- HTTP/1.1",
                      <a href="./rfc2616.html">RFC 2616</a>, June 1999.
 
-   [<a id="ref-RFC2923" name="ref-RFC2923">RFC2923</a>]         Lahey, K., "TCP Problems with Path MTU Discovery",
+   [<a id="ref-RFC2923">RFC2923</a>]         Lahey, K., "TCP Problems with Path MTU Discovery",
                      <a href="./rfc2923.html">RFC 2923</a>, September 2000.
 
 
 
 
 <span class="grey">Gont                          Informational                    [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
-   [<a id="ref-RFC3168" name="ref-RFC3168">RFC3168</a>]         Ramakrishnan, K., Floyd, S., and D. Black, "The
+   [<a id="ref-RFC3168">RFC3168</a>]         Ramakrishnan, K., Floyd, S., and D. Black, "The
                      Addition of Explicit Congestion Notification (ECN)
                      to IP", <a href="./rfc3168.html">RFC 3168</a>, September 2001.
 
-   [<a id="ref-RFC3390" name="ref-RFC3390">RFC3390</a>]         Allman, M., Floyd, S., and C. Partridge,
+   [<a id="ref-RFC3390">RFC3390</a>]         Allman, M., Floyd, S., and C. Partridge,
                      "Increasing TCP's Initial Window", <a href="./rfc3390.html">RFC 3390</a>,
                      October 2002.
 
-   [<a id="ref-RFC4271" name="ref-RFC4271">RFC4271</a>]         Rekhter, Y., Li, T., and S. Hares, "A Border
+   [<a id="ref-RFC4271">RFC4271</a>]         Rekhter, Y., Li, T., and S. Hares, "A Border
                      Gateway Protocol 4 (BGP-4)", <a href="./rfc4271.html">RFC 4271</a>,
                      January 2006.
 
-   [<a id="ref-RFC4821" name="ref-RFC4821">RFC4821</a>]         Mathis, M. and J. Heffner, "Packetization Layer
+   [<a id="ref-RFC4821">RFC4821</a>]         Mathis, M. and J. Heffner, "Packetization Layer
                      Path MTU Discovery", <a href="./rfc4821.html">RFC 4821</a>, March 2007.
 
-   [<a id="ref-RFC4907" name="ref-RFC4907">RFC4907</a>]         Aboba, B., "Architectural Implications of Link
+   [<a id="ref-RFC4907">RFC4907</a>]         Aboba, B., "Architectural Implications of Link
                      Indications", <a href="./rfc4907.html">RFC 4907</a>, June 2007.
 
-   [<a id="ref-RFC4953" name="ref-RFC4953">RFC4953</a>]         Touch, J., "Defending TCP Against Spoofing
+   [<a id="ref-RFC4953">RFC4953</a>]         Touch, J., "Defending TCP Against Spoofing
                      Attacks", <a href="./rfc4953.html">RFC 4953</a>, July 2007.
 
-   [<a id="ref-RFC5321" name="ref-RFC5321">RFC5321</a>]         Klensin, J., "Simple Mail Transfer Protocol",
+   [<a id="ref-RFC5321">RFC5321</a>]         Klensin, J., "Simple Mail Transfer Protocol",
                      <a href="./rfc5321.html">RFC 5321</a>, October 2008.
 
-   [<a id="ref-RFC5461" name="ref-RFC5461">RFC5461</a>]         Gont, F., "TCP's Reaction to Soft Errors",
+   [<a id="ref-RFC5461">RFC5461</a>]         Gont, F., "TCP's Reaction to Soft Errors",
                      <a href="./rfc5461.html">RFC 5461</a>, February 2009.
 
-   [<a id="ref-RFC5681" name="ref-RFC5681">RFC5681</a>]         Allman, M., Paxson, V., and E. Blanton, "TCP
+   [<a id="ref-RFC5681">RFC5681</a>]         Allman, M., Paxson, V., and E. Blanton, "TCP
                      Congestion Control", <a href="./rfc5681.html">RFC 5681</a>, September 2009.
 
-   [<a id="ref-RFC5925" name="ref-RFC5925">RFC5925</a>]         Touch, J., Mankin, A., and R. Bonica, "The TCP
+   [<a id="ref-RFC5925">RFC5925</a>]         Touch, J., Mankin, A., and R. Bonica, "The TCP
                      Authentication Option", <a href="./rfc5925.html">RFC 5925</a>, June 2010.
 
-   [<a id="ref-TCP-SECURITY" name="ref-TCP-SECURITY">TCP-SECURITY</a>]    Gont, F., "Security Assessment of the Transmission
+   [<a id="ref-TCP-SECURITY">TCP-SECURITY</a>]    Gont, F., "Security Assessment of the Transmission
                      Control Protocol (TCP)", Work in Progress,
                      February 2010.
 
-   [<a id="ref-TCPM-TCPSECURE" name="ref-TCPM-TCPSECURE">TCPM-TCPSECURE</a>]  Ramaiah, A., Stewart, R., and M. Dalal, "Improving
+   [<a id="ref-TCPM-TCPSECURE">TCPM-TCPSECURE</a>]  Ramaiah, A., Stewart, R., and M. Dalal, "Improving
                      TCP's Robustness to Blind In-Window Attacks", Work
                      in Progress, May 2010.
 
-   [<a id="ref-US-CERT" name="ref-US-CERT">US-CERT</a>]         US-CERT, "US-CERT Vulnerability Note VU#222750:
+   [<a id="ref-US-CERT">US-CERT</a>]         US-CERT, "US-CERT Vulnerability Note VU#222750:
                      TCP/IP Implementations do not adequately validate
                      ICMP error messages",
                      <a href="http://www.kb.cert.org/vuls/id/222750">http://www.kb.cert.org/vuls/id/222750</a>, 2005.
 
-   [<a id="ref-Watson" name="ref-Watson">Watson</a>]          Watson, P., "Slipping in the Window: TCP Reset
+   [<a id="ref-Watson">Watson</a>]          Watson, P., "Slipping in the Window: TCP Reset
                      Attacks", CanSecWest Conference, 2004.
 
 
 
 <span class="grey">Gont                          Informational                    [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc5927.html">RFC 5927</a>                ICMP Attacks against TCP               July 2010</span>
 
 
-   [<a id="ref-Wright" name="ref-Wright">Wright</a>]          Wright, G. and W. Stevens, "TCP/IP Illustrated,
+   [<a id="ref-Wright">Wright</a>]          Wright, G. and W. Stevens, "TCP/IP Illustrated,
                      Volume 2: The Implementation", Addison-
                      Wesley, 1994.
 
@@ -2188,11 +2167,6 @@ Author's Address
 
 
 Gont                          Informational                    [Page 36]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

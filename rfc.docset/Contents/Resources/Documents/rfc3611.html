@@ -1,31 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-friedman-avt-rtcp-report-extns" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:3611" name="DC.Identifier"/>
-<meta content="November, 2003" name="DC.Date.Issued"/>
-<meta content="Ramon Caceres" name="DC.Creator"/>
-<meta content="This document defines the Extended Report (XR) packet type for the RTP
-Control Protocol (RTCP), and defines how the use of XR packets can be
-signaled by an application if it employs the Session Description
-Protocol (SDP). XR packets are composed of report blocks, and seven
-block types are defined here. The purpose of the extended reporting
-format is to convey information that supplements the six statistics
-that are contained in the report blocks used by RTCP's Sender
-Report (SR) and Receiver Report (RR) packets. Some applications, such
-as multicast inference of network characteristics (MINC) or voice over
-IP (VoIP) monitoring, require other and more detailed statistics. In
-addition to the block types defined here, additional block types may
-be defined in the future by adhering to the framework that this
-document provides." name="DC.Description.Abstract"/>
-<meta content="RTP Control Protocol Extended Reports (RTCP XR)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 3611 - RTP Control Protocol Extended Reports (RTCP XR)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="T. Friedman" name="citation_author"/>
+<meta content="R. Caceres" name="citation_author"/>
+<meta content="A. Clark" name="citation_author"/>
+<meta content="November, 2003" name="citation_publication_date"/>
+<meta content=" RTP Control Protocol Extended Reports (RTCP XR) " name="citation_title"/>
+<meta content="10.17487/RFC3611" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc3611" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc3611.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 3611:  RTP Control Protocol Extended Reports (RTCP XR) </title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -54,7 +42,7 @@ document provides." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -63,7 +51,7 @@ document provides." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -142,19 +130,18 @@ document provides." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -168,21 +155,9 @@ document provides." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc3611.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc3611" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-avt-rtcp-report-extns.html" title="draft-ietf-avt-rtcp-report-extns">draft-ietf-avt-rt...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc3611" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc3611" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=3611">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                   T. Friedman, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc3611.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc3611.txt.pdf">PDF</a>|<a href="/rfc/rfc3611.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc3611" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=3611&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc3611" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc3611" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                   T. Friedman, Ed.
 Request for Comments: 3611                                       Paris 6
 Category: Standards Track                                R. Caceres, Ed.
                                                             IBM Research
@@ -234,7 +209,7 @@ Abstract
 
 
 <span class="grey">Friedman, et al.            Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -290,11 +265,11 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This document defines the Extended Report (XR) packet type for the
    RTP Control Protocol (RTCP) [<a href="#ref-9" title='"RTP: A Transport Protocol for Real-Time Applications"'>9</a>], and defines how the use of XR
@@ -346,7 +321,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -381,7 +356,7 @@ Table of Contents
    that provide examples of how to implement algorithms discussed in the
    text.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Applicability"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Applicability</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Applicability"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Applicability</span>
 
    The XR packets are useful across multiple applications, and for that
    reason are not defined as profile-specific extensions to RTCP sender
@@ -402,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -458,7 +433,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -514,19 +489,19 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Terminology</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
-   document are to be interpreted as described in <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a> [<a href="#ref-1" title='"Key words for use in RFCs to Indicate Requirement Levels"'>1</a>]
+   document are to be interpreted as described in <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a> [<a href="#ref-1" title='"Key words for use in RFCs to Indicate Requirement Levels"'>1</a>]
    and indicate requirement levels for compliance with this
    specification.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20XR%20Packet%20Format"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  XR Packet Format</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20XR%20Packet%20Format"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  XR Packet Format</span>
 
    An XR packet consists of a header of two 32-bit words, followed by a
    number, possibly zero, of extended report blocks.  This type of
@@ -570,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -594,7 +569,7 @@ Table of Contents
          extended report block framework defined below, each block <em>MUST</em>
          consist of one or more 32-bit words.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Extended%20Report%20Block%20Framework"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Extended Report Block Framework</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Extended%20Report%20Block%20Framework"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Extended Report Block Framework</span>
 
    Extended report blocks are stacked, one after the other, at the end
    of an XR packet.  An individual block's length is a multiple of 4
@@ -626,7 +601,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -647,7 +622,7 @@ Table of Contents
          long.  If the block type definition permits, It <em>MAY</em> be zero
          bits long.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Extended%20Report%20Blocks"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Extended Report Blocks</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Extended%20Report%20Blocks"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Extended Report Blocks</span>
 
    This section defines seven extended report blocks: block types for
    reporting upon received packet losses and duplicates, packet
@@ -658,7 +633,7 @@ Table of Contents
    registered with the Internet Assigned Numbers Authority (IANA) [<a href="#ref-16" title='"Assigned Numbers: RFC 1700 is Replaced by an On-line Database"'>16</a>],
    as described in <a href="#section-6.2">Section 6.2</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Loss%20RLE%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Loss RLE Report Block</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Loss%20RLE%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Loss RLE Report Block</span>
 
    This block type permits detailed reporting upon individual packet
    receipt and loss events.  Such reports can be used, for example, for
@@ -682,7 +657,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -738,7 +713,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -794,7 +769,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -850,7 +825,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -906,7 +881,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -962,7 +937,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -973,7 +948,7 @@ Table of Contents
          Otherwise, the left most bit of the chunk determines its type:
          0 for run length and 1 for bit vector.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Run%20Length%20Chunk"></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a>.  Run Length Chunk</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Run%20Length%20Chunk"></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a>.  Run Length Chunk</span>
 
     0                   1
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
@@ -995,7 +970,7 @@ Table of Contents
          despite the fact that they could also be described as part of a
          bit vector chunk.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20Bit%20Vector%20Chunk"></a></body></html><a class="selflink" href="#section-4.1.2" name="section-4.1.2">4.1.2</a>.  Bit Vector Chunk</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20Bit%20Vector%20Chunk"></a></body></html><a class="selflink" href="#section-4.1.2" id="section-4.1.2">4.1.2</a>.  Bit Vector Chunk</span>
 
     0                   1
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
@@ -1018,11 +993,11 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3.%20%20Terminating%20Null%20Chunk"></a></body></html><a class="selflink" href="#section-4.1.3" name="section-4.1.3">4.1.3</a>.  Terminating Null Chunk</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3.%20%20Terminating%20Null%20Chunk"></a></body></html><a class="selflink" href="#section-4.1.3" id="section-4.1.3">4.1.3</a>.  Terminating Null Chunk</span>
 
    This chunk is all zeroes.
 
@@ -1032,7 +1007,7 @@ Table of Contents
    |0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0|
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Duplicate%20RLE%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Duplicate RLE Report Block</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Duplicate%20RLE%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Duplicate RLE Report Block</span>
 
    This block type permits per-sequence-number reports on duplicates in
    a source's RTP packet stream.  Such information can be used for
@@ -1074,7 +1049,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1130,11 +1105,11 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Packet%20Receipt%20Times%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Packet Receipt Times Report Block</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Packet%20Receipt%20Times%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Packet Receipt Times Report Block</span>
 
    This block type permits per-sequence-number reports on packet receipt
    times for a given source's RTP packet stream.  Such information can
@@ -1186,7 +1161,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1242,7 +1217,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1265,7 +1240,7 @@ Table of Contents
          then the receipt time <em>SHOULD</em> be as close as possible to the
          reference time at the receiver.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Receiver%20Reference%20Time%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Receiver Reference Time Report Block</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Receiver%20Reference%20Time%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Receiver Reference Time Report Block</span>
 
    This block extends RTCP's timestamp reporting so that non-senders may
    also send timestamps.  It recapitulates the NTP timestamp fields from
@@ -1298,7 +1273,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1323,7 +1298,7 @@ Table of Contents
          no notion of wallclock or elapsed time may set the NTP
          timestamp to zero.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20DLRR%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  DLRR Report Block</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20DLRR%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  DLRR Report Block</span>
 
    This block extends RTCP's delay since the last Sender Report (DLSR)
    mechanism [9, Sec. 6.3.1] so that non-senders may also calculate
@@ -1354,7 +1329,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1390,7 +1365,7 @@ Table of Contents
          the round-trip propagation delay as A-LRR-DLRR.  This is
          illustrated in [9, Fig. 2].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Statistics%20Summary%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.6" name="section-4.6">4.6</a>.  Statistics Summary Report Block</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Statistics%20Summary%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.6" id="section-4.6">4.6</a>.  Statistics Summary Report Block</span>
 
    This block reports statistics beyond the information carried in the
    standard RTCP packet format, but is not as finely grained as that
@@ -1410,7 +1385,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1466,7 +1441,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1522,7 +1497,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1542,7 +1517,7 @@ Table of Contents
          The standard deviation of TTL or Hop Limit values of data
          packets in the sequence number range.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20VoIP%20Metrics%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.7" name="section-4.7">4.7</a>.  VoIP Metrics Report Block</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20VoIP%20Metrics%20Report%20Block"></a></body></html><a class="selflink" href="#section-4.7" id="section-4.7">4.7</a>.  VoIP Metrics Report Block</span>
 
    The VoIP Metrics Report Block provides metrics for monitoring voice
    over IP (VoIP) calls.  These metrics include packet loss and discard
@@ -1578,7 +1553,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1634,11 +1609,11 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.1.%20%20Packet%20Loss%20and%20Discard%20Metrics"></a></body></html><a class="selflink" href="#section-4.7.1" name="section-4.7.1">4.7.1</a>.  Packet Loss and Discard Metrics</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.1.%20%20Packet%20Loss%20and%20Discard%20Metrics"></a></body></html><a class="selflink" href="#section-4.7.1" id="section-4.7.1">4.7.1</a>.  Packet Loss and Discard Metrics</span>
 
    It is very useful to distinguish between packets lost by the network
    and those discarded due to jitter.  Both have equal effect on the
@@ -1674,7 +1649,7 @@ Table of Contents
          256, limiting the maximum value to 255 (to avoid overflow), and
          taking the integer part.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.2.%20%20Burst%20Metrics"></a></body></html><a class="selflink" href="#section-4.7.2" name="section-4.7.2">4.7.2</a>.  Burst Metrics</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.2.%20%20Burst%20Metrics"></a></body></html><a class="selflink" href="#section-4.7.2" id="section-4.7.2">4.7.2</a>.  Burst Metrics</span>
 
    A burst is a period during which a high proportion of packets are
    either lost or discarded due to late arrival.  A burst is defined, in
@@ -1690,7 +1665,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1746,7 +1721,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1802,7 +1777,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1813,7 +1788,7 @@ Table of Contents
          If there have been no gap periods, the gap duration value <em>MUST</em>
          be zero.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.3.%20%20Delay%20Metrics"></a></body></html><a class="selflink" href="#section-4.7.3" name="section-4.7.3">4.7.3</a>.  Delay Metrics</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.3.%20%20Delay%20Metrics"></a></body></html><a class="selflink" href="#section-4.7.3" id="section-4.7.3">4.7.3</a>.  Delay Metrics</span>
 
    For the purpose of the following definitions, the RTP interface is
    the interface between the RTP instance and the voice application
@@ -1858,7 +1833,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1869,7 +1844,7 @@ Table of Contents
 
     one way symmetric voice path delay  =  ( RTD + ESD(A) + ESD(B) ) / 2
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.4.%20%20Signal%20Related%20Metrics"></a></body></html><a class="selflink" href="#section-4.7.4" name="section-4.7.4">4.7.4</a>.  Signal Related Metrics</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.4.%20%20Signal%20Related%20Metrics"></a></body></html><a class="selflink" href="#section-4.7.4" id="section-4.7.4">4.7.4</a>.  Signal Related Metrics</span>
 
    The following metrics are intended to provide real time information
    related to the non-packet elements of the voice over IP system to
@@ -1914,7 +1889,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1970,7 +1945,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -1992,7 +1967,7 @@ Table of Contents
    Gmin
          See Configuration Parameters (<a href="#section-4.7.6">Section 4.7.6</a>, below).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.5.%20%20Call%20Quality%20or%20Transmission%20Quality%20Metrics"></a></body></html><a class="selflink" href="#section-4.7.5" name="section-4.7.5">4.7.5</a>.  Call Quality or Transmission Quality Metrics</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.5.%20%20Call%20Quality%20or%20Transmission%20Quality%20Metrics"></a></body></html><a class="selflink" href="#section-4.7.5" id="section-4.7.5">4.7.5</a>.  Call Quality or Transmission Quality Metrics</span>
 
    The following metrics are direct measures of the call quality or
    transmission quality, and incorporate the effects of codec type,
@@ -2026,7 +2001,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2067,7 +2042,7 @@ Table of Contents
          Values other than 127 and the valid range defined above <em>MUST</em>
          not be sent and <em>MUST</em> be ignored by the receiving system.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.6.%20%20Configuration%20Parameters"></a></body></html><a class="selflink" href="#section-4.7.6" name="section-4.7.6">4.7.6</a>.  Configuration Parameters</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.6.%20%20Configuration%20Parameters"></a></body></html><a class="selflink" href="#section-4.7.6" id="section-4.7.6">4.7.6</a>.  Configuration Parameters</span>
 
    Gmin: 8 bits
          The gap threshold.  This field contains the value used for this
@@ -2082,7 +2057,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2138,7 +2113,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2152,7 +2127,7 @@ Table of Contents
          of such a definition, the bits in this field <em>MUST</em> be set to
          zero and <em>MUST</em> be ignored by the receiver.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.7.%20%20Jitter%20Buffer%20Parameters"></a></body></html><a class="selflink" href="#section-4.7.7" name="section-4.7.7">4.7.7</a>.  Jitter Buffer Parameters</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.7.%20%20Jitter%20Buffer%20Parameters"></a></body></html><a class="selflink" href="#section-4.7.7" id="section-4.7.7">4.7.7</a>.  Jitter Buffer Parameters</span>
 
    The values reported in these fields <em>SHOULD</em> be the most recently
    obtained values at the time of reporting.
@@ -2181,7 +2156,7 @@ Table of Contents
          adaptive jitter buffer implementations and its value <em>MUST</em> be
          set to JB maximum for fixed jitter buffer implementations.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20SDP%20Signaling"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  SDP Signaling</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20SDP%20Signaling"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  SDP Signaling</span>
 
    This section defines Session Description Protocol (SDP) [<a href="#ref-4" title='"SDP: Session Description Protocol"'>4</a>] signaling
    for XR blocks that can be employed by applications that utilize SDP.
@@ -2194,7 +2169,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2215,7 +2190,7 @@ Table of Contents
    some fraction of the participants, the ones not implementing the XR
    blocks will ignore the SDP attribute.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20The%20SDP%20Attribute"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  The SDP Attribute</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20The%20SDP%20Attribute"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  The SDP Attribute</span>
 
    This section defines one new SDP attribute "rtcp-xr" that can be used
    to signal participants in a media session that they should use the
@@ -2250,7 +2225,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2306,7 +2281,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2362,7 +2337,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2393,7 +2368,7 @@ Table of Contents
    as to send certain report blocks without negotiation, while using SDP
    signaling to negotiate the use of other blocks.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Usage%20in%20Offer/Answer"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Usage in Offer/Answer</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Usage%20in%20Offer/Answer"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Usage in Offer/Answer</span>
 
    In the Offer/Answer context [<a href="#ref-8" title='"An Offer/Answer Model with the Session Description Protocol (SDP)"'>8</a>], the interpretation of SDP signaling
    for XR packets depends upon the direction attribute that is signaled:
@@ -2418,7 +2393,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2474,11 +2449,11 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Usage%20Outside%20of%20Offer/Answer"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Usage Outside of Offer/Answer</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Usage%20Outside%20of%20Offer/Answer"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Usage Outside of Offer/Answer</span>
 
    SDP can be employed outside of the Offer/Answer context, for instance
    for multimedia sessions that are announced through the Session
@@ -2496,7 +2471,7 @@ Table of Contents
    receives an initiator block <em>SHOULD</em> send the corresponding response
    block.  Each such participant <em>MAY</em> also send initiator blocks.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  IANA Considerations</span>
 
    This document defines a new RTCP packet type, the Extended Report
    (XR) type, within the existing Internet Assigned Numbers Authority
@@ -2512,13 +2487,13 @@ Table of Contents
    of six parameters, and describes how additional parameters are to be
    allocated.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20XR%20Packet%20Type"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  XR Packet Type</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20XR%20Packet%20Type"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  XR Packet Type</span>
 
    The XR packet type defined by this document is registered with the
    IANA as packet type 207 in the registry of RTP RTCP Control Packet
    types (PT).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20RTCP%20XR%20Block%20Type%20Registry"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  RTCP XR Block Type Registry</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20RTCP%20XR%20Block%20Type%20Registry"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  RTCP XR Block Type Registry</span>
 
    This document creates an IANA registry called the RTCP XR Block Type
    Registry to cover the name space of the Extended Report block type
@@ -2530,11 +2505,11 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 42]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-43" id="page-43" name="page-43"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-43"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
-   <a href="./rfc2434.html">RFC 2434</a> [<a href="#ref-7" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>7</a>].  Future specifications <em>SHOULD</em> attribute block type
+   <a href="./rfc2434.html">RFC 2434</a> [<a href="#ref-7" title="">7</a>].  Future specifications <em>SHOULD</em> attribute block type
    values in strict numeric order following the values attributed in
    this document:
 
@@ -2565,7 +2540,7 @@ Table of Contents
    -  A description of what the block type represents and how it shall
       be interpreted, detailing this information for each of its fields.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20The%20%22rtcp-xr%22%20SDP%20Attribute"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  The "rtcp-xr" SDP Attribute</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20The%20%22rtcp-xr%22%20SDP%20Attribute"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  The "rtcp-xr" SDP Attribute</span>
 
    The SDP attribute "rtcp-xr" defined by this document is registered
    with the IANA registry of SDP Parameters as follows:
@@ -2586,7 +2561,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 43]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-44" id="page-44" name="page-44"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-44"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2598,7 +2573,7 @@ Table of Contents
    "recv-rtt".
 
    Additional parameters are to be added to this registry in accordance
-   with the Specification Required policy of <a href="./rfc2434.html">RFC 2434</a> [<a href="#ref-7" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>7</a>].  Any
+   with the Specification Required policy of <a href="./rfc2434.html">RFC 2434</a> [<a href="#ref-7" title="">7</a>].  Any
    registration <em>MUST</em> contain the following information:
 
    -  Contact information of the one doing the registration, including
@@ -2611,7 +2586,7 @@ Table of Contents
    -  A description of what the parameter represents and how it shall be
       interpreted, both normally and in Offer/Answer.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    This document extends the RTCP reporting mechanism.  The security
    considerations that apply to RTCP reports [9, <a href="#appendix-B">Appendix B</a>] also apply
@@ -2642,7 +2617,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 44]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-45" id="page-45" name="page-45"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-45"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2698,13 +2673,13 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 45]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-46" id="page-46" name="page-46"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-46"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.%20%20Algorithms"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">A</a>.  Algorithms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.%20%20Algorithms"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">A</a>.  Algorithms</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Sequence%20Number%20Interpretation"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>.  Sequence Number Interpretation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Sequence%20Number%20Interpretation"></a></body></html><a class="selflink" href="#appendix-A.1" id="appendix-A.1">A.1</a>.  Sequence Number Interpretation</span>
 
    This is the algorithm suggested by <a href="#section-4.1">Section 4.1</a> for keeping track of
    the sequence numbers from a given sender.  It implements the
@@ -2754,7 +2729,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 46]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-47" id="page-47" name="page-47"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-47"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2786,7 +2761,7 @@ Table of Contents
            return extended_seq;
    }
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Example%20Burst%20Packet%20Loss%20Calculation."></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>.  Example Burst Packet Loss Calculation.</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Example%20Burst%20Packet%20Loss%20Calculation."></a></body></html><a class="selflink" href="#appendix-A.2" id="appendix-A.2">A.2</a>.  Example Burst Packet Loss Calculation.</span>
 
    This is an algorithm for measuring the burst characteristics for the
    VoIP Metrics Report Block (<a href="#section-4.7">Section 4.7</a>).  The algorithm, which has
@@ -2810,7 +2785,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 47]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-48" id="page-48" name="page-48"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-48"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2866,7 +2841,7 @@ Table of Contents
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 48]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-49" id="page-49" name="page-49"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-49"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2904,7 +2879,7 @@ Intellectual Property Notice
    might or might not be available; neither does it represent that it
    has made any effort to identify any such rights.  Information on the
    IETF's procedures with respect to rights in standards-track and
-   standards-related documentation can be found in <a href="./bcp11.html">BCP 11</a> [<a href="#ref-5" title='"The Organizations Involved in the IETF Standards Process"'>5</a>].  Copies
+   standards-related documentation can be found in <a href="https://www.rfc-editor.org/bcp/bcp11">BCP 11</a> [<a href="#ref-5" title='"The Organizations Involved in the IETF Standards Process"'>5</a>].  Copies
    of claims of rights made available for publication and any assurances
    of licenses to be made available, or the result of an attempt made to
    obtain a general license or permission for the use of such
@@ -2922,7 +2897,7 @@ Intellectual Property Notice
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 49]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-50" id="page-50" name="page-50"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-50"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2978,7 +2953,7 @@ Contributors
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 50]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-51" id="page-51" name="page-51"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-51"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -2986,47 +2961,47 @@ References
 
 Normative References
 
-   [<a id="ref-1" name="ref-1">1</a>]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
-        Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-1">1</a>]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
+        Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-2" name="ref-2">2</a>]  Crocker, D., Ed. and P. Overell, "Augmented BNF for Syntax
+   [<a id="ref-2">2</a>]  Crocker, D., Ed. and P. Overell, "Augmented BNF for Syntax
         Specifications: ABNF", <a href="./rfc2234.html">RFC 2234</a>, November 1997.
 
-   [<a id="ref-3" name="ref-3">3</a>]  ETSI, "Quality of Service (QoS) measurement methodologies", ETSI
+   [<a id="ref-3">3</a>]  ETSI, "Quality of Service (QoS) measurement methodologies", ETSI
         TS 101 329-5 V1.1.1 (2000-11), November 2000.
 
-   [<a id="ref-4" name="ref-4">4</a>]  Handley, M. and V. Jacobson, "SDP: Session Description
+   [<a id="ref-4">4</a>]  Handley, M. and V. Jacobson, "SDP: Session Description
         Protocol", <a href="./rfc2327.html">RFC 2327</a>, April 1998.
 
-   [<a id="ref-5" name="ref-5">5</a>]  Hovey, R. and S. Bradner, "The Organizations Involved in the
-        IETF Standards Process", <a href="./bcp11.html">BCP 11</a>, <a href="./rfc2028.html">RFC 2028</a>, October 1996.
+   [<a id="ref-5">5</a>]  Hovey, R. and S. Bradner, "The Organizations Involved in the
+        IETF Standards Process", <a href="https://www.rfc-editor.org/bcp/bcp11">BCP 11</a>, <a href="./rfc2028.html">RFC 2028</a>, October 1996.
 
-   [<a id="ref-6" name="ref-6">6</a>]  ITU-T, "The E-Model, a computational model for use in
+   [<a id="ref-6">6</a>]  ITU-T, "The E-Model, a computational model for use in
         transmission planning", Recommendation G.107, January 2003.
 
-   [<a id="ref-7" name="ref-7">7</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an IANA
-        Considerations Section in RFCs", <a href="./bcp26.html">BCP 26</a>, <a href="./rfc2434.html">RFC 2434</a>, October 1998.
+   [<a id="ref-7">7</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an IANA
+        Considerations Section in RFCs", <a href="https://www.rfc-editor.org/bcp/bcp26">BCP 26</a>, <a href="./rfc2434.html">RFC 2434</a>, October 1998.
 
-   [<a id="ref-8" name="ref-8">8</a>]  Rosenberg, J. and H. Schulzrinne, "An Offer/Answer Model with
+   [<a id="ref-8">8</a>]  Rosenberg, J. and H. Schulzrinne, "An Offer/Answer Model with
         the Session Description Protocol (SDP)", <a href="./rfc3264.html">RFC 3264</a>, June 2002.
 
-   [<a id="ref-9" name="ref-9">9</a>]  Schulzrinne, H., Casner, S., Frederick, R. and V. Jacobson,
+   [<a id="ref-9">9</a>]  Schulzrinne, H., Casner, S., Frederick, R. and V. Jacobson,
         "RTP: A Transport Protocol for Real-Time Applications", <a href="./rfc3550.html">RFC</a>
         <a href="./rfc3550.html">3550</a>, July 2003.
 
-   [<a id="ref-10" name="ref-10">10</a>] TIA/EIA-810-A Transmission Requirements for Narrowband Voice
+   [<a id="ref-10">10</a>] TIA/EIA-810-A Transmission Requirements for Narrowband Voice
         over IP and Voice over PCM Digital Wireline Telephones, December
         2000.
 
 Informative References
 
-   [<a id="ref-11" name="ref-11">11</a>] Adams, A., Bu, T., Caceres, R., Duffield, N.G., Friedman, T.,
+   [<a id="ref-11">11</a>] Adams, A., Bu, T., Caceres, R., Duffield, N.G., Friedman, T.,
         Horowitz, J., Lo Presti, F., Moon, S.B., Paxson, V. and D.
         Towsley, "The Use of End-to-End Multicast Measurements for
         Characterizing Internal Network Behavior", IEEE Communications
         Magazine, May 2000.
 
-   [<a id="ref-12" name="ref-12">12</a>] Baugher, McGrew, Oran, Blom, Carrara, Naslund and Norrman, "The
+   [<a id="ref-12">12</a>] Baugher, McGrew, Oran, Blom, Carrara, Naslund and Norrman, "The
         Secure Real-time Transport Protocol", Work in Progress.
 
 
@@ -3034,27 +3009,27 @@ Informative References
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 51]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-52" id="page-52" name="page-52"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-52"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
-   [<a id="ref-13" name="ref-13">13</a>] Caceres, R., Duffield, N.G. and T. Friedman, "Impromptu
+   [<a id="ref-13">13</a>] Caceres, R., Duffield, N.G. and T. Friedman, "Impromptu
         measurement infrastructures using RTP", Proc. IEEE Infocom 2002.
 
-   [<a id="ref-14" name="ref-14">14</a>] Clark, A.D., "Modeling the Effects of Burst Packet Loss and
+   [<a id="ref-14">14</a>] Clark, A.D., "Modeling the Effects of Burst Packet Loss and
         Recency on Subjective Voice Quality", Proc. IP Telephony
         Workshop 2001.
 
-   [<a id="ref-15" name="ref-15">15</a>] Handley, M., Perkins, C. and E. Whelan, "Session Announcement
+   [<a id="ref-15">15</a>] Handley, M., Perkins, C. and E. Whelan, "Session Announcement
         Protocol", <a href="./rfc2974.html">RFC 2974</a>, October 2000.
 
-   [<a id="ref-16" name="ref-16">16</a>] Reynolds, J., Ed., "Assigned Numbers: <a href="./rfc1700.html">RFC 1700</a> is Replaced by an
+   [<a id="ref-16">16</a>] Reynolds, J., Ed., "Assigned Numbers: <a href="./rfc1700.html">RFC 1700</a> is Replaced by an
         On-line Database", <a href="./rfc3232.html">RFC 3232</a>, January 2002.
 
-   [<a id="ref-17" name="ref-17">17</a>] Schulzrinne, H., Rao, A. and R. Lanphier, "Real Time Streaming
+   [<a id="ref-17">17</a>] Schulzrinne, H., Rao, A. and R. Lanphier, "Real Time Streaming
         Protocol (RTSP)", <a href="./rfc2326.html">RFC 2326</a>, April 1998.
 
-   [<a id="ref-18" name="ref-18">18</a>] Sisalem D. and A. Wolisz, "MLDA: A TCP-friendly Congestion
+   [<a id="ref-18">18</a>] Sisalem D. and A. Wolisz, "MLDA: A TCP-friendly Congestion
         Control Framework for Heterogeneous Multicast Environments",
         Proc. IWQoS 2000.
 
@@ -3090,7 +3065,7 @@ Informative References
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 52]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-53" id="page-53" name="page-53"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-53"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -3146,7 +3121,7 @@ Authors' Addresses
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 53]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-54" id="page-54" name="page-54"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-54"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -3202,7 +3177,7 @@ Authors' Addresses
 
 
 <span class="grey">Friedman, et al.            Standards Track                    [Page 54]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-55" id="page-55" name="page-55"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-55"></span>
 <span class="grey"><a href="./rfc3611.html">RFC 3611</a>                        RTCP XR                    November 2003</span>
 
 
@@ -3258,11 +3233,6 @@ Acknowledgement
 
 
 Friedman, et al.            Standards Track                    [Page 55]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

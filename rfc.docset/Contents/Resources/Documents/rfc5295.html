@@ -1,31 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-salowey-eap-emsk-deriv" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5295" name="DC.Identifier"/>
-<meta content="August, 2008" name="DC.Date.Issued"/>
-<meta content="Nakhjiri, Madjid" name="DC.Creator"/>
-<meta content="Dondeti, Lakshminath" name="DC.Creator"/>
-<meta content="Narayanan, Vidya" name="DC.Creator"/>
-<meta content="Salowey, Joseph" name="DC.Creator"/>
-<meta content="The Extensible Authentication Protocol (EAP) defined the Extended
-Master Session Key (EMSK) generation, but reserved it for unspecified
-future uses. This memo reserves the EMSK for the sole purpose of
-deriving root keys. Root keys are are master keys that can be used for
-multiple purposes, identified by usage definitions. This document also
-specifies a mechanism for avoiding conflicts between root keys by
-deriving them in a manner that guarantee cryptographic separation.
-Finally, this document also defines one such root key usage: domain
-specific root keys are root keys made available to and used within
-specific key management domains." name="DC.Description.Abstract"/>
-<meta content="Specification for the Derivation of Root Keys from an Extended Master Session Key (EMSK)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5295 - Specification for the Derivation of Root Keys from an Extended Master Session Key (EMSK)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="J. Salowey" name="citation_author"/>
+<meta content="L. Dondeti" name="citation_author"/>
+<meta content="V. Narayanan" name="citation_author"/>
+<meta content="M. Nakhjiri" name="citation_author"/>
+<meta content="August, 2008" name="citation_publication_date"/>
+<meta content="Specification for the Derivation of Root Keys from an Extended Master Session Key (EMSK)" name="citation_title"/>
+<meta content="10.17487/RFC5295" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5295" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5295.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5295: Specification for the Derivation of Root Keys from an Extended Master Session Key (EMSK)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -54,7 +43,7 @@ specific key management domains." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -63,7 +52,7 @@ specific key management domains." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -142,19 +131,18 @@ specific key management domains." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -168,21 +156,9 @@ specific key management domains." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5295.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5295" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-hokey-emsk-hierarchy.html" title="draft-ietf-hokey-emsk-hierarchy">draft-ietf-hokey-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5295" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5295" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5295">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                         J. Salowey
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5295.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5295.txt.pdf">PDF</a>|<a href="/rfc/rfc5295.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5295" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5295&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5295" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5295" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                         J. Salowey
 Request for Comments: 5295                                 Cisco Systems
 Updates: <a href="./rfc5247.html">5247</a>                                                 L. Dondeti
 Category: Standards Track                                   V. Narayanan
@@ -234,7 +210,7 @@ Abstract
 
 
 <span class="grey">Salowey, et al.             Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -290,11 +266,11 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This document deals with keys generated by authenticated key exchange
    mechanisms defined within the EAP framework [<a href="./rfc3748.html" title='"Extensible Authentication Protocol (EAP)"'>RFC3748</a>].  EAP defines
@@ -336,7 +312,7 @@ Table of Contents
    is coordinated key derivation and another is cryptographic
    separation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Applicable%20Usages%20of%20Keys%20Derived%20from%20the%20EMSK"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Applicable Usages of Keys Derived from the EMSK</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Applicable%20Usages%20of%20Keys%20Derived%20from%20the%20EMSK"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Applicable Usages of Keys Derived from the EMSK</span>
 
    The EMSK is typically established as part of network access
    authentication and authorization.  It is expected that keys derived
@@ -346,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -402,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -415,7 +391,7 @@ Table of Contents
    the scope of this document and would require additional
    specification.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Terminology</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -458,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -467,7 +443,7 @@ Table of Contents
       that its scope is restricted to the same domain as the parent DSRK
       from which it is derived.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Cryptographic%20Separation%20and%20Coordinated%20Key%20Derivation"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Cryptographic Separation and Coordinated Key Derivation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Cryptographic%20Separation%20and%20Coordinated%20Key%20Derivation"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Cryptographic Separation and Coordinated Key Derivation</span>
 
    The EMSK is used to derive keys for multiple use cases, and thus it
    is required that the derived keys are cryptographically separate.
@@ -514,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -537,7 +513,7 @@ Table of Contents
    development of new usages without cumbersome coordination between
    different usage definitions.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20EMSK%20Key%20Root%20Derivation%20Framework"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  EMSK Key Root Derivation Framework</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20EMSK%20Key%20Root%20Derivation%20Framework"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  EMSK Key Root Derivation Framework</span>
 
    The EMSK key derivation framework provides a coordinated means for
    generating multiple root keys from an EMSK.  Further keys may then be
@@ -570,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -580,7 +556,7 @@ Table of Contents
                         /    \
                    DSUSRK1 DSUSRK2
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20USRK%20Derivation"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  USRK Derivation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20USRK%20Derivation"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  USRK Derivation</span>
 
    The EMSK Root Key Derivation Function (KDF) derives a USRK from the
    EMSK, a key label, optional data, and output length.  The KDF is
@@ -626,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -640,7 +616,7 @@ Table of Contents
 
    USRKs <em>MUST</em> be at least 64 octets in length.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20On%20the%20KDFs"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  On the KDFs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20On%20the%20KDFs"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  On the KDFs</span>
 
    This specification allows for the use of different KDFs.  However, in
    order to have a coordinated key derivation function, the same KDF
@@ -663,7 +639,7 @@ Table of Contents
    details of the KDF construction or the KDF selection, they only need
    to worry about the inputs specified in <a href="#section-3">Section 3</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Default%20KDF"></a></body></html><a class="selflink" href="#section-3.1.2" name="section-3.1.2">3.1.2</a>.  Default KDF</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Default%20KDF"></a></body></html><a class="selflink" href="#section-3.1.2" id="section-3.1.2">3.1.2</a>.  Default KDF</span>
 
    The default KDF for deriving root keys from an EMSK is taken from the
    PRF+ key expansion specified in [<a href="./rfc4306.html" title='"Internet Key Exchange (IKEv2) Protocol"'>RFC4306</a>] based on HMAC-SHA-256
@@ -682,7 +658,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -702,7 +678,7 @@ Table of Contents
    Since PRF+ is only defined for 255 iterations, it may produce up to
    8160 octets of key material.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20EMSK%20and%20USRK%20Name%20Derivation"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  EMSK and USRK Name Derivation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20EMSK%20and%20USRK%20Name%20Derivation"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  EMSK and USRK Name Derivation</span>
 
    The EAP keying framework [<a href="./rfc5247.html" title='"Extensible Authentication Protocol (EAP) Key Management Framework"'>RFC5247</a>] specifies that the EMSK <em>MUST</em> be
    named using the EAP Session-ID and a binary or textual indication.
@@ -738,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -747,7 +723,7 @@ Table of Contents
    of the USRK usage.  The usage <em>SHALL</em> signal such an exception in key
    naming, so both parties know the key name used.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Domain-Specific%20Root%20Key%20Derivation"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Domain-Specific Root Key Derivation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Domain-Specific%20Root%20Key%20Derivation"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Domain-Specific Root Key Derivation</span>
 
    A specific USRK called a Domain-Specific Root Key (DSRK) is derived
    from the EMSK for a specific set of usages in a particular key
@@ -794,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -821,7 +797,7 @@ Table of Contents
 
    where length is the 2-octet unsigned integer 8 in network byte order.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Applicability%20of%20Multi-Domain%20Usages"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Applicability of Multi-Domain Usages</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Applicability%20of%20Multi-Domain%20Usages"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Applicability of Multi-Domain Usages</span>
 
    The DSUSRKs generated by a domain can be used to authorize entities
    in a domain to perform specific functions.  In cases where it is
@@ -850,11 +826,11 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Requirements%20for%20Usage%20Definitions"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Requirements for Usage Definitions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Requirements%20for%20Usage%20Definitions"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Requirements for Usage Definitions</span>
 
    In order for a usage definition to meet the guidelines for USRK
    usage, it must meet the following recommendations:
@@ -884,7 +860,7 @@ Table of Contents
       includes aspects of key management covered in the next section on
       Root Key management guidelines.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Root%20Key%20Management%20Guidelines"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Root Key Management Guidelines</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Root%20Key%20Management%20Guidelines"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Root Key Management Guidelines</span>
 
    This section makes recommendations for various aspects of key
    management of the Root Key including lifetime, child key derivation,
@@ -906,7 +882,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -945,7 +921,7 @@ Table of Contents
    and identities in the child key derivation.  Some of this data is
    described as "channel bindings" in [<a href="./rfc3748.html" title='"Extensible Authentication Protocol (EAP)"'>RFC3748</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Requirements%20for%20EAP%20System"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Requirements for EAP System</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Requirements%20for%20EAP%20System"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Requirements for EAP System</span>
 
    The system that wishes to make use of EAP root keys derived from the
    EMSK must take certain things into consideration.  The following is a
@@ -962,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -989,15 +965,15 @@ Table of Contents
    cryptographic separation is not achieved.  Implementations <em>MUST</em>
    prevent such combinations.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Key%20Strength"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Key Strength</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Key%20Strength"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Key Strength</span>
 
    The effective key strength of the derived keys will never be greater
    than the strength of the EMSK (or a master key internal to an EAP
    mechanism).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Cryptographic%20Separation%20of%20Keys"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Cryptographic Separation of Keys</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Cryptographic%20Separation%20of%20Keys"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Cryptographic Separation of Keys</span>
 
    The intent of the KDF is to derive keys that are cryptographically
    separate: the compromise of one of the Usage-Specific Root Keys
@@ -1005,7 +981,7 @@ Table of Contents
    EMSK.  It is believed that the KDF chosen provides the desired
    separation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Implementation"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  Implementation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Implementation"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  Implementation</span>
 
    An implementation of an EAP framework should keep the EMSK internally
    as close to where it is derived as possible and only provide an
@@ -1018,11 +994,11 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Key%20Distribution"></a></body></html><a class="selflink" href="#section-7.4" name="section-7.4">7.4</a>.  Key Distribution</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Key%20Distribution"></a></body></html><a class="selflink" href="#section-7.4" id="section-7.4">7.4</a>.  Key Distribution</span>
 
    In some cases, it will be necessary or convenient to distribute USRKs
    from where they are generated.  Since these are secret keys, they
@@ -1039,7 +1015,7 @@ Table of Contents
    hierarchy and by providing entities only with the keys in the
    hierarchy that they need.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Key%20Lifetime"></a></body></html><a class="selflink" href="#section-7.5" name="section-7.5">7.5</a>.  Key Lifetime</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Key%20Lifetime"></a></body></html><a class="selflink" href="#section-7.5" id="section-7.5">7.5</a>.  Key Lifetime</span>
 
    The key lifetime is dependent upon how the key is generated and how
    the key is used.  Since the Root Key is the responsibility of the
@@ -1053,7 +1029,7 @@ Table of Contents
    key lifetime to longer may result in decreased security since the key
    may be used beyond its recommended lifetime.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.6.%20%20Entropy%20Consideration"></a></body></html><a class="selflink" href="#section-7.6" name="section-7.6">7.6</a>.  Entropy Consideration</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.6.%20%20Entropy%20Consideration"></a></body></html><a class="selflink" href="#section-7.6" id="section-7.6">7.6</a>.  Entropy Consideration</span>
 
    The number of root keys derived from the EMSK is expected to be low.
    Note that there is no randomness required to be introduced into the
@@ -1062,11 +1038,11 @@ Table of Contents
    that Root-Key-to-child-key derivation introduce fresh random numbers
    in deriving each key.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  IANA Considerations</span>
 
    The keywords "Private Use", "Specification Required", and "IETF
    Consensus" that appear in this document when used to describe
-   namespace allocation are to be interpreted as described in [<a href="./rfc5226.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC5226</a>].
+   namespace allocation are to be interpreted as described in [<a href="./rfc5226.html" title="">RFC5226</a>].
 
 
 
@@ -1074,11 +1050,11 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Key%20Labels"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Key Labels</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Key%20Labels"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Key Labels</span>
 
    This specification introduces a new name space for "USRK Key Labels".
    Key labels <em>MUST</em> be printable US-ASCII strings, and <em>MUST NOT</em> contain
@@ -1088,7 +1064,7 @@ Table of Contents
    than 64 characters.
 
    Labels can be assigned based on Specification Required policy
-   [<a href="./rfc5226.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC5226</a>].  In addition, the labels "experimental1" and
+   [<a href="./rfc5226.html" title="">RFC5226</a>].  In addition, the labels "experimental1" and
    "experimental2" are reserved for experimental use.  The following
    considerations apply to their use:
 
@@ -1130,7 +1106,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -1147,7 +1123,7 @@ Table of Contents
    The following labels are reserved by this document: "EMSK",
    "dsrk@ietf.org".
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20PRF%20Numbers"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  PRF Numbers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20PRF%20Numbers"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  PRF Numbers</span>
 
    This specification introduces a new number space for "EMSK PRF
    numbers".  The numbers are in the range 0 to 255.  Numbers from 0 to
@@ -1159,7 +1135,7 @@ Table of Contents
 
       1 HMAC-SHA-256 PRF+ (Default)
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Acknowledgements</span>
 
    This document expands upon previous collaboration with Pasi Eronen.
    This document reflects conversations with Bernard Aboba, Jari Arkko,
@@ -1186,45 +1162,45 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" id="section-10.1">10.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC3748" name="ref-RFC3748">RFC3748</a>]  Aboba, B., Blunk, L., Vollbrecht, J., Carlson, J., and H.
+   [<a id="ref-RFC3748">RFC3748</a>]  Aboba, B., Blunk, L., Vollbrecht, J., Carlson, J., and H.
               Levkowetz, "Extensible Authentication Protocol (EAP)",
               <a href="./rfc3748.html">RFC 3748</a>, June 2004.
 
-   [<a id="ref-RFC4306" name="ref-RFC4306">RFC4306</a>]  Kaufman, C., "Internet Key Exchange (IKEv2) Protocol",
+   [<a id="ref-RFC4306">RFC4306</a>]  Kaufman, C., "Internet Key Exchange (IKEv2) Protocol",
               <a href="./rfc4306.html">RFC 4306</a>, December 2005.
 
-   [<a id="ref-RFC5226" name="ref-RFC5226">RFC5226</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
-              IANA Considerations Section in RFCs", <a href="./bcp26.html">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a>,
+   [<a id="ref-RFC5226">RFC5226</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", <a href="https://www.rfc-editor.org/bcp/bcp26">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a>,
               May 2008.
 
-   [<a id="ref-RFC5247" name="ref-RFC5247">RFC5247</a>]  Aboba, B., Simon, D., and P. Eronen, "Extensible
+   [<a id="ref-RFC5247">RFC5247</a>]  Aboba, B., Simon, D., and P. Eronen, "Extensible
               Authentication Protocol (EAP) Key Management Framework",
               <a href="./rfc5247.html">RFC 5247</a>, August 2008.
 
-   [<a id="ref-SHA256" name="ref-SHA256">SHA256</a>]   National Institute of Standards and Technology, "Secure
+   [<a id="ref-SHA256">SHA256</a>]   National Institute of Standards and Technology, "Secure
               Hash Standard", FIPS 180-2, With Change Notice 1 dated
               February 2004, August 2002.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" id="section-10.2">10.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC1034" name="ref-RFC1034">RFC1034</a>]  Mockapetris, P., "Domain names - concepts and facilities",
+   [<a id="ref-RFC1034">RFC1034</a>]  Mockapetris, P., "Domain names - concepts and facilities",
               STD 13, <a href="./rfc1034.html">RFC 1034</a>, November 1987.
 
-   [<a id="ref-RFC4346" name="ref-RFC4346">RFC4346</a>]  Dierks, T. and E. Rescorla, "The Transport Layer Security
+   [<a id="ref-RFC4346">RFC4346</a>]  Dierks, T. and E. Rescorla, "The Transport Layer Security
               (TLS) Protocol Version 1.1", <a href="./rfc4346.html">RFC 4346</a>, April 2006.
 
-   [<a id="ref-SIGMA" name="ref-SIGMA">SIGMA</a>]    Krawczyk, H., "SIGMA: the 'SIGn-and-MAc' Approach to
+   [<a id="ref-SIGMA">SIGMA</a>]    Krawczyk, H., "SIGMA: the 'SIGn-and-MAc' Approach to
               Authenticated Diffie-Hellman and its Use in the IKE
               Protocols", LNCS 2729, Springer, 2003,
               &lt;<a href="http://www.informatik.uni-trier.de/~ley/db/conf/crypto/crypto2003.html">http://www.informatik.uni-trier.de/~ley/db/conf/</a>
@@ -1242,7 +1218,7 @@ Table of Contents
 
 
 <span class="grey">Salowey, et al.             Standards Track                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -1298,7 +1274,7 @@ Authors' Addresses
 
 
 <span class="grey">Salowey, et al.             Standards Track                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5295.html">RFC 5295</a>                EMSK Root Key Derivation             August 2008</span>
 
 
@@ -1307,7 +1283,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2008).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1327,7 +1303,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1354,11 +1330,6 @@ Intellectual Property
 
 
 Salowey, et al.             Standards Track                    [Page 21]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

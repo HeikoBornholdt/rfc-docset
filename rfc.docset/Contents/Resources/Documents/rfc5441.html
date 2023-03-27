@@ -1,34 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-vasseur-pce-brpc" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5441" name="DC.Identifier"/>
-<meta content="April, 2009" name="DC.Date.Issued"/>
-<meta content="Vasseur, JP" name="DC.Creator"/>
-<meta content="Zhang, Raymond" name="DC.Creator"/>
-<meta content="Roux, JL Le" name="DC.Creator"/>
-<meta content="Bitar, Nabil" name="DC.Creator"/>
-<meta content="The ability to compute shortest constrained Traffic Engineering (TE)
-Label Switched Paths (LSPs) in Multiprotocol Label Switching (MPLS)
-and Generalized MPLS (GMPLS) networks across multiple domains (where a
-domain is referred to as a collection of network elements within a
-common sphere of address management or path computational
-responsibility such as IGP areas and Autonomous Systems) has been
-identified as a key requirement . This document specifies a procedure
-relying on the use of multiple Path Computation Elements (PCEs) in
-order to compute such inter-domain shortest constrained paths along a
-determined sequence of domains, using a backward recursive path
-computation technique while preserving confidentiality across domains,
-which is sometimes required when domains are managed by different
-Service Providers." name="DC.Description.Abstract"/>
-<meta content="A Backward Recursive PCE-based Computation (BRPC) procedure to compute shortest inter-domain Traffic Engineering Label Switched Paths" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5441 - A Backward Recursive PCE-based Computation (BRPC) procedure to compute shortest inter-domain Traffic Engineering Label Switched Paths</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="JP. Vasseur" name="citation_author"/>
+<meta content="R. Zhang" name="citation_author"/>
+<meta content="N. Bitar" name="citation_author"/>
+<meta content="JL. Le Roux" name="citation_author"/>
+<meta content="April, 2009" name="citation_publication_date"/>
+<meta content="A Backward-Recursive PCE-Based Computation (BRPC) Procedure to Compute Shortest Constrained Inter-Domain Traffic Engineering Label Switched Paths" name="citation_title"/>
+<meta content="10.17487/RFC5441" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5441" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5441.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5441: A Backward-Recursive PCE-Based Computation (BRPC) Procedure to Compute Shortest Constrained Inter-Domain Traffic Engineering Label Switched Paths</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -57,7 +43,7 @@ Service Providers." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -66,7 +52,7 @@ Service Providers." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -145,19 +131,18 @@ Service Providers." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -171,21 +156,9 @@ Service Providers." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5441.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5441" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-pce-brpc.html" title="draft-ietf-pce-brpc">draft-ietf-pce-brpc</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5441" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5441" title="Side-by-side diff">Diff2</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5441&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5441">Errata</a>]   </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                   JP. Vasseur, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5441.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5441.txt.pdf">PDF</a>|<a href="/rfc/rfc5441.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5441" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5441&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5441" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5441" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                   JP. Vasseur, Ed.
 Request for Comments: 5441                            Cisco Systems, Inc
 Category: Standards Track                                       R. Zhang
                                                               BT Infonet
@@ -213,7 +186,7 @@ Copyright Notice
    Copyright (c) 2009 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents in effect on the date of
    publication of this document (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>).
    Please review these documents carefully, as they describe your rights
@@ -237,7 +210,7 @@ Copyright Notice
 
 
 <span class="grey">Vasseur, et al.             Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
@@ -293,7 +266,7 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
@@ -304,7 +277,7 @@ Table of Contents
      <a href="#section-18.1">18.1</a>. Normative References . . . . . . . . . . . . . . . . . . . <a href="#page-16">16</a>
      <a href="#section-18.2">18.2</a>. Informative References . . . . . . . . . . . . . . . . . . <a href="#page-16">16</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    The requirements for inter-area and inter-AS MPLS Traffic Engineering
    (TE) have been developed by the Traffic Engineering Working Group (TE
@@ -313,7 +286,7 @@ Table of Contents
    The framework for inter-domain Multiprotocol Label Switching (MPLS)
    Traffic Engineering (TE) has been provided in [<a href="./rfc4726.html" title='"A Framework for Inter-Domain Multiprotocol Label Switching Traffic Engineering"'>RFC4726</a>].
 
-   [<a id="ref-RFC5152" name="ref-RFC5152">RFC5152</a>] defines a technique for establishing an inter-domain
+   [<a id="ref-RFC5152">RFC5152</a>] defines a technique for establishing an inter-domain
    Generalized MPLS (GMPLS) TE Label Switched Path (LSP) whereby the
    path is computed during the signaling process on a per-domain basis
    by the entry boundary node of each domain (each node responsible for
@@ -349,17 +322,17 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Language"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Requirements Language</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Language"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Requirements Language</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in <a href="./rfc2119.html">RFC 2119</a> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    ABR: Area Border Routers.  Routers used to connect two IGP areas
    (areas in OSPF or levels in IS-IS).
@@ -405,11 +378,11 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20General%20Assumptions"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  General Assumptions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20General%20Assumptions"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  General Assumptions</span>
 
    In the rest of this document, we make the following set of
    assumptions common to inter-area and inter-AS MPLS TE:
@@ -445,7 +418,7 @@ Table of Contents
       discovered by some means that is outside of the scope of this
       document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20BRPC%20Procedure"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  BRPC Procedure</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20BRPC%20Procedure"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  BRPC Procedure</span>
 
    The BRPC procedure is a multiple-PCE path computation technique as
    described in [<a href="./rfc4655.html" title='"A Path Computation Element (PCE)-Based Architecture"'>RFC4655</a>].  A possible model consists of hosting the PCE
@@ -461,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
@@ -479,7 +452,7 @@ Table of Contents
    Shortest Path First (CSPF) or an algorithm based on linear
    programming to solve multi-constraint optimization problems).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Domain%20Path%20Selection"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Domain Path Selection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Domain%20Path%20Selection"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Domain Path Selection</span>
 
    The PCE-based BRPC procedure applies to the computation of an optimal
    constrained inter-domain TE LSP.  The sequence of domains to be
@@ -500,7 +473,7 @@ Table of Contents
    procedure can also be used across a subset of all domain sequences,
    and the best path among these sequences can then be selected.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Mode%20of%20Operation"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Mode of Operation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Mode%20of%20Operation"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Mode of Operation</span>
 
    Definition of VSPT(i)
 
@@ -517,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
@@ -573,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
@@ -614,7 +587,7 @@ Table of Contents
    Note also that in case of Equal Cost Multi-Path (ECMP) paths, more
    than one path could be returned to the requesting PCC.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20PCEP%20Protocol%20Extensions"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  PCEP Protocol Extensions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20PCEP%20Protocol%20Extensions"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  PCEP Protocol Extensions</span>
 
    The BRPC procedure requires the specification of a new flag of the RP
    object carried within the PCReq message (defined in [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>]) to
@@ -629,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
@@ -650,7 +623,7 @@ Table of Contents
    message <em>MUST</em> be set.  It is the choice of the requester to
    appropriately set the O bit of the RP object.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20VSPT%20Encoding"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  VSPT Encoding</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20VSPT%20Encoding"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  VSPT Encoding</span>
 
    The VSPT is returned within a PCRep message.  The encoding consists
    of a non-ordered list of Explicit Route Objects (EROs) where each ERO
@@ -685,11 +658,11 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Inter-AS%20TE%20Links"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Inter-AS TE Links</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Inter-AS%20TE%20Links"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Inter-AS TE Links</span>
 
    In the case of inter-AS TE LSP path computation, the BRPC procedure
    requires the knowledge of the traffic engineering attributes of the
@@ -704,7 +677,7 @@ Table of Contents
    TE visibility up to the set of entry ASBRs in the downstream domain
    (see the IGP extensions defined in [<a href="./rfc5316.html" title='"ISIS Extensions in Support of Inter-Autonomous System (AS) MPLS and GMPLS Traffic Engineering"'>RFC5316</a>] and [<a href="./rfc5392.html" title='"OSPF Extensions in Support of Inter-Autonomous System (AS) MPLS and GMPLS Traffic Engineering"'>RFC5392</a>]).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Usage%20in%20Conjunction%20with%20Per-Domain%20Path%20Computation"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Usage in Conjunction with Per-Domain Path Computation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Usage%20in%20Conjunction%20with%20Per-Domain%20Path%20Computation"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Usage in Conjunction with Per-Domain Path Computation</span>
 
    The BRPC procedure may be used to compute path segments in
    conjunction with other path computation techniques (such as the per-
@@ -712,7 +685,7 @@ Table of Contents
    the end-to-end path.  In this case, end-to-end path optimality can no
    longer be guaranteed.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20BRPC%20Procedure%20Completion%20Failure"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  BRPC Procedure Completion Failure</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20BRPC%20Procedure%20Completion%20Failure"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  BRPC Procedure Completion Failure</span>
 
    If the BRPC procedure cannot be completed because a PCE along the
    domain does not recognize the procedure (VSPT flag of the RP object),
@@ -741,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
@@ -753,7 +726,7 @@ Table of Contents
                      1: BRPC procedure not supported by one or more PCEs
                         along the domain path
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Applicability"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Applicability</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Applicability"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Applicability</span>
 
    As discussed in <a href="#section-3">Section 3</a>, the requirements for inter-area and
    inter-AS MPLS Traffic Engineering have been developed by the Traffic
@@ -763,7 +736,7 @@ Table of Contents
    ability to compute an optimal (shortest) constrained inter-domain TE
    LSP and to compute a set of diverse inter-domain TE LSPs.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Diverse%20End-to-End%20Path%20Computation"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>.  Diverse End-to-End Path Computation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Diverse%20End-to-End%20Path%20Computation"></a></body></html><a class="selflink" href="#section-10.1" id="section-10.1">10.1</a>.  Diverse End-to-End Path Computation</span>
 
    PCEP (see [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>]) allows a PCC to request the computation of a set
    of diverse TE LSPs by setting the SVEC object's flags L, N, or S to
@@ -797,11 +770,11 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Path%20Optimality"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>.  Path Optimality</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Path%20Optimality"></a></body></html><a class="selflink" href="#section-10.2" id="section-10.2">10.2</a>.  Path Optimality</span>
 
    BRPC guarantees that the optimal (shortest) constrained inter-domain
    path will always be found, subject to policy constraints.  Both in
@@ -811,7 +784,7 @@ Table of Contents
    guarantee optimality after some network change within the domain by
    completely re-executing the BRPC procedure.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Reoptimization%20of%20an%20Inter-Domain%20TE%20LSP"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  Reoptimization of an Inter-Domain TE LSP</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Reoptimization%20of%20an%20Inter-Domain%20TE%20LSP"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  Reoptimization of an Inter-Domain TE LSP</span>
 
    The ability to reoptimize an existing inter-domain TE LSP path has
    been explicitly listed as a requirement in [<a href="./rfc4105.html" title='"Requirements for Inter-Area MPLS Traffic Engineering"'>RFC4105</a>] and [<a href="./rfc4216.html" title='"MPLS Inter-Autonomous System (AS) Traffic Engineering (TE) Requirements"'>RFC4216</a>].
@@ -821,7 +794,7 @@ Table of Contents
    computation request so that the PCEs involved in the reoptimization
    request can avoid double bandwidth accounting.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20Path%20Computation%20Failure"></a></body></html><a class="selflink" href="#section-12" name="section-12">12</a>.  Path Computation Failure</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20Path%20Computation%20Failure"></a></body></html><a class="selflink" href="#section-12" id="section-12">12</a>.  Path Computation Failure</span>
 
    If a PCE requires to relay a path computation request according to
    the BRPC procedure defined in this document to a downstream PCE and
@@ -835,7 +808,7 @@ Table of Contents
    Bit number     Name Flag
       28           BRPC path computation chain unavailable
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.%20%20Metric%20Normalization"></a></body></html><a class="selflink" href="#section-13" name="section-13">13</a>.  Metric Normalization</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.%20%20Metric%20Normalization"></a></body></html><a class="selflink" href="#section-13" id="section-13">13</a>.  Metric Normalization</span>
 
    In the case of inter-area TE, the same IGP/TE metric scheme is
    usually adopted for all the IGP areas (e.g., based on the link-speed,
@@ -853,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
@@ -861,11 +834,11 @@ Table of Contents
    metric must be requested in the PCEP path computation request) using
    the METRIC object (defined in [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>]).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.%20%20Manageability%20Considerations"></a></body></html><a class="selflink" href="#section-14" name="section-14">14</a>.  Manageability Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.%20%20Manageability%20Considerations"></a></body></html><a class="selflink" href="#section-14" id="section-14">14</a>.  Manageability Considerations</span>
 
    This section follows the guidance of [<a href="#ref-PCE-MANAGE" title='"Inclusion of Manageability Sections in PCE Working Group Drafts"'>PCE-MANAGE</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.1.%20%20Control%20of%20Function%20and%20Policy"></a></body></html><a class="selflink" href="#section-14.1" name="section-14.1">14.1</a>.  Control of Function and Policy</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.1.%20%20Control%20of%20Function%20and%20Policy"></a></body></html><a class="selflink" href="#section-14.1" id="section-14.1">14.1</a>.  Control of Function and Policy</span>
 
    The only configurable item is the support of the BRPC procedure on a
    PCE.  The support of the BRPC procedure by the PCE <em>MAY</em> be controlled
@@ -874,11 +847,11 @@ Table of Contents
    requests per second, etc.).  If the BRPC is not supported/allowed on
    a PCE, it <em>MUST</em> send a PCErr message as specified in <a href="#section-9">Section 9</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.2.%20%20Information%20and%20Data%20Models"></a></body></html><a class="selflink" href="#section-14.2" name="section-14.2">14.2</a>.  Information and Data Models</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.2.%20%20Information%20and%20Data%20Models"></a></body></html><a class="selflink" href="#section-14.2" id="section-14.2">14.2</a>.  Information and Data Models</span>
 
    A BRPC MIB module will be specified in a separate document.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.3.%20%20Liveness%20Detection%20and%20Monitoring"></a></body></html><a class="selflink" href="#section-14.3" name="section-14.3">14.3</a>.  Liveness Detection and Monitoring</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.3.%20%20Liveness%20Detection%20and%20Monitoring"></a></body></html><a class="selflink" href="#section-14.3" id="section-14.3">14.3</a>.  Liveness Detection and Monitoring</span>
 
    The BRPC procedure is a multiple-PCE path computation technique and,
    as such, a set of PCEs are involved in the path computation chain.
@@ -890,7 +863,7 @@ Table of Contents
    check the availability and performances of a PCE chain is defined in
    [<a href="#ref-PCE-MONITOR" title='"A set of monitoring tools for Path Computation Element based Architecture"'>PCE-MONITOR</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.4.%20%20Verifying%20Correct%20Operation"></a></body></html><a class="selflink" href="#section-14.4" name="section-14.4">14.4</a>.  Verifying Correct Operation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.4.%20%20Verifying%20Correct%20Operation"></a></body></html><a class="selflink" href="#section-14.4" id="section-14.4">14.4</a>.  Verifying Correct Operation</span>
 
    Verifying the correct operation of BRPC can be performed by
    monitoring a set of parameters.  A BRPC implementation <em>SHOULD</em> provide
@@ -909,11 +882,11 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.5.%20%20Requirements%20on%20Other%20Protocols%20and%20Functional%20Components"></a></body></html><a class="selflink" href="#section-14.5" name="section-14.5">14.5</a>.  Requirements on Other Protocols and Functional Components</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.5.%20%20Requirements%20on%20Other%20Protocols%20and%20Functional%20Components"></a></body></html><a class="selflink" href="#section-14.5" id="section-14.5">14.5</a>.  Requirements on Other Protocols and Functional Components</span>
 
    The BRPC procedure does not put any new requirements on other
    protocols.  That said, since the BRPC procedure relies on the PCEP
@@ -921,25 +894,25 @@ Table of Contents
    the BRPC procedure inherently makes use of the management functions
    developed for PCEP.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.6.%20%20Impact%20on%20Network%20Operation"></a></body></html><a class="selflink" href="#section-14.6" name="section-14.6">14.6</a>.  Impact on Network Operation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.6.%20%20Impact%20on%20Network%20Operation"></a></body></html><a class="selflink" href="#section-14.6" id="section-14.6">14.6</a>.  Impact on Network Operation</span>
 
    The BRPC procedure does not have any significant impact on network
    operation: indeed, BRPC is a multiple-PCE path computation scheme as
    defined in [<a href="./rfc4655.html" title='"A Path Computation Element (PCE)-Based Architecture"'>RFC4655</a>] and does not differ from any other path
    computation request.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.7.%20%20Path%20Computation%20Chain%20Monitoring"></a></body></html><a class="selflink" href="#section-14.7" name="section-14.7">14.7</a>.  Path Computation Chain Monitoring</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.7.%20%20Path%20Computation%20Chain%20Monitoring"></a></body></html><a class="selflink" href="#section-14.7" id="section-14.7">14.7</a>.  Path Computation Chain Monitoring</span>
 
-   [<a id="ref-PCE-MONITOR" name="ref-PCE-MONITOR">PCE-MONITOR</a>] specifies a set of mechanisms that can be used to
+   [<a id="ref-PCE-MONITOR">PCE-MONITOR</a>] specifies a set of mechanisms that can be used to
    gather PCE state metrics.  Because BRPC is a multiple-PCE path
    computation technique, such mechanisms could be advantageously used
    in the context of the BRPC procedure to check the liveness of the
    path computation chain, locate a faulty component, monitor the
    overall performance, and so on.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-15" name="section-15">15</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-15" id="section-15">15</a>.  IANA Considerations</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.1.%20%20New%20Flag%20of%20the%20RP%20Object"></a></body></html><a class="selflink" href="#section-15.1" name="section-15.1">15.1</a>.  New Flag of the RP Object</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.1.%20%20New%20Flag%20of%20the%20RP%20Object"></a></body></html><a class="selflink" href="#section-15.1" id="section-15.1">15.1</a>.  New Flag of the RP Object</span>
 
    A new flag of the RP object (specified in [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>]) is defined in
    this document.  IANA maintains a registry of RP object flags in the
@@ -951,7 +924,7 @@ Table of Contents
        Bit      Description              Reference
        25       VSPT                     This document
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.2.%20%20New%20Error-Type%20and%20Error-Value"></a></body></html><a class="selflink" href="#section-15.2" name="section-15.2">15.2</a>.  New Error-Type and Error-Value</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.2.%20%20New%20Error-Type%20and%20Error-Value"></a></body></html><a class="selflink" href="#section-15.2" id="section-15.2">15.2</a>.  New Error-Type and Error-Value</span>
 
    IANA maintains a registry of Error-Types and Error-values for use in
    PCEP messages.  This is maintained as the "PCEP-ERROR Object Error
@@ -965,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
@@ -986,7 +959,7 @@ Table of Contents
                   supported by one or more PCEs along
                   the domain path
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.3.%20%20New%20Flag%20of%20the%20NO-PATH-VECTOR%20TLV"></a></body></html><a class="selflink" href="#section-15.3" name="section-15.3">15.3</a>.  New Flag of the NO-PATH-VECTOR TLV</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/15.3.%20%20New%20Flag%20of%20the%20NO-PATH-VECTOR%20TLV"></a></body></html><a class="selflink" href="#section-15.3" id="section-15.3">15.3</a>.  New Flag of the NO-PATH-VECTOR TLV</span>
 
    A new flag of the NO-PATH-VECTOR TLV defined in [<a href="./rfc5440.html" title='"Path Computation Element (PCE) Communication Protocol (PCEP)"'>RFC5440</a>]) is
    specified in this document.
@@ -1001,7 +974,7 @@ Table of Contents
          4        BRPC path computation    This document
                   chain unavailable
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/16.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-16" name="section-16">16</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/16.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-16" id="section-16">16</a>.  Security Considerations</span>
 
    The BRPC procedure relies on the use of the PCEP protocol and as such
    is subjected to the potential attacks listed in <a href="./rfc5440.html#section-10">Section 10 of
@@ -1021,88 +994,88 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/17.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-17" name="section-17">17</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/17.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-17" id="section-17">17</a>.  Acknowledgments</span>
 
    The authors would like to thank Arthi Ayyangar, Dimitri
    Papadimitriou, Siva Sivabalan, Meral Shirazipour, and Mach Chen for
    their useful comments.  A special thanks to Adrian Farrel for his
    useful comments and suggestions.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/18.%20%20References"></a></body></html><a class="selflink" href="#section-18" name="section-18">18</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/18.%20%20References"></a></body></html><a class="selflink" href="#section-18" id="section-18">18</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/18.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-18.1" name="section-18.1">18.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/18.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-18.1" id="section-18.1">18.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]      Bradner, S., "Key words for use in RFCs to Indicate
-                  Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]      Bradner, S., "Key words for use in RFCs to Indicate
+                  Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC5440" name="ref-RFC5440">RFC5440</a>]      Vasseur, J., Ed. and J. Roux, Ed., "Path Computation
+   [<a id="ref-RFC5440">RFC5440</a>]      Vasseur, J., Ed. and J. Roux, Ed., "Path Computation
                   Element (PCE) Communication Protocol (PCEP)",
                   <a href="./rfc5440.html">RFC 5440</a>, April 2009.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/18.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-18.2" name="section-18.2">18.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/18.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-18.2" id="section-18.2">18.2</a>.  Informative References</span>
 
-   [<a id="ref-PATH-KEY" name="ref-PATH-KEY">PATH-KEY</a>]     Bradford, R., Vasseur, J., and A. Farrel, "Preserving
+   [<a id="ref-PATH-KEY">PATH-KEY</a>]     Bradford, R., Vasseur, J., and A. Farrel, "Preserving
                   Topology Confidentiality in Inter-Domain Path
                   Computation Using a Key-Based Mechanism", Work in
                   Progress, November 2008.
 
-   [<a id="ref-PCE-MANAGE" name="ref-PCE-MANAGE">PCE-MANAGE</a>]   Farrel, A., "Inclusion of Manageability Sections in
+   [<a id="ref-PCE-MANAGE">PCE-MANAGE</a>]   Farrel, A., "Inclusion of Manageability Sections in
                   PCE Working Group Drafts", Work in Progress,
                   January 2009.
 
-   [<a id="ref-PCE-MONITOR" name="ref-PCE-MONITOR">PCE-MONITOR</a>]  Vasseur, J., Roux, J., and Y. Ikejiri, "A set of
+   [<a id="ref-PCE-MONITOR">PCE-MONITOR</a>]  Vasseur, J., Roux, J., and Y. Ikejiri, "A set of
                   monitoring tools for Path Computation Element based
                   Architecture", Work in Progress, November 2008.
 
-   [<a id="ref-RFC2702" name="ref-RFC2702">RFC2702</a>]      Awduche, D., Malcolm, J., Agogbua, J., O'Dell, M., and
+   [<a id="ref-RFC2702">RFC2702</a>]      Awduche, D., Malcolm, J., Agogbua, J., O'Dell, M., and
                   J. McManus, "Requirements for Traffic Engineering Over
                   MPLS", <a href="./rfc2702.html">RFC 2702</a>, September 1999.
 
-   [<a id="ref-RFC4105" name="ref-RFC4105">RFC4105</a>]      Le Roux, J., Vasseur, J., and J. Boyle, "Requirements
+   [<a id="ref-RFC4105">RFC4105</a>]      Le Roux, J., Vasseur, J., and J. Boyle, "Requirements
                   for Inter-Area MPLS Traffic Engineering", <a href="./rfc4105.html">RFC 4105</a>,
                   June 2005.
 
-   [<a id="ref-RFC4216" name="ref-RFC4216">RFC4216</a>]      Zhang, R. and J. Vasseur, "MPLS Inter-Autonomous
+   [<a id="ref-RFC4216">RFC4216</a>]      Zhang, R. and J. Vasseur, "MPLS Inter-Autonomous
                   System (AS) Traffic Engineering (TE) Requirements",
                   <a href="./rfc4216.html">RFC 4216</a>, November 2005.
 
-   [<a id="ref-RFC4655" name="ref-RFC4655">RFC4655</a>]      Farrel, A., Vasseur, J., and J. Ash, "A Path
+   [<a id="ref-RFC4655">RFC4655</a>]      Farrel, A., Vasseur, J., and J. Ash, "A Path
                   Computation Element (PCE)-Based Architecture",
                   <a href="./rfc4655.html">RFC 4655</a>, August 2006.
 
 
 
 <span class="grey">Vasseur, et al.             Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
-   [<a id="ref-RFC4726" name="ref-RFC4726">RFC4726</a>]      Farrel, A., Vasseur, J., and A. Ayyangar, "A Framework
+   [<a id="ref-RFC4726">RFC4726</a>]      Farrel, A., Vasseur, J., and A. Ayyangar, "A Framework
                   for Inter-Domain Multiprotocol Label Switching Traffic
                   Engineering", <a href="./rfc4726.html">RFC 4726</a>, November 2006.
 
-   [<a id="ref-RFC5088" name="ref-RFC5088">RFC5088</a>]      Le Roux, JL., Vasseur, JP., Ikejiri, Y., and R. Zhang,
+   [<a id="ref-RFC5088">RFC5088</a>]      Le Roux, JL., Vasseur, JP., Ikejiri, Y., and R. Zhang,
                   "OSPF Protocol Extensions for Path Computation Element
                   (PCE) Discovery", <a href="./rfc5088.html">RFC 5088</a>, January 2008.
 
-   [<a id="ref-RFC5089" name="ref-RFC5089">RFC5089</a>]      Le Roux, JL., Vasseur, JP., Ikejiri, Y., and R. Zhang,
+   [<a id="ref-RFC5089">RFC5089</a>]      Le Roux, JL., Vasseur, JP., Ikejiri, Y., and R. Zhang,
                   "IS-IS Protocol Extensions for Path Computation
                   Element (PCE) Discovery", <a href="./rfc5089.html">RFC 5089</a>, January 2008.
 
-   [<a id="ref-RFC5152" name="ref-RFC5152">RFC5152</a>]      Vasseur, JP., Ayyangar, A., and R. Zhang, "A Per-
+   [<a id="ref-RFC5152">RFC5152</a>]      Vasseur, JP., Ayyangar, A., and R. Zhang, "A Per-
                   Domain Path Computation Method for Establishing Inter-
                   Domain Traffic Engineering (TE) Label Switched Paths
                   (LSPs)", <a href="./rfc5152.html">RFC 5152</a>, February 2008.
 
-   [<a id="ref-RFC5316" name="ref-RFC5316">RFC5316</a>]      Chen, M., Zhang, R., and X. Duan, "ISIS Extensions in
+   [<a id="ref-RFC5316">RFC5316</a>]      Chen, M., Zhang, R., and X. Duan, "ISIS Extensions in
                   Support of Inter-Autonomous System (AS) MPLS and GMPLS
                   Traffic Engineering", <a href="./rfc5316.html">RFC 5316</a>, December 2008.
 
-   [<a id="ref-RFC5392" name="ref-RFC5392">RFC5392</a>]      Chen, M., Zhang, R., and X. Duan, "OSPF Extensions in
+   [<a id="ref-RFC5392">RFC5392</a>]      Chen, M., Zhang, R., and X. Duan, "OSPF Extensions in
                   Support of Inter-Autonomous System (AS) MPLS and GMPLS
                   Traffic Engineering", <a href="./rfc5392.html">RFC 5392</a>, January 2009.
 
@@ -1133,7 +1106,7 @@ Table of Contents
 
 
 <span class="grey">Vasseur, et al.             Standards Track                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5441.html">RFC 5441</a>                          BRPC                        April 2009</span>
 
 
@@ -1189,11 +1162,6 @@ Authors' Addresses
 
 
 Vasseur, et al.             Standards Track                    [Page 18]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

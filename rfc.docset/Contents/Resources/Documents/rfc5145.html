@@ -1,33 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-shiomoto-ccamp-mpls-gmpls-interwork-fmwk" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5145" name="DC.Identifier"/>
-<meta content="March, 2008" name="DC.Date.Issued"/>
-<meta content="Kohei Shiomoto &lt;shiomoto.kohei@lab.ntt.co.jp&gt;" name="DC.Creator"/>
-<meta content="The migration from Multiprotocol Label Switching (MPLS) Traffic
-Engineering (TE) to Generalized MPLS (GMPLS) is the process of
-evolving an MPLS-TE control plane to a GMPLS control plane. An
-appropriate migration strategy will be selected based on various
-factors including the service provider's network deployment plan,
-customer demand, and operational policy.  This document presents
-several migration models and strategies for migrating from MPLS-TE to
-GMPLS. In the course of migration, MPLS-TE and GMPLS devices, or
-networks, may coexist which may require interworking between MPLS-TE
-and GMPLS protocols. Aspects of the interworking required are
-discussed as it will influence the choice of a migration strategy.
-This framework document provides a migration toolkit to aid the
-operator in selection of an appropriate strategy.  This framework
-document also lists a set of solutions that may aid in interworking,
-and highlights a set of potential issues." name="DC.Description.Abstract"/>
-<meta content="Framework for MPLS-TE to GMPLS migration" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5145 - Framework for MPLS-TE to GMPLS migration</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="K. Shiomoto" name="citation_author"/>
+<meta content="March, 2008" name="citation_publication_date"/>
+<meta content="Framework for MPLS-TE to GMPLS Migration" name="citation_title"/>
+<meta content="10.17487/RFC5145" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5145" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5145.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5145: Framework for MPLS-TE to GMPLS Migration</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -56,7 +40,7 @@ and highlights a set of potential issues." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -65,7 +49,7 @@ and highlights a set of potential issues." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -144,19 +128,18 @@ and highlights a set of potential issues." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -170,21 +153,9 @@ and highlights a set of potential issues." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5145.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5145" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-ccamp-mpls-gmpls-interwork-fmwk.html" title="draft-ietf-ccamp-mpls-gmpls-interwork-fmwk">draft-ietf-ccamp-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5145" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5145" title="Side-by-side diff">Diff2</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5145&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>]           </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                   K. Shiomoto, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5145.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5145.txt.pdf">PDF</a>|<a href="/rfc/rfc5145.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5145" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5145&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc5145" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                   K. Shiomoto, Ed.
 Request for Comments: 5145                                           NTT
 Category: Informational                                       March 2008
 
@@ -236,7 +207,7 @@ Abstract
 
 
 <span class="grey">Shiomoto                     Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -292,11 +263,11 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Multiprotocol Label Switching Traffic Engineering (MPLS-TE) to
    Generalized MPLS (GMPLS) migration is the process of evolving an
@@ -333,7 +304,7 @@ Table of Contents
    Note that MPLS-TE and GMPLS protocols can coexist as "ships in the
    night" without any interworking issues.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Conventions Used in This Document</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Conventions Used in This Document</span>
 
    This is not a requirements document, nevertheless the key words
    "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>", "<em>SHOULD</em>",
@@ -348,7 +319,7 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -362,7 +333,7 @@ Table of Contents
    The reader is assumed to be familiar with the terminology introduced
    in [<a href="./rfc3945.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Architecture"'>RFC3945</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Motivations%20for%20Migration"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Motivations for Migration</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Motivations%20for%20Migration"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Motivations for Migration</span>
 
    Motivations for migration will vary for different service providers.
    This section is presented to provide background so that the migration
@@ -404,16 +375,16 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20MPLS%20to%20GMPLS%20Migration%20Models"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  MPLS to GMPLS Migration Models</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20MPLS%20to%20GMPLS%20Migration%20Models"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  MPLS to GMPLS Migration Models</span>
 
    Three reference migration models are described below.  Multiple
    migration models may coexist in the same network.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Island%20Model"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Island Model</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Island%20Model"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Island Model</span>
 
    In the island model, "islands" of network nodes operating one
    protocol exist within a "sea" of nodes using the other protocol.
@@ -460,7 +431,7 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -491,7 +462,7 @@ Table of Contents
                   Figure 1: Example of the island model
                     for MPLS-GMPLS-MPLS interworking
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Balanced%20Islands"></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a>.  Balanced Islands</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Balanced%20Islands"></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a>.  Balanced Islands</span>
 
    In the MPLS-GMPLS-MPLS and GMPLS-MPLS-GMPLS cases, LSPs start and end
    using the same protocols.  Possible strategies include:
@@ -501,7 +472,7 @@ Table of Contents
 
    - protocol interworking or mapping (both are only for GMPLS-PSC)
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20Unbalanced%20Islands"></a></body></html><a class="selflink" href="#section-4.1.2" name="section-4.1.2">4.1.2</a>.  Unbalanced Islands</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20Unbalanced%20Islands"></a></body></html><a class="selflink" href="#section-4.1.2" id="section-4.1.2">4.1.2</a>.  Unbalanced Islands</span>
 
    As previously discussed, there are two island interworking models
    that support bordering islands.  GMPLS(PSC)-MPLS and MPLS-GMPLS(PSC)
@@ -516,7 +487,7 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -545,7 +516,7 @@ Table of Contents
    the directionality of the LSP, and the direction in which the LSP is
    established.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Integrated%20Model"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Integrated Model</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Integrated%20Model"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Integrated Model</span>
 
    The second migration model involves a more integrated migration
    strategy.  New devices that are capable of operating both MPLS and
@@ -572,7 +543,7 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -584,7 +555,7 @@ Table of Contents
    of the two protocol sets within the network.  Actual interworking is
    not a concern.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Phased%20Model"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Phased Model</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Phased%20Model"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Phased Model</span>
 
    The phased model introduces GMPLS features and protocol elements into
    an MPLS network one by one.  For example, some objects or sub-objects
@@ -613,7 +584,7 @@ Table of Contents
    operators of the ISP(s) involved as well as all vendors whose
    equipment will be involved in the migration.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Migration%20Strategies%20and%20Toolkit"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Migration Strategies and Toolkit</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Migration%20Strategies%20and%20Toolkit"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Migration Strategies and Toolkit</span>
 
    An appropriate migration strategy is selected by a network operator
    based on factors including the service provider's network deployment
@@ -628,7 +599,7 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -659,7 +630,7 @@ Table of Contents
    strategies selected will give rise to one or more of the interworking
    cases described in the following section.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Migration%20Toolkit"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Migration Toolkit</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Migration%20Toolkit"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Migration Toolkit</span>
 
    As described in the previous sections, an essential part of a
    migration and deployment strategy is how the MPLS and GMPLS or hybrid
@@ -671,7 +642,7 @@ Table of Contents
    Note that it is possible to consider upgrading the routing and
    signaling capabilities of LSRs from MPLS to GMPLS separately.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20Layered%20Networks"></a></body></html><a class="selflink" href="#section-5.1.1" name="section-5.1.1">5.1.1</a>.  Layered Networks</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20Layered%20Networks"></a></body></html><a class="selflink" href="#section-5.1.1" id="section-5.1.1">5.1.1</a>.  Layered Networks</span>
 
    In the balanced island model, LSP tunnels [<a href="./rfc4206.html" title='"Label Switched Paths (LSP) Hierarchy with Generalized Multi-Protocol Label Switching (GMPLS) Traffic Engineering (TE)"'>RFC4206</a>] are a solution to
    carry the end-to-end LSPs across islands of incompatible nodes.
@@ -684,7 +655,7 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -740,11 +711,11 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.%20%20Routing%20Interworking"></a></body></html><a class="selflink" href="#section-5.1.2" name="section-5.1.2">5.1.2</a>.  Routing Interworking</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.%20%20Routing%20Interworking"></a></body></html><a class="selflink" href="#section-5.1.2" id="section-5.1.2">5.1.2</a>.  Routing Interworking</span>
 
    Migration strategies may necessitate some interworking between MPLS
    and GMPLS routing protocols.  GMPLS extends the TE information
@@ -796,7 +767,7 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -817,7 +788,7 @@ Table of Contents
      adjacencies between LSRs of the same type.  This mode of operation
      may be appropriate to the integrated migration model.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.%20%20Signaling%20Interworking"></a></body></html><a class="selflink" href="#section-5.1.3" name="section-5.1.3">5.1.3</a>.  Signaling Interworking</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.%20%20Signaling%20Interworking"></a></body></html><a class="selflink" href="#section-5.1.3" id="section-5.1.3">5.1.3</a>.  Signaling Interworking</span>
 
    Signaling protocols are used to establish LSPs and are the principal
    concern for interworking during migration.  Issues of compatibility
@@ -852,7 +823,7 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -871,14 +842,14 @@ Table of Contents
      with both types of LSRs, and no conversion of protocols would be
      needed.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.4.%20%20Path%20Computation%20Element"></a></body></html><a class="selflink" href="#section-5.1.4" name="section-5.1.4">5.1.4</a>.  Path Computation Element</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.4.%20%20Path%20Computation%20Element"></a></body></html><a class="selflink" href="#section-5.1.4" id="section-5.1.4">5.1.4</a>.  Path Computation Element</span>
 
    The Path Computation Element (PCE) [<a href="./rfc4655.html" title='"A Path Computation Element (PCE)-Based Architecture"'>RFC4655</a>] may provide an
    additional tool to aid MPLS to GMPLS migration.  If a layered network
    approach (<a href="#section-5.1.1">Section 5.1.1</a>) is used, PCEs may be used to facilitate the
    computation of paths for LSPs in the different layers [<a href="#ref-PCE-INT" title='"Framework for PCE-Based Inter-Layer MPLS and GMPLS Traffic Engineering,"'>PCE-INT</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20%20Manageability%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.   Manageability Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20%20Manageability%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.   Manageability Considerations</span>
 
    Attention should be given during migration planning to how the
    network will be managed during and after migration.  For example,
@@ -891,7 +862,7 @@ Table of Contents
    migration: the resultant migrated network may seek to merge the
    management or to preserve the separation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Control%20of%20Function%20and%20Policy"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Control of Function and Policy</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Control%20of%20Function%20and%20Policy"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Control of Function and Policy</span>
 
    The most critical control functionality to be applied is at the
    moment of changeover between different levels of protocol support.
@@ -908,11 +879,11 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Information%20and%20Data%20Models"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Information and Data Models</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Information%20and%20Data%20Models"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Information and Data Models</span>
 
    No special information or data models are required to support
    migration, but note that migration in the control plane implies
@@ -926,7 +897,7 @@ Table of Contents
    extensions and augmentations.  This may make it possible to migrate
    management applications ahead of the LSRs that they manage.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Liveness%20Detection%20and%20Monitoring"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  Liveness Detection and Monitoring</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Liveness%20Detection%20and%20Monitoring"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  Liveness Detection and Monitoring</span>
 
    Migration will not impose additional issues for Operations,
    Administration, and Management (OAM) above those that already exist
@@ -940,7 +911,7 @@ Table of Contents
    flat OAM problem-space.  The OAM framework of MPLS/GMPLS interworking
    will need further consideration.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20Verifying%20Correct%20Operation"></a></body></html><a class="selflink" href="#section-6.4" name="section-6.4">6.4</a>.  Verifying Correct Operation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20Verifying%20Correct%20Operation"></a></body></html><a class="selflink" href="#section-6.4" id="section-6.4">6.4</a>.  Verifying Correct Operation</span>
 
    The concerns for verifying correct operation (and in particular,
    correct connectivity) are the same as for liveness detection and
@@ -948,7 +919,7 @@ Table of Contents
    tunneling or stitching [<a href="./rfc5150.html" title='"Label Switched Path Stitching with Generalized Multiprotocol Label Switching Traffic Engineering"'>RFC5150</a>] into what was previously a flat
    network.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.5.%20%20Requirements%20on%20Other%20Protocols%20and%20Functional%20Components"></a></body></html><a class="selflink" href="#section-6.5" name="section-6.5">6.5</a>.  Requirements on Other Protocols and Functional Components</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.5.%20%20Requirements%20on%20Other%20Protocols%20and%20Functional%20Components"></a></body></html><a class="selflink" href="#section-6.5" id="section-6.5">6.5</a>.  Requirements on Other Protocols and Functional Components</span>
 
    No particular requirements are introduced on other protocols.  As it
    has been observed, the management components may need to migrate in
@@ -964,7 +935,7 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -972,7 +943,7 @@ Table of Contents
    tunnels may impose additional configuration requirements at the
    border nodes.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.6.%20%20Impact%20on%20Network%20Operation"></a></body></html><a class="selflink" href="#section-6.6" name="section-6.6">6.6</a>.  Impact on Network Operation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.6.%20%20Impact%20on%20Network%20Operation"></a></body></html><a class="selflink" href="#section-6.6" id="section-6.6">6.6</a>.  Impact on Network Operation</span>
 
    The process of migration is likely to have significant impact on
    network operation while migration is in progress.  The main objective
@@ -990,7 +961,7 @@ Table of Contents
    overlay, augmented network and border peer models where the details
    of the protocol islands remain hidden from the surrounding LSRs.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.7.%20%20Other%20Considerations"></a></body></html><a class="selflink" href="#section-6.7" name="section-6.7">6.7</a>.  Other Considerations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.7.%20%20Other%20Considerations"></a></body></html><a class="selflink" href="#section-6.7" id="section-6.7">6.7</a>.  Other Considerations</span>
 
    A migration strategy may also imply moving an MPLS state to a GMPLS
    state for an in-service LSP.  This may arise once all of the LSRs
@@ -1000,7 +971,7 @@ Table of Contents
    make-before-break procedures [<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>] and [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol- Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>], and should be
    carefully managed under operator control.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    Security and confidentiality is often applied (and attacked) at
    administrative boundaries.  Some of the models described in this
@@ -1020,7 +991,7 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -1028,90 +999,90 @@ Table of Contents
    between any pair of LSRs are based on either MPLS or GMPLS, there are
    no changes necessary to the security procedures.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgements</span>
 
    The authors are grateful to Daisaku Shimazaki for discussion during
    the initial work on this document.  The authors are grateful to Dean
    Cheng and Adrian Farrel for their valuable comments.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>] Bradner, S., "Key words for use in RFCs to Indicate
-             Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>] Bradner, S., "Key words for use in RFCs to Indicate
+             Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC3209" name="ref-RFC3209">RFC3209</a>] Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan, V.,
+   [<a id="ref-RFC3209">RFC3209</a>] Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan, V.,
              and G. Swallow, "RSVP-TE: Extensions to RSVP for LSP
              Tunnels", <a href="./rfc3209.html">RFC 3209</a>, December 2001.
 
-   [<a id="ref-RFC3473" name="ref-RFC3473">RFC3473</a>] Berger, L., Ed., "Generalized Multi-Protocol Label
+   [<a id="ref-RFC3473">RFC3473</a>] Berger, L., Ed., "Generalized Multi-Protocol Label
              Switching (GMPLS) Signaling Resource ReserVation Protocol-
              Traffic Engineering (RSVP-TE) Extensions", <a href="./rfc3473.html">RFC 3473</a>,
              January 2003.
 
-   [<a id="ref-RFC3630" name="ref-RFC3630">RFC3630</a>] Katz, D., Kompella, K., and D. Yeung, "Traffic Engineering
+   [<a id="ref-RFC3630">RFC3630</a>] Katz, D., Kompella, K., and D. Yeung, "Traffic Engineering
              (TE) Extensions to OSPF Version 2", <a href="./rfc3630.html">RFC 3630</a>, September
              2003.
 
-   [<a id="ref-RFC3784" name="ref-RFC3784">RFC3784</a>] Smit, H. and T. Li, "Intermediate System to Intermediate
+   [<a id="ref-RFC3784">RFC3784</a>] Smit, H. and T. Li, "Intermediate System to Intermediate
              System (IS-IS) Extensions for Traffic Engineering (TE)",
              <a href="./rfc3784.html">RFC 3784</a>, June 2004.
 
-   [<a id="ref-RFC3945" name="ref-RFC3945">RFC3945</a>] Mannie, E., Ed., "Generalized Multi-Protocol Label
+   [<a id="ref-RFC3945">RFC3945</a>] Mannie, E., Ed., "Generalized Multi-Protocol Label
              Switching (GMPLS) Architecture", <a href="./rfc3945.html">RFC 3945</a>, October 2004.
 
-   [<a id="ref-RFC4872" name="ref-RFC4872">RFC4872</a>] Lang, J., Ed., Rekhter, Y., Ed., and D. Papadimitriou, Ed.,
+   [<a id="ref-RFC4872">RFC4872</a>] Lang, J., Ed., Rekhter, Y., Ed., and D. Papadimitriou, Ed.,
              "RSVP-TE Extensions in Support of End-to-End Generalized
              Multi-Protocol Label Switching (GMPLS) Recovery", <a href="./rfc4872.html">RFC 4872</a>,
              May 2007.
 
-   [<a id="ref-RFC4873" name="ref-RFC4873">RFC4873</a>] Berger, L., Bryskin, I., Papadimitriou, D., and A. Farrel,
+   [<a id="ref-RFC4873">RFC4873</a>] Berger, L., Bryskin, I., Papadimitriou, D., and A. Farrel,
              "GMPLS Segment Recovery", <a href="./rfc4873.html">RFC 4873</a>, May 2007.
 
-   [<a id="ref-RFC5073" name="ref-RFC5073">RFC5073</a>] Vasseur, J., Ed., and J. Le Roux, Ed., "IGP Routing
+   [<a id="ref-RFC5073">RFC5073</a>] Vasseur, J., Ed., and J. Le Roux, Ed., "IGP Routing
              Protocol Extensions for Discovery of Traffic Engineering
              Node Capabilities", <a href="./rfc5073.html">RFC 5073</a>, December 2007.
 
 
 
 <span class="grey">Shiomoto                     Informational                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>. Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>. Informative References</span>
 
-   [<a id="ref-RFC4206" name="ref-RFC4206">RFC4206</a>] Kompella, K. and Y. Rekhter, "Label Switched Paths (LSP)
+   [<a id="ref-RFC4206">RFC4206</a>] Kompella, K. and Y. Rekhter, "Label Switched Paths (LSP)
              Hierarchy with Generalized Multi-Protocol Label Switching
              (GMPLS) Traffic Engineering (TE)", <a href="./rfc4206.html">RFC 4206</a>, October 2005.
 
-   [<a id="ref-RFC4655" name="ref-RFC4655">RFC4655</a>] Farrel, A., Vasseur, J.-P., and J. Ash, "A Path Computation
+   [<a id="ref-RFC4655">RFC4655</a>] Farrel, A., Vasseur, J.-P., and J. Ash, "A Path Computation
              Element (PCE)-Based Architecture", <a href="./rfc4655.html">RFC 4655</a>, August 2006.
 
-   [<a id="ref-RFC4726" name="ref-RFC4726">RFC4726</a>] Farrel, A., Vasseur, J.-P., and A. Ayyangar, "A Framework
+   [<a id="ref-RFC4726">RFC4726</a>] Farrel, A., Vasseur, J.-P., and A. Ayyangar, "A Framework
              for Inter-Domain Multiprotocol Label Switching Traffic
              Engineering", <a href="./rfc4726.html">RFC 4726</a>, November 2006.
 
-   [<a id="ref-RFC5150" name="ref-RFC5150">RFC5150</a>] Ayyangar, A., Kompella, A., Vasseur, JP., and A. Farrel,
+   [<a id="ref-RFC5150">RFC5150</a>] Ayyangar, A., Kompella, A., Vasseur, JP., and A. Farrel,
              "Label Switched Path Stitching with Generalized
              Multiprotocol Label Switching Traffic Engineering", <a href="./rfc5150.html">RFC</a>
              <a href="./rfc5150.html">5150</a>, February 2008.
 
-   [<a id="ref-RFC5146" name="ref-RFC5146">RFC5146</a>] Kumaki, K., Ed., "Interworking Requirements to Support
+   [<a id="ref-RFC5146">RFC5146</a>] Kumaki, K., Ed., "Interworking Requirements to Support
              Operation of MPLS-TE over GMPLS Networks", <a href="./rfc5146.html">RFC 5146</a>, March
              2008.
 
-   [<a id="ref-MLN-REQ" name="ref-MLN-REQ">MLN-REQ</a>] Shiomoto, K., Papadimitriou, D., Le Roux, J.L., Vigoureux,
+   [<a id="ref-MLN-REQ">MLN-REQ</a>] Shiomoto, K., Papadimitriou, D., Le Roux, J.L., Vigoureux,
              M., and D. Brungard, "Requirements for GMPLS-Based Multi-
              Region and Multi-Layer Networks (MRN/MLN)", Work in
              Progress, January 2008.
 
-   [<a id="ref-PCE-INT" name="ref-PCE-INT">PCE-INT</a>] Oki, E., Le Roux , J-L., and A. Farrel, "Framework for
+   [<a id="ref-PCE-INT">PCE-INT</a>] Oki, E., Le Roux , J-L., and A. Farrel, "Framework for
              PCE-Based Inter-Layer MPLS and GMPLS Traffic Engineering,"
              Work in Progress, January 2008.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Contributors%27%20Addresses"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Contributors' Addresses</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Contributors%27%20Addresses"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Contributors' Addresses</span>
 
    Dimitri Papadimitriou
    Alcatel
@@ -1132,7 +1103,7 @@ Table of Contents
 
 
 <span class="grey">Shiomoto                     Informational                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -1188,7 +1159,7 @@ Editor's Address
 
 
 <span class="grey">Shiomoto                     Informational                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5145.html">RFC 5145</a>        Framework for MPLS-TE to GMPLS Migration      March 2008</span>
 
 
@@ -1197,7 +1168,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2008).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1217,7 +1188,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1244,11 +1215,6 @@ Intellectual Property
 
 
 Shiomoto                     Informational                     [Page 19]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

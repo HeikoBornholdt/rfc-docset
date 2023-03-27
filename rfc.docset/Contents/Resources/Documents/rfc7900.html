@@ -1,28 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content='   Previous RFCs specify the procedures necessary to allow IP multicast
-   traffic to travel from one site to another within a BGP/MPLS IP VPN
-   (Virtual Private Network).  However, it is sometimes desirable to
-   allow multicast traffic whose source is in one VPN to be received by
-   systems that are in another VPN.  This is known as a "Multicast VPN
-   (MVPN) extranet".  This document updates RFCs 6513, 6514, and 6625 by
-   specifying the procedures that are necessary in order to provide
-   extranet MVPN service.
-' name="DC.Description.Abstract"/>
-<meta content="Rekhter, Yakov" name="DC.Creator"/>
-<meta content="Cai, Yiqun" name="DC.Creator"/>
-<meta content="Morin, Thomas" name="DC.Creator"/>
-<meta content="Rosen, Eric C." name="DC.Creator"/>
-<meta content="Aggarwal, Rahul" name="DC.Creator"/>
-<meta content="Extranet Multicast in BGP/IP MPLS VPNs" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7900 - Extranet Multicast in BGP/IP MPLS VPNs</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="Y. Rekhter" name="citation_author"/>
+<meta content="E. Rosen" name="citation_author"/>
+<meta content="R. Aggarwal" name="citation_author"/>
+<meta content="Y. Cai" name="citation_author"/>
+<meta content="T. Morin" name="citation_author"/>
+<meta content="June, 2016" name="citation_publication_date"/>
+<meta content="Extranet Multicast in BGP/IP MPLS VPNs" name="citation_title"/>
+<meta content="10.17487/RFC7900" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7900" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7900.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7900: Extranet Multicast in BGP/IP MPLS VPNs</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -51,7 +44,7 @@
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -60,7 +53,7 @@
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -139,19 +132,18 @@
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -165,21 +157,9 @@
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7900.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7900" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-bess-mvpn-extranet.html" title="draft-ietf-bess-mvpn-extranet">draft-ietf-bess-m...</a>]                                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                   Y. Rekhter, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7900.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7900.txt.pdf">PDF</a>|<a href="/rfc/rfc7900.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7900" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7900&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc7900" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo">Updated by: <a href="/rfc/rfc8534" target="_blank">8534</a> </span><pre>Internet Engineering Task Force (IETF)                   Y. Rekhter, Ed.
 Request for Comments: 7900                                 E. Rosen, Ed.
 Updates: <a href="./rfc6513.html">6513</a>, <a href="./rfc6514.html">6514</a>, <a href="./rfc6625.html">6625</a>                         Juniper Networks, Inc.
 Category: Standards Track                                    R. Aggarwal
@@ -231,7 +211,7 @@ Status of This Memo
 
 
 <span class="grey">Rekhter, et al.              Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -240,7 +220,7 @@ Copyright Notice
    Copyright (c) 2016 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -287,7 +267,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -343,11 +323,11 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Previous RFCs [<a href="./rfc6513.html" title='"Multicast in MPLS/BGP IP VPNs"'>RFC6513</a>] [<a href="./rfc6514.html" title='"BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs"'>RFC6514</a>] specify the procedures necessary to
    allow IP multicast traffic to travel from one site to another within
@@ -362,7 +342,7 @@ Table of Contents
    procedures that are necessary in order to provide extranet MVPN
    service.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Terminology</span>
 
    This document uses terminology from [<a href="./rfc6513.html" title='"Multicast in MPLS/BGP IP VPNs"'>RFC6513</a>] and in particular uses
    the prefixes "C-" and "P-" as specified in <a href="./rfc6513.html#section-3.1">Section 3.1 of [RFC6513]</a>,
@@ -399,7 +379,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -455,7 +435,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -482,7 +462,7 @@ Table of Contents
    (possibly different, possibly the same) UMH-eligible route (see
    <a href="#section-4">Section 4</a>) whose respective address prefixes match the C-RP address.
 
-   [<a id="ref-RFC6513" name="ref-RFC6513">RFC6513</a>] allows a set of "P-tunnels" (defined in <a href="./rfc6513.html#section-3.2">Section 3.2 of
+   [<a id="ref-RFC6513">RFC6513</a>] allows a set of "P-tunnels" (defined in <a href="./rfc6513.html#section-3.2">Section 3.2 of
    [RFC6513]</a>) to be aggregated together and transported via an outer
    P-tunnel; i.e., it allows for the use of hierarchical Label Switched
    Paths (LSPs) as P-tunnels.  A two-level hierarchical LSP, for
@@ -511,7 +491,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -524,9 +504,9 @@ Table of Contents
    "<em>OPTIONAL</em>" in this document are to be interpreted as described in
    [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Scope"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Scope</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Scope"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Scope</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.1.%20%20Customer%20Multicast%20Control%20Protocols"></a></body></html><a class="selflink" href="#section-1.2.1" name="section-1.2.1">1.2.1</a>.  Customer Multicast Control Protocols</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.1.%20%20Customer%20Multicast%20Control%20Protocols"></a></body></html><a class="selflink" href="#section-1.2.1" id="section-1.2.1">1.2.1</a>.  Customer Multicast Control Protocols</span>
 
    This document presumes that the VPN customer is using PIM - Sparse
    Mode (PIM-SM) [<a href="./rfc7761.html" title='"Protocol Independent Multicast - Sparse Mode (PIM-SM): Protocol Specification (Revised)"'>RFC7761</a>] as the multicast control protocol at the
@@ -547,9 +527,9 @@ Table of Contents
    use of such protocols in an extranet is outside the scope of this
    document.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.2.%20%20Provider%20Multicast%20Control%20Protocols"></a></body></html><a class="selflink" href="#section-1.2.2" name="section-1.2.2">1.2.2</a>.  Provider Multicast Control Protocols</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.2.%20%20Provider%20Multicast%20Control%20Protocols"></a></body></html><a class="selflink" href="#section-1.2.2" id="section-1.2.2">1.2.2</a>.  Provider Multicast Control Protocols</span>
 
-   [<a id="ref-RFC6513" name="ref-RFC6513">RFC6513</a>] allows either PIM or BGP to be used as the protocol for
+   [<a id="ref-RFC6513">RFC6513</a>] allows either PIM or BGP to be used as the protocol for
    distributing customer multicast routing information.  Except where
    otherwise specified, such as in Sections <a href="#section-6">6</a> and <a href="#section-7">7</a>, the procedures of
    this document cover both cases.
@@ -567,18 +547,18 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Clarification%20on%20Use%20of%20Route%20Distinguishers"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>.  Clarification on Use of Route Distinguishers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Clarification%20on%20Use%20of%20Route%20Distinguishers"></a></body></html><a class="selflink" href="#section-1.3" id="section-1.3">1.3</a>.  Clarification on Use of Route Distinguishers</span>
 
-   [<a id="ref-RFC4364" name="ref-RFC4364">RFC4364</a>] requires that every VRF be associated with one or more
+   [<a id="ref-RFC4364">RFC4364</a>] requires that every VRF be associated with one or more
    Route Distinguishers (RDs).  Each VPN-IPv4 or VPN-IPv6 route that is
    exported from a particular VRF contains, in its NLRI, an RD that is
    associated with that VRF.
 
-   [<a id="ref-RFC4364" name="ref-RFC4364">RFC4364</a>] allows a given RD to be associated with more than one VRF,
+   [<a id="ref-RFC4364">RFC4364</a>] allows a given RD to be associated with more than one VRF,
    as long as all the VRFs associated with that RD belong to the same
    VPN.  However, in the most common deployment model, each RD is
    associated with one and only one VRF.  [<a href="./rfc6513.html" title='"Multicast in MPLS/BGP IP VPNs"'>RFC6513</a>] and [<a href="./rfc6514.html" title='"BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs"'>RFC6514</a>]
@@ -586,7 +566,7 @@ Table of Contents
    presuppose that every RD is associated with one and only one VRF.  We
    will call this the "unique VRF per RD" condition.
 
-   [<a id="ref-RFC6514" name="ref-RFC6514">RFC6514</a>] defines the MCAST-VPN address family, which has a number of
+   [<a id="ref-RFC6514">RFC6514</a>] defines the MCAST-VPN address family, which has a number of
    route types.  Each Intra-Autonomous System (Intra-AS) "Inclusive
    Provider Multicast Service Interface" (I-PMSI) A-D route, S-PMSI A-D
    route, and Source Active A-D route, when exported from a given VRF,
@@ -595,7 +575,7 @@ Table of Contents
    "UMH-eligible" routes; when a UMH-eligible route is exported from a
    given VRF, its NLRI contains an RD of the VRF.
 
-   [<a id="ref-RFC6514" name="ref-RFC6514">RFC6514</a>] also defines MCAST-VPN routes whose NLRIs do not contain an
+   [<a id="ref-RFC6514">RFC6514</a>] also defines MCAST-VPN routes whose NLRIs do not contain an
    RD of the VRF from which they are exported: the C-multicast Join
    routes and the Leaf A-D routes.
 
@@ -612,7 +592,7 @@ Table of Contents
    This document builds upon [<a href="./rfc6513.html" title='"Multicast in MPLS/BGP IP VPNs"'>RFC6513</a>] and [<a href="./rfc6514.html" title='"BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs"'>RFC6514</a>]; therefore, the
    "unique VRF per RD" condition is <em>REQUIRED</em>.
 
-   [<a id="ref-RFC6514" name="ref-RFC6514">RFC6514</a>] presupposes a further requirement on the use of RDs in the
+   [<a id="ref-RFC6514">RFC6514</a>] presupposes a further requirement on the use of RDs in the
    local-RD routes exported from a given VRF.  Suppose that a given VRF
    exports a Source Active A-D route containing (C-S,C-G).  That VRF
    will also export a UMH-eligible route matching C-S.  [<a href="./rfc6514.html" title='"BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs"'>RFC6514</a>]
@@ -623,7 +603,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -661,7 +641,7 @@ Table of Contents
    extranet RD as well as the default RD.  That is, a given extranet RD
    is associated with a unique VRF.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.4.%20%20Overview"></a></body></html><a class="selflink" href="#section-1.4" name="section-1.4">1.4</a>.  Overview</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.4.%20%20Overview"></a></body></html><a class="selflink" href="#section-1.4" id="section-1.4">1.4</a>.  Overview</span>
 
    Consider two VPNs, VPN-S and VPN-R, each of which supports MVPN
    functionality as specified in [<a href="./rfc6513.html" title='"Multicast in MPLS/BGP IP VPNs"'>RFC6513</a>] and/or [<a href="./rfc6514.html" title='"BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs"'>RFC6514</a>].  In the
@@ -679,7 +659,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                    [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -735,7 +715,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -791,7 +771,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -801,7 +781,7 @@ Table of Contents
    is in the overlap.  Other problems that can arise due to overlapping
    address spaces are discussed in <a href="#section-2">Section 2</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Extranets%20and%20Overlapping%20Address%20Spaces"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Extranets and Overlapping Address Spaces</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Extranets%20and%20Overlapping%20Address%20Spaces"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Extranets and Overlapping Address Spaces</span>
 
    As specified in [<a href="./rfc4364.html" title='"BGP/MPLS IP Virtual Private Networks (VPNs)"'>RFC4364</a>], the address space of one VPN may overlap
    with the address space of another.  A given address may be
@@ -847,7 +827,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -903,11 +883,11 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Ambiguity%3A%20P-Tunnel%20with%20Extranet/Non-extranet%20Flows"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Ambiguity: P-Tunnel with Extranet/Non-extranet Flows</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Ambiguity%3A%20P-Tunnel%20with%20Extranet/Non-extranet%20Flows"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Ambiguity: P-Tunnel with Extranet/Non-extranet Flows</span>
 
    In the following, we will use the notation "VRF A-n" to mean "VRF n
    of VPN-A".
@@ -959,7 +939,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1015,11 +995,11 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Ambiguity%3A%20P-Tunnel%20with%20Multiple%20Extranet%20Flows"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Ambiguity: P-Tunnel with Multiple Extranet Flows</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Ambiguity%3A%20P-Tunnel%20with%20Multiple%20Extranet%20Flows"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Ambiguity: P-Tunnel with Multiple Extranet Flows</span>
 
    Figure 2 illustrates another example of how overlapping address
    spaces may cause a problem.
@@ -1071,7 +1051,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1127,7 +1107,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1138,13 +1118,13 @@ Table of Contents
    C-group must have addresses that are unambiguous over all the MVPNs
    receiving traffic for that C-group.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Preventing%20Misdelivery%20in%20These%20Scenarios"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Preventing Misdelivery in These Scenarios</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Preventing%20Misdelivery%20in%20These%20Scenarios"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Preventing Misdelivery in These Scenarios</span>
 
    There are two ways to prevent the scenarios discussed in Sections <a href="#section-2.1">2.1</a>
    and 2.2 from resulting in misdelivery of data; these techniques are
    discussed in Sections <a href="#section-2.3.1">2.3.1</a> and <a href="#section-2.3.2">2.3.2</a>, respectively.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.%20%20Do%20Not%20Deliver%20Packets%20from%20the%20Wrong%20P-tunnel"></a></body></html><a class="selflink" href="#section-2.3.1" name="section-2.3.1">2.3.1</a>.  Do Not Deliver Packets from the Wrong P-tunnel</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.%20%20Do%20Not%20Deliver%20Packets%20from%20the%20Wrong%20P-tunnel"></a></body></html><a class="selflink" href="#section-2.3.1" id="section-2.3.1">2.3.1</a>.  Do Not Deliver Packets from the Wrong P-tunnel</span>
 
    Consider a particular C-flow that has receivers in a particular VRF.
    Sections <a href="#section-6">6</a> and <a href="#section-7">7</a> describe a set of procedures that enable an egress
@@ -1183,7 +1163,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1239,7 +1219,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1248,7 +1228,7 @@ Table of Contents
    a discussion of how to determine when packets from other than the
    expected P-tunnel must be discarded.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.2.%20%20Policies%20to%20Prevent%20Ambiguity%20on%20a%20P-Tunnel"></a></body></html><a class="selflink" href="#section-2.3.2" name="section-2.3.2">2.3.2</a>.  Policies to Prevent Ambiguity on a P-Tunnel</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.2.%20%20Policies%20to%20Prevent%20Ambiguity%20on%20a%20P-Tunnel"></a></body></html><a class="selflink" href="#section-2.3.2" id="section-2.3.2">2.3.2</a>.  Policies to Prevent Ambiguity on a P-Tunnel</span>
 
    For P-tunnels that are advertised in S-PMSI A-D routes whose NLRI
    contains (C-S,C-G) or (C-S,C-*), the ambiguities described in
@@ -1295,7 +1275,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1327,7 +1307,7 @@ Table of Contents
    <a href="#section-2.3.1">Section 2.3.1</a>.  Extranet separation is, however, implied by the
    policies discussed in this section (<a href="#section-2.3.2">Section 2.3.2</a>).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Extranet%20Transmission%20Models"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Extranet Transmission Models</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Extranet%20Transmission%20Models"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Extranet Transmission Models</span>
 
    This document specifies several "extranet transmission" models.  A
    given VRF containing extranet C-sources or C-receivers <em>MUST</em> use only
@@ -1338,7 +1318,7 @@ Table of Contents
    transmission model.  The model used by a given VRF is determined by
    provisioning.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Transmitting%20an%20Extranet%20C-Flow%20on%20a%20Single%20PMSI"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Transmitting an Extranet C-Flow on a Single PMSI</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Transmitting%20an%20Extranet%20C-Flow%20on%20a%20Single%20PMSI"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Transmitting an Extranet C-Flow on a Single PMSI</span>
 
    In one extranet transmission model, which we call the "transmitting
    an extranet C-flow on a single PMSI" model or, more simply, the
@@ -1351,7 +1331,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1367,7 +1347,7 @@ Table of Contents
    There are two variants of this transmission model: "without extranet
    separation" and "with extranet separation".
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Without%20Extranet%20Separation"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  Without Extranet Separation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Without%20Extranet%20Separation"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  Without Extranet Separation</span>
 
    In this variant, multicast data traffic from extranet C-sources and
    from non-extranet C-sources may be carried in the same P-tunnel.
@@ -1375,7 +1355,7 @@ Table of Contents
    This document provides procedures for supporting this variant using
    either BGP or PIM as the PE-PE C-multicast control protocol.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20With%20Extranet%20Separation"></a></body></html><a class="selflink" href="#section-3.1.2" name="section-3.1.2">3.1.2</a>.  With Extranet Separation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20With%20Extranet%20Separation"></a></body></html><a class="selflink" href="#section-3.1.2" id="section-3.1.2">3.1.2</a>.  With Extranet Separation</span>
 
    In this variant, multicast data traffic from extranet C-sources and
    from non-extranet C-sources are never carried in the same P-tunnel.
@@ -1407,11 +1387,11 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Transmitting%20an%20Extranet%20C-Flow%20over%20Multiple%20PMSIs"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Transmitting an Extranet C-Flow over Multiple PMSIs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Transmitting%20an%20Extranet%20C-Flow%20over%20Multiple%20PMSIs"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Transmitting an Extranet C-Flow over Multiple PMSIs</span>
 
    The second extranet transmission model is called the "transmitting an
    extranet C-flow over multiple PMSIs" model or, more simply, the
@@ -1426,9 +1406,9 @@ Table of Contents
    Support for this transmission model when BGP is used as the PE-PE
    C-multicast control protocol is outside the scope of this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Distribution%20of%20Routes%20That%20Match%20C-S/C-RP%20Addresses"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Distribution of Routes That Match C-S/C-RP Addresses</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Distribution%20of%20Routes%20That%20Match%20C-S/C-RP%20Addresses"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Distribution of Routes That Match C-S/C-RP Addresses</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20UMH-Eligible%20Routes"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  UMH-Eligible Routes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20UMH-Eligible%20Routes"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  UMH-Eligible Routes</span>
 
    As described in <a href="./rfc6513.html#section-5.1">Section 5.1 of [RFC6513]</a>, in order for a C-flow
    (C-S,C-G) to be carried across the SP backbone, a VRF that has
@@ -1463,7 +1443,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1496,7 +1476,7 @@ Table of Contents
    Arbitrarily complex policies can be created by suitable manipulation
    of the import and export RTs.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Extranet%20Separation"></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a>.  Extranet Separation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Extranet%20Separation"></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a>.  Extranet Separation</span>
 
    If extranet separation is being used and a given VRF is exporting
    UMH-eligible routes for both extranet C-sources and non-extranet
@@ -1519,11 +1499,11 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Distribution%20of%20Unicast%20Routes%20Matching%20C-RPs%20and%20DRs"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Distribution of Unicast Routes Matching C-RPs and DRs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Distribution%20of%20Unicast%20Routes%20Matching%20C-RPs%20and%20DRs"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Distribution of Unicast Routes Matching C-RPs and DRs</span>
 
    Consider a C-source, C-S, that may transmit to a particular extranet
    C-group, C-G.
@@ -1575,11 +1555,11 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Route%20Targets%20and%20Ambiguous%20UMH-Eligible%20Routes"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Route Targets and Ambiguous UMH-Eligible Routes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Route%20Targets%20and%20Ambiguous%20UMH-Eligible%20Routes"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Route Targets and Ambiguous UMH-Eligible Routes</span>
 
    This section imposes a constraint on the way RTs are assigned to
    (a) UMH-eligible routes and (b) the BGP A-D routes that advertise
@@ -1631,7 +1611,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1651,9 +1631,9 @@ Table of Contents
    additional constraints that cover the assignment of RTs to BGP A-D
    routes are given in subsequent sections.)
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Dynamically%20Marking%20Extranet%20Routes"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Dynamically Marking Extranet Routes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Dynamically%20Marking%20Extranet%20Routes"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Dynamically Marking Extranet Routes</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20The%20Extranet%20Source%20Extended%20Community"></a></body></html><a class="selflink" href="#section-4.4.1" name="section-4.4.1">4.4.1</a>.  The Extranet Source Extended Community</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20The%20Extranet%20Source%20Extended%20Community"></a></body></html><a class="selflink" href="#section-4.4.1" id="section-4.4.1">4.4.1</a>.  The Extranet Source Extended Community</span>
 
    Sections <a href="#section-4.1">4.1</a>, <a href="#section-4.2">4.2</a>, and <a href="#section-4.3">4.3</a> place specific requirements on the way in
    which certain VPN-IP routes are distributed.  In order to ensure that
@@ -1687,7 +1667,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1743,11 +1723,11 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Distribution%20of%20Extranet%20Source%20Extended%20Community"></a></body></html><a class="selflink" href="#section-4.4.2" name="section-4.4.2">4.4.2</a>.  Distribution of Extranet Source Extended Community</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Distribution%20of%20Extranet%20Source%20Extended%20Community"></a></body></html><a class="selflink" href="#section-4.4.2" id="section-4.4.2">4.4.2</a>.  Distribution of Extranet Source Extended Community</span>
 
    Suppose that a PE receives from a CE a route (call it "R") with the
    Extranet Source Extended Community.  The PE must determine (via the
@@ -1799,11 +1779,11 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20The%20Extranet%20Separation%20Extended%20Community"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  The Extranet Separation Extended Community</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20The%20Extranet%20Separation%20Extended%20Community"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  The Extranet Separation Extended Community</span>
 
    We define a new Transitive Opaque Extended Community: the Extranet
    Separation Extended Community (see [<a href="./rfc4360.html" title='"BGP Extended Communities Attribute"'>RFC4360</a>], [<a href="./rfc7153.html" title='"IANA Registries for BGP Extended Communities"'>RFC7153</a>], and
@@ -1827,13 +1807,13 @@ Table of Contents
    Extranet Separation Extended Community.  Further details may be found
    in Sections <a href="#section-7.3">7.3</a>, <a href="#section-7.4.4">7.4.4</a>, and <a href="#section-7.4.5">7.4.5</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Origination%20and%20Distribution%20of%20BGP%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Origination and Distribution of BGP A-D Routes</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Origination%20and%20Distribution%20of%20BGP%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Origination and Distribution of BGP A-D Routes</span>
 
    Except where otherwise specified, this section describes procedures
    and restrictions that are independent of the PE-PE C-multicast
    control protocol.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Route%20Targets%20of%20UMH-Eligible%20Routes%20and%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Route Targets of UMH-Eligible Routes and A-D Routes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Route%20Targets%20of%20UMH-Eligible%20Routes%20and%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Route Targets of UMH-Eligible Routes and A-D Routes</span>
 
    Suppose that there is an extranet C-flow such that:
 
@@ -1855,7 +1835,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1911,7 +1891,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1967,7 +1947,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -1990,7 +1970,7 @@ Table of Contents
    should be understood that failure to follow these rules is likely to
    result in VPN security violations.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Considerations%20for%20Particular%20Inclusive%20Tunnel%20Types"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Considerations for Particular Inclusive Tunnel Types</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Considerations%20for%20Particular%20Inclusive%20Tunnel%20Types"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Considerations for Particular Inclusive Tunnel Types</span>
 
    An Inclusive Tunnel (sometimes referred to as an "Inclusive Tree";
    see <a href="./rfc6513.html#section-2.1.1">Section 2.1.1 of [RFC6513]</a>) is a tunnel that, by default, carries
@@ -1998,7 +1978,7 @@ Table of Contents
    network via a particular PE.  An Inclusive Tunnel is advertised in
    the PTA of an I-PMSI A-D route.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.1.%20%20RSVP-TE%20P2MP%20or%20Ingress%20Replication"></a></body></html><a class="selflink" href="#section-5.2.1" name="section-5.2.1">5.2.1</a>.  RSVP-TE P2MP or Ingress Replication</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.1.%20%20RSVP-TE%20P2MP%20or%20Ingress%20Replication"></a></body></html><a class="selflink" href="#section-5.2.1" id="section-5.2.1">5.2.1</a>.  RSVP-TE P2MP or Ingress Replication</span>
 
    This section applies when Inclusive Tunnels are created using either
    RSVP-TE P2MP or IR.
@@ -2023,7 +2003,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2037,11 +2017,11 @@ Table of Contents
    route.  If this prohibition is ever removed, the requirement of this
    section will apply only if VRF-S does not set that flag.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.2.%20%20Ingress%20Replication"></a></body></html><a class="selflink" href="#section-5.2.2" name="section-5.2.2">5.2.2</a>.  Ingress Replication</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.2.%20%20Ingress%20Replication"></a></body></html><a class="selflink" href="#section-5.2.2" id="section-5.2.2">5.2.2</a>.  Ingress Replication</span>
 
    This section applies only when Inclusive Tunnels are created via IR.
 
-   [<a id="ref-RFC6513" name="ref-RFC6513">RFC6513</a>] and [<a href="./rfc6514.html" title='"BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs"'>RFC6514</a>] specify procedures that allow I-PMSIs to be
+   [<a id="ref-RFC6513">RFC6513</a>] and [<a href="./rfc6514.html" title='"BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs"'>RFC6514</a>] specify procedures that allow I-PMSIs to be
    instantiated by IR.  The concept of an IR P-tunnel, and the
    procedures for supporting IR P-tunnels, are explained more fully in
    [<a href="#ref-MVPN-IR" title='"Ingress Replication Tunnels in Multicast VPN"'>MVPN-IR</a>].  An IR P-tunnel can be thought of as a P2MP tree in which
@@ -2079,7 +2059,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2100,7 +2080,7 @@ Table of Contents
    that have receivers for it.  This document does not provide
    procedures to support extranets using that model.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20When%20PIM%20Is%20the%20PE-PE%20C-Multicast%20Control%20Plane"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  When PIM Is the PE-PE C-Multicast Control Plane</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20When%20PIM%20Is%20the%20PE-PE%20C-Multicast%20Control%20Plane"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  When PIM Is the PE-PE C-Multicast Control Plane</span>
 
    As specified in [<a href="./rfc6513.html" title='"Multicast in MPLS/BGP IP VPNs"'>RFC6513</a>], when PIM is used as the PE-PE C-multicast
    control plane for a particular MVPN, there is a "Multidirectional
@@ -2135,7 +2115,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2159,9 +2139,9 @@ Table of Contents
    I-PMSI A-D routes or for Leaf A-D routes.  Source Active A-D routes
    are not used when PIM is the PE-PE C-multicast protocol.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Provisioning%20VRFs%20with%20RTs"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Provisioning VRFs with RTs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Provisioning%20VRFs%20with%20RTs"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Provisioning VRFs with RTs</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.1.%20%20Incoming%20and%20Outgoing%20Extranet%20RTs"></a></body></html><a class="selflink" href="#section-6.1.1" name="section-6.1.1">6.1.1</a>.  Incoming and Outgoing Extranet RTs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.1.%20%20Incoming%20and%20Outgoing%20Extranet%20RTs"></a></body></html><a class="selflink" href="#section-6.1.1" id="section-6.1.1">6.1.1</a>.  Incoming and Outgoing Extranet RTs</span>
 
    In the absence of extranet service, suppose that each VRF of a given
    VPN (call it "VPN-S") is configured with RT-S as its import and
@@ -2191,7 +2171,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2213,7 +2193,7 @@ Table of Contents
    Extranet RT, and VPN-R VRFs <em>MAY</em> be configured such that RT-S is an
    Incoming Extranet RT.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.2.%20%20UMH-Eligible%20Routes%20and%20RTs"></a></body></html><a class="selflink" href="#section-6.1.2" name="section-6.1.2">6.1.2</a>.  UMH-Eligible Routes and RTs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.2.%20%20UMH-Eligible%20Routes%20and%20RTs"></a></body></html><a class="selflink" href="#section-6.1.2" id="section-6.1.2">6.1.2</a>.  UMH-Eligible Routes and RTs</span>
 
    Suppose that R1 is a route exported from a VPN-S VRF and matching an
    extranet C-source that is allowed by policy to transmit to VPN-R.  In
@@ -2225,7 +2205,7 @@ Table of Contents
    The rules of <a href="#section-4">Section 4</a> regarding RTs and ambiguous addresses still
    apply.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.3.%20%20PIM%20C-Instance%20Reverse%20Path%20Forwarding%20Determination"></a></body></html><a class="selflink" href="#section-6.1.3" name="section-6.1.3">6.1.3</a>.  PIM C-Instance Reverse Path Forwarding Determination</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.3.%20%20PIM%20C-Instance%20Reverse%20Path%20Forwarding%20Determination"></a></body></html><a class="selflink" href="#section-6.1.3" id="section-6.1.3">6.1.3</a>.  PIM C-Instance Reverse Path Forwarding Determination</span>
 
    Suppose that a PIM control message (call it "M") is received by a
    given VRF (call it "VRF-V") from a particular P-tunnel T.  In order
@@ -2247,7 +2227,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2263,14 +2243,14 @@ Table of Contents
    2.  An I-PMSI A-D route advertising P-tunnel T (in its PTA) has been
        imported into VRF-V, and that I-PMSI A-D route carries RT1.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20%22Single%20PMSI%20per%20C-Flow%22%20Model"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  "Single PMSI per C-Flow" Model</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20%22Single%20PMSI%20per%20C-Flow%22%20Model"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  "Single PMSI per C-Flow" Model</span>
 
    In this model, if a VPN-S VRF has extranet multicast C-sources and a
    VPN-R VRF has extranet multicast C-receivers allowed by policy to
    receive from the C-sources in the VPN-S VRF, then the VPN-R VRF joins
    the MI-PMSI that VPN-S uses for its non-extranet traffic.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.1.%20%20Forming%20the%20MI-PMSIs"></a></body></html><a class="selflink" href="#section-6.2.1" name="section-6.2.1">6.2.1</a>.  Forming the MI-PMSIs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.1.%20%20Forming%20the%20MI-PMSIs"></a></body></html><a class="selflink" href="#section-6.2.1" id="section-6.2.1">6.2.1</a>.  Forming the MI-PMSIs</span>
 
    Consider a VPN-S VRF that has extranet C-sources.  Per [<a href="./rfc6513.html" title='"Multicast in MPLS/BGP IP VPNs"'>RFC6513</a>],
    each VPN-S VRF must originate an Intra-AS I-PMSI A-D route containing
@@ -2303,7 +2283,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2359,7 +2339,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2415,7 +2395,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2444,7 +2424,7 @@ Table of Contents
    be configured with both Incoming Extranet RTs and Outgoing Extranet
    RTs; the VRF functions as both a VPN-S VRF and a VPN-R VRF.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.2.%20%20S-PMSIs"></a></body></html><a class="selflink" href="#section-6.2.2" name="section-6.2.2">6.2.2</a>.  S-PMSIs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.2.%20%20S-PMSIs"></a></body></html><a class="selflink" href="#section-6.2.2" id="section-6.2.2">6.2.2</a>.  S-PMSIs</span>
 
    When PIM is used as the PE-PE C-multicast control plane, every S-PMSI
    is considered to be part of the "emulated LAN" that "corresponds" to
@@ -2471,7 +2451,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2505,7 +2485,7 @@ Table of Contents
    The rules given in [<a href="./rfc6625.html" title='"Wildcards in Multicast VPN Auto-Discovery Routes"'>RFC6625</a>] for determining whether a given S-PMSI
    A-D route is a "match for transmission" are unchanged.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.3.%20%20Sending%20PIM%20Control%20Packets"></a></body></html><a class="selflink" href="#section-6.2.3" name="section-6.2.3">6.2.3</a>.  Sending PIM Control Packets</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.3.%20%20Sending%20PIM%20Control%20Packets"></a></body></html><a class="selflink" href="#section-6.2.3" id="section-6.2.3">6.2.3</a>.  Sending PIM Control Packets</span>
 
    Suppose that a PE, say PE1, receives a PIM Join(S,G) from a CE, over
    a VRF interface that is associated with a VPN-R VRF.  The PE does the
@@ -2527,7 +2507,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 42]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-43" id="page-43" name="page-43"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-43"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2544,13 +2524,13 @@ Table of Contents
    the RPF check is the same, except that the selected UMH route will be
    a route to the C-RP associated with the C-G group.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.4.%20%20Receiving%20PIM%20Control%20Packets"></a></body></html><a class="selflink" href="#section-6.2.4" name="section-6.2.4">6.2.4</a>.  Receiving PIM Control Packets</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.4.%20%20Receiving%20PIM%20Control%20Packets"></a></body></html><a class="selflink" href="#section-6.2.4" id="section-6.2.4">6.2.4</a>.  Receiving PIM Control Packets</span>
 
    When a PIM C-instance receives a PIM control message from a P-tunnel,
    it needs to identify the message's incoming interface.  This incoming
    interface is the MI-PMSI of which the P-tunnel is a part.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.5.%20%20Sending%20and%20Receiving%20Data%20Packets"></a></body></html><a class="selflink" href="#section-6.2.5" name="section-6.2.5">6.2.5</a>.  Sending and Receiving Data Packets</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.5.%20%20Sending%20and%20Receiving%20Data%20Packets"></a></body></html><a class="selflink" href="#section-6.2.5" id="section-6.2.5">6.2.5</a>.  Sending and Receiving Data Packets</span>
 
    The rules for choosing the PMSI on which to send a multicast data
    packet are as specified in [<a href="./rfc6513.html" title='"Multicast in MPLS/BGP IP VPNs"'>RFC6513</a>] and [<a href="./rfc6625.html" title='"Wildcards in Multicast VPN Auto-Discovery Routes"'>RFC6625</a>], with one new
@@ -2572,7 +2552,7 @@ Table of Contents
    unexpected incoming interface are discarded.  This eliminates any
    problems due to the ambiguities described in Sections <a href="#section-2.1">2.1</a> and <a href="#section-2.2">2.2</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20%22Multiple%20PMSIs%20per%20C-Flow%22%20Model"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  "Multiple PMSIs per C-Flow" Model</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20%22Multiple%20PMSIs%20per%20C-Flow%22%20Model"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  "Multiple PMSIs per C-Flow" Model</span>
 
    In this model, if a VPN-S VRF has extranet multicast C-sources and a
    VPN-R VRF has extranet multicast C-receivers allowed by policy to
@@ -2583,7 +2563,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 43]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-44" id="page-44" name="page-44"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-44"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2604,7 +2584,7 @@ Table of Contents
    another PMSI that the VPN-A VRF uses to transmit the packet to the
    VPN-C VRFs.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.1.%20%20Forming%20the%20MI-PMSIs"></a></body></html><a class="selflink" href="#section-6.3.1" name="section-6.3.1">6.3.1</a>.  Forming the MI-PMSIs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.1.%20%20Forming%20the%20MI-PMSIs"></a></body></html><a class="selflink" href="#section-6.3.1" id="section-6.3.1">6.3.1</a>.  Forming the MI-PMSIs</span>
 
    Consider a VPN-R VRF that has extranet C-receivers.  Per [<a href="./rfc6513.html" title='"Multicast in MPLS/BGP IP VPNs"'>RFC6513</a>],
    each VPN-R VRF must originate an Intra-AS I-PMSI A-D route containing
@@ -2639,7 +2619,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 44]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-45" id="page-45" name="page-45"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-45"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2695,11 +2675,11 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 45]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-46" id="page-46" name="page-46"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-46"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20When%20BGP%20Is%20the%20PE-PE%20C-Multicast%20Control%20Plane"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  When BGP Is the PE-PE C-Multicast Control Plane</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20When%20BGP%20Is%20the%20PE-PE%20C-Multicast%20Control%20Plane"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  When BGP Is the PE-PE C-Multicast Control Plane</span>
 
    This document assumes that if BGP is used as the PE-PE C-multicast
    control plane, the "single PMSI per C-flow" model is used.
@@ -2719,7 +2699,7 @@ Table of Contents
    Note that there are no special extranet procedures for Inter-AS
    I-PMSI A-D routes or for Leaf A-D routes.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Originating%20C-Multicast%20Routes"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Originating C-Multicast Routes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Originating%20C-Multicast%20Routes"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Originating C-Multicast Routes</span>
 
    This section applies whether extranet separation is used or not.
 
@@ -2751,13 +2731,13 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 46]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-47" id="page-47" name="page-47"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-47"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Originating%20A-D%20Routes%20without%20Extranet%20Separation"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Originating A-D Routes without Extranet Separation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Originating%20A-D%20Routes%20without%20Extranet%20Separation"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Originating A-D Routes without Extranet Separation</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.1.%20%20Intra-AS%20I-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.2.1" name="section-7.2.1">7.2.1</a>.  Intra-AS I-PMSI A-D Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.1.%20%20Intra-AS%20I-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.2.1" id="section-7.2.1">7.2.1</a>.  Intra-AS I-PMSI A-D Routes</span>
 
    Consider a VRF (call it "VRF-S") that contains extranet C-sources and
    exports UMH-eligible routes matching those C-sources.  The VRF may
@@ -2785,7 +2765,7 @@ Table of Contents
    one RT in common with every UMH-eligible route that is exported from
    the VRF.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.2.%20%20S-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.2.2" name="section-7.2.2">7.2.2</a>.  S-PMSI A-D Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.2.%20%20S-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.2.2" id="section-7.2.2">7.2.2</a>.  S-PMSI A-D Routes</span>
 
    Let R-SP be an S-PMSI A-D route that is exported from VRF-S.  Suppose
    that R-SP is used to bind some or all of the extranet C-flows from a
@@ -2807,7 +2787,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 47]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-48" id="page-48" name="page-48"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-48"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2842,9 +2822,9 @@ Table of Contents
        inclusive P-tunnel for both extranet and non-extranet traffic, as
        the inclusive P-tunnel would not get used in that case.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.3.%20%20Source%20Active%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.2.3" name="section-7.2.3">7.2.3</a>.  Source Active A-D Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.3.%20%20Source%20Active%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.2.3" id="section-7.2.3">7.2.3</a>.  Source Active A-D Routes</span>
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.3.1.%20%20When%20Inter-Site%20Shared%20Trees%20Are%20Used"></a></body></html><a class="selflink" href="#section-7.2.3.1" name="section-7.2.3.1">7.2.3.1</a>.  When Inter-Site Shared Trees Are Used</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.3.1.%20%20When%20Inter-Site%20Shared%20Trees%20Are%20Used"></a></body></html><a class="selflink" href="#section-7.2.3.1" id="section-7.2.3.1">7.2.3.1</a>.  When Inter-Site Shared Trees Are Used</span>
 
    This section applies when inter-site shared trees are used, as
    specified in <a href="./rfc6514.html#section-13">Section 13 of [RFC6514]</a>.
@@ -2863,7 +2843,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 48]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-49" id="page-49" name="page-49"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-49"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2871,7 +2851,7 @@ Table of Contents
    by a given VRF, carries the same set of RTs as the UMH-eligible route
    matching C-S that is exported from that VRF.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.3.2.%20%20When%20Inter-Site%20Shared%20Trees%20Are%20Not%20Used"></a></body></html><a class="selflink" href="#section-7.2.3.2" name="section-7.2.3.2">7.2.3.2</a>.  When Inter-Site Shared Trees Are Not Used</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.3.2.%20%20When%20Inter-Site%20Shared%20Trees%20Are%20Not%20Used"></a></body></html><a class="selflink" href="#section-7.2.3.2" id="section-7.2.3.2">7.2.3.2</a>.  When Inter-Site Shared Trees Are Not Used</span>
 
    This section applies when inter-site shared trees are not used, as
    specified in <a href="./rfc6514.html#section-14">Section 14 of [RFC6514]</a>.
@@ -2890,14 +2870,14 @@ Table of Contents
    receive extranet traffic from C-S, then VRF-R imports both the
    UMH-eligible route and the Source Active A-D route.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Originating%20A-D%20Routes%20with%20Extranet%20Separation"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  Originating A-D Routes with Extranet Separation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Originating%20A-D%20Routes%20with%20Extranet%20Separation"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  Originating A-D Routes with Extranet Separation</span>
 
    If a VRF contains both extranet C-sources and non-extranet C-sources,
    it <em>MUST</em> be configured with both a default RD and an extranet RD (see
    <a href="#section-1.3">Section 1.3</a>).  The use of these RDs is explained in the following
    subsections.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.1.%20%20Intra-AS%20I-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.3.1" name="section-7.3.1">7.3.1</a>.  Intra-AS I-PMSI A-D Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.1.%20%20Intra-AS%20I-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.3.1" id="section-7.3.1">7.3.1</a>.  Intra-AS I-PMSI A-D Routes</span>
 
    This section applies when VRF-S is using extranet separation AND when
    VRF-S is using an inclusive P-tunnel to carry some or all of the
@@ -2919,7 +2899,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 49]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-50" id="page-50" name="page-50"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-50"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -2953,7 +2933,7 @@ Table of Contents
    an inclusive P-tunnel for extranet traffic while using only selective
    P-tunnels for non-extranet traffic.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.2.%20%20S-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.3.2" name="section-7.3.2">7.3.2</a>.  S-PMSI A-D Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.2.%20%20S-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.3.2" id="section-7.3.2">7.3.2</a>.  S-PMSI A-D Routes</span>
 
    Let R-SP be an S-PMSI A-D route that is exported from VRF-S.  Suppose
    that R-SP is used to bind some or all of the extranet C-flows from a
@@ -2975,7 +2955,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 50]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-51" id="page-51" name="page-51"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-51"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -3031,7 +3011,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 51]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-52" id="page-52" name="page-52"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-52"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -3042,7 +3022,7 @@ Table of Contents
        for extranet traffic, as the inclusive P-tunnel would not get
        used in that case.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.3.%20%20Source%20Active%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.3.3" name="section-7.3.3">7.3.3</a>.  Source Active A-D Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.3.%20%20Source%20Active%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.3.3" id="section-7.3.3">7.3.3</a>.  Source Active A-D Routes</span>
 
    The procedures of <a href="#section-7.2.3">Section 7.2.3</a> apply.
 
@@ -3051,7 +3031,7 @@ Table of Contents
    the RD of the route's NLRI <em>MUST</em> be the extranet RD of the VRF.
    Otherwise, the RD is the default RD of the VRF.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Determining%20the%20Expected%20P-Tunnel%20for%20a%20C-Flow"></a></body></html><a class="selflink" href="#section-7.4" name="section-7.4">7.4</a>.  Determining the Expected P-Tunnel for a C-Flow</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Determining%20the%20Expected%20P-Tunnel%20for%20a%20C-Flow"></a></body></html><a class="selflink" href="#section-7.4" id="section-7.4">7.4</a>.  Determining the Expected P-Tunnel for a C-Flow</span>
 
    This section applies whether extranet separation is used or not.
 
@@ -3087,7 +3067,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 52]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-53" id="page-53" name="page-53"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-53"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -3143,7 +3123,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 53]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-54" id="page-54" name="page-54"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-54"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -3164,7 +3144,7 @@ Table of Contents
    is expected is determined according to the procedures already
    described in this section.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.1.%20%20%28C-S%2CC-G%29%20S-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.4.1" name="section-7.4.1">7.4.1</a>.  (C-S,C-G) S-PMSI A-D Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.1.%20%20%28C-S%2CC-G%29%20S-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.4.1" id="section-7.4.1">7.4.1</a>.  (C-S,C-G) S-PMSI A-D Routes</span>
 
    When extranet functionality is being provided, an S-PMSI A-D route
    whose NLRI contains (C-S,C-G) is NOT considered to be a "match for
@@ -3179,7 +3159,7 @@ Table of Contents
       the S-PMSI A-D route, and at least one of the common RTs is an
       import RT of the VRF.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.2.%20%20%28C-S%2CC-%2A%29%20S-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.4.2" name="section-7.4.2">7.4.2</a>.  (C-S,C-*) S-PMSI A-D Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.2.%20%20%28C-S%2CC-%2A%29%20S-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.4.2" id="section-7.4.2">7.4.2</a>.  (C-S,C-*) S-PMSI A-D Routes</span>
 
    When extranet functionality is being provided, an S-PMSI A-D route
    whose NLRI contains (C-S,C-*) is NOT considered to be a "match for
@@ -3199,11 +3179,11 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 54]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-55" id="page-55" name="page-55"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-55"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.3.%20%20%28C-%2A%2CC-G%29%20S-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.4.3" name="section-7.4.3">7.4.3</a>.  (C-*,C-G) S-PMSI A-D Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.3.%20%20%28C-%2A%2CC-G%29%20S-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.4.3" id="section-7.4.3">7.4.3</a>.  (C-*,C-G) S-PMSI A-D Routes</span>
 
    When extranet functionality is being provided, an S-PMSI A-D route
    whose NLRI contains (C-*,C-G) is NOT considered to be a "match for
@@ -3255,7 +3235,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 55]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-56" id="page-56" name="page-56"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-56"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -3267,7 +3247,7 @@ Table of Contents
        when the route is still installed, the procedures of <a href="./rfc6514.html#section-12.3">Section 12.3
        of [RFC6514]</a> are invoked at that time.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.4.%20%20%28C-%2A%2CC-%2A%29%20S-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.4.4" name="section-7.4.4">7.4.4</a>.  (C-*,C-*) S-PMSI A-D Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.4.%20%20%28C-%2A%2CC-%2A%29%20S-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.4.4" id="section-7.4.4">7.4.4</a>.  (C-*,C-*) S-PMSI A-D Routes</span>
 
    A (C-*,C-*) S-PMSI A-D route (call it "R-AD") is NOT considered to be
    a "match for reception" for a given C-flow (C-S,C-G) or (C-*,C-G)
@@ -3282,7 +3262,7 @@ Table of Contents
       Community or neither carries the Extranet Separation Extended
       Community.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.5.%20%20I-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.4.5" name="section-7.4.5">7.4.5</a>.  I-PMSI A-D Routes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.5.%20%20I-PMSI%20A-D%20Routes"></a></body></html><a class="selflink" href="#section-7.4.5" id="section-7.4.5">7.4.5</a>.  I-PMSI A-D Routes</span>
 
    If a particular egress VRF in a particular egress PE contains no
    matching S-PMSI A-D routes for a particular C-flow, then the C-flow
@@ -3311,7 +3291,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 56]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-57" id="page-57" name="page-57"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-57"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -3343,7 +3323,7 @@ Table of Contents
       The PTA of R-AD specifies the P-tunnel over which the traffic of
       the given C-flow is expected.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Packets%20Arriving%20from%20the%20Wrong%20P-Tunnel"></a></body></html><a class="selflink" href="#section-7.5" name="section-7.5">7.5</a>.  Packets Arriving from the Wrong P-Tunnel</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Packets%20Arriving%20from%20the%20Wrong%20P-Tunnel"></a></body></html><a class="selflink" href="#section-7.5" id="section-7.5">7.5</a>.  Packets Arriving from the Wrong P-Tunnel</span>
 
    Any packets that arrive on a P-tunnel other than the expected
    P-tunnel (as defined in <a href="#section-7.4">Section 7.4</a>) <em>MUST</em> be discarded unless it is
@@ -3353,7 +3333,7 @@ Table of Contents
    Note that packets arriving on the wrong P-tunnel are to be discarded
    even if they are arriving from the expected PE.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Multiple%20Extranet%20VRFs%20on%20the%20Same%20PE"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Multiple Extranet VRFs on the Same PE</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Multiple%20Extranet%20VRFs%20on%20the%20Same%20PE"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Multiple Extranet VRFs on the Same PE</span>
 
    When multiple VRFs that contain extranet receivers for a given
    extranet source are present on the same PE, this PE becomes a single
@@ -3367,7 +3347,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 57]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-58" id="page-58" name="page-58"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-58"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -3382,7 +3362,7 @@ Table of Contents
    of as originating from several VRFs.  It <em>MUST NOT</em> be withdrawn by the
    PE until there are no longer any VRFs originating it.
 
-   [<a id="ref-RFC6514" name="ref-RFC6514">RFC6514</a>] specifies conditions under which a PE originates a
+   [<a id="ref-RFC6514">RFC6514</a>] specifies conditions under which a PE originates a
    C-multicast Source Tree Join or a C-multicast Shared Tree Join, based
    on the (*,G) and (S,G) states associated with a given VRF.  It also
    specifies the procedure for computing the NLRI of each such route.
@@ -3404,10 +3384,10 @@ Table of Contents
 
    An implementation <em>MUST</em> support multiple extranet VRFs on a PE.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  IANA Considerations</span>
 
    IANA has allocated two new codepoints from the "First Come First
-   Served" [<a href="./rfc5226.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC5226</a>] range of the "Transitive Opaque Extended Community
+   Served" [<a href="./rfc5226.html" title="">RFC5226</a>] range of the "Transitive Opaque Extended Community
    Sub-Types" registry (under the top-level registry "Border Gateway
    Protocol (BGP) Extended Communities" registry).
 
@@ -3423,11 +3403,11 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 58]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-59" id="page-59" name="page-59"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-59"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Security Considerations</span>
 
    The security considerations of [<a href="./rfc6513.html" title='"Multicast in MPLS/BGP IP VPNs"'>RFC6513</a>] and [<a href="./rfc6514.html" title='"BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs"'>RFC6514</a>] are
    applicable.
@@ -3479,7 +3459,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 59]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-60" id="page-60" name="page-60"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-60"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -3535,46 +3515,46 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 60]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-61" id="page-61" name="page-61"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-61"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20References"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20References"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-11.1" name="section-11.1">11.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-11.1" id="section-11.1">11.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
               DOI 10.17487/RFC2119, March 1997,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2119">http://www.rfc-editor.org/info/rfc2119</a>&gt;.
 
-   [<a id="ref-RFC4360" name="ref-RFC4360">RFC4360</a>]  Sangli, S., Tappan, D., and Y. Rekhter, "BGP Extended
+   [<a id="ref-RFC4360">RFC4360</a>]  Sangli, S., Tappan, D., and Y. Rekhter, "BGP Extended
               Communities Attribute", <a href="./rfc4360.html">RFC 4360</a>, DOI 10.17487/RFC4360,
               February 2006, &lt;<a href="http://www.rfc-editor.org/info/rfc4360">http://www.rfc-editor.org/info/rfc4360</a>&gt;.
 
-   [<a id="ref-RFC4364" name="ref-RFC4364">RFC4364</a>]  Rosen, E. and Y. Rekhter, "BGP/MPLS IP Virtual Private
+   [<a id="ref-RFC4364">RFC4364</a>]  Rosen, E. and Y. Rekhter, "BGP/MPLS IP Virtual Private
               Networks (VPNs)", <a href="./rfc4364.html">RFC 4364</a>, DOI 10.17487/RFC4364,
               February 2006, &lt;<a href="http://www.rfc-editor.org/info/rfc4364">http://www.rfc-editor.org/info/rfc4364</a>&gt;.
 
-   [<a id="ref-RFC6513" name="ref-RFC6513">RFC6513</a>]  Rosen, E., Ed., and R. Aggarwal, Ed., "Multicast in
+   [<a id="ref-RFC6513">RFC6513</a>]  Rosen, E., Ed., and R. Aggarwal, Ed., "Multicast in
               MPLS/BGP IP VPNs", <a href="./rfc6513.html">RFC 6513</a>, DOI 10.17487/RFC6513,
               February 2012, &lt;<a href="http://www.rfc-editor.org/info/rfc6513">http://www.rfc-editor.org/info/rfc6513</a>&gt;.
 
-   [<a id="ref-RFC6514" name="ref-RFC6514">RFC6514</a>]  Aggarwal, R., Rosen, E., Morin, T., and Y. Rekhter, "BGP
+   [<a id="ref-RFC6514">RFC6514</a>]  Aggarwal, R., Rosen, E., Morin, T., and Y. Rekhter, "BGP
               Encodings and Procedures for Multicast in MPLS/BGP IP
               VPNs", <a href="./rfc6514.html">RFC 6514</a>, DOI 10.17487/RFC6514, February 2012,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6514">http://www.rfc-editor.org/info/rfc6514</a>&gt;.
 
-   [<a id="ref-RFC6625" name="ref-RFC6625">RFC6625</a>]  Rosen, E., Ed., Rekhter, Y., Ed., Hendrickx, W., and R.
+   [<a id="ref-RFC6625">RFC6625</a>]  Rosen, E., Ed., Rekhter, Y., Ed., Hendrickx, W., and R.
               Qiu, "Wildcards in Multicast VPN Auto-Discovery Routes",
               <a href="./rfc6625.html">RFC 6625</a>, DOI 10.17487/RFC6625, May 2012,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6625">http://www.rfc-editor.org/info/rfc6625</a>&gt;.
 
-   [<a id="ref-RFC7153" name="ref-RFC7153">RFC7153</a>]  Rosen, E. and Y. Rekhter, "IANA Registries for BGP
+   [<a id="ref-RFC7153">RFC7153</a>]  Rosen, E. and Y. Rekhter, "IANA Registries for BGP
               Extended Communities", <a href="./rfc7153.html">RFC 7153</a>, DOI 10.17487/RFC7153,
               March 2014, &lt;<a href="http://www.rfc-editor.org/info/rfc7153">http://www.rfc-editor.org/info/rfc7153</a>&gt;.
 
-   [<a id="ref-RFC7761" name="ref-RFC7761">RFC7761</a>]  Fenner, B., Handley, M., Holbrook, H., Kouvelas, I.,
+   [<a id="ref-RFC7761">RFC7761</a>]  Fenner, B., Handley, M., Holbrook, H., Kouvelas, I.,
               Parekh, R., Zhang, Z., and L. Zheng, "Protocol Independent
               Multicast - Sparse Mode (PIM-SM): Protocol Specification
               (Revised)", STD 83, <a href="./rfc7761.html">RFC 7761</a>, DOI 10.17487/RFC7761,
@@ -3591,45 +3571,45 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 61]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-62" id="page-62" name="page-62"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-62"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-11.2" name="section-11.2">11.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-11.2" id="section-11.2">11.2</a>.  Informative References</span>
 
-   [<a id="ref-MVPN-IR" name="ref-MVPN-IR">MVPN-IR</a>]  Rosen, E., Ed., Subramanian, K., and Z. Zhang, "Ingress
+   [<a id="ref-MVPN-IR">MVPN-IR</a>]  Rosen, E., Ed., Subramanian, K., and Z. Zhang, "Ingress
               Replication Tunnels in Multicast VPN", Work in Progress,
               <a href="./draft-ietf-bess-ir-03.html">draft-ietf-bess-ir-03</a>, April 2016.
 
-   [<a id="ref-RFC3446" name="ref-RFC3446">RFC3446</a>]  Kim, D., Meyer, D., Kilmer, H., and D. Farinacci, "Anycast
+   [<a id="ref-RFC3446">RFC3446</a>]  Kim, D., Meyer, D., Kilmer, H., and D. Farinacci, "Anycast
               Rendevous Point (RP) mechanism using Protocol Independent
               Multicast (PIM) and Multicast Source Discovery Protocol
               (MSDP)", <a href="./rfc3446.html">RFC 3446</a>, DOI 10.17487/RFC3446, January 2003,
               &lt;<a href="http://www.rfc-editor.org/info/rfc3446">http://www.rfc-editor.org/info/rfc3446</a>&gt;.
 
-   [<a id="ref-RFC3618" name="ref-RFC3618">RFC3618</a>]  Fenner, B., Ed., and D. Meyer, Ed., "Multicast Source
+   [<a id="ref-RFC3618">RFC3618</a>]  Fenner, B., Ed., and D. Meyer, Ed., "Multicast Source
               Discovery Protocol (MSDP)", <a href="./rfc3618.html">RFC 3618</a>,
               DOI 10.17487/RFC3618, October 2003,
               &lt;<a href="http://www.rfc-editor.org/info/rfc3618">http://www.rfc-editor.org/info/rfc3618</a>&gt;.
 
-   [<a id="ref-RFC4610" name="ref-RFC4610">RFC4610</a>]  Farinacci, D. and Y. Cai, "Anycast-RP Using Protocol
+   [<a id="ref-RFC4610">RFC4610</a>]  Farinacci, D. and Y. Cai, "Anycast-RP Using Protocol
               Independent Multicast (PIM)", <a href="./rfc4610.html">RFC 4610</a>,
               DOI 10.17487/RFC4610, August 2006,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4610">http://www.rfc-editor.org/info/rfc4610</a>&gt;.
 
-   [<a id="ref-RFC4875" name="ref-RFC4875">RFC4875</a>]  Aggarwal, R., Ed., Papadimitriou, D., Ed., and S.
+   [<a id="ref-RFC4875">RFC4875</a>]  Aggarwal, R., Ed., Papadimitriou, D., Ed., and S.
               Yasukawa, Ed., "Extensions to Resource Reservation
               Protocol - Traffic Engineering (RSVP-TE) for Point-to-
               Multipoint TE Label Switched Paths (LSPs)", <a href="./rfc4875.html">RFC 4875</a>,
               DOI 10.17487/RFC4875, May 2007,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4875">http://www.rfc-editor.org/info/rfc4875</a>&gt;.
 
-   [<a id="ref-RFC5015" name="ref-RFC5015">RFC5015</a>]  Handley, M., Kouvelas, I., Speakman, T., and L. Vicisano,
+   [<a id="ref-RFC5015">RFC5015</a>]  Handley, M., Kouvelas, I., Speakman, T., and L. Vicisano,
               "Bidirectional Protocol Independent Multicast
               (BIDIR-PIM)", <a href="./rfc5015.html">RFC 5015</a>, DOI 10.17487/RFC5015,
               October 2007, &lt;<a href="http://www.rfc-editor.org/info/rfc5015">http://www.rfc-editor.org/info/rfc5015</a>&gt;.
 
-   [<a id="ref-RFC5059" name="ref-RFC5059">RFC5059</a>]  Bhaskar, N., Gall, A., Lingard, J., and S. Venaas,
+   [<a id="ref-RFC5059">RFC5059</a>]  Bhaskar, N., Gall, A., Lingard, J., and S. Venaas,
               "Bootstrap Router (BSR) Mechanism for Protocol Independent
               Multicast (PIM)", <a href="./rfc5059.html">RFC 5059</a>, DOI 10.17487/RFC5059,
               January 2008, &lt;<a href="http://www.rfc-editor.org/info/rfc5059">http://www.rfc-editor.org/info/rfc5059</a>&gt;.
@@ -3647,16 +3627,16 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 62]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-63" id="page-63" name="page-63"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-63"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
-   [<a id="ref-RFC5226" name="ref-RFC5226">RFC5226</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
-              IANA Considerations Section in RFCs", <a href="./bcp26.html">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a>,
+   [<a id="ref-RFC5226">RFC5226</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", <a href="https://www.rfc-editor.org/bcp/bcp26">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a>,
               DOI 10.17487/RFC5226, May 2008,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5226">http://www.rfc-editor.org/info/rfc5226</a>&gt;.
 
-   [<a id="ref-RFC6388" name="ref-RFC6388">RFC6388</a>]  Wijnands, IJ., Ed., Minei, I., Ed., Kompella, K., and B.
+   [<a id="ref-RFC6388">RFC6388</a>]  Wijnands, IJ., Ed., Minei, I., Ed., Kompella, K., and B.
               Thomas, "Label Distribution Protocol Extensions for Point-
               to-Multipoint and Multipoint-to-Multipoint Label Switched
               Paths", <a href="./rfc6388.html">RFC 6388</a>, DOI 10.17487/RFC6388, November 2011,
@@ -3703,7 +3683,7 @@ Table of Contents
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 63]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-64" id="page-64" name="page-64"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-64"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -3759,7 +3739,7 @@ Contributors
 
 
 <span class="grey">Rekhter, et al.              Standards Track                   [Page 64]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-65" id="page-65" name="page-65"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-65"></span>
 <span class="grey"><a href="./rfc7900.html">RFC 7900</a>         Extranet Multicast in BGP/IP MPLS VPNs        June 2016</span>
 
 
@@ -3815,11 +3795,6 @@ Authors' Addresses
 
 
 Rekhter, et al.              Standards Track                   [Page 65]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

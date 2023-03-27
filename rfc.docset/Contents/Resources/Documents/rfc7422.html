@@ -1,35 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:7422" name="DC.Identifier"/>
-<meta content="In some instances, Service Providers (SPs) have a legal logging
-requirement to be able to map a subscriber's inside address with
-the address used on the public Internet (e.g., for abuse response).
-Unfortunately, many logging solutions for Carrier-Grade NATs (CGNs)
-require active logging of dynamic translations. CGN port assignments
-are often per connection, but they could optionally use port ranges.
-Research indicates that per-connection logging is not scalable in many
-residential broadband services. This document suggests a way to manage
-CGN translations in such a way as to significantly reduce the amount
-of logging required while providing traceability for abuse response.
-IPv6 is, of course, the preferred solution. While deployment is in
-progress, SPs are forced by business imperatives to maintain support
-for IPv4. This note addresses the IPv4 part of the network when a CGN
-solution is in use." name="DC.Description.Abstract"/>
-<meta content="Vautrin, Olivier" name="DC.Creator"/>
-<meta content="Sundaresan, Karthik" name="DC.Creator"/>
-<meta content="Donley, Chris" name="DC.Creator"/>
-<meta content="Sarawat, Vikas" name="DC.Creator"/>
-<meta content="Grundemann, Chris" name="DC.Creator"/>
-<meta content="December, 2014" name="DC.Date.Issued"/>
-<meta content="Deterministic Address Mapping to Reduce Logging in Carrier-Grade NAT Deployments" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7422 - Deterministic Address Mapping to Reduce Logging in Carrier-Grade NAT Deployments</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="C. Donley" name="citation_author"/>
+<meta content="C. Grundemann" name="citation_author"/>
+<meta content="V. Sarawat" name="citation_author"/>
+<meta content="K. Sundaresan" name="citation_author"/>
+<meta content="O. Vautrin" name="citation_author"/>
+<meta content="December, 2014" name="citation_publication_date"/>
+<meta content="Deterministic Address Mapping to Reduce Logging in Carrier-Grade NAT Deployments" name="citation_title"/>
+<meta content="10.17487/RFC7422" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7422" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7422.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7422: Deterministic Address Mapping to Reduce Logging in Carrier-Grade NAT Deployments</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -58,7 +44,7 @@ solution is in use." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -67,7 +53,7 @@ solution is in use." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -146,19 +132,18 @@ solution is in use." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -172,21 +157,9 @@ solution is in use." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7422.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7422" title="PDF version of this document">pdf</a>] [<a href="./draft-donley-behave-deterministic-cgn.html" title="draft-donley-behave-deterministic-cgn">draft-donley-beha...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc7422" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc7422" title="Side-by-side diff">Diff2</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7422&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=7422">Errata</a>]  </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Independent Submission                                         C. Donley
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7422.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7422.txt.pdf">PDF</a>|<a href="/rfc/rfc7422.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7422" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7422&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc7422" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc7422" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Independent Submission                                         C. Donley
 Request for Comments: 7422                                     CableLabs
 Category: Informational                                    C. Grundemann
 ISSN: 2070-1721                                         Internet Society
@@ -238,7 +211,7 @@ Status of This Memo
 
 
 <span class="grey">Donley, et al.                Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
@@ -247,7 +220,7 @@ Copyright Notice
    Copyright (c) 2014 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -273,7 +246,7 @@ Table of Contents
    Acknowledgements ..................................................<a href="#page-13">13</a>
    Authors' Addresses ................................................<a href="#page-14">14</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    It is becoming increasingly difficult to obtain new IPv4 address
    assignments from Regional/Local Internet Registries due to depleting
@@ -294,7 +267,7 @@ Table of Contents
 
 
 <span class="grey">Donley, et al.                Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
@@ -350,7 +323,7 @@ Table of Contents
 
 
 <span class="grey">Donley, et al.                Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
@@ -370,13 +343,13 @@ Table of Contents
    compliant with BEHAVE requirements such as the support of
    Application-specific functions (APP).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Language"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Requirements Language</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Language"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Requirements Language</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in <a href="./rfc2119.html">RFC 2119</a> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Deterministic%20Port%20Ranges"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Deterministic Port Ranges</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Deterministic%20Port%20Ranges"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Deterministic Port Ranges</span>
 
    While a subscriber uses thousands of connections per day, most
    subscribers use far fewer resources at any given time.  When the
@@ -406,7 +379,7 @@ Table of Contents
 
 
 <span class="grey">Donley, et al.                Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
@@ -462,7 +435,7 @@ Table of Contents
 
 
 <span class="grey">Donley, et al.                Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
@@ -518,7 +491,7 @@ Table of Contents
 
 
 <span class="grey">Donley, et al.                Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
@@ -556,14 +529,14 @@ Table of Contents
    connections within its internal translation tables; however, it only
    needs to externally log translations for dynamically assigned ports.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20IPv4%20Port%20Utilization%20Efficiency"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  IPv4 Port Utilization Efficiency</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20IPv4%20Port%20Utilization%20Efficiency"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  IPv4 Port Utilization Efficiency</span>
 
    For SPs requiring an aggressive address-sharing ratio, the use of the
    algorithmic mapping may impact the efficiency of the address sharing.
    A dynamic port range allocation assignment is more suitable in those
    cases.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Planning%20and%20Dimensioning"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Planning and Dimensioning</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Planning%20and%20Dimensioning"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Planning and Dimensioning</span>
 
    Unlike dynamic approaches, the use of the algorithmic mapping
    requires more effort from operational teams to tweak the algorithm
@@ -574,7 +547,7 @@ Table of Contents
 
 
 <span class="grey">Donley, et al.                Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
@@ -583,7 +556,7 @@ Table of Contents
    allocation planning, etc.) would require external geolocation
    providers to recalibrate their mappings.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Deterministic%20CGN%20Example"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Deterministic CGN Example</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Deterministic%20CGN%20Example"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Deterministic CGN Example</span>
 
    To illustrate the use of deterministic NAT, let's consider a simple
    example.  The operator configures an inside address range (I) of
@@ -630,7 +603,7 @@ Table of Contents
 
 
 <span class="grey">Donley, et al.                Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
@@ -671,7 +644,7 @@ Table of Contents
    Note that in a production environment, operators are encouraged to
    consider [<a href="./rfc6598.html" title='"IANA-Reserved IPv4 Prefix for Shared Address Space"'>RFC6598</a>] for assigning inside addresses.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Additional%20Logging%20Considerations"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Additional Logging Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Additional%20Logging%20Considerations"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Additional Logging Considerations</span>
 
    In order to be able to identify a subscriber based on observed
    external IPv4 address, port, and timestamp, an operator needs to know
@@ -686,7 +659,7 @@ Table of Contents
 
 
 <span class="grey">Donley, et al.                Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
@@ -702,7 +675,7 @@ Table of Contents
    [Wed Oct 11 14:32:52
    2000]:198.51.100.0:28:192.0.2.0:32:2:5040:0:1-1023,5004,5060.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Failover%20Considerations"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Failover Considerations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Failover%20Considerations"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Failover Considerations</span>
 
    Due to the deterministic nature of algorithmically assigned
    translations, no additional logging is required during failover
@@ -719,7 +692,7 @@ Table of Contents
    logged as described above, whether translations are performed on the
    primary or failover CGN.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Impact%20on%20the%20IPv6%20Transition"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Impact on the IPv6 Transition</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Impact%20on%20the%20IPv6%20Transition"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Impact on the IPv6 Transition</span>
 
    The solution described in this document is applicable to CGN
    transition technologies (e.g., NAT444, DS-Lite, and NAT64).  As
@@ -742,11 +715,11 @@ Table of Contents
 
 
 <span class="grey">Donley, et al.                Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Privacy%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Privacy Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Privacy%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Privacy Considerations</span>
 
    The algorithm described above makes it easier for SPs and public
    safety officials to identify the IP address of a subscriber through a
@@ -761,7 +734,7 @@ Table of Contents
    about the Service Provider's CGN configuration to be able to tie
    multiple connections to a particular subscriber.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    The security considerations applicable to NAT operation for various
    protocols as documented in, for example, <a href="./rfc4787.html">RFC 4787</a> [<a href="./rfc4787.html" title='"Network Address Translation (NAT) Behavioral Requirements for Unicast UDP"'>RFC4787</a>] and <a href="./rfc5382.html">RFC</a>
@@ -775,21 +748,21 @@ Table of Contents
    the subscriber would experience in the absence of CGN.  CGN is not
    intended to provide additional security by obscurity.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997,
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2119">http://www.rfc-editor.org/info/rfc2119</a>&gt;.
 
-   [<a id="ref-RFC4787" name="ref-RFC4787">RFC4787</a>]  Audet, F. and C. Jennings, "Network Address Translation
-              (NAT) Behavioral Requirements for Unicast UDP", <a href="./bcp127.html">BCP 127</a>,
+   [<a id="ref-RFC4787">RFC4787</a>]  Audet, F. and C. Jennings, "Network Address Translation
+              (NAT) Behavioral Requirements for Unicast UDP", <a href="https://www.rfc-editor.org/bcp/bcp127">BCP 127</a>,
               <a href="./rfc4787.html">RFC 4787</a>, January 2007,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4787">http://www.rfc-editor.org/info/rfc4787</a>&gt;.
 
-   [<a id="ref-RFC5382" name="ref-RFC5382">RFC5382</a>]  Guha, S., Biswas, K., Ford, B., Sivakumar, S., and P.
-              Srisuresh, "NAT Behavioral Requirements for TCP", <a href="./bcp142.html">BCP 142</a>,
+   [<a id="ref-RFC5382">RFC5382</a>]  Guha, S., Biswas, K., Ford, B., Sivakumar, S., and P.
+              Srisuresh, "NAT Behavioral Requirements for TCP", <a href="https://www.rfc-editor.org/bcp/bcp142">BCP 142</a>,
               <a href="./rfc5382.html">RFC 5382</a>, October 2008,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5382">http://www.rfc-editor.org/info/rfc5382</a>&gt;.
 
@@ -798,53 +771,53 @@ Table of Contents
 
 
 <span class="grey">Donley, et al.                Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
-   [<a id="ref-RFC6264" name="ref-RFC6264">RFC6264</a>]  Jiang, S., Guo, D., and B. Carpenter, "An Incremental
+   [<a id="ref-RFC6264">RFC6264</a>]  Jiang, S., Guo, D., and B. Carpenter, "An Incremental
               Carrier-Grade NAT (CGN) for IPv6 Transition", <a href="./rfc6264.html">RFC 6264</a>,
               June 2011, &lt;<a href="http://www.rfc-editor.org/info/rfc6264">http://www.rfc-editor.org/info/rfc6264</a>&gt;.
 
-   [<a id="ref-RFC6269" name="ref-RFC6269">RFC6269</a>]  Ford, M., Boucadair, M., Durand, A., Levis, P., and P.
+   [<a id="ref-RFC6269">RFC6269</a>]  Ford, M., Boucadair, M., Durand, A., Levis, P., and P.
               Roberts, "Issues with IP Address Sharing", <a href="./rfc6269.html">RFC 6269</a>, June
               2011, &lt;<a href="http://www.rfc-editor.org/info/rfc6269">http://www.rfc-editor.org/info/rfc6269</a>&gt;.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Informative References</span>
 
-   [<a id="ref-L2NAT" name="ref-L2NAT">L2NAT</a>]    Miles, D. and M. Townsley, <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22Layer2-Aware+NAT%22" style="text-decoration: none">"Layer2-Aware NAT"</a>, Work in
+   [<a id="ref-L2NAT">L2NAT</a>]    Miles, D. and M. Townsley, <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22Layer2-Aware+NAT%22" style="text-decoration: none">"Layer2-Aware NAT"</a>, Work in
               Progress, <a href="./draft-miles-behave-l2nat-00.html">draft-miles-behave-l2nat-00</a>, March 2009.
 
-   [<a id="ref-LOG-REDUCTION" name="ref-LOG-REDUCTION">LOG-REDUCTION</a>]
+   [<a id="ref-LOG-REDUCTION">LOG-REDUCTION</a>]
               Tsou, T., Li, W., Taylor, T., and J. Huang, "Port
               Management To Reduce Logging In Large-Scale NATs", Work in
               Progress, <a href="./draft-tsou-behave-natx4-log-reduction-04.html">draft-tsou-behave-natx4-log-reduction-04</a>, July
               2013.
 
-   [<a id="ref-NAT-LOGGING" name="ref-NAT-LOGGING">NAT-LOGGING</a>]
+   [<a id="ref-NAT-LOGGING">NAT-LOGGING</a>]
               Sivakumar, S. and R. Penno, "IPFIX Information Elements
               for logging NAT Events", Work in Progress,
               <a href="./draft-ietf-behave-ipfix-nat-logging-04.html">draft-ietf-behave-ipfix-nat-logging-04</a>, July 2014.
 
-   [<a id="ref-NAT444" name="ref-NAT444">NAT444</a>]   Yamagata, I., Shirasaki, Y., Nakagawa, A., Yamaguchi, J.,
+   [<a id="ref-NAT444">NAT444</a>]   Yamagata, I., Shirasaki, Y., Nakagawa, A., Yamaguchi, J.,
               and H. Ashida, "NAT444", Work in Progress,
               <a href="./draft-shirasaki-nat444-06.html">draft-shirasaki-nat444-06</a>, July 2012.
 
-   [<a id="ref-RFC6146" name="ref-RFC6146">RFC6146</a>]  Bagnulo, M., Matthews, P., and I. van Beijnum, "Stateful
+   [<a id="ref-RFC6146">RFC6146</a>]  Bagnulo, M., Matthews, P., and I. van Beijnum, "Stateful
               NAT64: Network Address and Protocol Translation from IPv6
               Clients to IPv4 Servers", <a href="./rfc6146.html">RFC 6146</a>, April 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6146">http://www.rfc-editor.org/info/rfc6146</a>&gt;.
 
-   [<a id="ref-RFC6292" name="ref-RFC6292">RFC6292</a>]  Hoffman, P., "Requirements for a Working Group Charter
+   [<a id="ref-RFC6292">RFC6292</a>]  Hoffman, P., "Requirements for a Working Group Charter
               Tool", <a href="./rfc6292.html">RFC 6292</a>, June 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6292">http://www.rfc-editor.org/info/rfc6292</a>&gt;.
 
-   [<a id="ref-RFC6302" name="ref-RFC6302">RFC6302</a>]  Durand, A., Gashinsky, I., Lee, D., and S. Sheppard,
-              "Logging Recommendations for Internet-Facing Servers", <a href="./bcp162.html">BCP</a>
-              <a href="./bcp162.html">162</a>, <a href="./rfc6302.html">RFC 6302</a>, June 2011,
+   [<a id="ref-RFC6302">RFC6302</a>]  Durand, A., Gashinsky, I., Lee, D., and S. Sheppard,
+              "Logging Recommendations for Internet-Facing Servers", <a href="https://www.rfc-editor.org/bcp/bcp162">BCP</a>
+              <a href="https://www.rfc-editor.org/bcp/bcp162">162</a>, <a href="./rfc6302.html">RFC 6302</a>, June 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6302">http://www.rfc-editor.org/info/rfc6302</a>&gt;.
 
-   [<a id="ref-RFC6333" name="ref-RFC6333">RFC6333</a>]  Durand, A., Droms, R., Woodyatt, J., and Y. Lee, "Dual-
+   [<a id="ref-RFC6333">RFC6333</a>]  Durand, A., Droms, R., Woodyatt, J., and Y. Lee, "Dual-
               Stack Lite Broadband Deployments Following IPv4
               Exhaustion", <a href="./rfc6333.html">RFC 6333</a>, August 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6333">http://www.rfc-editor.org/info/rfc6333</a>&gt;.
@@ -854,32 +827,32 @@ Table of Contents
 
 
 <span class="grey">Donley, et al.                Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
-   [<a id="ref-RFC6335" name="ref-RFC6335">RFC6335</a>]  Cotton, M., Eggert, L., Touch, J., Westerlund, M., and S.
+   [<a id="ref-RFC6335">RFC6335</a>]  Cotton, M., Eggert, L., Touch, J., Westerlund, M., and S.
               Cheshire, "Internet Assigned Numbers Authority (IANA)
               Procedures for the Management of the Service Name and
-              Transport Protocol Port Number Registry", <a href="./bcp165.html">BCP 165</a>, <a href="./rfc6335.html">RFC</a>
+              Transport Protocol Port Number Registry", <a href="https://www.rfc-editor.org/bcp/bcp165">BCP 165</a>, <a href="./rfc6335.html">RFC</a>
               <a href="./rfc6335.html">6335</a>, August 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6335">http://www.rfc-editor.org/info/rfc6335</a>&gt;.
 
-   [<a id="ref-RFC6431" name="ref-RFC6431">RFC6431</a>]  Boucadair, M., Levis, P., Bajko, G., Savolainen, T., and
+   [<a id="ref-RFC6431">RFC6431</a>]  Boucadair, M., Levis, P., Bajko, G., Savolainen, T., and
               T. Tsou, "Huawei Port Range Configuration Options for PPP
               IP Control Protocol (IPCP)", <a href="./rfc6431.html">RFC 6431</a>, November 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6431">http://www.rfc-editor.org/info/rfc6431</a>&gt;.
 
-   [<a id="ref-RFC6598" name="ref-RFC6598">RFC6598</a>]  Weil, J., Kuarsingh, V., Donley, C., Liljenstolpe, C., and
+   [<a id="ref-RFC6598">RFC6598</a>]  Weil, J., Kuarsingh, V., Donley, C., Liljenstolpe, C., and
               M. Azinger, "IANA-Reserved IPv4 Prefix for Shared Address
-              Space", <a href="./bcp153.html">BCP 153</a>, <a href="./rfc6598.html">RFC 6598</a>, April 2012,
+              Space", <a href="https://www.rfc-editor.org/bcp/bcp153">BCP 153</a>, <a href="./rfc6598.html">RFC 6598</a>, April 2012,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6598">http://www.rfc-editor.org/info/rfc6598</a>&gt;.
 
-   [<a id="ref-RFC6887" name="ref-RFC6887">RFC6887</a>]  Wing, D., Cheshire, S., Boucadair, M., Penno, R., and P.
+   [<a id="ref-RFC6887">RFC6887</a>]  Wing, D., Cheshire, S., Boucadair, M., Penno, R., and P.
               Selkirk, "Port Control Protocol (PCP)", <a href="./rfc6887.html">RFC 6887</a>, April
               2013, &lt;<a href="http://www.rfc-editor.org/info/rfc6887">http://www.rfc-editor.org/info/rfc6887</a>&gt;.
 
-   [<a id="ref-RFC7021" name="ref-RFC7021">RFC7021</a>]  Donley, C., Howard, L., Kuarsingh, V., Berg, J., and J.
+   [<a id="ref-RFC7021">RFC7021</a>]  Donley, C., Howard, L., Kuarsingh, V., Berg, J., and J.
               Doshi, "Assessing the Impact of Carrier-Grade NAT on
               Network Applications", <a href="./rfc7021.html">RFC 7021</a>, September 2013,
               &lt;<a href="http://www.rfc-editor.org/info/rfc7021">http://www.rfc-editor.org/info/rfc7021</a>&gt;.
@@ -910,7 +883,7 @@ Acknowledgements
 
 
 <span class="grey">Donley, et al.                Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7422.html">RFC 7422</a>                    deterministic-cgn              December 2014</span>
 
 
@@ -966,11 +939,6 @@ Authors' Addresses
 
 
 Donley, et al.                Informational                    [Page 14]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

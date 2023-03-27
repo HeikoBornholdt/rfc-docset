@@ -1,27 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:6709" name="DC.Identifier"/>
-<meta content="This document discusses architectural issues related to the
-extensibility of Internet protocols, with a focus on design
-considerations. It is intended to assist designers of both base
-protocols and extensions. Case studies are included. A companion
-document, RFC 4775 (BCP 125), discusses procedures relating to the
-extensibility of IETF protocols. This document is not an Internet
-Standards Track specification; it is published for informational
-purposes." name="DC.Description.Abstract"/>
-<meta content="Aboba, Bernard" name="DC.Creator"/>
-<meta content="Carpenter, Brian" name="DC.Creator"/>
-<meta content="Cheshire, Stuart" name="DC.Creator"/>
-<meta content="September, 2012" name="DC.Date.Issued"/>
-<meta content="Design Considerations for Protocol Extensions" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6709 - Design Considerations for Protocol Extensions</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="B. Carpenter" name="citation_author"/>
+<meta content="B. Aboba" name="citation_author"/>
+<meta content="S. Cheshire" name="citation_author"/>
+<meta content="September, 2012" name="citation_publication_date"/>
+<meta content="Design Considerations for Protocol Extensions" name="citation_title"/>
+<meta content="10.17487/RFC6709" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6709" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6709.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6709: Design Considerations for Protocol Extensions</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -50,7 +42,7 @@ purposes." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -59,7 +51,7 @@ purposes." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -138,19 +130,18 @@ purposes." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -164,21 +155,9 @@ purposes." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6709.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6709" title="PDF version of this document">pdf</a>] [<a href="./draft-iab-extension-recs.html" title="draft-iab-extension-recs">draft-iab-extensi...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6709" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6709" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Architecture Board (IAB)                           B. Carpenter
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6709.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6709.txt.pdf">PDF</a>|<a href="/rfc/rfc6709.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6709" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6709&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6709" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Architecture Board (IAB)                           B. Carpenter
 Request for Comments: 6709                                 B. Aboba, Ed.
 Category: Informational                                      S. Cheshire
 ISSN: 2070-1721                                           September 2012
@@ -192,7 +171,7 @@ Abstract
    extensibility of Internet protocols, with a focus on design
    considerations.  It is intended to assist designers of both base
    protocols and extensions.  Case studies are included.  A companion
-   document, <a href="./rfc4775.html">RFC 4775</a> (<a href="./bcp125.html">BCP 125</a>), discusses procedures relating to the
+   document, <a href="./rfc4775.html">RFC 4775</a> (<a href="https://www.rfc-editor.org/bcp/bcp125">BCP 125</a>), discusses procedures relating to the
    extensibility of IETF protocols.
 
 Status of This Memo
@@ -216,7 +195,7 @@ Copyright Notice
    Copyright (c) 2012 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -230,7 +209,7 @@ Copyright Notice
 
 
 <span class="grey">Carpenter, et al.             Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -286,11 +265,11 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    When developing protocols, IETF Working Groups (WGs) often include
    mechanisms whereby these protocols can be extended in the future.  It
@@ -325,7 +304,7 @@ Table of Contents
    The purpose of this document is to describe the architectural
    principles of sound extensibility design, in order to minimize such
    risks.  Formal procedures for extending IETF protocols are discussed
-   in "Procedures for Protocol Extensions and Variations" <a href="./bcp125.html">BCP 125</a>
+   in "Procedures for Protocol Extensions and Variations" <a href="https://www.rfc-editor.org/bcp/bcp125">BCP 125</a>
    [<a href="./rfc4775.html" title='"Procedures for Protocol Extensions and Variations"'>RFC4775</a>].
 
    The rest of this document is organized as follows: <a href="#section-2">Section 2</a>
@@ -342,18 +321,18 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Language"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Requirements Language</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Requirements%20Language"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Requirements Language</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in "Key words for use in
-   RFCs to Indicate Requirement Levels" <a href="./bcp14.html">BCP 14</a> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
+   RFCs to Indicate Requirement Levels" <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Routine%20and%20Major%20Extensions"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Routine and Major Extensions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Routine%20and%20Major%20Extensions"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Routine and Major Extensions</span>
 
    The risk of unintended consequences from an extension is especially
    high if the extension is performed by a different team than the
@@ -381,7 +360,7 @@ Table of Contents
    review.  Guidance on which extensions may be considered 'routine' and
    which ones are 'major' is provided in the sections that follow.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20What%20Constitutes%20a%20Major%20Extension%3F"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  What Constitutes a Major Extension?</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20What%20Constitutes%20a%20Major%20Extension%3F"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  What Constitutes a Major Extension?</span>
 
    Major extensions may have characteristics leading to a risk of
    interoperability failures, security vulnerabilities, or operational
@@ -398,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -454,7 +433,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -481,7 +460,7 @@ Table of Contents
        have adverse consequences, particularly if the performance of
        existing deployments is affected.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20When%20is%20an%20Extension%20Routine%3F"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  When is an Extension Routine?</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20When%20is%20an%20Extension%20Routine%3F"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  When is an Extension Routine?</span>
 
    An extension may be considered 'routine' if it does not meet the
    criteria for being considered a 'major' extension and if its handling
@@ -510,12 +489,12 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
    Processes that allow routine extensions with minimal or no review
-   (such as "First Come First Served" (FCFS) allocation [<a href="./rfc5226.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC5226</a>])
+   (such as "First Come First Served" (FCFS) allocation [<a href="./rfc5226.html" title="">RFC5226</a>])
    should be used sparingly.  In particular, they should be limited to
    cases that are unlikely to result in interoperability problems or in
    security or operational exposures.
@@ -526,7 +505,7 @@ Table of Contents
    lead to an option that is unnecessarily hard for clients and servers
    to process.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Architectural%20Principles"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Architectural Principles</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Architectural%20Principles"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Architectural Principles</span>
 
    This section describes basic principles of protocol extensibility:
 
@@ -551,7 +530,7 @@ Table of Contents
        critical component is one whose failure can lead to Internet-wide
        reliability and security issues or performance degradation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Limited%20Extensibility"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Limited Extensibility</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Limited%20Extensibility"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Limited Extensibility</span>
 
    Protocols should not be made more extensible than clearly necessary
    at inception, in order to enable optimization along dimensions (e.g.,
@@ -566,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -579,10 +558,10 @@ Table of Contents
    this does not imply that an initial design needs to take all
    potential needs into account at inception.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Design%20for%20Global%20Interoperability"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Design for Global Interoperability</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Design%20for%20Global%20Interoperability"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Design for Global Interoperability</span>
 
    <a href="#section-3.1">Section 3.1</a> of "Procedures for Protocol Extensions and Variations"
-   <a href="./bcp125.html">BCP 125</a> [<a href="./rfc4775.html" title='"Procedures for Protocol Extensions and Variations"'>RFC4775</a>] notes:
+   <a href="https://www.rfc-editor.org/bcp/bcp125">BCP 125</a> [<a href="./rfc4775.html" title='"Procedures for Protocol Extensions and Variations"'>RFC4775</a>] notes:
 
       According to its Mission Statement [<a href="./rfc3935.html" title='"A Mission Statement for the IETF"'>RFC3935</a>], the IETF produces
       high quality, relevant technical and engineering documents,
@@ -622,7 +601,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -637,7 +616,7 @@ Table of Contents
    (Appendix A.3), it is not sufficient to design extensibility
    carefully; it also must be implemented carefully.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Private%20Extensions"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Private Extensions</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Private%20Extensions"></a></body></html><a class="selflink" href="#section-3.2.1" id="section-3.2.1">3.2.1</a>.  Private Extensions</span>
 
    Experience shows that separate private networks often end up having
    portable equipment like laptop computers move between them, and
@@ -678,7 +657,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -702,7 +681,7 @@ Table of Contents
           "X-" convention was only implicit, and not explicitly
           provided, such as was done for email in [<a href="./rfc822.html" title='"STANDARD FOR THE FORMAT OF ARPA INTERNET TEXT MESSAGES"'>RFC822</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Local%20Use"></a></body></html><a class="selflink" href="#section-3.2.2" name="section-3.2.2">3.2.2</a>.  Local Use</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Local%20Use"></a></body></html><a class="selflink" href="#section-3.2.2" id="section-3.2.2">3.2.2</a>.  Local Use</span>
 
    Values designated as "experimental" or "local use" are only
    appropriate in limited circumstances such as in early implementations
@@ -723,7 +702,7 @@ Table of Contents
    domain in which they are meaningful.
 
    <a href="#section-1">Section 1</a> of "Assigning Experimental and Testing Numbers Considered
-   Useful" <a href="./bcp82.html">BCP 82</a> [<a href="./rfc3692.html" title='"Assigning Experimental and Testing Numbers Considered Useful"'>RFC3692</a>] provides guidance on the use of experimental
+   Useful" <a href="https://www.rfc-editor.org/bcp/bcp82">BCP 82</a> [<a href="./rfc3692.html" title='"Assigning Experimental and Testing Numbers Considered Useful"'>RFC3692</a>] provides guidance on the use of experimental
    code points:
 
       Numbers in the experimentation range ... are not intended to be
@@ -734,7 +713,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -767,7 +746,7 @@ Table of Contents
 
       "Assigning Experimental and Testing Numbers Considered Useful" ...
       implies that the "X-" prefix is also useful for experimental
-      parameters.  However, <a href="./bcp82.html">BCP 82</a> addresses the need for protocol
+      parameters.  However, <a href="https://www.rfc-editor.org/bcp/bcp82">BCP 82</a> addresses the need for protocol
       numbers when the pool of such numbers is strictly limited (e.g.,
       DHCP options) or when a number is absolutely required even for
       purely experimental purposes (e.g., the Protocol field of the IP
@@ -790,11 +769,11 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Multi-Site%20Experiments"></a></body></html><a class="selflink" href="#section-3.2.3" name="section-3.2.3">3.2.3</a>.  Multi-Site Experiments</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Multi-Site%20Experiments"></a></body></html><a class="selflink" href="#section-3.2.3" id="section-3.2.3">3.2.3</a>.  Multi-Site Experiments</span>
 
    Where an experiment is undertaken among a diverse set of experimental
    sites connected via the global Internet, the use of "experimental" or
@@ -804,7 +783,7 @@ Table of Contents
    set of other sites interested in that protocol.  In such a situation,
    it is impractical and probably impossible to coordinate the
    de-confliction of "experimental" code points.  <a href="#section-4.1">Section 4.1</a> of the
-   IANA Considerations guidelines document [<a href="./rfc5226.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC5226</a>] notes:
+   IANA Considerations guidelines document [<a href="./rfc5226.html" title="">RFC5226</a>] notes:
 
       For private or local use ... No attempt is made to prevent
       multiple sites from using the same value in different (and
@@ -821,7 +800,7 @@ Table of Contents
    respectively, at the time of publication of their respective
    Experimental RFCs.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Architectural%20Compatibility"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Architectural Compatibility</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Architectural%20Compatibility"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Architectural Compatibility</span>
 
    Since protocol extension mechanisms may impact interoperability, it
    is important that they be architecturally compatible with the base
@@ -846,7 +825,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -876,7 +855,7 @@ Table of Contents
        extension mechanisms to define new features and object management
        capabilities.
 
-   2.  "Guidelines for Authors and Reviewers of MIB Documents" <a href="./bcp111.html">BCP 111</a>
+   2.  "Guidelines for Authors and Reviewers of MIB Documents" <a href="https://www.rfc-editor.org/bcp/bcp111">BCP 111</a>
        [<a href="./rfc4181.html" title='"Guidelines for Authors and Reviewers of MIB Documents"'>RFC4181</a>], which provides guidance to protocol designers creating
        new MIB modules.
 
@@ -885,14 +864,14 @@ Table of Contents
        of SIP extensions.
 
    4.  "Considerations for Lightweight Directory Access Protocol (LDAP)
-       Extensions" <a href="./bcp118.html">BCP 118</a> [<a href="./rfc4521.html" title='"Considerations for Lightweight Directory Access Protocol (LDAP) Extensions"'>RFC4521</a>], which discusses considerations for
+       Extensions" <a href="https://www.rfc-editor.org/bcp/bcp118">BCP 118</a> [<a href="./rfc4521.html" title='"Considerations for Lightweight Directory Access Protocol (LDAP) Extensions"'>RFC4521</a>], which discusses considerations for
        designers of LDAP extensions.
 
-   5.  "RADIUS Design Guidelines" <a href="./bcp158.html">BCP 158</a> [<a href="./rfc6158.html" title='"RADIUS Design Guidelines"'>RFC6158</a>], which provides
+   5.  "RADIUS Design Guidelines" <a href="https://www.rfc-editor.org/bcp/bcp158">BCP 158</a> [<a href="./rfc6158.html" title='"RADIUS Design Guidelines"'>RFC6158</a>], which provides
        guidelines for the design of attributes used by the Remote
        Authentication Dial In User Service (RADIUS) protocol.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Protocol%20Variations"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Protocol Variations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Protocol%20Variations"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Protocol Variations</span>
 
    Protocol variations -- specifications that look very similar to the
    original but don't interoperate with each other or with the original
@@ -902,7 +881,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -942,7 +921,7 @@ Table of Contents
       The reuse of previously assigned EAP Type Codes is incompatible
       with EAP method negotiation as defined in <a href="./rfc3748.html">RFC 3748</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.1.%20%20Profiles"></a></body></html><a class="selflink" href="#section-3.4.1" name="section-3.4.1">3.4.1</a>.  Profiles</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.1.%20%20Profiles"></a></body></html><a class="selflink" href="#section-3.4.1" id="section-3.4.1">3.4.1</a>.  Profiles</span>
 
    Profiling is a common technique for improving interoperability within
    a target environment or set of scenarios.  Generally speaking, there
@@ -958,7 +937,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1014,11 +993,11 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Testability"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  Testability</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Testability"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  Testability</span>
 
    Experience has shown that it is insufficient merely to specify
    extensibility and backward compatibility correctly in an RFC.  It is
@@ -1042,10 +1021,10 @@ Table of Contents
    behavior of extension mechanisms and should include examples of
    correct extension behavior.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20Protocol%20Parameter%20Registration"></a></body></html><a class="selflink" href="#section-3.6" name="section-3.6">3.6</a>.  Protocol Parameter Registration</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20Protocol%20Parameter%20Registration"></a></body></html><a class="selflink" href="#section-3.6" id="section-3.6">3.6</a>.  Protocol Parameter Registration</span>
 
    As noted in <a href="#section-3.2">Section 3.2</a> of "Procedures for Protocol Extensions and
-   Variations" <a href="./bcp125.html">BCP 125</a> [<a href="./rfc4775.html" title='"Procedures for Protocol Extensions and Variations"'>RFC4775</a>]:
+   Variations" <a href="https://www.rfc-editor.org/bcp/bcp125">BCP 125</a> [<a href="./rfc4775.html" title='"Procedures for Protocol Extensions and Variations"'>RFC4775</a>]:
 
       An extension is often likely to make use of additional values
       added to an existing IANA registry....  It is essential that such
@@ -1070,7 +1049,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1085,7 +1064,7 @@ Table of Contents
    common case is the use of unregistered URI schemes.  Numerous cases
    could be cited, but not without embarrassing specific implementers.
    For general rules, see the IANA Considerations guidelines document
-   [<a href="./rfc5226.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC5226</a>], and for specific rules and registries, see the individual
+   [<a href="./rfc5226.html" title="">RFC5226</a>], and for specific rules and registries, see the individual
    protocol specification RFCs and the IANA web site.
 
    While in theory a "Standards Track" or "IETF Consensus" parameter
@@ -1100,7 +1079,7 @@ Table of Contents
    processes need to be changed to support the role of a registry as
    "documentation of how the Internet is operating".
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.%20%20Extensions%20to%20Critical%20Protocols"></a></body></html><a class="selflink" href="#section-3.7" name="section-3.7">3.7</a>.  Extensions to Critical Protocols</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.7.%20%20Extensions%20to%20Critical%20Protocols"></a></body></html><a class="selflink" href="#section-3.7" id="section-3.7">3.7</a>.  Extensions to Critical Protocols</span>
 
    Some protocols (such as the Domain Name System (DNS), the Border
    Gateway Protocol (BGP), and the Hypertext Transfer Protocol (HTTP))
@@ -1126,7 +1105,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1147,7 +1126,7 @@ Table of Contents
    originating node receives no indicators of remote failures it may
    have triggered.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Considerations%20for%20the%20Base%20Protocol"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Considerations for the Base Protocol</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Considerations%20for%20the%20Base%20Protocol"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Considerations for the Base Protocol</span>
 
    Good extension design depends on a well-designed base protocol.  To
    promote interoperability, designers should:
@@ -1182,7 +1161,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1205,7 +1184,7 @@ Table of Contents
        when an extension (such as a new data type) is likely to require
        a code change within existing implementations?
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Version%20Numbers"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Version Numbers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Version%20Numbers"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Version Numbers</span>
 
    Any mechanism for extension by versioning must include provisions to
    ensure interoperability, or at least clean failure modes.  Imagine
@@ -1238,7 +1217,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1294,7 +1273,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1350,7 +1329,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1396,7 +1375,7 @@ Table of Contents
    least managed to implement the version-negotiation mechanism
    correctly.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Reserved%20Fields"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Reserved Fields</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Reserved%20Fields"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Reserved Fields</span>
 
    Protocols commonly include one or more "reserved" fields, clearly
    intended for future extensions.  It is good practice to specify the
@@ -1406,7 +1385,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1424,7 +1403,7 @@ Table of Contents
    (headers, TLVs, etc.), such that failures occur only when that is
    truly the intended outcome.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Encoding%20Formats"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Encoding Formats</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Encoding%20Formats"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Encoding Formats</span>
 
    Using widely supported encoding formats leads to better
    interoperability and easier extensibility.
@@ -1447,7 +1426,7 @@ Table of Contents
    any MIB designer needing to define objects containing IP addresses,
    thus ensuring consistency as the body of MIBs is extended.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Parameter%20Space%20Design"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Parameter Space Design</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Parameter%20Space%20Design"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Parameter Space Design</span>
 
    In some protocols, the parameter space either has no specified limit
    (e.g., Header field names) or is sufficiently large that it is
@@ -1462,7 +1441,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1476,7 +1455,7 @@ Table of Contents
        the development of the PEAPv2 protocol [<a href="#ref-PEAP" title='"Protected EAP Protocol (PEAP) Version 2"'>PEAP</a>].
 
    b.  A small parameter space (e.g., 8 bits or less) along with a First
-       Come, First Served (FCFS) allocation policy [<a href="./rfc5226.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC5226</a>].  In
+       Come, First Served (FCFS) allocation policy [<a href="./rfc5226.html" title="">RFC5226</a>].  In
        general, an FCFS allocation policy is only appropriate in
        situations where parameter exhaustion is highly unlikely.  In
        situations where substantial demand is anticipated within a
@@ -1508,7 +1487,7 @@ Table of Contents
 
       For example, a few years after publication of PPP EAP [<a href="./rfc2284.html" title='"PPP Extensible Authentication Protocol (EAP)"'>RFC2284</a>] in
       1998, it became clear that the combination of an FCFS allocation
-      policy [<a href="./rfc5226.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC5226</a>] and lack of support for vendor-extensions had
+      policy [<a href="./rfc5226.html" title="">RFC5226</a>] and lack of support for vendor-extensions had
       created the potential for exhaustion of the EAP Method Type space
       within a few years.  To address the issue, <a href="#section-6.2">Section 6.2</a> of the 2004
       update [<a href="./rfc3748.html" title='"Extensible Authentication Protocol (EAP)"'>RFC3748</a>] changed the allocation policy for EAP Method
@@ -1518,7 +1497,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1574,7 +1553,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1588,12 +1567,12 @@ Table of Contents
       is best for the desired capabilities to be carefully thought
       through at the time of registry establishment.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Cryptographic%20Agility"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  Cryptographic Agility</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Cryptographic%20Agility"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  Cryptographic Agility</span>
 
    Extensibility with respect to cryptographic algorithms is desirable
    in order to provide resilience against the compromise of any
    particular algorithm.  <a href="#section-3">Section 3</a> of "Guidance for Authentication,
-   Authorization, and Accounting (AAA) Key Management" <a href="./bcp132.html">BCP 132</a> [<a href="./rfc4962.html" title='"Guidance for Authentication, Authorization, and Accounting (AAA) Key Management"'>RFC4962</a>]
+   Authorization, and Accounting (AAA) Key Management" <a href="https://www.rfc-editor.org/bcp/bcp132">BCP 132</a> [<a href="./rfc4962.html" title='"Guidance for Authentication, Authorization, and Accounting (AAA) Key Management"'>RFC4962</a>]
    provides some basic advice:
 
       The ability to negotiate the use of a particular cryptographic
@@ -1630,7 +1609,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1640,7 +1619,7 @@ Table of Contents
    algorithms, it may not be possible to secure the cryptographic
    negotiation while retaining backward compatibility.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Transport"></a></body></html><a class="selflink" href="#section-4.6" name="section-4.6">4.6</a>.  Transport</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Transport"></a></body></html><a class="selflink" href="#section-4.6" id="section-4.6">4.6</a>.  Transport</span>
 
    In the past, IETF protocols have been specified to operate over
    multiple transports.  Often the protocol was originally specified to
@@ -1686,7 +1665,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1711,7 +1690,7 @@ Table of Contents
    transport protocols, resulting in non-interoperable protocol
    variants.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Handling%20of%20Unknown%20Extensions"></a></body></html><a class="selflink" href="#section-4.7" name="section-4.7">4.7</a>.  Handling of Unknown Extensions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Handling%20of%20Unknown%20Extensions"></a></body></html><a class="selflink" href="#section-4.7" id="section-4.7">4.7</a>.  Handling of Unknown Extensions</span>
 
    IETF protocols have utilized several techniques for the handling of
    unknown extensions.  One technique (often used for vendor-specific
@@ -1742,7 +1721,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -1765,7 +1744,7 @@ Table of Contents
    "Supported" headers in a text-based protocol such as SIP [<a href="./rfc3261.html" title='"SIP: Session Initiation Protocol"'>RFC3261</a>] or
    HTTP [<a href="./rfc2616.html" title='"Hypertext Transfer Protocol -- HTTP/1.1"'>RFC2616</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    An extension must not introduce new security risks without also
    providing adequate countermeasures; in particular, it must not
@@ -1798,55 +1777,55 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC4775" name="ref-RFC4775">RFC4775</a>]  Bradner, S., Carpenter, B., Ed., and T. Narten,
-              "Procedures for Protocol Extensions and Variations", <a href="./bcp125.html">BCP</a>
-              <a href="./bcp125.html">125</a>, <a href="./rfc4775.html">RFC 4775</a>, December 2006.
+   [<a id="ref-RFC4775">RFC4775</a>]  Bradner, S., Carpenter, B., Ed., and T. Narten,
+              "Procedures for Protocol Extensions and Variations", <a href="https://www.rfc-editor.org/bcp/bcp125">BCP</a>
+              <a href="https://www.rfc-editor.org/bcp/bcp125">125</a>, <a href="./rfc4775.html">RFC 4775</a>, December 2006.
 
-   [<a id="ref-RFC5226" name="ref-RFC5226">RFC5226</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
-              IANA Considerations Section in RFCs", <a href="./bcp26.html">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a>,
+   [<a id="ref-RFC5226">RFC5226</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", <a href="https://www.rfc-editor.org/bcp/bcp26">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a>,
               May 2008.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Informative References</span>
 
-   [<a id="ref-ERROR-HANDLING" name="ref-ERROR-HANDLING">ERROR-HANDLING</a>]
+   [<a id="ref-ERROR-HANDLING">ERROR-HANDLING</a>]
               Scudder, J., Chen, E., Mohapatra, P., and K. Patel,
               "Revised Error Handling for BGP UPDATE Messages", Work in
               Progress, June 2012.
 
-   [<a id="ref-ID-COMPARISON" name="ref-ID-COMPARISON">ID-COMPARISON</a>]
+   [<a id="ref-ID-COMPARISON">ID-COMPARISON</a>]
               Thaler, D., "Issues in Identifier Comparison for Security
               Purposes", Work in Progress, August 2012.
 
-   [<a id="ref-IEEE-802.1X" name="ref-IEEE-802.1X">IEEE-802.1X</a>]
+   [<a id="ref-IEEE-802.1X">IEEE-802.1X</a>]
               Institute of Electrical and Electronics Engineers, "Local
               and Metropolitan Area Networks: Port-Based Network Access
               Control", IEEE Standard 802.1X-2004, December 2004.
 
-   [<a id="ref-LISP" name="ref-LISP">LISP</a>]     Farinacci, D., Fuller, V., Meyer, D., and D. Lewis,
+   [<a id="ref-LISP">LISP</a>]     Farinacci, D., Fuller, V., Meyer, D., and D. Lewis,
               "Locator/ID Separation Protocol (LISP)", Work in Progress,
               May 2012.
 
-   [<a id="ref-PEAP" name="ref-PEAP">PEAP</a>]     Palekar, A., Simon, D., Salowey, J., Zhou, H., Zorn, G.,
+   [<a id="ref-PEAP">PEAP</a>]     Palekar, A., Simon, D., Salowey, J., Zhou, H., Zorn, G.,
               and S. Josefsson, "Protected EAP Protocol (PEAP) Version
               2", Work in Progress, October 2004.
 
-   [<a id="ref-PRECIS-FRAMEWORK" name="ref-PRECIS-FRAMEWORK">PRECIS-FRAMEWORK</a>]
+   [<a id="ref-PRECIS-FRAMEWORK">PRECIS-FRAMEWORK</a>]
               Saint-Andre, P. and M. Blanchet, "PRECIS Framework:
               Preparation and Comparison of Internationalized Strings in
               Application Protocols", Work in Progress, August 2012.
 
-   [<a id="ref-PRECIS-STATEMENT" name="ref-PRECIS-STATEMENT">PRECIS-STATEMENT</a>]
+   [<a id="ref-PRECIS-STATEMENT">PRECIS-STATEMENT</a>]
               Blanchet, M. and A. Sullivan, "Stringprep Revision and
               PRECIS Problem Statement", Work in Progress, August 2012.
 
@@ -1854,111 +1833,111 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
-   [<a id="ref-RFC822" name="ref-RFC822">RFC822</a>]   Crocker, D., "STANDARD FOR THE FORMAT OF ARPA INTERNET
+   [<a id="ref-RFC822">RFC822</a>]   Crocker, D., "STANDARD FOR THE FORMAT OF ARPA INTERNET
               TEXT MESSAGES", STD 11, <a href="./rfc822.html">RFC 822</a>, August 1982.
 
-   [<a id="ref-RFC1263" name="ref-RFC1263">RFC1263</a>]  O'Malley, S. and L. Peterson, "TCP Extensions Considered
+   [<a id="ref-RFC1263">RFC1263</a>]  O'Malley, S. and L. Peterson, "TCP Extensions Considered
               Harmful", <a href="./rfc1263.html">RFC 1263</a>, October 1991.
 
-   [<a id="ref-RFC1341" name="ref-RFC1341">RFC1341</a>]  Borenstein, N. and N. Freed, "MIME (Multipurpose Internet
+   [<a id="ref-RFC1341">RFC1341</a>]  Borenstein, N. and N. Freed, "MIME (Multipurpose Internet
               Mail Extensions): Mechanisms for Specifying and Describing
               the Format of Internet Message Bodies", <a href="./rfc1341.html">RFC 1341</a>, June
               1992.
 
-   [<a id="ref-RFC1521" name="ref-RFC1521">RFC1521</a>]  Borenstein, N. and N. Freed, "MIME (Multipurpose Internet
+   [<a id="ref-RFC1521">RFC1521</a>]  Borenstein, N. and N. Freed, "MIME (Multipurpose Internet
               Mail Extensions) Part One: Mechanisms for Specifying and
               Describing the Format of Internet Message Bodies", <a href="./rfc1521.html">RFC</a>
               <a href="./rfc1521.html">1521</a>, September 1993.
 
-   [<a id="ref-RFC2058" name="ref-RFC2058">RFC2058</a>]  Rigney, C., Rubens, A., Simpson, W., and S. Willens,
+   [<a id="ref-RFC2058">RFC2058</a>]  Rigney, C., Rubens, A., Simpson, W., and S. Willens,
               "Remote Authentication Dial In User Service (RADIUS)", <a href="./rfc2058.html">RFC</a>
               <a href="./rfc2058.html">2058</a>, January 1997.
 
-   [<a id="ref-RFC2132" name="ref-RFC2132">RFC2132</a>]  Alexander, S. and R. Droms, "DHCP Options and BOOTP Vendor
+   [<a id="ref-RFC2132">RFC2132</a>]  Alexander, S. and R. Droms, "DHCP Options and BOOTP Vendor
               Extensions", <a href="./rfc2132.html">RFC 2132</a>, March 1997.
 
-   [<a id="ref-RFC2246" name="ref-RFC2246">RFC2246</a>]  Dierks, T. and C. Allen, "The TLS Protocol Version 1.0",
+   [<a id="ref-RFC2246">RFC2246</a>]  Dierks, T. and C. Allen, "The TLS Protocol Version 1.0",
               <a href="./rfc2246.html">RFC 2246</a>, January 1999.
 
-   [<a id="ref-RFC2284" name="ref-RFC2284">RFC2284</a>]  Blunk, L. and J. Vollbrecht, "PPP Extensible
+   [<a id="ref-RFC2284">RFC2284</a>]  Blunk, L. and J. Vollbrecht, "PPP Extensible
               Authentication Protocol (EAP)", <a href="./rfc2284.html">RFC 2284</a>, March 1998.
 
-   [<a id="ref-RFC2474" name="ref-RFC2474">RFC2474</a>]  Nichols, K., Blake, S., Baker, F., and D. Black,
+   [<a id="ref-RFC2474">RFC2474</a>]  Nichols, K., Blake, S., Baker, F., and D. Black,
               "Definition of the Differentiated Services Field (DS
               Field) in the IPv4 and IPv6 Headers", <a href="./rfc2474.html">RFC 2474</a>, December
               1998.
 
-   [<a id="ref-RFC2616" name="ref-RFC2616">RFC2616</a>]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
+   [<a id="ref-RFC2616">RFC2616</a>]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
               Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
               Transfer Protocol -- HTTP/1.1", <a href="./rfc2616.html">RFC 2616</a>, June 1999.
 
-   [<a id="ref-RFC2661" name="ref-RFC2661">RFC2661</a>]  Townsley, W., Valencia, A., Rubens, A., Pall, G., Zorn,
+   [<a id="ref-RFC2661">RFC2661</a>]  Townsley, W., Valencia, A., Rubens, A., Pall, G., Zorn,
               G., and B. Palter, "Layer Two Tunneling Protocol "L2TP"",
               <a href="./rfc2661.html">RFC 2661</a>, August 1999.
 
-   [<a id="ref-RFC2671" name="ref-RFC2671">RFC2671</a>]  Vixie, P., "Extension Mechanisms for DNS (EDNS0)", <a href="./rfc2671.html">RFC</a>
+   [<a id="ref-RFC2671">RFC2671</a>]  Vixie, P., "Extension Mechanisms for DNS (EDNS0)", <a href="./rfc2671.html">RFC</a>
               <a href="./rfc2671.html">2671</a>, August 1999.
 
-   [<a id="ref-RFC2822" name="ref-RFC2822">RFC2822</a>]  Resnick, P., Ed., "Internet Message Format", <a href="./rfc2822.html">RFC 2822</a>,
+   [<a id="ref-RFC2822">RFC2822</a>]  Resnick, P., Ed., "Internet Message Format", <a href="./rfc2822.html">RFC 2822</a>,
               April 2001.
 
 
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
-   [<a id="ref-RFC2865" name="ref-RFC2865">RFC2865</a>]  Rigney, C., Willens, S., Rubens, A., and W. Simpson,
+   [<a id="ref-RFC2865">RFC2865</a>]  Rigney, C., Willens, S., Rubens, A., and W. Simpson,
               "Remote Authentication Dial In User Service (RADIUS)", <a href="./rfc2865.html">RFC</a>
               <a href="./rfc2865.html">2865</a>, June 2000.
 
-   [<a id="ref-RFC2882" name="ref-RFC2882">RFC2882</a>]  Mitton, D., "Network Access Servers Requirements: Extended
+   [<a id="ref-RFC2882">RFC2882</a>]  Mitton, D., "Network Access Servers Requirements: Extended
               RADIUS Practices", <a href="./rfc2882.html">RFC 2882</a>, July 2000.
 
-   [<a id="ref-RFC3095" name="ref-RFC3095">RFC3095</a>]  Bormann, C., Burmeister, C., Degermark, M., Fukushima, H.,
+   [<a id="ref-RFC3095">RFC3095</a>]  Bormann, C., Burmeister, C., Degermark, M., Fukushima, H.,
               Hannu, H., Jonsson, L-E., Hakenberg, R., Koren, T., Le,
               K., Liu, Z., Martensson, A., Miyazaki, A., Svanbro, K.,
               Wiebke, T., Yoshimura, T., and H. Zheng, "RObust Header
               Compression (ROHC): Framework and four profiles: RTP, UDP,
               ESP, and uncompressed", <a href="./rfc3095.html">RFC 3095</a>, July 2001.
 
-   [<a id="ref-RFC3261" name="ref-RFC3261">RFC3261</a>]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
+   [<a id="ref-RFC3261">RFC3261</a>]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
               A., Peterson, J., Sparks, R., Handley, M., and E.
               Schooler, "SIP: Session Initiation Protocol", <a href="./rfc3261.html">RFC 3261</a>,
               June 2002.
 
-   [<a id="ref-RFC3427" name="ref-RFC3427">RFC3427</a>]  Mankin, A., Bradner, S., Mahy, R., Willis, D., Ott, J.,
+   [<a id="ref-RFC3427">RFC3427</a>]  Mankin, A., Bradner, S., Mahy, R., Willis, D., Ott, J.,
               and B. Rosen, "Change Process for the Session Initiation
               Protocol (SIP)", <a href="./rfc3427.html">RFC 3427</a>, December 2002.
 
-   [<a id="ref-RFC3575" name="ref-RFC3575">RFC3575</a>]  Aboba, B., "IANA Considerations for RADIUS (Remote
+   [<a id="ref-RFC3575">RFC3575</a>]  Aboba, B., "IANA Considerations for RADIUS (Remote
               Authentication Dial In User Service)", <a href="./rfc3575.html">RFC 3575</a>, July
               2003.
 
-   [<a id="ref-RFC3588" name="ref-RFC3588">RFC3588</a>]  Calhoun, P., Loughney, J., Guttman, E., Zorn, G., and J.
+   [<a id="ref-RFC3588">RFC3588</a>]  Calhoun, P., Loughney, J., Guttman, E., Zorn, G., and J.
               Arkko, "Diameter Base Protocol", <a href="./rfc3588.html">RFC 3588</a>, September 2003.
 
-   [<a id="ref-RFC3597" name="ref-RFC3597">RFC3597</a>]  Gustafsson, A., "Handling of Unknown DNS Resource Record
+   [<a id="ref-RFC3597">RFC3597</a>]  Gustafsson, A., "Handling of Unknown DNS Resource Record
               (RR) Types", <a href="./rfc3597.html">RFC 3597</a>, September 2003.
 
-   [<a id="ref-RFC3692" name="ref-RFC3692">RFC3692</a>]  Narten, T., "Assigning Experimental and Testing Numbers
-              Considered Useful", <a href="./bcp82.html">BCP 82</a>, <a href="./rfc3692.html">RFC 3692</a>, January 2004.
+   [<a id="ref-RFC3692">RFC3692</a>]  Narten, T., "Assigning Experimental and Testing Numbers
+              Considered Useful", <a href="https://www.rfc-editor.org/bcp/bcp82">BCP 82</a>, <a href="./rfc3692.html">RFC 3692</a>, January 2004.
 
-   [<a id="ref-RFC3735" name="ref-RFC3735">RFC3735</a>]  Hollenbeck, S., "Guidelines for Extending the Extensible
+   [<a id="ref-RFC3735">RFC3735</a>]  Hollenbeck, S., "Guidelines for Extending the Extensible
               Provisioning Protocol (EPP)", <a href="./rfc3735.html">RFC 3735</a>, March 2004.
 
-   [<a id="ref-RFC3748" name="ref-RFC3748">RFC3748</a>]  Aboba, B., Blunk, L., Vollbrecht, J., Carlson, J., and H.
+   [<a id="ref-RFC3748">RFC3748</a>]  Aboba, B., Blunk, L., Vollbrecht, J., Carlson, J., and H.
               Levkowetz, Ed., "Extensible Authentication Protocol
               (EAP)", <a href="./rfc3748.html">RFC 3748</a>, June 2004.
 
-   [<a id="ref-RFC3935" name="ref-RFC3935">RFC3935</a>]  Alvestrand, H., "A Mission Statement for the IETF", <a href="./bcp95.html">BCP</a>
-              <a href="./bcp95.html">95</a>, <a href="./rfc3935.html">RFC 3935</a>, October 2004.
+   [<a id="ref-RFC3935">RFC3935</a>]  Alvestrand, H., "A Mission Statement for the IETF", <a href="https://www.rfc-editor.org/bcp/bcp95">BCP</a>
+              <a href="https://www.rfc-editor.org/bcp/bcp95">95</a>, <a href="./rfc3935.html">RFC 3935</a>, October 2004.
 
 
 
@@ -1966,106 +1945,106 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
-   [<a id="ref-RFC4001" name="ref-RFC4001">RFC4001</a>]  Daniele, M., Haberman, B., Routhier, S., and J.
+   [<a id="ref-RFC4001">RFC4001</a>]  Daniele, M., Haberman, B., Routhier, S., and J.
               Schoenwaelder, "Textual Conventions for Internet Network
               Addresses", <a href="./rfc4001.html">RFC 4001</a>, February 2005.
 
-   [<a id="ref-RFC4181" name="ref-RFC4181">RFC4181</a>]  Heard, C., Ed., "Guidelines for Authors and Reviewers of
-              MIB Documents", <a href="./bcp111.html">BCP 111</a>, <a href="./rfc4181.html">RFC 4181</a>, September 2005.
+   [<a id="ref-RFC4181">RFC4181</a>]  Heard, C., Ed., "Guidelines for Authors and Reviewers of
+              MIB Documents", <a href="https://www.rfc-editor.org/bcp/bcp111">BCP 111</a>, <a href="./rfc4181.html">RFC 4181</a>, September 2005.
 
-   [<a id="ref-RFC4366" name="ref-RFC4366">RFC4366</a>]  Blake-Wilson, S., Nystrom, M., Hopwood, D., Mikkelsen, J.,
+   [<a id="ref-RFC4366">RFC4366</a>]  Blake-Wilson, S., Nystrom, M., Hopwood, D., Mikkelsen, J.,
               and T. Wright, "Transport Layer Security (TLS)
               Extensions", <a href="./rfc4366.html">RFC 4366</a>, April 2006.
 
-   [<a id="ref-RFC4485" name="ref-RFC4485">RFC4485</a>]  Rosenberg, J. and H. Schulzrinne, "Guidelines for Authors
+   [<a id="ref-RFC4485">RFC4485</a>]  Rosenberg, J. and H. Schulzrinne, "Guidelines for Authors
               of Extensions to the Session Initiation Protocol (SIP)",
               <a href="./rfc4485.html">RFC 4485</a>, May 2006.
 
-   [<a id="ref-RFC4521" name="ref-RFC4521">RFC4521</a>]  Zeilenga, K., "Considerations for Lightweight Directory
-              Access Protocol (LDAP) Extensions", <a href="./bcp118.html">BCP 118</a>, <a href="./rfc4521.html">RFC 4521</a>,
+   [<a id="ref-RFC4521">RFC4521</a>]  Zeilenga, K., "Considerations for Lightweight Directory
+              Access Protocol (LDAP) Extensions", <a href="https://www.rfc-editor.org/bcp/bcp118">BCP 118</a>, <a href="./rfc4521.html">RFC 4521</a>,
               June 2006.
 
-   [<a id="ref-RFC4727" name="ref-RFC4727">RFC4727</a>]  Fenner, B., "Experimental Values In IPv4, IPv6, ICMPv4,
+   [<a id="ref-RFC4727">RFC4727</a>]  Fenner, B., "Experimental Values In IPv4, IPv6, ICMPv4,
               ICMPv6, UDP, and TCP Headers", <a href="./rfc4727.html">RFC 4727</a>, November 2006.
 
-   [<a id="ref-RFC4929" name="ref-RFC4929">RFC4929</a>]  Andersson, L., Ed., and A. Farrel, Ed., "Change Process
+   [<a id="ref-RFC4929">RFC4929</a>]  Andersson, L., Ed., and A. Farrel, Ed., "Change Process
               for Multiprotocol Label Switching (MPLS) and Generalized
-              MPLS (GMPLS) Protocols and Procedures", <a href="./bcp129.html">BCP 129</a>, <a href="./rfc4929.html">RFC 4929</a>,
+              MPLS (GMPLS) Protocols and Procedures", <a href="https://www.rfc-editor.org/bcp/bcp129">BCP 129</a>, <a href="./rfc4929.html">RFC 4929</a>,
               June 2007.
 
-   [<a id="ref-RFC4962" name="ref-RFC4962">RFC4962</a>]  Housley, R. and B. Aboba, "Guidance for Authentication,
-              Authorization, and Accounting (AAA) Key Management", <a href="./bcp132.html">BCP</a>
-              <a href="./bcp132.html">132</a>, <a href="./rfc4962.html">RFC 4962</a>, July 2007.
+   [<a id="ref-RFC4962">RFC4962</a>]  Housley, R. and B. Aboba, "Guidance for Authentication,
+              Authorization, and Accounting (AAA) Key Management", <a href="https://www.rfc-editor.org/bcp/bcp132">BCP</a>
+              <a href="https://www.rfc-editor.org/bcp/bcp132">132</a>, <a href="./rfc4962.html">RFC 4962</a>, July 2007.
 
-   [<a id="ref-RFC5080" name="ref-RFC5080">RFC5080</a>]  Nelson, D. and A. DeKok, "Common Remote Authentication
+   [<a id="ref-RFC5080">RFC5080</a>]  Nelson, D. and A. DeKok, "Common Remote Authentication
               Dial In User Service (RADIUS) Implementation Issues and
               Suggested Fixes", <a href="./rfc5080.html">RFC 5080</a>, December 2007.
 
-   [<a id="ref-RFC5201" name="ref-RFC5201">RFC5201</a>]  Moskowitz, R., Nikander, P., Jokela, P., Ed., and T.
+   [<a id="ref-RFC5201">RFC5201</a>]  Moskowitz, R., Nikander, P., Jokela, P., Ed., and T.
               Henderson, "Host Identity Protocol", <a href="./rfc5201.html">RFC 5201</a>, April 2008.
 
-   [<a id="ref-RFC5218" name="ref-RFC5218">RFC5218</a>]  Thaler, D. and B. Aboba, "What Makes For a Successful
+   [<a id="ref-RFC5218">RFC5218</a>]  Thaler, D. and B. Aboba, "What Makes For a Successful
               Protocol?", <a href="./rfc5218.html">RFC 5218</a>, July 2008.
 
-   [<a id="ref-RFC5225" name="ref-RFC5225">RFC5225</a>]  Pelletier, G. and K. Sandlund, "RObust Header Compression
+   [<a id="ref-RFC5225">RFC5225</a>]  Pelletier, G. and K. Sandlund, "RObust Header Compression
               Version 2 (ROHCv2): Profiles for RTP, UDP, IP, ESP and
               UDP-Lite", <a href="./rfc5225.html">RFC 5225</a>, April 2008.
 
-   [<a id="ref-RFC5246" name="ref-RFC5246">RFC5246</a>]  Dierks, T. and E. Rescorla, "The Transport Layer Security
+   [<a id="ref-RFC5246">RFC5246</a>]  Dierks, T. and E. Rescorla, "The Transport Layer Security
               (TLS) Protocol Version 1.2", <a href="./rfc5246.html">RFC 5246</a>, August 2008.
 
 
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
-   [<a id="ref-RFC5321" name="ref-RFC5321">RFC5321</a>]  Klensin, J., "Simple Mail Transfer Protocol", <a href="./rfc5321.html">RFC 5321</a>,
+   [<a id="ref-RFC5321">RFC5321</a>]  Klensin, J., "Simple Mail Transfer Protocol", <a href="./rfc5321.html">RFC 5321</a>,
               October 2008.
 
-   [<a id="ref-RFC5405" name="ref-RFC5405">RFC5405</a>]  Eggert, L. and G. Fairhurst, "Unicast UDP Usage Guidelines
-              for Application Designers", <a href="./bcp145.html">BCP 145</a>, <a href="./rfc5405.html">RFC 5405</a>, November
+   [<a id="ref-RFC5405">RFC5405</a>]  Eggert, L. and G. Fairhurst, "Unicast UDP Usage Guidelines
+              for Application Designers", <a href="https://www.rfc-editor.org/bcp/bcp145">BCP 145</a>, <a href="./rfc5405.html">RFC 5405</a>, November
               2008.
 
-   [<a id="ref-RFC5421" name="ref-RFC5421">RFC5421</a>]  Cam-Winget, N. and H. Zhou, "Basic Password Exchange
+   [<a id="ref-RFC5421">RFC5421</a>]  Cam-Winget, N. and H. Zhou, "Basic Password Exchange
               within the Flexible Authentication via Secure Tunneling
               Extensible Authentication Protocol (EAP-FAST)", <a href="./rfc5421.html">RFC 5421</a>,
               March 2009.
 
-   [<a id="ref-RFC5422" name="ref-RFC5422">RFC5422</a>]  Cam-Winget, N., McGrew, D., Salowey, J., and H. Zhou,
+   [<a id="ref-RFC5422">RFC5422</a>]  Cam-Winget, N., McGrew, D., Salowey, J., and H. Zhou,
               "Dynamic Provisioning Using Flexible Authentication via
               Secure Tunneling Extensible Authentication Protocol (EAP-
               FAST)", <a href="./rfc5422.html">RFC 5422</a>, March 2009.
 
-   [<a id="ref-RFC5704" name="ref-RFC5704">RFC5704</a>]  Bryant, S., Ed., Morrow, M., Ed., and IAB, "Uncoordinated
+   [<a id="ref-RFC5704">RFC5704</a>]  Bryant, S., Ed., Morrow, M., Ed., and IAB, "Uncoordinated
               Protocol Development Considered Harmful", <a href="./rfc5704.html">RFC 5704</a>,
               November 2009.
 
-   [<a id="ref-RFC5727" name="ref-RFC5727">RFC5727</a>]  Peterson, J., Jennings, C., and R. Sparks, "Change Process
+   [<a id="ref-RFC5727">RFC5727</a>]  Peterson, J., Jennings, C., and R. Sparks, "Change Process
               for the Session Initiation Protocol (SIP) and the Real-
-              time Applications and Infrastructure Area", <a href="./bcp67.html">BCP 67</a>, <a href="./rfc5727.html">RFC</a>
+              time Applications and Infrastructure Area", <a href="https://www.rfc-editor.org/bcp/bcp67">BCP 67</a>, <a href="./rfc5727.html">RFC</a>
               <a href="./rfc5727.html">5727</a>, March 2010.
 
-   [<a id="ref-RFC5996" name="ref-RFC5996">RFC5996</a>]  Kaufman, C., Hoffman, P., Nir, Y., and P. Eronen,
+   [<a id="ref-RFC5996">RFC5996</a>]  Kaufman, C., Hoffman, P., Nir, Y., and P. Eronen,
               "Internet Key Exchange Protocol Version 2 (IKEv2)", <a href="./rfc5996.html">RFC</a>
               <a href="./rfc5996.html">5996</a>, September 2010.
 
-   [<a id="ref-RFC6055" name="ref-RFC6055">RFC6055</a>]  Thaler, D., Klensin, J., and S. Cheshire, "IAB Thoughts on
+   [<a id="ref-RFC6055">RFC6055</a>]  Thaler, D., Klensin, J., and S. Cheshire, "IAB Thoughts on
               Encodings for Internationalized Domain Names", <a href="./rfc6055.html">RFC 6055</a>,
               February 2011.
 
-   [<a id="ref-RFC6158" name="ref-RFC6158">RFC6158</a>]  DeKok, A., Ed., and G. Weber, "RADIUS Design Guidelines",
-              <a href="./bcp158.html">BCP 158</a>, <a href="./rfc6158.html">RFC 6158</a>, March 2011.
+   [<a id="ref-RFC6158">RFC6158</a>]  DeKok, A., Ed., and G. Weber, "RADIUS Design Guidelines",
+              <a href="https://www.rfc-editor.org/bcp/bcp158">BCP 158</a>, <a href="./rfc6158.html">RFC 6158</a>, March 2011.
 
-   [<a id="ref-RFC6648" name="ref-RFC6648">RFC6648</a>]  Saint-Andre, P., Crocker, D., and M. Nottingham,
+   [<a id="ref-RFC6648">RFC6648</a>]  Saint-Andre, P., Crocker, D., and M. Nottingham,
               "Deprecating the "X-" Prefix and Similar Constructs in
-              Application Protocols", <a href="./bcp178.html">BCP 178</a>, <a href="./rfc6648.html">RFC 6648</a>, June 2012.
+              Application Protocols", <a href="https://www.rfc-editor.org/bcp/bcp178">BCP 178</a>, <a href="./rfc6648.html">RFC 6648</a>, June 2012.
 
 
 
@@ -2078,11 +2057,11 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgments</span>
 
    This document is heavily based on an earlier draft by Scott Bradner
    and Thomas Narten, other parts of which were eventually published as
@@ -2100,7 +2079,7 @@ Table of Contents
    and Pekka Savola.  The text on TLS experience was contributed by
    Yngve Pettersen.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20IAB%20Members%20at%20the%20Time%20of%20Approval"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  IAB Members at the Time of Approval</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20IAB%20Members%20at%20the%20Time%20of%20Approval"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  IAB Members at the Time of Approval</span>
 
    Bernard Aboba
    Jari Arkko
@@ -2134,15 +2113,15 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Examples"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Examples</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Examples"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Examples</span>
 
    This section discusses some specific examples as case studies.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Already-Documented%20Cases"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>.  Already-Documented Cases</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Already-Documented%20Cases"></a></body></html><a class="selflink" href="#appendix-A.1" id="appendix-A.1">A.1</a>.  Already-Documented Cases</span>
 
    There are certain documents that specify a change process or describe
    extension considerations for specific IETF protocols:
@@ -2156,9 +2135,9 @@ Table of Contents
 
    It is relatively common for MIBs, which are all in effect extensions
    of the SMI data model, to be defined or extended outside the IETF.
-   <a href="./bcp111.html">BCP 111</a> [<a href="./rfc4181.html" title='"Guidelines for Authors and Reviewers of MIB Documents"'>RFC4181</a>] offers detailed guidance for authors and reviewers.
+   <a href="https://www.rfc-editor.org/bcp/bcp111">BCP 111</a> [<a href="./rfc4181.html" title='"Guidelines for Authors and Reviewers of MIB Documents"'>RFC4181</a>] offers detailed guidance for authors and reviewers.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20RADIUS%20Extensions"></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>.  RADIUS Extensions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20RADIUS%20Extensions"></a></body></html><a class="selflink" href="#appendix-A.2" id="appendix-A.2">A.2</a>.  RADIUS Extensions</span>
 
    The RADIUS [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>] protocol was designed to be extensible via
    addition of Attributes.  This extensibility model assumed that
@@ -2190,7 +2169,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -2236,7 +2215,7 @@ Table of Contents
    defined that would not be supportable by current implementations if
    placed within the standard RADIUS attribute space, this has caused
    problems in standardizing widely deployed VSAs, as discussed in
-   <a href="#section-2.4">Section 2.4</a> of "RADIUS Design Guidelines" <a href="./bcp158.html">BCP 158</a> [<a href="./rfc6158.html" title='"RADIUS Design Guidelines"'>RFC6158</a>]:
+   <a href="#section-2.4">Section 2.4</a> of "RADIUS Design Guidelines" <a href="https://www.rfc-editor.org/bcp/bcp158">BCP 158</a> [<a href="./rfc6158.html" title='"RADIUS Design Guidelines"'>RFC6158</a>]:
 
       RADIUS attributes can often be developed within the vendor space
       without loss (and possibly even with gain) in functionality.  As a
@@ -2246,7 +2225,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -2289,7 +2268,7 @@ Table of Contents
    defined new values of the Service-Type attribute in order to create
    new RADIUS commands.  Since the RADIUS specification [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>]
    defined Service-Type values as being allocated First Come, First
-   Served (FCFS) [<a href="./rfc5226.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC5226</a>], this permitted new RADIUS commands to be
+   Served (FCFS) [<a href="./rfc5226.html" title="">RFC5226</a>], this permitted new RADIUS commands to be
    allocated without IETF review.  This oversight has since been fixed
    in "IANA Considerations for RADIUS" [<a href="./rfc3575.html" title='"IANA Considerations for RADIUS (Remote Authentication Dial In User Service)"'>RFC3575</a>].
 
@@ -2302,11 +2281,11 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20%20TLS%20Extensions"></a></body></html><a class="selflink" href="#appendix-A.3" name="appendix-A.3">A.3</a>.  TLS Extensions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20%20TLS%20Extensions"></a></body></html><a class="selflink" href="#appendix-A.3" id="appendix-A.3">A.3</a>.  TLS Extensions</span>
 
    The Secure Sockets Layer (SSL) Version 2 Protocol was developed by
    Netscape to be used to secure online transactions on the Internet.
@@ -2358,7 +2337,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -2414,7 +2393,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -2425,7 +2404,7 @@ Table of Contents
    implementers to pay attention to implementing extensibility
    mechanisms correctly.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.%20%20L2TP%20Extensions"></a></body></html><a class="selflink" href="#appendix-A.4" name="appendix-A.4">A.4</a>.  L2TP Extensions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.%20%20L2TP%20Extensions"></a></body></html><a class="selflink" href="#appendix-A.4" id="appendix-A.4">A.4</a>.  L2TP Extensions</span>
 
    The Layer Two Tunneling Protocol (L2TP) [<a href="./rfc2661.html" title='"Layer Two Tunneling Protocol "'>RFC2661</a>] carries Attribute-
    Value Pairs (AVPs), with most AVPs having no semantics to the L2TP
@@ -2470,7 +2449,7 @@ Table of Contents
 
 
 <span class="grey">Carpenter, et al.             Informational                    [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc6709.html">RFC 6709</a>          Design Considerations for Extensions    September 2012</span>
 
 
@@ -2526,11 +2505,6 @@ Authors' Addresses
 
 
 Carpenter, et al.             Informational                    [Page 42]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

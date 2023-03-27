@@ -1,26 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-petithuguenin-avtcore-rfc5764-mux-fixes" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:7983" name="DC.Identifier"/>
-<meta content="September, 2016" name="DC.Date.Issued"/>
-<meta content="Petit-Huguenin, Marc" name="DC.Creator"/>
-<meta content="Salgueiro, Gonzalo" name="DC.Creator"/>
-<meta content='This document defines how Datagram Transport Layer Security (DTLS),
-Real-time Transport Protocol (RTP), RTP Control Protocol (RTCP),
-Session Traversal Utilities for NAT (STUN), Traversal Using Relays
-around NAT (TURN), and ZRTP packets are multiplexed on a single
-receiving socket. It overrides the guidance from RFC 5764 ("SRTP
-Extension for DTLS"), which suffered from four issues described and
-fixed in this document.  This document updates RFC 5764.' name="DC.Description.Abstract"/>
-<meta content="Multiplexing Scheme Updates for Secure Real-time Transport Protocol (SRTP) Extension for Datagram Transport Layer Security (DTLS)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7983 - Multiplexing Scheme Updates for Secure Real-time Transport Protocol (SRTP) Extension for Datagram Transport Layer Security (DTLS)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="M. Petit-Huguenin" name="citation_author"/>
+<meta content="G. Salgueiro" name="citation_author"/>
+<meta content="September, 2016" name="citation_publication_date"/>
+<meta content="Multiplexing Scheme Updates for Secure Real-time Transport Protocol (SRTP) Extension for Datagram Transport Layer Security (DTLS)" name="citation_title"/>
+<meta content="10.17487/RFC7983" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7983" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7983.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7983: Multiplexing Scheme Updates for Secure Real-time Transport Protocol (SRTP) Extension for Datagram Transport Layer Security (DTLS)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -49,7 +41,7 @@ fixed in this document.  This document updates RFC 5764.' name="DC.Description.A
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -58,7 +50,7 @@ fixed in this document.  This document updates RFC 5764.' name="DC.Description.A
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -137,19 +129,18 @@ fixed in this document.  This document updates RFC 5764.' name="DC.Description.A
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -163,21 +154,9 @@ fixed in this document.  This document updates RFC 5764.' name="DC.Description.A
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7983.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7983" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-avtcore-rfc5764-mux-fixes.html" title="draft-ietf-avtcore-rfc5764-mux-fixes">draft-ietf-avtcor...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc7983" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc7983" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                 M. Petit-Huguenin
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7983.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7983.txt.pdf">PDF</a>|<a href="/rfc/rfc7983.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7983" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7983&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc7983" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                 M. Petit-Huguenin
 Request for Comments: 7983                            Impedance Mismatch
 Updates: <a href="./rfc5764.html">5764</a>                                               G. Salgueiro
 Category: Standards Track                                  Cisco Systems
@@ -229,7 +208,7 @@ Status of This Memo
 
 
 <span class="grey">Petit-Huguenin &amp; Salgueiro   Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7983.html">RFC 7983</a>        Multiplexing Scheme Updates for <a href="./rfc5764.html">RFC 5764</a>  September 2016</span>
 
 
@@ -238,7 +217,7 @@ Copyright Notice
    Copyright (c) 2016 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -285,11 +264,11 @@ Table of Contents
 
 
 <span class="grey">Petit-Huguenin &amp; Salgueiro   Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7983.html">RFC 7983</a>        Multiplexing Scheme Updates for <a href="./rfc5764.html">RFC 5764</a>  September 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    <a href="#section-5.1.2">Section 5.1.2</a> of "Datagram Transport Layer Security (DTLS) Extension
    to Establish Keys for the Secure Real-time Transport Protocol (SRTP)"
@@ -341,7 +320,7 @@ Table of Contents
 
 
 <span class="grey">Petit-Huguenin &amp; Salgueiro   Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7983.html">RFC 7983</a>        Multiplexing Scheme Updates for <a href="./rfc5764.html">RFC 5764</a>  September 2016</span>
 
 
@@ -360,13 +339,13 @@ Table of Contents
    [<a href="#ref-SDP-BUNDLE">SDP-BUNDLE</a>].  So in addition, these and any other affected documents
    will need to be corrected with the updates this document provides.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Implicit%20Allocation%20of%20Codepoints%20for%20New%20STUN%20Methods"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Implicit Allocation of Codepoints for New STUN Methods</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Implicit%20Allocation%20of%20Codepoints%20for%20New%20STUN%20Methods"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Implicit Allocation of Codepoints for New STUN Methods</span>
 
    The demultiplexing scheme in [<a href="./rfc5764.html" title='"Datagram Transport Layer Security (DTLS) Extension to Establish Keys for the Secure Real-time Transport Protocol (SRTP)"'>RFC5764</a>] states that the receiver can
    identify the packet type by looking at the first byte.  If the value
@@ -397,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Petit-Huguenin &amp; Salgueiro   Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7983.html">RFC 7983</a>        Multiplexing Scheme Updates for <a href="./rfc5764.html">RFC 5764</a>  September 2016</span>
 
 
@@ -417,7 +396,7 @@ Table of Contents
    0x080-0x0FF     Designated Expert
    0x100-0xFFF     Reserved
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Multiplexing%20of%20ZRTP"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Multiplexing of ZRTP</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Multiplexing%20of%20ZRTP"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Multiplexing of ZRTP</span>
 
    ZRTP [<a href="./rfc6189.html" title='"ZRTP: Media Path Key Agreement for Unicast Secure RTP"'>RFC6189</a>] is a protocol for media path Diffie-Hellman exchange
    to agree on a session key and parameters for establishing unicast
@@ -430,7 +409,7 @@ Table of Contents
    demultiplexing algorithm to properly account for ZRTP [<a href="./rfc6189.html" title='"ZRTP: Media Path Key Agreement for Unicast Secure RTP"'>RFC6189</a>] by
    allocating the values from 16 to 19 for this purpose.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Implicit%20Allocation%20of%20New%20Codepoints%20for%20TLS%20ContentTypes"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Implicit Allocation of New Codepoints for TLS ContentTypes</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Implicit%20Allocation%20of%20New%20Codepoints%20for%20TLS%20ContentTypes"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Implicit Allocation of New Codepoints for TLS ContentTypes</span>
 
    The demultiplexing scheme in [<a href="./rfc5764.html" title='"Datagram Transport Layer Security (DTLS) Extension to Establish Keys for the Secure Real-time Transport Protocol (SRTP)"'>RFC5764</a>] dictates that if the value of
    the first byte is between 20 and 63 (inclusive), then the packet is
@@ -453,7 +432,7 @@ Table of Contents
 
 
 <span class="grey">Petit-Huguenin &amp; Salgueiro   Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7983.html">RFC 7983</a>        Multiplexing Scheme Updates for <a href="./rfc5764.html">RFC 5764</a>  September 2016</span>
 
 
@@ -509,11 +488,11 @@ Table of Contents
 
 
 <span class="grey">Petit-Huguenin &amp; Salgueiro   Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7983.html">RFC 7983</a>        Multiplexing Scheme Updates for <a href="./rfc5764.html">RFC 5764</a>  September 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Multiplexing%20of%20TURN%20Channels"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Multiplexing of TURN Channels</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Multiplexing%20of%20TURN%20Channels"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Multiplexing of TURN Channels</span>
 
    When used with Interactive Connectivity Establishment (ICE)
    [<a href="./rfc5245.html" title='"Interactive Connectivity Establishment (ICE): A Protocol for Network Address Translator (NAT) Traversal for Offer/Answer Protocols"'>RFC5245</a>], an implementation of <a href="./rfc5764.html">RFC 5764</a> can receive packets on the
@@ -565,7 +544,7 @@ Table of Contents
 
 
 <span class="grey">Petit-Huguenin &amp; Salgueiro   Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7983.html">RFC 7983</a>        Multiplexing Scheme Updates for <a href="./rfc5764.html">RFC 5764</a>  September 2016</span>
 
 
@@ -578,7 +557,7 @@ Table of Contents
    binding request in combination with the demultiplexing scheme
    described in [<a href="./rfc5764.html" title='"Datagram Transport Layer Security (DTLS) Extension to Establish Keys for the Secure Real-time Transport Protocol (SRTP)"'>RFC5764</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Updates%20to%20RFC%205764"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Updates to <a href="./rfc5764.html">RFC 5764</a></span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Updates%20to%20RFC%205764"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Updates to <a href="./rfc5764.html">RFC 5764</a></span>
 
    This document updates the text in <a href="./rfc5764.html#section-5.1.2">Section 5.1.2 of [RFC5764]</a> as
    follows:
@@ -621,7 +600,7 @@ Table of Contents
 
 
 <span class="grey">Petit-Huguenin &amp; Salgueiro   Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7983.html">RFC 7983</a>        Multiplexing Scheme Updates for <a href="./rfc5764.html">RFC 5764</a>  September 2016</span>
 
 
@@ -655,7 +634,7 @@ Table of Contents
 
    END NEW TEXT
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Security Considerations</span>
 
    This document updates existing IANA registries and adds a new range
    for TURN channels in the demultiplexing algorithm.
@@ -677,13 +656,13 @@ Table of Contents
 
 
 <span class="grey">Petit-Huguenin &amp; Salgueiro   Standards Track                    [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7983.html">RFC 7983</a>        Multiplexing Scheme Updates for <a href="./rfc5764.html">RFC 5764</a>  September 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  IANA Considerations</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20STUN%20Methods"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  STUN Methods</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20STUN%20Methods"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  STUN Methods</span>
 
    This specification contains the registration information for reserved
    STUN Methods codepoints, as explained in <a href="#section-3">Section 3</a> and in accordance
@@ -708,7 +687,7 @@ Table of Contents
 
    Registration Procedures:   Designated Expert
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20TLS%20ContentType"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  TLS ContentType</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20TLS%20ContentType"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  TLS ContentType</span>
 
    This specification contains the registration information for reserved
    TLS ContentType codepoints, as explained in <a href="#section-5">Section 5</a> and in
@@ -733,11 +712,11 @@ Table of Contents
 
 
 <span class="grey">Petit-Huguenin &amp; Salgueiro   Standards Track                   [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7983.html">RFC 7983</a>        Multiplexing Scheme Updates for <a href="./rfc5764.html">RFC 5764</a>  September 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.3.%20%20Traversal%20Using%20Relays%20around%20NAT%20%28TURN%29%20Channel%20Numbers"></a></body></html><a class="selflink" href="#section-9.3" name="section-9.3">9.3</a>.  Traversal Using Relays around NAT (TURN) Channel Numbers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.3.%20%20Traversal%20Using%20Relays%20around%20NAT%20%28TURN%29%20Channel%20Numbers"></a></body></html><a class="selflink" href="#section-9.3" id="section-9.3">9.3</a>.  Traversal Using Relays around NAT (TURN) Channel Numbers</span>
 
    This specification contains the registration information for reserved
    codepoints in the "Traversal Using Relays around NAT (TURN) Channel
@@ -751,37 +730,37 @@ Table of Contents
 
    Reference:   <a href="./rfc7983.html">RFC 7983</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" id="section-10.1">10.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
               DOI 10.17487/RFC2119, March 1997,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2119">http://www.rfc-editor.org/info/rfc2119</a>&gt;.
 
-   [<a id="ref-RFC3550" name="ref-RFC3550">RFC3550</a>]  Schulzrinne, H., Casner, S., Frederick, R., and V.
+   [<a id="ref-RFC3550">RFC3550</a>]  Schulzrinne, H., Casner, S., Frederick, R., and V.
               Jacobson, "RTP: A Transport Protocol for Real-Time
               Applications", STD 64, <a href="./rfc3550.html">RFC 3550</a>, DOI 10.17487/RFC3550,
               July 2003, &lt;<a href="http://www.rfc-editor.org/info/rfc3550">http://www.rfc-editor.org/info/rfc3550</a>&gt;.
 
-   [<a id="ref-RFC3711" name="ref-RFC3711">RFC3711</a>]  Baugher, M., McGrew, D., Naslund, M., Carrara, E., and K.
+   [<a id="ref-RFC3711">RFC3711</a>]  Baugher, M., McGrew, D., Naslund, M., Carrara, E., and K.
               Norrman, "The Secure Real-time Transport Protocol (SRTP)",
               <a href="./rfc3711.html">RFC 3711</a>, DOI 10.17487/RFC3711, March 2004,
               &lt;<a href="http://www.rfc-editor.org/info/rfc3711">http://www.rfc-editor.org/info/rfc3711</a>&gt;.
 
-   [<a id="ref-RFC5245" name="ref-RFC5245">RFC5245</a>]  Rosenberg, J., "Interactive Connectivity Establishment
+   [<a id="ref-RFC5245">RFC5245</a>]  Rosenberg, J., "Interactive Connectivity Establishment
               (ICE): A Protocol for Network Address Translator (NAT)
               Traversal for Offer/Answer Protocols", <a href="./rfc5245.html">RFC 5245</a>,
               DOI 10.17487/RFC5245, April 2010,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5245">http://www.rfc-editor.org/info/rfc5245</a>&gt;.
 
-   [<a id="ref-RFC5246" name="ref-RFC5246">RFC5246</a>]  Dierks, T. and E. Rescorla, "The Transport Layer Security
+   [<a id="ref-RFC5246">RFC5246</a>]  Dierks, T. and E. Rescorla, "The Transport Layer Security
               (TLS) Protocol Version 1.2", <a href="./rfc5246.html">RFC 5246</a>,
               DOI 10.17487/RFC5246, August 2008,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5246">http://www.rfc-editor.org/info/rfc5246</a>&gt;.
 
-   [<a id="ref-RFC5389" name="ref-RFC5389">RFC5389</a>]  Rosenberg, J., Mahy, R., Matthews, P., and D. Wing,
+   [<a id="ref-RFC5389">RFC5389</a>]  Rosenberg, J., Mahy, R., Matthews, P., and D. Wing,
               "Session Traversal Utilities for NAT (STUN)", <a href="./rfc5389.html">RFC 5389</a>,
               DOI 10.17487/RFC5389, October 2008,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5389">http://www.rfc-editor.org/info/rfc5389</a>&gt;.
@@ -789,43 +768,43 @@ Table of Contents
 
 
 <span class="grey">Petit-Huguenin &amp; Salgueiro   Standards Track                   [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7983.html">RFC 7983</a>        Multiplexing Scheme Updates for <a href="./rfc5764.html">RFC 5764</a>  September 2016</span>
 
 
-   [<a id="ref-RFC5764" name="ref-RFC5764">RFC5764</a>]  McGrew, D. and E. Rescorla, "Datagram Transport Layer
+   [<a id="ref-RFC5764">RFC5764</a>]  McGrew, D. and E. Rescorla, "Datagram Transport Layer
               Security (DTLS) Extension to Establish Keys for the Secure
               Real-time Transport Protocol (SRTP)", <a href="./rfc5764.html">RFC 5764</a>,
               DOI 10.17487/RFC5764, May 2010,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5764">http://www.rfc-editor.org/info/rfc5764</a>&gt;.
 
-   [<a id="ref-RFC5766" name="ref-RFC5766">RFC5766</a>]  Mahy, R., Matthews, P., and J. Rosenberg, "Traversal Using
+   [<a id="ref-RFC5766">RFC5766</a>]  Mahy, R., Matthews, P., and J. Rosenberg, "Traversal Using
               Relays around NAT (TURN): Relay Extensions to Session
               Traversal Utilities for NAT (STUN)", <a href="./rfc5766.html">RFC 5766</a>,
               DOI 10.17487/RFC5766, April 2010,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5766">http://www.rfc-editor.org/info/rfc5766</a>&gt;.
 
-   [<a id="ref-RFC6347" name="ref-RFC6347">RFC6347</a>]  Rescorla, E. and N. Modadugu, "Datagram Transport Layer
+   [<a id="ref-RFC6347">RFC6347</a>]  Rescorla, E. and N. Modadugu, "Datagram Transport Layer
               Security Version 1.2", <a href="./rfc6347.html">RFC 6347</a>, DOI 10.17487/RFC6347,
               January 2012, &lt;<a href="http://www.rfc-editor.org/info/rfc6347">http://www.rfc-editor.org/info/rfc6347</a>&gt;.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" id="section-10.2">10.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC4347" name="ref-RFC4347">RFC4347</a>]  Rescorla, E. and N. Modadugu, "Datagram Transport Layer
+   [<a id="ref-RFC4347">RFC4347</a>]  Rescorla, E. and N. Modadugu, "Datagram Transport Layer
               Security", <a href="./rfc4347.html">RFC 4347</a>, DOI 10.17487/RFC4347, April 2006,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4347">http://www.rfc-editor.org/info/rfc4347</a>&gt;.
 
-   [<a id="ref-RFC6189" name="ref-RFC6189">RFC6189</a>]  Zimmermann, P., Johnston, A., Ed., and J. Callas, "ZRTP:
+   [<a id="ref-RFC6189">RFC6189</a>]  Zimmermann, P., Johnston, A., Ed., and J. Callas, "ZRTP:
               Media Path Key Agreement for Unicast Secure RTP",
               <a href="./rfc6189.html">RFC 6189</a>, DOI 10.17487/RFC6189, April 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6189">http://www.rfc-editor.org/info/rfc6189</a>&gt;.
 
-   [<a id="ref-RFC7345" name="ref-RFC7345">RFC7345</a>]  Holmberg, C., Sedlacek, I., and G. Salgueiro, "UDP
+   [<a id="ref-RFC7345">RFC7345</a>]  Holmberg, C., Sedlacek, I., and G. Salgueiro, "UDP
               Transport Layer (UDPTL) over Datagram Transport Layer
               Security (DTLS)", <a href="./rfc7345.html">RFC 7345</a>, DOI 10.17487/RFC7345, August
               2014, &lt;<a href="http://www.rfc-editor.org/info/rfc7345">http://www.rfc-editor.org/info/rfc7345</a>&gt;.
 
-   [<a id="ref-SDP-BUNDLE" name="ref-SDP-BUNDLE">SDP-BUNDLE</a>]
+   [<a id="ref-SDP-BUNDLE">SDP-BUNDLE</a>]
               Holmberg, C., Alvestrand, H., and C. Jennings,
               "Negotiating Media Multiplexing Using the Session
               Description Protocol (SDP)", Work in Progress,
@@ -845,7 +824,7 @@ Table of Contents
 
 
 <span class="grey">Petit-Huguenin &amp; Salgueiro   Standards Track                   [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7983.html">RFC 7983</a>        Multiplexing Scheme Updates for <a href="./rfc5764.html">RFC 5764</a>  September 2016</span>
 
 
@@ -901,11 +880,6 @@ Authors' Addresses
 
 
 Petit-Huguenin &amp; Salgueiro   Standards Track                   [Page 13]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

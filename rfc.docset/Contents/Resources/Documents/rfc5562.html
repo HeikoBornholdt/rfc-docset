@@ -1,41 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-ietf-tsvwg-ecnsyn" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5562" name="DC.Identifier"/>
-<meta content="June, 2009" name="DC.Date.Issued"/>
-<meta content="Floyd, Sally" name="DC.Creator"/>
-<meta content="Kuzmanovic, Aleksandar" name="DC.Creator"/>
-<meta content="Mondal, Amit" name="DC.Creator"/>
-<meta content="This draft specifies a modification to RFC 3168 to allow TCP SYN/ACK
-packets to be ECN-Capable. For TCP, RFC 3168 only specifies setting an
-ECN-Capable codepoint on data packets, and not on SYN and SYN/ACK
-packets. However, because of the high cost to the TCP transfer of
-having a SYN/ACK packet dropped, with the resulting retransmit
-timeout, this document specifies the use of ECN for the SYN/ACK packet
-itself, when sent in response to a SYN packet with the two ECN flags
-set in the TCP header, indicating a willingness to use ECN. Setting
-the initial TCP SYN/ACK packet as ECN-Capable can be of great benefit
-to the TCP connection, avoiding the severe penalty of a retransmit
-timeout for a connection that has not yet started placing a load on
-the network. The TCP responder (the sender of the SYN/ACK packet) must
-reply to a report of an ECN-marked SYN/ACK packet by resending a
-SYN/ACK packet that is not ECN-Capable. If the resent SYN/ACK packet
-is acknowledged, then the TCP responder reduces its initial congestion
-window from two, three, or four segments to one segment, thereby
-reducing the subsequent load from that connection on the network. If
-instead the SYN/ACK packet is dropped, or for some other reason the
-TCP responder does not receive an acknowledgement in the specified
-time, the TCP responder follows TCP standards for a dropped SYN/ACK
-packet (setting the retransmit timer). This document updates RFC 3168." name="DC.Description.Abstract"/>
-<meta content="Adding Explicit Congestion Notification (ECN) Capability to TCP's SYN/ACK Packets" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5562 - Adding Explicit Congestion Notification (ECN) Capability to TCP's SYN/ACK Packets</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="A. Kuzmanovic" name="citation_author"/>
+<meta content="A. Mondal" name="citation_author"/>
+<meta content="S. Floyd" name="citation_author"/>
+<meta content="K. Ramakrishnan" name="citation_author"/>
+<meta content="June, 2009" name="citation_publication_date"/>
+<meta content="Adding Explicit Congestion Notification (ECN) Capability to TCP's SYN/ACK Packets" name="citation_title"/>
+<meta content="10.17487/RFC5562" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5562" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5562.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5562: Adding Explicit Congestion Notification (ECN) Capability to TCP's SYN/ACK Packets</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -64,7 +43,7 @@ packet (setting the retransmit timer). This document updates RFC 3168." name="DC
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -73,7 +52,7 @@ packet (setting the retransmit timer). This document updates RFC 3168." name="DC
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -152,19 +131,18 @@ packet (setting the retransmit timer). This document updates RFC 3168." name="DC
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -178,21 +156,9 @@ packet (setting the retransmit timer). This document updates RFC 3168." name="DC
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgyellow" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5562.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5562" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-tcpm-ecnsyn.html" title="draft-ietf-tcpm-ecnsyn">draft-ietf-tcpm-e...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5562" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5562" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                      A. Kuzmanovic
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5562.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5562.txt.pdf">PDF</a>|<a href="/rfc/rfc5562.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5562" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5562&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc5562" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                      A. Kuzmanovic
 Request for Comments: 5562                                     A. Mondal
 Category: Experimental                           Northwestern University
                                                                 S. Floyd
@@ -217,7 +183,7 @@ Copyright Notice
    Copyright (c) 2009 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents in effect on the date of
    publication of this document (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>).
    Please review these documents carefully, as they describe your rights
@@ -244,7 +210,7 @@ Copyright Notice
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -300,7 +266,7 @@ Abstract
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -335,7 +301,7 @@ Table of Contents
    Normative References ..............................................<a href="#page-30">30</a>
    Informative References ............................................<a href="#page-30">30</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    TCP's congestion control mechanism has primarily used packet loss as
    the congestion indication, with packets dropped when buffers
@@ -356,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -412,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -442,7 +408,7 @@ Table of Contents
    issues, and <a href="#section-5">Section 5</a> discusses related work.  <a href="#section-6">Section 6</a> contains an
    evaluation of the specified change.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions%20and%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Conventions and Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions%20and%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Conventions and Terminology</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -468,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -482,7 +448,7 @@ Table of Contents
    refer to the sender of the SYN packet and of the SYN-ACK packet,
    respectively.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Specification"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Specification</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Specification"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Specification</span>
 
    This section specifies the modification to <a href="./rfc3168.html">RFC 3168</a> [<a href="./rfc3168.html" title='"The Addition of Explicit Congestion Notification (ECN) to IP"'>RFC3168</a>] to
    allow TCP SYN/ACK packets to be ECN-Capable.
@@ -524,11 +490,11 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20SYN/ACK%20Packets%20Dropped%20in%20the%20Network"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  SYN/ACK Packets Dropped in the Network</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20SYN/ACK%20Packets%20Dropped%20in%20the%20Network"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  SYN/ACK Packets Dropped in the Network</span>
 
    Figure 1 shows an interchange with the SYN/ACK packet dropped by a
    congested router.  Node B waits for a retransmission timeout, and
@@ -580,11 +546,11 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20SYN/ACK%20Packets%20ECN-Marked%20in%20the%20Network"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  SYN/ACK Packets ECN-Marked in the Network</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20SYN/ACK%20Packets%20ECN-Marked%20in%20the%20Network"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  SYN/ACK Packets ECN-Marked in the Network</span>
 
    Figure 2 shows an interchange with the SYN/ACK packet sent as ECN-
    Capable, and ECN-marked instead of dropped at the congested router.
@@ -636,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -692,7 +658,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -736,7 +702,7 @@ Table of Contents
    acknowledgement for the other end, the TCP responder resends the
    SYN/ACK packet, following the TCP standards.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Management%20Interface"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Management Interface</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Management%20Interface"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Management Interface</span>
 
    The TCP implementation using ECN-Capable SYN/ACK packets should
    include a management interface to allow the use of ECN to be turned
@@ -748,11 +714,11 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Discussion"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Discussion</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Discussion"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Discussion</span>
 
    The rationale for the specification in this document is the
    following.  When node B receives a TCP SYN packet with ECN-Echo bit
@@ -769,7 +735,7 @@ Table of Contents
    second retransmission timeouts resulting from the drop of SYN/ACK
    packets.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Flooding%20Attacks"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Flooding Attacks</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Flooding%20Attacks"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Flooding Attacks</span>
 
    Setting an ECN-Capable codepoint in the responding TCP SYN/ACK
    packets does not raise any new or additional security
@@ -788,7 +754,7 @@ Table of Contents
    before being dropped, thus adding somewhat to the ability of a
    SYN/ACK attack to flood a network link.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20The%20TCP%20SYN%20Packet"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  The TCP SYN Packet</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20The%20TCP%20SYN%20Packet"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  The TCP SYN Packet</span>
 
    There are several reasons why an ECN-Capable codepoint must not be
    set in the IP header of the initiating TCP SYN packet.  First, when
@@ -804,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -817,7 +783,7 @@ Table of Contents
    For both these reasons, we continue the restriction that the TCP SYN
    packet must not have the ECN-Capable codepoint in the IP header set.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20SYN/ACK%20Packets%20and%20Packet%20Size"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  SYN/ACK Packets and Packet Size</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20SYN/ACK%20Packets%20and%20Packet%20Size"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  SYN/ACK Packets and Packet Size</span>
 
    There are a number of router buffer architectures that have smaller
    dropping rates for small (SYN) packets than for large (data) packets.
@@ -849,7 +815,7 @@ Table of Contents
    Tail queues are by default in units of packets, while the default for
    RED queue management has been changed from packet mode to byte mode).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Response%20to%20ECN-Marking%20of%20SYN/ACK%20Packets"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Response to ECN-Marking of SYN/ACK Packets</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Response%20to%20ECN-Marking%20of%20SYN/ACK%20Packets"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Response to ECN-Marking of SYN/ACK Packets</span>
 
    One question is why TCP SYN/ACK packets should be treated differently
    from other packets in terms of the end node's response to an ECN-
@@ -860,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -916,7 +882,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -933,7 +899,7 @@ Table of Contents
    not send data packets until it has received a non-ECN-marked SYN/ACK
    packet from the other end.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Related%20Work"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Related Work</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Related%20Work"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Related Work</span>
 
    The addition of ECN-Capability to TCP's SYN/ACK packets was initially
    proposed in [ECN+].  The paper includes an extensive set of
@@ -972,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -981,9 +947,9 @@ Table of Contents
    result of the flows that do use ECN+, increases as a greater fraction
    of flows use ECN+.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Performance%20Evaluation"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Performance Evaluation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Performance%20Evaluation"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Performance Evaluation</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20The%20Costs%20and%20Benefits%20of%20Adding%20ECN-Capability"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  The Costs and Benefits of Adding ECN-Capability</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20The%20Costs%20and%20Benefits%20of%20Adding%20ECN-Capability"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  The Costs and Benefits of Adding ECN-Capability</span>
 
    [ECN+] explores the costs and benefits of adding ECN-Capability to
    SYN/ACK packets with both simulations and experiments.  The addition
@@ -1028,7 +994,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -1061,7 +1027,7 @@ Table of Contents
    network, but also on the queue management architecture at the
    congested link.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20An%20Evaluation%20of%20Different%20Responses%20to%20ECN-Marked%20SYN/ACK%20Packets"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  An Evaluation of Different Responses to ECN-Marked SYN/ACK Packets</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20An%20Evaluation%20of%20Different%20Responses%20to%20ECN-Marked%20SYN/ACK%20Packets"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  An Evaluation of Different Responses to ECN-Marked SYN/ACK Packets</span>
 
    This document specifies that the end node responds to the report of
    an ECN-marked SYN/ACK packet by setting the initial congestion window
@@ -1084,7 +1050,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -1113,7 +1079,7 @@ Table of Contents
    updated version of the ns-2 simulator, after the document had almost
    completed the standardization process.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Experiments"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  Experiments</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Experiments"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  Experiments</span>
 
    This section discusses experiments that would be useful before a
    widespread deployment of ECN-Capability for TCP SYN/ACK packets.
@@ -1140,17 +1106,17 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    TCP packets carrying the ECT codepoint in IP headers can be marked
    rather than dropped by ECN-Capable routers.  This raises several
    security concerns that we discuss below.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20%22Bad%22%20Routers%20or%20Middleboxes"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  "Bad" Routers or Middleboxes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20%22Bad%22%20Routers%20or%20Middleboxes"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  "Bad" Routers or Middleboxes</span>
 
    There are a number of known deployment problems from using ECN with
    TCP traffic in the Internet.  The first reported problem, dating back
@@ -1178,7 +1144,7 @@ Table of Contents
    or ECT(1)), but we have not conducted any measurement studies of this
    [<a href="#ref-F07" title='"[BEHAVE] Response of firewalls and middleboxes to TCP SYN packets that are ECN-Capable?"'>F07</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Congestion%20Collapse"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Congestion Collapse</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Congestion%20Collapse"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Congestion Collapse</span>
 
    Because TCP SYN/ACK packets carrying an ECT codepoint could be ECN-
    marked instead of dropped at an ECN-Capable router, the concern is
@@ -1196,7 +1162,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -1208,7 +1174,7 @@ Table of Contents
    significantly higher packet drop rate than ECN or ECN+/TryOnce
    (Tables 1 and 3 in <a href="#appendix-A">Appendix A</a> below).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Conclusions"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Conclusions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Conclusions"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Conclusions</span>
 
    This document specifies a modification to <a href="./rfc3168.html">RFC 3168</a> [<a href="./rfc3168.html" title='"The Addition of Explicit Congestion Notification (ECN) to IP"'>RFC3168</a>] to allow
    TCP nodes to send SYN/ACK packets as being ECN-Capable.  Making the
@@ -1227,7 +1193,7 @@ Table of Contents
    adjust the initial load it places on the network, while avoiding the
    delay of a retransmission timeout.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Acknowledgements</span>
 
    We thank Anil Agarwal, Mark Allman, Remi Denis-Courmont, Wesley Eddy,
    Lars Eggert, Alfred Hoenes, Janardhan Iyengar, and Pasi Sarolahti for
@@ -1252,11 +1218,11 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Report%20on%20Simulations"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Report on Simulations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Report%20on%20Simulations"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Report on Simulations</span>
 
    This section reports on simulations showing the costs of adding ECN+
    in highly congested scenarios.  This section also reports on
@@ -1293,7 +1259,7 @@ Table of Contents
    The simulation scripts are available on [<a href="#ref-ECN-SYN">ECN-SYN</a>], along with graphs
    showing the distribution of response times for the TCP connections.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Simulations%20with%20RED%20in%20Packet%20Mode"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>.  Simulations with RED in Packet Mode</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Simulations%20with%20RED%20in%20Packet%20Mode"></a></body></html><a class="selflink" href="#appendix-A.1" id="appendix-A.1">A.1</a>.  Simulations with RED in Packet Mode</span>
 
    The simulations with RED in packet mode and with the queue in packets
    show that ECN+ is useful in times of moderate or high congestion.
@@ -1308,7 +1274,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -1364,7 +1330,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -1420,7 +1386,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -1476,7 +1442,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -1532,7 +1498,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -1575,7 +1541,7 @@ Table of Contents
              packets  (the graphs are available from
              "<a href="http://www.icir.org/floyd/ecn-syn/">http://www.icir.org/floyd/ecn-syn/</a>")
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Simulations%20with%20RED%20in%20Byte%20Mode"></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>.  Simulations with RED in Byte Mode</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Simulations%20with%20RED%20in%20Byte%20Mode"></a></body></html><a class="selflink" href="#appendix-A.2" id="appendix-A.2">A.2</a>.  Simulations with RED in Byte Mode</span>
 
    Table 5 below shows simulations with RED in byte mode and the queue
    in bytes.  There is no significant increase in aggregate congestion
@@ -1588,7 +1554,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -1644,7 +1610,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -1700,11 +1666,11 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Issues%20of%20Incremental%20Deployment"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Issues of Incremental Deployment</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Issues%20of%20Incremental%20Deployment"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Issues of Incremental Deployment</span>
 
    In order for TCP node B to send a SYN/ACK packet as ECN-Capable, node
    B must have received an ECN-setup SYN packet from node A.  However,
@@ -1756,7 +1722,7 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -1812,14 +1778,14 @@ Table of Contents
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
        arriving SYN packets.  Some active queue management mechanisms
        might switch from packet-marking to packet-dropping in times of
-       high congestion before buffer overflow, as recommended in <a href="#section-19.1">Section</a>
-       <a href="#section-19.1">19.1</a> of <a href="./rfc3168.html">RFC 3168</a> [<a href="./rfc3168.html" title='"The Addition of Explicit Congestion Notification (ECN) to IP"'>RFC3168</a>].  This helps to prevent congestion
+       high congestion before buffer overflow, as recommended in <a href="./rfc3168.html#section-19.1">Section</a>
+       <a href="./rfc3168.html#section-19.1">19.1 of RFC 3168</a> [<a href="./rfc3168.html" title='"The Addition of Explicit Congestion Notification (ECN) to IP"'>RFC3168</a>].  This helps to prevent congestion
        collapse problems with the use of ECN.
 
    (3) Detection of and response to backwards-compatibility problems: A
@@ -1839,16 +1805,16 @@ Table of Contents
 
 Normative References
 
-   [<a id="ref-RFC793" name="ref-RFC793">RFC793</a>]   Postel, J., "Transmission Control Protocol", STD 7, <a href="./rfc793.html">RFC</a>
+   [<a id="ref-RFC793">RFC793</a>]   Postel, J., "Transmission Control Protocol", STD 7, <a href="./rfc793.html">RFC</a>
               <a href="./rfc793.html">793</a>, September 1981.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC2988" name="ref-RFC2988">RFC2988</a>]  Paxson, V. and M. Allman, "Computing TCP's Retransmission
+   [<a id="ref-RFC2988">RFC2988</a>]  Paxson, V. and M. Allman, "Computing TCP's Retransmission
               Timer", <a href="./rfc2988.html">RFC 2988</a>, November 2000.
 
-   [<a id="ref-RFC3168" name="ref-RFC3168">RFC3168</a>]  Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
+   [<a id="ref-RFC3168">RFC3168</a>]  Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
               of Explicit Congestion Notification (ECN) to IP", <a href="./rfc3168.html">RFC</a>
               <a href="./rfc3168.html">3168</a>, September 2001.
 
@@ -1857,7 +1823,7 @@ Informative References
    [ECN+]     A. Kuzmanovic, The Power of Explicit Congestion
               Notification, SIGCOMM 2005.
 
-   [<a id="ref-ECN-SYN" name="ref-ECN-SYN">ECN-SYN</a>]  ECN-SYN web page with simulation scripts,
+   [<a id="ref-ECN-SYN">ECN-SYN</a>]  ECN-SYN web page with simulation scripts,
               <a href="http://www.icir.org/floyd/ecn-syn">http://www.icir.org/floyd/ecn-syn</a>.
 
 
@@ -1868,86 +1834,86 @@ Informative References
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
-   [<a id="ref-F07" name="ref-F07">F07</a>]      S. Floyd, "[BEHAVE] Response of firewalls and middleboxes
+   [<a id="ref-F07">F07</a>]      S. Floyd, "[BEHAVE] Response of firewalls and middleboxes
               to TCP SYN packets that are ECN-Capable?", August 2, 2007,
               email to the BEHAVE mailing list, <a href="http://www1.ietf.org/mail-archive/web/behave/current/msg02644.html">http://www1.ietf.org/</a>
               <a href="http://www1.ietf.org/mail-archive/web/behave/current/msg02644.html">mail-archive/web/behave/current/msg02644.html</a>.
 
-   [<a id="ref-Kelson00" name="ref-Kelson00">Kelson00</a>] Dax Kelson, "8% of the Internet unreachable!", September
+   [<a id="ref-Kelson00">Kelson00</a>] Dax Kelson, "8% of the Internet unreachable!", September
               10, 2000, email to the Linux kernel mailing list,
               <a href="http://lkml.indiana.edu/hypermail/linux/kernel/0009.1/0329.html">http://lkml.indiana.edu/hypermail/linux/kernel/</a>
               <a href="http://lkml.indiana.edu/hypermail/linux/kernel/0009.1/0329.html">0009.1/0329.html</a>.
 
-   [<a id="ref-L08" name="ref-L08">L08</a>]      A. Landley, "Re: [tcpm] I-D Action:<a href="./draft-ietf-tcpm-ecnsyn-06.txt.html">draft-ietf-tcpm-</a>
+   [<a id="ref-L08">L08</a>]      A. Landley, "Re: [tcpm] I-D Action:<a href="./draft-ietf-tcpm-ecnsyn-06.txt.html">draft-ietf-tcpm-</a>
               <a href="./draft-ietf-tcpm-ecnsyn-06.txt.html">ecnsyn-06.txt</a>", August 24, 2008, email to the tcpm mailing
               list, <a href="http://www.ietf.org/mail-archive/web/tcpm/current/msg03988.html">http://www.ietf.org/</a>
               <a href="http://www.ietf.org/mail-archive/web/tcpm/current/msg03988.html">mail-archive/web/tcpm/current/msg03988.html</a>.
 
-   [<a id="ref-MAF05" name="ref-MAF05">MAF05</a>]    A. Medina, M. Allman, and S. Floyd, "Measuring the
+   [<a id="ref-MAF05">MAF05</a>]    A. Medina, M. Allman, and S. Floyd, "Measuring the
               Evolution of Transport Protocols in the Internet", ACM
               CCR, April 2005.
 
-   [<a id="ref-PI" name="ref-PI">PI</a>]       C. Hollot, V. Misra, W. Gong, and D. Towsley, "On
+   [<a id="ref-PI">PI</a>]       C. Hollot, V. Misra, W. Gong, and D. Towsley, "On
               Designing Improved Controllers for AQM Routers Supporting
               TCP Flows", April 1998.
 
-   [<a id="ref-RED" name="ref-RED">RED</a>]      Floyd, S., and Jacobson, V., "Random Early Detection
+   [<a id="ref-RED">RED</a>]      Floyd, S., and Jacobson, V., "Random Early Detection
               gateways for Congestion Avoidance", IEEE/ACM Transactions
               on Networking, V.1 N.4, August 1993.
 
-   [<a id="ref-REM" name="ref-REM">REM</a>]      S. Athuraliya, V. H. Li, S. H. Low and Q. Yin, "REM:
+   [<a id="ref-REM">REM</a>]      S. Athuraliya, V. H. Li, S. H. Low and Q. Yin, "REM:
               Active Queue Management", IEEE Network, May 2001.
 
-   [<a id="ref-RFC2309" name="ref-RFC2309">RFC2309</a>]  Braden, B., Clark, D., Crowcroft, J., Davie, B., Deering,
+   [<a id="ref-RFC2309">RFC2309</a>]  Braden, B., Clark, D., Crowcroft, J., Davie, B., Deering,
               S., Estrin, D., Floyd, S., Jacobson, V., Minshall, G.,
               Partridge, C., Peterson, L., Ramakrishnan, K., Shenker,
               S., Wroclawski, J., and L. Zhang, "Recommendations on
               Queue Management and Congestion Avoidance in the
               Internet", <a href="./rfc2309.html">RFC 2309</a>, April 1998.
 
-   [<a id="ref-RFC2581" name="ref-RFC2581">RFC2581</a>]  Allman, M., Paxson, V., and W. Stevens, "TCP Congestion
+   [<a id="ref-RFC2581">RFC2581</a>]  Allman, M., Paxson, V., and W. Stevens, "TCP Congestion
               Control", <a href="./rfc2581.html">RFC 2581</a>, April 1999.
 
-   [<a id="ref-RFC3042" name="ref-RFC3042">RFC3042</a>]  Allman, M., Balakrishnan, H., and S. Floyd, "Enhancing
+   [<a id="ref-RFC3042">RFC3042</a>]  Allman, M., Balakrishnan, H., and S. Floyd, "Enhancing
               TCP's Loss Recovery Using Limited Transmit", <a href="./rfc3042.html">RFC 3042</a>,
               January 2001.
 
-   [<a id="ref-RFC3360" name="ref-RFC3360">RFC3360</a>]  Floyd, S., "Inappropriate TCP Resets Considered Harmful",
-              <a href="./bcp60.html">BCP 60</a>, <a href="./rfc3360.html">RFC 3360</a>, August 2002.
+   [<a id="ref-RFC3360">RFC3360</a>]  Floyd, S., "Inappropriate TCP Resets Considered Harmful",
+              <a href="https://www.rfc-editor.org/bcp/bcp60">BCP 60</a>, <a href="./rfc3360.html">RFC 3360</a>, August 2002.
 
 
 
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
-   [<a id="ref-RFC3390" name="ref-RFC3390">RFC3390</a>]  Allman, M., Floyd, S., and C. Partridge, "Increasing TCP's
+   [<a id="ref-RFC3390">RFC3390</a>]  Allman, M., Floyd, S., and C. Partridge, "Increasing TCP's
               Initial Window", <a href="./rfc3390.html">RFC 3390</a>, October 2002.
 
-   [<a id="ref-RFC4987" name="ref-RFC4987">RFC4987</a>]  Eddy, W., "TCP SYN Flooding Attacks and Common
+   [<a id="ref-RFC4987">RFC4987</a>]  Eddy, W., "TCP SYN Flooding Attacks and Common
               Mitigations", <a href="./rfc4987.html">RFC 4987</a>, August 2007.
 
-   [<a id="ref-SCJO01" name="ref-SCJO01">SCJO01</a>]   F. Smith, F. Campos, K. Jeffay, and D. Ott, "What TCP/IP
+   [<a id="ref-SCJO01">SCJO01</a>]   F. Smith, F. Campos, K. Jeffay, and D. Ott, "What TCP/IP
               Protocol Headers Can Tell us about the Web", SIGMETRICS,
               June 2001.
 
-   [<a id="ref-SYN-COOK" name="ref-SYN-COOK">SYN-COOK</a>] Dan J. Bernstein, SYN cookies, 1997, see also
+   [<a id="ref-SYN-COOK">SYN-COOK</a>] Dan J. Bernstein, SYN cookies, 1997, see also
               &lt;<a href="http://cr.yp.to/syncookies.html">http://cr.yp.to/syncookies.html</a>&gt;.
 
-   [<a id="ref-SBT07" name="ref-SBT07">SBT07</a>]    M. Sridharan, D. Bansal, and D. Thaler, "Implementation
+   [<a id="ref-SBT07">SBT07</a>]    M. Sridharan, D. Bansal, and D. Thaler, "Implementation
               Report on Experiences with Various TCP RFCs", Presentation
               in the TSVAREA, IETF 68, March 2007.
               <a href="http://www3.ietf.org/proceedings/07mar/slides/tsvarea-3/sld6.htm">http://www3.ietf.org/proceedings/07mar/slides/tsvarea-</a>
               <a href="http://www3.ietf.org/proceedings/07mar/slides/tsvarea-3/sld6.htm">3/sld6.htm</a>.
 
-   [<a id="ref-Tools" name="ref-Tools">Tools</a>]    S. Floyd, Ed., and E. Kohler, Ed., "Tools for the
+   [<a id="ref-Tools">Tools</a>]    S. Floyd, Ed., and E. Kohler, Ed., "Tools for the
               Evaluation of Simulation and Testbed Scenarios", Work in
               Progress, February 2008.
 
@@ -1980,7 +1946,7 @@ Informative References
 
 
 <span class="grey">Kuzmanovic, et al.            Experimental                     [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc5562.html">RFC 5562</a>                ECN and SYN/ACK Packets                June 2009</span>
 
 
@@ -2036,11 +2002,6 @@ Authors' Addresses
 
 
 Kuzmanovic, et al.            Experimental                     [Page 33]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

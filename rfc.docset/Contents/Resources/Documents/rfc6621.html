@@ -1,36 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:6621" name="DC.Identifier"/>
-<meta content="This document describes a Simplified Multicast Forwarding (SMF)
-mechanism that provides basic Internet Protocol (IP) multicast
-forwarding suitable for limited wireless mesh and mobile ad hoc
-network (MANET) use. It is mainly applicable in situations where
-efficient flooding represents an acceptable engineering design trade-
-off. It defines techniques for multicast duplicate packet detection
-(DPD), to be applied in the forwarding process, for both IPv4 and IPv6
-protocol use. This document also specifies optional mechanisms for
-using reduced relay sets to achieve more efficient multicast data
-distribution within a mesh topology as compared to Classic Flooding.
-Interactions with other protocols, such as use of information provided
-by concurrently running unicast routing protocols or interaction with
-other multicast protocols, as well as multiple deployment approaches
-are also described. Distributed algorithms for selecting reduced relay
-sets and related discussion are provided in the appendices. Basic
-issues relating to the operation of multicast MANET border routers are
-discussed, but ongoing work remains in this area and is beyond the
-scope of this document. This document defines an Experimental Protocol
-for the Internet community." name="DC.Description.Abstract"/>
-<meta content="Joseph Macker &lt;macker@itd.nrl.navy.mil&gt;" name="DC.Creator"/>
-<meta content="May, 2012" name="DC.Date.Issued"/>
-<meta content="Simplified Multicast Forwarding" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6621 - Simplified Multicast Forwarding</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="J. Macker" name="citation_author"/>
+<meta content="May, 2012" name="citation_publication_date"/>
+<meta content="Simplified Multicast Forwarding" name="citation_title"/>
+<meta content="10.17487/RFC6621" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6621" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6621.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6621: Simplified Multicast Forwarding</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -59,7 +40,7 @@ for the Internet community." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -68,7 +49,7 @@ for the Internet community." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -147,19 +128,18 @@ for the Internet community." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -173,21 +153,9 @@ for the Internet community." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgyellow" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6621.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6621" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-manet-smf.html" title="draft-ietf-manet-smf">draft-ietf-manet-smf</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6621" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6621" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=6621">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                    J. Macker, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6621.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6621.txt.pdf">PDF</a>|<a href="/rfc/rfc6621.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6621" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6621&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc6621" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc6621" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Engineering Task Force (IETF)                    J. Macker, Ed.
 Request for Comments: 6621                                           NRL
 Category: Experimental                                          May 2012
 ISSN: 2070-1721
@@ -239,7 +207,7 @@ Status of This Memo
 
 
 <span class="grey">Macker                        Experimental                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -248,7 +216,7 @@ Copyright Notice
    Copyright (c) 2012 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -295,7 +263,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -351,11 +319,11 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction%20and%20Scope"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction and Scope</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction%20and%20Scope"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction and Scope</span>
 
    Unicast routing protocols, designed for MANET and wireless mesh use,
    often apply distributed algorithms to flood routing control plane
@@ -382,7 +350,7 @@ Table of Contents
    o  define the needed IPv4 and IPv6 multicast duplicate packet
       detection (DPD) mechanisms to support multi-hop packet forwarding.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "NOT <em>RECOMMENDED</em>", "<em>MAY</em>", and
@@ -407,7 +375,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -438,7 +406,7 @@ Table of Contents
    | Domain       | specified in this document is operating            |
    +--------------+----------------------------------------------------+
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Applicability%20Statement"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Applicability Statement</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Applicability%20Statement"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Applicability Statement</span>
 
    Within dynamic wireless routing topologies, maintaining traditional
    forwarding trees to support a multicast routing protocol is often not
@@ -463,7 +431,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -482,7 +450,7 @@ Table of Contents
    This document does not presently support forwarding of packets with
    directed broadcast addresses as a destination [<a href="./rfc2644.html" title='"Changing the Default for Directed Broadcasts in Routers"'>RFC2644</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Overview%20and%20Functioning"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Overview and Functioning</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Overview%20and%20Functioning"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Overview and Functioning</span>
 
    Figure 1 provides an overview of the logical SMF router architecture,
    consisting of "Neighborhood Discovery", "Relay Set Selection", and
@@ -519,7 +487,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -575,7 +543,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -592,7 +560,7 @@ Table of Contents
    in SMF to be explicitly identified along with their respective
    dynamic relay set algorithm configuration.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20SMF%20Packet%20Processing%20and%20Forwarding"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  SMF Packet Processing and Forwarding</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20SMF%20Packet%20Processing%20and%20Forwarding"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  SMF Packet Processing and Forwarding</span>
 
    The SMF packet processing and forwarding actions are conducted with
    the following packet handling activities:
@@ -631,7 +599,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -687,7 +655,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -717,7 +685,7 @@ Table of Contents
    previous hop, while other classes designate the local SMF router as a
    forwarder for all neighboring routers.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20SMF%20Duplicate%20Packet%20Detection"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  SMF Duplicate Packet Detection</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20SMF%20Duplicate%20Packet%20Detection"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  SMF Duplicate Packet Detection</span>
 
    Duplicate packet detection (DPD) is often a requirement in MANET or
    wireless mesh packet forwarding mechanisms because packets may be
@@ -743,7 +711,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -773,7 +741,7 @@ Table of Contents
    different classes of packets are described in the following
    subsections.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20IPv6%20Duplicate%20Packet%20Detection"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  IPv6 Duplicate Packet Detection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20IPv6%20Duplicate%20Packet%20Detection"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  IPv6 Duplicate Packet Detection</span>
 
    This section describes the mechanisms and options for SMF IPv6 DPD.
    The base IPv6 packet header does not provide an explicit packet
@@ -799,7 +767,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -809,7 +777,7 @@ Table of Contents
    configured to operate either in I-DPD or H-DPD mode and perform the
    corresponding tasks, outlined in Sections <a href="#section-6.1.2">6.1.2</a> and <a href="#section-6.1.3">6.1.3</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.1.%20%20IPv6%20SMF_DPD%20Option%20Header"></a></body></html><a class="selflink" href="#section-6.1.1" name="section-6.1.1">6.1.1</a>.  IPv6 SMF_DPD Option Header</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.1.%20%20IPv6%20SMF_DPD%20Option%20Header"></a></body></html><a class="selflink" href="#section-6.1.1" id="section-6.1.1">6.1.1</a>.  IPv6 SMF_DPD Option Header</span>
 
    This section defines an IPv6 Hop-by-Hop Option [<a href="./rfc2460.html" title='"Internet Protocol, Version 6 (IPv6) Specification"'>RFC2460</a>], SMF_DPD, to
    serve the purpose of unique packet identification for IPv6 I-DPD.
@@ -855,7 +823,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -911,7 +879,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -951,7 +919,7 @@ Table of Contents
    properties of the specific hash algorithm used.  More details on IPv6
    H-DPD operation are provided in <a href="#section-6.1.3">Section 6.1.3</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.2.%20%20IPv6%20Identification-Based%20DPD"></a></body></html><a class="selflink" href="#section-6.1.2" name="section-6.1.2">6.1.2</a>.  IPv6 Identification-Based DPD</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.2.%20%20IPv6%20Identification-Based%20DPD"></a></body></html><a class="selflink" href="#section-6.1.2" id="section-6.1.2">6.1.2</a>.  IPv6 Identification-Based DPD</span>
 
    Table 2 summarizes the IPv6 I-DPD processing and forwarding decision
    approach.  Within the table, '*' indicates an ignore field condition.
@@ -967,7 +935,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1023,7 +991,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1047,7 +1015,7 @@ Table of Contents
    The "TaggerId" is an optional field of the IPv6 SMF_DPD option
    header.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.3.%20%20IPv6%20Hash-Based%20DPD"></a></body></html><a class="selflink" href="#section-6.1.3" name="section-6.1.3">6.1.3</a>.  IPv6 Hash-Based DPD</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.3.%20%20IPv6%20Hash-Based%20DPD"></a></body></html><a class="selflink" href="#section-6.1.3" id="section-6.1.3">6.1.3</a>.  IPv6 Hash-Based DPD</span>
 
    A default hash-based DPD approach (H-DPD) for use by SMF is specified
    as follows.  An SHA-1 [<a href="./rfc3174.html" title='"US Secure Hash Algorithm 1 (SHA1)"'>RFC3174</a>] hash of the non-mutable header
@@ -1079,7 +1047,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1100,7 +1068,7 @@ Table of Contents
    Such techniques could reduce packet-processing overhead and memory
    requirements.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20IPv4%20Duplicate%20Packet%20Detection"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  IPv4 Duplicate Packet Detection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20IPv4%20Duplicate%20Packet%20Detection"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  IPv4 Duplicate Packet Detection</span>
 
    This section describes the mechanisms and options for IPv4 DPD.  The
    following areas are described to support IPv4 DPD:
@@ -1135,7 +1103,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1146,7 +1114,7 @@ Table of Contents
    the following sections.  However, it is <em>RECOMMENDED</em> that a deployment
    be configured with a common mode for operational consistency.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.1.%20%20IPv4%20Identification-Based%20DPD"></a></body></html><a class="selflink" href="#section-6.2.1" name="section-6.2.1">6.2.1</a>.  IPv4 Identification-Based DPD</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.1.%20%20IPv4%20Identification-Based%20DPD"></a></body></html><a class="selflink" href="#section-6.2.1" id="section-6.2.1">6.2.1</a>.  IPv4 Identification-Based DPD</span>
 
    Table 4 summarizes the IPv4 I-DPD processing approach once a packet
    has passed the basic forwardable criteria described in <a href="#section-5">Section 5</a>.  To
@@ -1191,7 +1159,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1214,7 +1182,7 @@ Table of Contents
    "IPsecType" is either Authentication Header (AH) or Encapsulating
    Security Payload (ESP).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.2.%20%20IPv4%20Hash-Based%20DPD"></a></body></html><a class="selflink" href="#section-6.2.2" name="section-6.2.2">6.2.2</a>.  IPv4 Hash-Based DPD</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.2.%20%20IPv4%20Hash-Based%20DPD"></a></body></html><a class="selflink" href="#section-6.2.2" id="section-6.2.2">6.2.2</a>.  IPv4 Hash-Based DPD</span>
 
    The hashing technique here is similar to that specified for IPv6 in
    <a href="#section-6.1.3">Section 6.1.3</a>, but the H-DPD header option with HAV is not
@@ -1247,7 +1215,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1262,13 +1230,13 @@ Table of Contents
    payload length that is processed, determining shorter indexes, or
    applying a more efficient hashing algorithm.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Relay%20Set%20Selection"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Relay Set Selection</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Relay%20Set%20Selection"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Relay Set Selection</span>
 
    SMF is flexible in its support of different reduced relay set
    mechanisms for efficient flooding, the constraints imposed herein
    being detailed in this section.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Non-Reduced%20Relay%20Set%20Forwarding"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Non-Reduced Relay Set Forwarding</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Non-Reduced%20Relay%20Set%20Forwarding"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Non-Reduced Relay Set Forwarding</span>
 
    SMF implementations <em>MUST</em> support CF as a basic forwarding mechanism
    when reduced relay set information is not available or not selected
@@ -1277,7 +1245,7 @@ Table of Contents
    <a href="#section-6">Section 6</a> are critical to proper operation and prevention of
    duplicate packet retransmissions by the same relays.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Reduced%20Relay%20Set%20Forwarding"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Reduced Relay Set Forwarding</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Reduced%20Relay%20Set%20Forwarding"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Reduced Relay Set Forwarding</span>
 
    MANET reduced relay sets are often achieved by distributed algorithms
    that can dynamically calculate a topological connected dominating set
@@ -1303,7 +1271,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1359,7 +1327,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1415,7 +1383,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1429,7 +1397,7 @@ Table of Contents
        base for dynamic relay set selection and maintenance (e.g.,
        lower-link layer).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20SMF%20Neighborhood%20Discovery%20Requirements"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  SMF Neighborhood Discovery Requirements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20SMF%20Neighborhood%20Discovery%20Requirements"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  SMF Neighborhood Discovery Requirements</span>
 
    This section defines the requirements for use of the MANET
    Neighborhood Discovery Protocol (NHDP) [<a href="./rfc6130.html" title='"Mobile Ad Hoc Network (MANET) Neighborhood Discovery Protocol (NHDP)"'>RFC6130</a>] to support SMF
@@ -1471,7 +1439,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1488,14 +1456,14 @@ Table of Contents
    any additional requirements for use with NHDP and reference the
    applicable TLV types as needed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20SMF%20Relay%20Algorithm%20TLV%20Types"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  SMF Relay Algorithm TLV Types</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20SMF%20Relay%20Algorithm%20TLV%20Types"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  SMF Relay Algorithm TLV Types</span>
 
    This section specifies TLV types to be used within NHDP messages to
    identify the CDS relay set selection algorithm(s) in use.  Two TLV
    types are defined: one Message TLV type and one Address Block TLV
    type.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.1.%20%20SMF%20Message%20TLV%20Type"></a></body></html><a class="selflink" href="#section-8.1.1" name="section-8.1.1">8.1.1</a>.  SMF Message TLV Type</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.1.%20%20SMF%20Message%20TLV%20Type"></a></body></html><a class="selflink" href="#section-8.1.1" id="section-8.1.1">8.1.1</a>.  SMF Message TLV Type</span>
 
    The Message TLV type denoted SMF_TYPE is used to identify the
    existence of an SMF instance operating in conjunction with NHDP.
@@ -1527,7 +1495,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1574,7 +1542,7 @@ Table of Contents
    the algorithms defined by this document, see the appropriate appendix
    for the &lt;value&gt; field format.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.2.%20%20SMF%20Address%20Block%20TLV%20Type"></a></body></html><a class="selflink" href="#section-8.1.2" name="section-8.1.2">8.1.2</a>.  SMF Address Block TLV Type</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.2.%20%20SMF%20Address%20Block%20TLV%20Type"></a></body></html><a class="selflink" href="#section-8.1.2" id="section-8.1.2">8.1.2</a>.  SMF Address Block TLV Type</span>
 
    An Address Block TLV type, denoted SMF_NBR_TYPE (i.e., SMF neighbor
    relay algorithm) is specified in Table 8.  This TLV enables CDS relay
@@ -1583,7 +1551,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1623,7 +1591,7 @@ Table of Contents
    information.  See the appropriate appendix for definitions of value
    fields for the algorithms defined by this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20SMF%20Border%20Gateway%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  SMF Border Gateway Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20SMF%20Border%20Gateway%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  SMF Border Gateway Considerations</span>
 
    It is expected that SMF will be used to provide simple forwarding of
    multicast traffic within a MANET or mesh routing topology.  A border
@@ -1639,7 +1607,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1667,7 +1635,7 @@ Table of Contents
    standard multicast forwarding mechanisms do not usually perform this
    function.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Forwarded%20Multicast%20Groups"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Forwarded Multicast Groups</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Forwarded%20Multicast%20Groups"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Forwarded Multicast Groups</span>
 
    Mechanisms for dynamically determining groups for forwarding into a
    MANET SMF routing domain is an evolving technology area.  Ideally,
@@ -1695,7 +1663,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1703,7 +1671,7 @@ Table of Contents
    additional issues.  This is further discussed in <a href="#section-9.4">Section 9.4</a> but
    further work is expected to be needed here.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Multicast%20Group%20Scoping"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Multicast Group Scoping</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Multicast%20Group%20Scoping"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Multicast Group Scoping</span>
 
    Multicast scoping is used by network administrators to control the
    network routing domains reachable by multicast packets.  This is
@@ -1751,11 +1719,11 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.3.%20%20Interface%20with%20Exterior%20Multicast%20Routing%20Protocols"></a></body></html><a class="selflink" href="#section-9.3" name="section-9.3">9.3</a>.  Interface with Exterior Multicast Routing Protocols</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.3.%20%20Interface%20with%20Exterior%20Multicast%20Routing%20Protocols"></a></body></html><a class="selflink" href="#section-9.3" id="section-9.3">9.3</a>.  Interface with Exterior Multicast Routing Protocols</span>
 
    The traditional operation of multicast routing protocols is tightly
    integrated with the group membership function.  Leaf routers are
@@ -1796,7 +1764,7 @@ Table of Contents
    Discovery Protocol (MSDP), receivers in those external networks are
    not able to join the multicast tree for that source.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.4.%20%20Multiple%20Border%20Routers"></a></body></html><a class="selflink" href="#section-9.4" name="section-9.4">9.4</a>.  Multiple Border Routers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.4.%20%20Multiple%20Border%20Routers"></a></body></html><a class="selflink" href="#section-9.4" id="section-9.4">9.4</a>.  Multiple Border Routers</span>
 
    An SMF routing domain might be deployed with multiple participating
    routers having connectivity to external, fixed-infrastructure
@@ -1807,7 +1775,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1863,7 +1831,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1872,7 +1840,7 @@ Table of Contents
    hash indexes (those not requiring the H-DPD options header in IPv6)
    should be resolved effectively.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Security Considerations</span>
 
    Gratuitous use of option headers can cause problems in routers.
    Other IP routers external to an SMF routing domain that might receive
@@ -1919,7 +1887,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -1952,7 +1920,7 @@ Table of Contents
    is used, the security considerations described in [<a href="./rfc6130.html" title='"Mobile Ad Hoc Network (MANET) Neighborhood Discovery Protocol (NHDP)"'>RFC6130</a>] also
    apply.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  IANA Considerations</span>
 
    This document defines one IPv6 Hop-by-Hop Option, a type for which
    has been allocated from the IPv6 "Destination Options and Hop-by-Hop
@@ -1975,11 +1943,11 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20IPv6%20SMF_DPD%20Header%20Extension%20Option%20Type"></a></body></html><a class="selflink" href="#section-11.1" name="section-11.1">11.1</a>.  IPv6 SMF_DPD Header Extension Option Type</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20IPv6%20SMF_DPD%20Header%20Extension%20Option%20Type"></a></body></html><a class="selflink" href="#section-11.1" id="section-11.1">11.1</a>.  IPv6 SMF_DPD Header Extension Option Type</span>
 
    IANA has allocated an IPv6 Option Type from the IPv6 "Destination
    Options and Hop-by-Hop Options" registry of [<a href="./rfc2780.html" title='"IANA Allocation Guidelines For Values In the Internet Protocol and Related Headers"'>RFC2780</a>], as specified
@@ -1994,7 +1962,7 @@ Table of Contents
 
                    Table 9: IPv6 Option Type Allocation
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20%20TaggerId%20Types%20%28TidTy%29"></a></body></html><a class="selflink" href="#section-11.2" name="section-11.2">11.2</a>.  TaggerId Types (TidTy)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20%20TaggerId%20Types%20%28TidTy%29"></a></body></html><a class="selflink" href="#section-11.2" id="section-11.2">11.2</a>.  TaggerId Types (TidTy)</span>
 
    A portion of the option data content in the SMF_DPD is the Tagger
    Identifier Type (TidTy), which provides a context for the optionally
@@ -2020,7 +1988,7 @@ Table of Contents
 
                          Table 10: TaggerId Types
 
-   For allocation of unassigned values 4-7, IETF Review [<a href="./rfc5226.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC5226</a>] is
+   For allocation of unassigned values 4-7, IETF Review [<a href="./rfc5226.html" title="">RFC5226</a>] is
    required.
 
 
@@ -2031,11 +1999,11 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.3.%20%20Well-Known%20Multicast%20Address"></a></body></html><a class="selflink" href="#section-11.3" name="section-11.3">11.3</a>.  Well-Known Multicast Address</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.3.%20%20Well-Known%20Multicast%20Address"></a></body></html><a class="selflink" href="#section-11.3" id="section-11.3">11.3</a>.  Well-Known Multicast Address</span>
 
    IANA has allocated an IPv4 multicast address "SL-MANET-ROUTERS"
    (224.0.1.186) from the "Internetwork Control Block (224.0.1.0-
@@ -2047,9 +2015,9 @@ Table of Contents
    "Fixed Scope Multicast Addresses" sub-registry of the "INTERNET
    PROTOCOL VERSION 6 MULTICAST ADDRESSES" registry.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.4.%20%20SMF%20TLVs"></a></body></html><a class="selflink" href="#section-11.4" name="section-11.4">11.4</a>.  SMF TLVs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.4.%20%20SMF%20TLVs"></a></body></html><a class="selflink" href="#section-11.4" id="section-11.4">11.4</a>.  SMF TLVs</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.4.1.%20%20Expert%20Review%20for%20Created%20Type%20Extension%20Registries"></a></body></html><a class="selflink" href="#section-11.4.1" name="section-11.4.1">11.4.1</a>.  Expert Review for Created Type Extension Registries</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.4.1.%20%20Expert%20Review%20for%20Created%20Type%20Extension%20Registries"></a></body></html><a class="selflink" href="#section-11.4.1" id="section-11.4.1">11.4.1</a>.  Expert Review for Created Type Extension Registries</span>
 
    Creation of Address Block TLV Types and Message TLV Types in
    registries of [<a href="./rfc5444.html" title='"Generalized Mobile Ad Hoc Network (MANET) Packet/Message Format"'>RFC5444</a>], and hence in the HELLO-message-specific
@@ -2059,7 +2027,7 @@ Table of Contents
    <em>SHOULD</em> take the same general recommendations into consideration as
    those specified by [<a href="./rfc5444.html" title='"Generalized Mobile Ad Hoc Network (MANET) Packet/Message Format"'>RFC5444</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.4.2.%20%20SMF%20Message%20TLV%20Type%20%28SMF_TYPE%29"></a></body></html><a class="selflink" href="#section-11.4.2" name="section-11.4.2">11.4.2</a>.  SMF Message TLV Type (SMF_TYPE)</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.4.2.%20%20SMF%20Message%20TLV%20Type%20%28SMF_TYPE%29"></a></body></html><a class="selflink" href="#section-11.4.2" id="section-11.4.2">11.4.2</a>.  SMF Message TLV Type (SMF_TYPE)</span>
 
    This document defines one Message TLV Type, "SMF_TYPE", which has
    been allocated from the "HELLO Message-Type-specific Message TLV
@@ -2087,11 +2055,11 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.4.3.%20%20SMF%20Address%20Block%20TLV%20Type%20%28SMF_NBR_TYPE%29"></a></body></html><a class="selflink" href="#section-11.4.3" name="section-11.4.3">11.4.3</a>.  SMF Address Block TLV Type (SMF_NBR_TYPE)</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.4.3.%20%20SMF%20Address%20Block%20TLV%20Type%20%28SMF_NBR_TYPE%29"></a></body></html><a class="selflink" href="#section-11.4.3" id="section-11.4.3">11.4.3</a>.  SMF Address Block TLV Type (SMF_NBR_TYPE)</span>
 
    This document defines one Address Block TLV Type, "SMF_NBR_TYPE",
    which has been allocated from the "HELLO Message-Type-specific
@@ -2118,7 +2086,7 @@ Table of Contents
 
      Table 12: SMF_NBR_TYPE Address Block TLV Type Extension Registry
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.4.4.%20%20SMF%20Relay%20Algorithm%20ID%20Registry"></a></body></html><a class="selflink" href="#section-11.4.4" name="section-11.4.4">11.4.4</a>.  SMF Relay Algorithm ID Registry</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.4.4.%20%20SMF%20Relay%20Algorithm%20ID%20Registry"></a></body></html><a class="selflink" href="#section-11.4.4" id="section-11.4.4">11.4.4</a>.  SMF Relay Algorithm ID Registry</span>
 
    Types for the Type Extension Registries for the SMF_TYPE Message TLV
    and the SMF_NBR_TYPE Address Block TLV are unified in this single SMF
@@ -2143,7 +2111,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -2164,7 +2132,7 @@ Table of Contents
    the SMF Relay Algorithm ID Registry <em>MUST</em> specify the interpretation
    of the &lt;value&gt; field (if any).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-12" name="section-12">12</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-12" id="section-12">12</a>.  Acknowledgments</span>
 
    Many of the concepts and mechanisms used and adopted by SMF resulted
    over several years of discussion and related work within the MANET
@@ -2199,55 +2167,55 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.%20%20References"></a></body></html><a class="selflink" href="#section-13" name="section-13">13</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.%20%20References"></a></body></html><a class="selflink" href="#section-13" id="section-13">13</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-13.1" name="section-13.1">13.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-13.1" id="section-13.1">13.1</a>.  Normative References</span>
 
-   [<a id="ref-MPR-CDS" name="ref-MPR-CDS">MPR-CDS</a>]  Adjih, C., Jacquet, P., and L. Viennot, "Computing
+   [<a id="ref-MPR-CDS">MPR-CDS</a>]  Adjih, C., Jacquet, P., and L. Viennot, "Computing
               Connected Dominating Sets with Multipoint Relays", Ad Hoc
               and Sensor Wireless Networks, January 2005.
 
-   [<a id="ref-RFC0791" name="ref-RFC0791">RFC0791</a>]  Postel, J., "Internet Protocol", STD 5, <a href="./rfc791.html">RFC 791</a>,
+   [<a id="ref-RFC0791">RFC0791</a>]  Postel, J., "Internet Protocol", STD 5, <a href="./rfc791.html">RFC 791</a>,
               September 1981.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC2460" name="ref-RFC2460">RFC2460</a>]  Deering, S. and R. Hinden, "Internet Protocol, Version 6
+   [<a id="ref-RFC2460">RFC2460</a>]  Deering, S. and R. Hinden, "Internet Protocol, Version 6
               (IPv6) Specification", <a href="./rfc2460.html">RFC 2460</a>, December 1998.
 
-   [<a id="ref-RFC2644" name="ref-RFC2644">RFC2644</a>]  Senie, D., "Changing the Default for Directed Broadcasts
-              in Routers", <a href="./bcp34.html">BCP 34</a>, <a href="./rfc2644.html">RFC 2644</a>, August 1999.
+   [<a id="ref-RFC2644">RFC2644</a>]  Senie, D., "Changing the Default for Directed Broadcasts
+              in Routers", <a href="https://www.rfc-editor.org/bcp/bcp34">BCP 34</a>, <a href="./rfc2644.html">RFC 2644</a>, August 1999.
 
-   [<a id="ref-RFC2780" name="ref-RFC2780">RFC2780</a>]  Bradner, S. and V. Paxson, "IANA Allocation Guidelines For
+   [<a id="ref-RFC2780">RFC2780</a>]  Bradner, S. and V. Paxson, "IANA Allocation Guidelines For
               Values In the Internet Protocol and Related Headers",
-              <a href="./bcp37.html">BCP 37</a>, <a href="./rfc2780.html">RFC 2780</a>, March 2000.
+              <a href="https://www.rfc-editor.org/bcp/bcp37">BCP 37</a>, <a href="./rfc2780.html">RFC 2780</a>, March 2000.
 
-   [<a id="ref-RFC3174" name="ref-RFC3174">RFC3174</a>]  Eastlake, D. and P. Jones, "US Secure Hash Algorithm 1
+   [<a id="ref-RFC3174">RFC3174</a>]  Eastlake, D. and P. Jones, "US Secure Hash Algorithm 1
               (SHA1)", <a href="./rfc3174.html">RFC 3174</a>, September 2001.
 
-   [<a id="ref-RFC3626" name="ref-RFC3626">RFC3626</a>]  Clausen, T. and P. Jacquet, "Optimized Link State Routing
+   [<a id="ref-RFC3626">RFC3626</a>]  Clausen, T. and P. Jacquet, "Optimized Link State Routing
               Protocol (OLSR)", <a href="./rfc3626.html">RFC 3626</a>, October 2003.
 
-   [<a id="ref-RFC4291" name="ref-RFC4291">RFC4291</a>]  Hinden, R. and S. Deering, "IP Version 6 Addressing
+   [<a id="ref-RFC4291">RFC4291</a>]  Hinden, R. and S. Deering, "IP Version 6 Addressing
               Architecture", <a href="./rfc4291.html">RFC 4291</a>, February 2006.
 
-   [<a id="ref-RFC4302" name="ref-RFC4302">RFC4302</a>]  Kent, S., "IP Authentication Header", <a href="./rfc4302.html">RFC 4302</a>,
+   [<a id="ref-RFC4302">RFC4302</a>]  Kent, S., "IP Authentication Header", <a href="./rfc4302.html">RFC 4302</a>,
               December 2005.
 
-   [<a id="ref-RFC5226" name="ref-RFC5226">RFC5226</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
-              IANA Considerations Section in RFCs", <a href="./bcp26.html">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a>,
+   [<a id="ref-RFC5226">RFC5226</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", <a href="https://www.rfc-editor.org/bcp/bcp26">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a>,
               May 2008.
 
-   [<a id="ref-RFC5444" name="ref-RFC5444">RFC5444</a>]  Clausen, T., Dearlove, C., Dean, J., and C. Adjih,
+   [<a id="ref-RFC5444">RFC5444</a>]  Clausen, T., Dearlove, C., Dean, J., and C. Adjih,
               "Generalized Mobile Ad Hoc Network (MANET) Packet/Message
               Format", <a href="./rfc5444.html">RFC 5444</a>, February 2009.
 
-   [<a id="ref-RFC5614" name="ref-RFC5614">RFC5614</a>]  Ogier, R. and P. Spagnolo, "Mobile Ad Hoc Network (MANET)
+   [<a id="ref-RFC5614">RFC5614</a>]  Ogier, R. and P. Spagnolo, "Mobile Ad Hoc Network (MANET)
               Extension of OSPF Using Connected Dominating Set (CDS)
               Flooding", <a href="./rfc5614.html">RFC 5614</a>, August 2009.
 
@@ -2255,51 +2223,51 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
-   [<a id="ref-RFC5771" name="ref-RFC5771">RFC5771</a>]  Cotton, M., Vegoda, L., and D. Meyer, "IANA Guidelines for
-              IPv4 Multicast Address Assignments", <a href="./bcp51.html">BCP 51</a>, <a href="./rfc5771.html">RFC 5771</a>,
+   [<a id="ref-RFC5771">RFC5771</a>]  Cotton, M., Vegoda, L., and D. Meyer, "IANA Guidelines for
+              IPv4 Multicast Address Assignments", <a href="https://www.rfc-editor.org/bcp/bcp51">BCP 51</a>, <a href="./rfc5771.html">RFC 5771</a>,
               March 2010.
 
-   [<a id="ref-RFC6130" name="ref-RFC6130">RFC6130</a>]  Clausen, T., Dearlove, C., and J. Dean, "Mobile Ad Hoc
+   [<a id="ref-RFC6130">RFC6130</a>]  Clausen, T., Dearlove, C., and J. Dean, "Mobile Ad Hoc
               Network (MANET) Neighborhood Discovery Protocol (NHDP)",
               <a href="./rfc6130.html">RFC 6130</a>, April 2011.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-13.2" name="section-13.2">13.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-13.2" id="section-13.2">13.2</a>.  Informative References</span>
 
-   [<a id="ref-CDHM07" name="ref-CDHM07">CDHM07</a>]   Chakeres, I., Danilov, C., Henderson, T., and J. Macker,
+   [<a id="ref-CDHM07">CDHM07</a>]   Chakeres, I., Danilov, C., Henderson, T., and J. Macker,
               "Connecting MANET Multicast", IEEE MILCOM
               2007 Proceedings, 2007.
 
-   [<a id="ref-DHG09" name="ref-DHG09">DHG09</a>]    Danilov, C., Henderson, T., Goff, T., Kim, J., Macker, J.,
+   [<a id="ref-DHG09">DHG09</a>]    Danilov, C., Henderson, T., Goff, T., Kim, J., Macker, J.,
               Weston, J., Neogi, N., Ortiz, A., and D. Uhlig,
               "Experiment and field demonstration of a 802.11-based
               ground-UAV mobile ad-hoc network", Proceedings of the 28th
               IEEE conference on Military Communications, 2009.
 
-   [<a id="ref-DHS08" name="ref-DHS08">DHS08</a>]    Danilov, C., Henderson, T., Spagnolo, T., Goff, T., and J.
+   [<a id="ref-DHS08">DHS08</a>]    Danilov, C., Henderson, T., Spagnolo, T., Goff, T., and J.
               Kim, "MANET Multicast with Multiple Gateways", IEEE MILCOM
               2008 Proceedings, 2008.
 
-   [<a id="ref-GM99" name="ref-GM99">GM99</a>]     Garcia-Luna-Aceves, JJ. and E. Madruga, "The Core-Assisted
+   [<a id="ref-GM99">GM99</a>]     Garcia-Luna-Aceves, JJ. and E. Madruga, "The Core-Assisted
               Mesh Protocol", Selected Areas in Communications, IEEE
               Journal,  Volume 17, Issue 8, August 1999.
 
-   [<a id="ref-IPV4-ID-UPDATE" name="ref-IPV4-ID-UPDATE">IPV4-ID-UPDATE</a>]
-              Touch, J., <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22Updated+Specification+of+the+IPv4+ID+Field%22" style="text-decoration: none">"Updated Specification of the IPv4 ID Field"</a>,
+   [<a id="ref-IPV4-ID-UPDATE">IPV4-ID-UPDATE</a>]
+              Touch, J., <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22Updated+Specification+of+the+IPv4+ID+Field%22" style="text-decoration: none">"Updated Specification of the IPv4 ID Field"</a>,
               Work in Progress, September 2011.
 
-   [<a id="ref-JLMV02" name="ref-JLMV02">JLMV02</a>]   Jacquet, P., Laouiti, V., Minet, P., and L. Viennot,
+   [<a id="ref-JLMV02">JLMV02</a>]   Jacquet, P., Laouiti, V., Minet, P., and L. Viennot,
               "Performance of Multipoint Relaying in Ad Hoc Mobile
               Routing Protocols", Networking , 2002.
 
-   [<a id="ref-MDC04" name="ref-MDC04">MDC04</a>]    Macker, J., Dean, J., and W. Chao, "Simplified Multicast
+   [<a id="ref-MDC04">MDC04</a>]    Macker, J., Dean, J., and W. Chao, "Simplified Multicast
               Forwarding in Mobile Ad hoc Networks", IEEE MILCOM 2004
               Proceedings, 2004.
 
-   [<a id="ref-MDDA07" name="ref-MDDA07">MDDA07</a>]   Macker, J., Downard, I., Dean, J., and R. Adamson,
+   [<a id="ref-MDDA07">MDDA07</a>]   Macker, J., Downard, I., Dean, J., and R. Adamson,
               "Evaluation of Distributed Cover Set Algorithms in Mobile
               Ad hoc Network for Simplified Multicast Forwarding", ACM
               SIGMOBILE Mobile Computing and Communications
@@ -2311,31 +2279,31 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
-   [<a id="ref-MGL04" name="ref-MGL04">MGL04</a>]    Mohapatra, P., Gui, C., and J. Li, "Group Communications
+   [<a id="ref-MGL04">MGL04</a>]    Mohapatra, P., Gui, C., and J. Li, "Group Communications
               in Mobile Ad hoc Networks", IEEE Computer, Vol. 37, No. 2,
               February 2004.
 
-   [<a id="ref-NTSC99" name="ref-NTSC99">NTSC99</a>]   Ni, S., Tseng, Y., Chen, Y., and J. Sheu, "The Broadcast
+   [<a id="ref-NTSC99">NTSC99</a>]   Ni, S., Tseng, Y., Chen, Y., and J. Sheu, "The Broadcast
               Storm Problem in a Mobile Ad Hoc Network", Proceedings of
               ACM Mobicom 99, 1999.
 
-   [<a id="ref-RFC2501" name="ref-RFC2501">RFC2501</a>]  Corson, M. and J. Macker, "Mobile Ad hoc Networking
+   [<a id="ref-RFC2501">RFC2501</a>]  Corson, M. and J. Macker, "Mobile Ad hoc Networking
               (MANET): Routing Protocol Performance Issues and
               Evaluation Considerations", <a href="./rfc2501.html">RFC 2501</a>, January 1999.
 
-   [<a id="ref-RFC3684" name="ref-RFC3684">RFC3684</a>]  Ogier, R., Templin, F., and M. Lewis, "Topology
+   [<a id="ref-RFC3684">RFC3684</a>]  Ogier, R., Templin, F., and M. Lewis, "Topology
               Dissemination Based on Reverse-Path Forwarding (TBRPF)",
               <a href="./rfc3684.html">RFC 3684</a>, February 2004.
 
-   [<a id="ref-RFC3973" name="ref-RFC3973">RFC3973</a>]  Adams, A., Nicholas, J., and W. Siadak, "Protocol
+   [<a id="ref-RFC3973">RFC3973</a>]  Adams, A., Nicholas, J., and W. Siadak, "Protocol
               Independent Multicast - Dense Mode (PIM-DM): Protocol
               Specification (Revised)", <a href="./rfc3973.html">RFC 3973</a>, January 2005.
 
-   [<a id="ref-RFC4601" name="ref-RFC4601">RFC4601</a>]  Fenner, B., Handley, M., Holbrook, H., and I. Kouvelas,
+   [<a id="ref-RFC4601">RFC4601</a>]  Fenner, B., Handley, M., Holbrook, H., and I. Kouvelas,
               "Protocol Independent Multicast - Sparse Mode (PIM-SM):
               Protocol Specification (Revised)", <a href="./rfc4601.html">RFC 4601</a>, August 2006.
 
@@ -2367,11 +2335,11 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Essential%20Connecting%20Dominating%20Set%20%28E-CDS%29%20Algorithm"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Essential Connecting Dominating Set (E-CDS) Algorithm</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Essential%20Connecting%20Dominating%20Set%20%28E-CDS%29%20Algorithm"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Essential Connecting Dominating Set (E-CDS) Algorithm</span>
 
    The "Essential Connected Dominating Set" (E-CDS) algorithm [<a href="./rfc5614.html" title='"Mobile Ad Hoc Network (MANET) Extension of OSPF Using Connected Dominating Set (CDS) Flooding"'>RFC5614</a>]
    forms a single CDS mesh for the SMF operating region.  It allows
@@ -2396,7 +2364,7 @@ Table of Contents
    Address Block TLV be used to advertise neighbor routers that are also
    conducting E-CDS SMF operation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20E-CDS%20Relay%20Set%20Selection%20Overview"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>.  E-CDS Relay Set Selection Overview</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20E-CDS%20Relay%20Set%20Selection%20Overview"></a></body></html><a class="selflink" href="#appendix-A.1" id="appendix-A.1">A.1</a>.  E-CDS Relay Set Selection Overview</span>
 
    The E-CDS relay set selection requires 2-hop neighborhood information
    collected through NHDP or another process.  Relay routers, in E-CDS
@@ -2423,7 +2391,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -2437,7 +2405,7 @@ Table of Contents
    (e.g., bi-connected), but such capability is supported by the basic
    E-CDS design.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20E-CDS%20Forwarding%20Rules"></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>.  E-CDS Forwarding Rules</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20E-CDS%20Forwarding%20Rules"></a></body></html><a class="selflink" href="#appendix-A.2" id="appendix-A.2">A.2</a>.  E-CDS Forwarding Rules</span>
 
    With E-CDS, any SMF router that has selected itself as a relay
    performs DPD and forwards all non-duplicative multicast traffic
@@ -2468,7 +2436,7 @@ Table of Contents
    statically configured CF relays that are identified via NHDP or other
    means.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20%20E-CDS%20Neighborhood%20Discovery%20Requirements"></a></body></html><a class="selflink" href="#appendix-A.3" name="appendix-A.3">A.3</a>.  E-CDS Neighborhood Discovery Requirements</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20%20E-CDS%20Neighborhood%20Discovery%20Requirements"></a></body></html><a class="selflink" href="#appendix-A.3" id="appendix-A.3">A.3</a>.  E-CDS Neighborhood Discovery Requirements</span>
 
    It is possible to perform E-CDS relay set selection without
    modification of NHDP, basing the self-election process exclusively on
@@ -2479,7 +2447,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -2535,7 +2503,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 42]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-43" id="page-43" name="page-43"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-43"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -2591,7 +2559,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 43]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-44" id="page-44" name="page-44"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-44"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -2617,7 +2585,7 @@ Table of Contents
    address is associated with its own value byte and therefore its own
    Router Priority.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.%20%20E-CDS%20Selection%20Algorithm"></a></body></html><a class="selflink" href="#appendix-A.4" name="appendix-A.4">A.4</a>.  E-CDS Selection Algorithm</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.%20%20E-CDS%20Selection%20Algorithm"></a></body></html><a class="selflink" href="#appendix-A.4" id="appendix-A.4">A.4</a>.  E-CDS Selection Algorithm</span>
 
    This section describes an algorithm for E-CDS relay selection (self-
    election).  The algorithm described uses 2-hop information.  Note
@@ -2647,7 +2615,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 44]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-45" id="page-45" name="page-45"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-45"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -2703,7 +2671,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 45]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-46" id="page-46" name="page-46"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-46"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -2721,7 +2689,7 @@ Table of Contents
    TLV types in their NHDP_HELLO message and address blocks,
    respectively.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Source-Based%20Multipoint%20Relay%20%28S-MPR%29%20Algorithm"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Source-Based Multipoint Relay (S-MPR) Algorithm</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Source-Based%20Multipoint%20Relay%20%28S-MPR%29%20Algorithm"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Source-Based Multipoint Relay (S-MPR) Algorithm</span>
 
    The source-based multipoint relay (S-MPR) set selection algorithm
    enables individual routers, using 2-hop topology information, to
@@ -2745,7 +2713,7 @@ Table of Contents
    Address Block TLV be used to specify which neighbor routers are
    conducting S-MPR SMF operation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.1.%20%20S-MPR%20Relay%20Set%20Selection%20Overview"></a></body></html><a class="selflink" href="#appendix-B.1" name="appendix-B.1">B.1</a>.  S-MPR Relay Set Selection Overview</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.1.%20%20S-MPR%20Relay%20Set%20Selection%20Overview"></a></body></html><a class="selflink" href="#appendix-B.1" id="appendix-B.1">B.1</a>.  S-MPR Relay Set Selection Overview</span>
 
    The S-MPR algorithm uses bi-directional 1-hop and 2-hop neighborhood
    information collected via NHDP to select, from a router's 1-hop
@@ -2759,7 +2727,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 46]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-47" id="page-47" name="page-47"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-47"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -2787,7 +2755,7 @@ Table of Contents
    selection among multiple interfaces by selecting common MPRs to the
    extent possible.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.2.%20%20S-MPR%20Forwarding%20Rules"></a></body></html><a class="selflink" href="#appendix-B.2" name="appendix-B.2">B.2</a>.  S-MPR Forwarding Rules</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.2.%20%20S-MPR%20Forwarding%20Rules"></a></body></html><a class="selflink" href="#appendix-B.2" id="appendix-B.2">B.2</a>.  S-MPR Forwarding Rules</span>
 
    An S-MPR SMF router <em>MUST</em> only forward packets for neighbors that have
    explicitly selected it as an MPR.  The source-based forwarding
@@ -2815,7 +2783,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 47]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-48" id="page-48" name="page-48"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-48"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -2849,7 +2817,7 @@ Table of Contents
    will be unable to source multicast packets and have them forwarded by
    other S-MPR SMF routers.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.3.%20%20S-MPR%20Neighborhood%20Discovery%20Requirements"></a></body></html><a class="selflink" href="#appendix-B.3" name="appendix-B.3">B.3</a>.  S-MPR Neighborhood Discovery Requirements</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.3.%20%20S-MPR%20Neighborhood%20Discovery%20Requirements"></a></body></html><a class="selflink" href="#appendix-B.3" id="appendix-B.3">B.3</a>.  S-MPR Neighborhood Discovery Requirements</span>
 
    Nodes may optionally signal a Router Priority value to their 1-hop
    neighbors by using the SMF_TYPE:S-MPR message block TLV value field.
@@ -2871,7 +2839,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 48]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-49" id="page-49" name="page-49"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-49"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -2927,7 +2895,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 49]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-50" id="page-50" name="page-50"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-50"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -2965,7 +2933,7 @@ Table of Contents
    addresses using only one TLV.  See Figure 8 for a similar example on
    how this may be done.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.4.%20%20S-MPR%20Selection%20Algorithm"></a></body></html><a class="selflink" href="#appendix-B.4" name="appendix-B.4">B.4</a>.  S-MPR Selection Algorithm</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.4.%20%20S-MPR%20Selection%20Algorithm"></a></body></html><a class="selflink" href="#appendix-B.4" id="appendix-B.4">B.4</a>.  S-MPR Selection Algorithm</span>
 
    This section describes a basic algorithm for the S-MPR selection
    process.  Note that the selection is with respect to a specific
@@ -2983,7 +2951,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 50]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-51" id="page-51" name="page-51"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-51"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -3039,7 +3007,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 51]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-52" id="page-52" name="page-52"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-52"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -3051,7 +3019,7 @@ Table of Contents
    selector.  Note these steps are re-evaluated upon neighborhood status
    changes.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20C.%20%20Multipoint%20Relay%20Connected%20Dominating%20Set%20%28MPR-CDS%29"></a></body></html><a class="selflink" href="#appendix-C" name="appendix-C">Appendix C</a>.  Multipoint Relay Connected Dominating Set (MPR-CDS)</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20C.%20%20Multipoint%20Relay%20Connected%20Dominating%20Set%20%28MPR-CDS%29"></a></body></html><a class="selflink" href="#appendix-C" id="appendix-C">Appendix C</a>.  Multipoint Relay Connected Dominating Set (MPR-CDS)</span>
              Algorithm
 
    The MPR-CDS algorithm is an extension to the basic S-MPR election
@@ -3064,7 +3032,7 @@ Table of Contents
    NHDP_HELLO messages that are generated by routers conducting MPR-CDS
    SMF operation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.1.%20%20MPR-CDS%20Relay%20Set%20Selection%20Overview"></a></body></html><a class="selflink" href="#appendix-C.1" name="appendix-C.1">C.1</a>.  MPR-CDS Relay Set Selection Overview</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.1.%20%20MPR-CDS%20Relay%20Set%20Selection%20Overview"></a></body></html><a class="selflink" href="#appendix-C.1" id="appendix-C.1">C.1</a>.  MPR-CDS Relay Set Selection Overview</span>
 
    The MPR-CDS relay set selection process is based upon the MPR
    selection process of the S-MPR algorithm with the added refinement of
@@ -3095,7 +3063,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 52]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-53" id="page-53" name="page-53"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-53"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -3113,7 +3081,7 @@ Table of Contents
    participating in NHDP and the opportunity for statically configured
    CF routers to be present, regardless of their participation in NHDP.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.2.%20%20MPR-CDS%20Forwarding%20Rules"></a></body></html><a class="selflink" href="#appendix-C.2" name="appendix-C.2">C.2</a>.  MPR-CDS Forwarding Rules</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.2.%20%20MPR-CDS%20Forwarding%20Rules"></a></body></html><a class="selflink" href="#appendix-C.2" id="appendix-C.2">C.2</a>.  MPR-CDS Forwarding Rules</span>
 
    The forwarding rules for MPR-CDS are similar to those for E-CDS.  Any
    SMF router that has selected itself as a relay performs DPD and
@@ -3142,7 +3110,7 @@ Table of Contents
    operating as part of a different relay set algorithm (e.g., S-MPR) to
    allow coexistent deployments to operate correctly.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.3.%20%20MPR-CDS%20Neighborhood%20Discovery%20Requirements"></a></body></html><a class="selflink" href="#appendix-C.3" name="appendix-C.3">C.3</a>.  MPR-CDS Neighborhood Discovery Requirements</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.3.%20%20MPR-CDS%20Neighborhood%20Discovery%20Requirements"></a></body></html><a class="selflink" href="#appendix-C.3" id="appendix-C.3">C.3</a>.  MPR-CDS Neighborhood Discovery Requirements</span>
 
    The neighborhood discovery requirements for MPR-CDS have commonality
    with both the S-MPR and E-CDS algorithms.  MPR-CDS selection
@@ -3151,11 +3119,11 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 53]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-54" id="page-54" name="page-54"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-54"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
-   [<a id="ref-RFC6130" name="ref-RFC6130">RFC6130</a>] or from external sources.  Unlike S-MPR operation, there is
+   [<a id="ref-RFC6130">RFC6130</a>] or from external sources.  Unlike S-MPR operation, there is
    no need for associating link-layer address information with 1-hop
    neighbors since MPR-CDS forwarding is independent of the previous hop
    similar to E-CDS forwarding.
@@ -3173,7 +3141,7 @@ Table of Contents
    type TLV shares a common format with SMF_NBR_TYPE:S-MPR (Table 17) to
    convey MPR selection.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.4.%20%20MPR-CDS%20Selection%20Algorithm"></a></body></html><a class="selflink" href="#appendix-C.4" name="appendix-C.4">C.4</a>.  MPR-CDS Selection Algorithm</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.4.%20%20MPR-CDS%20Selection%20Algorithm"></a></body></html><a class="selflink" href="#appendix-C.4" id="appendix-C.4">C.4</a>.  MPR-CDS Selection Algorithm</span>
 
    This section describes an algorithm for the MPR-CDS selection
    process.  Note that the selection described is with respect to a
@@ -3207,7 +3175,7 @@ Table of Contents
 
 
 <span class="grey">Macker                        Experimental                     [Page 54]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-55" id="page-55" name="page-55"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-55"></span>
 <span class="grey"><a href="./rfc6621.html">RFC 6621</a>                           SMF                          May 2012</span>
 
 
@@ -3263,11 +3231,6 @@ Author's Address
 
 
 Macker                        Experimental                     [Page 55]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

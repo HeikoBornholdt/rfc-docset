@@ -1,26 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:4009" name="DC.Identifier"/>
-<meta content="This document describes the SEED encryption algorithm, which has been
-adopted by most of the security systems in the Republic of Korea.
-Included are a description of the cipher and the key scheduling
-algorithm (Section 2), the S-boxes (Appendix A), and a set of test
-vectors (Appendix B). This memo provides information for the Internet
-community." name="DC.Description.Abstract"/>
-<meta content="Lee, Jaeil" name="DC.Creator"/>
-<meta content="Park, Jongwook" name="DC.Creator"/>
-<meta content="Lee, Sungjae" name="DC.Creator"/>
-<meta content="Kim, Jeeyeon" name="DC.Creator"/>
-<meta content="February, 2005" name="DC.Date.Issued"/>
-<meta content="The SEED Encryption Algorithm" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 4009 - The SEED Encryption Algorithm</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="J. Park" name="citation_author"/>
+<meta content="S. Lee" name="citation_author"/>
+<meta content="J. Kim" name="citation_author"/>
+<meta content="J. Lee" name="citation_author"/>
+<meta content="February, 2005" name="citation_publication_date"/>
+<meta content=" The SEED Encryption Algorithm " name="citation_title"/>
+<meta content="10.17487/RFC4009" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc4009" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc4009.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 4009:  The SEED Encryption Algorithm </title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -49,7 +43,7 @@ community." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -58,7 +52,7 @@ community." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -137,19 +131,18 @@ community." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -163,21 +156,9 @@ community." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgbrown" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc4009.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc4009" title="PDF version of this document">pdf</a>] [<a href="./draft-park-seed.html" title="draft-park-seed">draft-park-seed</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc4009" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc4009" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=4009">Errata</a>]             </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">Obsoleted by: <a href="./rfc4269.html">4269</a>                                         INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                            J. Park
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc4009.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc4009.txt.pdf">PDF</a>|<a href="/rfc/rfc4009.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc4009" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=4009&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc4009" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc4009" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">Obsoleted by: <a href="/rfc/rfc4269" target="_blank">4269</a>                                         INFORMATIONAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                            J. Park
 Request for Comments: 4009                                        S. Lee
 Category: Informational                                           J. Kim
                                                                   J. Lee
@@ -205,9 +186,9 @@ Abstract
    algorithm (<a href="#section-2">Section 2</a>), the S-boxes (Appendix A), and a set of test
    vectors (Appendix B).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20SEED%20Overview"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  SEED Overview</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20SEED%20Overview"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  SEED Overview</span>
 
    SEED is a 128-bit symmetric key block cipher that has been developed
    by KISA (Korea Information Security Agency) and a group of experts
@@ -229,7 +210,7 @@ Abstract
 
 
 <span class="grey">Park, et al.                 Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
@@ -246,7 +227,7 @@ Abstract
    such as electronic commerce; e.g., financial services provided in
    wired and wireless communication.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Notation"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Notation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Notation"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Notation</span>
 
    The following notation is used in the description of the SEED
    encryption algorithm:
@@ -260,7 +241,7 @@ Abstract
       &gt;&gt; n          right circular rotation by n bits
       0x            hexadecimal representation
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20The%20Structure%20of%20SEED"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  The Structure of SEED</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20The%20Structure%20of%20SEED"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  The Structure of SEED</span>
 
    The input/output block size of SEED is 128-bit, and the key length is
    also 128-bit.  SEED has the 16-round Feistel structure.  A 128-bit
@@ -285,11 +266,11 @@ Abstract
 
 
 <span class="grey">Park, et al.                 Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20The%20Round%20Function%20F"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  The Round Function F</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20The%20Round%20Function%20F"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  The Round Function F</span>
 
    SEED uses two 8x8 S-boxes, permutations, rotations, and basic modular
    operations such as exclusive OR (XOR) and additions to provide strong
@@ -310,7 +291,7 @@ Abstract
      R1' = G[ G[ G[(R0 ^ Ki0) ^ (R1 ^ Ki1)] + (R0 ^ Ki0)] + G[(R0 ^ Ki0)
             ^ (R1 ^ Ki1)]] + G[ G[(R0 ^ Ki0) ^ (R1 ^ Ki1)]
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20The%20Function%20G"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  The Function G</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20The%20Function%20G"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  The Function G</span>
 
    The function G has two layers: a layer of two 8x8 S-boxes and a layer
    of block permutation of sixteen 8-bit sub-blocks.  The outputs
@@ -341,7 +322,7 @@ Abstract
 
 
 <span class="grey">Park, et al.                 Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
@@ -352,7 +333,7 @@ Abstract
    This new G function is faster than the original G function but takes
    more memory to store four SS-boxes.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Key%20Schedule"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Key Schedule</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Key%20Schedule"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Key Schedule</span>
 
    The key schedule generates each round subkeys.  It uses the function
    G, addition in modular 2**32, subtraction in modular 2**32, and
@@ -397,7 +378,7 @@ Abstract
 
 
 <span class="grey">Park, et al.                 Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
@@ -414,13 +395,13 @@ Abstract
           Key2 || Key3 = (Key2 || Key3) &lt;&lt; 8;
       }
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Decryption%20Procedure"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Decryption Procedure</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Decryption%20Procedure"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Decryption Procedure</span>
 
    Decryption procedure is the reverse step of the encryption procedure.
    It can be implemented by using the encryption algorithm with reverse
    order of the round subkeys.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20SEED%20Object%20Identifiers"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  SEED Object Identifiers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20SEED%20Object%20Identifiers"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  SEED Object Identifiers</span>
 
    For those who may be using SEED in algorithm negotiation within a
    protocol, or in any other context that may require the use of OIDs,
@@ -453,7 +434,7 @@ Abstract
 
 
 <span class="grey">Park, et al.                 Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
@@ -461,30 +442,30 @@ Abstract
    on SHA-1 and the SEED block cipher is provided.  The details of the
    PBE computation are well described in <a href="./rfc2898.html#section-6.1">Section 6.1 of [RFC2898]</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Security Considerations</span>
 
    No security problem has been found on SEED.  See [<a href="#ref-ISOSEED" title='"National Body contributions on NP 18033 Encryption algorithms in response to document SC 27 N 2563"'>ISOSEED</a>] and
    [<a href="#ref-CRYPTREC" title='"SEED Evaluation Report"'>CRYPTREC</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20References"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20References"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Normative References</span>
 
-   [<a id="ref-TTASSEED" name="ref-TTASSEED">TTASSEED</a>] Telecommunications Technology Association (TTA), "128-bit
+   [<a id="ref-TTASSEED">TTASSEED</a>] Telecommunications Technology Association (TTA), "128-bit
               Symmetric Block Cipher (SEED)", TTAS.KO-12.0004,
               September, 1998 (In Korean)
               <a href="http://www.tta.or.kr/English/new/main/index.htm">http://www.tta.or.kr/English/new/main/index.htm</a>
 
-   [<a id="ref-RFC2898" name="ref-RFC2898">RFC2898</a>]  Kaliski, B., "PKCS #5: Password-Based Cryptography
+   [<a id="ref-RFC2898">RFC2898</a>]  Kaliski, B., "PKCS #5: Password-Based Cryptography
               Specification Version 2.0", <a href="./rfc2898.html">RFC 2898</a>, September 2000.
 
               4.2.  Informative References
 
-   [<a id="ref-ISOSEED" name="ref-ISOSEED">ISOSEED</a>]  ISO/IEC, ISO/IEC JTC1/SC 27 N 256r1, "National Body
+   [<a id="ref-ISOSEED">ISOSEED</a>]  ISO/IEC, ISO/IEC JTC1/SC 27 N 256r1, "National Body
               contributions on NP 18033 Encryption algorithms in
               response to document SC 27 N 2563", October, 2000
 
-   [<a id="ref-CRYPTREC" name="ref-CRYPTREC">CRYPTREC</a>] Information-technology Promotion Agency (IPA), Japan,
+   [<a id="ref-CRYPTREC">CRYPTREC</a>] Information-technology Promotion Agency (IPA), Japan,
               CRYPTREC. "SEED Evaluation Report", February, 2002
               <a href="http://www.kisa.or.kr/seed/seed_eng.html">http://www.kisa.or.kr/seed/seed_eng.html</a>
 
@@ -509,13 +490,13 @@ Abstract
 
 
 <span class="grey">Park, et al.                 Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20S-Boxes"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  S-Boxes</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20S-Boxes"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  S-Boxes</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20S-Boxes%28two%20original%20S-boxes%29"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>.  S-Boxes(two original S-boxes)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20S-Boxes%28two%20original%20S-boxes%29"></a></body></html><a class="selflink" href="#appendix-A.1" id="appendix-A.1">A.1</a>.  S-Boxes(two original S-boxes)</span>
 
 - S-Box S0
 
@@ -565,11 +546,11 @@ C8, 9E, 9C, 3A, 0C, 2E, BA, 6E, 9F, 5A, F2, 92, F3, 49, 78, CC,
 
 
 <span class="grey">Park, et al.                 Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20S-Boxes%20%28four%20extended%20S-boxes%29"></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>.  S-Boxes (four extended S-boxes)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20S-Boxes%20%28four%20extended%20S-boxes%29"></a></body></html><a class="selflink" href="#appendix-A.2" id="appendix-A.2">A.2</a>.  S-Boxes (four extended S-boxes)</span>
 
 - S-Box SS0
 
@@ -621,7 +602,7 @@ C8, 9E, 9C, 3A, 0C, 2E, BA, 6E, 9F, 5A, F2, 92, F3, 49, 78, CC,
 
 
 <span class="grey">Park, et al.                 Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
@@ -677,7 +658,7 @@ d819c9d1,4c0c4c40,80038383,8c0f8f83,cc0ecec2,383b0b33,480a4a42,b43787b3
 
 
 <span class="grey">Park, et al.                 Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
@@ -733,7 +714,7 @@ e0e828c8,13181b0b,01040505,71783949,90901080,62682a4a,22282a0a,92981a8a
 
 
 <span class="grey">Park, et al.                 Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
@@ -789,11 +770,11 @@ c9d1d819,4c404c0c,83838003,8f838c0f,cec2cc0e,0b33383b,4a42480a,87b3b437
 
 
 <span class="grey">Park, et al.                 Informational                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Test%20Vectors"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Test Vectors</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Test%20Vectors"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Test Vectors</span>
 
    This appendix provides test vectors for the SEED cipher described in
    this document.
@@ -845,7 +826,7 @@ B.1.
 
 
 <span class="grey">Park, et al.                 Informational                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
@@ -901,7 +882,7 @@ B.2.
 
 
 <span class="grey">Park, et al.                 Informational                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
@@ -957,7 +938,7 @@ B.3.
 
 
 <span class="grey">Park, et al.                 Informational                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
@@ -1013,7 +994,7 @@ B.4.
 
 
 <span class="grey">Park, et al.                 Informational                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
@@ -1069,7 +1050,7 @@ Authors' Addresses
 
 
 <span class="grey">Park, et al.                 Informational                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc4009.html">RFC 4009</a>             The SEED Encryption Algorithm         February 2005</span>
 
 
@@ -1078,7 +1059,7 @@ Full Copyright Statement
    Copyright (C) The Internet Society (2005).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1098,7 +1079,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the IETF's procedures with respect to rights in IETF Documents can
-   be found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   be found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1125,11 +1106,6 @@ Acknowledgement
 
 
 Park, et al.                 Informational                     [Page 17]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,24 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:7693" name="DC.Identifier"/>
-<meta content="This document describes the cryptographic hash function BLAKE2 and
-makes the algorithm specification and C source code conveniently
-available to the Internet community. BLAKE2 comes in two main flavors:
-BLAKE2b is optimized for 64-bit platforms and BLAKE2s for smaller
-architectures. BLAKE2 can be directly keyed, making it functionally
-equivalent to a Message Authentication Code (MAC)." name="DC.Description.Abstract"/>
-<meta content="Saarinen, M-J." name="DC.Creator"/>
-<meta content="Aumasson, J-P." name="DC.Creator"/>
-<meta content="November, 2015" name="DC.Date.Issued"/>
-<meta content="The BLAKE2 Cryptographic Hash and Message Authentication Code (MAC)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7693 - The BLAKE2 Cryptographic Hash and Message Authentication Code (MAC)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="M-J. Saarinen" name="citation_author"/>
+<meta content="J-P. Aumasson" name="citation_author"/>
+<meta content="November, 2015" name="citation_publication_date"/>
+<meta content="The BLAKE2 Cryptographic Hash and Message Authentication Code (MAC)" name="citation_title"/>
+<meta content="10.17487/RFC7693" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7693" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7693.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7693: The BLAKE2 Cryptographic Hash and Message Authentication Code (MAC)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -47,7 +41,7 @@ equivalent to a Message Authentication Code (MAC)." name="DC.Description.Abstrac
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -56,7 +50,7 @@ equivalent to a Message Authentication Code (MAC)." name="DC.Description.Abstrac
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -135,19 +129,18 @@ equivalent to a Message Authentication Code (MAC)." name="DC.Description.Abstrac
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -161,21 +154,9 @@ equivalent to a Message Authentication Code (MAC)." name="DC.Description.Abstrac
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7693.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7693" title="PDF version of this document">pdf</a>] [<a href="./draft-saarinen-blake2.html" title="draft-saarinen-blake2">draft-saarinen-bl...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc7693" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc7693" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Independent Submission                                M-J. Saarinen, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7693.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7693.txt.pdf">PDF</a>|<a href="/rfc/rfc7693.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7693" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7693&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc7693" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Independent Submission                                M-J. Saarinen, Ed.
 Request for Comments: 7693                    Queen's University Belfast
 Category: Informational                                    J-P. Aumasson
 ISSN: 2070-1721                                        Kudelski Security
@@ -214,7 +195,7 @@ Copyright Notice
    Copyright (c) 2015 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -227,7 +208,7 @@ Copyright Notice
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -283,11 +264,11 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction%20and%20Terminology"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction and Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction%20and%20Terminology"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction and Terminology</span>
 
    The BLAKE2 cryptographic hash function [<a href="#ref-BLAKE2" title="Willi Meier">BLAKE2</a>] was designed by Jean-
    Philippe Aumasson, Samuel Neves, Zooko Wilcox-O'Hearn, and Christian
@@ -339,13 +320,13 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions%2C%20Variables%2C%20and%20Constants"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Conventions, Variables, and Constants</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions%2C%20Variables%2C%20and%20Constants"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Conventions, Variables, and Constants</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Parameters"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Parameters</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Parameters"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Parameters</span>
 
    The following table summarizes various parameters and their ranges:
 
@@ -362,7 +343,7 @@ Table of Contents
                 constants = | (32, 24, 16, 63) | (16, 12,  8,  7) |
               --------------+------------------+------------------+
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Other%20Constants%20and%20Variables"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Other Constants and Variables</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Other%20Constants%20and%20Variables"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Other Constants and Variables</span>
 
    These variables are used in the algorithm description:
 
@@ -382,7 +363,7 @@ Table of Contents
 
    f  Flag indicating the last block.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Arithmetic%20Notation"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Arithmetic Notation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Arithmetic%20Notation"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Arithmetic Notation</span>
 
    For real-valued x, we define the following functions:
 
@@ -395,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -413,7 +394,7 @@ Table of Contents
 
    x &gt;&gt;&gt; n =  (x &gt;&gt; n) ^ (x &lt;&lt; (w - n)).  Rotate "x" right by "n".
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Little-Endian%20Interpretation%20of%20Words%20as%20Bytes"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Little-Endian Interpretation of Words as Bytes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Little-Endian%20Interpretation%20of%20Words%20as%20Bytes"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Little-Endian Interpretation of Words as Bytes</span>
 
    All mathematical operations are on 64-bit words in BLAKE2b and on
    32-bit words in BLAKE2s.
@@ -434,7 +415,7 @@ Table of Contents
    When interpreted as a 64-bit word, bytes x[0..7] have a numerical
    value of 0xEFCDAB8967452301 or 17279655951921914625.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Parameter%20Block"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  Parameter Block</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Parameter%20Block"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  Parameter Block</span>
 
    We specify the parameter block words p[0..7] as follows:
 
@@ -451,7 +432,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -460,7 +441,7 @@ Table of Contents
    <em>OPTIONAL</em> features use fields in the parameter block that are not
    defined in this document.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20Initialization%20Vector"></a></body></html><a class="selflink" href="#section-2.6" name="section-2.6">2.6</a>.  Initialization Vector</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20Initialization%20Vector"></a></body></html><a class="selflink" href="#section-2.6" id="section-2.6">2.6</a>.  Initialization Vector</span>
 
    We define the Initialization Vector constant IV mathematically as:
 
@@ -474,7 +455,7 @@ Table of Contents
    Note: BLAKE2b IV is the same as SHA-512 IV, and BLAKE2s IV is the
    same as SHA-256 IV; see [<a href="./rfc6234.html" title='"US Secure Hash Algorithms (SHA and SHA-based HMAC and HKDF)"'>RFC6234</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.%20%20Message%20Schedule%20SIGMA"></a></body></html><a class="selflink" href="#section-2.7" name="section-2.7">2.7</a>.  Message Schedule SIGMA</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.%20%20Message%20Schedule%20SIGMA"></a></body></html><a class="selflink" href="#section-2.7" id="section-2.7">2.7</a>.  Message Schedule SIGMA</span>
 
    Message word schedule permutations for each round of both BLAKE2b and
    BLAKE2s are defined by SIGMA.  For BLAKE2b, the two extra
@@ -507,13 +488,13 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20BLAKE2%20Processing"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  BLAKE2 Processing</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20BLAKE2%20Processing"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  BLAKE2 Processing</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Mixing%20Function%20G"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Mixing Function G</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Mixing%20Function%20G"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Mixing Function G</span>
 
    The G primitive function mixes two input words, "x" and "y", into
    four words indexed by "a", "b", "c", and "d" in the working vector
@@ -563,11 +544,11 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Compression%20Function%20F"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Compression Function F</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Compression%20Function%20F"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Compression Function F</span>
 
    Compression function F takes as an argument the state vector "h",
    message block vector "m" (last block is padded with zeros to full
@@ -619,11 +600,11 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Padding%20Data%20and%20Computing%20a%20BLAKE2%20Digest"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Padding Data and Computing a BLAKE2 Digest</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Padding%20Data%20and%20Computing%20a%20BLAKE2%20Digest"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Padding Data and Computing a BLAKE2 Digest</span>
 
    We refer the reader to Appendices C and D for reference C language
    implementations of BLAKE2b and BLAKE2s, respectively.
@@ -675,11 +656,11 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Standard%20Parameter%20Sets%20and%20Algorithm%20Identifiers"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Standard Parameter Sets and Algorithm Identifiers</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Standard%20Parameter%20Sets%20and%20Algorithm%20Identifiers"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Standard Parameter Sets and Algorithm Identifiers</span>
 
    An implementation of BLAKE2b and/or BLAKE2s <em>MAY</em> support the following
    digest size parameters for interoperability (e.g., digital
@@ -731,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -741,7 +722,7 @@ Table of Contents
           id-blake2s224 OBJECT IDENTIFIER ::= { blake2s 7 }
           id-blake2s256 OBJECT IDENTIFIER ::= { blake2s 8 }
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    This document is intended to provide convenient open-source access by
    the Internet community to the BLAKE2 cryptographic hash algorithm.
@@ -754,32 +735,32 @@ Table of Contents
    immediately from process memory after use.  Such cleanup can be added
    if needed.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
               DOI 10.17487/RFC2119, March 1997,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2119">http://www.rfc-editor.org/info/rfc2119</a>&gt;.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Informative References</span>
 
-   [<a id="ref-BLAKE" name="ref-BLAKE">BLAKE</a>]    Aumasson, J-P., Meier, W., Phan, R., and L. Henzen, "The
+   [<a id="ref-BLAKE">BLAKE</a>]    Aumasson, J-P., Meier, W., Phan, R., and L. Henzen, "The
               Hash Function BLAKE", January 2015,
               &lt;<a href="https://131002.net/blake/book">https://131002.net/blake/book</a>&gt;.
 
-   [<a id="ref-BLAKE2" name="ref-BLAKE2">BLAKE2</a>]   Aumasson, J-P., Neves, S., Wilcox-O'Hearn, Z., and C.
+   [<a id="ref-BLAKE2">BLAKE2</a>]   Aumasson, J-P., Neves, S., Wilcox-O'Hearn, Z., and C.
               Winnerlein, "BLAKE2: simpler, smaller, fast as MD5",
               January 2013, &lt;<a href="https://blake2.net/blake2.pdf">https://blake2.net/blake2.pdf</a>&gt;.
 
-   [<a id="ref-FIPS140-2IG" name="ref-FIPS140-2IG">FIPS140-2IG</a>]
+   [<a id="ref-FIPS140-2IG">FIPS140-2IG</a>]
               NIST, "Implementation Guidance for FIPS PUB 140-2 and the
               Cryptographic Module Validation Program", September 2015,
               &lt;<a href="http://csrc.nist.gov/groups/STM/cmvp/documents/fips140-2/FIPS1402IG.pdf/">http://csrc.nist.gov/groups/STM/cmvp/documents/fips140-2/</a>
               <a href="http://csrc.nist.gov/groups/STM/cmvp/documents/fips140-2/FIPS1402IG.pdf/">FIPS1402IG.pdf/</a>&gt;.
 
-   [<a id="ref-RFC6151" name="ref-RFC6151">RFC6151</a>]  Turner, S. and L. Chen, "Updated Security Considerations
+   [<a id="ref-RFC6151">RFC6151</a>]  Turner, S. and L. Chen, "Updated Security Considerations
               for the MD5 Message-Digest and the HMAC-MD5 Algorithms",
               <a href="./rfc6151.html">RFC 6151</a>, DOI 10.17487/RFC6151, March 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6151">http://www.rfc-editor.org/info/rfc6151</a>&gt;.
@@ -787,11 +768,11 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
-   [<a id="ref-RFC6234" name="ref-RFC6234">RFC6234</a>]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms
+   [<a id="ref-RFC6234">RFC6234</a>]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms
               (SHA and SHA-based HMAC and HKDF)", <a href="./rfc6234.html">RFC 6234</a>,
               DOI 10.17487/RFC6234, May 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6234">http://www.rfc-editor.org/info/rfc6234</a>&gt;.
@@ -843,11 +824,11 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Example%20of%20BLAKE2b%20Computation"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Example of BLAKE2b Computation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Example%20of%20BLAKE2b%20Computation"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Example of BLAKE2b Computation</span>
 
    We compute the unkeyed hash of three ASCII bytes "abc" with
    BLAKE2b-512 and show internal values during computation.
@@ -899,7 +880,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -955,7 +936,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -975,7 +956,7 @@ Table of Contents
                         7D 87 C5 39 2A AB 79 2D C2 52 D5 DE 45 33 CC 95
                         18 D3 8A A8 DB F1 92 5A B9 23 86 ED D4 00 99 23
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Example%20of%20BLAKE2s%20Computation"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Example of BLAKE2s Computation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Example%20of%20BLAKE2s%20Computation"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Example of BLAKE2s Computation</span>
 
    We compute the unkeyed hash of three ASCII bytes "abc" with
    BLAKE2s-256 and show internal values during computation.
@@ -1011,7 +992,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1041,9 +1022,9 @@ Table of Contents
    BLAKE2s-256("abc") = 50 8C 5E 8C 32 7C 14 E2 E1 A7 2B A3 4E EB 45 2F
                         37 45 8B 20 9E D6 3A 29 4D 99 9B 4C 86 67 59 82
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20C.%20%20BLAKE2b%20Implementation%20C%20Source"></a></body></html><a class="selflink" href="#appendix-C" name="appendix-C">Appendix C</a>.  BLAKE2b Implementation C Source</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20C.%20%20BLAKE2b%20Implementation%20C%20Source"></a></body></html><a class="selflink" href="#appendix-C" id="appendix-C">Appendix C</a>.  BLAKE2b Implementation C Source</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.1.%20%20blake2b.h"></a></body></html><a class="selflink" href="#appendix-C.1" name="appendix-C.1">C.1</a>.  blake2b.h</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.1.%20%20blake2b.h"></a></body></html><a class="selflink" href="#appendix-C.1" id="appendix-C.1">C.1</a>.  blake2b.h</span>
 
    &lt;CODE BEGINS&gt;
    // blake2b.h
@@ -1067,7 +1048,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1093,7 +1074,7 @@ Table of Contents
    #endif
    &lt;CODE ENDS&gt;
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.2.%20%20blake2b.c"></a></body></html><a class="selflink" href="#appendix-C.2" name="appendix-C.2">C.2</a>.  blake2b.c</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/C.2.%20%20blake2b.c"></a></body></html><a class="selflink" href="#appendix-C.2" id="appendix-C.2">C.2</a>.  blake2b.c</span>
 
    &lt;CODE BEGINS&gt;
    // blake2b.c
@@ -1123,7 +1104,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1179,7 +1160,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1235,7 +1216,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1291,7 +1272,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1319,9 +1300,9 @@ Table of Contents
    }
    &lt;CODE ENDS&gt;
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20D.%20%20BLAKE2s%20Implementation%20C%20Source"></a></body></html><a class="selflink" href="#appendix-D" name="appendix-D">Appendix D</a>.  BLAKE2s Implementation C Source</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20D.%20%20BLAKE2s%20Implementation%20C%20Source"></a></body></html><a class="selflink" href="#appendix-D" id="appendix-D">Appendix D</a>.  BLAKE2s Implementation C Source</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/D.1.%20%20blake2s.h"></a></body></html><a class="selflink" href="#appendix-D.1" name="appendix-D.1">D.1</a>.  blake2s.h</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/D.1.%20%20blake2s.h"></a></body></html><a class="selflink" href="#appendix-D.1" id="appendix-D.1">D.1</a>.  blake2s.h</span>
 
    &lt;CODE BEGINS&gt;
    // blake2s.h
@@ -1347,7 +1328,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1373,7 +1354,7 @@ Table of Contents
    #endif
    &lt;CODE ENDS&gt;
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/D.2.%20%20blake2s.c"></a></body></html><a class="selflink" href="#appendix-D.2" name="appendix-D.2">D.2</a>.  blake2s.c</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/D.2.%20%20blake2s.c"></a></body></html><a class="selflink" href="#appendix-D.2" id="appendix-D.2">D.2</a>.  blake2s.c</span>
 
    &lt;CODE BEGINS&gt;
    // blake2s.c
@@ -1403,7 +1384,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1459,7 +1440,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1515,7 +1496,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1571,7 +1552,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1584,7 +1565,7 @@ Table of Contents
    }
    &lt;CODE ENDS&gt;
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20E.%20%20BLAKE2b%20and%20BLAKE2s%20Self-Test%20Module%20C%20Source"></a></body></html><a class="selflink" href="#appendix-E" name="appendix-E">Appendix E</a>.  BLAKE2b and BLAKE2s Self-Test Module C Source</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20E.%20%20BLAKE2b%20and%20BLAKE2s%20Self-Test%20Module%20C%20Source"></a></body></html><a class="selflink" href="#appendix-E" id="appendix-E">Appendix E</a>.  BLAKE2b and BLAKE2s Self-Test Module C Source</span>
 
    This module computes a series of keyed and unkeyed hashes from
    deterministically generated pseudorandom data and computes a hash
@@ -1627,7 +1608,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1683,7 +1664,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1739,7 +1720,7 @@ Table of Contents
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1765,7 +1746,7 @@ Acknowledgements
    Christian Winnerlein.  We have borrowed passages from [<a href="#ref-BLAKE" title='"The Hash Function BLAKE"'>BLAKE</a>] and
    [<a href="#ref-BLAKE2" title="Willi Meier">BLAKE2</a>] with permission.
 
-   [<a id="ref-BLAKE2" name="ref-BLAKE2">BLAKE2</a>] is based on the SHA-3 proposal [<a href="#ref-BLAKE" title='"The Hash Function BLAKE"'>BLAKE</a>], designed by Jean-
+   [<a id="ref-BLAKE2">BLAKE2</a>] is based on the SHA-3 proposal [<a href="#ref-BLAKE" title='"The Hash Function BLAKE"'>BLAKE</a>], designed by Jean-
    Philippe Aumasson, Luca Henzen, Willi Meier, and Raphael C.-W. Phan.
    BLAKE2, like BLAKE, relies on a core algorithm borrowed from the
    ChaCha stream cipher, designed by Daniel J. Bernstein.
@@ -1795,7 +1776,7 @@ Acknowledgements
 
 
 <span class="grey">Saarinen &amp; Aumasson           Informational                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc7693.html">RFC 7693</a>               BLAKE2 Crypto Hash and MAC          November 2015</span>
 
 
@@ -1851,11 +1832,6 @@ Authors' Addresses
 
 
 Saarinen &amp; Aumasson           Informational                    [Page 30]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

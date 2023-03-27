@@ -1,31 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:956" name="DC.Identifier"/>
-<meta content="This RFC discussed clock synchronization algorithms for the ARPA-
-Internet community, and requests discussion and suggestions for
-improvements. The recent interest within the Internet community in
-determining accurate time from a set of mutually suspicious network
-clocks has been prompted by several occasions in which errors were
-found in usually reliable, accurate clock servers after thunderstorms
-which disrupted their power supply. To these sources of error should
-be added those due to malfunctioning hardware, defective software and
-operator mistakes, as well as random errors in the mechanism used to
-set and synchronize clocks. This report suggests a stochastic model
-and algorithms for computing a good estimator from time-offset samples
-measured between clocks connected via network links. Included in this
-report are descriptions of certain experiments which give an
-indication of the effectiveness of the algorithms." name="DC.Description.Abstract"/>
-<meta content="D.L. Mills" name="DC.Creator"/>
-<meta content="September, 1985" name="DC.Date.Issued"/>
-<meta content="Algorithms for synchronizing network clocks" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 956 - Algorithms for synchronizing network clocks</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="D.L. Mills" name="citation_author"/>
+<meta content="September, 1985" name="citation_publication_date"/>
+<meta content=" Algorithms for synchronizing network clocks " name="citation_title"/>
+<meta content="10.17487/RFC0956" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc956" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc956.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 956:  Algorithms for synchronizing network clocks </title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -54,7 +40,7 @@ indication of the effectiveness of the algorithms." name="DC.Description.Abstrac
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -63,7 +49,7 @@ indication of the effectiveness of the algorithms." name="DC.Description.Abstrac
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -142,19 +128,18 @@ indication of the effectiveness of the algorithms." name="DC.Description.Abstrac
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -168,21 +153,9 @@ indication of the effectiveness of the algorithms." name="DC.Description.Abstrac
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgwhite" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc956.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc956" title="PDF version of this document">pdf</a>]                                                        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                         D.L. Mills
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc956.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc956.txt.pdf">PDF</a>|<a href="/rfc/rfc956.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc956" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=956&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc956" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                                 UNKNOWN</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                         D.L. Mills
 Request for Comments: 956                               M/A-COM Linkabit
                                                           September 1985
 
@@ -236,12 +209,12 @@ List of Tables
 
 
 <span class="grey">Mills                                                           [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    The recent interest within the Internet community in determining
    accurate time from a set of mutually suspicious network clocks has
@@ -291,7 +264,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                           [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -333,7 +306,7 @@ Algorithms for Synchronizing Network Clocks
    which to judge robustness, additional quantitative confidence should
    be developed through the use of statistical mechanics.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Majority-Subset%20Algorithms"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Majority-Subset Algorithms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Majority-Subset%20Algorithms"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Majority-Subset Algorithms</span>
 
    A stochastic model appropriate to a system of mutually suspicious
    clocks can be constructed as follows.  An experiment consists of one
@@ -346,7 +319,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                           [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -401,7 +374,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                           [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -456,12 +429,12 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                           [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Clustering%20Algorithms"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Clustering Algorithms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Clustering%20Algorithms"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Clustering Algorithms</span>
 
    Another method for developing a maximum-likelihood estimator is
    through the use of clustering algorithms.  These algorithms operate
@@ -511,7 +484,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                           [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -566,7 +539,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                           [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -621,12 +594,12 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                           [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Application%20to%20Time-Synchronization%20Data"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Application to Time-Synchronization Data</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Application%20to%20Time-Synchronization%20Data"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Application to Time-Synchronization Data</span>
 
    A variation of the above algorithms can be used to improve the offset
    estimates from a single clock by discarding noise samples produced by
@@ -676,7 +649,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                           [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -731,7 +704,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -786,7 +759,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -841,7 +814,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -858,7 +831,7 @@ Algorithms for Synchronizing Network Clocks
    ISI-MCON-GW and LL-GW (b) cases suggests a C(6,4) or even C(7,4)
    algorithm might yield greater accuracies.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Summary%20and%20Conclusions"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Summary and Conclusions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Summary%20and%20Conclusions"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Summary and Conclusions</span>
 
    The principles of maximum-likelihood estimation are well known and
    widely applied in communication electronics.  In this note two
@@ -896,7 +869,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -917,7 +890,7 @@ Algorithms for Synchronizing Network Clocks
    distributing highly reliable timekeeping information using a
    hierarchical set of trusted clocks.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  References</span>
 
    1.  Lindsay, W.C., and A.V.  Kantak.  Network synchronization of
        random signals.  IEEE Trans.  Comm.  COM-28, 8 (August 1980),
@@ -951,7 +924,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -1006,7 +979,7 @@ Appendix A.
 
 
 <span class="grey">Mills                                                          [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -1061,7 +1034,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -1116,7 +1089,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -1171,7 +1144,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -1226,7 +1199,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -1281,7 +1254,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -1336,7 +1309,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -1391,7 +1364,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -1446,7 +1419,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -1501,7 +1474,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -1556,7 +1529,7 @@ Algorithms for Synchronizing Network Clocks
 
 
 <span class="grey">Mills                                                          [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc956.html">RFC 956</a>                                                   September 1985</span>
 Algorithms for Synchronizing Network Clocks
 
@@ -1611,11 +1584,6 @@ Algorithms for Synchronizing Network Clocks
 
 
 Mills                                                          [Page 26]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

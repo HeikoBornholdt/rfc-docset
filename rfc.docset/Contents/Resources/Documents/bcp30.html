@@ -1,1514 +1,1169 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-<meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<link href="" rel="icon" type="image/png"/>
-<link href="" rel="shortcut icon" type="image/png"/>
-<title>BCP 30 - Anti-Spam Recommendations for SMTP MTAs</title>
-<style type="text/css">
-	@media only screen 
-	  and (min-width: 992px)
-	  and (max-width: 1199px) {
-	    body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 768px)
-	  and (max-width: 991px) {
-            body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 480px)
-	  and (max-width: 767px) {
-            body { font-size: 11pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (max-width: 479px) {
-            body { font-size: 8pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-device-width : 375px) 
-	  and (max-device-width : 667px) {
-            body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
-        }
-	@media only screen 
-	  and (min-device-width: 1200px) {
-            body { font-size: 10pt; margin: 0 4em; }
-            div.content { width: 96ex; margin: 0; }
-        }
-        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-	    font-weight: bold;
-            line-height: 0pt;
-            display: inline;
-            white-space: pre;
-            font-family: monospace;
-            font-size: 1em;
-	    font-weight: bold;
-        }
-        pre {
-            font-size: 1em;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-	.pre {
-	    white-space: pre;
-	    font-family: monospace;
-	}
-	.header{
-	    font-weight: bold;
-	}
-        .newpage {
-            page-break-before: always;
-        }
-        .invisible {
-            text-decoration: none;
-            color: white;
-        }
-        a.selflink {
-          color: black;
-          text-decoration: none;
-        }
-        @media print {
-            body {
-                font-family: monospace;
-                font-size: 10.5pt;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                font-size: 1em;
-            }
-        
-            a:link, a:visited {
-                color: inherit;
-                text-decoration: none;
-            }
-            .noprint {
-                display: none;
-            }
-        }
-	@media screen {
-	    .grey, .grey a:link, .grey a:visited {
-		color: #777;
-	    }
-            .docinfo {
-                background-color: #EEE;
-            }
-            .top {
-                border-top: 7px solid #EEE;
-            }
-            .bgwhite  { background-color: white; }
-            .bgred    { background-color: #F44; }
-            .bggrey   { background-color: #666; }
-            .bgbrown  { background-color: #840; }            
-            .bgorange { background-color: #FA0; }
-            .bgyellow { background-color: #EE0; }
-            .bgmagenta{ background-color: #F4F; }
-            .bgblue   { background-color: #66F; }
-            .bgcyan   { background-color: #4DD; }
-            .bggreen  { background-color: #4F4; }
-
-            .legend   { font-size: 90%; }
-            .cplate   { font-size: 70%; border: solid grey 1px; }
-	}
-    </style>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="http://gmpg.org/xfn/11" rel="profile"/>
+<meta charset="utf-8"/>
+<meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/> <title>Information on BCP 30 » RFC Editor</title>
+<meta content="WordPress 6.0.3" name="generator"/> <!-- leave this for stats -->
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/style.css" media="screen" rel="stylesheet" type="text/css"/>
 <!--[if IE]>
-    <style>
-    body {
-       font-size: 13px;
-       margin: 10px 10px;
-    }
+                <style type="text/css">
+                #headerimg{ filter:alpha(opacity=80);}
+                .top img{ filter:alpha(opacity=60);}
+                .top img:hover{ filter:alpha(opacity=100);}
+                ul.comment-preview li{ filter:alpha(opacity=70);}
+                ul.comment-preview li:hover{ filter:alpha(opacity=100);}
+                #commentform input[type="text"],#commentform .comment-form-author .required, 
+                #commentform .comment-form-email .required{padding-left: 65px !important;}
+                .top a {position: relative;top: 2px;}
+                </style>
+        <![endif]-->
+<!--[if IE 7]>
+                <style type="text/css">
+                #headerimgwrap{ position:absolute;left:20%}
+                .hleft{position:absolute;}
+                .hright{position:absolute; right:0;}
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<!--[if IE 8 ]>
+                <style type="text/css">
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<link href="https://www.rfc-editor.org/xmlrpc.php" rel="pingback"/>
+<meta content="max-image-preview:large" name="robots"/>
+<link href="./fonts.googleapis.com.html" rel="dns-prefetch"/>
+<link href="./s.w.org.html" rel="dns-prefetch"/>
+<link href="https://www.rfc-editor.org/feed/" rel="alternate" title="RFC Editor » Feed" type="application/rss+xml"/>
+<link href="https://www.rfc-editor.org/comments/feed/" rel="alternate" title="RFC Editor » Comments Feed" type="application/rss+xml"/>
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.rfc-editor.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.3"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dist/block-library/style.min.css?ver=6.0.3" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<style id="responsive-menu-inline-css" type="text/css">
+/** This file is major component of this plugin so please don't try to edit here. */
+#rmp_menu_trigger-2538 {
+  width: 55px;
+  height: 55px;
+  position: fixed;
+  top: 15px;
+  border-radius: 5px;
+  display: none;
+  text-decoration: none;
+  right: 5%;
+  background: #000000;
+  transition: transform 0.5s, background-color 0.5s;
+}
+#rmp_menu_trigger-2538:hover, #rmp_menu_trigger-2538:focus {
+  background: #000000;
+  text-decoration: unset;
+}
+#rmp_menu_trigger-2538.is-active {
+  background: #000000;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-box {
+  width: 25px;
+  color: #ffffff;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-icon-active, #rmp_menu_trigger-2538 .rmp-trigger-text-open {
+  display: none;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-active, #rmp_menu_trigger-2538.is-active .rmp-trigger-text-open {
+  display: inline;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-inactive, #rmp_menu_trigger-2538.is-active .rmp-trigger-text {
+  display: none;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label {
+  color: #ffffff;
+  pointer-events: none;
+  line-height: 13px;
+  font-family: inherit;
+  font-size: 14px;
+  display: inline;
+  text-transform: inherit;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-top {
+  display: block;
+  margin-bottom: 12px;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-bottom {
+  display: block;
+  margin-top: 12px;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner {
+  display: block;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::after {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  position: absolute;
+}
+#rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+#rmp_menu_trigger-2538:hover .responsive-menu-pro-inner, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+/* Hamburger menu styling */
+@media screen and (max-width: 1024px) {
+  /** Menu Title Style */
+  /** Menu Additional Content Style */
+  #l_sidebar {
+    display: none !important;
+  }
+  #rmp_menu_trigger-2538 {
+    display: block;
+  }
+  #rmp-container-2538 {
+    position: fixed;
+    top: 0;
+    margin: 0;
+    transition: transform 0.5s;
+    overflow: auto;
+    display: block;
+    width: 75%;
+    background-color: #212121;
+    background-image: url("");
+    height: 100%;
+    left: 0;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+  }
+  #rmp-menu-wrap-2538 {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu, #rmp-menu-wrap-2538 .rmp-submenu {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-1 .rmp-menu-item-link {
+    padding-left: 10%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-2 .rmp-menu-item-link {
+    padding-left: 15%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-3 .rmp-menu-item-link {
+    padding-left: 20%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-4 .rmp-menu-item-link {
+    padding-left: 25%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu.rmp-submenu-open {
+    display: block;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+    font-weight: normal;
+    letter-spacing: 0px;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.5s, border-color 0.5s, 0.5s;
+    padding: 0 5%;
+    padding-right: 50px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:after, #rmp-menu-wrap-2538 .rmp-menu-item-link:before {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:focus {
+    outline: none;
+    border-color: unset;
+    box-shadow: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link .rmp-font-icon {
+    height: 40px;
+    line-height: 40px;
+    margin-right: 10px;
+    font-size: 13px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    overflow: hidden;
+    background-size: cover;
+    overflow: hidden;
+    right: 0;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow .rmp-font-icon {
+    margin-right: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow * {
+    vertical-align: middle;
+    line-height: 40px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active {
+    display: block;
+    background-size: cover;
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow {
+    right: 0;
+    border-right: unset;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-description {
+    margin: 0;
+    padding: 5px 5%;
+    opacity: 0.8;
+    color: #ffffff;
+  }
+  #rmp-search-box-2538 {
+    display: block;
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+  }
+  #rmp-search-box-2538 .rmp-search-form {
+    margin: 0;
+  }
+  #rmp-search-box-2538 .rmp-search-box {
+    background: #ffffff;
+    border: 1px solid #dadada;
+    color: #333333;
+    width: 100%;
+    padding: 0 5%;
+    border-radius: 30px;
+    height: 45px;
+    -webkit-appearance: none;
+  }
+  #rmp-search-box-2538 .rmp-search-box::placeholder {
+    color: #c7c7cd;
+  }
+  #rmp-search-box-2538 .rmp-search-box:focus {
+    background-color: #ffffff;
+    outline: 2px solid #dadada;
+    color: #333333;
+  }
+  #rmp-menu-title-2538 {
+    background-color: #212121;
+    color: #ffffff;
+    text-align: left;
+    font-size: 13px;
+    padding-top: 10%;
+    padding-left: 5%;
+    padding-bottom: 0%;
+    padding-right: 5%;
+    font-weight: 400;
+    transition: background-color 0.5s, border-color 0.5s, color 0.5s;
+  }
+  #rmp-menu-title-2538:hover {
+    background-color: #212121;
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 > a {
+    color: #ffffff;
+    width: 100%;
+    background-color: unset;
+    text-decoration: none;
+  }
+  #rmp-menu-title-2538 > a:hover {
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 .rmp-font-icon {
+    font-size: 13px;
+  }
+  #rmp-menu-additional-content-2538 {
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+    color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+/**
+This file contents common styling of menus.
+*/
+.rmp-container {
+  display: none;
+  visibility: visible;
+  padding: 0px 0px 0px 0px;
+  z-index: 99998;
+  transition: all 0.3s;
+  /** Scrolling bar in menu setting box **/
+}
+.rmp-container.rmp-fade-top, .rmp-container.rmp-fade-left, .rmp-container.rmp-fade-right, .rmp-container.rmp-fade-bottom {
+  display: none;
+}
+.rmp-container.rmp-slide-left, .rmp-container.rmp-push-left {
+  transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+}
+.rmp-container.rmp-slide-left.rmp-menu-open, .rmp-container.rmp-push-left.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-right, .rmp-container.rmp-push-right {
+  transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+}
+.rmp-container.rmp-slide-right.rmp-menu-open, .rmp-container.rmp-push-right.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-top, .rmp-container.rmp-push-top {
+  transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+}
+.rmp-container.rmp-slide-top.rmp-menu-open, .rmp-container.rmp-push-top.rmp-menu-open {
+  transform: translateY(0);
+  -ms-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+}
+.rmp-container.rmp-slide-bottom, .rmp-container.rmp-push-bottom {
+  transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+  -moz-transform: translateY(100%);
+}
+.rmp-container.rmp-slide-bottom.rmp-menu-open, .rmp-container.rmp-push-bottom.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container::-webkit-scrollbar {
+  width: 0px;
+}
+.rmp-container ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+.rmp-container .rmp-menu-wrap .rmp-menu {
+  transition: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  border: 0;
+  bottom: auto;
+  box-sizing: border-box;
+  clip: auto;
+  color: #666;
+  display: block;
+  float: none;
+  font-family: inherit;
+  font-size: 14px;
+  height: auto;
+  left: auto;
+  line-height: 1.7;
+  list-style-type: none;
+  margin: 0;
+  min-height: auto;
+  max-height: none;
+  opacity: 1;
+  outline: none;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  pointer-events: auto;
+  right: auto;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  transform: none;
+  top: auto;
+  visibility: inherit;
+  width: auto;
+  word-wrap: break-word;
+  white-space: normal;
+}
+.rmp-container .rmp-menu-additional-content {
+  display: block;
+  word-break: break-word;
+}
+.rmp-container .rmp-menu-title {
+  display: flex;
+  flex-direction: column;
+}
+.rmp-container .rmp-menu-title .rmp-menu-title-image {
+  max-width: 100%;
+  margin-bottom: 15px;
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+}
+button.rmp_menu_trigger {
+  z-index: 999999;
+  overflow: hidden;
+  outline: none;
+  border: 0;
+  display: none;
+  margin: 0;
+  transition: transform 0.5s, background-color 0.5s;
+  padding: 0;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before, button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  content: "";
+  display: block;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before {
+  top: 10px;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  bottom: 10px;
+}
+button.rmp_menu_trigger .rmp-trigger-box {
+  width: 40px;
+  display: inline-block;
+  position: relative;
+  pointer-events: none;
+  vertical-align: super;
+}
+.admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+  margin-top: 32px !important;
+}
+@media screen and (max-width: 782px) {
+  .admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+    margin-top: 46px !important;
+  }
+}
+/*  Menu Trigger Boring Animation */
+.rmp-menu-trigger-boring .responsive-menu-pro-inner {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring .responsive-menu-pro-inner::after, .rmp-menu-trigger-boring .responsive-menu-pro-inner::before {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner {
+  transform: rotate(45deg);
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:before {
+  top: 0;
+  opacity: 0;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:after {
+  bottom: 0;
+  transform: rotate(-90deg);
+}
+
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dashicons.min.css?ver=6.0.3" id="dashicons-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/css/mobile.css?ver=0.1" id="tech-mobile-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans%7C&amp;ver=6.0.3" id="google_fonts-css" media="screen" rel="stylesheet" type="text/css"/>
+<script id="jquery-core-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" type="text/javascript"></script>
+<script id="jquery-migrate-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" type="text/javascript"></script>
+<script id="rmp_menu_scripts-js-extra" type="text/javascript">
+/* <![CDATA[ */
+var rmp_menu = {"ajaxURL":"https:\/\/www.rfc-editor.org\/wp-admin\/admin-ajax.php","wp_nonce":"2262d2d074","menu":[{"menu_theme":null,"theme_type":"default","theme_location_menu":"","submenu_submenu_arrow_width":"40","submenu_submenu_arrow_width_unit":"px","submenu_submenu_arrow_height":"40","submenu_submenu_arrow_height_unit":"px","submenu_arrow_position":"right","submenu_sub_arrow_background_colour":"#212121","submenu_sub_arrow_background_hover_colour":"#3f3f3f","submenu_sub_arrow_background_colour_active":"#212121","submenu_sub_arrow_background_hover_colour_active":"#3f3f3f","submenu_sub_arrow_border_width":"1","submenu_sub_arrow_border_width_unit":"px","submenu_sub_arrow_border_colour":"#212121","submenu_sub_arrow_border_hover_colour":"#3f3f3f","submenu_sub_arrow_border_colour_active":"#212121","submenu_sub_arrow_border_hover_colour_active":"#3f3f3f","submenu_sub_arrow_shape_colour":"#ffffff","submenu_sub_arrow_shape_hover_colour":"#ffffff","submenu_sub_arrow_shape_colour_active":"#ffffff","submenu_sub_arrow_shape_hover_colour_active":"#ffffff","use_header_bar":"off","header_bar_items_order":"{\"logo\":\"on\",\"title\":\"on\",\"search\":\"on\",\"html content\":\"on\"}","header_bar_title":"","header_bar_html_content":"","header_bar_logo":"","header_bar_logo_link":"","header_bar_logo_width":null,"header_bar_logo_width_unit":"%","header_bar_logo_height":null,"header_bar_logo_height_unit":"%","header_bar_height":"80","header_bar_height_unit":"px","header_bar_padding":{"top":"0px","right":"5%","bottom":"0px","left":"5%"},"header_bar_font":"","header_bar_font_size":"14","header_bar_font_size_unit":"px","header_bar_text_color":"#ffffff","header_bar_background_color":"#ffffff","header_bar_breakpoint":"800","header_bar_position_type":"fixed","header_bar_adjust_page":null,"header_bar_scroll_enable":"off","header_bar_scroll_background_color":"#36bdf6","mobile_breakpoint":"600","tablet_breakpoint":"1024","transition_speed":"0.5","sub_menu_speed":"0.2","show_menu_on_page_load":"","menu_disable_scrolling":"off","menu_overlay":"off","menu_overlay_colour":"rgba(0, 0, 0, 0.7)","desktop_menu_width":"","desktop_menu_width_unit":"px","desktop_menu_positioning":"fixed","desktop_menu_side":"","desktop_menu_to_hide":"","use_current_theme_location":"off","mega_menu":{"225":"off","227":"off","229":"off","228":"off","226":"off"},"desktop_submenu_open_animation":"none","desktop_submenu_open_animation_speed":"100ms","desktop_submenu_open_on_click":"off","desktop_menu_hide_and_show":"off","menu_name":"Default Menu","menu_to_use":"responsive-menu","different_menu_for_mobile":"off","menu_to_use_in_mobile":"main-menu","use_mobile_menu":"on","use_tablet_menu":"on","use_desktop_menu":null,"menu_display_on":"all-pages","menu_to_hide":"#l_sidebar,.hright,#r_sidebar","submenu_descriptions_on":"","custom_walker":"","menu_background_colour":"#212121","menu_depth":"5","smooth_scroll_on":"off","smooth_scroll_speed":"500","menu_font_icons":[],"menu_links_height":"40","menu_links_height_unit":"px","menu_links_line_height":"40","menu_links_line_height_unit":"px","menu_depth_0":"5","menu_depth_0_unit":"%","menu_font_size":"13","menu_font_size_unit":"px","menu_font":"","menu_font_weight":"normal","menu_text_alignment":"left","menu_text_letter_spacing":"","menu_word_wrap":"off","menu_link_colour":"#ffffff","menu_link_hover_colour":"#ffffff","menu_current_link_colour":"#ffffff","menu_current_link_hover_colour":"#ffffff","menu_item_background_colour":"#212121","menu_item_background_hover_colour":"#3f3f3f","menu_current_item_background_colour":"#212121","menu_current_item_background_hover_colour":"#3f3f3f","menu_border_width":"1","menu_border_width_unit":"px","menu_item_border_colour":"#212121","menu_item_border_colour_hover":"#212121","menu_current_item_border_colour":"#212121","menu_current_item_border_hover_colour":"#3f3f3f","submenu_links_height":"40","submenu_links_height_unit":"px","submenu_links_line_height":"40","submenu_links_line_height_unit":"px","menu_depth_side":"left","menu_depth_1":"10","menu_depth_1_unit":"%","menu_depth_2":"15","menu_depth_2_unit":"%","menu_depth_3":"20","menu_depth_3_unit":"%","menu_depth_4":"25","menu_depth_4_unit":"%","submenu_item_background_colour":"#212121","submenu_item_background_hover_colour":"#3f3f3f","submenu_current_item_background_colour":"#212121","submenu_current_item_background_hover_colour":"#3f3f3f","submenu_border_width":"1","submenu_border_width_unit":"px","submenu_item_border_colour":"#212121","submenu_item_border_colour_hover":"#212121","submenu_current_item_border_colour":"#212121","submenu_current_item_border_hover_colour":"#3f3f3f","submenu_font_size":"13","submenu_font_size_unit":"px","submenu_font":"","submenu_font_weight":"normal","submenu_text_letter_spacing":"","submenu_text_alignment":"left","submenu_link_colour":"#ffffff","submenu_link_hover_colour":"#ffffff","submenu_current_link_colour":"#ffffff","submenu_current_link_hover_colour":"#ffffff","inactive_arrow_shape":"\u25bc","active_arrow_shape":"\u25b2","inactive_arrow_font_icon":"","active_arrow_font_icon":"","inactive_arrow_image":"","active_arrow_image":"","submenu_arrow_width":"40","submenu_arrow_width_unit":"px","submenu_arrow_height":"40","submenu_arrow_height_unit":"px","arrow_position":"right","menu_sub_arrow_shape_colour":"#ffffff","menu_sub_arrow_shape_hover_colour":"#ffffff","menu_sub_arrow_shape_colour_active":"#ffffff","menu_sub_arrow_shape_hover_colour_active":"#ffffff","menu_sub_arrow_border_width":"1","menu_sub_arrow_border_width_unit":"px","menu_sub_arrow_border_colour":"#212121","menu_sub_arrow_border_hover_colour":"#3f3f3f","menu_sub_arrow_border_colour_active":"#212121","menu_sub_arrow_border_hover_colour_active":"#3f3f3f","menu_sub_arrow_background_colour":"#212121","menu_sub_arrow_background_hover_colour":"#3f3f3f","menu_sub_arrow_background_colour_active":"#212121","menu_sub_arrow_background_hover_colour_active":"#3f3f3f","fade_submenus":"off","fade_submenus_side":"left","fade_submenus_delay":"100","fade_submenus_speed":"500","use_slide_effect":"off","slide_effect_back_to_text":"Back","accordion_animation":"off","auto_expand_all_submenus":"off","auto_expand_current_submenus":"off","menu_item_click_to_trigger_submenu":"off","button_width":"55","button_width_unit":"px","button_height":"55","button_height_unit":"px","button_background_colour":"#000000","button_background_colour_hover":"#000000","button_background_colour_active":"#000000","toggle_button_border_radius":"5","button_transparent_background":"off","button_left_or_right":"right","button_position_type":"fixed","button_distance_from_side":"5","button_distance_from_side_unit":"%","button_top":"15","button_top_unit":"px","button_push_with_animation":"off","button_click_animation":"boring","button_line_margin":"5","button_line_margin_unit":"px","button_line_width":"25","button_line_width_unit":"px","button_line_height":"3","button_line_height_unit":"px","button_line_colour":"#ffffff","button_line_colour_hover":"#ffffff","button_line_colour_active":"#ffffff","button_font_icon":"","button_font_icon_when_clicked":"","button_image":"","button_image_when_clicked":"","button_title":"","button_title_open":"","button_title_position":"left","button_font":"","button_font_size":"14","button_font_size_unit":"px","button_title_line_height":"13","button_title_line_height_unit":"px","button_text_colour":"#ffffff","button_trigger_type_click":"on","button_trigger_type_hover":"off","button_click_trigger":"#responsive-menu-button","items_order":{"title":"on","menu":"on","search":"","additional content":"on"},"menu_title":"","menu_title_link":"","menu_title_link_location":"_self","menu_title_image":"","menu_title_font_icon":"","menu_title_section_padding":{"top":"10%","right":"5%","bottom":"0%","left":"5%"},"menu_title_background_colour":"#212121","menu_title_background_hover_colour":"#212121","menu_title_font_size":"13","menu_title_font_size_unit":"px","menu_title_alignment":"left","menu_title_font_weight":"400","menu_title_font_family":"","menu_title_colour":"#ffffff","menu_title_hover_colour":"#ffffff","menu_title_image_width":null,"menu_title_image_width_unit":"%","menu_title_image_height":null,"menu_title_image_height_unit":"px","menu_additional_content":"<a href=\"\/search\/rfc_search.php\">Advanced Search<\/a>\r\n<form id=\"search_query_separator_id\" name=\"search_query_separator_name\"  action=\"\/search\/rfc_search_detail.php\" method=\"POST\" onsubmit=\"return validateComboBox(this);\"> \r\n<input type=\"text\" id =\"combo_box_id\" name=\"combo_box\"  maxlength=\"20\" size =\"35\" placeholder=\"number, title, keyword, or author surname\"><\/form>\r\n","menu_additional_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_additional_content_font_size":"16","menu_additional_content_font_size_unit":"px","menu_additional_content_alignment":"center","menu_additional_content_colour":"#ffffff","menu_search_box_text":"Search","menu_search_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_search_box_height":"45","menu_search_box_height_unit":"px","menu_search_box_border_radius":"30","menu_search_box_text_colour":"#333333","menu_search_box_background_colour":"#ffffff","menu_search_box_placeholder_colour":"#c7c7cd","menu_search_box_border_colour":"#dadada","menu_section_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_width":"75","menu_width_unit":"%","menu_maximum_width":"","menu_maximum_width_unit":"px","menu_minimum_width":"","menu_minimum_width_unit":"px","menu_auto_height":"off","menu_container_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_container_background_colour":"#212121","menu_background_image":"","animation_type":"slide","menu_appear_from":"left","animation_speed":"0.5","page_wrapper":"","menu_close_on_body_click":"off","menu_close_on_scroll":"off","menu_close_on_link_click":"off","enable_touch_gestures":"","breakpoint":"1024","menu_depth_5":"30","menu_depth_5_unit":"%","keyboard_shortcut_close_menu":"27,37","keyboard_shortcut_open_menu":"32,39","button_image_alt":"","button_image_alt_when_clicked":"","button_font_icon_type":"font-awesome","button_font_icon_when_clicked_type":"font-awesome","button_trigger_type":"click","active_arrow_image_alt":"","inactive_arrow_image_alt":"","active_arrow_font_icon_type":"font-awesome","inactive_arrow_font_icon_type":"font-awesome","menu_adjust_for_wp_admin_bar":"off","menu_title_image_alt":"","menu_title_font_icon_type":"font-awesome","minify_scripts":"off","scripts_in_footer":"off","external_files":"off","remove_fontawesome":"","remove_bootstrap":"","shortcode":"off","mobile_only":"off","custom_css":"","single_menu_height":"80","single_menu_height_unit":"px","single_menu_font":"","single_menu_font_size":"14","single_menu_font_size_unit":"px","single_menu_submenu_height":"40","single_menu_submenu_height_unit":"px","single_menu_submenu_font":"","single_menu_submenu_font_size":"12","single_menu_submenu_font_size_unit":"px","single_menu_item_link_colour":"#000000","single_menu_item_link_colour_hover":"#000000","single_menu_item_background_colour":"#ffffff","single_menu_item_background_colour_hover":"#ffffff","single_menu_item_submenu_link_colour":"#000000","single_menu_item_submenu_link_colour_hover":"#000000","single_menu_item_submenu_background_colour":"#ffffff","single_menu_item_submenu_background_colour_hover":"#ffffff","header_bar_logo_alt":"","desktop_menu_options":"{}","admin_theme":"light","single_menu_line_height":"80","single_menu_line_height_unit":"px","single_menu_submenu_line_height":"40","single_menu_submenu_line_height_unit":"px","hide_on_mobile":"off","hide_on_desktop":"off","menu_title_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_id":2538,"active_toggle_contents":"\u25b2","inactive_toggle_contents":"\u25bc"}]};
+/* ]]> */
+</script>
+<script id="rmp_menu_scripts-js" src="https://www.rfc-editor.org/wp-content/plugins/responsive-menu/v4.0.0/assets/js/rmp-menu.js?ver=4.1.11" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-json/" rel="https://api.w.org/"/><link href="https://www.rfc-editor.org/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+<link href="https://www.rfc-editor.org/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+<meta content="WordPress 6.0.3" name="generator"/>
+<script type="text/javascript">
+        jQuery(document).ready(function($){
+	/* toggle nav */
+	$("#menu-icon").on("click", function(){
+		$(".top-menu").slideToggle();
+		$(this).toggleClass("active");
+	});
+
+        });
+        </script><script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/matomo-tracking.js" type="text/javascript"></script>
+<style type="text/css">/*Variable Styles*/
+#page{ 
+background:#FFFFFF url() repeat top center scroll;
+}
+body{
+font:normal 14px/1.3em Noto Sans, Sans-Serif;
+background:#FFFFFF url() repeat top center scroll;
+}
+.techozoic_font_size{
+font-size: 14px;
+}
+.narrowcolumn .entry,.widecolumn .entry, .top {
+font:normal 14px/1.5em Noto Sans, Sans-Serif;
+color: #2C4353;
+}
+.noclass,.home .narrowcolumn .entry, home .widecolumn .entry, .top,.post .singlepost,.archive .narrowcolumn .entry, .archive .widecolumn .entry, .top{
+background-color:#E3E3E3;
+border-top:1px #A0B3C2 solid;
+}
+.top{
+border:none;
+}
+.blog_title, .blog_title a, .blog_title a:hover, .blog_title a:visited{
+font:normal 40px/1.3em Courier, Sans-Serif;
+color:  	#000000;
+}
+h1.post_title{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.post_title a{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.entry h1{
+font:bold 3em/2.2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h2{
+font:bold 2em/2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h3{
+font:bold 1.4em/1.6em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h4{
+font:bold 1.3em/1.4em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h5{
+font:bold 1.2em/1.3em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.sidebar h2, .sidebar h3, #footer h2{
+font: bold 18px/1.3em Noto Sans, Sans-Serif;
+color:#2C4353;
+}
+.widgettitle {
+font-size: 18px;
+margin: 1px 0;
+}
+#content {
+font-size: 14px;
+}
+acronym,abbr,span.caps,small,.trackback li,.sidebar, .postmetadata {
+font-size: 12px;
+}
+.postmetadata{
+font: normal 12px/1.3em Noto Sans, Sans-Serif;
+color: #777777;
+}
+ul#nav a, ul#admin a, #dropdown li.current_page_item a:hover, .top-menu li.current-menu-item a:hover, #dropdown li.current_page_item ul a, .top-menu li.current-menu-item ul a, ul#nav li.current_page_item a:hover, {
+color: #A0B3C2;
+}
+.commenlist .author,#searchform #s, #searchsubmit:hover,#catsubmit:hover,#wp-submit:hover,#TB_ajaxContent {
+background-color: #A0B3C2 ;
+}
+ul#admin li, ul#dropdown li, #navmenu .top-menu li{
+/*background-color: #E3E3E3;*/
+}
+ul#admin li a, ul#dropdown li a, #navmenu .top-menu li a{
+font-style: bold; 
+font-size:14px;
+font-family: Noto Sans, Sans-Serif;
+color:#A0B3C2;
+}
+ul#admin li a:hover, ul#dropdown li a:hover, #navmenu .top-menu li a:hover{
+color: #A0B3C2;
+}
+#dropdown > li, ul.top-menu > li{
+margin: 0 3px;
+}
+.ribbon ul.top-menu > li, .square ul.top-menu > li, #dropdown > li{
+margin: 0;
+padding: 0 3px;
+}
+.ribbon ul.top-menu > li.has_children:hover:after, .square ul.top-menu > li.has_children:hover:after, #dropdown > li.has_children:hover:after {
+border-bottom: 5px solid #E3E3E3;
+}
+#dropdown ul, .top-menu ul{
+background-color: #E3E3E3;
+}
+.ribbon, .square, #dropdown{
+background-color: #E3E3E3;
+background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E3E3E3), to(#CCCCCC));
+background-image: -webkit-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:    -moz-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:     -ms-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:      -o-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:         linear-gradient(top, #E3E3E3, #CCCCCC);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E3E3E3', endColorstr='#CCCCCC');
+}
+.ribbon ul.top-menu:before{
+border-right: 10px solid #CCCCCC;
+}
+.ribbon ul.top-menu:after{
+border-left: 10px solid #CCCCCC;
+}.ribbon ul.top-menu > li:last-child, .square ul.top-menu > li:last-child, #dropdown > li:last-child{
+margin-right: 100px;
+}#navmenu .top-menu li, #navmenu .top-menu ul.sub-menu, ul#admin li, #navmenu #dropdown li{
+background-color: #E3E3E3;
+}       
+#navmenu #dropdown li.current_page_item, #navmenu .top-menu li.current-menu-item, #navmenu .top-menu ul.sub-menu li.current-menu-item {
+background-color: #A0B3C2 ;
+}
+#navmenu #dropdown li:hover, #navmenu .top-menu li:hover, #navmenu .top-menu ul.sub-menu > li:hover {
+background-color:#EFEFEF;
+}
+#navmenu #dropdown li.current_page_item > a:hover, #navmenu .top-menu li.current-menu-item > a:hover, #navmenu .top-menu li.current-menu-item:hover > a, #navmenu .top-menu li:hover > a, #navmenu #dropdown li:hover > a {
+color:#A0B3C2;
+}
+#navmenu #dropdown li.current_page_item > a, #navmenu .top-menu li.current-menu-item > a{
+color:#F7F7F7;
+}
+ul#admin li:hover{
+background:#EFEFEF;
+box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-moz-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-webkit-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+}#dropdown li ul li, .top-menu li ul li, #dropdown li ul , .top-menu li ul{
+width: 250px !important;
+}
+#dropdown li ul ul, .top-menu li ul ul{
+left:250px ; 
+}
+.tags {
+border-bottom:1px #A0B3C2 solid;
+border-top:1px #A0B3C2 solid;
+}
+a,h2 a:hover,h3 a:hover,#user_login,#user_pass, #sidenav a:visited {
+color:#597EAA; 
+text-decoration:none;
+}
+#searchform #s {
+color:#E3E3E3; 
+text-decoration:none;
+}
+a:hover {
+color:#114477; 
+text-decoration:underline;
+}
+a:visited{
+color:#476588;
+}
+.description {
+color:#A0B3C2;
+}
+#headerimg {
+;
+float:left;margin-left:10px;
+}
+#header-logo{
+float:left;margin-left:10px;
+padding-top:0px;
+padding-left:0px;
+}
+.single .blog_title a:hover {
+cursor:default;
+text-decoration:none;
+}
+.noclass{
+-moz-box-shadow:none !important;
+box-shadow:none !important;
+-webkit-box-shadow: none !important;
+opacity:1 !important;
+border: none !important;
+}#headerimgwrap{
+top:20%;
+}  #page {
+width: 90%;
+}
+.narrowcolumn {
+float:left;
+margin:0;
+padding:25px 3% 20px 2%;
+width:75%;
+}
+#l_sidebar {
+float:left;
+padding:25px 1% 0 2%;
+width:17%
+}#dropdown, .top-menu{
+text-align:left;
+}#header {
+background-repeat: no-repeat;  
+background-position: center center;
+height: 110px;
+}
+.hleft, .hright {
+height: 70px;
+}table.statictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.statictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #CACACA;
+}
+table.statictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+
+
+table.statictable tr{
+        background-color: #F6F6F6;
+}
+
+table.statictable td.special {
+          font-weight: bold;
+          color:grey
+}
+table.statictable td.title {
+         font-weight: bold;
+         letter-spacing: inherit
+}
+
+table.statictable .boldtext {
+       font-weight: bold;
+       color: #597eaa;
+}
+
+table.dynamictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.dynamictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #FEFEFEFE;
+}
+table.dynamictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+table.dynamictable tr.even{
+        background-color: #ffffff;
+}
+table.dynamictable tr.odd{
+        background-color: #F6F6F6;
+}
+table.erratasearch {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-color: #666666;
+        border-collapse: collapse;
+        text-align:center;
+}
+table.erratasearch th {
+        border-width: 1px;
+        padding: 8px;
+        
+        text-decoration: underline;
+        border-color: #666666;
+        //background-color: #ffffff;
+        background-color: silver;
+}
+
+table.erratasearch td {
+        border-width: 1px;
+        padding: 8px;
+        border-color: #666666;
+        background-color: #ffffff;
+        text-align:left;
+}
+table.erratasearch td.sbar { 
+          background-color: silver;
+          text-align: center;
+        }
+
+
+.nosidebar{
+    float:left;
+    margin:0 10%;
+    padding:0 0 10px;
+    width:70%;
+}
+
+input[type="button"], .button, div#infinite-handle span {
+    display: inline-block;
+    zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+    *display: inline;
+    vertical-align: baseline;
+    margin: 0 2px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    padding: .3em 1em .35em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .25em; 
+    -moz-border-radius: .25em;
+    border-radius: .25em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    color: #505050;
+    border: solid 1px #b7b7b7;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+    background: -moz-linear-gradient(top,  #fff,  #ededed);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+}
+input[type="button"]:hover, .button:hover, div#infinite-handle span:hover {
+    text-decoration: none;
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+    background: -moz-linear-gradient(top,  #fff,  #dcdcdc);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+}
+input[type="button"]:active, .button:active, div#infinite-handle span: active {
+    position: relative;
+    top: 1px;
+    color: #999;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+    background: -moz-linear-gradient(top,  #ededed,  #fff);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
+}
+
+.search_label_bold { text-align: left;
+                     border-style: none;
+                     font-weight: bold;
+                   }
+
+.error { font-weight: bold; color: red; }
+
+textarea {
+   font-family: inherit;
+   font-size: inherit;
+}
+/*DIV to hold scroll tables*/
+.scrolltable{
+   width:95%
+
+}
+
+/*--------------------------------------------------------------------------------
+----------------------------RFCMETA PAGE  Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+ body.rfcmeta {
+font-family: 'Noto Sans', sans-serif;
+color: #2C4353;
+width: 100%;}
+
+ body.rfcmeta #page {
+width: 100%;
+box-shadow:none;
+margin-top: 0px;}
+
+ body.rfcmeta .hright { height:120px;}
+
+ body.rfcmeta #header {width: 100%;
+ background-color: #fff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 0px;;}
+
+ body.rfcmeta .singlepost.entry {padding-top: 0px!important;}
+ body.rfcmeta .singlepost.entry dl,  body.rfcmeta .singlepost.entry p, body.rfcmeta .singlepost.entry h2, body.rfcmeta .singlepost.entry h3 { margin-left:40px;
+ margin-right: 20px; }
+
+ body.rfcmeta .singlepost.entry dt{
+         font-weight: bold!important;
+         margin-top: 15px;}
+
+          body.rfcmeta .singlepost.entry dd{
+         margin-left: 15px;}
+
+ body.rfcmeta a{
+color: #597eaa;}
+  body.rfcmeta .entryheader {background-color:#2C4353 !important;
+  border-bottom: 10px solid #FFF !important;
+  margin-top: 0px;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;}
+
+   body.rfcmeta .entryheader h2 a, body.rfcmeta .entryheader h2 {color: #fff  !important;
+   font-size: 50px;
+   padding: 0px !important;
+   line-height: 1.2;
+   font:bold !important;}
+
+   body.rfcmeta .entryheader h2 a:hover {color: #aob3c2 !important;}
+
+   body.rfcmeta .entryheader h3 {color: #fff  !important;
+   font-size: 18px;
+   padding: 0px;
+   line-height: 1.2;
+   padding-top: 10px;
+   }
+
+      body.rfcmeta .entryheader h3 span {font-weight: normal;
+          font-size: 14px;
+          text-transform: uppercase;}
+    h2 {font-weight: bold;}
+
+ body.rfcmeta   #search_query_separator_id  {padding-bottom: 5px;
+ padding-top: 5px;}
+
+ body.rfcmeta .page {margin-top: 0px!important;
+ padding-top: 0px!important;}
+
+    /*--------------------------------------------------------------------------------
+----------------------------end RFCMETA PAGE Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+
+.cluster_heading {
+ font-size: 14px;
+}
+</style> <style type="text/css">
+        #header {
+            background-image: url();
+        }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
-    function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
-                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
-                }
-	    }
-	}
-    }
-    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
-    function showElem(id) {
-        var elem = document.getElementById(id);
-        elem.innerHTML = eval(id+"_html");
-        elem.style.visibility='visible';
-    }
-    function hideElem(id) {
-        var elem = document.getElementById(id);
-        elem.style.visibility='hidden';        
-        elem.innerHTML = "";
-    }
-    // -->
-    </script>
+<script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/iterate-survey.js" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="32x32"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="192x192"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="apple-touch-icon"/>
+<meta content="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" name="msapplication-TileImage"/>
 </head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo " onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
+<body class="rfcmeta">
+<a id="top"></a>
+<div id="page">
+<div id="header">
+<div class="hright">
+<div class="hwidget widget_text"><h2 class="widgettitle">Search RFCs</h2> <div class="textwidget"><form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="40" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+<a href="/search/rfc_search.php">Advanced Search</a>
+</div>
+</div></div>
+<div id="headerimgwrap">
+<div id="headerimg">
+<h1 class="blog_title"> <a href="https://www.rfc-editor.org/">RFC Editor</a>
+</h1> </div><!--end headerimg-->
+</div><!--end headerimgwrap-->
+</div><!--end header-->
+<div class="nosidebar" id="content">
+<h1 class="post_title"></h1>
+<div class="post-127 page type-page status-publish hentry post clear" id="post-127">
+<div class="singlepost entry">
+<div class="entryheader"><h2><a href="https://www.rfc-editor.org/bcp/bcp30.txt">BCP 30</a></h2><h2><a href="https://www.rfc-editor.org/rfc/rfc2505.txt">RFC 2505</a></h2>
+<h3>Anti-Spam Recommendations for SMTP MTAs, <span>February 1999</span></h3>
+</div><dl>
+<dt><b>File formats:</b></dt><dd><a href="https://www.rfc-editor.org/rfc/rfc2505.txt"><img alt="icon for text file" src="/rfcscripts/images/RFC_ICONS_Text_40x50.png" title="text"/></a> <a href="https://www.rfc-editor.org/rfc/pdfrfc/rfc2505.txt.pdf"><img alt="icon for PDF" src="/rfcscripts/images/RFC_ICONS_PDF_2019_50x40.png" title="PDF"/></a> <a href="https://www.rfc-editor.org/rfc/rfc2505.html"><img alt="icon for HTML" src="/rfcscripts/images/RFC_ICONS_HTML_40x50.png" title="HTML"/></a></dd>
+<dt><b>Status:</b></dt><dd>BEST CURRENT PRACTICE</dd>
+<dt><b>Author:</b></dt><dd>G. Lindberg</dd>
+<dt><b>Stream:</b></dt><dd>[Legacy]</dd>
+</dl>
+<p>
+<b>Cite this BCP</b>: 
+<a href="/refs/ref-bcp30.txt">TXT</a></p>
+<p><b>Discuss this RFC</b>: Send questions or comments to the mailing list <a href="mailto:iesg@ietf.org?subject=Question regarding RFC  ">iesg@ietf.org</a></p><p>
+<b>Other actions</b>: 
+<a href="/errata.php#reportnew">Submit Errata</a>  | 
+<a href="https://datatracker.ietf.org/ipr/search/?draft=&amp;rfc=rfc2505&amp;submit=rfc">
+Find IPR Disclosures from the IETF</a>  | 
+<a href="https://datatracker.ietf.org/doc/rfc/">
+View History of RFC </a>
+</p>
+<hr/>
+<h2>Abstract</h2>
+<p> This memo gives a number of implementation recommendations for SMTP, MTAs (Mail Transfer Agents, e.g. sendmail,) to make them more capable of reducing the impact of spam.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.  </p> <hr/>
+<p>
+For the definition of <b>Status</b>,
+see <a href="/info/rfc2026">RFC 2026</a>.
+</p><p>
+For the definition of <b>Stream</b>, see <a href="/info/rfc8729">RFC 8729</a>.
+</p>
+<hr/> </div>
 </div>
 </div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/bcp/bcp30.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/bcp30" title="PDF version of this document">pdf</a>]                                                        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                        G. Lindberg
-Request for Comments: 2505             Chalmers University of Technology
-BCP: 30                                                    February 1999
-Category: Best Current Practice
-
-
-                <span class="h1">Anti-Spam Recommendations for SMTP MTAs</span>
-
-Status of this Memo
-
-   This document specifies an Internet Best Current Practices for the
-   Internet Community, and requests discussion and suggestions for
-   improvements.  Distribution of this memo is unlimited.
-
-Copyright Notice
-
-   Copyright (C) The Internet Society (1999).  All Rights Reserved.
-
-Abstract
-
-   This memo gives a number of implementation recommendations for SMTP,
-   [<a href="#ref-1" title='"Simple Mail Transfer Protocol"'>1</a>], MTAs (Mail Transfer Agents, e.g. sendmail, [<a href="#ref-8">8</a>]) to make them
-   more capable of reducing the impact of spam(*).
-
-   The intent is that these recommendations will help clean up the spam
-   situation, if applied on enough SMTP MTAs on the Internet, and that
-   they should be used as guidelines for the various MTA vendors. We are
-   fully aware that this is not the final solution, but if these
-   recommendations were included, and used, on all Internet SMTP MTAs,
-   things would improve considerably and give time to design a more long
-   term solution. The Future Work section suggests some ideas that may
-   be part of such a long term solution. It might, though, very well be
-   the case that the ultimate solution is social, political, or legal,
-   rather than technical in nature.
-
-   The implementor should be aware of the increased risk of denial of
-   service attacks that several of the proposed methods might lead to.
-   For example, increased number of queries to DNS servers and increased
-   size of logfiles might both lead to overloaded systems and system
-   crashes during an attack.
-
-   A brief summary of this memo is:
-
-   o   Stop unauthorized mail relaying.
-   o   Spammers then have to operate in the open; deal with them.
-   o   Design a mail system that can handle spam.
-
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                  [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>. Introduction</span>
-
-   This memo is a Best Current Practice (BCP) RFC.  As such it should be
-   used as a guideline for SMTP MTA implementors to make their products
-   more capable of preventing/handling spam.  Despite this being its
-   primary goal, an intended side effect is to suggest to the
-   sysadmin/Postmaster community which "anti spam knobs" an SMTP MTA is
-   expected to have.
-
-   However, this memo is not generally intended as a description on how
-   to operate an SMTP MTA - which "knobs" to turn and how to configure
-   the options. If suggestions are provided, they will be clearly marked
-   and they should be read as such.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20Background"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>. Background</span>
-
-   Mass unsolicited electronic mail, often known as spam(*), has
-   increased considerably during a short period of time and has become a
-   serious threat to the Internet email community as a whole. Something
-   needs to be done fairly quickly.
-
-   The problem has several components:
-
-   o   It is high volume, i.e. people get a lot of such mail in their
-       mailboxes.
-
-   o   It is completely "blind", i.e. there is no correlation between
-       the receivers' areas of interest and the actual mail sent out (at
-       least if one assumes that not everybody on the Internet is
-       interested in porno pictures and spam programs...).
-
-   o   It costs real money for the receivers. Since many receivers pay
-       for the time to transfer the mailbox from the (dialup) ISP to
-       their computer they in reality pay real money for this.
-
-   o   It costs real money for the ISPs. Assume one 10 Kbyte message
-       sent to 10 000 users with their mailboxes at one ISP host; that
-       means an unsolicited, unexpected, storage of 100 Mbytes.  State
-       of the art disks, 4 Gbyte, can take 40 such message floods before
-       they are filled. It is almost impossible to plan ahead for such
-       "storms".
-
-   o   Many of the senders of spam are dishonest, e.g. hide behind false
-       return addresses, deliberately write messages to look like they
-       were between two individuals so the spam recipient will think it
-       was just misdelivered to them, say the message is "material you
-
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                  [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-       requested" when you never asked for it, and generally do
-       everything they can without regard to honesty or ethics, to try
-       to get a few more people to look at their message.
-
-       In fact some of the spam-programs take a pride in adding false
-       info that will "make the ISPs scratch their heads".
-
-       It is usually the case that people who send in protests (often
-       according to the instructions in the mail) find their mail
-       addresses added to more lists and sold to other parties.
-
-   o   It is quite common practice to make use of third party hosts as
-       relays to get the spam mail sent out to the receivers. This theft
-       of service is illegal in most - if not all - countries (at least
-       in the US spammers have been successfully sued).  However, with
-       the original sender in the US, the (innocent) relay in Sweden and
-       the list of receivers back in the US, the legal process of
-       getting damages from the spammers becomes extremely difficult.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20Scope"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>. Scope</span>
-
-   This memo has no intention of being the final solution to the spam
-   problem.
-
-   If, however, enough Internet MTAs did implement enough of the rules
-   described below (especially the Non-Relay rules), we would get the
-   spammers out in the open, where they could be taken care of. Either
-   pure legal actions would help, or we can block them technically using
-   other rules described below (since the Non-Relay rules now make them
-   appear openly, with their own hosts and domains, we can apply various
-   access filters against them). In reality, a combination of legal and
-   technical methods is likely to give the best result.
-
-   This way, the spam problem could be reduced enough to allow the
-   Internet community to design and deploy a real and general solution.
-
-   But, please note:
-
-       The Non-Relay rules are not in themselves enough to stop spam.
-       Even if 99% of the SMTP MTAs implemented them from Day 1,
-       spammers would still find the remaining 1% and use them. Or
-       spammers would just switch gear and connect directly to each and
-       every recipient host; that will be to a higher cost for the
-       spammer, but is still quite likely.
-
-   Even though IPv6 deployment may be near, the spam problem is here
-   already and thus this memo restricts itself to the current IPv4.
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                  [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20Terminology"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>. Terminology</span>
-
-   Throughout this memo we will use the terminology of <a href="./rfc2119.html">RFC2119</a>, [<a href="#ref-4" title='"Key words for use in RFCs to Indicate Requirement Level"'>4</a>]:
-
-   o   "<em>MUST</em>"
-
-       This word or the adjective "<em>REQUIRED</em>" means that the item is an
-       absolute requirement.
-
-   o   "<em>SHOULD</em>"
-
-       This word or the adjective "<em>RECOMMENDED</em>" means that there may
-       exist valid reasons in particular circumstances to ignore this
-       item, but the full implications should be understood and the case
-       carefully weighed before choosing a different course.
-
-   o   "<em>MAY</em>"
-
-       This word or the adjective "<em>OPTIONAL</em>" means that this item is
-       truly optional. One vendor may choose to include the item because
-       a particular marketplace requires it or because it enhances the
-       product, for example; another vendor may omit the same item.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.4.%20Using%20DNS%20information"></a></body></html><a class="selflink" href="#section-1.4" name="section-1.4">1.4</a>. Using DNS information</span>
-
-   In the memo we sometimes use the term "host name" or "domain name"
-   which should be interpreted as a Fully Qualified Domain Name, FQDN.
-   By this we mean the name returned from the DNS in response to a PTR
-   query (.IN-ADDR.ARPA), i.e. when an IP address is translated to a
-   name, or we mean a name with a DNS A or MX record associated to it
-   <a href="./rfc1034.html">RFC1034</a>, [<a href="#ref-5" title='"Domain Names - Concepts and Facilities"'>5</a>], and <a href="./rfc1035.html">RFC1035</a>, [<a href="#ref-6" title='"Domain Names - Implementation and Specifications"'>6</a>].
-
-   When we suggest use of FQDNs rather than IP addresses this is because
-   FQDNs are intuitively much easier to use. However, all such usage
-   depends heavily on DNS and .IN-ADDR.ARPA (PTR) information. Since it
-   is fairly easy to forge that, either by false cache information
-   injected in DNS servers or spammers running their own DNS with false
-   information in them, host and domain names must be used with care,
-   e.g. verified so that the translation address-&gt;name corresponds to
-   name-&gt;address. With Secure DNS, <a href="./rfc2065.html">RFC2065</a>, [<a href="#ref-7" title='"Domain Name System Security Extensions"'>7</a>], things will improve,
-   since spoofing of .IN-ADDR.ARPA will no longer be possible.
-
-   One of the recommendations is about verifying "MAIL From:" (envelope
-   originator) domains with the DNS (assure that appropriate DNS
-   information exists for the domain). When making use of this
-   capability there are a few things to consider:
-
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                  [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-   (1) One must not forget the increased amount of DNS queries which
-       might result in problems for the DNS server itself to cope with
-       the load.  This itself can result in a denial of service attack
-       against the DNS server just by sending email to a site.
-
-   (2) It should be noted that with negative caching in the DNS, forged
-       DNS responses can be used to mount denial of service attacks.
-       For example, if a site is known to implement a FQDN validity
-       check on addresses in SMTP "MAIL From:" commands, an attacker may
-       be able to use negative DNS responses to effectively block
-       acceptance of mail from one or more origins. Because of this, one
-       should carefully check the DNS server in use, e.g. how it
-       verifies that incoming responses correspond to outstanding
-       queries, to minimize the risk for such attacks.
-
-   (3) For early versions of spam software FQDN checks provide quite
-       some relief, since that software generates mail with completely
-       bogus "MAIL From:" that will never get into the system if
-       verified with the DNS. This is in active use at many
-       installations today and it does reduce spam.
-
-   On the other hand, sites with weak DNS connectivity may find their
-   legitimate mail having problems reaching destinations due to DNS
-   timeouts when the receivers verify their "MAIL From:". However, since
-   DNS information is handled asynchronously and is cached even though
-   the initial requester has given up, chances are high that the
-   necessary information is there at a later attempt.
-
-   For later versions of spam software, a check of "MAIL From:" is much
-   less likely to help, since spam software evolves too and will start
-   using existing mail addresses (whether or not that is legal is beyond
-   the scope of this memo). But, at least the Internet will benefit from
-   the side effect that this test stops typos and misconfigured UAs.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.5.%20Where%20to%20block%20spam%2C%20in%20SMTP%2C%20in%20RFC822%20or%20in%20the%20UA"></a></body></html><a class="selflink" href="#section-1.5" name="section-1.5">1.5</a>. Where to block spam, in SMTP, in <a href="./rfc822.html">RFC822</a> or in the UA</span>
-
-   Our basic assumption is that refuse/accept is handled at the SMTP
-   layer and that an MTA that decides to refuse a message should do so
-   while still in the SMTP dialogue. First, this means that we do not
-   have to store a copy of a message we later decide to refuse and
-   second, our responsibility for that message is low or none - since we
-   have not yet read it in, we leave it to the sender to handle the
-   error.
-
-
-
-
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                  [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.6.%20SMTP%20Return%20Codes"></a></body></html><a class="selflink" href="#section-1.6" name="section-1.6">1.6</a>. SMTP Return Codes</span>
-
-   SMTP has several classes of Return Codes, see [<a href="#ref-1" title='"Simple Mail Transfer Protocol"'>1</a>] for a discussion:
-
-   o   5xx
-       is a Permanent Negative Completion reply (Fatal Error) and
-       results in the mail transfer being terminated and the mail
-       returned to sender.
-
-   o   4xx
-       is a Transient Negative Completion reply (Temporary Error) and
-       results in the mail transfer being put back on queue again and a
-       new attempt being made later.
-
-   o   2xx
-       is a Positive Completion reply and indicates that the MTA now has
-       taken responsibility for the delivery of the mail.
-
-   When making use of the options/"knobs" described in this memo there
-   are a few things to consider:
-
-   For some events, like "Denied - you're on the spammer's list", 5xx
-   may be the correct Return Code, since it terminates the session at
-   once and we are done with it (assuming that the spammer plays by the
-   SMTP rules, which he may decide not to do - in fact he can put the
-   mail back on queue or turn to some other host, regardless of Return
-   Code). However, a 5xx mistake in a configuration may cause legitimate
-   mail to bounce, which may be quite unfortunate.
-
-   Therefore, we suggest 4xx as the Return Code for most cases. Since
-   that is a non fatal error, the mail gets re-queued at the sender and
-   we have at least some time to discover and correct configuration
-   errors, rather than have mail bounce (typically this is when we
-   refuse to Relay for domains that we actually should accept since we
-   are on their MX list).
-
-   A 4xx response also makes the spammer's host re-queue the mail and if
-   it really is his own host who gets to do this it is probably a good
-   thing - fill up his disks with his own spam. If, on the other hand,
-   he is using someone else as Relay Host, all the spam mail being
-   queued is a fairly strong evidence that something bad is going on and
-   should cause attention at that Relay Host.
-
-   However, 4xx Temporary Errors may have unexpected interaction with
-   MX-records. If the receiving domain has several MX records and the
-   lowest preference MX-host refuses to receive mail with a "451"
-   Response Code, the sending host may choose to - and often will - use
-   the next host on the MX list.
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                  [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-   If that next MX host does not have the same refuse-list, it will of
-   course accept the mail, only to find that the final host still
-   refuses to receive that piece of mail ("MAIL From:"). Our intent was
-   to make the offending mail stay at the offending sender's host and
-   fill up his mqueue disk, but it all ended up at our friend, the next
-   lowest preference MX-host.
-
-   Finally, it has been suggested that one may use a 2xx Return Code but
-   nevertheless decide not to forward or receive the spam mail; typical
-   alternatives are to store it elsewhere (e.g. /dev/null). This clearly
-   violates the intent of <a href="./rfc821.html">RFC821</a> and should not be done without careful
-   consideration - instead of blindly dropping the mail one could re-
-   queue it and manually (or automagically) inspect whether it is spam
-   or legitimate mail and whether it should be dropped or forwarded.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.7.%20Mailing%20Lists"></a></body></html><a class="selflink" href="#section-1.7" name="section-1.7">1.7</a>. Mailing Lists</span>
-
-   An MTA that also has the ability to handle mailing lists and expand
-   that to a number of recipients, needs to be able to authorize senders
-   and protect its lists from spam. The mechanisms for this may be very
-   different from those for ordinary mail and ordinary users and are not
-   covered in this memo.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20Recommendations"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>. Recommendations</span>
-
-   Here we first give a brief list of recommendations, followed by a
-   more thorough discussion of each of them. We will also give
-   recommendations on things NOT to do, things that may seem natural in
-   the spam fight (and might even work so far) but that might wreak
-   havoc on Internet mail and thus may cause more damage than good.
-
-   1)  <em>MUST</em> be able to restrict unauthorized use as Mail Relay.
-
-   2)  <em>MUST</em> be able to provide "Received:" lines with enough
-       information to make it possible to trace the mail path, despite
-       spammers use forged host names in HELO statements etc.
-
-   3)  <em>MUST</em> be able to provide local log information that makes it
-       possible to trace the event afterwards.
-
-   4)  <em>SHOULD</em> be able to log all occurrences of anti-relay/anti-spam
-       actions.
-
-   5)  <em>SHOULD</em> be able to refuse mail from a host or a group of hosts.
-
-   6a) <em>MUST NOT</em> refuse "MAIL From: &lt;&gt;".
-
-   6b) <em>MUST NOT</em> refuse "MAIL From: &lt;user@my.local.dom.ain&gt;".
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                  [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-   7a) <em>SHOULD</em> be able to refuse mail from a specific "MAIL From:"
-       user, &lt;foo@domain.example&gt;.
-
-   7b) <em>SHOULD</em> be able to refuse mail from an entire "MAIL From:"  domain
-       &lt;.*@domain.example&gt;.
-
-   8)  <em>SHOULD</em> be able to limit ("Rate Control") mail flow.
-
-   9)  <em>SHOULD</em> be able to verify "MAIL From:" domain (using DNS or
-       other means).
-
-   10) <em>SHOULD</em> be able to verify &lt;local-part&gt; in outgoing mail.
-
-   11) <em>SHOULD</em> be able to control SMTP VRFY and EXPN.
-
-   12) <em>SHOULD</em> be able to control SMTP ETRN.
-
-   13) <em>MUST</em> be able to configure to provide different Return Codes
-       for different rules (e.g. 451 Temp Fail vs 550 Fatal Error).
-
-   The discussion below often ends up with a need to do various forms of
-   pattern matching on domain/host names and IP addresses/subnets.  It
-   is <em>RECOMMENDED</em> that the data/template for doing so may be supplied
-   outside of the MTA, e.g. that the pattern matching rules be included
-   in the MTA but that the actual patterns may be in an external file.
-   It is also <em>RECOMMENDED</em> that the pattern matching rules (external
-   file) may contain regular expressions, to give maximum flexibility.
-
-   Of course string matching on domain/host names <em>MUST NOT</em> be case
-   sensitive. Since &lt;local-part&gt; may be case sensitive it may be natural
-   to keep that here. However, since &lt;sPAmMeR@domain.example&gt; and
-   &lt;spammer@domain.example&gt; is most probably the same user and since the
-   string compares are used to refuse his messages, we suggest that
-   &lt;local-part&gt; comparisons be case insensitive too.
-
-   The interpretation that should apply to all these recommendations is
-   flexibility - regardless of how well we design anti-spam rules today,
-   spammers will find ways around them and a well designed MTA should be
-   flexible enough to meet those new threats.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20Restricting%20unauthorized%20Mail%20Relay%20usage"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>. Restricting unauthorized Mail Relay usage</span>
-
-   Unauthorized usage of a host as Mail Relay means theft of the relay's
-   resources and puts the relay owner's reputation at risk. It also
-   makes it impossible to filter out or block spam without at the same
-   time blocking legitimate mail.
-
-   Therefore, the MTA <em>MUST</em> be able to control/refuse such Relay usage.
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                  [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-   In an SMTP session we have 4 elements, each with a varying degree of
-   trust:
-
-   1)  "HELO Hostname"           Easily and often forged.
-   2)  "MAIL From:"              Easily and often forged.
-   3)  "RCPT To:"                Correct, or at least intended.
-   4)  SMTP_Caller (host)        IP.src addr OK, FQDN may be OK.
-
-   Since 1) and 2) are so easily and often forged, we cannot depend on
-   them at all to authorize usage of our host as Mail Relay.
-
-   Instead, the MTA <em>MUST</em> be able to authorize Mail Relay usage based on
-   a combination of:
-
-   o   "RCPT To:" address (domain).
-   o   SMTP_Caller FQDN hostname.
-   o   SMTP_Caller IP address.
-
-   The suggested algorithm is:
-
-   a)  If "RCPT To:" is one of "our" domains, local or a domain that
-       we accept to forward to (alternate MX), then accept to Relay.
-
-   b)  If SMTP_Caller is authorized, either its IP.src or its FQDN
-       (depending on if you trust the DNS), then accept to Relay.
-
-   c)  Else refuse to Relay.
-
-   When doing a) you have to make sure all kinds of SMTP source routing
-   (both the official [@a,@b:u@c], the '%' hack and uucp-style '!' path)
-   is either removed completely before the test, or at least is
-   taken into account.
-
-   A site implementing this requirement must also be aware that they
-   might block correctly addressed messages, especially such originating
-   or terminating in a gateway to a different mail system than SMTP.
-   Before implementing such a policy, a careful inventory should be done
-   to make sure all routing algorithms used, either by other mail
-   systems or ad-hoc, are known. Each one of such systems must be taken
-   care of on a case-by-case basis.
-
-   Examples of such mail systems, and their addressing schemes are X.400
-   with an address of the type:
-
-       "/c=us/admd= /prmd=xyz/dd.<a href="./rfc822.html">rfc-822</a>=user(a)final/"@x400-gateway
-
-   Another example involves DECnet MAIL-11, which can have addresses in
-   the form:
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                  [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-       "gateway::smtp%\"user@final\""@mail-11-gateway
-
-   In all cases the configuration <em>MUST</em> support wild cards for FQDNs and
-   classful IP addresses and <em>SHOULD</em> support "address/mask" for classless
-   IP addresses, e.g. domain.example and *.domain.example; 10.11.*.*,
-   192.168.1.*, 192.168.2.*, 10.0.0.0/13, 192.168.1.0/23.
-
-   The configuration <em>SHOULD</em> allow for the decision/template data to be
-   supplied by an external source, e.g. text file or dbm database. The
-   decision/template <em>SHOULD</em> be allowed to contain regular expressions.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20Received%3A%20lines"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>. Received: lines</span>
-
-   The MTA <em>MUST</em> prepend a "Received:" line in the mail (as described in
-   <a href="./rfc822.html">RFC822</a>, [<a href="#ref-2" title='"Standard for the format of ARPA Internet text messages"'>2</a>], and required in <a href="./rfc1123.html">RFC1123</a>, [<a href="#ref-3" title='"Requirements for Internet hosts - application and support"'>3</a>]). This "Received:" line
-   <em>MUST</em> contain enough information to make it possible to trace the mail
-   path back to the sender. We have two cases:
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.1.%20Direct%20MTA-to-MTA%20connections"></a></body></html><a class="selflink" href="#section-2.2.1" name="section-2.2.1">2.2.1</a>. Direct MTA-to-MTA connections</span>
-
-   Internet mail was designed such that the sending host connects
-   directly to the recipient as described by MX records (there may be
-   several MX hosts on a priority list). To assure traceability back to
-   the sending host (which may be a firewall/gateway, as described
-   later) each MTA along the path, including the final MTA, <em>MUST</em> prepend
-   a "Received:" line. For such a "Received:" line we have:
-
-   It <em>MUST</em> contain:
-
-   o   The IP address of the caller.
-
-   o   The 'date-time' as described in <a href="./rfc822.html">RFC822</a>, [<a href="#ref-2" title='"Standard for the format of ARPA Internet text messages"'>2</a>], pp 18.
-
-   It <em>SHOULD</em> contain:
-
-   o   The FQDN corresponding to the callers IP address.
-
-   o   The argument given in the "HELO" statement.
-
-   o   Authentication information, if an authenticated connection
-       was used for the transmission / submission.
-
-   It is suggested that most other "Received:" fields described in
-   <a href="./rfc822.html">RFC822</a> be included in the "Received:" lines.
-
-   Basically, any information that can help tracing the message can and
-   should be added to the "Received:" line. It is true even when the
-   initial submission is non-SMTP, for example submission via a web-based
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-   mail client where http is used between the web client and server, a
-   "Received:" line can be used to identify that connection stating what
-   IP-address was used when connecting to the http server where the mail
-   was created.
-
-   These recommendations are deliberately stronger than <a href="./rfc1123.html">RFC1123</a>, [<a href="#ref-3" title='"Requirements for Internet hosts - application and support"'>3</a>],
-   and are there to assure that mail sent directly from a spammer's host
-   to a recipient can be traced with enough accuracy; a typical example
-   is when a spammer uses a dialup account and the ISP needs to have his
-   IP address at the 'date-time' to be able to take action against him.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.2.%20Firewall/gateway%20type%20devices"></a></body></html><a class="selflink" href="#section-2.2.2" name="section-2.2.2">2.2.2</a>. Firewall/gateway type devices</span>
-
-   Organizations with a policy of hiding their internal network structure
-   must still be allowed and able to do so. They usually make their
-   internal MTAs prepend "Received:" lines with a very limited amount of
-   information, or prepend none at all. Then they send out the mail
-   through some kind of firewall/gateway device, which may even remove
-   all the internal MTAs' "Received:" lines before it prepends its own
-   "Received:" line (as required in <a href="./rfc1123.html">RFC1123</a>, [<a href="#ref-3" title='"Requirements for Internet hosts - application and support"'>3</a>]).
-
-   By doing so they take on the full responsibility to trace spammers
-   that send from inside their organization or they accept to be held
-   responsible for those spammers' activities. It is <em>REQUIRED</em> that the
-   information provided in their outgoing mail is sufficient for them to
-   perform any necessary traces.
-
-   In the case of incoming mail to an organization, the "Received:"
-   lines <em>MUST</em> be kept intact to make sure that users receiving mail on
-   the inside can give information needed to trace incoming messages to
-   their origin.
-
-   Generally, a gateway <em>SHOULD NOT</em> change or delete "Received:" lines
-   unless it is a security requirement to do so. Changing the content
-   of existing "Received:" lines to make sure they "make sense" when
-   passing a mail gateway of some kind most often destroys and deletes
-   information needed to make a message traceable. Care must be taken to
-   preserve the information in "Received:" lines, either in the message
-   itself, the mail that the receiver gets, or if that is impossible, in
-   logfiles.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20Event%20logs"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>. Event logs</span>
-
-   The MTA <em>MUST</em> be able to provide enough local log information to make
-   it possible to trace the event. This includes most of the information
-   put into the "Received:" lines; see above.
-
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20Log%20anti-relay/anti-spam%20actions"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>. Log anti-relay/anti-spam actions</span>
-
-   The MTA <em>SHOULD</em> be able to log all anti-relay/anti-spam actions. The
-   log entries <em>SHOULD</em> contain at least:
-
-   o   Time information.
-
-   o   Refusal information, i.e. why the request was refused ("Mail
-       From", "Relaying Denied", "Spam User", "Spam Host", etc).
-
-   o   "RCPT To:" addresses (domains).
-       (If the connection was disallowed at an earlier stage, e.g.
-       by checking the SMTP_Caller IP address, the "RCPT To:"
-       address is unknown and therefore cannot be logged).
-
-   o   Offending host's IP address.
-
-   o   Offending host's FQDN hostname.
-
-   o   Other relevant information (e.g. given during the SMTP
-       dialogue, before we decided to refuse the request).
-
-   It should be noted that by logging more events, especially denied
-   email, one opens the possibility for denial of service attacks, for
-   example by filling logs by having a very large amount of "RCPT To:"
-   commands. An implementation that implements increased logging
-   according to this description must be aware of the fact that the size
-   of the logfiles increases, especially during attacks.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20Refuse%20mail%20based%20on%20SMTP_Caller%20address"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>. Refuse mail based on SMTP_Caller address</span>
-
-   The MTA <em>SHOULD</em> be able to accept or refuse mail from a specific host
-   or from a group of hosts. Here we mean the IP.src address or the FQDN
-   that its .IN-ADDR.ARPA resolves to (depending on whether you trust
-   the DNS). This functionality could be implemented at a firewall, but
-   since the MTA should be able to "defend itself" we recommend it be able
-   to as well.
-
-   It is <em>RECOMMENDED</em> that the MTA be able to decide based on FQDN hostnames
-   (host.domain.example), on wild card domain names (*.domain.example),
-   on individual IP addresses (10.11.12.13) or on IP addresses with a
-   prefix length (10.0.0.0/8, 192.168.1.0/24).
-
-   It is also <em>RECOMMENDED</em> that these decision rules can be combined to
-   form a flexible list of accept/refuse/accept/refuse, e.g:
-
-
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-       accept   host.domain.example
-       refuse   *.domain.example
-       accept   10.11.12.13
-       accept   192.168.1.0/24
-       refuse   10.0.0.0/8
-
-   The list is searched until first match and the accept/refuse action
-   is based on that.
-
-   IP-address/length is <em>RECOMMENDED</em>. However, implementations with wild
-   cards, e.g. 10.11.12.* (classful networks on byte boundaries only)
-   are of course much better than those without.
-
-   To improve filtering even more, the MTA <em>MAY</em> provide complete regular
-   expressions to be used for hostnames; possibly also for IP addresses.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%22MAIL%20From%3A%20%3C%3E%22%20and%20%22MAIL%20From%3A%20%3Cuser%40my.local.dom.ain%3E%22"></a></body></html><a class="selflink" href="#section-2.6" name="section-2.6">2.6</a>. "MAIL From: &lt;&gt;" and "MAIL From: &lt;user@my.local.dom.ain&gt;"</span>
-
-   Although the fight against spammers is important it must never be
-   done in a way that violates existing email standards. Since spammers
-   often forge "MAIL From:" addresses it is tempting to put general
-   restrictions on that, especially for some "obvious" addresses. This
-   may, however, wreak more havoc to the mail community than spam does.
-
-   When there is a need to refuse mail from a particular host or site
-   our recommendation is to use other methods mentioned in this memo,
-   e.g. refuse mail based on SMTP_Caller address (or name), regardless
-   of what "MAIL From:" was used.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.1.%20%22MAIL%20From%3A%20%3C%3E%22"></a></body></html><a class="selflink" href="#section-2.6.1" name="section-2.6.1">2.6.1</a>. "MAIL From: &lt;&gt;"</span>
-
-   The MTA <em>MUST NOT</em> refuse to receive "MAIL From: &lt;&gt;".
-
-   The "MAIL From: &lt;&gt;" address is used in error messages from the mail
-   system itself, e.g. when a legitimate mail relay is used and forwards
-   an error message back to the user. Refusing to receive such mail
-   means that users may not be notified of errors in their outgong mail,
-   e.g.  "User unknown", which will no doubt wreak more havoc to the
-   mail community than spam does.
-
-   The most common case of such legitimate "MAIL From: &lt;&gt;" is to one
-   recipient, i.e. an error message returned to one single individual.
-   Since spammers have used "MAIL From: &lt;&gt;" to send to many recipients,
-   it is tempting to either reject such mail completely or to reject all
-   but the first recipient. However, there are legitimate causes for an
-   error mail to go to multiple recipients, e.g. a list with several
-   list owners, all located at the same remote site, and thus the MTA
-   <em>MUST NOT</em> refuse "MAIL From: &lt;&gt;" even in this case.
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-   However, the MTA <em>MAY</em> throttle down the TCP connection ("read()"
-   frequency) if there are more than one "RCPT To:" and that way slow
-   down spammers using "MAIL From: &lt;&gt;".
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.2.%20%22MAIL%20From%3A%20%3Cuser%40my.local.dom.ain%3E%22"></a></body></html><a class="selflink" href="#section-2.6.2" name="section-2.6.2">2.6.2</a>. "MAIL From: &lt;user@my.local.dom.ain&gt;"</span>
-
-   The MTA <em>MUST NOT</em> refuse "MAIL From: &lt;user@my.local.dom.ain&gt;".
-
-   By "my.local.dom.ain" we mean the domain name(s) that are treated as
-   local and result in local delivery. At first thought it may seem like
-   noone else will need to use "MAIL From: &lt;user@my.local.dom.ain&gt;" and
-   that restrictions on who may use that would reduce the risk of fraud
-   and thus reduce spam. While this may be true in the (very) short
-   term, it also does away with at least two legitimate usages:
-
-   o   Aliases (.forward files).
-       &lt;user1@my.local.dom.ain&gt; sends to &lt;user2@external.example&gt; and
-       that mail gets forwarded back to &lt;user2@my.local.dom.ain&gt;, e.g.
-       since &lt;user2&gt; has moved to my.local.dom.ain and has a .forward
-       file at external.example.
-
-   o   Mailing lists.
-       <a href="./rfc1123.html">RFC1123</a>, [<a href="#ref-3" title='"Requirements for Internet hosts - application and support"'>3</a>], gives a clear requirement that "MAIL From:" for
-       mail from a mailing list should reflect the owner of the list,
-       rather than the individual sender. Because of this fact, and the
-       fact that the owner of the list might not be in the same domain
-       as the list (list host) itself, mail may arrive to the list
-       owner's domain (mail host) from a foreign domain (from a host
-       serving a foreign domain) with the list owner's local domain in
-       the "Mail From:" command.
-
-   If "MAIL From: &lt;user@my.local.dom.ain&gt;" is rejected, both these cases
-   will result in failure to deliver legitimate mail.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.%20Refuse%20based%20on%20%22MAIL%20From%3A%22"></a></body></html><a class="selflink" href="#section-2.7" name="section-2.7">2.7</a>. Refuse based on "MAIL From:"</span>
-
-   The MTA <em>SHOULD</em> be able to refuse to receive mail from a specific
-   "MAIL From:" user (foo@domain.example) or from an entire "MAIL From:"
-   domain (domain.example). In general these kinds of rules are easily
-   overcome by the spammers changing "MAIL From:" every so often, but
-   the ability to block a certain user or a certain domain is quite
-   helpful while an attack has just been discovered and is ongoing.
-
-   Please note that
-
-       "MAIL From: &lt;&gt;"
-   and
-       "MAIL From: &lt;user@my.local.dom.ain&gt;"
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-   <em>MUST NOT</em> be refused (see above), except when other policies block the
-   connection, for example when the SMTP_Caller IP address of the peer
-   belongs to a network which is deliberately refused.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.8.%20Rate%20Control"></a></body></html><a class="selflink" href="#section-2.8" name="section-2.8">2.8</a>. Rate Control</span>
-
-   The MTA <em>SHOULD</em> provide tools for the mail host to control the rate
-   with which mail is sent or received. The idea is twofold:
-
-   1)  If we happen to have an legitimate mail user with an existing
-       legitimate account and this user sends out spam, we may want to
-       reduce the speed with which he sends it out. This is not without
-       controversy and must be used with extreme care, but it may
-       protect the rest of the Internet from him.
-
-   2)  If we are under a spam attack it may help us considerably just
-       being able to slow down the incoming mail rate for that
-       particular user/host.
-
-   For sending mail, this has to be done by throttling the TCP
-   connection to set the acceptable output data rate, e.g. reduce the
-   "write()" frequency.
-
-   For receiving mail, we could use basically the same technique, e.g.
-   reduce the "read()" frequency, or we could signal with a 4xx Return
-   Code that we cannot receive. It is <em>RECOMMENDED</em> that the decision to
-   take such action be based on "MAIL From:" user, "MAIL From:" domain,
-   SMTP_Caller (name/address), "RCPT TO:", or a combination of all
-   these.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.9.%20Verify%20%22MAIL%20From%3A%22"></a></body></html><a class="selflink" href="#section-2.9" name="section-2.9">2.9</a>. Verify "MAIL From:"</span>
-
-   The MTA <em>SHOULD</em> be able to perform a simple "sanity check" of the
-   "MAIL From:" domain and refuse to receive mail if that domain is
-   nonexistent (i.e. does not resolve to having an MX or an A record).
-   If the DNS error is temporary, TempFail, the MTA <em>MUST</em> return a 4xx
-   Return Code (Temporary Error). If the DNS error is an Authoritative
-   NXdomain (host/domain unknown) the MTA <em>SHOULD</em> still return a 4xx
-   Return Code (since this may just be primary and secondary DNS not
-   being in sync) but it <em>MAY</em> allow for an 5xx Return Code (as configured
-   by the sysadmin).
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.10.%20Verify%20%3Clocal-part%3E"></a></body></html><a class="selflink" href="#section-2.10" name="section-2.10">2.10</a>. Verify &lt;local-part&gt;</span>
-
-   The MTA <em>SHOULD</em> allow outgoing mail to have its &lt;local-part&gt; verified
-   so that the sender name is a real user or an existing alias. This is
-   basically to protect the rest of the Internet from various "typos"
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-       MAIL From: &lt;fo0bar@domain.example&gt;
-
-   and/or malicious users
-
-       MAIL From: &lt;I.am.unknown.to.you.he.he@domain.example&gt;
-
-   As always this can be overcome by spammers really wanting to do so,
-   but with more strict rules for relaying it becomes harder and harder.
-   In fact, catching "typos" at the initial (and official) mail relay is
-   in itself enough motivation for this recommendation.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.11.%20SMTP%20VRFY%20and%20EXPN"></a></body></html><a class="selflink" href="#section-2.11" name="section-2.11">2.11</a>. SMTP VRFY and EXPN</span>
-
-   Both SMTP VRFY and EXPN provide means for a potential spammer to test
-   whether the addresses on his list are valid (VRFY) and even get more
-   addresses (EXPN). Therefore, the MTA <em>SHOULD</em> control who is is allowed
-   to issue these commands. This may be "on/off" or it may use access
-   lists similar to those mentioned previously.
-
-   Note that the "VRFY" command is required according to <a href="./rfc821.html">RFC821</a>, [<a href="#ref-1" title='"Simple Mail Transfer Protocol"'>1</a>].
-   The response can, though, be "252 Argument not checked" to represent
-   "off" or blocked via an access list. This should be the default.
-
-   Default for the "EXPN" command should be "off".
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.12.%20SMTP%20ETRN"></a></body></html><a class="selflink" href="#section-2.12" name="section-2.12">2.12</a>. SMTP ETRN</span>
-
-   SMTP ETRN means that the MTA will re-run its mail queue, which may be
-   quite costly and open for Denial of Service attacks. Therefore, the
-   MTA <em>SHOULD</em> control who is is allowed to issue the ETRN command.  This
-   may be "on/off" or it may use access lists similar to those mentioned
-   previously. Default should be "off".
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.13.%20Return%20Codes"></a></body></html><a class="selflink" href="#section-2.13" name="section-2.13">2.13</a>. Return Codes</span>
-
-   The primary issue here is flexibility - it is simply not possible to
-   define in a document how to make tradeoffs between returning 5xx and
-   make legitimate mail fail at once due to a configuration mistake and
-   returning 4xx and be able to catch such configuration mistakes via
-   log file inspection.
-
-   Therefore, the MTA <em>MUST</em> be configurable to provide "Success" (2xx),
-   "Temporary Failure" (4xx) or "Permanent Failure" (5xx) for different
-   rules or policies. The exact return codes, other than the first digit
-   (2, 4 or 5) should, however, not be configurable.  This is because of
-   the ease of configuring the software in the wrong way, and the fact
-
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-   that the selection of exactly what error code to use is very subtle
-   and that many software implementations do check more than the first
-   digit (2, 4 or 5) in the return code.
-
-   However, when the response is the result of a DNS lookup and the DNS
-   system returned TempFail, a temporary error, the MTA <em>MUST</em> reflect
-   this and provide a 4xx return code. If the DNS response is an
-   Authoritative NXdomain (host or domain unknown) the MTA <em>MAY</em> reflect
-   this by a 5xx Return Code.
-
-   Please refer to the previous discussion on SMTP Return Codes for
-   additional information.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.13.1.%20The%20importance%20of%20flexibility%20-%20an%20example"></a></body></html><a class="selflink" href="#section-2.13.1" name="section-2.13.1">2.13.1</a>. The importance of flexibility - an example</span>
-
-   At Chalmers University of Technology our DNS contains
-
-       cdg.chalmers.se.  IN  MX    0   mail.cdg.chalmers.se.
-                         IN  MX  100   mail.chalmers.se.
-
-   and similarly for most subdomains, i.e. a second host to store mail
-   to each subdomain, should their mail host be down. This means that
-   mail.chalmers.se must be prepared to act as Mail Relay for the
-   subdomains ("RCPT To:") it serves and that those subdomains' mail
-   hosts have to accept SMTP connections from mail.chalmers.se. Late
-   versions of spam software make use of this fact by always using
-   mail.chalmers.se to get their mail delivered to our subdomains and by
-   doing so they still get Mail Relaying done for them and they prevent
-   recipient hosts from refusing SMTP connections based on the sending
-   host's FQDN or IP-address.
-
-   As long as we keep our design with a secondary MX host we cannot
-   really have mail.chalmers.se refuse Mail Relay, at least not with a
-   5xx return code. However, it has been fairly straight forward to
-   identify the hosts/domains/networks that make use of this possibility
-   and refuse to act as Mail Relay for them them - and only them - and
-   do so with a 4xx return code. Legitimate mail from them may be
-   delayed if the final recipient host is down but will eventually be
-   delivered when it gets up again (4xx Return Code) and this is no
-   worse then if we changed our MX design. Spam now faces a "Denied"
-   response and have to connect to each and every one of the recipients,
-   who may decide to refuse the SMTP connection.
-
-   The bottom line is that this is made possible because of 1) enough
-   flexibility in the Relay Authorization code and 2) enough flexibility
-   in assigning Return Codes - an MTA with a 5xx Return Code carved in
-   stone would have made this absolutely impossible.
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Future%20work"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>. Future work</span>
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20Impact%20on%20SMTP%20UAs%20and%20end%20users"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>. Impact on SMTP UAs and end users</span>
-
-   Even though this memo is about MTAs and recommendations for them,
-   some of what is done here also impacts UAs (User Agents, the
-   "ordinary mail programs").
-
-   A UA does two things:
-
-   1)  Reads mail from a mailbox and prints on the screen.
-       This typically uses a protocol like POP, IMAP or NFS.
-
-   2)  Reads text from the keyboard and hands that over to the mailbox
-       MTA for delivery as a piece of mail. This typically uses the SMTP
-       protocol, i.e. the same protocol that is used between MTAs.
-
-   When MTAs now start to implement various anti-relay filters as
-   described above, a UA on a portable laptop host may get a response
-   like "Relaying Denied" just because it happens to use IP addresses
-   within an unknown range or that resolve to unknown FQDNs.
-
-   The typical victim of this "Relaying Denied" response is a salesman
-   carrying a laptop on a business trip, or even an IETF delegate at a
-   meeting hotel. The salesman will probably dial his nearest ISP and
-   will get an IP address from that dialup pool; the IETF delegate will
-   use an IP address from the terminal room. In both cases their laptop
-   mail program (the UA; e.g. pine, Netscape, Eudora) will try to send
-   out mail via their home MTA, e.g. SMTP-SERVER=mail.home.example, but
-   unless mail.home.example has been updated to accept that (temporary)
-   IP address it will respond "Relaying Denied" and refuse.
-
-   To get around this problem we could simply add the terminal room's or
-   the dialup pool's IP network to the list of accepted networks at
-   mail.home.example. This does open up some minimal risk of spammers
-   using that host as their Mail Relay: If they use the same ISP's
-   dialup pool and they configure to use mail.home.example at the same
-   time as our salesman is on his trip, then the spammers will be
-   authorized to relay their spam through mail.home.example. However,
-   this is not extremely likely and as long as we do not open up for the
-   entire world all the time and we keep the log files under close
-   observation and we stop relaying at once we find we're being used,
-   this solution is probably good enough.
-
-   Another way around is that our salesman uses a Mail Relay provided by
-   the current dialup ISP, if that service exists. To do so he has to
-   modify SMTP-SERVER= in his UA, which may or may not be reasonable.
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-   The correct way to handle this situation, though, is by some other
-   mail-sending protocol between the UA and the MTA.
-
-   Although a separate submission protocol does not exist, a profile of
-   SMTP for this, the "Message Submission" specification, [<a href="#ref-9" title='"Message Submission"'>9</a>], has
-   recently been defined.
-
-   Or, we could note that when the SMTP Authentication work, [<a href="#ref-10" title='"SMTP Service Extension for Authentication"'>10</a>], is
-   all in place, it will allow for Authenticated SMTP to serve as The
-   Protocol between the UAs and the home MTA (whether that should be
-   considered a new protocol or "the same old SMTP" is irrelevant here).
-
-   This adds one item to the suggested Relay algorithm in <a href="#section-2.1">section 2.1</a>:
-
-   +   If "SMTP Authenticated" then accept to Relay.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20Personal%20anti-spam%20filters"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>. Personal anti-spam filters</span>
-
-   Since all users are individuals, there is little hope that any
-   central anti-spam action will suit them all - in fact people can and
-   do argue about Freedom of Speech infringement if some central set of
-   anti-spam rules is enforced without the users' approval. (One could
-   of course also argue whether spam really adds anything to anyone, but
-   that must be up to each individual user to decide, rather than being
-   centrally decided).
-
-   Therefore the only reasonable extension is to allow for personal
-   anti-spam filters, i.e. anti-spam filters like the ones described
-   earlier in this memo, but available and configurable on a per user
-   basis. Since most users will not have a strong opinion (except that
-   they want to avoid spam) the mail system should provide a system
-   default and give each user the ability to override or modify that.
-   In a UNIX based environment one could have something like
-
-       /etc/mail/rc.spam
-       ~/.spamrc
-
-   and rules on how the latter can interfere with the former.
-
-   All of this opens up quite a number of unresolved issues, e.g.
-   whether each user himself really should be allowed to decide on SMTP
-   Return Codes (and how it should be described so he understands enough
-   of the implications) and how existing mail systems will deal with
-   different per user responses, especially how they will deal with a
-   mix of 5xx and 4xx codes:
-
-       C  MAIL From: &lt;usr@spam.example&gt;
-       S  250 &lt;usr@spam.example&gt;... Sender ok
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-       C  RCPT To: &lt;usr@domain.example&gt;
-       S  250 &lt;usr@domain.example&gt;... Recipient ok
-       C  RCPT To: &lt;foo@domain.example&gt;
-       S  451 &lt;foo@domain.example&gt;... Denied due to spam list
-       C  RCPT To: &lt;bar@domain.example&gt;
-       S  550 &lt;bar@domain.example&gt;... Denied due to spam list
-
-   Of course one could decide on either "250 OK" or "550 Denied" with no
-   other alternatives for the individual user, but this too has to be
-   explained enough that an ordinary user understands the implications
-   of "Refuse 'MAIL From: &lt;.*@spam.example&gt;'" and that it can do away
-   with, or block out, mail he actually wanted.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20SMTP%20Authentication"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>. SMTP Authentication</span>
-
-   SMTP Authentication, [<a href="#ref-10" title='"SMTP Service Extension for Authentication"'>10</a>], has already been mentioned as a method to
-   authorize Mail Relaying, but of course there is much more to it than
-   that. When that infrastructure and functionality is all in place,
-   spammers will have a much harder time forging addresses and hiding.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20Spam%20and%20NATs"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>. Spam and NATs</span>
-
-   With the increased use of Network Address Translators (NATs) may come
-   a need for additional information in log files. As long as there is a
-   1:1 mapping between the addresses inside the NAT and the addresses
-   used outside it everything is OK, but if the NAT box also translates
-   port numbers (to combine many internal hosts into one external
-   address) we will need to log not only the IP addresses of spam hosts
-   but also the port numbers. Otherwise we will not be able to identify
-   the individual host inside the NAT.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>. Security Considerations</span>
-
-   The grassfire-like increase of spam raises several security issues
-   which, in fact, puts the entire Internet mail community at risk:
-
-   o   People may fail to find important mail in their flooded
-       mailboxes. Or, they may delete it while cleaning up.
-
-   o   ISPs get overloaded mailbox hosts and filled disk. Cleaning up
-       and helping customers requires a lot of human resources.  In
-       fact, ISP mail servers have crashed by too much mail.
-
-   o   While disks are unaccessible, either due to being filled or due
-       to "mail quota", important mail may be delayed or lost.  Normally
-       this would not happen without notice, but if both the sender and
-
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-       receiver hosts have their disk flooded, the mail being returned
-       may also fail, i.e. the email service may become less trustworthy
-       than before.
-
-   o   Hosts used as unauthorized Mail Relays become overloaded.
-       Besides the technical implications, this too requires a lot of
-       human resources, cleaning up mail queues and taking care of
-       furious external users that were spammed through the Relay.
-
-   o   The fight against spammers includes blocking their hosts (which
-       is described in this memo). However, there is a great risk that
-       Mail Relay hosts may be blocked too, even though they are also
-       victims. In the long run, this may cause Internet mail service to
-       deteriorate.
-
-   o   The common use of forged "MAIL From:" and "From:" addresses puts
-       the blame on innocent persons/hosts/organizations. This is bad
-       for reputations and may affect business relations.
-
-   Several of the methods described in this document increases the load
-   on several support systems to the email system itself. Those support
-   systems can be DNS, logging, databases with lists of local users,
-   authentication mechanisms and others. Implementing the methods
-   described in this document will, because of that, increase the risk
-   of a denial of service attack against the support system by sending
-   spam to a site. Logging facilities must for example be able to handle
-   more logging (what happens when the logfiles fills the disk?).  DNS
-   servers and authentication mechanisms must be able to stand the load
-   of more lookups etc.
-
-   The functionality of the support systems during high load should be
-   carefully studied before implementing the methods described in this
-   document.
-
-   The mail system should be carefully studied, e.g. how it behaves when
-   one or more of the support systems needed for a specific method
-   fails. A mail server <em>MUST NOT</em> respond with "Permanent Failure" (5xx)
-   if there is a temporary problem with one of its support systems.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20Acknowledgements"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>. Acknowledgements</span>
-
-   This memo is the result of discussions in an ad hoc group of Swedish
-   ISPs and Universities. Without any hope on mentioning everyone we
-   simply give the domain names here: algonet.se, global-ip.net, pi.se,
-   swip.net, telia.net, udac.se; chalmers.se, sunet.se, umu.se, and
-   uu.se.
-
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-   We want to acknowledge valuable input and suggestions from Andras
-   Salamon, John Myers, Bob Flandrena, Dave Presotto, Dave Kristol,
-   Donald Eastlake, Ned Freed, Keith Moore and Paul Hoffman.
-
-   Finally many thanks to Harald Alvestrand and Patrik Faltstrom, both
-   for useful comments and for their support and guidance through the
-   IETF process.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20References"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>. References</span>
-
-   [<a id="ref-1" name="ref-1">1</a>] Postel, J., "Simple Mail Transfer Protocol", STD 10, <a href="./rfc821.html">RFC 821</a>,
-       August 1982.
-
-   [<a id="ref-2" name="ref-2">2</a>] Crocker, D., "Standard for the format of ARPA Internet text
-       messages", STD 11, <a href="./rfc822.html">RFC 822</a>, August 1982.
-
-   [<a id="ref-3" name="ref-3">3</a>] Braden, R., "Requirements for Internet hosts - application and
-       support", STD 3, <a href="./rfc1123.html">RFC 1123</a>, October 1989.
-
-   [<a id="ref-4" name="ref-4">4</a>] Bradner, S., "Key words for use in RFCs to Indicate Requirement
-       Level", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
-
-   [<a id="ref-5" name="ref-5">5</a>] Mockapetris, P., "Domain Names - Concepts and Facilities", STD
-       13, <a href="./rfc1034.html">RFC 1034</a>, November 1987.
-
-   [<a id="ref-6" name="ref-6">6</a>] Mockapetris, P., "Domain Names - Implementation and
-       Specifications", STD 13, <a href="./rfc1035.html">RFC 1035</a>, November 1987.
-
-   [<a id="ref-7" name="ref-7">7</a>] Eastlake, D. and C. Kaufman, "Domain Name System Security
-       Extensions", <a href="./rfc2065.html">RFC 2065</a>, January 1997.
-
-   [<a id="ref-8" name="ref-8">8</a>] sendmail Home Page. <a href="http://www.sendmail.org">http://www.sendmail.org</a>
-
-   [<a id="ref-9" name="ref-9">9</a>] Gellens, R. and J. Klensin "Message Submission", <a href="./rfc2476.html">RFC 2476</a>,
-       September 1998.
-
-   [<a id="ref-10" name="ref-10">10</a>] Myers, J., <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22SMTP+Service+Extension+for+Authentication%22" style="text-decoration: none">"SMTP Service Extension for Authentication"</a>, Work in
-       Progress.
-
-   *   Spam (R) (capitalized) is a registered trademark of a meat
-       product made by Hormel. Use of the term spam (uncapitalized) in
-       the Internet community comes from a Monty Python sketch and is
-       almost Internet folklore. The term spam is usually pejorative,
-       however this is not in any way intended to describe the Hormel
-       product.
-
-
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-Editor's Address
-
-   Gunnar Lindberg
-   Computer Communications Group
-   Chalmers University of Technology
-   SE-412 96 Gothenburg, SWEDEN,
-
-   Phone: +46 31 772 5913
-   FAX:   +46 31 772 5922
-   EMail: lindberg@cdg.chalmers.se
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Lindberg                 Best Current Practice                 [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
-<span class="grey"><a href="./rfc2505.html">RFC 2505</a>               Anti-Spam Recommendations           February 1999</span>
-
-
-Full Copyright Statement
-
-   Copyright (C) The Internet Society (1999).  All Rights Reserved.
-
-   This document and translations of it may be copied and furnished to
-   others, and derivative works that comment on or otherwise explain it
-   or assist in its implementation may be prepared, copied, published
-   and distributed, in whole or in part, without restriction of any
-   kind, provided that the above copyright notice and this paragraph are
-   included on all such copies and derivative works.  However, this
-   document itself may not be modified in any way, such as by removing
-   the copyright notice or references to the Internet Society or other
-   Internet organizations, except as needed for the purpose of
-   developing Internet standards in which case the procedures for
-   copyrights defined in the Internet Standards process must be
-   followed, or as required to translate it into languages other than
-   English.
-
-   The limited permissions granted above are perpetual and will not be
-   revoked by the Internet Society or its successors or assigns.
-
-   This document and the information contained herein is provided on an
-   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
-   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
-   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
-   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
-   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Lindberg                 Best Current Practice                 [Page 24]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
+<br/><br/><div id="footer">
+<div id="footerdivs">
+</div>
+<div style="clear:both"></div>
+<p class="credit">
+<a href="./www.iab.org/.html">IAB</a> • <a href="./www.iana.org/.html">IANA</a>  • <a href="./www.ietf.org.html">IETF</a> • <a href="./www.irtf.org.html">IRTF</a> • <a href="/about/independent">ISE</a> • <a href="./www.internetsociety.org.html">ISOC</a> • <a href="./trustee.ietf.org/.html">IETF Trust</a>
+<br/>
+<a href="/report-summary">Reports</a> • <a href="./www.ietf.org/privacy-statement/.html">Privacy Statement</a> • <a href="/sitemap">Site Map</a> • <a href="/contact">Contact Us</a> </p>
+</div><!--footer-->
+</div><!--page-->
+<button aria-controls="rmp-container-2538" aria-label="Menu Trigger" class="rmp_menu_trigger rmp-menu-trigger-boring" id="rmp_menu_trigger-2538" type="button">
+<span class="rmp-trigger-box">
+<span class="responsive-menu-pro-inner"></span>
+</span>
+</button>
+<div class="rmp-container rmp-container rmp-slide-left" id="rmp-container-2538">
+<div class="rmp-menu-title" id="rmp-menu-title-2538">
+<a href="" id="rmp-menu-title-link" target="_self">
+<span></span>
+</a>
+</div>
+<div class="rmp-menu-wrap" id="rmp-menu-wrap-2538"><ul aria-label="Default Menu" class="rmp-menu" id="rmp-menu-2538" role="menubar"><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-632" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/retrieve/" role="menuitem">Document Retrieval</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-633" role="none"><a class="rmp-menu-item-link" href="/errata.php" role="menuitem">Errata</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-634" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/faq/" role="menuitem">Frequently Asked Questions</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-636" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/rse/format-faq/" role="menuitem">Future Format FAQ</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-637" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/history/" role="menuitem">History</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-638" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/about/" role="menuitem">About Us</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-639" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/other/" role="menuitem">Other Information</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-640" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/pubprocess/" role="menuitem">Publication Process</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-641" role="none"><a class="rmp-menu-item-link" href="/current_queue.php" role="menuitem">Publication Queue</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-642" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/styleguide/" role="menuitem">Style Guide</a></li></ul></div> <div class="rmp-menu-additional-content" id="rmp-menu-additional-content-2538">
+<a href="/search/rfc_search.php">Advanced Search</a>
+<form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="20" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+</div>
 </div>
 </body>
 </html>

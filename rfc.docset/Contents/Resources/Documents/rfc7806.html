@@ -1,22 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="   This note discusses queuing and marking/dropping algorithms.  While
-   these algorithms may be implemented in a coupled manner, this note
-   argues that specifications, measurements, and comparisons should
-   decouple the different algorithms and their contributions to system
-   behavior.
-" name="DC.Description.Abstract"/>
-<meta content="Pan, Rong" name="DC.Creator"/>
-<meta content="Baker, Fred" name="DC.Creator"/>
-<meta content="On Queuing, Marking, and Dropping" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7806 - On Queuing, Marking, and Dropping</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="F. Baker" name="citation_author"/>
+<meta content="R. Pan" name="citation_author"/>
+<meta content="April, 2016" name="citation_publication_date"/>
+<meta content="On Queuing, Marking, and Dropping" name="citation_title"/>
+<meta content="10.17487/RFC7806" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7806" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7806.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7806: On Queuing, Marking, and Dropping</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -45,7 +41,7 @@
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -54,7 +50,7 @@
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -133,19 +129,18 @@
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -159,21 +154,9 @@
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7806.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7806" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-aqm-fq-implementation.html" title="draft-ietf-aqm-fq-implementation">draft-ietf-aqm-fq...</a>]                                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                          F. Baker
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7806.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7806.txt.pdf">PDF</a>|<a href="/rfc/rfc7806.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7806" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7806&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc7806" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                          F. Baker
 Request for Comments: 7806                                        R. Pan
 Category: Informational                                    Cisco Systems
 ISSN: 2070-1721                                               April 2016
@@ -210,7 +193,7 @@ Copyright Notice
    Copyright (c) 2016 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -225,7 +208,7 @@ Copyright Notice
 
 
 <span class="grey">Baker &amp; Pan                   Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
@@ -256,7 +239,7 @@ Table of Contents
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-15">15</a>
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-16">16</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    In the discussion of Active Queue Management (AQM), there has been
    discussion of the coupling of queue management algorithms such as
@@ -281,11 +264,11 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Fair%20Queuing%3A%20Algorithms%20and%20History"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Fair Queuing: Algorithms and History</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Fair%20Queuing%3A%20Algorithms%20and%20History"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Fair Queuing: Algorithms and History</span>
 
    There is extensive history in the set of algorithms collectively
    referred to as "fair queuing".  The model was initially discussed in
@@ -304,7 +287,7 @@ Table of Contents
    want a "weighted" or "predictably unfair" queuing algorithm, and so
    on.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Generalized%20Processor%20Sharing"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Generalized Processor Sharing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Generalized%20Processor%20Sharing"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Generalized Processor Sharing</span>
 
    Conceptually, any fair queuing algorithm attempts to implement some
    approximation to the Generalized Processor Sharing [<a href="#ref-GPS" title='"Analysis and Simulation of a Fair Queueing Algorithm"'>GPS</a>] model.
@@ -337,11 +320,11 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.1.%20%20GPS%20Comparisons%3A%20Transmission%20Quanta"></a></body></html><a class="selflink" href="#section-2.1.1" name="section-2.1.1">2.1.1</a>.  GPS Comparisons: Transmission Quanta</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.1.%20%20GPS%20Comparisons%3A%20Transmission%20Quanta"></a></body></html><a class="selflink" href="#section-2.1.1" id="section-2.1.1">2.1.1</a>.  GPS Comparisons: Transmission Quanta</span>
 
    The most obvious comparison between the GPS model and common
    approximations to it is that real world data is not delivered
@@ -363,7 +346,7 @@ Table of Contents
    256 KB).  After that initial burst, TCP senders commonly send pairs
    of packets but may send either smaller or larger bursts [<a href="./rfc5690.html" title='"Adding Acknowledgement Congestion Control to TCP"'>RFC5690</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.2.%20%20GPS%20Comparisons%3A%20Flow%20Definition"></a></body></html><a class="selflink" href="#section-2.1.2" name="section-2.1.2">2.1.2</a>.  GPS Comparisons: Flow Definition</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.2.%20%20GPS%20Comparisons%3A%20Flow%20Definition"></a></body></html><a class="selflink" href="#section-2.1.2" id="section-2.1.2">2.1.2</a>.  GPS Comparisons: Flow Definition</span>
 
    An important engineering trade-off relevant to GPS is the definition
    of a "flow".  A flow is, by definition, a defined data stream.
@@ -393,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
@@ -409,7 +392,7 @@ Table of Contents
    Flow fairness, and the implications of TCP's congestion avoidance
    algorithms, is discussed extensively in [<a href="#ref-NoFair" title='"Flow rate fairness: dismantling a religion"'>NoFair</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.3.%20%20GPS%20Comparisons%3A%20Unit%20of%20Measurement"></a></body></html><a class="selflink" href="#section-2.1.3" name="section-2.1.3">2.1.3</a>.  GPS Comparisons: Unit of Measurement</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.3.%20%20GPS%20Comparisons%3A%20Unit%20of%20Measurement"></a></body></html><a class="selflink" href="#section-2.1.3" id="section-2.1.3">2.1.3</a>.  GPS Comparisons: Unit of Measurement</span>
 
    And finally, there is the question of what is measured for rate.  If
    the only objective is to force packet streams to not dominate each
@@ -419,9 +402,9 @@ Table of Contents
    in bits or bytes).  If predictable unfairness is a consideration, the
    value must be weighted accordingly.
 
-   [<a id="ref-RFC7141" name="ref-RFC7141">RFC7141</a>] discusses measurement.
+   [<a id="ref-RFC7141">RFC7141</a>] discusses measurement.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20GPS%20Approximations"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  GPS Approximations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20GPS%20Approximations"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  GPS Approximations</span>
 
    Carrying the matter further, a queuing algorithm may also be termed
    "work conserving" or "non work conserving".  A queue in a work-
@@ -435,7 +418,7 @@ Table of Contents
    impose an artificial upper bound on a class of traffic that is lower
    than the rate of the underlying physical interface.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.1.%20%20Definition%20of%20a%20Queuing%20Algorithm"></a></body></html><a class="selflink" href="#section-2.2.1" name="section-2.2.1">2.2.1</a>.  Definition of a Queuing Algorithm</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.1.%20%20Definition%20of%20a%20Queuing%20Algorithm"></a></body></html><a class="selflink" href="#section-2.2.1" id="section-2.2.1">2.2.1</a>.  Definition of a Queuing Algorithm</span>
 
    In the discussion following, we assume a basic definition of a
    queuing algorithm.  A queuing algorithm has, at minimum:
@@ -449,7 +432,7 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
@@ -480,7 +463,7 @@ Table of Contents
    might have a maximum queue depth and a current queue depth maintained
    in packets or bytes.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.2.%20%20Round-Robin%20Models"></a></body></html><a class="selflink" href="#section-2.2.2" name="section-2.2.2">2.2.2</a>.  Round-Robin Models</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.2.%20%20Round-Robin%20Models"></a></body></html><a class="selflink" href="#section-2.2.2" id="section-2.2.2">2.2.2</a>.  Round-Robin Models</span>
 
    One class of implementation approaches, generically referred to as
    "Weighted Round Robin" (WRR), implements the structure of the queue
@@ -505,7 +488,7 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
@@ -536,7 +519,7 @@ Table of Contents
 
                        Figure 1: Round-Robin Queues
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.3.%20%20Calendar%20Queue%20Models"></a></body></html><a class="selflink" href="#section-2.2.3" name="section-2.2.3">2.2.3</a>.  Calendar Queue Models</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.3.%20%20Calendar%20Queue%20Models"></a></body></html><a class="selflink" href="#section-2.2.3" id="section-2.2.3">2.2.3</a>.  Calendar Queue Models</span>
 
    Another class of implementation approaches, generically referred to
    as Calendar Queue Implementations [<a href="#ref-CalendarQueue">CalendarQueue</a>], implements the
@@ -561,7 +544,7 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
@@ -617,7 +600,7 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
@@ -627,7 +610,7 @@ Table of Contents
    reasoning would have it discard any waiting data in the present queue
    and move to the next.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.4.%20%20Work-Conserving%20Models%20and%20Stochastic%20Fairness%20Queuing"></a></body></html><a class="selflink" href="#section-2.2.4" name="section-2.2.4">2.2.4</a>.  Work-Conserving Models and Stochastic Fairness Queuing</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.4.%20%20Work-Conserving%20Models%20and%20Stochastic%20Fairness%20Queuing"></a></body></html><a class="selflink" href="#section-2.2.4" id="section-2.2.4">2.2.4</a>.  Work-Conserving Models and Stochastic Fairness Queuing</span>
 
    Stochastic Fairness Queuing [<a href="#ref-SFQ" title='"Stochastic Fairness Queuing"'>SFQ</a>] is an example of a work-conserving
    algorithm.  This algorithm measures packets and considers a "flow" to
@@ -653,12 +636,12 @@ Table of Contents
    others, but they will over time average the incremental quantum per
    round if there is data present.
 
-   [<a id="ref-SFQ" name="ref-SFQ">SFQ</a>] and [<a href="#ref-DRR" title='"Efficient fair queuing using deficit round-robin"'>DRR</a>] could be implemented as described in <a href="#section-2.2.3">Section 2.2.3</a>.
+   [<a id="ref-SFQ">SFQ</a>] and [<a href="#ref-DRR" title='"Efficient fair queuing using deficit round-robin"'>DRR</a>] could be implemented as described in <a href="#section-2.2.3">Section 2.2.3</a>.
    The weakness of a classical WRR approach is the search time expended
    inspecting and not choosing sub-queues that contain no data or not
    enough to trigger a transmission from them.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.5.%20%20Non-Work-Conserving%20Models%20and%20Virtual%20Clock"></a></body></html><a class="selflink" href="#section-2.2.5" name="section-2.2.5">2.2.5</a>.  Non-Work-Conserving Models and Virtual Clock</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.5.%20%20Non-Work-Conserving%20Models%20and%20Virtual%20Clock"></a></body></html><a class="selflink" href="#section-2.2.5" id="section-2.2.5">2.2.5</a>.  Non-Work-Conserving Models and Virtual Clock</span>
 
    Virtual Clock [<a href="#ref-VirtualClock">VirtualClock</a>] is an example of a non-work-conserving
    algorithm.  It is trivially implemented as described in
@@ -673,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
@@ -700,7 +683,7 @@ Table of Contents
    Congestion Experienced (ECN-CE) [<a href="./rfc3168.html" title='"The Addition of Explicit Congestion Notification (ECN) to IP"'>RFC3168</a>] [<a href="./rfc6679.html" title='"Explicit Congestion Notification (ECN) for RTP over UDP"'>RFC6679</a>] or dropping the
    packet.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Queuing%2C%20Marking%2C%20and%20Dropping"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Queuing, Marking, and Dropping</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Queuing%2C%20Marking%2C%20and%20Dropping"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Queuing, Marking, and Dropping</span>
 
    Queuing, marking, and dropping are integrated in any system that has
    a queue.  If nothing else, as memory is finite, a system has to drop
@@ -729,11 +712,11 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Queuing%20with%20Tail%20Mark/Drop"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Queuing with Tail Mark/Drop</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Queuing%20with%20Tail%20Mark/Drop"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Queuing with Tail Mark/Drop</span>
 
    In the default case in which a FIFO queue is used with defensive tail
    drop only, the effect is to signal to the sender in two ways:
@@ -745,7 +728,7 @@ Table of Contents
       capacity (such as by probing network capacity when fully utilizing
       that capacity) and overburdens a queue.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Queuing%20with%20CoDel%20Mark/Drop"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Queuing with CoDel Mark/Drop</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Queuing%20with%20CoDel%20Mark/Drop"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Queuing with CoDel Mark/Drop</span>
 
    In any case wherein a queuing algorithm is used along with CoDel
    [<a href="#ref-DELAY-AQM" title='"Controlled Delay Active Queue Management"'>DELAY-AQM</a>], the sequence of events is that a packet is time stamped,
@@ -774,7 +757,7 @@ Table of Contents
       capacity (such as by probing network capacity when fully utilizing
       that capacity) and overburdens a queue.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Queuing%20with%20RED%20or%20PIE%20Mark/Drop"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Queuing with RED or PIE Mark/Drop</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Queuing%20with%20RED%20or%20PIE%20Mark/Drop"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Queuing with RED or PIE Mark/Drop</span>
 
    In any case wherein a queuing algorithm is used along with PIE
    [<a href="#ref-AQM-PIE" title='"PIE: A Lightweight Control Scheme To Address the Bufferbloat Problem"'>AQM-PIE</a>], Random Early Detection (RED) [<a href="./rfc7567.html" title='"IETF Recommendations Regarding Active Queue Management"'>RFC7567</a>], or other such
@@ -785,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
@@ -812,7 +795,7 @@ Table of Contents
       capacity (such as by probing network capacity when fully utilizing
       that capacity) and overburdens a queue.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Conclusion"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Conclusion</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Conclusion"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Conclusion</span>
 
    To summarize, in <a href="#section-2">Section 2</a>, implementation approaches for several
    classes of queuing algorithms were explored.  Queuing algorithms such
@@ -841,55 +824,55 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    This memo adds no new security issues; it observes implementation
    strategies for Diffserv implementation.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2475" name="ref-RFC2475">RFC2475</a>]   Blake, S., Black, D., Carlson, M., Davies, E., Wang, Z.,
+   [<a id="ref-RFC2475">RFC2475</a>]   Blake, S., Black, D., Carlson, M., Davies, E., Wang, Z.,
                and W. Weiss, "An Architecture for Differentiated
                Services", <a href="./rfc2475.html">RFC 2475</a>, DOI 10.17487/RFC2475, December 1998,
                &lt;<a href="http://www.rfc-editor.org/info/rfc2475">http://www.rfc-editor.org/info/rfc2475</a>&gt;.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Informative References</span>
 
-   [<a id="ref-AQM-PIE" name="ref-AQM-PIE">AQM-PIE</a>]   Pan, R., Natarajan, P., and F. Baker, "PIE: A Lightweight
+   [<a id="ref-AQM-PIE">AQM-PIE</a>]   Pan, R., Natarajan, P., and F. Baker, "PIE: A Lightweight
                Control Scheme To Address the Bufferbloat Problem", Work
                in Progress, <a href="./draft-ietf-aqm-pie-06.html">draft-ietf-aqm-pie-06</a>, April 2016.
 
-   [<a id="ref-CalendarQueue" name="ref-CalendarQueue">CalendarQueue</a>]
+   [<a id="ref-CalendarQueue">CalendarQueue</a>]
                Brown, R., "Calendar queues: a fast 0(1) priority queue
                implementation for the simulation event set problem",
                Communications of the ACM Volume 21, Issue 10, pp.
                1220-1227, DOI 10.1145/63039.63045, October 1988,
                &lt;<a href="http://dl.acm.org/citation.cfm?id=63045">http://dl.acm.org/citation.cfm?id=63045</a>&gt;.
 
-   [<a id="ref-Deadline" name="ref-Deadline">Deadline</a>]  Kruk, L., Lohoczky, J., Ramanan, K., and S. Shreve,
+   [<a id="ref-Deadline">Deadline</a>]  Kruk, L., Lohoczky, J., Ramanan, K., and S. Shreve,
                "Heavy Traffic Analysis For EDF Queues With Reneging",
                The Annals of Applied Probability Volume 21, Issue No. 2,
                pp. 484-545, DOI 10.1214/10-AAP681, 2011,
                &lt;<a href="http://www.math.cmu.edu/users/shreve/Reneging.pdf">http://www.math.cmu.edu/users/shreve/Reneging.pdf</a>&gt;.
 
-   [<a id="ref-DELAY-AQM" name="ref-DELAY-AQM">DELAY-AQM</a>] Nichols, K., Jacobson, V., McGregor, A., and J. Iyengar,
+   [<a id="ref-DELAY-AQM">DELAY-AQM</a>] Nichols, K., Jacobson, V., McGregor, A., and J. Iyengar,
                "Controlled Delay Active Queue Management", Work in
                Progress, <a href="./draft-ietf-aqm-codel-03.html">draft-ietf-aqm-codel-03</a>, March 2016.
 
-   [<a id="ref-DRR" name="ref-DRR">DRR</a>]       Shreedhar, M. and G. Varghese, "Efficient fair queuing
+   [<a id="ref-DRR">DRR</a>]       Shreedhar, M. and G. Varghese, "Efficient fair queuing
                using deficit round-robin", IEEE/ACM Transactions on
                Networking Volume 4, Issue 3, pp. 375-385,
                DOI 10.1109/90.502236, June 1996,
                &lt;<a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=502236">http://ieeexplore.ieee.org/stamp/</a>
                <a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=502236">stamp.jsp?tp=&amp;arnumber=502236</a>&gt;.
 
-   [<a id="ref-FQ-CODEL" name="ref-FQ-CODEL">FQ-CODEL</a>]  Hoeiland-Joergensen, T., McKenney, P., Taht, D., Gettys,
+   [<a id="ref-FQ-CODEL">FQ-CODEL</a>]  Hoeiland-Joergensen, T., McKenney, P., Taht, D., Gettys,
                J., and E. Dumazet, "The FlowQueue-CoDel Packet Scheduler
                and Active Queue Management Algorithm", Work in Progress,
                <a href="./draft-ietf-aqm-fq-codel-06.html">draft-ietf-aqm-fq-codel-06</a>, March 2016.
@@ -897,11 +880,11 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
-   [<a id="ref-GPS" name="ref-GPS">GPS</a>]       Demers, A., University of California, Berkeley, and Xerox
+   [<a id="ref-GPS">GPS</a>]       Demers, A., University of California, Berkeley, and Xerox
                PARC, "Analysis and Simulation of a Fair Queueing
                Algorithm", ACM SIGCOMM Computer Communication
                Review, Volume 19, Issue 4, pp. 1-12,
@@ -909,40 +892,40 @@ Table of Contents
                &lt;<a href="http://blizzard.cs.uwaterloo.ca/keshav/home/Papers/data/89/fq.pdf">http://blizzard.cs.uwaterloo.ca/keshav/home/Papers/</a>
                <a href="http://blizzard.cs.uwaterloo.ca/keshav/home/Papers/data/89/fq.pdf">data/89/fq.pdf</a>&gt;.
 
-   [<a id="ref-NoFair" name="ref-NoFair">NoFair</a>]    Briscoe, B., "Flow rate fairness: dismantling a
+   [<a id="ref-NoFair">NoFair</a>]    Briscoe, B., "Flow rate fairness: dismantling a
                religion", ACM SIGCOMM Computer Communication
                Review, Volume 37, Issue 2, pp. 63-74,
                DOI 10.1145/1232919.1232926, April 2007,
                &lt;<a href="http://dl.acm.org/citation.cfm?id=1232926">http://dl.acm.org/citation.cfm?id=1232926</a>&gt;.
 
-   [<a id="ref-RFC970" name="ref-RFC970">RFC970</a>]    Nagle, J., "On Packet Switches With Infinite Storage",
+   [<a id="ref-RFC970">RFC970</a>]    Nagle, J., "On Packet Switches With Infinite Storage",
                <a href="./rfc970.html">RFC 970</a>, DOI 10.17487/RFC0970, December 1985,
                &lt;<a href="http://www.rfc-editor.org/info/rfc970">http://www.rfc-editor.org/info/rfc970</a>&gt;.
 
-   [<a id="ref-RFC2990" name="ref-RFC2990">RFC2990</a>]   Huston, G., "Next Steps for the IP QoS Architecture",
+   [<a id="ref-RFC2990">RFC2990</a>]   Huston, G., "Next Steps for the IP QoS Architecture",
                <a href="./rfc2990.html">RFC 2990</a>, DOI 10.17487/RFC2990, November 2000,
                &lt;<a href="http://www.rfc-editor.org/info/rfc2990">http://www.rfc-editor.org/info/rfc2990</a>&gt;.
 
-   [<a id="ref-RFC3168" name="ref-RFC3168">RFC3168</a>]   Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
+   [<a id="ref-RFC3168">RFC3168</a>]   Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
                of Explicit Congestion Notification (ECN) to IP",
                <a href="./rfc3168.html">RFC 3168</a>, DOI 10.17487/RFC3168, September 2001,
                &lt;<a href="http://www.rfc-editor.org/info/rfc3168">http://www.rfc-editor.org/info/rfc3168</a>&gt;.
 
-   [<a id="ref-RFC3390" name="ref-RFC3390">RFC3390</a>]   Allman, M., Floyd, S., and C. Partridge, "Increasing
+   [<a id="ref-RFC3390">RFC3390</a>]   Allman, M., Floyd, S., and C. Partridge, "Increasing
                TCP's Initial Window", <a href="./rfc3390.html">RFC 3390</a>, DOI 10.17487/RFC3390,
                October 2002, &lt;<a href="http://www.rfc-editor.org/info/rfc3390">http://www.rfc-editor.org/info/rfc3390</a>&gt;.
 
-   [<a id="ref-RFC5690" name="ref-RFC5690">RFC5690</a>]   Floyd, S., Arcia, A., Ros, D., and J. Iyengar, "Adding
+   [<a id="ref-RFC5690">RFC5690</a>]   Floyd, S., Arcia, A., Ros, D., and J. Iyengar, "Adding
                Acknowledgement Congestion Control to TCP", <a href="./rfc5690.html">RFC 5690</a>,
                DOI 10.17487/RFC5690, February 2010,
                &lt;<a href="http://www.rfc-editor.org/info/rfc5690">http://www.rfc-editor.org/info/rfc5690</a>&gt;.
 
-   [<a id="ref-RFC6057" name="ref-RFC6057">RFC6057</a>]   Bastian, C., Klieber, T., Livingood, J., Mills, J., and
+   [<a id="ref-RFC6057">RFC6057</a>]   Bastian, C., Klieber, T., Livingood, J., Mills, J., and
                R.  Woundy, "Comcast's Protocol-Agnostic Congestion
                Management System", <a href="./rfc6057.html">RFC 6057</a>, DOI 10.17487/RFC6057,
                December 2010, &lt;<a href="http://www.rfc-editor.org/info/rfc6057">http://www.rfc-editor.org/info/rfc6057</a>&gt;.
 
-   [<a id="ref-RFC6679" name="ref-RFC6679">RFC6679</a>]   Westerlund, M., Johansson, I., Perkins, C., O'Hanlon, P.,
+   [<a id="ref-RFC6679">RFC6679</a>]   Westerlund, M., Johansson, I., Perkins, C., O'Hanlon, P.,
                and K. Carlberg, "Explicit Congestion Notification (ECN)
                for RTP over UDP", <a href="./rfc6679.html">RFC 6679</a>, DOI 10.17487/RFC6679, August
                2012, &lt;<a href="http://www.rfc-editor.org/info/rfc6679">http://www.rfc-editor.org/info/rfc6679</a>&gt;.
@@ -953,31 +936,31 @@ Table of Contents
 
 
 <span class="grey">Baker &amp; Pan                   Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
-   [<a id="ref-RFC6928" name="ref-RFC6928">RFC6928</a>]   Chu, J., Dukkipati, N., Cheng, Y., and M. Mathis,
+   [<a id="ref-RFC6928">RFC6928</a>]   Chu, J., Dukkipati, N., Cheng, Y., and M. Mathis,
                "Increasing TCP's Initial Window", <a href="./rfc6928.html">RFC 6928</a>,
                DOI 10.17487/RFC6928, April 2013,
                &lt;<a href="http://www.rfc-editor.org/info/rfc6928">http://www.rfc-editor.org/info/rfc6928</a>&gt;.
 
-   [<a id="ref-RFC7141" name="ref-RFC7141">RFC7141</a>]   Briscoe, B. and J. Manner, "Byte and Packet Congestion
-               Notification", <a href="./bcp41.html">BCP 41</a>, <a href="./rfc7141.html">RFC 7141</a>, DOI 10.17487/RFC7141,
+   [<a id="ref-RFC7141">RFC7141</a>]   Briscoe, B. and J. Manner, "Byte and Packet Congestion
+               Notification", <a href="https://www.rfc-editor.org/bcp/bcp41">BCP 41</a>, <a href="./rfc7141.html">RFC 7141</a>, DOI 10.17487/RFC7141,
                February 2014, &lt;<a href="http://www.rfc-editor.org/info/rfc7141">http://www.rfc-editor.org/info/rfc7141</a>&gt;.
 
-   [<a id="ref-RFC7567" name="ref-RFC7567">RFC7567</a>]   Baker, F., Ed. and G. Fairhurst, Ed., "IETF
+   [<a id="ref-RFC7567">RFC7567</a>]   Baker, F., Ed. and G. Fairhurst, Ed., "IETF
                Recommendations Regarding Active Queue Management",
-               <a href="./bcp197.html">BCP 197</a>, <a href="./rfc7567.html">RFC 7567</a>, DOI 10.17487/RFC7567, July 2015,
+               <a href="https://www.rfc-editor.org/bcp/bcp197">BCP 197</a>, <a href="./rfc7567.html">RFC 7567</a>, DOI 10.17487/RFC7567, July 2015,
                &lt;<a href="http://www.rfc-editor.org/info/rfc7567">http://www.rfc-editor.org/info/rfc7567</a>&gt;.
 
-   [<a id="ref-SFQ" name="ref-SFQ">SFQ</a>]       Mckenney, P., "Stochastic Fairness Queuing", Proceedings
+   [<a id="ref-SFQ">SFQ</a>]       Mckenney, P., "Stochastic Fairness Queuing", Proceedings
                of IEEE INFOCOM '90, Volume 2, pp. 733-740,
                DOI 10.1109/INFCOM.1990.91316, June 1990,
                &lt;<a href="http://www2.rdrop.com/~paulmck/scalability/paper/sfq.2002.06.04.pdf">http://www2.rdrop.com/~paulmck/scalability/paper/</a>
                <a href="http://www2.rdrop.com/~paulmck/scalability/paper/sfq.2002.06.04.pdf">sfq.2002.06.04.pdf</a>&gt;.
 
-   [<a id="ref-VirtualClock" name="ref-VirtualClock">VirtualClock</a>]
+   [<a id="ref-VirtualClock">VirtualClock</a>]
                Zhang, L., "VirtualClock: A New Traffic Control Algorithm
                for Packet Switching Networks", Proceedings of the ACM
                Symposium on Communications Architectures and
@@ -1009,7 +992,7 @@ Acknowledgements
 
 
 <span class="grey">Baker &amp; Pan                   Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc7806.html">RFC 7806</a>            On Queuing, Marking, and Dropping         April 2016</span>
 
 
@@ -1065,11 +1048,6 @@ Authors' Addresses
 
 
 Baker &amp; Pan                   Informational                    [Page 16]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

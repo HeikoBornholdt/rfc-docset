@@ -1,33 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:4653" name="DC.Identifier"/>
-<meta content="This document specifies Non-Congestion Robustness (NCR) for TCP. In
-the absence of explicit congestion notification from the network, TCP
-uses loss as an indication of congestion. One of the ways TCP detects
-loss is using the arrival of three duplicate acknowledgments. However,
-this heuristic is not always correct, notably in the case when network
-paths reorder segments (for whatever reason), resulting in degraded
-performance. TCP-NCR is designed to mitigate this degraded performance
-by increasing the number of duplicate acknowledgments required to
-trigger loss recovery, based on the current state of the connection,
-in an effort to better disambiguate true segment loss from segment
-reordering. This document specifies the changes to TCP, as well as the
-costs and benefits of these modifications. This memo defines an
-Experimental Protocol for the Internet community." name="DC.Description.Abstract"/>
-<meta content="Blanton, Ethan" name="DC.Creator"/>
-<meta content="Reddy, A. L. Narasimha" name="DC.Creator"/>
-<meta content="Bhandarkar, Sumitha" name="DC.Creator"/>
-<meta content="Allman, Mark" name="DC.Creator"/>
-<meta content="August, 2006" name="DC.Date.Issued"/>
-<meta content="Improving the Robustness of TCP to Non-Congestion Events" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 4653 - Improving the Robustness of TCP to Non-Congestion Events</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="S. Bhandarkar" name="citation_author"/>
+<meta content="A. L. N. Reddy" name="citation_author"/>
+<meta content="M. Allman" name="citation_author"/>
+<meta content="E. Blanton" name="citation_author"/>
+<meta content="August, 2006" name="citation_publication_date"/>
+<meta content="Improving the Robustness of TCP to Non-Congestion Events" name="citation_title"/>
+<meta content="10.17487/RFC4653" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc4653" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc4653.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 4653: Improving the Robustness of TCP to Non-Congestion Events</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -56,7 +43,7 @@ Experimental Protocol for the Internet community." name="DC.Description.Abstract
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -65,7 +52,7 @@ Experimental Protocol for the Internet community." name="DC.Description.Abstract
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -144,19 +131,18 @@ Experimental Protocol for the Internet community." name="DC.Description.Abstract
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -170,21 +156,9 @@ Experimental Protocol for the Internet community." name="DC.Description.Abstract
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgyellow" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc4653.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc4653" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-tcpm-tcp-dcr.html" title="draft-ietf-tcpm-tcp-dcr">draft-ietf-tcpm-t...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc4653" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc4653" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=4653">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                      S. Bhandarkar
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc4653.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc4653.txt.pdf">PDF</a>|<a href="/rfc/rfc4653.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc4653" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=4653&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc4653" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc4653" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                      S. Bhandarkar
 Request for Comments: 4653                                A. L. N. Reddy
 Category: Experimental                              Texas A&amp;M University
                                                                M. Allman
@@ -236,7 +210,7 @@ Abstract
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -261,7 +235,7 @@ Table of Contents
       <a href="#section-10.1">10.1</a>. Normative References .....................................<a href="#page-14">14</a>
       <a href="#section-10.2">10.2</a>. Informative References ...................................<a href="#page-15">15</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    One strength of TCP [<a href="./rfc793.html" title='"Transmission Control Protocol"'>RFC793</a>] lies in its ability to adjust its
    sending rate according to the perceived congestion in the network
@@ -292,7 +266,7 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -348,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -388,7 +362,7 @@ Table of Contents
    the drawbacks.  <a href="#section-6">Section 6</a> discusses related work.  <a href="#section-7">Section 7</a>
    discusses security concerns.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Terminology</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -404,11 +378,11 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20NCR%20Description"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  NCR Description</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20NCR%20Description"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  NCR Description</span>
 
    As discussed above, in the face of packet reordering, three duplicate
    ACKs may not be enough to disambiguate loss from reordering.  In this
@@ -460,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -495,7 +469,7 @@ Table of Contents
    Which of the two Extended Limited Transmit variants is best for use
    on the Internet is an open question.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Algorithm"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Algorithm</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Algorithm"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Algorithm</span>
 
    The TCP-NCR modifications make two fundamental changes to the way
    [<a href="./rfc3517.html" title='"A Conservative Selective Acknowledgment (SACK)-based Loss Recovery Algorithm for TCP"'>RFC3517</a>] currently operates, as follows.
@@ -516,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -572,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -611,7 +585,7 @@ Table of Contents
    numbers transmitted in each segment.  However, we leave this as
    future work.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Initialization"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Initialization</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Initialization"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Initialization</span>
 
    When entering a period of loss/reordering detection and Extended
    Limited Transmit, a TCP-NCR <em>MUST</em> initialize several state variables.
@@ -628,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -652,7 +626,7 @@ Table of Contents
    In addition to the above steps, the incoming ACK <em>MUST</em> be processed
    with the E series of steps in <a href="#section-3.3">Section 3.3</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Terminating%20Extended%20Limited%20Transmit%20and%20Preventing%20Bursts"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Terminating Extended Limited Transmit and Preventing Bursts</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Terminating%20Extended%20Limited%20Transmit%20and%20Preventing%20Bursts"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Terminating Extended Limited Transmit and Preventing Bursts</span>
 
    Extended Limited Transmit <em>MUST</em> be terminated at the start of loss
    recovery as outlined in <a href="#section-3.4">Section 3.4</a>.
@@ -684,7 +658,7 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -716,7 +690,7 @@ Table of Contents
          addition, the series of steps in <a href="#section-3.3">Section 3.3</a> (the "E" steps)
          <em>MUST</em> be taken.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Extended%20Limited%20Transmit"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Extended Limited Transmit</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Extended%20Limited%20Transmit"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Extended Limited Transmit</span>
 
    On each ACK containing SACK information that arrives after TCP-NCR
    has entered the Extended Limited Transmit phase (as outlined in
@@ -740,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -769,7 +743,7 @@ Table of Contents
          been cumulatively acknowledged (which is different from
          "pipe").
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Entering%20Loss%20Recovery"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Entering Loss Recovery</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Entering%20Loss%20Recovery"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Entering Loss Recovery</span>
 
    When a segment is deemed lost via the algorithms in [<a href="./rfc3517.html" title='"A Conservative Selective Acknowledgment (SACK)-based Loss Recovery Algorithm for TCP"'>RFC3517</a>],
    Extended Limited Transmit <em>MUST</em> be terminated, leaving the algorithms
@@ -796,11 +770,11 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Advantages"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Advantages</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Advantages"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Advantages</span>
 
    The major advantages of TCP-NCR are twofold.  As discussed in <a href="#section-1">Section</a>
    <a href="#section-1">1</a>, TCP-NCR will open up the design space for network applications and
@@ -808,7 +782,7 @@ Table of Contents
    to packet reordering.  The second advantage is in terms of an
    increase in TCP performance.
 
-   [<a id="ref-BR04" name="ref-BR04">BR04</a>] presents ns-2 [<a href="#ref-NS-2">NS-2</a>] simulations of a pre-cursor to the TCP-
+   [<a id="ref-BR04">BR04</a>] presents ns-2 [<a href="#ref-NS-2">NS-2</a>] simulations of a pre-cursor to the TCP-
    NCR algorithm specified in this document, called TCP-DCR (Delayed
    Congestion Response).  The paper shows that TCP-DCR aids performance
    in comparison to unmodified TCP in the presence of packet reordering.
@@ -833,7 +807,7 @@ Table of Contents
    needlessly reducing the sending rate when retransmitting these
    segments).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Disadvantages"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Disadvantages</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Disadvantages"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Disadvantages</span>
 
    Although all the changes outlined above are implemented in the
    sender, the receiver also potentially has a part to play.  In
@@ -852,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -873,7 +847,7 @@ Table of Contents
    congestion control decisions may be reasonable; however, further
    experimentation on the Internet is required to verify these results.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Related%20Work"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Related Work</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Related%20Work"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Related Work</span>
 
    Over the past few years, several solutions have been proposed to
    improve the performance of TCP in the face of segment reordering.
@@ -908,7 +882,7 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -917,7 +891,7 @@ Table of Contents
    spurious fast retransmits; some of the above algorithms also attempt
    to detect and mitigate spurious timeout-based retransmits.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    General attacks against the congestion control of TCP are described
    in [<a href="./rfc2581.html" title='"TCP Congestion Control"'>RFC2581</a>].  SACK-based loss recovery for TCP [<a href="./rfc3517.html" title='"A Conservative Selective Acknowledgment (SACK)-based Loss Recovery Algorithm for TCP"'>RFC3517</a>] mitigates
@@ -926,34 +900,34 @@ Table of Contents
    Transmit algorithms specified in this document have been designed to
    thwart the ACK division problems that are described in [<a href="./rfc3465.html" title='"TCP Congestion Control with Appropriate Byte Counting (ABC)"'>RFC3465</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgments</span>
 
    Feedback from Lars Eggert, Ted Faber, Wesley Eddy, Gorry Fairhurst,
    Sally Floyd, Sara Landstrom, Nauzad Sadry, Pasi Sarolahti, Joe Touch,
    Nitin Vaidya, and the TCPM working group have contributed
    significantly to this document.  Our thanks to all!
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC793" name="ref-RFC793">RFC793</a>]  Postel, J., "Transmission Control Protocol", STD 7, <a href="./rfc793.html">RFC</a>
+   [<a id="ref-RFC793">RFC793</a>]  Postel, J., "Transmission Control Protocol", STD 7, <a href="./rfc793.html">RFC</a>
              <a href="./rfc793.html">793</a>, September 1981.
 
-   [<a id="ref-RFC2018" name="ref-RFC2018">RFC2018</a>] Mathis, M., Mahdavi, J., Floyd, S., and A. Romanow, "TCP
+   [<a id="ref-RFC2018">RFC2018</a>] Mathis, M., Mahdavi, J., Floyd, S., and A. Romanow, "TCP
              Selective Acknowledgement Options", <a href="./rfc2018.html">RFC 2018</a>, October 1996.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>] Bradner, S., "Key words for use in RFCs to Indicate
-             Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>] Bradner, S., "Key words for use in RFCs to Indicate
+             Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC2581" name="ref-RFC2581">RFC2581</a>] Allman, M., Paxson, V., and W. Stevens, "TCP Congestion
+   [<a id="ref-RFC2581">RFC2581</a>] Allman, M., Paxson, V., and W. Stevens, "TCP Congestion
              Control", <a href="./rfc2581.html">RFC 2581</a>, April 1999.
 
-   [<a id="ref-RFC3042" name="ref-RFC3042">RFC3042</a>] Allman, M., Balakrishnan, H., and S. Floyd, "Enhancing
+   [<a id="ref-RFC3042">RFC3042</a>] Allman, M., Balakrishnan, H., and S. Floyd, "Enhancing
              TCP's Loss Recovery Using Limited Transmit", <a href="./rfc3042.html">RFC 3042</a>,
              January 2001.
 
-   [<a id="ref-RFC3517" name="ref-RFC3517">RFC3517</a>] Blanton, E., Allman, M., Fall, K., and L. Wang, "A
+   [<a id="ref-RFC3517">RFC3517</a>] Blanton, E., Allman, M., Fall, K., and L. Wang, "A
              Conservative Selective Acknowledgment (SACK)-based Loss
              Recovery Algorithm for TCP", <a href="./rfc3517.html">RFC 3517</a>, April 2003.
 
@@ -964,105 +938,105 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-BA02" name="ref-BA02">BA02</a>]    E. Blanton and M. Allman, "On Making TCP More Robust to
+   [<a id="ref-BA02">BA02</a>]    E. Blanton and M. Allman, "On Making TCP More Robust to
              Packet Reordering," ACM Computer Communication Review,
              January 2002.
 
-   [<a id="ref-BBFS01" name="ref-BBFS01">BBFS01</a>]  D. Bansal, H. Balakrishnan, S. Floyd and S. Shenker,
+   [<a id="ref-BBFS01">BBFS01</a>]  D. Bansal, H. Balakrishnan, S. Floyd and S. Shenker,
              "Dynamic Behavior of Slowly Responsive Congestion Control
              Algorithms", Proceedings of ACM SIGCOMM, Sep. 2001.
 
-   [<a id="ref-BPS99" name="ref-BPS99">BPS99</a>]   J. Bennett, C. Partridge, and N. Shectman, "Packet
+   [<a id="ref-BPS99">BPS99</a>]   J. Bennett, C. Partridge, and N. Shectman, "Packet
              reordering is not pathological network behavior," IEEE/ACM
              Transactions on Networking, December 1999.
 
-   [<a id="ref-BR04" name="ref-BR04">BR04</a>]    Sumitha Bhandarkar and A. L. Narasimha Reddy, "TCP-DCR:
+   [<a id="ref-BR04">BR04</a>]    Sumitha Bhandarkar and A. L. Narasimha Reddy, "TCP-DCR:
              Making TCP Robust to Non-Congestion Events", In the
              Proceedings of Networking 2004 conference, May 2004.
              Extended version available as tech report TAMU-ECE-2003-04.
 
-   [<a id="ref-BSRV04" name="ref-BSRV04">BSRV04</a>]  Sumitha Bhandarkar, Nauzad Sadry, A. L. Narasimha Reddy and
+   [<a id="ref-BSRV04">BSRV04</a>]  Sumitha Bhandarkar, Nauzad Sadry, A. L. Narasimha Reddy and
              Nitin Vaidya, "TCP-DCR: A Novel Protocol for Tolerating
              Wireless Channel Errors", to appear in IEEE Transactions on
              Mobile Computing.
 
-   [<a id="ref-GPL04" name="ref-GPL04">GPL04</a>]   Ladan Gharai, Colin Perkins and Tom Lehman, "Packet
+   [<a id="ref-GPL04">GPL04</a>]   Ladan Gharai, Colin Perkins and Tom Lehman, "Packet
              Reordering, High Speed Networks and Transport Protocol
              Performance", ICCCN 2004, October 2004.
 
-   [<a id="ref-Jac88" name="ref-Jac88">Jac88</a>]   V. Jacobson, "Congestion Avoidance and Control", Computer
+   [<a id="ref-Jac88">Jac88</a>]   V. Jacobson, "Congestion Avoidance and Control", Computer
              Communication Review, vol. 18, no. 4, pp. 314-329, Aug.
              1988.  <a href="ftp://ftp.ee.lbl.gov/papers/congavoid.ps.Z">ftp://ftp.ee.lbl.gov/papers/congavoid.ps.Z</a>.
 
-   [<a id="ref-JIDKT03" name="ref-JIDKT03">JIDKT03</a>] S. Jaiswal, G. Iannaccone, C. Diot, J. Kurose, and D.
+   [<a id="ref-JIDKT03">JIDKT03</a>] S. Jaiswal, G. Iannaccone, C. Diot, J. Kurose, and D.
              Towsley, "Measurement and Classification of Out-of-Sequence
              Packets in a Tier-1 IP Backbone," Proceedings of IEEE
              INFOCOM, 2003.
 
-   [<a id="ref-KM02" name="ref-KM02">KM02</a>]    I. Keslassy and N. McKeown, "Maintaining packet order in
+   [<a id="ref-KM02">KM02</a>]    I. Keslassy and N. McKeown, "Maintaining packet order in
              twostage switches," Proceedings of the IEEE Infocom, June
              2002
 
-   [<a id="ref-MAF05" name="ref-MAF05">MAF05</a>]   A. Medina, M. Allman, S. Floyd.  Measuring the Evolution of
+   [<a id="ref-MAF05">MAF05</a>]   A. Medina, M. Allman, S. Floyd.  Measuring the Evolution of
              Transport Protocols in the Internet.  ACM Computer
              Communication Review, 35(2), April 2005.
 
-   [<a id="ref-NS-2" name="ref-NS-2">NS-2</a>]    ns-2 Network Simulator. <a href="http://www.isi.edu/nsnam/">http://www.isi.edu/nsnam/</a>
+   [<a id="ref-NS-2">NS-2</a>]    ns-2 Network Simulator. <a href="http://www.isi.edu/nsnam/">http://www.isi.edu/nsnam/</a>
 
 
 
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
-   [<a id="ref-Pax97" name="ref-Pax97">Pax97</a>]   V. Paxson, "End-to-End Internet Packet Dynamics,"
+   [<a id="ref-Pax97">Pax97</a>]   V. Paxson, "End-to-End Internet Packet Dynamics,"
              Proceedings of ACM SIGCOMM, September 1997.
 
-   [<a id="ref-RFC896" name="ref-RFC896">RFC896</a>]  Nagle, J., "Congestion control in IP/TCP internetworks",
+   [<a id="ref-RFC896">RFC896</a>]  Nagle, J., "Congestion control in IP/TCP internetworks",
              <a href="./rfc896.html">RFC 896</a>, January 1984.
 
-   [<a id="ref-RFC1122" name="ref-RFC1122">RFC1122</a>] Braden, R., "Requirements for Internet Hosts -
+   [<a id="ref-RFC1122">RFC1122</a>] Braden, R., "Requirements for Internet Hosts -
              Communication Layers", STD 3, <a href="./rfc1122.html">RFC 1122</a>, October 1989.
 
-   [<a id="ref-RFC2883" name="ref-RFC2883">RFC2883</a>] Floyd, S., Mahdavi, J., Mathis, M., and M. Podolsky, "An
+   [<a id="ref-RFC2883">RFC2883</a>] Floyd, S., Mahdavi, J., Mathis, M., and M. Podolsky, "An
              Extension to the Selective Acknowledgement (SACK) Option
              for TCP", <a href="./rfc2883.html">RFC 2883</a>, July 2000.
 
-   [<a id="ref-RFC2960" name="ref-RFC2960">RFC2960</a>] R. Stewart, Q. Xie, K. Morneault, C. Sharp, H.
+   [<a id="ref-RFC2960">RFC2960</a>] R. Stewart, Q. Xie, K. Morneault, C. Sharp, H.
              Schwarzbauer, T. Taylor, I. Rytina, M. Kalla, L. Zhang, V.
              Paxson.  Stream Control Transmission Protocol.  October
              2000.
 
-   [<a id="ref-RFC3465" name="ref-RFC3465">RFC3465</a>] Allman, M., "TCP Congestion Control with Appropriate Byte
+   [<a id="ref-RFC3465">RFC3465</a>] Allman, M., "TCP Congestion Control with Appropriate Byte
              Counting (ABC)", <a href="./rfc3465.html">RFC 3465</a>, February 2003.
 
-   [<a id="ref-RFC3522" name="ref-RFC3522">RFC3522</a>] Ludwig, R. and M. Meyer, "The Eifel Detection Algorithm for
+   [<a id="ref-RFC3522">RFC3522</a>] Ludwig, R. and M. Meyer, "The Eifel Detection Algorithm for
              TCP", <a href="./rfc3522.html">RFC 3522</a>, April 2003.
 
-   [<a id="ref-RFC3708" name="ref-RFC3708">RFC3708</a>] Blanton, E. and M. Allman, "Using TCP Duplicate Selective
+   [<a id="ref-RFC3708">RFC3708</a>] Blanton, E. and M. Allman, "Using TCP Duplicate Selective
              Acknowledgement (DSACKs) and Stream Control Transmission
              Protocol (SCTP) Duplicate Transmission Sequence Numbers
              (TSNs) to Detect Spurious Retransmissions", <a href="./rfc3708.html">RFC 3708</a>,
              February 2004.
 
-   [<a id="ref-RFC4015" name="ref-RFC4015">RFC4015</a>] Ludwig, R. and A. Gurtov, "The Eifel Response Algorithm for
+   [<a id="ref-RFC4015">RFC4015</a>] Ludwig, R. and A. Gurtov, "The Eifel Response Algorithm for
              TCP", <a href="./rfc4015.html">RFC 4015</a>, February 2005.
 
-   [<a id="ref-RFC4138" name="ref-RFC4138">RFC4138</a>] Sarolahti, P. and M. Kojo, "Forward RTO-Recovery (F-RTO):
+   [<a id="ref-RFC4138">RFC4138</a>] Sarolahti, P. and M. Kojo, "Forward RTO-Recovery (F-RTO):
              An Algorithm for Detecting Spurious Retransmission Timeouts
              with TCP and the Stream Control Transmission Protocol
              (SCTP)", <a href="./rfc4138.html">RFC 4138</a>, August 2005.
 
-   [<a id="ref-ZKFP03" name="ref-ZKFP03">ZKFP03</a>]  M. Zhang, B. Karp, S. Floyd, L. Peterson, "RR-TCP: A
+   [<a id="ref-ZKFP03">ZKFP03</a>]  M. Zhang, B. Karp, S. Floyd, L. Peterson, "RR-TCP: A
              Reordering-Robust TCP with DSACK", in Proceedings of the
              Eleventh IEEE International Conference on Networking
              Protocols (ICNP 2003), Atlanta, GA, November, 2003.
@@ -1076,7 +1050,7 @@ Table of Contents
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -1132,7 +1106,7 @@ Authors' Addresses
 
 
 <span class="grey">Bhandarkar, et al.            Experimental                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc4653.html">RFC 4653</a>            Improving the Robustness of TCP          August 2006</span>
 
 
@@ -1141,7 +1115,7 @@ Full Copyright Statement
    Copyright (C) The Internet Society (2006).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1161,7 +1135,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1188,11 +1162,6 @@ Acknowledgement
 
 
 Bhandarkar, et al.            Experimental                     [Page 18]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

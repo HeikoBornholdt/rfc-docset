@@ -1,23 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:5782" name="DC.Identifier"/>
-<meta content="The rise of spam and other anti-social behavior on the Internet has
-led to the creation of shared blacklists and whitelists of IP
-addresses or domains. The DNS has become a de-facto standard method of
-distributing these blacklists and whitelists. This memo documents the
-structure and usage of DNS based blacklists and whitelists, and the
-protocol used to query them." name="DC.Description.Abstract"/>
-<meta content="John R. Levine &lt;johnl@taugh.com&gt;" name="DC.Creator"/>
-<meta content="February, 2010" name="DC.Date.Issued"/>
-<meta content="DNS Based Blacklists and Whitelists for E-Mail" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5782 - DNS Based Blacklists and Whitelists for E-Mail</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="J. Levine" name="citation_author"/>
+<meta content="February, 2010" name="citation_publication_date"/>
+<meta content="DNS Blacklists and Whitelists" name="citation_title"/>
+<meta content="10.17487/RFC5782" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5782" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5782.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5782: DNS Blacklists and Whitelists</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -46,7 +40,7 @@ protocol used to query them." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -55,7 +49,7 @@ protocol used to query them." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -134,19 +128,18 @@ protocol used to query them." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -160,21 +153,9 @@ protocol used to query them." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5782.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5782" title="PDF version of this document">pdf</a>] [<a href="./draft-irtf-asrg-dnsbl.html" title="draft-irtf-asrg-dnsbl">draft-irtf-asrg-d...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5782" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5782" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5782">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Internet Research Task Force (IRTF)                            J. Levine
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5782.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5782.txt.pdf">PDF</a>|<a href="/rfc/rfc5782.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5782" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5782&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5782" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5782" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Research Task Force (IRTF)                            J. Levine
 Request for Comments: 5782                          Taughannock Networks
 Category: Informational                                    February 2010
 ISSN: 2070-1721
@@ -213,7 +194,7 @@ Copyright Notice
    Copyright (c) 2010 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -226,7 +207,7 @@ Copyright Notice
 
 
 <span class="grey">Levine                        Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5782.html">RFC 5782</a>              DNS Blacklists and Whitelists        February 2010</span>
 
 
@@ -247,7 +228,7 @@ Table of Contents
       <a href="#section-8.1">8.1</a>. Normative References ......................................<a href="#page-10">10</a>
       <a href="#section-8.2">8.2</a>. Informative References ....................................<a href="#page-10">10</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    In 1997, Dave Rand and Paul Vixie, well-known Internet software
    engineers, started keeping a list of IP addresses that had sent them
@@ -282,7 +263,7 @@ Table of Contents
 
 
 <span class="grey">Levine                        Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5782.html">RFC 5782</a>              DNS Blacklists and Whitelists        February 2010</span>
 
 
@@ -302,7 +283,7 @@ Table of Contents
       recommendations for improving technical interoperability of
       DNSxLs.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Structure%20of%20an%20IP%20Address%20DNSBL%20or%20DNSWL"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Structure of an IP Address DNSBL or DNSWL</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Structure%20of%20an%20IP%20Address%20DNSBL%20or%20DNSWL"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Structure of an IP Address DNSBL or DNSWL</span>
 
    A DNSxL is a zone in the DNS [<a href="./rfc1034.html" title='"Domain names - concepts and facilities"'>RFC1034</a>] [<a href="./rfc1035.html" title='"Domain names - implementation and specification"'>RFC1035</a>].  The zone
    containing resource records identifies hosts present in a blacklist
@@ -310,7 +291,7 @@ Table of Contents
    transformation of their IP addresses, but now host names are
    sometimes encoded as well.  Most DNSxLs still use IP addresses.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20IP%20Address%20DNSxL"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  IP Address DNSxL</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20IP%20Address%20DNSxL"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  IP Address DNSxL</span>
 
    An IPv4 address DNSxL has a structure adapted from that of the rDNS.
    (The rDNS, reverse DNS, is the IN-ADDR.ARPA [<a href="./rfc1034.html" title='"Domain names - concepts and facilities"'>RFC1034</a>] and IP6.ARPA
@@ -338,7 +319,7 @@ Table of Contents
 
 
 <span class="grey">Levine                        Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5782.html">RFC 5782</a>              DNS Blacklists and Whitelists        February 2010</span>
 
 
@@ -358,7 +339,7 @@ Table of Contents
    address in the DNSxL.  Conversely, if an IP address is not listed in
    the DNSxL, there <em>MUST NOT</em> be any records for the address.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20IP%20Address%20DNSWL"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  IP Address DNSWL</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20IP%20Address%20DNSWL"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  IP Address DNSWL</span>
 
    Since SMTP has no way for a server to advise a client why a request
    was accepted, TXT records in DNSWLs are not very useful.  Some DNSWLs
@@ -372,7 +353,7 @@ Table of Contents
    network's outgoing mail server or intranet web server, and used as a
    DNSBL for mail servers on other networks.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Combined%20IP%20Address%20DNSxL"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Combined IP Address DNSxL</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Combined%20IP%20Address%20DNSxL"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Combined IP Address DNSxL</span>
 
    In many cases, an organization maintains a DNSxL that contains
    multiple entry types, with the entries of each type constituting a
@@ -394,7 +375,7 @@ Table of Contents
 
 
 <span class="grey">Levine                        Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5782.html">RFC 5782</a>              DNS Blacklists and Whitelists        February 2010</span>
 
 
@@ -435,7 +416,7 @@ Table of Contents
    records to the A records limits the usefulness of those TXT records.
    Other combined DNSxLs return a single TXT record.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20IPv6%20DNSxLs"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  IPv6 DNSxLs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20IPv6%20DNSxLs"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  IPv6 DNSxLs</span>
 
    The structure of DNSxLs based on IPv6 addresses is adapted from that
    of the IP6.ARPA domain defined in [<a href="./rfc3596.html" title='"DNS Extensions to Support IP Version 6"'>RFC3596</a>].  Each entry's name <em>MUST</em>
@@ -450,7 +431,7 @@ Table of Contents
 
 
 <span class="grey">Levine                        Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5782.html">RFC 5782</a>              DNS Blacklists and Whitelists        February 2010</span>
 
 
@@ -475,7 +456,7 @@ Table of Contents
    matches, so wildcard names would indeed be ambiguous for DNSxLs
    served in that fashion.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Domain%20Name%20DNSxLs"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Domain Name DNSxLs</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Domain%20Name%20DNSxLs"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Domain Name DNSxLs</span>
 
    A few DNSxLs list domain names rather than IP addresses.  They are
    sometimes called RHSBLs, for right-hand-side blacklists.  The names
@@ -506,11 +487,11 @@ Table of Contents
 
 
 <span class="grey">Levine                        Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5782.html">RFC 5782</a>              DNS Blacklists and Whitelists        February 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20DNSxL%20Cache%20Behavior"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  DNSxL Cache Behavior</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20DNSxL%20Cache%20Behavior"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  DNSxL Cache Behavior</span>
 
    The per-record time-to-live and zone refresh intervals of DNSBLs and
    DNSWLs vary greatly depending on the management policy of the list.
@@ -522,7 +503,7 @@ Table of Contents
    that had been observed sending spam might change every few minutes,
    with comparably short TTL and refresh intervals.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Test%20and%20Contact%20Addresses"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Test and Contact Addresses</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Test%20and%20Contact%20Addresses"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Test and Contact Addresses</span>
 
    IPv4-based DNSxLs <em>MUST</em> contain an entry for 127.0.0.2 for testing
    purposes.  IPv4-based DNSxLs <em>MUST NOT</em> contain an entry for 127.0.0.1.
@@ -562,11 +543,11 @@ Table of Contents
 
 
 <span class="grey">Levine                        Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5782.html">RFC 5782</a>              DNS Blacklists and Whitelists        February 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Typical%20Usage%20of%20DNSBLs%20and%20DNSWLs"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Typical Usage of DNSBLs and DNSWLs</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Typical%20Usage%20of%20DNSBLs%20and%20DNSWLs"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Typical Usage of DNSBLs and DNSWLs</span>
 
    DNSxLs can be served either from standard DNS servers, or from
    specialized servers like rbldns [<a href="#ref-RBLDNS" title="&quot;rbldns, in 'djbdns'&quot;">RBLDNS</a>] and rbldnsd [<a href="#ref-RBLDNSD" title='"rbldnsd: Small Daemon for DNSBLs"'>RBLDNSD</a>] that
@@ -618,7 +599,7 @@ Table of Contents
 
 
 <span class="grey">Levine                        Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5782.html">RFC 5782</a>              DNS Blacklists and Whitelists        February 2010</span>
 
 
@@ -639,7 +620,7 @@ Table of Contents
    addresses and host names found in mail headers, and to check the
    domains found in URLs in message bodies.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    Any system manager that uses DNSxLs is entrusting part of his or her
    server management to the parties that run the lists, and <em>SHOULD</em>
@@ -674,7 +655,7 @@ Table of Contents
 
 
 <span class="grey">Levine                        Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5782.html">RFC 5782</a>              DNS Blacklists and Whitelists        February 2010</span>
 
 
@@ -687,57 +668,57 @@ Table of Contents
    As with any other DNS-based services, DNSBLs and DNSWLs are subject
    to various types of DNS attacks, which are described in [<a href="./rfc3833.html" title='"Threat Analysis of the Domain Name System (DNS)"'>RFC3833</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC1034" name="ref-RFC1034">RFC1034</a>]     Mockapetris, P., "Domain names - concepts and
+   [<a id="ref-RFC1034">RFC1034</a>]     Mockapetris, P., "Domain names - concepts and
                  facilities", STD 13, <a href="./rfc1034.html">RFC 1034</a>, November 1987.
 
-   [<a id="ref-RFC1035" name="ref-RFC1035">RFC1035</a>]     Mockapetris, P., "Domain names - implementation and
+   [<a id="ref-RFC1035">RFC1035</a>]     Mockapetris, P., "Domain names - implementation and
                  specification", STD 13, <a href="./rfc1035.html">RFC 1035</a>, November 1987.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]     Bradner, S., "Key words for use in RFCs to Indicate
-                 Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]     Bradner, S., "Key words for use in RFCs to Indicate
+                 Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC2606" name="ref-RFC2606">RFC2606</a>]     Eastlake, D. and A. Panitz, "Reserved Top Level DNS
-                 Names", <a href="./bcp32.html">BCP 32</a>, <a href="./rfc2606.html">RFC 2606</a>, June 1999.
+   [<a id="ref-RFC2606">RFC2606</a>]     Eastlake, D. and A. Panitz, "Reserved Top Level DNS
+                 Names", <a href="https://www.rfc-editor.org/bcp/bcp32">BCP 32</a>, <a href="./rfc2606.html">RFC 2606</a>, June 1999.
 
-   [<a id="ref-RFC3596" name="ref-RFC3596">RFC3596</a>]     Thomson, S., Huitema, C., Ksinant, V., and M. Souissi,
+   [<a id="ref-RFC3596">RFC3596</a>]     Thomson, S., Huitema, C., Ksinant, V., and M. Souissi,
                  "DNS Extensions to Support IP Version 6", <a href="./rfc3596.html">RFC 3596</a>,
                  October 2003.
 
-   [<a id="ref-RFC4291" name="ref-RFC4291">RFC4291</a>]     Hinden, R. and S. Deering, "IP Version 6 Addressing
+   [<a id="ref-RFC4291">RFC4291</a>]     Hinden, R. and S. Deering, "IP Version 6 Addressing
                  Architecture", <a href="./rfc4291.html">RFC 4291</a>, February 2006.
 
-   [<a id="ref-RFC5518" name="ref-RFC5518">RFC5518</a>]     Hoffman, P., Levine, J., and A. Hathcock, "Vouch By
+   [<a id="ref-RFC5518">RFC5518</a>]     Hoffman, P., Levine, J., and A. Hathcock, "Vouch By
                  Reference", <a href="./rfc5518.html">RFC 5518</a>, April 2009.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC3833" name="ref-RFC3833">RFC3833</a>]     Atkins, D. and R. Austein, "Threat Analysis of the
+   [<a id="ref-RFC3833">RFC3833</a>]     Atkins, D. and R. Austein, "Threat Analysis of the
                  Domain Name System (DNS)", <a href="./rfc3833.html">RFC 3833</a>, August 2004.
 
-   [<a id="ref-RBLDNS" name="ref-RBLDNS">RBLDNS</a>]      Bernstein, D., "rbldns, in 'djbdns'",
+   [<a id="ref-RBLDNS">RBLDNS</a>]      Bernstein, D., "rbldns, in 'djbdns'",
                  &lt;<a href="http://cr.yp.to/djbdns.html">http://cr.yp.to/djbdns.html</a>&gt;.
 
-   [<a id="ref-MAPSRBL" name="ref-MAPSRBL">MAPSRBL</a>]     "MAPS RBL+", &lt;<a href="http://mail-abuse.com/">http://mail-abuse.com/</a>&gt;.
+   [<a id="ref-MAPSRBL">MAPSRBL</a>]     "MAPS RBL+", &lt;<a href="http://mail-abuse.com/">http://mail-abuse.com/</a>&gt;.
 
-   [<a id="ref-RBLDNSD" name="ref-RBLDNSD">RBLDNSD</a>]     Tokarev, M., "rbldnsd: Small Daemon for DNSBLs",
+   [<a id="ref-RBLDNSD">RBLDNSD</a>]     Tokarev, M., "rbldnsd: Small Daemon for DNSBLs",
                  &lt;<a href="http://www.corpit.ru/mjt/rbldnsd.html">http://www.corpit.ru/mjt/rbldnsd.html</a>&gt;.
 
 
 
 
 <span class="grey">Levine                        Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5782.html">RFC 5782</a>              DNS Blacklists and Whitelists        February 2010</span>
 
 
-   [<a id="ref-SENDERBASE" name="ref-SENDERBASE">SENDERBASE</a>]  Ironport Systems, "Senderbase",
+   [<a id="ref-SENDERBASE">SENDERBASE</a>]  Ironport Systems, "Senderbase",
                  &lt;<a href="http://www.senderbase.org">http://www.senderbase.org</a>&gt;.
 
-   [<a id="ref-KSN" name="ref-KSN">KSN</a>]         Levine, J., "The South Korean Network Blocking List",
+   [<a id="ref-KSN">KSN</a>]         Levine, J., "The South Korean Network Blocking List",
                  &lt;<a href="http://korea.services.net">http://korea.services.net</a>&gt;.
 
 Author's Address
@@ -786,11 +767,6 @@ Author's Address
 
 
 Levine                        Informational                    [Page 11]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,26 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="   This document describes the IETF architecture for a standard,
-   programmatic interface for state transfer in and out of the Internet
-   routing system.  It describes the high-level architecture, the
-   building blocks of this high-level architecture, and their
-   interfaces, with particular focus on those to be standardized as part
-   of the Interface to the Routing System (I2RS).
-" name="DC.Description.Abstract"/>
-<meta content="Hares, Susan" name="DC.Creator"/>
-<meta content="Ward, Dave" name="DC.Creator"/>
-<meta content="Halpern, Joel" name="DC.Creator"/>
-<meta content="Nadeau, Thomas D." name="DC.Creator"/>
-<meta content="Atlas, Alia" name="DC.Creator"/>
-<meta content="An Architecture for the Interface to the Routing System" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7921 - An Architecture for the Interface to the Routing System</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="A. Atlas" name="citation_author"/>
+<meta content="J. Halpern" name="citation_author"/>
+<meta content="S. Hares" name="citation_author"/>
+<meta content="D. Ward" name="citation_author"/>
+<meta content="T. Nadeau" name="citation_author"/>
+<meta content="June, 2016" name="citation_publication_date"/>
+<meta content="An Architecture for the Interface to the Routing System" name="citation_title"/>
+<meta content="10.17487/RFC7921" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7921" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7921.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7921: An Architecture for the Interface to the Routing System</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -49,7 +44,7 @@
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -58,7 +53,7 @@
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -137,19 +132,18 @@
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -163,21 +157,9 @@
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7921.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7921" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-i2rs-architecture.html" title="draft-ietf-i2rs-architecture">draft-ietf-i2rs-a...</a>]                                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                          A. Atlas
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7921.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7921.txt.pdf">PDF</a>|<a href="/rfc/rfc7921.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7921" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7921&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc7921" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                          A. Atlas
 Request for Comments: 7921                              Juniper Networks
 Category: Informational                                       J. Halpern
 ISSN: 2070-1721                                                 Ericsson
@@ -229,7 +211,7 @@ Status of This Memo
 
 
 <span class="grey">Atlas, et al.                 Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -238,7 +220,7 @@ Copyright Notice
    Copyright (c) 2016 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -285,7 +267,7 @@ Copyright Notice
 
 
 <span class="grey">Atlas, et al.                 Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -341,7 +323,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -356,7 +338,7 @@ Table of Contents
    Acknowledgements ..................................................<a href="#page-39">39</a>
    Authors' Addresses ................................................<a href="#page-40">40</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Routers that form the Internet routing infrastructure maintain state
    at various layers of detail and function.  For example, a typical
@@ -397,7 +379,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -421,7 +403,7 @@ Table of Contents
    environment in which the I2RS protocol exists are contained in
    [<a href="#ref-I2RS-ENV-SEC">I2RS-ENV-SEC</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Drivers%20for%20the%20I2RS%20Architecture"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Drivers for the I2RS Architecture</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Drivers%20for%20the%20I2RS%20Architecture"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Drivers for the I2RS Architecture</span>
 
    There are four key drivers that shape the I2RS architecture.  First
    is the need for an interface that is programmatic and asynchronous
@@ -453,7 +435,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -462,7 +444,7 @@ Table of Contents
    modify via Local Configuration; no direct manipulation of protocol-
    internal, dynamically determined data is envisioned.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Architectural%20Overview"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Architectural Overview</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Architectural%20Overview"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Architectural Overview</span>
 
    Figure 1 shows the basic architecture for I2RS between applications
    using I2RS, their associated I2RS clients, and I2RS agents.
@@ -509,7 +491,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -565,7 +547,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -621,7 +603,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -677,7 +659,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -733,11 +715,11 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    The following terminology is used in this document.
 
@@ -789,7 +771,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -845,7 +827,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -876,7 +858,7 @@ Table of Contents
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Key%20Architectural%20Properties"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Key Architectural Properties</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Key%20Architectural%20Properties"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Key Architectural Properties</span>
 
    Several key architectural properties for the I2RS protocol are
    elucidated below (simplicity, extensibility, and model-driven
@@ -885,7 +867,7 @@ Table of Contents
    are discussed in [<a href="./rfc7920.html" title='"Problem Statement for the Interface to the Routing System"'>RFC7920</a>] and because they may vary based on the
    particular use cases.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Simplicity"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Simplicity</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Simplicity"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Simplicity</span>
 
    There have been many efforts over the years to improve access to the
    information available to the routing and forwarding system.  Making
@@ -901,7 +883,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -921,7 +903,7 @@ Table of Contents
    ask ourselves, "Is this the simplest way to provide this complexity
    in the I2RS external interface?"
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Extensibility"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Extensibility</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Extensibility"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Extensibility</span>
 
    Extensibility of the protocol and data model is very important.  In
    particular, given the necessary scope limitations of the initial
@@ -945,7 +927,7 @@ Table of Contents
    consider extensibility not only of the underlying services' data
    models, but also of the primitives and protocol operations.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Model-Driven%20Programmatic%20Interfaces"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Model-Driven Programmatic Interfaces</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Model-Driven%20Programmatic%20Interfaces"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Model-Driven Programmatic Interfaces</span>
 
    A critical component of I2RS is the standard information and data
    models with their associated semantics.  While many components of the
@@ -957,7 +939,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -986,7 +968,7 @@ Table of Contents
    the first time, a logical information model may be standardized prior
    to creating the data model.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Security Considerations</span>
 
    This I2RS architecture describes interfaces that clearly require
    serious consideration of security.  As an architecture, I2RS has been
@@ -1013,7 +995,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -1069,7 +1051,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -1101,7 +1083,7 @@ Table of Contents
    authenticated and authorized client whose communications cannot have
    been altered.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Identity%20and%20Authentication"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Identity and Authentication</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Identity%20and%20Authentication"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Identity and Authentication</span>
 
    As discussed above, all control exchanges between the I2RS client and
    agent should be authenticated and integrity-protected (such that the
@@ -1125,11 +1107,11 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Authorization"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Authorization</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Authorization"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Authorization</span>
 
    All operations using I2RS, both observation and manipulation, should
    be subject to appropriate authorization controls.  Such authorization
@@ -1181,11 +1163,11 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Client%20Redundancy"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Client Redundancy</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Client%20Redundancy"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Client Redundancy</span>
 
    I2RS must support client redundancy.  At the simplest, this can be
    handled by having a primary and a backup network application that
@@ -1198,7 +1180,7 @@ Table of Contents
    transport information about each connection and time can be logged
    with the identity.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20I2RS%20in%20Personal%20Devices"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  I2RS in Personal Devices</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20I2RS%20in%20Personal%20Devices"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  I2RS in Personal Devices</span>
 
    If an I2RS agent or I2RS client is tightly correlated with a person
    (such as if an I2RS agent is running on someone's phone to control
@@ -1209,7 +1191,7 @@ Table of Contents
    phone.  The I2RS protocol and data models should consider if privacy
    issues can arise when clients or agents are used for such use cases.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Network%20Applications%20and%20I2RS%20Client"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Network Applications and I2RS Client</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Network%20Applications%20and%20I2RS%20Client"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Network Applications and I2RS Client</span>
 
    I2RS is expected to be used by network-oriented applications in
    different architectures.  While the interface between a network-
@@ -1237,7 +1219,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -1250,7 +1232,7 @@ Table of Contents
    initially, out of scope for I2RS.  The following section describes an
    example of such a network application.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Example%20Network%20Application%3A%20Topology%20Manager"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Example Network Application: Topology Manager</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Example%20Network%20Application%3A%20Topology%20Manager"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Example Network Application: Topology Manager</span>
 
    A Topology Manager includes an I2RS client that uses the I2RS data
    models and protocol to collect information about the state of the
@@ -1270,13 +1252,13 @@ Table of Contents
    same I2RS protocol and could provide a topology service using
    extensions to the I2RS data models.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20I2RS%20Agent%20Role%20and%20Functionality"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  I2RS Agent Role and Functionality</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20I2RS%20Agent%20Role%20and%20Functionality"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  I2RS Agent Role and Functionality</span>
 
    The I2RS agent is part of a routing element.  As such, it has
    relationships with that routing element as a whole and with various
    components of that routing element.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Relationship%20to%20Its%20Routing%20Element"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Relationship to Its Routing Element</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Relationship%20to%20Its%20Routing%20Element"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Relationship to Its Routing Element</span>
 
    A Routing Element may be implemented with a wide variety of different
    architectures: an integrated router, a split architecture,
@@ -1293,7 +1275,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -1305,7 +1287,7 @@ Table of Contents
    important that traceability of the requests received by I2RS agent's
    and actions taken be supported via a common data model.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20I2RS%20State%20Storage"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  I2RS State Storage</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20I2RS%20State%20Storage"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  I2RS State Storage</span>
 
    State modification requests are sent to the I2RS agent in a routing
    element by I2RS clients.  The I2RS agent is responsible for applying
@@ -1322,7 +1304,7 @@ Table of Contents
    routing element reboots; thus, the I2RS agent will not attempt to
    reapply such changes after a reboot.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.1.%20%20I2RS%20Agent%20Failure"></a></body></html><a class="selflink" href="#section-6.2.1" name="section-6.2.1">6.2.1</a>.  I2RS Agent Failure</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.1.%20%20I2RS%20Agent%20Failure"></a></body></html><a class="selflink" href="#section-6.2.1" id="section-6.2.1">6.2.1</a>.  I2RS Agent Failure</span>
 
    It is expected that an I2RS agent may fail independently of the
    associated routing element.  This could happen because I2RS is
@@ -1349,7 +1331,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -1392,7 +1374,7 @@ Table of Contents
       termination, it will send a NOTIFICATION_I2RS_AGENT_STARTING to
       each cached I2RS client.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.2.%20%20Starting%20and%20Ending"></a></body></html><a class="selflink" href="#section-6.2.2" name="section-6.2.2">6.2.2</a>.  Starting and Ending</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.2.%20%20Starting%20and%20Ending"></a></body></html><a class="selflink" href="#section-6.2.2" id="section-6.2.2">6.2.2</a>.  Starting and Ending</span>
 
    When an I2RS client applies changes via the I2RS protocol, those
    changes are applied and left until removed or the routing element
@@ -1405,11 +1387,11 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.3.%20%20Reversion"></a></body></html><a class="selflink" href="#section-6.2.3" name="section-6.2.3">6.2.3</a>.  Reversion</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.3.%20%20Reversion"></a></body></html><a class="selflink" href="#section-6.2.3" id="section-6.2.3">6.2.3</a>.  Reversion</span>
 
    An I2RS agent may decide that some state should no longer be applied.
    An I2RS client may instruct an agent to remove state it has applied.
@@ -1426,7 +1408,7 @@ Table of Contents
    notification scope, regarding state modification or removal by a
    particular I2RS client.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Interactions%20with%20Local%20Configuration"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  Interactions with Local Configuration</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Interactions%20with%20Local%20Configuration"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  Interactions with Local Configuration</span>
 
    Changes may originate from either Local Configuration or from I2RS.
    The modifications and data stored by I2RS are separate from the local
@@ -1461,7 +1443,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -1495,7 +1477,7 @@ Table of Contents
    state to prevail could cause race conditions where the final state is
    not repeatably deterministic.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.1.%20%20Examples%20of%20Local%20Configuration%20vs.%20I2RS%20Ephemeral%20Configuration"></a></body></html><a class="selflink" href="#section-6.3.1" name="section-6.3.1">6.3.1</a>.  Examples of Local Configuration vs. I2RS Ephemeral Configuration</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.1.%20%20Examples%20of%20Local%20Configuration%20vs.%20I2RS%20Ephemeral%20Configuration"></a></body></html><a class="selflink" href="#section-6.3.1" id="section-6.3.1">6.3.1</a>.  Examples of Local Configuration vs. I2RS Ephemeral Configuration</span>
 
    A set of examples is useful in order to illustrated these
    architecture principles.  Assume there are three routers: Router A,
@@ -1517,7 +1499,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -1573,7 +1555,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -1596,7 +1578,7 @@ Table of Contents
    changes to make sure all ephemeral changes are included in the next
    configuration run.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20Routing%20Components%20and%20Associated%20I2RS%20Services"></a></body></html><a class="selflink" href="#section-6.4" name="section-6.4">6.4</a>.  Routing Components and Associated I2RS Services</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20Routing%20Components%20and%20Associated%20I2RS%20Services"></a></body></html><a class="selflink" href="#section-6.4" id="section-6.4">6.4</a>.  Routing Components and Associated I2RS Services</span>
 
    For simplicity, each logical protocol or set of functionality that
    can be compactly described in a separable information and data model
@@ -1629,7 +1611,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -1685,11 +1667,11 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.1.%20%20Routing%20and%20Label%20Information%20Bases"></a></body></html><a class="selflink" href="#section-6.4.1" name="section-6.4.1">6.4.1</a>.  Routing and Label Information Bases</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.1.%20%20Routing%20and%20Label%20Information%20Bases"></a></body></html><a class="selflink" href="#section-6.4.1" id="section-6.4.1">6.4.1</a>.  Routing and Label Information Bases</span>
 
    Routing elements may maintain one or more information bases.
    Examples include Routing Information Bases such as IPv4/IPv6 Unicast
@@ -1706,7 +1688,7 @@ Table of Contents
    create arbitrary replication state in the RIB, subject to the
    advertised capabilities of the routing element.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.2.%20%20IGPs%2C%20BGP%2C%20and%20Multicast%20Protocols"></a></body></html><a class="selflink" href="#section-6.4.2" name="section-6.4.2">6.4.2</a>.  IGPs, BGP, and Multicast Protocols</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.2.%20%20IGPs%2C%20BGP%2C%20and%20Multicast%20Protocols"></a></body></html><a class="selflink" href="#section-6.4.2" id="section-6.4.2">6.4.2</a>.  IGPs, BGP, and Multicast Protocols</span>
 
    A separate I2RS service can expose each routing protocol on the
    device.  Such I2RS services may include a number of different kinds
@@ -1741,11 +1723,11 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.3.%20%20MPLS"></a></body></html><a class="selflink" href="#section-6.4.3" name="section-6.4.3">6.4.3</a>.  MPLS</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.3.%20%20MPLS"></a></body></html><a class="selflink" href="#section-6.4.3" id="section-6.4.3">6.4.3</a>.  MPLS</span>
 
    I2RS services will be needed to expose the protocols that create
    transport LSPs (e.g., LDP and RSVP-TE) as well as protocols (e.g.,
@@ -1754,7 +1736,7 @@ Table of Contents
    about LSPs originating in, transiting, or terminating in this Routing
    Element.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.4.%20%20Policy%20and%20QoS%20Mechanisms"></a></body></html><a class="selflink" href="#section-6.4.4" name="section-6.4.4">6.4.4</a>.  Policy and QoS Mechanisms</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.4.%20%20Policy%20and%20QoS%20Mechanisms"></a></body></html><a class="selflink" href="#section-6.4.4" id="section-6.4.4">6.4.4</a>.  Policy and QoS Mechanisms</span>
 
    Many network elements have separate policy and QoS mechanisms,
    including knobs that affect local path computation and queue control
@@ -1769,7 +1751,7 @@ Table of Contents
    models can specify use of a basic model that can be replaced by a
    more detailed model.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.%20%20Information%20Modeling%2C%20Device%20Variation%2C%20and%20Information"></a></body></html><a class="selflink" href="#section-6.4.5" name="section-6.4.5">6.4.5</a>.  Information Modeling, Device Variation, and Information</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.%20%20Information%20Modeling%2C%20Device%20Variation%2C%20and%20Information"></a></body></html><a class="selflink" href="#section-6.4.5" id="section-6.4.5">6.4.5</a>.  Information Modeling, Device Variation, and Information</span>
 <span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20%20%20Relationships"></a></body></html>        Relationships</span>
 
    I2RS depends heavily on information models of the relevant aspects of
@@ -1781,7 +1763,7 @@ Table of Contents
    information models can address these variations: class or type
    inheritance, optional features, and templating.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.1.%20%20Managing%20Variation%3A%20Object%20Classes/Types%20and%20Inheritance"></a></body></html><a class="selflink" href="#section-6.4.5.1" name="section-6.4.5.1">6.4.5.1</a>.  Managing Variation: Object Classes/Types and Inheritance</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.1.%20%20Managing%20Variation%3A%20Object%20Classes/Types%20and%20Inheritance"></a></body></html><a class="selflink" href="#section-6.4.5.1" id="section-6.4.5.1">6.4.5.1</a>.  Managing Variation: Object Classes/Types and Inheritance</span>
 
    Information modeled by I2RS from a Routing Element can be described
    in terms of classes or types or object.  Different valid inheritance
@@ -1797,7 +1779,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -1817,7 +1799,7 @@ Table of Contents
    rules should be done so that it can apply across data modeling tools
    until the I2RS data modeling language is selected.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.2.%20%20Managing%20Variation%3A%20Optionality"></a></body></html><a class="selflink" href="#section-6.4.5.2" name="section-6.4.5.2">6.4.5.2</a>.  Managing Variation: Optionality</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.2.%20%20Managing%20Variation%3A%20Optionality"></a></body></html><a class="selflink" href="#section-6.4.5.2" id="section-6.4.5.2">6.4.5.2</a>.  Managing Variation: Optionality</span>
 
    I2RS information models must be clear about what aspects are
    optional.  For instance, must an instance of a class always contain a
@@ -1853,11 +1835,11 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.3.%20%20Managing%20Variation%3A%20Templating"></a></body></html><a class="selflink" href="#section-6.4.5.3" name="section-6.4.5.3">6.4.5.3</a>.  Managing Variation: Templating</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.3.%20%20Managing%20Variation%3A%20Templating"></a></body></html><a class="selflink" href="#section-6.4.5.3" id="section-6.4.5.3">6.4.5.3</a>.  Managing Variation: Templating</span>
 
    A template is a collection of information to address a problem; it
    cuts across the notions of class and object instances.  A template
@@ -1884,7 +1866,7 @@ Table of Contents
    configured with the proper templates to complete the operation.  This
    is a topic for further discussion.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.4.%20%20Object%20Relationships"></a></body></html><a class="selflink" href="#section-6.4.5.4" name="section-6.4.5.4">6.4.5.4</a>.  Object Relationships</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.4.%20%20Object%20Relationships"></a></body></html><a class="selflink" href="#section-6.4.5.4" id="section-6.4.5.4">6.4.5.4</a>.  Object Relationships</span>
 
    Objects (in a Routing Element or otherwise) do not exist in
    isolation.  They are related to each other.  One of the important
@@ -1894,7 +1876,7 @@ Table of Contents
    information relationships that the information models need to
    support.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.4.1.%20%20Initialization"></a></body></html><a class="selflink" href="#section-6.4.5.4.1" name="section-6.4.5.4.1">6.4.5.4.1</a>.  Initialization</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.4.1.%20%20Initialization"></a></body></html><a class="selflink" href="#section-6.4.5.4.1" id="section-6.4.5.4.1">6.4.5.4.1</a>.  Initialization</span>
 
    The simplest relationship is that one object instance is initialized
    by copying another.  For example, one may have an object instance
@@ -1909,11 +1891,11 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.4.2.%20%20Correlation%20Identification"></a></body></html><a class="selflink" href="#section-6.4.5.4.2" name="section-6.4.5.4.2">6.4.5.4.2</a>.  Correlation Identification</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.4.2.%20%20Correlation%20Identification"></a></body></html><a class="selflink" href="#section-6.4.5.4.2" id="section-6.4.5.4.2">6.4.5.4.2</a>.  Correlation Identification</span>
 
    Often, it suffices to indicate in one object that it is related to a
    second object, without having a strong binding between the two.  So
@@ -1924,7 +1906,7 @@ Table of Contents
    circumstance.  In modeling, this is often represented by the type of
    the value.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.4.3.%20%20Object%20References"></a></body></html><a class="selflink" href="#section-6.4.5.4.3" name="section-6.4.5.4.3">6.4.5.4.3</a>.  Object References</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.4.3.%20%20Object%20References"></a></body></html><a class="selflink" href="#section-6.4.5.4.3" id="section-6.4.5.4.3">6.4.5.4.3</a>.  Object References</span>
 
    Sometimes the relationship between objects is stronger.  A valid ARP
    entry has to point to the active interface over which it was derived.
@@ -1932,7 +1914,7 @@ Table of Contents
    It can be used for relationships like containment or dependence.
    This is usually represented by an explicit modeling link.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.4.4.%20%20Active%20References"></a></body></html><a class="selflink" href="#section-6.4.5.4.4" name="section-6.4.5.4.4">6.4.5.4.4</a>.  Active References</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.5.4.4.%20%20Active%20References"></a></body></html><a class="selflink" href="#section-6.4.5.4.4" id="section-6.4.5.4.4">6.4.5.4.4</a>.  Active References</span>
 
    There is an even stronger form of coupling between objects if changes
    in one of the two objects are always to be reflected in the state of
@@ -1943,9 +1925,9 @@ Table of Contents
    internal bookkeeping to ensure consistency, often conceptualized as a
    subscription model across objects.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20I2RS%20Client%20Agent%20Interface"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  I2RS Client Agent Interface</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20I2RS%20Client%20Agent%20Interface"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  I2RS Client Agent Interface</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20One%20Control%20and%20Data%20Exchange%20Protocol"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  One Control and Data Exchange Protocol</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20One%20Control%20and%20Data%20Exchange%20Protocol"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  One Control and Data Exchange Protocol</span>
 
    This I2RS architecture assumes a data-model-driven protocol where the
    data models are defined in YANG 1.1 [<a href="#ref-YANG1.1" title='"The YANG 1.1 Data Modeling Language"'>YANG1.1</a>] and associated YANG
@@ -1965,7 +1947,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -1978,7 +1960,7 @@ Table of Contents
    transports are mandatory to implement, and c) which transports are
    optional to implement.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Communication%20Channels"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Communication Channels</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Communication%20Channels"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Communication Channels</span>
 
    Multiple communication channels and multiple types of communication
    channels are required.  There may be a range of requirements (e.g.,
@@ -1998,7 +1980,7 @@ Table of Contents
    cause the I2RS agent to become unreachable across that communication
    channel.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Capability%20Negotiation"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  Capability Negotiation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Capability%20Negotiation"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  Capability Negotiation</span>
 
    The support for different protocol capabilities and I2RS services
    will vary across I2RS clients and Routing Elements supporting I2RS
@@ -2021,7 +2003,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -2031,7 +2013,7 @@ Table of Contents
    represent and be used to communicate important information about the
    agent and the capabilities thereof.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Scope%20Policy%20Specifications"></a></body></html><a class="selflink" href="#section-7.4" name="section-7.4">7.4</a>.  Scope Policy Specifications</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Scope%20Policy%20Specifications"></a></body></html><a class="selflink" href="#section-7.4" id="section-7.4">7.4</a>.  Scope Policy Specifications</span>
 
    As Sections <a href="#section-4.1">4.1</a> and <a href="#section-4.2">4.2</a> describe, each I2RS client will have a unique
    identity and may have a secondary identity (see <a href="#section-2">Section 2</a>) to aid in
@@ -2043,7 +2025,7 @@ Table of Contents
    consumption) need to specify the data being controlled by the policy,
    and acceptable ranges of values for the data.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Connectivity"></a></body></html><a class="selflink" href="#section-7.5" name="section-7.5">7.5</a>.  Connectivity</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Connectivity"></a></body></html><a class="selflink" href="#section-7.5" id="section-7.5">7.5</a>.  Connectivity</span>
 
    An I2RS client may or may not maintain an active communication
    channel with an I2RS agent.  Therefore, an I2RS agent may need to
@@ -2077,7 +2059,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -2085,7 +2067,7 @@ Table of Contents
    successful communication channel to or from the I2RS client for the
    policy-specified duration.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.6.%20%20Notifications"></a></body></html><a class="selflink" href="#section-7.6" name="section-7.6">7.6</a>.  Notifications</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.6.%20%20Notifications"></a></body></html><a class="selflink" href="#section-7.6" id="section-7.6">7.6</a>.  Notifications</span>
 
    As with any policy system interacting with the network, the I2RS
    client needs to be able to receive notifications of changes in
@@ -2118,7 +2100,7 @@ Table of Contents
    publish/subscribe mechanism that is not amenable to having the I2RS
    agent do the filtering.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.7.%20%20Information%20Collection"></a></body></html><a class="selflink" href="#section-7.7" name="section-7.7">7.7</a>.  Information Collection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.7.%20%20Information%20Collection"></a></body></html><a class="selflink" href="#section-7.7" id="section-7.7">7.7</a>.  Information Collection</span>
 
    One of the other important aspects of I2RS is that it is intended to
    simplify collecting information about the state of network elements.
@@ -2133,11 +2115,11 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.8.%20%20Multi-headed%20Control"></a></body></html><a class="selflink" href="#section-7.8" name="section-7.8">7.8</a>.  Multi-headed Control</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.8.%20%20Multi-headed%20Control"></a></body></html><a class="selflink" href="#section-7.8" id="section-7.8">7.8</a>.  Multi-headed Control</span>
 
    As described earlier, an I2RS agent interacts with multiple I2RS
    clients who are actively controlling the network element.  From an
@@ -2168,7 +2150,7 @@ Table of Contents
    there.  The I2RS client may then respond to the situation as it sees
    fit.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.9.%20%20Transactions"></a></body></html><a class="selflink" href="#section-7.9" name="section-7.9">7.9</a>.  Transactions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.9.%20%20Transactions"></a></body></html><a class="selflink" href="#section-7.9" id="section-7.9">7.9</a>.  Transactions</span>
 
    In the interest of simplicity, the I2RS architecture does not include
    multi-message atomicity and rollback mechanisms.  Rather, it includes
@@ -2189,7 +2171,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -2209,7 +2191,7 @@ Table of Contents
    protocol will include an explicit reply to modification or write
    operations even when they fully succeed.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Operational%20and%20Manageability%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Operational and Manageability Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Operational%20and%20Manageability%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Operational and Manageability Considerations</span>
 
    In order to facilitate troubleshooting of routing elements
    implementing I2RS agents, the routing elements should provide for a
@@ -2245,7 +2227,7 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -2255,42 +2237,42 @@ Table of Contents
       more scalable notification handling for the I2RS agent-client
       interactions.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
               DOI 10.17487/RFC2119, March 1997,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2119">http://www.rfc-editor.org/info/rfc2119</a>&gt;.
 
-   [<a id="ref-RFC7920" name="ref-RFC7920">RFC7920</a>]  Atlas, A., Ed., Nadeau, T., Ed., and D. Ward, "Problem
+   [<a id="ref-RFC7920">RFC7920</a>]  Atlas, A., Ed., Nadeau, T., Ed., and D. Ward, "Problem
               Statement for the Interface to the Routing System",
               <a href="./rfc7920.html">RFC 7920</a>, DOI 10.17487/RFC7920, June 2016,
               &lt;<a href="http://www.rfc-editor.org/info/rfc7920">http://www.rfc-editor.org/info/rfc7920</a>&gt;.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-I2RS-ENV-SEC" name="ref-I2RS-ENV-SEC">I2RS-ENV-SEC</a>]
+   [<a id="ref-I2RS-ENV-SEC">I2RS-ENV-SEC</a>]
               Migault, D., Ed., Halpern, J., and S. Hares, "I2RS
               Environment Security Requirements", Work in Progress,
               <a href="./draft-ietf-i2rs-security-environment-reqs-01.html">draft-ietf-i2rs-security-environment-reqs-01</a>, April 2016.
 
-   [<a id="ref-I2RS-PROT-SEC" name="ref-I2RS-PROT-SEC">I2RS-PROT-SEC</a>]
+   [<a id="ref-I2RS-PROT-SEC">I2RS-PROT-SEC</a>]
               Hares, S., Migault, D., and J. Halpern, "I2RS Security
               Related Requirements", Work in Progress, <a href="./draft-ietf-i2rs-protocol-security-requirements-06.html">draft-ietf-i2rs-</a>
               <a href="./draft-ietf-i2rs-protocol-security-requirements-06.html">protocol-security-requirements-06</a>, May 2016.
 
-   [<a id="ref-RESTCONF" name="ref-RESTCONF">RESTCONF</a>] Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
+   [<a id="ref-RESTCONF">RESTCONF</a>] Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
               Protocol", Work in Progress, <a href="./draft-ietf-netconf-restconf-14.html">draft-ietf-netconf-</a>
               <a href="./draft-ietf-netconf-restconf-14.html">restconf-14</a>, June 2016.
 
-   [<a id="ref-RFC6241" name="ref-RFC6241">RFC6241</a>]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
+   [<a id="ref-RFC6241">RFC6241</a>]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
               and A. Bierman, Ed., "Network Configuration Protocol
               (NETCONF)", <a href="./rfc6241.html">RFC 6241</a>, DOI 10.17487/RFC6241, June 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6241">http://www.rfc-editor.org/info/rfc6241</a>&gt;.
 
-   [<a id="ref-RFC6536" name="ref-RFC6536">RFC6536</a>]  Bierman, A. and M. Bjorklund, "Network Configuration
+   [<a id="ref-RFC6536">RFC6536</a>]  Bierman, A. and M. Bjorklund, "Network Configuration
               Protocol (NETCONF) Access Control Model", <a href="./rfc6536.html">RFC 6536</a>,
               DOI 10.17487/RFC6536, March 2012,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6536">http://www.rfc-editor.org/info/rfc6536</a>&gt;.
@@ -2301,37 +2283,37 @@ Table of Contents
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
-   [<a id="ref-RFC6991" name="ref-RFC6991">RFC6991</a>]  Schoenwaelder, J., Ed., "Common YANG Data Types",
+   [<a id="ref-RFC6991">RFC6991</a>]  Schoenwaelder, J., Ed., "Common YANG Data Types",
               <a href="./rfc6991.html">RFC 6991</a>, DOI 10.17487/RFC6991, July 2013,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6991">http://www.rfc-editor.org/info/rfc6991</a>&gt;.
 
-   [<a id="ref-RFC7223" name="ref-RFC7223">RFC7223</a>]  Bjorklund, M., "A YANG Data Model for Interface
+   [<a id="ref-RFC7223">RFC7223</a>]  Bjorklund, M., "A YANG Data Model for Interface
               Management", <a href="./rfc7223.html">RFC 7223</a>, DOI 10.17487/RFC7223, May 2014,
               &lt;<a href="http://www.rfc-editor.org/info/rfc7223">http://www.rfc-editor.org/info/rfc7223</a>&gt;.
 
-   [<a id="ref-RFC7224" name="ref-RFC7224">RFC7224</a>]  Bjorklund, M., "IANA Interface Type YANG Module",
+   [<a id="ref-RFC7224">RFC7224</a>]  Bjorklund, M., "IANA Interface Type YANG Module",
               <a href="./rfc7224.html">RFC 7224</a>, DOI 10.17487/RFC7224, May 2014,
               &lt;<a href="http://www.rfc-editor.org/info/rfc7224">http://www.rfc-editor.org/info/rfc7224</a>&gt;.
 
-   [<a id="ref-RFC7277" name="ref-RFC7277">RFC7277</a>]  Bjorklund, M., "A YANG Data Model for IP Management",
+   [<a id="ref-RFC7277">RFC7277</a>]  Bjorklund, M., "A YANG Data Model for IP Management",
               <a href="./rfc7277.html">RFC 7277</a>, DOI 10.17487/RFC7277, June 2014,
               &lt;<a href="http://www.rfc-editor.org/info/rfc7277">http://www.rfc-editor.org/info/rfc7277</a>&gt;.
 
-   [<a id="ref-RFC7317" name="ref-RFC7317">RFC7317</a>]  Bierman, A. and M. Bjorklund, "A YANG Data Model for
+   [<a id="ref-RFC7317">RFC7317</a>]  Bierman, A. and M. Bjorklund, "A YANG Data Model for
               System Management", <a href="./rfc7317.html">RFC 7317</a>, DOI 10.17487/RFC7317, August
               2014, &lt;<a href="http://www.rfc-editor.org/info/rfc7317">http://www.rfc-editor.org/info/rfc7317</a>&gt;.
 
-   [<a id="ref-RFC7752" name="ref-RFC7752">RFC7752</a>]  Gredler, H., Ed., Medved, J., Previdi, S., Farrel, A., and
+   [<a id="ref-RFC7752">RFC7752</a>]  Gredler, H., Ed., Medved, J., Previdi, S., Farrel, A., and
               S. Ray, "North-Bound Distribution of Link-State and
               Traffic Engineering (TE) Information Using BGP", <a href="./rfc7752.html">RFC 7752</a>,
               DOI 10.17487/RFC7752, March 2016,
               &lt;<a href="http://www.rfc-editor.org/info/rfc7752">http://www.rfc-editor.org/info/rfc7752</a>&gt;.
 
-   [<a id="ref-YANG1.1" name="ref-YANG1.1">YANG1.1</a>]  Bjorklund, M., Ed., <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22The+YANG+1.1+Data+Modeling+Language%22" style="text-decoration: none">"The YANG 1.1 Data Modeling Language"</a>,
+   [<a id="ref-YANG1.1">YANG1.1</a>]  Bjorklund, M., Ed., <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22The+YANG+1.1+Data+Modeling+Language%22" style="text-decoration: none">"The YANG 1.1 Data Modeling Language"</a>,
               Work in Progress, <a href="./draft-ietf-netmod-rfc6020bis-14.html">draft-ietf-netmod-rfc6020bis-14</a>, June
               2016.
 
@@ -2357,7 +2339,7 @@ Acknowledgements
 
 
 <span class="grey">Atlas, et al.                 Informational                    [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc7921.html">RFC 7921</a>                    I2RS Architecture                  June 2016</span>
 
 
@@ -2413,11 +2395,6 @@ Authors' Addresses
 
 
 Atlas, et al.                 Informational                    [Page 40]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

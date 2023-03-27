@@ -1,31 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-schulzrinne-p2prg-rtc-security" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5765" name="DC.Identifier"/>
-<meta content="February, 2010" name="DC.Date.Issued"/>
-<meta content="Ivov, Emil" name="DC.Creator"/>
-<meta content="Marocco, Enrico" name="DC.Creator"/>
-<meta content="Schulzrinne, Henning" name="DC.Creator"/>
-<meta content="Peer-to-peer (P2P) networks offer higher robustness against failure,
-easier configuration and are generally more economical than their
-client-server counterparts. It has therefore become reasonable for
-resource consuming and typically centralized applications like Voice
-over IP (VoIP) and, in general, realtime communication to adapt and
-exploit the benefits of P2P. Such a migration needs to address a new
-set of P2P specific security problems. This document describes some of
-the known issues found in common P2P networks, analyzing the relevance
-of such issues and the applicability of existing solutions when using
-P2P architectures for realtime communication. This document is a
-product of the P2P Research Group." name="DC.Description.Abstract"/>
-<meta content="Security Issues and Solutions in Peer-to-peer Systems for Realtime Communications" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5765 - Security Issues and Solutions in Peer-to-peer Systems for Realtime Communications</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="H. Schulzrinne" name="citation_author"/>
+<meta content="E. Marocco" name="citation_author"/>
+<meta content="E. Ivov" name="citation_author"/>
+<meta content="February, 2010" name="citation_publication_date"/>
+<meta content="Security Issues and Solutions in Peer-to-Peer Systems for Realtime Communications" name="citation_title"/>
+<meta content="10.17487/RFC5765" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5765" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5765.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5765: Security Issues and Solutions in Peer-to-Peer Systems for Realtime Communications</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -54,7 +42,7 @@ product of the P2P Research Group." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -63,7 +51,7 @@ product of the P2P Research Group." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -142,19 +130,18 @@ product of the P2P Research Group." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -168,21 +155,9 @@ product of the P2P Research Group." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5765.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5765" title="PDF version of this document">pdf</a>] [<a href="./draft-irtf-p2prg-rtc-security.html" title="draft-irtf-p2prg-rtc-security">draft-irtf-p2prg-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5765" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5765" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Research Task Force (IRTF)                       H. Schulzrinne
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5765.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5765.txt.pdf">PDF</a>|<a href="/rfc/rfc5765.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5765" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5765&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5765" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5765" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Research Task Force (IRTF)                       H. Schulzrinne
 Request for Comments: 5765                           Columbia University
 Category: Informational                                       E. Marocco
 ISSN: 2070-1721                                           Telecom Italia
@@ -234,7 +209,7 @@ Status of This Memo
 
 
 <span class="grey">Schulzrinne, et al.           Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -243,7 +218,7 @@ Copyright Notice
    Copyright (c) 2010 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -290,7 +265,7 @@ Copyright Notice
 
 
 <span class="grey">Schulzrinne, et al.           Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -346,11 +321,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Peer-to-peer (P2P) overlays have become quite popular with the advent
    of file-sharing applications such as Napster [<a href="#ref-NAPSTER" title='"Napster"'>NAPSTER</a>], KaZaa
@@ -402,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -458,7 +433,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -493,7 +468,7 @@ Table of Contents
    Table 1: Main differences between P2P applications used for
                file-sharing and for realtime communication.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Purpose%20of%20This%20Document"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Purpose of This Document</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Purpose%20of%20This%20Document"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Purpose of This Document</span>
 
    The goal of this document is to provide authors of P2P protocols for
    realtime communications with background that they may find useful
@@ -514,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -524,7 +499,7 @@ Table of Contents
    may apply when protecting applications against a specific attack, as,
    for example, in the case of lawful interception.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Structure%20of%20This%20Document"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Structure of This Document</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Structure%20of%20This%20Document"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Structure of This Document</span>
 
    The document is organized as follows.  In <a href="#section-2">Section 2</a>, we discuss P2P
    security attackers.  We try to elaborate on their motivation, the
@@ -570,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -614,9 +589,9 @@ Table of Contents
    Table 3: Index of some of the more popular solutions discussed in
                               this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20The%20Attackers"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  The Attackers</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20The%20Attackers"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  The Attackers</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Incentive%20of%20the%20Attacker"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Incentive of the Attacker</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Incentive%20of%20the%20Attacker"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Incentive of the Attacker</span>
 
    Attacks on networks happen for a variety of reasons such as monetary
    gain, personal enmity, or even for fame in the hacker community.
@@ -626,7 +601,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -659,7 +634,7 @@ Table of Contents
    likely to be successful or cause damage, since their resources tend
    to be relatively limited.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Resources%20Available%20to%20the%20Attacker"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Resources Available to the Attacker</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Resources%20Available%20to%20the%20Attacker"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Resources Available to the Attacker</span>
 
    Resource constraints play an important role in determining the nature
    of the attack.  An attacker who controls a botnet can use an Internet
@@ -682,11 +657,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Victim%20of%20the%20Attack"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Victim of the Attack</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Victim%20of%20the%20Attack"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Victim of the Attack</span>
 
    The victim of an attack could be an individual node, a particular
    content entry, or the entire overlay service.  If malicious nodes are
@@ -697,7 +672,7 @@ Table of Contents
    packets or upload malicious content, then the quality of the overlay
    would deteriorate.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Time%20of%20Attack"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Time of Attack</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Time%20of%20Attack"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Time of Attack</span>
 
    A malicious node could start misbehaving as soon as it enters the
    overlay or it could follow the rules of the overlay for a finite
@@ -714,7 +689,7 @@ Table of Contents
    management systems, it is important that they adapt to the current
    behavior of a peer.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Admission%20Control"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Admission Control</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Admission%20Control"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Admission Control</span>
 
    Admission control depends on who decides whether or not to admit a
    node and how this permission is granted.  Kim et al.  [<a href="#ref-Kim" title='"Admission Control in Peer Groups"'>Kim</a>] answer
@@ -738,7 +713,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -769,7 +744,7 @@ Table of Contents
    as CAPTCHA [<a href="#ref-Ahn" title='"Telling humans and computers apart automatically"'>Ahn</a>]; however, reliability of such mechanisms is at the
    time of writing a topic of lively debate [<a href="#ref-Tam" title='"Breaking Audio CAPTCHAs with Machine Learning Techniques"'>Tam</a>] [<a href="#ref-Chellapilla" title='"Using Machine Learning to Break Visual Human Interaction Proofs (HIPs)"'>Chellapilla</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Determining%20the%20Position%20in%20the%20Overlay"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Determining the Position in the Overlay</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Determining%20the%20Position%20in%20the%20Overlay"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Determining the Position in the Overlay</span>
 
    For ring-based DHT overlays such as Chord [<a href="#ref-Stoica" title='"Chord: A Scalable Peer-to-peer Lookup Service for Internet Applications"'>Stoica</a>], Kademlia
    [<a href="#ref-Maymounkov" title='"Kademlia: A Peer-to-peer Information System Based on the XOR Metric"'>Maymounkov</a>], and Pastry [<a href="#ref-Rowstron" title='"Pastry: Scalable, distributed object location and routing for large-scale peer-to-peer systems"'>Rowstron</a>], when a node joins the overlay,
@@ -794,7 +769,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -841,7 +816,7 @@ Table of Contents
    know their position before joining, the overlay is still vulnerable
    to Sybil attacks.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Resilience%20against%20Malicious%20Peers"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Resilience against Malicious Peers</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Resilience%20against%20Malicious%20Peers"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Resilience against Malicious Peers</span>
 
    Making overlays robust against even a small percentage of malicious
    nodes is difficult [<a href="#ref-Castro" title='"Secure routing for structured peer-to-peer overlay networks"'>Castro</a>].  It is therefore important for other
@@ -850,7 +825,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -860,13 +835,13 @@ Table of Contents
    group for the former, and reputation management systems are needed
    for the latter.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Identification%20of%20Malicious%20Peers"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Identification of Malicious Peers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Identification%20of%20Malicious%20Peers"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Identification of Malicious Peers</span>
 
    For identifying a node as malicious, malicious activity has to be
    observed first.  This could be done in either a proactive way or a
    reactive way.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20Proactive%20Identification"></a></body></html><a class="selflink" href="#section-5.1.1" name="section-5.1.1">5.1.1</a>.  Proactive Identification</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20Proactive%20Identification"></a></body></html><a class="selflink" href="#section-5.1.1" id="section-5.1.1">5.1.1</a>.  Proactive Identification</span>
 
    When acting proactively, peers perform periodic operations with the
    purpose of detecting malicious activity.  A malicious node could
@@ -887,7 +862,7 @@ Table of Contents
    example, in Kademlia [<a href="#ref-Maymounkov" title='"Kademlia: A Peer-to-peer Information System Based on the XOR Metric"'>Maymounkov</a>], the sending peer can identify
    anomalies comparing responses coming in from different paths.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.%20%20Reactive%20Identification"></a></body></html><a class="selflink" href="#section-5.1.2" name="section-5.1.2">5.1.2</a>.  Reactive Identification</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.%20%20Reactive%20Identification"></a></body></html><a class="selflink" href="#section-5.1.2" id="section-5.1.2">5.1.2</a>.  Reactive Identification</span>
 
    In a reactive strategy, the peers perform normal operations and if
    they happen to detect some malicious activity, then they can label
@@ -906,11 +881,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Reputation%20Management%20Systems"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Reputation Management Systems</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Reputation%20Management%20Systems"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Reputation Management Systems</span>
 
    Reputation management systems are used to allow peers to share
    information about other peers based on their own experience and thus
@@ -937,7 +912,7 @@ Table of Contents
    o  The system should be robust to malicious collectives of peers who
       know one another and attempt to collectively subvert the system.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.1.%20%20Unstructured%20Reputation%20Management"></a></body></html><a class="selflink" href="#section-5.2.1" name="section-5.2.1">5.2.1</a>.  Unstructured Reputation Management</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.1.%20%20Unstructured%20Reputation%20Management"></a></body></html><a class="selflink" href="#section-5.2.1" id="section-5.2.1">5.2.1</a>.  Unstructured Reputation Management</span>
 
    Unstructured reputation management systems have been proposed by Uzun
    et al.  [<a href="#ref-Uzun" title='"A Reputation-Based Trust Management System for P2P Networks"'>Uzun</a>] and Damiani et al.  [<a href="#ref-Damiani" title='"A Reputation-Based Approach for Choosing Reliable Resources in Peer-to-Peer Networks"'>Damiani</a>].  The basic idea of
@@ -953,7 +928,7 @@ Table of Contents
    otherwise, malicious nodes may successfully place targeted attacks
    returning false values for their victims.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.2.%20%20Structured%20Reputation%20Management"></a></body></html><a class="selflink" href="#section-5.2.2" name="section-5.2.2">5.2.2</a>.  Structured Reputation Management</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.2.%20%20Structured%20Reputation%20Management"></a></body></html><a class="selflink" href="#section-5.2.2" id="section-5.2.2">5.2.2</a>.  Structured Reputation Management</span>
 
    One of the problems with unstructured reputation management systems
    is that they either take the feedback from few peers or, if they do
@@ -962,7 +937,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -980,7 +955,7 @@ Table of Contents
    Eventually, they suggest the use of incentives for peers with high
    reputation values.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Routing%20and%20Data%20Integrity"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Routing and Data Integrity</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Routing%20and%20Data%20Integrity"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Routing and Data Integrity</span>
 
    Preserving integrity of routing and data, or, in other words,
    preventing peers from returning corrupt responses to queries and
@@ -992,7 +967,7 @@ Table of Contents
    other routing information.  We describe such data integrity issues in
    <a href="#section-7">Section 7</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Data%20Integrity"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Data Integrity</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Data%20Integrity"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Data Integrity</span>
 
    For file-sharing applications, insertion of wrong content (e.g.,
    files not matching their names or descriptions) and introduction of
@@ -1008,7 +983,7 @@ Table of Contents
    fail [<a href="#ref-Zhang" title='"Enhancing Data Authenticity and Integrity in P2P Systems"'>Zhang</a>].  An analysis of BitTorrent in terms of integrity and
    performance can be found in the work of Pouwelse et al.  [<a href="#ref-Pouwelse" title='"The Bittorent P2P File-Sharing System: Measurements and Analysis"'>Pouwelse</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Routing%20Integrity"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Routing Integrity</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Routing%20Integrity"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Routing Integrity</span>
 
    To enhance the integrity of routing, it is important to reduce the
    number of queries forwarded to malicious nodes.  Marti et al.
@@ -1018,7 +993,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -1039,7 +1014,7 @@ Table of Contents
    only when they are present in the appropriate row selected by the DHT
    algorithm.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Peer-to-Peer%20in%20Realtime%20Communication"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Peer-to-Peer in Realtime Communication</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Peer-to-Peer%20in%20Realtime%20Communication"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Peer-to-Peer in Realtime Communication</span>
 
    The idea of using P2P in realtime communication essentially implies
    distributing centralized entities from conventional architectures
@@ -1074,7 +1049,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -1086,7 +1061,7 @@ Table of Contents
    discussed in previous sections, and discuss solutions that would be
    applicable to realtime communication in P2P.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Peer%20Promotion"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Peer Promotion</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Peer%20Promotion"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Peer Promotion</span>
 
    In order to remain compatible with existing user agents, P2P
    communication architectures would have to allow certain nodes to use
@@ -1103,7 +1078,7 @@ Table of Contents
    (admission to the DHT).  This requires addressing the following
    issues.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.1.%20%20Active%20vs.%20Passive%20Upgrades"></a></body></html><a class="selflink" href="#section-7.1.1" name="section-7.1.1">7.1.1</a>.  Active vs. Passive Upgrades</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.1.%20%20Active%20vs.%20Passive%20Upgrades"></a></body></html><a class="selflink" href="#section-7.1.1" id="section-7.1.1">7.1.1</a>.  Active vs. Passive Upgrades</span>
 
    Most existing P2P networks [<a href="#ref-KAZAA" title='"KaZaa"'>KAZAA</a>] [<a href="#ref-BITTORRENT" title='"BitTorrent"'>BITTORRENT</a>] [<a href="#ref-PPLIVE" title='"PPLive"'>PPLIVE</a>] would
    generally leave it to the clients to determine if and when they would
@@ -1130,7 +1105,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -1144,7 +1119,7 @@ Table of Contents
       has chances to join the overlay (possibly after an accurate
       examination).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.2.%20%20When%20to%20Upgrade"></a></body></html><a class="selflink" href="#section-7.1.2" name="section-7.1.2">7.1.2</a>.  When to Upgrade</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.2.%20%20When%20to%20Upgrade"></a></body></html><a class="selflink" href="#section-7.1.2" id="section-7.1.2">7.1.2</a>.  When to Upgrade</span>
 
    In order to answer this question, one would have to define some
    criteria that would allow determination of the load on a peer and a
@@ -1163,7 +1138,7 @@ Table of Contents
       application-specific data, and information about the attached
       clients.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.3.%20%20Which%20Clients%20to%20Upgrade"></a></body></html><a class="selflink" href="#section-7.1.3" name="section-7.1.3">7.1.3</a>.  Which Clients to Upgrade</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.3.%20%20Which%20Clients%20to%20Upgrade"></a></body></html><a class="selflink" href="#section-7.1.3" id="section-7.1.3">7.1.3</a>.  Which Clients to Upgrade</span>
 
    Selecting which clients to upgrade would require defining and keeping
    track of new metrics.  The exact set of metrics and how they
@@ -1186,7 +1161,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -1200,7 +1175,7 @@ Table of Contents
    attacks against existing super-nodes in order to improve their
    chances of being upgraded.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.4.%20%20Incentives%20for%20Clients"></a></body></html><a class="selflink" href="#section-7.1.4" name="section-7.1.4">7.1.4</a>.  Incentives for Clients</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.4.%20%20Incentives%20for%20Clients"></a></body></html><a class="selflink" href="#section-7.1.4" id="section-7.1.4">7.1.4</a>.  Incentives for Clients</span>
 
    Clients need to have incentives for accepting upgrades in order to
    prevent excessive burden on existing peers.  One way to handle this
@@ -1223,9 +1198,9 @@ Table of Contents
    Such behavior may therefore be interpreted as arbitrary and make the
    service look unreliable.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Security"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Security</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Security"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Security</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.1.%20%20Targeted%20Denial%20of%20Service"></a></body></html><a class="selflink" href="#section-7.2.1" name="section-7.2.1">7.2.1</a>.  Targeted Denial of Service</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.1.%20%20Targeted%20Denial%20of%20Service"></a></body></html><a class="selflink" href="#section-7.2.1" id="section-7.2.1">7.2.1</a>.  Targeted Denial of Service</span>
 
    In addition to bombardment with queries as described in <a href="#section-2">Section 2</a>,
    the denial-of-service attack against an individual node can be
@@ -1242,11 +1217,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.2.%20%20Man-in-the-Middle%20Attack"></a></body></html><a class="selflink" href="#section-7.2.2" name="section-7.2.2">7.2.2</a>.  Man-in-the-Middle Attack</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.2.%20%20Man-in-the-Middle%20Attack"></a></body></html><a class="selflink" href="#section-7.2.2" id="section-7.2.2">7.2.2</a>.  Man-in-the-Middle Attack</span>
 
    The man-in-the-middle attack is well described by Seedorf [<a href="#ref-Seedorf1" title='"Security Challenges for Peer-to-Peer SIP"'>Seedorf1</a>]
    in the particular case of P2PSIP [<a href="#ref-P2PSIP" title='"Peer-to-Peer Session Initiation Protocol (P2PSIP) IETF Working Group"'>P2PSIP</a>] and consists of an attack
@@ -1262,7 +1237,7 @@ Table of Contents
    closer to the desired ID with every hop.  However, this is not a
    strong check and can be defeated [<a href="#ref-Seedorf1" title='"Security Challenges for Peer-to-Peer SIP"'>Seedorf1</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.3.%20%20Trust%20between%20Peers"></a></body></html><a class="selflink" href="#section-7.2.3" name="section-7.2.3">7.2.3</a>.  Trust between Peers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.3.%20%20Trust%20between%20Peers"></a></body></html><a class="selflink" href="#section-7.2.3" id="section-7.2.3">7.2.3</a>.  Trust between Peers</span>
 
    The effect of malicious peers could be mitigated by introducing the
    concept of trust within an overlay.  This can be done in different
@@ -1279,7 +1254,7 @@ Table of Contents
       might be theoretically possible, in reality it is extremely
       difficult to obtain long enough trust chains.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.4.%20%20Routing%20Call%20Signaling"></a></body></html><a class="selflink" href="#section-7.2.4" name="section-7.2.4">7.2.4</a>.  Routing Call Signaling</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.4.%20%20Routing%20Call%20Signaling"></a></body></html><a class="selflink" href="#section-7.2.4" id="section-7.2.4">7.2.4</a>.  Routing Call Signaling</span>
 
    One way for implementing realtime communication overlays (as we have
    mentioned in earlier sections) would be to simply replace centralized
@@ -1298,7 +1273,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -1316,7 +1291,7 @@ Table of Contents
    through it, adopting a similar mechanism to the one used for
    upgrading from HTTP to HTTPS [<a href="./rfc2818.html" title='"HTTP Over TLS"'>RFC2818</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.5.%20%20Integrity%20of%20Location%20Bindings"></a></body></html><a class="selflink" href="#section-7.2.5" name="section-7.2.5">7.2.5</a>.  Integrity of Location Bindings</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.5.%20%20Integrity%20of%20Location%20Bindings"></a></body></html><a class="selflink" href="#section-7.2.5" id="section-7.2.5">7.2.5</a>.  Integrity of Location Bindings</span>
 
    It is important to ensure that the location that a user registers,
    usually a (URI, IP) pair, is what is returned to the requesting
@@ -1338,7 +1313,7 @@ Table of Contents
    this such as a certified web service using SSL that can publish an
    "online phone book" mapping users to URIs.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.6.%20%20Encrypting%20Content"></a></body></html><a class="selflink" href="#section-7.2.6" name="section-7.2.6">7.2.6</a>.  Encrypting Content</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.6.%20%20Encrypting%20Content"></a></body></html><a class="selflink" href="#section-7.2.6" id="section-7.2.6">7.2.6</a>.  Encrypting Content</span>
 
    Using P2P overlays for realtime communication implies that content is
    likely to traverse numerous intermediate peers before reaching its
@@ -1354,7 +1329,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -1362,7 +1337,7 @@ Table of Contents
    material (e.g., for retrieving public keys when interacting with
    unknown peers) may be expensive, especially for mobile devices.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.7.%20%20Other%20Issues"></a></body></html><a class="selflink" href="#section-7.2.7" name="section-7.2.7">7.2.7</a>.  Other Issues</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.7.%20%20Other%20Issues"></a></body></html><a class="selflink" href="#section-7.2.7" id="section-7.2.7">7.2.7</a>.  Other Issues</span>
 
    Details on cost and payment regimes could help identify further
    threats.  Such details could also be important when determining the
@@ -1387,7 +1362,7 @@ Table of Contents
    it would be difficult to do billing in a pure P2P manner as it would
    mean keeping the billing details with untrusted peers.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Open%20Issues"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Open Issues</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Open%20Issues"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Open Issues</span>
 
    Existing systems used for file-sharing, media streaming, and realtime
    communications all achieve a reasonable level of security relying on
@@ -1410,7 +1385,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
@@ -1423,7 +1398,7 @@ Table of Contents
    solutions would be likely to help research in the field of P2P
    security progress more efficiently.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Security Considerations</span>
 
    This document, tutorial in nature, discusses some of the security
    issues of P2P systems used for realtime communications.  It does not
@@ -1434,7 +1409,7 @@ Table of Contents
    how they apply (or could apply) to the case of realtime
    communications.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Acknowledgments</span>
 
    The authors are particularly grateful to Dhruv Chopra, who
    contributed to the writing of the article "Peer-to-peer Overlays for
@@ -1446,19 +1421,19 @@ Table of Contents
    for reviewing the document and the many others who provided useful
    comments.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  Informative References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  Informative References</span>
 
-   [<a id="ref-Ahn" name="ref-Ahn">Ahn</a>]          Ahn, L., Blum, M., and J. Langford, "Telling humans
+   [<a id="ref-Ahn">Ahn</a>]          Ahn, L., Blum, M., and J. Langford, "Telling humans
                   and computers apart automatically", Communications of
                   the ACM, vol. 47, no. 2, February 2004.
 
-   [<a id="ref-Androutsellis-Theotokis" name="ref-Androutsellis-Theotokis">Androutsellis-Theotokis</a>]
+   [<a id="ref-Androutsellis-Theotokis">Androutsellis-Theotokis</a>]
                   Androutsellis-Theotokis, S. and D. Spinellis, "A
                   survey of peer-to-peer content distribution
                   technologies", ACM CSUR, vol. 36, no. 4,
                   December 2004.
 
-   [<a id="ref-BITTORRENT" name="ref-BITTORRENT">BITTORRENT</a>]   "BitTorrent", &lt;<a href="http://www.bittorrent.com/">http://www.bittorrent.com/</a>&gt;.
+   [<a id="ref-BITTORRENT">BITTORRENT</a>]   "BitTorrent", &lt;<a href="http://www.bittorrent.com/">http://www.bittorrent.com/</a>&gt;.
 
 
 
@@ -1466,108 +1441,108 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
-   [<a id="ref-Baset" name="ref-Baset">Baset</a>]        Baset, S. and H. Schulzrinne, "An analysis of the
+   [<a id="ref-Baset">Baset</a>]        Baset, S. and H. Schulzrinne, "An analysis of the
                   skype peer-to-peer internet telephony protocol",
                   Proceedings of IEEE INFOCOM 2006, April 2006.
 
-   [<a id="ref-Baumann" name="ref-Baumann">Baumann</a>]      Baumann, R., Cavin, S., and S. Schmid, "Voice Over IP
+   [<a id="ref-Baumann">Baumann</a>]      Baumann, R., Cavin, S., and S. Schmid, "Voice Over IP
                   - Security and SPIT", Technical Report, University of
                   Berne, September 2006.
 
-   [<a id="ref-COOLSTREAM" name="ref-COOLSTREAM">COOLSTREAM</a>]   "COOLSTREAMING", &lt;<a href="http://www.coolstreaming.us">http://www.coolstreaming.us</a>&gt;.
+   [<a id="ref-COOLSTREAM">COOLSTREAM</a>]   "COOLSTREAMING", &lt;<a href="http://www.coolstreaming.us">http://www.coolstreaming.us</a>&gt;.
 
-   [<a id="ref-Castro" name="ref-Castro">Castro</a>]       Castro, M., Druschel, P., Ganesh, A., Rowstron, A.,
+   [<a id="ref-Castro">Castro</a>]       Castro, M., Druschel, P., Ganesh, A., Rowstron, A.,
                   and D.  Wallach, "Secure routing for structured
                   peer-to-peer overlay networks", Proceedings of 5th
                   symposium on Operating systems design and
                   implementation, December 2002.
 
-   [<a id="ref-Chellapilla" name="ref-Chellapilla">Chellapilla</a>]  Chellapilla, K. and P. Simard, "Using Machine Learning
+   [<a id="ref-Chellapilla">Chellapilla</a>]  Chellapilla, K. and P. Simard, "Using Machine Learning
                   to Break Visual Human Interaction Proofs (HIPs)",
                   Proceedings of Advances in Neural Information
                   Processing Systems, December 2004.
 
-   [<a id="ref-Condie" name="ref-Condie">Condie</a>]       Condie, T., Kacholia, V., Sankararaman, S.,
+   [<a id="ref-Condie">Condie</a>]       Condie, T., Kacholia, V., Sankararaman, S.,
                   Hellerstein, J., and P. Maniatis, "Maelstorm: Churn as
                   Shelter", Proceedings of 13th Annual Network and
                   Distributed System Security Symposium, November 2005.
 
-   [<a id="ref-Damiani" name="ref-Damiani">Damiani</a>]      Damiani, E., Vimercati, D., Paraboschi, S., Samarati,
+   [<a id="ref-Damiani">Damiani</a>]      Damiani, E., Vimercati, D., Paraboschi, S., Samarati,
                   P., and F. Violante, "A Reputation-Based Approach for
                   Choosing Reliable Resources in Peer-to-Peer Networks",
                   Proceedings of Conference on Computer and
                   Communications Security, November 2002.
 
-   [<a id="ref-Danezis" name="ref-Danezis">Danezis</a>]      Danezis, G., Lesniewski-Laas, C., Kaashoek, M., and R.
+   [<a id="ref-Danezis">Danezis</a>]      Danezis, G., Lesniewski-Laas, C., Kaashoek, M., and R.
                   Anderson, "Sybil-resistant DHT routing", Proceedings
                   of 10th European Symposium on Research in Computer
                   Security, September 2005.
 
-   [<a id="ref-Douceur" name="ref-Douceur">Douceur</a>]      Douceur, J., "The Sybil Attack", Revised Papers
+   [<a id="ref-Douceur">Douceur</a>]      Douceur, J., "The Sybil Attack", Revised Papers
                   from First International Workshop on Peer-to-Peer
                   Systems, March 2002.
 
-   [<a id="ref-Gurbani" name="ref-Gurbani">Gurbani</a>]      Gurbani, V., Willis, D., and F. Audet,
+   [<a id="ref-Gurbani">Gurbani</a>]      Gurbani, V., Willis, D., and F. Audet,
                   "Cryptographically Transparent Session Initiation
                   Protocol (SIP) Proxies", Proceedings of IEEE ICC '07,
                   June 2007.
 
-   [<a id="ref-KAZAA" name="ref-KAZAA">KAZAA</a>]        "KaZaa", &lt;<a href="http://www.kazaa.com/">http://www.kazaa.com/</a>&gt;.
+   [<a id="ref-KAZAA">KAZAA</a>]        "KaZaa", &lt;<a href="http://www.kazaa.com/">http://www.kazaa.com/</a>&gt;.
 
 
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
-   [<a id="ref-Kamvar" name="ref-Kamvar">Kamvar</a>]       Kamvar, S., Garcia-Molina, H., and M. Schlosser, "The
+   [<a id="ref-Kamvar">Kamvar</a>]       Kamvar, S., Garcia-Molina, H., and M. Schlosser, "The
                   EigenTrust Algorithm for Reputation Management in P2P
                   Networks", Proceedings of 12th international
                   conference on World Wide Web, May 2003.
 
-   [<a id="ref-Kim" name="ref-Kim">Kim</a>]          Kim, Y., Mazzocchi, D., and G. Tsudik, "Admission
+   [<a id="ref-Kim">Kim</a>]          Kim, Y., Mazzocchi, D., and G. Tsudik, "Admission
                   Control in Peer Groups", Proceedings of Second IEEE
                   International Symposium on Network Computing and
                   Applications, April 2003.
 
-   [<a id="ref-Kong" name="ref-Kong">Kong</a>]         Kong, J., Zerfos, P., Luo, H., Lu, S., and L. Zhang,
+   [<a id="ref-Kong">Kong</a>]         Kong, J., Zerfos, P., Luo, H., Lu, S., and L. Zhang,
                   "Providing robust and ubiquitous security support for
                   MANET", Proceedings of 9th International Conference on
                   Network Protocols, November 2001.
 
-   [<a id="ref-Lee" name="ref-Lee">Lee</a>]          Lee, S., Kwon, O., Kim, J., and S. Hong, "A Reputation
+   [<a id="ref-Lee">Lee</a>]          Lee, S., Kwon, O., Kim, J., and S. Hong, "A Reputation
                   Management System in Structured Peer-to-Peer
                   Networks", Proceedings of 14th IEEE International
                   Workshops on Enabling Technologies: Infrastructure for
                   Collaborative Enterprise, June 2005.
 
-   [<a id="ref-Liang" name="ref-Liang">Liang</a>]        Liang, J., Kumar, R., Xi, Y., and K. Ross, "Pollution
+   [<a id="ref-Liang">Liang</a>]        Liang, J., Kumar, R., Xi, Y., and K. Ross, "Pollution
                   in p2p file sharing systems", Proceedings of IEEE
                   INFOCOM 2005, March 2005.
 
-   [<a id="ref-Marti" name="ref-Marti">Marti</a>]        Marti, S., Ganesan, P., and H. Garcia-Molina, "SPROUT:
+   [<a id="ref-Marti">Marti</a>]        Marti, S., Ganesan, P., and H. Garcia-Molina, "SPROUT:
                   P2P Routing with Social Networks", Proceedings
                   of First International Workshop on Peer-to-Peer and
                   Databases, March 2004.
 
-   [<a id="ref-Maymounkov" name="ref-Maymounkov">Maymounkov</a>]   Maymounkov, P. and D. Mazi, "Kademlia: A Peer-to-peer
+   [<a id="ref-Maymounkov">Maymounkov</a>]   Maymounkov, P. and D. Mazi, "Kademlia: A Peer-to-peer
                   Information System Based on the XOR Metric",
                   Proceedings of First International Workshop on
                   Peer-to-peer Systems, March 2002.
 
-   [<a id="ref-McCue" name="ref-McCue">McCue</a>]        McCue, Andy., "Bookie reveals 100,000 cost of
+   [<a id="ref-McCue">McCue</a>]        McCue, Andy., "Bookie reveals 100,000 cost of
                   denial-of-service extortion attacks", available from
                   <a href="http://www.silicon.com">http://www.silicon.com</a>, June 2004.
 
-   [<a id="ref-NAPSTER" name="ref-NAPSTER">NAPSTER</a>]      "Napster", &lt;<a href="http://www.napster.com/">http://www.napster.com/</a>&gt;.
+   [<a id="ref-NAPSTER">NAPSTER</a>]      "Napster", &lt;<a href="http://www.napster.com/">http://www.napster.com/</a>&gt;.
 
-   [<a id="ref-Ohta" name="ref-Ohta">Ohta</a>]         Ohta, K., Micali, S., and L. Reyzin, "Accountable
+   [<a id="ref-Ohta">Ohta</a>]         Ohta, K., Micali, S., and L. Reyzin, "Accountable
                   Subgroup Multisignatures", Proceedings of 8th ACM
                   conference on Computer and Communications Security,
                   November 2001.
@@ -1578,54 +1553,54 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
-   [<a id="ref-P2PSIP" name="ref-P2PSIP">P2PSIP</a>]       "Peer-to-Peer Session Initiation Protocol (P2PSIP)
+   [<a id="ref-P2PSIP">P2PSIP</a>]       "Peer-to-Peer Session Initiation Protocol (P2PSIP)
                   IETF Working Group",
                   &lt;<a href="http://www.ietf.org/html.charters/p2psip-charter.html">http://www.ietf.org/html.charters/</a>
                   <a href="http://www.ietf.org/html.charters/p2psip-charter.html">p2psip-charter.html</a>&gt;.
 
-   [<a id="ref-P2PSIP-DIAG" name="ref-P2PSIP-DIAG">P2PSIP-DIAG</a>] Yongchao, S., Jiang, X., Even, R., and D. Bryan,
+   [<a id="ref-P2PSIP-DIAG">P2PSIP-DIAG</a>] Yongchao, S., Jiang, X., Even, R., and D. Bryan,
                   "P2PSIP Overlay Diagnostics", Work in Progress,
                   December 2009.
 
-   [<a id="ref-PPLIVE" name="ref-PPLIVE">PPLIVE</a>]       "PPLive", &lt;<a href="http://www.pplive.com">http://www.pplive.com</a>&gt;.
+   [<a id="ref-PPLIVE">PPLIVE</a>]       "PPLive", &lt;<a href="http://www.pplive.com">http://www.pplive.com</a>&gt;.
 
-   [<a id="ref-Poon" name="ref-Poon">Poon</a>]         Poon, W. and R. Chang, "Robust Forwarding in
+   [<a id="ref-Poon">Poon</a>]         Poon, W. and R. Chang, "Robust Forwarding in
                   Structured Peer-to-Peer Overlay Networks", Proceedings
                   of ACM SIGCOMM 2004, August 2004.
 
-   [<a id="ref-Pouwelse" name="ref-Pouwelse">Pouwelse</a>]     Pouwelse, J., Garbacki, P., Epema, D., and H. Sips,
+   [<a id="ref-Pouwelse">Pouwelse</a>]     Pouwelse, J., Garbacki, P., Epema, D., and H. Sips,
                   "The Bittorent P2P File-Sharing System: Measurements
                   and Analysis", Proceedings of 4th International
                   Workshop of Peer-to-peer Systems, February 2005.
 
-   [<a id="ref-RFC2818" name="ref-RFC2818">RFC2818</a>]      Rescorla, E., "HTTP Over TLS", <a href="./rfc2818.html">RFC 2818</a>, May 2000.
+   [<a id="ref-RFC2818">RFC2818</a>]      Rescorla, E., "HTTP Over TLS", <a href="./rfc2818.html">RFC 2818</a>, May 2000.
 
-   [<a id="ref-RFC3261" name="ref-RFC3261">RFC3261</a>]      Rosenberg, J., Schulzrinne, H., Camarillo, G.,
+   [<a id="ref-RFC3261">RFC3261</a>]      Rosenberg, J., Schulzrinne, H., Camarillo, G.,
                   Johnston, A., Peterson, J., Sparks, R., Handley, M.,
                   and E.  Schooler, "SIP: Session Initiation Protocol",
                   <a href="./rfc3261.html">RFC 3261</a>, June 2002.
 
-   [<a id="ref-RFC3711" name="ref-RFC3711">RFC3711</a>]      Baugher, M., McGrew, D., Naslund, M., Carrara, E., and
+   [<a id="ref-RFC3711">RFC3711</a>]      Baugher, M., McGrew, D., Naslund, M., Carrara, E., and
                   K.  Norrman, "The Secure Real-time Transport Protocol
                   (SRTP)", <a href="./rfc3711.html">RFC 3711</a>, March 2004.
 
-   [<a id="ref-RFC4981" name="ref-RFC4981">RFC4981</a>]      Risson, J. and T. Moors, "Survey of Research towards
+   [<a id="ref-RFC4981">RFC4981</a>]      Risson, J. and T. Moors, "Survey of Research towards
                   Robust Peer-to-Peer Networks: Search Methods",
                   <a href="./rfc4981.html">RFC 4981</a>, September 2007.
 
-   [<a id="ref-Ratnasamy" name="ref-Ratnasamy">Ratnasamy</a>]    Ratnasamy, S., Francis, P., Handley, M., Karp, R., and
+   [<a id="ref-Ratnasamy">Ratnasamy</a>]    Ratnasamy, S., Francis, P., Handley, M., Karp, R., and
                   S.  Shenker, "A Scalable Content-Addressable Network",
                   Proceedings of ACM SIGCOMM 2001, January 2001.
 
-   [<a id="ref-Rowaihy" name="ref-Rowaihy">Rowaihy</a>]      Rowaihy, H., Enck, W., McDaniel, P., and T. Porta,
+   [<a id="ref-Rowaihy">Rowaihy</a>]      Rowaihy, H., Enck, W., McDaniel, P., and T. Porta,
                   "Limiting Sybil attacks in structured peer-to-peer
                   networks", Proceedings of IEEE INFOCOM 2007, May 2007.
 
-   [<a id="ref-Rowstron" name="ref-Rowstron">Rowstron</a>]     Rowstron, A. and P. Druschel, "Pastry: Scalable,
+   [<a id="ref-Rowstron">Rowstron</a>]     Rowstron, A. and P. Druschel, "Pastry: Scalable,
                   distributed object location and routing for
                   large-scale peer-to-peer systems", Proceedings of 18th
                   IFIP/ACM International Conference on Distributed
@@ -1634,53 +1609,53 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
-   [<a id="ref-SHA1" name="ref-SHA1">SHA1</a>]         180-1, FIPS., "Secure Hash Standard", April 2005.
+   [<a id="ref-SHA1">SHA1</a>]         180-1, FIPS., "Secure Hash Standard", April 2005.
 
-   [<a id="ref-SKYPE" name="ref-SKYPE">SKYPE</a>]        "Skype", &lt;<a href="http://www.skype.com/">http://www.skype.com/</a>&gt;.
+   [<a id="ref-SKYPE">SKYPE</a>]        "Skype", &lt;<a href="http://www.skype.com/">http://www.skype.com/</a>&gt;.
 
-   [<a id="ref-Saxena" name="ref-Saxena">Saxena</a>]       Saxena, N., Tsudik, G., and J. Yi, "Admission Control
+   [<a id="ref-Saxena">Saxena</a>]       Saxena, N., Tsudik, G., and J. Yi, "Admission Control
                   in Peer-to-Peer: Design and Performance Evaluation",
                   Proceedings of 1st ACM workshop on Security of ad hoc
                   and sensor networks, October 2003.
 
-   [<a id="ref-Scheideler" name="ref-Scheideler">Scheideler</a>]   Scheideler, C., "How to Spread Adversarial Nodes?:
+   [<a id="ref-Scheideler">Scheideler</a>]   Scheideler, C., "How to Spread Adversarial Nodes?:
                   Rotate!", Proceedings of 37th Annual ACM Symposium on
                   Theory of Computing, May 2005.
 
-   [<a id="ref-Seedorf1" name="ref-Seedorf1">Seedorf1</a>]     Seedorf, J., "Security Challenges for Peer-to-Peer
+   [<a id="ref-Seedorf1">Seedorf1</a>]     Seedorf, J., "Security Challenges for Peer-to-Peer
                   SIP", IEEE Network, vol. 20, no. 5, September 2006.
 
-   [<a id="ref-Seedorf2" name="ref-Seedorf2">Seedorf2</a>]     Seedorf, J., "Using Cryptographically Generated
+   [<a id="ref-Seedorf2">Seedorf2</a>]     Seedorf, J., "Using Cryptographically Generated
                   SIP-URIs to Protect the Integrity of Content in
                   P2P-SIP", Proceedings of 3rd Annual VoIP Security
                   Workshop, June 2006.
 
-   [<a id="ref-Singh" name="ref-Singh">Singh</a>]        Singh, K. and H. Schulzrinne, "Peer-to-Peer Internet
+   [<a id="ref-Singh">Singh</a>]        Singh, K. and H. Schulzrinne, "Peer-to-Peer Internet
                   Telephony using SIP", Proceedings of International
                   Workshop on Network and Operating System Support for
                   Digital Audio and Video, June 2005.
 
-   [<a id="ref-Sit" name="ref-Sit">Sit</a>]          Sit, E. and R. Morris, "Security considerations for
+   [<a id="ref-Sit">Sit</a>]          Sit, E. and R. Morris, "Security considerations for
                   peer- to-peer distributed hash tables", Revised Papers
                   from First International Workshop on Peer-to-Peer
                   Systems, March 2002.
 
-   [<a id="ref-Stoica" name="ref-Stoica">Stoica</a>]       Stoica, I., Morris, R., Karger, D., Kaashoek, M., and
+   [<a id="ref-Stoica">Stoica</a>]       Stoica, I., Morris, R., Karger, D., Kaashoek, M., and
                   H.  Balakrishnan, "Chord: A Scalable Peer-to-peer
                   Lookup Service for Internet Applications", Proceedings
                   of Applications, Technologies, Architectures, and
                   Protocols for Computer Communication 2001, May 2001.
 
-   [<a id="ref-Tam" name="ref-Tam">Tam</a>]          Tam, J., Simsa, J., Hyde, S., and L. Ahn, "Breaking
+   [<a id="ref-Tam">Tam</a>]          Tam, J., Simsa, J., Hyde, S., and L. Ahn, "Breaking
                   Audio CAPTCHAs with Machine Learning Techniques",
                   Proceedings of Advances in Neural Information
                   Processing Systems, December 2009.
 
-   [<a id="ref-Uzun" name="ref-Uzun">Uzun</a>]         Uzun, E., Pariente, M., and A. Selpk, "A
+   [<a id="ref-Uzun">Uzun</a>]         Uzun, E., Pariente, M., and A. Selpk, "A
                   Reputation-Based Trust Management System for P2P
                   Networks", Proceedings of International Symposium on
                   Cluster Computing and the Grids, April 2004.
@@ -1690,26 +1665,26 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne, et al.           Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc5765.html">RFC 5765</a>         Security in P2P Realtime Communications   February 2010</span>
 
 
-   [<a id="ref-Wallach" name="ref-Wallach">Wallach</a>]      Wallach, D., "A Survey of Peer-to-Peer Security
+   [<a id="ref-Wallach">Wallach</a>]      Wallach, D., "A Survey of Peer-to-Peer Security
                   Issues", Proceedings of International Symposium of
                   Software Security 2002, November 2002,
                   &lt;<a href="http://www.cs.rice.edu/~dwallach/pub/tokyo-p2p2002.pdf">http://www.cs.rice.edu/~dwallach/pub/</a>
                   <a href="http://www.cs.rice.edu/~dwallach/pub/tokyo-p2p2002.pdf">tokyo-p2p2002.pdf</a>&gt;.
 
-   [<a id="ref-Yu" name="ref-Yu">Yu</a>]           Yu, H., Kaminsky, M., Gibbons, P., and A. Flaxman,
+   [<a id="ref-Yu">Yu</a>]           Yu, H., Kaminsky, M., Gibbons, P., and A. Flaxman,
                   "SybilGuard: Defending Against Sybil Attacks via
                   Social Networks", Proceedings of ACM SIGCOMM 2006,
                   September 2006.
 
-   [<a id="ref-Zhang" name="ref-Zhang">Zhang</a>]        Zhang, X., Chen, S., and R. Sandhu, "Enhancing Data
+   [<a id="ref-Zhang">Zhang</a>]        Zhang, X., Chen, S., and R. Sandhu, "Enhancing Data
                   Authenticity and Integrity in P2P Systems", IEEE
                   Internet Computing, vol. 9, no. 6, September 2005.
 
-   [<a id="ref-Zimmermann" name="ref-Zimmermann">Zimmermann</a>]   Zimmermann, Philip., "Pretty good privacy: public key
+   [<a id="ref-Zimmermann">Zimmermann</a>]   Zimmermann, Philip., "Pretty good privacy: public key
                   encryption for the masses", Building in big brother:
                   the cryptographic policy debate pag. 103-107, 1995.
 
@@ -1746,11 +1721,6 @@ Authors' Addresses
 
 
 Schulzrinne, et al.           Informational                    [Page 28]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

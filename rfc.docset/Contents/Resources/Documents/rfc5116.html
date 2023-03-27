@@ -1,23 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:5116" name="DC.Identifier"/>
-<meta content="This document defines algorithms for Authenticated Encryption with
-Associated Data (AEAD), and defines a uniform interface and a registry
-for such algorithms. The interface and registry can be used as an
-application-independent set of cryptoalgorithm suites. This approach
-provides advantages in efficiency and security, and promotes the reuse
-of crypto implementations. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
-<meta content="David McGrew &lt;mcgrew@cisco.com&gt;" name="DC.Creator"/>
-<meta content="January, 2008" name="DC.Date.Issued"/>
-<meta content="An Interface and Algorithms for Authenticated Encryption" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5116 - An Interface and Algorithms for Authenticated Encryption</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="D. McGrew" name="citation_author"/>
+<meta content="January, 2008" name="citation_publication_date"/>
+<meta content="An Interface and Algorithms for Authenticated Encryption" name="citation_title"/>
+<meta content="10.17487/RFC5116" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5116" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5116.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5116: An Interface and Algorithms for Authenticated Encryption</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -46,7 +40,7 @@ of crypto implementations. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -55,7 +49,7 @@ of crypto implementations. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -134,19 +128,18 @@ of crypto implementations. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -160,21 +153,9 @@ of crypto implementations. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5116.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5116" title="PDF version of this document">pdf</a>] [<a href="./draft-mcgrew-auth-enc.html" title="draft-mcgrew-auth-enc">draft-mcgrew-auth...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5116" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5116" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5116">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                          D. McGrew
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5116.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5116.txt.pdf">PDF</a>|<a href="/rfc/rfc5116.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5116" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5116&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5116" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5116" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                          D. McGrew
 Request for Comments: 5116                           Cisco Systems, Inc.
 Category: Standards Track                                   January 2008
 
@@ -226,7 +207,7 @@ Abstract
 
 
 <span class="grey">McGrew                      Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -282,11 +263,11 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Authenticated encryption [<a href="#ref-BN00" title='"Authenticated encryption: Relations among notions and analysis of the generic composition paradigm"'>BN00</a>] is a form of encryption that, in
    addition to providing confidentiality for the plaintext that is
@@ -296,7 +277,7 @@ Table of Contents
    Associated Data (AD), also called "additional authenticated data",
    that is not encrypted.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Background"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Background</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Background"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Background</span>
 
    Many cryptographic applications require both confidentiality and
    message authentication.  Confidentiality is a security service that
@@ -322,7 +303,7 @@ Table of Contents
    The benefits of AEAD algorithms, and this interface, are outlined in
    <a href="#section-1.3">Section 1.3</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Scope"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Scope</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Scope"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Scope</span>
 
    In this document, we define an AEAD algorithm as an abstraction, by
    specifying an interface to an AEAD and defining an IANA registry for
@@ -338,7 +319,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -353,7 +334,7 @@ Table of Contents
    the guidance about how to use it, are consistent with the
    recommendations from [<a href="#ref-EEM04" title='"Breaking and provably repairing the SSH authenticated encryption scheme: A case study of the Encode-then-Encrypt-and-MAC paradigm"'>EEM04</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Benefits"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>.  Benefits</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Benefits"></a></body></html><a class="selflink" href="#section-1.3" id="section-1.3">1.3</a>.  Benefits</span>
 
    The AEAD approach enables applications that need cryptographic
    security services to more easily adopt those services.  It benefits
@@ -385,7 +366,7 @@ Table of Contents
    acceleration to any application using that interface, even to
    applications that had not been designed when the module was built.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.4.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-1.4" name="section-1.4">1.4</a>.  Conventions Used in This Document</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.4.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-1.4" id="section-1.4">1.4</a>.  Conventions Used in This Document</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -394,11 +375,11 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20AEAD%20Interface"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  AEAD Interface</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20AEAD%20Interface"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  AEAD Interface</span>
 
    An AEAD algorithm has two operations, authenticated encryption and
    authenticated decryption.  The inputs and outputs of these algorithms
@@ -409,7 +390,7 @@ Table of Contents
    implementation strategies.  However, such extensions <em>MUST NOT</em> affect
    interoperability with other implementations.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Authenticated%20Encryption"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Authenticated Encryption</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Authenticated%20Encryption"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Authenticated Encryption</span>
 
    The authenticated encryption operation has four inputs, each of which
    is an octet string:
@@ -450,7 +431,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -506,7 +487,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -536,7 +517,7 @@ Table of Contents
    Applications <em>MUST NOT</em> assume any particular structure or formatting
    of the ciphertext.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Authenticated%20Decryption"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Authenticated Decryption</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Authenticated%20Decryption"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Authenticated Decryption</span>
 
    The authenticated decryption operation has four inputs: K, N, A, and
    C, as defined above.  It has only a single output, either a plaintext
@@ -549,7 +530,7 @@ Table of Contents
    respecting adversary that does not know the secret key (assuming that
    the AEAD algorithm is secure).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Data%20Formatting"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Data Formatting</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Data%20Formatting"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Data Formatting</span>
 
    This document does not specify any particular encoding for the AEAD
    inputs and outputs, since the encoding does not affect the security
@@ -562,7 +543,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -571,7 +552,7 @@ Table of Contents
    rule facilitates efficient and simple hardware implementations of
    AEAD algorithms.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Guidance%20on%20the%20Use%20of%20AEAD%20Algorithms"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Guidance on the Use of AEAD Algorithms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Guidance%20on%20the%20Use%20of%20AEAD%20Algorithms"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Guidance on the Use of AEAD Algorithms</span>
 
    This section provides advice that must be followed in order to use an
    AEAD algorithm securely.
@@ -584,7 +565,7 @@ Table of Contents
    support that length, applications should use that length to aid
    interoperability.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Requirements%20on%20Nonce%20Generation"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Requirements on Nonce Generation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Requirements%20on%20Nonce%20Generation"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Requirements on Nonce Generation</span>
 
    It is essential for security that the nonces be constructed in a
    manner that respects the requirement that each nonce value be
@@ -618,7 +599,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -639,7 +620,7 @@ Table of Contents
    Each AEAD algorithm <em>SHOULD</em> describe what security degradation would
    result from an inadvertent reuse of a nonce value.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Recommended%20Nonce%20Formation"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Recommended Nonce Formation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Recommended%20Nonce%20Formation"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Recommended Nonce Formation</span>
 
    The following method to construct nonces is <em>RECOMMENDED</em>.  The nonce
    is formatted as illustrated in Figure 1, with the initial octets
@@ -674,7 +655,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -685,7 +666,7 @@ Table of Contents
    nonces.  Thus, at most 2^(8*F) distinct encrypters can share a key
    when the Fixed field is F octets in length.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Partially%20Implicit%20Nonces"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Partially Implicit Nonces</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Partially%20Implicit%20Nonces"></a></body></html><a class="selflink" href="#section-3.2.1" id="section-3.2.1">3.2.1</a>.  Partially Implicit Nonces</span>
 
    In some cases, it is desirable to not transmit or store an entire
    nonce, but instead to reconstruct that value from contextual
@@ -730,11 +711,11 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Construction%20of%20AEAD%20Inputs"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Construction of AEAD Inputs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Construction%20of%20AEAD%20Inputs"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Construction of AEAD Inputs</span>
 
    If the AD input is constructed out of multiple data elements, then it
    is essential that it be unambiguously parseable into its constituent
@@ -758,7 +739,7 @@ Table of Contents
    encrypted there is a potential loss of confidentiality when
    information about the plaintext is included in the AD.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Example%20Usage"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Example Usage</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Example%20Usage"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Example Usage</span>
 
    To make use of an AEAD algorithm, an application must define how the
    encryption algorithm's inputs are defined in terms of application
@@ -786,7 +767,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -802,7 +783,7 @@ Table of Contents
    authentication tag).  Please note that here we have not described the
    use of the ESP Extended Sequence Number.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Requirements%20on%20AEAD%20Algorithm%20Specifications"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Requirements on AEAD Algorithm Specifications</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Requirements%20on%20AEAD%20Algorithm%20Specifications"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Requirements on AEAD Algorithm Specifications</span>
 
    Each AEAD algorithm <em>MUST</em> only accept keys with a fixed key length
    K_LEN, and <em>MUST NOT</em> require any particular data format for the keys
@@ -842,7 +823,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -898,17 +879,17 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20AEAD%20Algorithms"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  AEAD Algorithms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20AEAD%20Algorithms"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  AEAD Algorithms</span>
 
    This section defines four AEAD algorithms; two are based on AES GCM,
    two are based on AES CCM.  Each pair includes an algorithm with a key
    size of 128 bits and one with a key size of 256 bits.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20AEAD_AES_128_GCM"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  AEAD_AES_128_GCM</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20AEAD_AES_128_GCM"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  AEAD_AES_128_GCM</span>
 
    The AEAD_AES_128_GCM authenticated encryption algorithm works as
    specified in [<a href="#ref-GCM" title='"NIST Special Publication 800-38D: Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC."'>GCM</a>], using AES-128 as the block cipher, by providing
@@ -935,7 +916,7 @@ Table of Contents
 
    A security analysis of GCM is available in [<a href="#ref-MV04" title='"The Security and Performance of the Galois/Counter Mode (GCM)"'>MV04</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20Nonce%20Reuse"></a></body></html><a class="selflink" href="#section-5.1.1" name="section-5.1.1">5.1.1</a>.  Nonce Reuse</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20Nonce%20Reuse"></a></body></html><a class="selflink" href="#section-5.1.1" id="section-5.1.1">5.1.1</a>.  Nonce Reuse</span>
 
    The inadvertent reuse of the same nonce by two invocations of the GCM
    encryption operation, with the same key, but with distinct plaintext
@@ -954,7 +935,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -966,7 +947,7 @@ Table of Contents
    internal hash key used to provide data integrity.  Knowledge of this
    key makes subsequent forgeries trivial.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20AEAD_AES_256_GCM"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  AEAD_AES_256_GCM</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20AEAD_AES_256_GCM"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  AEAD_AES_256_GCM</span>
 
    This algorithm is identical to AEAD_AES_128_GCM, but with the
    following differences:
@@ -975,7 +956,7 @@ Table of Contents
 
       AES-256 GCM is used instead of AES-128 GCM.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20AEAD_AES_128_CCM"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  AEAD_AES_128_CCM</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20AEAD_AES_128_CCM"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  AEAD_AES_128_CCM</span>
 
    The AEAD_AES_128_CCM authenticated encryption algorithm works as
    specified in [<a href="#ref-CCM" title='"NIST Special Publication 800-38C: The CCM Mode for Authentication and Confidentiality"'>CCM</a>], using AES-128 as the block cipher, by providing
@@ -1010,7 +991,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -1019,7 +1000,7 @@ Table of Contents
 
    A security analysis of AES CCM is available in [<a href="#ref-J02" title='"On the Security of CTR + CBC-MAC"'>J02</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.1.%20%20Nonce%20Reuse"></a></body></html><a class="selflink" href="#section-5.3.1" name="section-5.3.1">5.3.1</a>.  Nonce Reuse</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.1.%20%20Nonce%20Reuse"></a></body></html><a class="selflink" href="#section-5.3.1" id="section-5.3.1">5.3.1</a>.  Nonce Reuse</span>
 
    Inadvertent reuse of the same nonce by two invocations of the CCM
    encryption operation, with the same key, undermines the security for
@@ -1027,7 +1008,7 @@ Table of Contents
    confidentiality ensues because an adversary will be able to
    reconstruct the bitwise exclusive-or of the two plaintext values.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20AEAD_AES_256_CCM"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  AEAD_AES_256_CCM</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20AEAD_AES_256_CCM"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  AEAD_AES_256_CCM</span>
 
    This algorithm is identical to AEAD_AES_128_CCM, but with the
    following differences:
@@ -1036,7 +1017,7 @@ Table of Contents
 
       AES-256 CCM is used instead of AES-128 CCM.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  IANA Considerations</span>
 
    The Internet Assigned Numbers Authority (IANA) has defined the "AEAD
    Registry" described below.  An algorithm designer <em>MAY</em> register an
@@ -1066,7 +1047,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -1078,7 +1059,7 @@ Table of Contents
    (binary 1111111111111111) inclusive, will not be assigned by IANA,
    and are reserved for private use; no attempt will be made to prevent
    multiple sites from using the same value in different (and
-   incompatible) ways [<a href="./rfc2434.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC2434</a>].
+   incompatible) ways [<a href="./rfc2434.html" title="">RFC2434</a>].
 
    IANA has added the following entries to the AEAD Registry:
 
@@ -1094,7 +1075,7 @@ Table of Contents
    An IANA registration of an AEAD does not constitute an endorsement of
    that algorithm or its security.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Other%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Other Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Other%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Other Considerations</span>
 
    Directly testing a randomized AEAD encryption algorithm using test
    cases with fixed inputs and outputs is not possible, since the
@@ -1122,7 +1103,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -1134,7 +1115,7 @@ Table of Contents
    current practice, and might be more easily supported by crypto
    modules that lack support for other AEAD algorithms.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Security Considerations</span>
 
    This document describes authenticated encryption algorithms, and
    provides guidance on their use.  While these algorithms make it
@@ -1165,7 +1146,7 @@ Table of Contents
    advances or to "Moore's Law", that is, the diminishing cost of
    computational resources over time.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Acknowledgments</span>
 
    Many reviewers provided valuable comments on earlier drafts of this
    document.  Some fruitful discussions took place on the email list of
@@ -1178,51 +1159,51 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" id="section-10.1">10.1</a>.  Normative References</span>
 
-   [<a id="ref-CCM" name="ref-CCM">CCM</a>]      Dworkin, M., "NIST Special Publication 800-38C: The CCM
+   [<a id="ref-CCM">CCM</a>]      Dworkin, M., "NIST Special Publication 800-38C: The CCM
               Mode for Authentication and Confidentiality", U.S.
               National Institute of Standards and Technology,
               &lt;<a href="http://csrc.nist.gov/publications/nistpubs/800-38C/SP800-38C.pdf">http://csrc.nist.gov/publications/nistpubs/800-38C/</a>
               <a href="http://csrc.nist.gov/publications/nistpubs/800-38C/SP800-38C.pdf">SP800-38C.pdf</a>&gt;.
 
-   [<a id="ref-GCM" name="ref-GCM">GCM</a>]      Dworkin, M., "NIST Special Publication 800-38D:
+   [<a id="ref-GCM">GCM</a>]      Dworkin, M., "NIST Special Publication 800-38D:
               Recommendation for Block Cipher Modes of Operation:
               Galois/Counter Mode (GCM) and GMAC.", U.S. National
               Institute of Standards and Technology, November 2007,
               &lt;<a href="http://csrc.nist.gov/publications/nistpubs/800-38D/SP-800-38D.pdf">http://csrc.nist.gov/publications/nistpubs/800-38D/</a>
               <a href="http://csrc.nist.gov/publications/nistpubs/800-38D/SP-800-38D.pdf">SP-800-38D.pdf</a>&gt;.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" id="section-10.2">10.2</a>.  Informative References</span>
 
-   [<a id="ref-BN00" name="ref-BN00">BN00</a>]     Bellare, M. and C. Namprempre, "Authenticated encryption:
+   [<a id="ref-BN00">BN00</a>]     Bellare, M. and C. Namprempre, "Authenticated encryption:
               Relations among notions and analysis of the generic
               composition paradigm", Proceedings of ASIACRYPT 2000,
               Springer-Verlag, LNCS 1976, pp. 531-545, 2002.
 
-   [<a id="ref-BOYD" name="ref-BOYD">BOYD</a>]     Boyd, C. and A. Mathuria, "Protocols for Authentication
+   [<a id="ref-BOYD">BOYD</a>]     Boyd, C. and A. Mathuria, "Protocols for Authentication
               and Key Establishment", Springer 2003.
 
-   [<a id="ref-CMAC" name="ref-CMAC">CMAC</a>]     "NIST Special Publication 800-38B", &lt;<a href="http://csrc.nist.gov/publications/nistpubs/800-38B/SP_800-38B.pdf">http://csrc.nist.gov/</a>
+   [<a id="ref-CMAC">CMAC</a>]     "NIST Special Publication 800-38B", &lt;<a href="http://csrc.nist.gov/publications/nistpubs/800-38B/SP_800-38B.pdf">http://csrc.nist.gov/</a>
               <a href="http://csrc.nist.gov/publications/nistpubs/800-38B/SP_800-38B.pdf">publications/nistpubs/800-38B/SP_800-38B.pdf</a>&gt;.
 
-   [<a id="ref-EEM04" name="ref-EEM04">EEM04</a>]    Bellare, M., Namprempre, C., and T. Kohno, "Breaking and
+   [<a id="ref-EEM04">EEM04</a>]    Bellare, M., Namprempre, C., and T. Kohno, "Breaking and
               provably repairing the SSH authenticated encryption
               scheme: A case study of the Encode-then-Encrypt-and-MAC
               paradigm", ACM Transactions on Information and
               System Security,
               &lt;<a href="http://www-cse.ucsd.edu/users/tkohno/papers/TISSEC04/">http://www-cse.ucsd.edu/users/tkohno/papers/TISSEC04/</a>&gt;.
 
-   [<a id="ref-GR05" name="ref-GR05">GR05</a>]     Garfinkel, T. and M. Rosenblum, "When Virtual is Harder
+   [<a id="ref-GR05">GR05</a>]     Garfinkel, T. and M. Rosenblum, "When Virtual is Harder
               than Real: Security Challenges in Virtual Machine Based
               Computing Environments", Proceedings of the 10th Workshop
               on Hot Topics in Operating Systems,
@@ -1234,53 +1215,53 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
-   [<a id="ref-J02" name="ref-J02">J02</a>]      Jonsson, J., "On the Security of CTR + CBC-MAC",
+   [<a id="ref-J02">J02</a>]      Jonsson, J., "On the Security of CTR + CBC-MAC",
               Proceedings of the 9th Annual Workshop on Selected Areas
               on Cryptography, 2002, &lt;<a href="http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/ccm/ccm-ad1.pdf">http://csrc.nist.gov/groups/ST/</a>
               <a href="http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/ccm/ccm-ad1.pdf">toolkit/BCM/documents/proposedmodes/ccm/ccm-ad1.pdf</a>&gt;.
 
-   [<a id="ref-MODES" name="ref-MODES">MODES</a>]    Dworkin, M., "NIST Special Publication 800-38:
+   [<a id="ref-MODES">MODES</a>]    Dworkin, M., "NIST Special Publication 800-38:
               Recommendation for Block Cipher Modes of Operation", U.S.
               National Institute of Standards and Technology,
               &lt;<a href="http://csrc.nist.gov/publications/nistpubs/800-38a/sp800-38a.pdf">http://csrc.nist.gov/publications/nistpubs/800-38a/</a>
               <a href="http://csrc.nist.gov/publications/nistpubs/800-38a/sp800-38a.pdf">sp800-38a.pdf</a>&gt;.
 
-   [<a id="ref-MV04" name="ref-MV04">MV04</a>]     McGrew, D. and J. Viega, "The Security and Performance of
+   [<a id="ref-MV04">MV04</a>]     McGrew, D. and J. Viega, "The Security and Performance of
               the Galois/Counter Mode (GCM)", Proceedings of
               INDOCRYPT '04, December 2004,
               &lt;<a href="http://eprint.iacr.org/2004/193">http://eprint.iacr.org/2004/193</a>&gt;.
 
-   [<a id="ref-R02" name="ref-R02">R02</a>]      Rogaway, P., "Authenticated encryption with Associated-
+   [<a id="ref-R02">R02</a>]      Rogaway, P., "Authenticated encryption with Associated-
               Data", ACM Conference on Computer and Communication
               Security (CCS'02), pp. 98-107, ACM Press, 2002,
               &lt;<a href="http://www.cs.ucdavis.edu/~rogaway/papers/ad.html">http://www.cs.ucdavis.edu/~rogaway/papers/ad.html</a>&gt;.
 
-   [<a id="ref-RFC2104" name="ref-RFC2104">RFC2104</a>]  Krawczyk, H., Bellare, M., and R. Canetti, "HMAC: Keyed-
+   [<a id="ref-RFC2104">RFC2104</a>]  Krawczyk, H., Bellare, M., and R. Canetti, "HMAC: Keyed-
               Hashing for Message Authentication", <a href="./rfc2104.html">RFC 2104</a>,
               February 1997.
 
-   [<a id="ref-RFC2434" name="ref-RFC2434">RFC2434</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
-              IANA Considerations Section in RFCs", <a href="./bcp26.html">BCP 26</a>, <a href="./rfc2434.html">RFC 2434</a>,
+   [<a id="ref-RFC2434">RFC2434</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", <a href="https://www.rfc-editor.org/bcp/bcp26">BCP 26</a>, <a href="./rfc2434.html">RFC 2434</a>,
               October 1998.
 
-   [<a id="ref-RFC4086" name="ref-RFC4086">RFC4086</a>]  Eastlake, D., Schiller, J., and S. Crocker, "Randomness
-              Requirements for Security", <a href="./bcp106.html">BCP 106</a>, <a href="./rfc4086.html">RFC 4086</a>, June 2005.
+   [<a id="ref-RFC4086">RFC4086</a>]  Eastlake, D., Schiller, J., and S. Crocker, "Randomness
+              Requirements for Security", <a href="https://www.rfc-editor.org/bcp/bcp106">BCP 106</a>, <a href="./rfc4086.html">RFC 4086</a>, June 2005.
 
-   [<a id="ref-RFC4106" name="ref-RFC4106">RFC4106</a>]  Viega, J. and D. McGrew, "The Use of Galois/Counter Mode
+   [<a id="ref-RFC4106">RFC4106</a>]  Viega, J. and D. McGrew, "The Use of Galois/Counter Mode
               (GCM) in IPsec Encapsulating Security Payload (ESP)",
               <a href="./rfc4106.html">RFC 4106</a>, June 2005.
 
-   [<a id="ref-RFC4107" name="ref-RFC4107">RFC4107</a>]  Bellovin, S. and R. Housley, "Guidelines for Cryptographic
-              Key Management", <a href="./bcp107.html">BCP 107</a>, <a href="./rfc4107.html">RFC 4107</a>, June 2005.
+   [<a id="ref-RFC4107">RFC4107</a>]  Bellovin, S. and R. Housley, "Guidelines for Cryptographic
+              Key Management", <a href="https://www.rfc-editor.org/bcp/bcp107">BCP 107</a>, <a href="./rfc4107.html">RFC 4107</a>, June 2005.
 
-   [<a id="ref-RFC4303" name="ref-RFC4303">RFC4303</a>]  Kent, S., "IP Encapsulating Security Payload (ESP)",
+   [<a id="ref-RFC4303">RFC4303</a>]  Kent, S., "IP Encapsulating Security Payload (ESP)",
               <a href="./rfc4303.html">RFC 4303</a>, December 2005.
 
-   [<a id="ref-RFC4309" name="ref-RFC4309">RFC4309</a>]  Housley, R., "Using Advanced Encryption Standard (AES) CCM
+   [<a id="ref-RFC4309">RFC4309</a>]  Housley, R., "Using Advanced Encryption Standard (AES) CCM
               Mode with IPsec Encapsulating Security Payload (ESP)",
               <a href="./rfc4309.html">RFC 4309</a>, December 2005.
 
@@ -1290,7 +1271,7 @@ Table of Contents
 
 
 <span class="grey">McGrew                      Standards Track                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -1346,7 +1327,7 @@ Author's Address
 
 
 <span class="grey">McGrew                      Standards Track                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5116.html">RFC 5116</a>                Authenticated Encryption            January 2008</span>
 
 
@@ -1355,7 +1336,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2008).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1375,7 +1356,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1402,11 +1383,6 @@ Intellectual Property
 
 
 McGrew                      Standards Track                    [Page 22]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

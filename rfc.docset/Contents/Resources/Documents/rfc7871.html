@@ -1,26 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-vandergaast-dnsop-edns-client-subnet" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:7871" name="DC.Identifier"/>
-<meta content="May, 2016" name="DC.Date.Issued"/>
-<meta content="Contavalli, Carlo" name="DC.Creator"/>
-<meta content="Kumari, Warren" name="DC.Creator"/>
-<meta content="Gaast, Wilmer van der" name="DC.Creator"/>
-<meta content="This document describes an Extension Mechanisms for DNS (EDNS0) option
-that is in active use to carry information about the network that
-originated a DNS query and the network for which the subsequent
-response can be cached. Since it has some known operational and
-privacy shortcomings, a revision will be worked through the IETF for
-improvement." name="DC.Description.Abstract"/>
-<meta content="Client Subnet in DNS Queries" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7871 - Client Subnet in DNS Queries</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="C. Contavalli" name="citation_author"/>
+<meta content="W. van der Gaast" name="citation_author"/>
+<meta content="D. Lawrence" name="citation_author"/>
+<meta content="W. Kumari" name="citation_author"/>
+<meta content="May, 2016" name="citation_publication_date"/>
+<meta content="Client Subnet in DNS Queries" name="citation_title"/>
+<meta content="10.17487/RFC7871" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7871" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7871.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7871: Client Subnet in DNS Queries</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -49,7 +43,7 @@ improvement." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -58,7 +52,7 @@ improvement." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -137,19 +131,18 @@ improvement." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -163,21 +156,9 @@ improvement." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7871.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7871" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-dnsop-edns-client-subnet.html" title="draft-ietf-dnsop-edns-client-subnet">draft-ietf-dnsop-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc7871" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc7871" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=7871">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                     C. Contavalli
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7871.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7871.txt.pdf">PDF</a>|<a href="/rfc/rfc7871.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7871" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7871&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc7871" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc7871" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Engineering Task Force (IETF)                     C. Contavalli
 Request for Comments: 7871                              W. van der Gaast
 Category: Informational                                           Google
 ISSN: 2070-1721                                              D. Lawrence
@@ -229,7 +210,7 @@ Status of This Memo
 
 
 <span class="grey">Contavalli, et al.            Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -238,7 +219,7 @@ Copyright Notice
    Copyright (c) 2016 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -285,7 +266,7 @@ Copyright Notice
 
 
 <span class="grey">Contavalli, et al.            Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -341,11 +322,11 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Many Authoritative Nameservers today return different responses based
    on the perceived topological location of the user.  These servers use
@@ -397,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -412,7 +393,7 @@ Table of Contents
    A revised proposal to improve upon the minor flaws in this protocol
    will be forthcoming to the IETF.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Privacy%20Note"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Privacy Note</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Privacy%20Note"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Privacy Note</span>
 
    If we were just beginning to design this mechanism, and not
    documenting existing protocol, it is unlikely that we would have done
@@ -440,7 +421,7 @@ Table of Contents
    applications are known to be able to indicate that user preference to
    the stub resolver.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Requirements Notation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Requirements Notation</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -453,11 +434,11 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Terminology"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Terminology"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Terminology</span>
 
    ECS:  EDNS Client Subnet.
 
@@ -509,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -520,7 +501,7 @@ Table of Contents
    For a more comprehensive treatment of DNS terms, please see
    [<a href="./rfc7719.html" title='"DNS Terminology"'>RFC7719</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Overview"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Overview</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Overview"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Overview</span>
 
    The general idea of this document is to provide an EDNS0 option to
    allow Recursive Resolvers, if they are willing, to forward details
@@ -565,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -578,7 +559,7 @@ Table of Contents
    queries to forward or to reduce the number of bits forwarded for
    queries already including an ECS option.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Option%20Format"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Option Format</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Option%20Format"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Option Format</span>
 
    This protocol uses an EDNS0 [<a href="./rfc6891.html" title='"Extension Mechanisms for DNS (EDNS(0))"'>RFC6891</a>] option to include client
    address information in DNS messages.  The option is structured as
@@ -621,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -643,16 +624,16 @@ Table of Contents
    All fields are in network byte order ("big-endian", per [<a href="./rfc1700.html" title='"Assigned Numbers"'>RFC1700</a>],
    Data Notation).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Protocol%20Description"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Protocol Description</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Protocol%20Description"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Protocol Description</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Originating%20the%20Option"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Originating the Option</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Originating%20the%20Option"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Originating the Option</span>
 
    The ECS option should generally be added by Recursive Resolvers when
    querying Authoritative Nameservers, as described in <a href="#section-12">Section 12</a>.  The
    option can also be initialized by a Stub Resolver or Forwarding
    Resolver.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.1.%20%20Recursive%20Resolvers"></a></body></html><a class="selflink" href="#section-7.1.1" name="section-7.1.1">7.1.1</a>.  Recursive Resolvers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.1.%20%20Recursive%20Resolvers"></a></body></html><a class="selflink" href="#section-7.1.1" id="section-7.1.1">7.1.1</a>.  Recursive Resolvers</span>
 
    The setup of the ECS option in a Recursive Resolver depends on the
    client query that triggered the resolution process.
@@ -677,7 +658,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -703,7 +684,7 @@ Table of Contents
    previous response indicated that a shorter prefix length was
    sufficient.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.2.%20%20Stub%20Resolvers"></a></body></html><a class="selflink" href="#section-7.1.2" name="section-7.1.2">7.1.2</a>.  Stub Resolvers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.2.%20%20Stub%20Resolvers"></a></body></html><a class="selflink" href="#section-7.1.2" id="section-7.1.2">7.1.2</a>.  Stub Resolvers</span>
 
    A Stub Resolver <em>MAY</em> generate DNS queries with an ECS option that sets
    SOURCE PREFIX-LENGTH to limit how network information should be
@@ -733,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -741,7 +722,7 @@ Table of Contents
    the option if FAMILY is not 1 or 2, even though it is irrelevant if
    there are no ADDRESS bits.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.3.%20%20Forwarding%20Resolvers"></a></body></html><a class="selflink" href="#section-7.1.3" name="section-7.1.3">7.1.3</a>.  Forwarding Resolvers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.3.%20%20Forwarding%20Resolvers"></a></body></html><a class="selflink" href="#section-7.1.3" id="section-7.1.3">7.1.3</a>.  Forwarding Resolvers</span>
 
    Forwarding Resolvers essentially appear to be Stub Resolvers to
    whatever Recursive Resolver is ultimately handling the query, but
@@ -759,9 +740,9 @@ Table of Contents
    a query that includes a non-zero ADDRESS, it <em>MUST</em> retry with no
    ADDRESS.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Generating%20a%20Response"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Generating a Response</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Generating%20a%20Response"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Generating a Response</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.1.%20%20Authoritative%20Nameserver"></a></body></html><a class="selflink" href="#section-7.2.1" name="section-7.2.1">7.2.1</a>.  Authoritative Nameserver</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.1.%20%20Authoritative%20Nameserver"></a></body></html><a class="selflink" href="#section-7.2.1" id="section-7.2.1">7.2.1</a>.  Authoritative Nameserver</span>
 
    When a query containing an ECS option is received, an Authoritative
    Nameserver supporting ECS <em>MAY</em> use the address information specified
@@ -789,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -845,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -891,7 +872,7 @@ Table of Contents
    for 1.2.0/23, 1.2.2/24, 1.2.4/22, and 1.2.8/21 all pointing to A, and
    1.2.3/24 to B.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.2.%20%20Intermediate%20Nameserver"></a></body></html><a class="selflink" href="#section-7.2.2" name="section-7.2.2">7.2.2</a>.  Intermediate Nameserver</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.2.%20%20Intermediate%20Nameserver"></a></body></html><a class="selflink" href="#section-7.2.2" id="section-7.2.2">7.2.2</a>.  Intermediate Nameserver</span>
 
    When an Intermediate Nameserver uses ECS, whether it passes an ECS
    option in its own response to its client is predicated on whether the
@@ -901,7 +882,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -925,7 +906,7 @@ Table of Contents
    Nameserver already knows the response to provide to its client is
    covered in the next section.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Handling%20ECS%20Responses%20and%20Caching"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  Handling ECS Responses and Caching</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Handling%20ECS%20Responses%20and%20Caching"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  Handling ECS Responses and Caching</span>
 
    When an Intermediate Nameserver receives a response containing an ECS
    option and without the TC bit set, it <em>SHOULD</em> cache the result based
@@ -957,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -965,7 +946,7 @@ Table of Contents
    sufficiently clear whether the REFUSED response was because of the
    ECS option or some other reason.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.1.%20%20Caching%20the%20Response"></a></body></html><a class="selflink" href="#section-7.3.1" name="section-7.3.1">7.3.1</a>.  Caching the Response</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.1.%20%20Caching%20the%20Response"></a></body></html><a class="selflink" href="#section-7.3.1" id="section-7.3.1">7.3.1</a>.  Caching the Response</span>
 
    In the cache, all resource records in the Answer section <em>MUST</em> be tied
    to the network specified in the response.  The appropriate prefix
@@ -1013,7 +994,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -1031,7 +1012,7 @@ Table of Contents
    implementers should consider data storage formats that allow the same
    answer data to be shared among multiple prefixes.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.2.%20%20Answering%20from%20Cache"></a></body></html><a class="selflink" href="#section-7.3.2" name="section-7.3.2">7.3.2</a>.  Answering from Cache</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.2.%20%20Answering%20from%20Cache"></a></body></html><a class="selflink" href="#section-7.3.2" id="section-7.3.2">7.3.2</a>.  Answering from Cache</span>
 
    Cache lookups are first done as usual for a DNS query, using the
    query tuple of &lt;name, type, class&gt;.  Then, the appropriate RRset <em>MUST</em>
@@ -1069,7 +1050,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -1077,7 +1058,7 @@ Table of Contents
    from polluting the cache with a Tailored Response for all the users
    of that resolver.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Delegations%20and%20Negative%20Answers"></a></body></html><a class="selflink" href="#section-7.4" name="section-7.4">7.4</a>.  Delegations and Negative Answers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Delegations%20and%20Negative%20Answers"></a></body></html><a class="selflink" href="#section-7.4" id="section-7.4">7.4</a>.  Delegations and Negative Answers</span>
 
    The prohibition against tying ECS data to records from the Authority
    and Additional sections left an unfortunate ambiguity in the original
@@ -1125,11 +1106,11 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Transitivity"></a></body></html><a class="selflink" href="#section-7.5" name="section-7.5">7.5</a>.  Transitivity</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Transitivity"></a></body></html><a class="selflink" href="#section-7.5" id="section-7.5">7.5</a>.  Transitivity</span>
 
    Generally, ECS options will only be present in DNS messages between a
    Recursive Resolver and an Authoritative Nameserver, i.e., one hop.
@@ -1165,7 +1146,7 @@ Table of Contents
    another network (the one which contains the address that the
    Intermediate Nameserver saw as making the query).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  IANA Considerations</span>
 
    IANA has assigned option code 8 in the "DNS EDNS0 Option Codes (OPT)"
    registry to edns-client-subnet.
@@ -1181,11 +1162,11 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20DNSSEC%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  DNSSEC Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20DNSSEC%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  DNSSEC Considerations</span>
 
    The presence or absence of an EDNS0 OPT resource record ([<a href="./rfc6891.html" title='"Extension Mechanisms for DNS (EDNS(0))"'>RFC6891</a>])
    containing an ECS option in a DNS query does not change the usage of
@@ -1220,7 +1201,7 @@ Table of Contents
    records at /0 per the previous paragraph necessarily implies that
    DNSSEC-signed negative answers must also be network-invariant.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20NAT%20Considerations"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  NAT Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20NAT%20Considerations"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  NAT Considerations</span>
 
    Special awareness of ECS in devices that perform Network Address
    Translation (NAT) as described in [<a href="./rfc2663.html" title='"IP Network Address Translator (NAT) Terminology and Considerations"'>RFC2663</a>] is not required; queries
@@ -1237,7 +1218,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -1266,9 +1247,9 @@ Table of Contents
    answer under one entry for special-purpose addresses [<a href="./rfc6890.html" title='"Special-Purpose IP Address Registries"'>RFC6890</a>]; see
    <a href="#section-11.3">Section 11.3</a> of this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  Security Considerations</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20Privacy"></a></body></html><a class="selflink" href="#section-11.1" name="section-11.1">11.1</a>.  Privacy</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20Privacy"></a></body></html><a class="selflink" href="#section-11.1" id="section-11.1">11.1</a>.  Privacy</span>
 
    With the ECS option, the network address of the client that initiated
    the resolution becomes visible to all servers involved in the
@@ -1293,7 +1274,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -1307,7 +1288,7 @@ Table of Contents
    of queries to return a cached entry or to generate a Tailored
    Response that best matches the query.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20%20Birthday%20Attacks"></a></body></html><a class="selflink" href="#section-11.2" name="section-11.2">11.2</a>.  Birthday Attacks</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20%20Birthday%20Attacks"></a></body></html><a class="selflink" href="#section-11.2" id="section-11.2">11.2</a>.  Birthday Attacks</span>
 
    ECS adds information to the DNS query tuple (q-tuple).  This allows
    an attacker to send a caching Intermediate Nameserver multiple
@@ -1349,11 +1330,11 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.3.%20%20Cache%20Pollution"></a></body></html><a class="selflink" href="#section-11.3" name="section-11.3">11.3</a>.  Cache Pollution</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.3.%20%20Cache%20Pollution"></a></body></html><a class="selflink" href="#section-11.3" id="section-11.3">11.3</a>.  Cache Pollution</span>
 
    It is simple for an arbitrary resolver or client to provide false
    information in the ECS option, or to send UDP packets with forged
@@ -1405,7 +1386,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -1422,13 +1403,13 @@ Table of Contents
       ECS option based on blacklists or whitelists, rate-limiting
       mechanisms, or any other logic implemented in the software.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20Sending%20the%20Option"></a></body></html><a class="selflink" href="#section-12" name="section-12">12</a>.  Sending the Option</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20Sending%20the%20Option"></a></body></html><a class="selflink" href="#section-12" id="section-12">12</a>.  Sending the Option</span>
 
    When implementing a Recursive Resolver, there are two strategies on
    deciding when to include an ECS option in a query.  At this stage,
    it's not clear which strategy is best.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.1.%20%20Probing"></a></body></html><a class="selflink" href="#section-12.1" name="section-12.1">12.1</a>.  Probing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.1.%20%20Probing"></a></body></html><a class="selflink" href="#section-12.1" id="section-12.1">12.1</a>.  Probing</span>
 
    A Recursive Resolver can send the ECS option with every outgoing
    query.  However, it is <em>RECOMMENDED</em> that resolvers remember which
@@ -1461,11 +1442,11 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.2.%20%20Whitelist"></a></body></html><a class="selflink" href="#section-12.2" name="section-12.2">12.2</a>.  Whitelist</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.2.%20%20Whitelist"></a></body></html><a class="selflink" href="#section-12.2" id="section-12.2">12.2</a>.  Whitelist</span>
 
    As described previously, it is expected that only a few Recursive
    Resolvers will need to use ECS, and that it will generally be enabled
@@ -1496,7 +1477,7 @@ Table of Contents
    The maintenance of access control mechanisms is out of scope for this
    protocol definition.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.%20%20Example"></a></body></html><a class="selflink" href="#section-13" name="section-13">13</a>.  Example</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/13.%20%20Example"></a></body></html><a class="selflink" href="#section-13" id="section-13">13</a>.  Example</span>
 
    1.   A Stub Resolver, SR, with the IP address
         2001:0db8:fd13:4231:2112:8a2e:c37b:7334 tries to resolve
@@ -1517,7 +1498,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -1573,7 +1554,7 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -1592,33 +1573,33 @@ Table of Contents
         match, the one with the longest SCOPE PREFIX-LENGTH is chosen,
         as per common best-network-match algorithms.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.%20%20References"></a></body></html><a class="selflink" href="#section-14" name="section-14">14</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.%20%20References"></a></body></html><a class="selflink" href="#section-14" id="section-14">14</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-14.1" name="section-14.1">14.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-14.1" id="section-14.1">14.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC1034" name="ref-RFC1034">RFC1034</a>]  Mockapetris, P., "Domain Names - Concepts and Facilities",
+   [<a id="ref-RFC1034">RFC1034</a>]  Mockapetris, P., "Domain Names - Concepts and Facilities",
               STD 13, <a href="./rfc1034.html">RFC 1034</a>, DOI 10.17487/RFC1034, November 1987,
               &lt;<a href="http://www.rfc-editor.org/info/rfc1034">http://www.rfc-editor.org/info/rfc1034</a>&gt;.
 
-   [<a id="ref-RFC1035" name="ref-RFC1035">RFC1035</a>]  Mockapetris, P., "Domain Names - Implementation and
+   [<a id="ref-RFC1035">RFC1035</a>]  Mockapetris, P., "Domain Names - Implementation and
               Specification", STD 13, <a href="./rfc1035.html">RFC 1035</a>, DOI 10.17487/RFC1035,
               November 1987, &lt;<a href="http://www.rfc-editor.org/info/rfc1035">http://www.rfc-editor.org/info/rfc1035</a>&gt;.
 
-   [<a id="ref-RFC1700" name="ref-RFC1700">RFC1700</a>]  Reynolds, J. and J. Postel, "Assigned Numbers", <a href="./rfc1700.html">RFC 1700</a>,
+   [<a id="ref-RFC1700">RFC1700</a>]  Reynolds, J. and J. Postel, "Assigned Numbers", <a href="./rfc1700.html">RFC 1700</a>,
               DOI 10.17487/RFC1700, October 1994,
               &lt;<a href="http://www.rfc-editor.org/info/rfc1700">http://www.rfc-editor.org/info/rfc1700</a>&gt;.
 
-   [<a id="ref-RFC1918" name="ref-RFC1918">RFC1918</a>]  Rekhter, Y., Moskowitz, B., Karrenberg, D., de Groot, G.,
+   [<a id="ref-RFC1918">RFC1918</a>]  Rekhter, Y., Moskowitz, B., Karrenberg, D., de Groot, G.,
               and E. Lear, "Address Allocation for Private Internets",
-              <a href="./bcp5.html">BCP 5</a>, <a href="./rfc1918.html">RFC 1918</a>, DOI 10.17487/RFC1918, February 1996,
+              <a href="https://www.rfc-editor.org/bcp/bcp5">BCP 5</a>, <a href="./rfc1918.html">RFC 1918</a>, DOI 10.17487/RFC1918, February 1996,
               &lt;<a href="http://www.rfc-editor.org/info/rfc1918">http://www.rfc-editor.org/info/rfc1918</a>&gt;.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
               DOI 10.17487/RFC2119, March 1997,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2119">http://www.rfc-editor.org/info/rfc2119</a>&gt;.
 
-   [<a id="ref-RFC4033" name="ref-RFC4033">RFC4033</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
+   [<a id="ref-RFC4033">RFC4033</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "DNS Security Introduction and Requirements",
               <a href="./rfc4033.html">RFC 4033</a>, DOI 10.17487/RFC4033, March 2005,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4033">http://www.rfc-editor.org/info/rfc4033</a>&gt;.
@@ -1629,80 +1610,80 @@ Table of Contents
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
-   [<a id="ref-RFC4034" name="ref-RFC4034">RFC4034</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
+   [<a id="ref-RFC4034">RFC4034</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "Resource Records for the DNS Security Extensions",
               <a href="./rfc4034.html">RFC 4034</a>, DOI 10.17487/RFC4034, March 2005,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4034">http://www.rfc-editor.org/info/rfc4034</a>&gt;.
 
-   [<a id="ref-RFC4035" name="ref-RFC4035">RFC4035</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
+   [<a id="ref-RFC4035">RFC4035</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "Protocol Modifications for the DNS Security
               Extensions", <a href="./rfc4035.html">RFC 4035</a>, DOI 10.17487/RFC4035, March 2005,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4035">http://www.rfc-editor.org/info/rfc4035</a>&gt;.
 
-   [<a id="ref-RFC4193" name="ref-RFC4193">RFC4193</a>]  Hinden, R. and B. Haberman, "Unique Local IPv6 Unicast
+   [<a id="ref-RFC4193">RFC4193</a>]  Hinden, R. and B. Haberman, "Unique Local IPv6 Unicast
               Addresses", <a href="./rfc4193.html">RFC 4193</a>, DOI 10.17487/RFC4193, October 2005,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4193">http://www.rfc-editor.org/info/rfc4193</a>&gt;.
 
-   [<a id="ref-RFC6177" name="ref-RFC6177">RFC6177</a>]  Narten, T., Huston, G., and L. Roberts, "IPv6 Address
-              Assignment to End Sites", <a href="./bcp157.html">BCP 157</a>, <a href="./rfc6177.html">RFC 6177</a>,
+   [<a id="ref-RFC6177">RFC6177</a>]  Narten, T., Huston, G., and L. Roberts, "IPv6 Address
+              Assignment to End Sites", <a href="https://www.rfc-editor.org/bcp/bcp157">BCP 157</a>, <a href="./rfc6177.html">RFC 6177</a>,
               DOI 10.17487/RFC6177, March 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6177">http://www.rfc-editor.org/info/rfc6177</a>&gt;.
 
-   [<a id="ref-RFC6890" name="ref-RFC6890">RFC6890</a>]  Cotton, M., Vegoda, L., Bonica, R., Ed., and B. Haberman,
-              "Special-Purpose IP Address Registries", <a href="./bcp153.html">BCP 153</a>,
+   [<a id="ref-RFC6890">RFC6890</a>]  Cotton, M., Vegoda, L., Bonica, R., Ed., and B. Haberman,
+              "Special-Purpose IP Address Registries", <a href="https://www.rfc-editor.org/bcp/bcp153">BCP 153</a>,
               <a href="./rfc6890.html">RFC 6890</a>, DOI 10.17487/RFC6890, April 2013,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6890">http://www.rfc-editor.org/info/rfc6890</a>&gt;.
 
-   [<a id="ref-RFC6891" name="ref-RFC6891">RFC6891</a>]  Damas, J., Graff, M., and P. Vixie, "Extension Mechanisms
+   [<a id="ref-RFC6891">RFC6891</a>]  Damas, J., Graff, M., and P. Vixie, "Extension Mechanisms
               for DNS (EDNS(0))", STD 75, <a href="./rfc6891.html">RFC 6891</a>,
               DOI 10.17487/RFC6891, April 2013,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6891">http://www.rfc-editor.org/info/rfc6891</a>&gt;.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-14.2" name="section-14.2">14.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/14.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-14.2" id="section-14.2">14.2</a>.  Informative References</span>
 
-   [<a id="ref-Address_Family_Numbers" name="ref-Address_Family_Numbers">Address_Family_Numbers</a>]
+   [<a id="ref-Address_Family_Numbers">Address_Family_Numbers</a>]
               IANA, "Address Family Numbers",
               &lt;<a href="http://www.iana.org/assignments/address-family-numbers">http://www.iana.org/assignments/address-family-numbers</a>&gt;.
 
-   [<a id="ref-DPRIVE_Working_Group" name="ref-DPRIVE_Working_Group">DPRIVE_Working_Group</a>]
+   [<a id="ref-DPRIVE_Working_Group">DPRIVE_Working_Group</a>]
               IETF, "PNS PRIVate Exchange (dprive) DPRIVE Working
               Group", 2015,
               &lt;<a href="https://datatracker.ietf.org/wg/dprive/charter/">https://datatracker.ietf.org/wg/dprive/charter/</a>&gt;.
 
-   [<a id="ref-METADATA" name="ref-METADATA">METADATA</a>]
+   [<a id="ref-METADATA">METADATA</a>]
               Hardie, T., Ed., "Design considerations for Metadata
               Insertion", Work in Progress, <a href="./draft-hardie-privsec-metadata-insertion-02.html">draft-hardie-privsec-</a>
               <a href="./draft-hardie-privsec-metadata-insertion-02.html">metadata-insertion-02</a>, March 2016.
 
-   [<a id="ref-Public_Suffix_List" name="ref-Public_Suffix_List">Public_Suffix_List</a>]
+   [<a id="ref-Public_Suffix_List">Public_Suffix_List</a>]
               "Public Suffix List", &lt;<a href="https://publicsuffix.org/">https://publicsuffix.org/</a>&gt;.
 
 
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
-   [<a id="ref-RFC2308" name="ref-RFC2308">RFC2308</a>]  Andrews, M., "Negative Caching of DNS Queries (DNS
+   [<a id="ref-RFC2308">RFC2308</a>]  Andrews, M., "Negative Caching of DNS Queries (DNS
               NCACHE)", <a href="./rfc2308.html">RFC 2308</a>, DOI 10.17487/RFC2308, March 1998,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2308">http://www.rfc-editor.org/info/rfc2308</a>&gt;.
 
-   [<a id="ref-RFC2663" name="ref-RFC2663">RFC2663</a>]  Srisuresh, P. and M. Holdrege, "IP Network Address
+   [<a id="ref-RFC2663">RFC2663</a>]  Srisuresh, P. and M. Holdrege, "IP Network Address
               Translator (NAT) Terminology and Considerations",
               <a href="./rfc2663.html">RFC 2663</a>, DOI 10.17487/RFC2663, August 1999,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2663">http://www.rfc-editor.org/info/rfc2663</a>&gt;.
 
-   [<a id="ref-RFC7719" name="ref-RFC7719">RFC7719</a>]  Hoffman, P., Sullivan, A., and K. Fujiwara, "DNS
+   [<a id="ref-RFC7719">RFC7719</a>]  Hoffman, P., Sullivan, A., and K. Fujiwara, "DNS
               Terminology", <a href="./rfc7719.html">RFC 7719</a>, DOI 10.17487/RFC7719, December
               2015, &lt;<a href="http://www.rfc-editor.org/info/rfc7719">http://www.rfc-editor.org/info/rfc7719</a>&gt;.
 
-   [<a id="ref-VANDERGAAST" name="ref-VANDERGAAST">VANDERGAAST</a>]
+   [<a id="ref-VANDERGAAST">VANDERGAAST</a>]
               Contavalli, C., Gaast, W., Leach, S., and E. Lewis,
               "Client Subnet in DNS Requests", Work in Progress,
               <a href="./draft-vandergaast-edns-client-subnet-02.html">draft-vandergaast-edns-client-subnet-02</a>, July 2013.
@@ -1741,7 +1722,7 @@ Acknowledgements
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -1797,7 +1778,7 @@ Contributors
 
 
 <span class="grey">Contavalli, et al.            Informational                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc7871.html">RFC 7871</a>              Client Subnet in DNS Queries              May 2016</span>
 
 
@@ -1853,11 +1834,6 @@ Authors' Addresses
 
 
 Contavalli, et al.            Informational                    [Page 30]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,24 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="   This specification describes how to declare in a JSON Web Token (JWT)
-   that the presenter of the JWT possesses a particular proof-of-
-   possession key and how the recipient can cryptographically confirm
-   proof of possession of the key by the presenter.  Being able to prove
-   possession of a key is also sometimes described as the presenter
-   being a holder-of-key.
-" name="DC.Description.Abstract"/>
-<meta content="Bradley, John" name="DC.Creator"/>
-<meta content="Jones, Michael B." name="DC.Creator"/>
-<meta content="Tschofenig, Hannes" name="DC.Creator"/>
-<meta content="Proof-of-Possession Key Semantics for JSON Web Tokens (JWTs)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7800 - Proof-of-Possession Key Semantics for JSON Web Tokens (JWTs)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="M. Jones" name="citation_author"/>
+<meta content="J. Bradley" name="citation_author"/>
+<meta content="H. Tschofenig" name="citation_author"/>
+<meta content="April, 2016" name="citation_publication_date"/>
+<meta content="Proof-of-Possession Key Semantics for JSON Web Tokens (JWTs)" name="citation_title"/>
+<meta content="10.17487/RFC7800" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7800" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7800.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7800: Proof-of-Possession Key Semantics for JSON Web Tokens (JWTs)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -47,7 +42,7 @@
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -56,7 +51,7 @@
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -135,19 +130,18 @@
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -161,21 +155,9 @@
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7800.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7800" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-oauth-proof-of-possession.html" title="draft-ietf-oauth-proof-of-possession">draft-ietf-oauth-...</a>]                                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                          M. Jones
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7800.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7800.txt.pdf">PDF</a>|<a href="/rfc/rfc7800.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7800" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7800&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc7800" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc7800" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Engineering Task Force (IETF)                          M. Jones
 Request for Comments: 7800                                     Microsoft
 Category: Standards Track                                     J. Bradley
 ISSN: 2070-1721                                            Ping Identity
@@ -214,7 +196,7 @@ Copyright Notice
    Copyright (c) 2016 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -227,7 +209,7 @@ Copyright Notice
 
 
 <span class="grey">Jones, et al.                Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
@@ -258,7 +240,7 @@ Table of Contents
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-15">15</a>
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-15">15</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This specification describes how a JSON Web Token [<a href="#ref-JWT" title='"JSON Web Token (JWT)"'>JWT</a>] can declare
    that the presenter of the JWT possesses a particular proof-of-
@@ -283,7 +265,7 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
@@ -339,7 +321,7 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
@@ -395,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
@@ -405,7 +387,7 @@ Table of Contents
    In both cases, the JWT may contain other claims that are needed by
    the application.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Notational%20Conventions"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Notational Conventions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Notational%20Conventions"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Notational Conventions</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "NOT <em>RECOMMENDED</em>", "<em>MAY</em>", and
@@ -415,7 +397,7 @@ Table of Contents
    Unless otherwise noted, all the protocol parameter names and values
    are case sensitive.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    This specification uses terms defined in the JSON Web Token [<a href="#ref-JWT" title='"JSON Web Token (JWT)"'>JWT</a>],
    JSON Web Key [<a href="#ref-JWK" title='"JSON Web Key (JWK)"'>JWK</a>], and JSON Web Encryption [<a href="#ref-JWE" title='"JSON Web Encryption (JWE)"'>JWE</a>] specifications.
@@ -435,7 +417,7 @@ Table of Contents
       Party that receives the JWT containing the proof-of-possession key
       information from the presenter.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Representations%20for%20Proof-of-Possession%20Keys"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Representations for Proof-of-Possession Keys</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Representations%20for%20Proof-of-Possession%20Keys"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Representations for Proof-of-Possession Keys</span>
 
    By including a "cnf" (confirmation) claim in a JWT, the issuer of the
    JWT declares that the presenter possesses a particular key and that
@@ -451,7 +433,7 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
@@ -471,7 +453,7 @@ Table of Contents
    identifying the presenter is application specific, as is the means of
    confirming possession of the key that is communicated.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Confirmation%20Claim"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Confirmation Claim</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Confirmation%20Claim"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Confirmation Claim</span>
 
    The "cnf" claim is used in the JWT to contain members used to
    identify the proof-of-possession key.  Other members of the "cnf"
@@ -507,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
@@ -516,7 +498,7 @@ Table of Contents
    applications or other specifications and could be registered in the
    IANA "JSON Web Token Claims" registry [<a href="#ref-IANA.JWT.Claims">IANA.JWT.Claims</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Representation%20of%20an%20Asymmetric%20Proof-of-Possession%20Key"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Representation of an Asymmetric Proof-of-Possession Key</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Representation%20of%20an%20Asymmetric%20Proof-of-Possession%20Key"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Representation of an Asymmetric Proof-of-Possession Key</span>
 
    When the key held by the presenter is an asymmetric private key, the
    "jwk" member is a JSON Web Key [<a href="#ref-JWK" title='"JSON Web Key (JWK)"'>JWK</a>] representing the corresponding
@@ -548,7 +530,7 @@ Table of Contents
    explained in [<a href="#ref-JWT" title='"JSON Web Token (JWT)"'>JWT</a>].  If the JWT is not encrypted, the symmetric key
    <em>MUST</em> be encrypted as described below.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Representation%20of%20an%20Encrypted%20Symmetric%20Proof-of-Possession%20Key"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Representation of an Encrypted Symmetric Proof-of-Possession Key</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Representation%20of%20an%20Encrypted%20Symmetric%20Proof-of-Possession%20Key"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Representation of an Encrypted Symmetric Proof-of-Possession Key</span>
 
    When the key held by the presenter is a symmetric key, the "jwe"
    member is an encrypted JSON Web Key [<a href="#ref-JWK" title='"JSON Web Key (JWK)"'>JWK</a>] encrypted to a key known to
@@ -563,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
@@ -604,7 +586,7 @@ Table of Contents
         }
      }
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Representation%20of%20a%20Key%20ID%20for%20a%20Proof-of-Possession%20Key"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Representation of a Key ID for a Proof-of-Possession Key</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Representation%20of%20a%20Key%20ID%20for%20a%20Proof-of-Possession%20Key"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Representation of a Key ID for a Proof-of-Possession Key</span>
 
    The proof-of-possession key can also be identified by the use of a
    Key ID instead of communicating the actual key, provided the
@@ -619,7 +601,7 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
@@ -639,7 +621,7 @@ Table of Contents
    instance, some applications may choose to use a JWK Thumbprint
    [<a href="#ref-JWK.Thumbprint">JWK.Thumbprint</a>] value as the "kid" value.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Representation%20of%20a%20URL%20for%20a%20Proof-of-Possession%20Key"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  Representation of a URL for a Proof-of-Possession Key</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Representation%20of%20a%20URL%20for%20a%20Proof-of-Possession%20Key"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  Representation of a URL for a Proof-of-Possession Key</span>
 
    The proof-of-possession key can be passed by reference instead of
    being passed by value.  This is done using the "jku" member.  Its
@@ -675,11 +657,11 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                    [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20Specifics%20Intentionally%20Not%20Specified"></a></body></html><a class="selflink" href="#section-3.6" name="section-3.6">3.6</a>.  Specifics Intentionally Not Specified</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20Specifics%20Intentionally%20Not%20Specified"></a></body></html><a class="selflink" href="#section-3.6" id="section-3.6">3.6</a>.  Specifics Intentionally Not Specified</span>
 
    Proof of possession is typically demonstrated by having the presenter
    sign a value determined by the recipient using the key possessed by
@@ -699,7 +681,7 @@ Table of Contents
    For examples using the mechanisms defined in this specification, see
    [<a href="#ref-OAUTH-POP-ARCH">OAUTH-POP-ARCH</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Security Considerations</span>
 
    All of the security considerations that are discussed in [<a href="#ref-JWT" title='"JSON Web Token (JWT)"'>JWT</a>] also
    apply here.  In addition, proof of possession introduces its own
@@ -731,7 +713,7 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                   [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
@@ -746,19 +728,19 @@ Table of Contents
    since those not only require integrity protection but also
    confidentiality protection.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Privacy%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Privacy Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Privacy%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Privacy Considerations</span>
 
    A proof-of-possession key can be used as a correlation handle if the
    same key is used with multiple parties.  Thus, for privacy reasons,
    it is recommended that different proof-of-possession keys be used
    when interacting with different parties.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  IANA Considerations</span>
 
    The following registration procedure is used for all the registries
    established by this specification.
 
-   Values are registered on a Specification Required [<a href="./rfc5226.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC5226</a>] basis
+   Values are registered on a Specification Required [<a href="./rfc5226.html" title="">RFC5226</a>] basis
    after a three-week review period on the jwt-reg-review@ietf.org
    mailing list, on the advice of one or more Designated Experts.
    However, to allow for the allocation of values prior to publication,
@@ -787,33 +769,33 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                   [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
    Expert, that Expert should defer to the judgment of the other
    Experts.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20JSON%20Web%20Token%20Claims%20Registration"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  JSON Web Token Claims Registration</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20JSON%20Web%20Token%20Claims%20Registration"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  JSON Web Token Claims Registration</span>
 
    This specification registers the "cnf" claim in the IANA "JSON Web
    Token Claims" registry [<a href="#ref-IANA.JWT.Claims">IANA.JWT.Claims</a>] established by [<a href="#ref-JWT" title='"JSON Web Token (JWT)"'>JWT</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.1.%20%20Registry%20Contents"></a></body></html><a class="selflink" href="#section-6.1.1" name="section-6.1.1">6.1.1</a>.  Registry Contents</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.1.%20%20Registry%20Contents"></a></body></html><a class="selflink" href="#section-6.1.1" id="section-6.1.1">6.1.1</a>.  Registry Contents</span>
 
    o  Claim Name: "cnf"
    o  Claim Description: Confirmation
    o  Change Controller: IESG
    o  Specification Document(s): <a href="./rfc7800.html#section-3.1">Section 3.1 of [RFC7800]</a>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20JWT%20Confirmation%20Methods%20Registry"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  JWT Confirmation Methods Registry</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20JWT%20Confirmation%20Methods%20Registry"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  JWT Confirmation Methods Registry</span>
 
    This specification establishes the IANA "JWT Confirmation Methods"
    registry for JWT "cnf" member values.  The registry records the
    confirmation method member and a reference to the specification that
    defines it.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.1.%20%20Registration%20Template"></a></body></html><a class="selflink" href="#section-6.2.1" name="section-6.2.1">6.2.1</a>.  Registration Template</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.1.%20%20Registration%20Template"></a></body></html><a class="selflink" href="#section-6.2.1" id="section-6.2.1">6.2.1</a>.  Registration Template</span>
 
    Confirmation Method Value:
       The name requested (e.g., "kid").  Because a core goal of this
@@ -843,11 +825,11 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                   [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.2.%20%20Initial%20Registry%20Contents"></a></body></html><a class="selflink" href="#section-6.2.2" name="section-6.2.2">6.2.2</a>.  Initial Registry Contents</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.2.%20%20Initial%20Registry%20Contents"></a></body></html><a class="selflink" href="#section-6.2.2" id="section-6.2.2">6.2.2</a>.  Initial Registry Contents</span>
 
    o  Confirmation Method Value: "jwk"
    o  Confirmation Method Description: JSON Web Key Representing Public
@@ -869,28 +851,28 @@ Table of Contents
    o  Change Controller: IESG
    o  Specification Document(s): <a href="./rfc7800.html#section-3.5">Section 3.5 of [RFC7800]</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Normative References</span>
 
-   [<a id="ref-IANA.JWT.Claims" name="ref-IANA.JWT.Claims">IANA.JWT.Claims</a>]
+   [<a id="ref-IANA.JWT.Claims">IANA.JWT.Claims</a>]
               IANA, "JSON Web Token Claims",
               &lt;<a href="http://www.iana.org/assignments/jwt">http://www.iana.org/assignments/jwt</a>&gt;.
 
-   [<a id="ref-JWE" name="ref-JWE">JWE</a>]      Jones, M. and J. Hildebrand, "JSON Web Encryption (JWE)",
+   [<a id="ref-JWE">JWE</a>]      Jones, M. and J. Hildebrand, "JSON Web Encryption (JWE)",
               <a href="./rfc7516.html">RFC 7516</a>, DOI 10.17487/RFC7156, May 2015,
               &lt;<a href="http://www.rfc-editor.org/info/rfc7516">http://www.rfc-editor.org/info/rfc7516</a>&gt;.
 
-   [<a id="ref-JWK" name="ref-JWK">JWK</a>]      Jones, M., "JSON Web Key (JWK)", <a href="./rfc7517.html">RFC 7517</a>,
+   [<a id="ref-JWK">JWK</a>]      Jones, M., "JSON Web Key (JWK)", <a href="./rfc7517.html">RFC 7517</a>,
               DOI 10.17487/RFC7157, May 2015,
               &lt;<a href="http://www.rfc-editor.org/info/rfc7517">http://www.rfc-editor.org/info/rfc7517</a>&gt;.
 
-   [<a id="ref-JWT" name="ref-JWT">JWT</a>]      Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
+   [<a id="ref-JWT">JWT</a>]      Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", <a href="./rfc7519.html">RFC 7519</a>, DOI 10.17487/RFC7159, May 2015,
               &lt;<a href="http://www.rfc-editor.org/info/rfc7519">http://www.rfc-editor.org/info/rfc7519</a>&gt;.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>,
               DOI 10.17487/RFC2119, March 1997,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2119">http://www.rfc-editor.org/info/rfc2119</a>&gt;.
 
@@ -899,51 +881,51 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                   [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
-   [<a id="ref-RFC3629" name="ref-RFC3629">RFC3629</a>]  Yergeau, F., "UTF-8, a transformation format of ISO
+   [<a id="ref-RFC3629">RFC3629</a>]  Yergeau, F., "UTF-8, a transformation format of ISO
               10646", STD 63, <a href="./rfc3629.html">RFC 3629</a>, DOI 10.17487/RFC3629, November
               2003, &lt;<a href="http://www.rfc-editor.org/info/rfc3629">http://www.rfc-editor.org/info/rfc3629</a>&gt;.
 
-   [<a id="ref-RFC3986" name="ref-RFC3986">RFC3986</a>]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+   [<a id="ref-RFC3986">RFC3986</a>]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66,
               <a href="./rfc3986.html">RFC 3986</a>, DOI 10.17487/RFC3986, January 2005,
               &lt;<a href="http://www.rfc-editor.org/info/rfc3986">http://www.rfc-editor.org/info/rfc3986</a>&gt;.
 
-   [<a id="ref-RFC5226" name="ref-RFC5226">RFC5226</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
-              IANA Considerations Section in RFCs", <a href="./bcp26.html">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a>,
+   [<a id="ref-RFC5226">RFC5226</a>]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", <a href="https://www.rfc-editor.org/bcp/bcp26">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a>,
               DOI 10.17487/RFC5226, May 2008,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5226">http://www.rfc-editor.org/info/rfc5226</a>&gt;.
 
-   [<a id="ref-RFC5246" name="ref-RFC5246">RFC5246</a>]  Dierks, T. and E. Rescorla, "The Transport Layer Security
+   [<a id="ref-RFC5246">RFC5246</a>]  Dierks, T. and E. Rescorla, "The Transport Layer Security
               (TLS) Protocol Version 1.2", <a href="./rfc5246.html">RFC 5246</a>,
               DOI 10.17487/RFC5246, August 2008,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5246">http://www.rfc-editor.org/info/rfc5246</a>&gt;.
 
-   [<a id="ref-RFC6125" name="ref-RFC6125">RFC6125</a>]  Saint-Andre, P. and J. Hodges, "Representation and
+   [<a id="ref-RFC6125">RFC6125</a>]  Saint-Andre, P. and J. Hodges, "Representation and
               Verification of Domain-Based Application Service Identity
               within Internet Public Key Infrastructure Using X.509
               (PKIX) Certificates in the Context of Transport Layer
               Security (TLS)", <a href="./rfc6125.html">RFC 6125</a>, DOI 10.17487/RFC6125, March
               2011, &lt;<a href="http://www.rfc-editor.org/info/rfc6125">http://www.rfc-editor.org/info/rfc6125</a>&gt;.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Informative References</span>
 
-   [<a id="ref-JWK.Thumbprint" name="ref-JWK.Thumbprint">JWK.Thumbprint</a>]
+   [<a id="ref-JWK.Thumbprint">JWK.Thumbprint</a>]
               Jones, M. and N. Sakimura, "JSON Web Key (JWK)
               Thumbprint", <a href="./rfc7638.html">RFC 7638</a>, DOI 10.17487/RFC7638, September
               2015, &lt;<a href="http://www.rfc-editor.org/info/rfc7638">http://www.rfc-editor.org/info/rfc7638</a>&gt;.
 
-   [<a id="ref-OASIS.saml-core-2.0-os" name="ref-OASIS.saml-core-2.0-os">OASIS.saml-core-2.0-os</a>]
+   [<a id="ref-OASIS.saml-core-2.0-os">OASIS.saml-core-2.0-os</a>]
               Cantor, S., Kemp, J., Philpott, R., and E. Maler,
               "Assertions and Protocol for the OASIS Security Assertion
               Markup Language (SAML) V2.0", OASIS Standard saml-core-
               2.0-os, March 2005,
               &lt;<a href="http://docs.oasis-open.org/security/saml/v2.0/">http://docs.oasis-open.org/security/saml/v2.0/</a>&gt;.
 
-   [<a id="ref-OAUTH-POP-ARCH" name="ref-OAUTH-POP-ARCH">OAUTH-POP-ARCH</a>]
+   [<a id="ref-OAUTH-POP-ARCH">OAUTH-POP-ARCH</a>]
               Hunt, P., Ed, Richer, J., Mills, W., Mishra, P., and H.
               Tschofenig, "OAuth 2.0 Proof-of-Possession (PoP) Security
               Architecture", Work in Progress, <a href="./draft-ietf-oauth-pop-architecture-07.html">draft-ietf-oauth-pop-</a>
@@ -955,11 +937,11 @@ Table of Contents
 
 
 <span class="grey">Jones, et al.                Standards Track                   [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7800.html">RFC 7800</a>            Proof-of-Possession Key for JWTs          April 2016</span>
 
 
-   [<a id="ref-OpenID.Core" name="ref-OpenID.Core">OpenID.Core</a>]
+   [<a id="ref-OpenID.Core">OpenID.Core</a>]
               Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
               C. Mortimore, "OpenID Connect Core 1.0", November 2014,
               &lt;<a href="http://openid.net/specs/openid-connect-core-1_0.html">http://openid.net/specs/openid-connect-core-1_0.html</a>&gt;.
@@ -1011,11 +993,6 @@ Authors' Addresses
 
 
 Jones, et al.                Standards Track                   [Page 15]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

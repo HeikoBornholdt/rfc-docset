@@ -1,34 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-kaplan-mmusic-latching" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:7362" name="DC.Identifier"/>
-<meta content="September, 2014" name="DC.Date.Issued"/>
-<meta content="Ivov, Emil" name="DC.Creator"/>
-<meta content="Wing, Dan" name="DC.Creator"/>
-<meta content="Kaplan, Hadriel" name="DC.Creator"/>
-<meta content="This document describes the behavior of signaling intermediaries in
-Real-Time Communication (RTC) deployments, sometimes referred to as
-Session Border Controllers (SBCs), when performing Hosted NAT
-Traversal (HNT). HNT is a set of mechanisms, such as media relaying
-and latching, that such intermediaries use to enable other RTC devices
-behind NATs to communicate with each other.  This document is non-
-normative and is only written to explain HNT in order to provide a
-reference to the Internet community and an informative description to
-manufacturers and users.  Latching, which is one of the HNT
-components, has a number of security issues covered here. Because of
-those, and unless all security considerations explained here are taken
-into account and solved, the IETF advises against use of the latching
-mechanism over the Internet and recommends other solutions, such as
-the Interactive Connectivity Establishment (ICE) protocol." name="DC.Description.Abstract"/>
-<meta content="Latching: Hosted NAT Traversal (HNT) for Media in Real-Time Communication" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7362 - Latching: Hosted NAT Traversal (HNT) for Media in Real-Time Communication</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="E. Ivov" name="citation_author"/>
+<meta content="H. Kaplan" name="citation_author"/>
+<meta content="D. Wing" name="citation_author"/>
+<meta content="September, 2014" name="citation_publication_date"/>
+<meta content="Latching: Hosted NAT Traversal (HNT) for Media in Real-Time Communication" name="citation_title"/>
+<meta content="10.17487/RFC7362" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7362" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7362.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7362: Latching: Hosted NAT Traversal (HNT) for Media in Real-Time Communication</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -57,7 +42,7 @@ the Interactive Connectivity Establishment (ICE) protocol." name="DC.Description
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -66,7 +51,7 @@ the Interactive Connectivity Establishment (ICE) protocol." name="DC.Description
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -145,19 +130,18 @@ the Interactive Connectivity Establishment (ICE) protocol." name="DC.Description
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -171,21 +155,9 @@ the Interactive Connectivity Establishment (ICE) protocol." name="DC.Description
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7362.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7362" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-mmusic-latching.html" title="draft-ietf-mmusic-latching">draft-ietf-mmusic...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc7362" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc7362" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                           E. Ivov
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7362.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7362.txt.pdf">PDF</a>|<a href="/rfc/rfc7362.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7362" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7362&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc7362" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                           E. Ivov
 Request for Comments: 7362                                         Jitsi
 Category: Informational                                        H. Kaplan
 ISSN: 2070-1721                                                   Oracle
@@ -237,7 +209,7 @@ Status of This Memo
 
 
 <span class="grey">Ivov, et al.                  Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -246,7 +218,7 @@ Copyright Notice
    Copyright (c) 2014 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -268,7 +240,7 @@ Table of Contents
      <a href="#section-7.1">7.1</a>.  Normative References  . . . . . . . . . . . . . . . . . .  <a href="#page-14">14</a>
      <a href="#section-7.2">7.2</a>.  Informative References  . . . . . . . . . . . . . . . . .  <a href="#page-14">14</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Network Address Translators (NATs) are widely used in the Internet by
    consumers and organizations.  Although specific NAT behaviors vary,
@@ -293,7 +265,7 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -349,7 +321,7 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -367,7 +339,7 @@ Table of Contents
    Control Protocol (MGCP) [<a href="./rfc3435.html" title='"Media Gateway Control Protocol (MGCP) Version 1.0"'>RFC3435</a>], Megaco/H.248 [<a href="./rfc5125.html" title='"Reclassification of RFC 3525 to Historic"'>RFC5125</a>], and H.323
    [<a href="#ref-H.323" title='"Packet-based multimedia communication systems"'>H.323</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Background"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Background</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Background"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Background</span>
 
    The general problems with NAT traversal for protocols such as SIP
    are:
@@ -405,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -427,7 +399,7 @@ Table of Contents
 
     Figure 1: Signaling and Media Flows in a Common Deployment Scenario
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Impact%20on%20Signaling"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Impact on Signaling</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Impact%20on%20Signaling"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Impact on Signaling</span>
 
    Along with codec and other media-layer information, session
    establishment signaling also conveys potentially private and non-
@@ -461,7 +433,7 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -470,7 +442,7 @@ Table of Contents
    customer UA until a SIP 200 response has been received (e.g., to
    prevent toll fraud).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Media%20Behavior%20and%20Latching"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Media Behavior and Latching</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Media%20Behavior%20and%20Latching"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Media Behavior and Latching</span>
 
    An UA that is behind a NAT would stream media from an address and a
    port number (an address:port tuple) that are only valid in its local
@@ -517,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -573,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -629,7 +601,7 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -685,7 +657,7 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -741,7 +713,7 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -768,7 +740,7 @@ Table of Contents
    media and hence offer better performance than regular Internet
    routing.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    A common concern is that an SBC (or an XMPP server -- all security
    considerations apply to both) that implements HNT may latch to
@@ -797,7 +769,7 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -853,7 +825,7 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -888,7 +860,7 @@ Table of Contents
    mechanisms such as TURN [<a href="./rfc5766.html" title='"Traversal Using Relays around NAT (TURN): Relay Extensions to Session Traversal Utilities for NAT (STUN)"'>RFC5766</a>] if the client explicitly wishes to
    do so.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Acknowledgements</span>
 
    The authors would like to thank Flemming Andreasen, Miguel A.
    Garcia, Alissa Cooper, Vijay K. Gurbani, Ari Keranen, and Paul
@@ -909,54 +881,54 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC3261" name="ref-RFC3261">RFC3261</a>]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
+   [<a id="ref-RFC3261">RFC3261</a>]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
               A., Peterson, J., Sparks, R., Handley, M., and E.
               Schooler, "SIP: Session Initiation Protocol", <a href="./rfc3261.html">RFC 3261</a>,
               June 2002.
 
-   [<a id="ref-RFC3264" name="ref-RFC3264">RFC3264</a>]  Rosenberg, J. and H. Schulzrinne, "An Offer/Answer Model
+   [<a id="ref-RFC3264">RFC3264</a>]  Rosenberg, J. and H. Schulzrinne, "An Offer/Answer Model
               with Session Description Protocol (SDP)", <a href="./rfc3264.html">RFC 3264</a>, June
               2002.
 
-   [<a id="ref-RFC3711" name="ref-RFC3711">RFC3711</a>]  Baugher, M., McGrew, D., Naslund, M., Carrara, E., and K.
+   [<a id="ref-RFC3711">RFC3711</a>]  Baugher, M., McGrew, D., Naslund, M., Carrara, E., and K.
               Norrman, "The Secure Real-time Transport Protocol (SRTP)",
               <a href="./rfc3711.html">RFC 3711</a>, March 2004.
 
-   [<a id="ref-RFC4566" name="ref-RFC4566">RFC4566</a>]  Handley, M., Jacobson, V., and C. Perkins, "SDP: Session
+   [<a id="ref-RFC4566">RFC4566</a>]  Handley, M., Jacobson, V., and C. Perkins, "SDP: Session
               Description Protocol", <a href="./rfc4566.html">RFC 4566</a>, July 2006.
 
-   [<a id="ref-RFC4787" name="ref-RFC4787">RFC4787</a>]  Audet, F. and C. Jennings, "Network Address Translation
-              (NAT) Behavioral Requirements for Unicast UDP", <a href="./bcp127.html">BCP 127</a>,
+   [<a id="ref-RFC4787">RFC4787</a>]  Audet, F. and C. Jennings, "Network Address Translation
+              (NAT) Behavioral Requirements for Unicast UDP", <a href="https://www.rfc-editor.org/bcp/bcp127">BCP 127</a>,
               <a href="./rfc4787.html">RFC 4787</a>, January 2007.
 
-   [<a id="ref-RFC5853" name="ref-RFC5853">RFC5853</a>]  Hautakorpi, J., Camarillo, G., Penfield, R., Hawrylyshen,
+   [<a id="ref-RFC5853">RFC5853</a>]  Hautakorpi, J., Camarillo, G., Penfield, R., Hawrylyshen,
               A., and M. Bhatia, "Requirements from Session Initiation
               Protocol (SIP) Session Border Control (SBC) Deployments",
               <a href="./rfc5853.html">RFC 5853</a>, April 2010.
 
-   [<a id="ref-RFC6120" name="ref-RFC6120">RFC6120</a>]  Saint-Andre, P., "Extensible Messaging and Presence
+   [<a id="ref-RFC6120">RFC6120</a>]  Saint-Andre, P., "Extensible Messaging and Presence
               Protocol (XMPP): Core", <a href="./rfc6120.html">RFC 6120</a>, March 2011.
 
-   [<a id="ref-XEP-0177" name="ref-XEP-0177">XEP-0177</a>]
+   [<a id="ref-XEP-0177">XEP-0177</a>]
               Beda, J., Saint-Andre, P., Hildebrand, J., and S. Egan,
               "XEP-0177: Jingle Raw UDP Transport Method", XSF XEP 0177,
               December 2009.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Informative References</span>
 
-   [<a id="ref-H.323" name="ref-H.323">H.323</a>]    International Telecommunication Union, "Packet-based
+   [<a id="ref-H.323">H.323</a>]    International Telecommunication Union, "Packet-based
               multimedia communication systems", ITU-T Recommendation
               H.323, December 2009.
 
-   [<a id="ref-RFC3424" name="ref-RFC3424">RFC3424</a>]  Daigle, L. and IAB, "IAB Considerations for UNilateral
+   [<a id="ref-RFC3424">RFC3424</a>]  Daigle, L. and IAB, "IAB Considerations for UNilateral
               Self-Address Fixing (UNSAF) Across Network Address
               Translation", <a href="./rfc3424.html">RFC 3424</a>, November 2002.
 
@@ -965,47 +937,47 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
-   [<a id="ref-RFC3435" name="ref-RFC3435">RFC3435</a>]  Andreasen, F. and B. Foster, "Media Gateway Control
+   [<a id="ref-RFC3435">RFC3435</a>]  Andreasen, F. and B. Foster, "Media Gateway Control
               Protocol (MGCP) Version 1.0", <a href="./rfc3435.html">RFC 3435</a>, January 2003.
 
-   [<a id="ref-RFC3489" name="ref-RFC3489">RFC3489</a>]  Rosenberg, J., Weinberger, J., Huitema, C., and R. Mahy,
+   [<a id="ref-RFC3489">RFC3489</a>]  Rosenberg, J., Weinberger, J., Huitema, C., and R. Mahy,
               "STUN - Simple Traversal of User Datagram Protocol (UDP)
               Through Network Address Translators (NATs)", <a href="./rfc3489.html">RFC 3489</a>,
               March 2003.
 
-   [<a id="ref-RFC4474" name="ref-RFC4474">RFC4474</a>]  Peterson, J. and C. Jennings, "Enhancements for
+   [<a id="ref-RFC4474">RFC4474</a>]  Peterson, J. and C. Jennings, "Enhancements for
               Authenticated Identity Management in the Session
               Initiation Protocol (SIP)", <a href="./rfc4474.html">RFC 4474</a>, August 2006.
 
-   [<a id="ref-RFC5125" name="ref-RFC5125">RFC5125</a>]  Taylor, T., "Reclassification of <a href="./rfc3525.html">RFC 3525</a> to Historic",
+   [<a id="ref-RFC5125">RFC5125</a>]  Taylor, T., "Reclassification of <a href="./rfc3525.html">RFC 3525</a> to Historic",
               <a href="./rfc5125.html">RFC 5125</a>, February 2008.
 
-   [<a id="ref-RFC5245" name="ref-RFC5245">RFC5245</a>]  Rosenberg, J., "Interactive Connectivity Establishment
+   [<a id="ref-RFC5245">RFC5245</a>]  Rosenberg, J., "Interactive Connectivity Establishment
               (ICE): A Protocol for Network Address Translator (NAT)
               Traversal for Offer/Answer Protocols", <a href="./rfc5245.html">RFC 5245</a>, April
               2010.
 
-   [<a id="ref-RFC5389" name="ref-RFC5389">RFC5389</a>]  Rosenberg, J., Mahy, R., Matthews, P., and D. Wing,
+   [<a id="ref-RFC5389">RFC5389</a>]  Rosenberg, J., Mahy, R., Matthews, P., and D. Wing,
               "Session Traversal Utilities for NAT (STUN)", <a href="./rfc5389.html">RFC 5389</a>,
               October 2008.
 
-   [<a id="ref-RFC5751" name="ref-RFC5751">RFC5751</a>]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
+   [<a id="ref-RFC5751">RFC5751</a>]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
               Mail Extensions (S/MIME) Version 3.2 Message
               Specification", <a href="./rfc5751.html">RFC 5751</a>, January 2010.
 
-   [<a id="ref-RFC5766" name="ref-RFC5766">RFC5766</a>]  Mahy, R., Matthews, P., and J. Rosenberg, "Traversal Using
+   [<a id="ref-RFC5766">RFC5766</a>]  Mahy, R., Matthews, P., and J. Rosenberg, "Traversal Using
               Relays around NAT (TURN): Relay Extensions to Session
               Traversal Utilities for NAT (STUN)", <a href="./rfc5766.html">RFC 5766</a>, April 2010.
 
-   [<a id="ref-RFC6888" name="ref-RFC6888">RFC6888</a>]  Perreault, S., Yamagata, I., Miyakawa, S., Nakagawa, A.,
+   [<a id="ref-RFC6888">RFC6888</a>]  Perreault, S., Yamagata, I., Miyakawa, S., Nakagawa, A.,
               and H. Ashida, "Common Requirements for Carrier-Grade NATs
-              (CGNs)", <a href="./bcp127.html">BCP 127</a>, <a href="./rfc6888.html">RFC 6888</a>, April 2013.
+              (CGNs)", <a href="https://www.rfc-editor.org/bcp/bcp127">BCP 127</a>, <a href="./rfc6888.html">RFC 6888</a>, April 2013.
 
-   [<a id="ref-TCP-SPLICING" name="ref-TCP-SPLICING">TCP-SPLICING</a>]
+   [<a id="ref-TCP-SPLICING">TCP-SPLICING</a>]
               Maltz, D. and P. Bhagwat, "TCP Splice for application
               layer proxy performance", Journal of High Speed Networks
               Vol. 8, No. 3, 1999, pp. 225-240, March 1999.
@@ -1021,7 +993,7 @@ Table of Contents
 
 
 <span class="grey">Ivov, et al.                  Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc7362.html">RFC 7362</a>          Hosted NAT Traversal for Media in RTC   September 2014</span>
 
 
@@ -1077,11 +1049,6 @@ Authors' Addresses
 
 
 Ivov, et al.                  Informational                    [Page 16]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

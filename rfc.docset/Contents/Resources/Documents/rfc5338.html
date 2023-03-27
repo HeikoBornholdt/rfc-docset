@@ -1,32 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-henderson-hip-applications" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5338" name="DC.Identifier"/>
-<meta content="September, 2008" name="DC.Date.Issued"/>
-<meta content="Henderson, Thomas" name="DC.Creator"/>
-<meta content="Komu, Miika" name="DC.Creator"/>
-<meta content="Nikander, Pekka" name="DC.Creator"/>
-<meta content="This document is an informative overview of how legacy applications
-can be made to work with the Host Identity Protocol (HIP). HIP
-proposes to add a cryptographic name space for network stack names.
-From an application viewpoint, HIP-enabled systems support a new
-address family of host identifiers, but it may be a long time until
-such HIP-aware applications are widely deployed even if host systems
-are upgraded. This informational document discusses implementation and
-Application Programming Interface (API) issues relating to using HIP
-in situations in which the system is HIP-aware but the applications
-are not, and is intended to aid implementors and early adopters in
-thinking about and locally solving systems issues regarding the
-incremental deployment of HIP." name="DC.Description.Abstract"/>
-<meta content="Using the Host Identity Protocol with Legacy Applications" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5338 - Using the Host Identity Protocol with Legacy Applications</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="T. Henderson" name="citation_author"/>
+<meta content="P. Nikander" name="citation_author"/>
+<meta content="M. Komu" name="citation_author"/>
+<meta content="September, 2008" name="citation_publication_date"/>
+<meta content="Using the Host Identity Protocol with Legacy Applications" name="citation_title"/>
+<meta content="10.17487/RFC5338" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5338" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5338.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5338: Using the Host Identity Protocol with Legacy Applications</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -55,7 +42,7 @@ incremental deployment of HIP." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -64,7 +51,7 @@ incremental deployment of HIP." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -143,19 +130,18 @@ incremental deployment of HIP." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -169,21 +155,9 @@ incremental deployment of HIP." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgyellow" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5338.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5338" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-hip-applications.html" title="draft-ietf-hip-applications">draft-ietf-hip-ap...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5338" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5338" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                       T. Henderson
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5338.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5338.txt.pdf">PDF</a>|<a href="/rfc/rfc5338.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5338" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5338&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc5338" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                       T. Henderson
 Request for Comments: 5338                            The Boeing Company
 Category: Informational                                      P. Nikander
                                             Ericsson Research NomadicLab
@@ -235,7 +209,7 @@ Abstract
 
 
 <span class="grey">Henderson, et al.            Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
@@ -256,7 +230,7 @@ Table of Contents
    <a href="#section-7">7</a>. Acknowledgments ................................................<a href="#page-12">12</a>
    <a href="#section-8">8</a>. Informative References .........................................<a href="#page-12">12</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    The Host Identity Protocol (HIP) [<a href="./rfc5201.html" title='"Host Identity Protocol"'>RFC5201</a>] is an experimental effort
    in the IETF and IRTF to study a new public-key-based name space for
@@ -291,7 +265,7 @@ Table of Contents
 
 
 <span class="grey">Henderson, et al.            Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
@@ -335,7 +309,7 @@ Table of Contents
    addresses by legacy applications, and we will try to clarify these
    implications in the below discussions.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    Callback:   The application at one end retrieves the IP address of
       the peer and uses that to later communicate "back" to the peer.
@@ -347,7 +321,7 @@ Table of Contents
 
 
 <span class="grey">Henderson, et al.            Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
@@ -377,7 +351,7 @@ Table of Contents
       from the DNS APIs (e.g., getaddrinfo()) and the API to the
       protocol stack (e.g., connect() or sendto()).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Enabling%20HIP%20Transparently%20within%20the%20System"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Enabling HIP Transparently within the System</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Enabling%20HIP%20Transparently%20within%20the%20System"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Enabling HIP Transparently within the System</span>
 
    When both users and applications are unaware of HIP, but the host
    administrator chooses to use HIP between hosts, a few options are
@@ -387,7 +361,7 @@ Table of Contents
    agent in the DNS resolution process and to return to the application
    a HIT or a locally scoped handle, formatted like an IP address.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Applying%20HIP%20to%20Cases%20in%20Which%20IP%20Addresses%20Are%20Used"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Applying HIP to Cases in Which IP Addresses Are Used</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Applying%20HIP%20to%20Cases%20in%20Which%20IP%20Addresses%20Are%20Used"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Applying HIP to Cases in Which IP Addresses Are Used</span>
 
    Consider the case in which an application issues a "connect(ip)"
    system call to set the default destination to a system named by
@@ -403,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Henderson, et al.            Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
@@ -459,7 +433,7 @@ Table of Contents
 
 
 <span class="grey">Henderson, et al.            Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
@@ -467,7 +441,7 @@ Table of Contents
    associated with opportunistic HIP, because the DNS record suggests
    that the peer is HIP-capable.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Interposing%20a%20HIP-Aware%20Agent%20in%20the%20DNS%20Resolution"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Interposing a HIP-Aware Agent in the DNS Resolution</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Interposing%20a%20HIP-Aware%20Agent%20in%20the%20DNS%20Resolution"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Interposing a HIP-Aware Agent in the DNS Resolution</span>
 
    In the previous section, it was noted that a HIP-unaware application
    might typically use the DNS to fetch IP addresses prior to invoking
@@ -515,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Henderson, et al.            Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
@@ -532,7 +506,7 @@ Table of Contents
    preferable for applications to handle such names instead of IP
    addresses.  However, such networks are out of scope of this document.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Discussion"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Discussion</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Discussion"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Discussion</span>
 
    Solutions preserving the use of IP addresses in the applications have
    the benefit of better support for applications that use IP addresses
@@ -571,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Henderson, et al.            Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
@@ -595,7 +569,7 @@ Table of Contents
    consider, in the next section, use cases for which the end user
    explicitly and selectively chooses to enable HIP.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Users%20Invoking%20HIP%20with%20a%20Legacy%20Application"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Users Invoking HIP with a Legacy Application</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Users%20Invoking%20HIP%20with%20a%20Legacy%20Application"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Users Invoking HIP with a Legacy Application</span>
 
    The previous section described approaches for configuring HIP for
    legacy applications that did not necessarily involve the user.
@@ -608,7 +582,7 @@ Table of Contents
    name to signal to the resolver to fetch HIP records and to signal to
    the system to use HIP.  We describe both of these approaches below.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Connecting%20to%20a%20HIT%20or%20LSI"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Connecting to a HIT or LSI</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Connecting%20to%20a%20HIT%20or%20LSI"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Connecting to a HIT or LSI</span>
 
    <a href="#section-3.2">Section 3.2</a> above describes the use of HITs or LSIs as spoofed return
    values of the DNS resolution process.  A similar approach that is
@@ -627,7 +601,7 @@ Table of Contents
 
 
 <span class="grey">Henderson, et al.            Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
@@ -641,7 +615,7 @@ Table of Contents
    supports HIP but is not able to perform HIT resolution for some
    reason.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Using%20a%20Modified%20DNS%20Name"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Using a Modified DNS Name</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Using%20a%20Modified%20DNS%20Name"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Using a Modified DNS Name</span>
 
    Specifically, if the application requests to resolve "HIP-
    www.example.com" (or some similar prefix string), then the system
@@ -654,7 +628,7 @@ Table of Contents
    or label length (255 or 63, respectively) should be considered when
    prepending any prefixes.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Other%20Techniques"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Other Techniques</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Other%20Techniques"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Other Techniques</span>
 
    Alternatives to using a modified DNS name that have been experimented
    with include the following.  Command-line tools or tools with a
@@ -666,7 +640,7 @@ Table of Contents
    can be invoked by the user by running commands through a special
    shell, for example.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Local%20Address%20Management"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Local Address Management</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Local%20Address%20Management"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Local Address Management</span>
 
    The previous two sections focused mainly on controlling client
    behavior (HIP initiator).  We must also consider the behavior for
@@ -683,7 +657,7 @@ Table of Contents
 
 
 <span class="grey">Henderson, et al.            Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
@@ -739,11 +713,11 @@ Table of Contents
 
 
 <span class="grey">Henderson, et al.            Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    In this section, we discuss the security of the system in general
    terms, outlining some of the security properties.  However, this
@@ -795,7 +769,7 @@ Table of Contents
 
 
 <span class="grey">Henderson, et al.            Informational                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
@@ -815,7 +789,7 @@ Table of Contents
    information so that administrators can correlate other logs with HIP
    identifiers.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgments</span>
 
    Jeff Ahrenholz, Gonzalo Camarillo, Alberto Garcia, Teemu Koponen,
    Julien Laganier, and Jukka Ylitalo have provided comments on
@@ -823,25 +797,25 @@ Table of Contents
    substantial and useful comments during the review phase from David
    Black, Lars Eggert, Peter Koch, Thomas Narten, and Pekka Savola.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Informative References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Informative References</span>
 
-   [<a id="ref-RFC5201" name="ref-RFC5201">RFC5201</a>]  Moskowitz, R., Nikander, P., Jokela, P., Ed., and T.
+   [<a id="ref-RFC5201">RFC5201</a>]  Moskowitz, R., Nikander, P., Jokela, P., Ed., and T.
               Henderson, "Host Identity Protocol", <a href="./rfc5201.html">RFC 5201</a>, April 2008.
 
-   [<a id="ref-RFC4843" name="ref-RFC4843">RFC4843</a>]   Nikander, P., Laganier, J., and F. Dupont, "An IPv6
+   [<a id="ref-RFC4843">RFC4843</a>]   Nikander, P., Laganier, J., and F. Dupont, "An IPv6
               Prefix for Overlay Routable Cryptographic Hash Identifiers
               (ORCHID)", <a href="./rfc4843.html">RFC 4843</a>, April 2007.
 
-   [<a id="ref-TESLA" name="ref-TESLA">TESLA</a>]     Salz, J., Balakrishnan, H., and A. Snoeren, "TESLA:  A
+   [<a id="ref-TESLA">TESLA</a>]     Salz, J., Balakrishnan, H., and A. Snoeren, "TESLA:  A
               Transparent, Extensible Session-Layer Architecture for
               End-to-end Network Services",  Proceedings of USENIX
               Symposium on Internet Technologies and Systems (USITS),
               pages 211-224, March 2003.
 
-   [<a id="ref-RFC1958" name="ref-RFC1958">RFC1958</a>]  Carpenter, B., Ed., "Architectural Principles of the
+   [<a id="ref-RFC1958">RFC1958</a>]  Carpenter, B., Ed., "Architectural Principles of the
               Internet", <a href="./rfc1958.html">RFC 1958</a>, June 1996.
 
-   [<a id="ref-RFC4033" name="ref-RFC4033">RFC4033</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
+   [<a id="ref-RFC4033">RFC4033</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "DNS Security Introduction and Requirements", <a href="./rfc4033.html">RFC</a>
               <a href="./rfc4033.html">4033</a>, March 2005.
 
@@ -851,15 +825,15 @@ Table of Contents
 
 
 <span class="grey">Henderson, et al.            Informational                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
-   [<a id="ref-RFC3493" name="ref-RFC3493">RFC3493</a>]  Gilligan, R., Thomson, S., Bound, J., McCann, J., and W.
+   [<a id="ref-RFC3493">RFC3493</a>]  Gilligan, R., Thomson, S., Bound, J., McCann, J., and W.
               Stevens, "Basic Socket Interface Extensions for IPv6", <a href="./rfc3493.html">RFC</a>
               <a href="./rfc3493.html">3493</a>, February 2003.
 
-   [<a id="ref-APP_REF" name="ref-APP_REF">APP_REF</a>]  Nordmark, E., <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22Shim6+Application+Referral+Issues%22" style="text-decoration: none">"Shim6 Application Referral Issues"</a>, Work in
+   [<a id="ref-APP_REF">APP_REF</a>]  Nordmark, E., <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22Shim6+Application+Referral+Issues%22" style="text-decoration: none">"Shim6 Application Referral Issues"</a>, Work in
               Progress, July 2005.
 
 Authors' Addresses
@@ -907,7 +881,7 @@ Authors' Addresses
 
 
 <span class="grey">Henderson, et al.            Informational                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5338.html">RFC 5338</a>           Using HIP with Legacy Applications     September 2008</span>
 
 
@@ -916,7 +890,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2008).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -936,7 +910,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -963,11 +937,6 @@ Intellectual Property
 
 
 Henderson, et al.            Informational                     [Page 14]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

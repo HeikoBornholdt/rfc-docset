@@ -1,32 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-fair-ipdvb-ar" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:4947" name="DC.Identifier"/>
-<meta content="July, 2007" name="DC.Date.Issued"/>
-<meta content="Fairhurst, Godred" name="DC.Creator"/>
-<meta content="&lt;UNKNOWN&gt;, Marie-Jose Montpetit" name="DC.Creator"/>
-<meta content="This document describes the process of binding/associating IPv4/IPv6
-addresses with MPEG-2 Transport Streams (TS). This procedure is known
-as Address Resolution (AR) or Neighbor Discovery (ND). Such address
-resolution complements the higher-layer resource discovery tools that
-are used to advertise IP sessions.  In MPEG-2 Networks, an IP address
-must be associated with a Packet ID (PID) value and a specific
-Transmission Multiplex. This document reviews current methods
-appropriate to a range of technologies (such as DVB (Digital Video
-Broadcasting), ATSC (Advanced Television Systems Committee), DOCSIS
-(Data-Over-Cable Service Interface Specifications), and variants). It
-also describes the interaction with well-known protocols for address
-management including DHCP, ARP, and the ND protocol. This memo
-provides information for the Internet community." name="DC.Description.Abstract"/>
-<meta content="Address Resolution Mechanisms for IP Datagrams over MPEG-2 Networks" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 4947 - Address Resolution Mechanisms for IP Datagrams over MPEG-2 Networks</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="G. Fairhurst" name="citation_author"/>
+<meta content="M. Montpetit" name="citation_author"/>
+<meta content="July, 2007" name="citation_publication_date"/>
+<meta content="Address Resolution Mechanisms for IP Datagrams over MPEG-2 Networks" name="citation_title"/>
+<meta content="10.17487/RFC4947" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc4947" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc4947.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 4947: Address Resolution Mechanisms for IP Datagrams over MPEG-2 Networks</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -55,7 +41,7 @@ provides information for the Internet community." name="DC.Description.Abstract"
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -64,7 +50,7 @@ provides information for the Internet community." name="DC.Description.Abstract"
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -143,19 +129,18 @@ provides information for the Internet community." name="DC.Description.Abstract"
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -169,21 +154,9 @@ provides information for the Internet community." name="DC.Description.Abstract"
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc4947.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc4947" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-ipdvb-ar.html" title="draft-ietf-ipdvb-ar">draft-ietf-ipdvb-ar</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc4947" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc4947" title="Side-by-side diff">Diff2</a>]                  </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                       G. Fairhurst
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc4947.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc4947.txt.pdf">PDF</a>|<a href="/rfc/rfc4947.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc4947" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=4947&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc4947" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                       G. Fairhurst
 Request for Comments: 4947                        University of Aberdeen
 Category: Informational                                  M.-J. Montpetit
                                        Motorola Connected Home Solutions
@@ -235,7 +208,7 @@ Abstract
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -291,11 +264,11 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This document describes the process of binding/associating IPv4/IPv6
    addresses with MPEG-2 Transport Streams (TS).  This procedure is
@@ -347,7 +320,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -359,7 +332,7 @@ Table of Contents
    be accommodated by address resolution protocols that use this
    service.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Bridging%20and%20Routing"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Bridging and Routing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Bridging%20and%20Routing"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Bridging and Routing</span>
 
    The following two figures illustrate the use of AR for a routed and a
    bridged subnetwork.  Various other combinations of L2 and L3
@@ -403,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -459,7 +432,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -515,11 +488,11 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Conventions Used in This Document</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Conventions Used in This Document</span>
 
    AIT: Application Information Table specified by the Multimedia Home
    Platform (MHP) specifications [<a href="#ref-ETSI-MHP" title='"Digital Video Broadcasting (DVB); Multimedia Home Platform (MHP) Specification"'>ETSI-MHP</a>].  This table may carry
@@ -571,7 +544,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -627,7 +600,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -683,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -716,7 +689,7 @@ Table of Contents
    encapsulated PDUs.  ULE Streams may be identified by definition of a
    stream_type in SI/PSI [<a href="./rfc4326.html" title='"Unidirectional Lightweight Encapsulation (ULE) for Transmission of IP Datagrams over an MPEG-2 Transport Stream (TS)"'>RFC4326</a>, <a href="#ref-ISO-MPEG2" title='"Information technology -- Generic coding of moving pictures and associated audio information -- Part 1: Systems"'>ISO-MPEG2</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Address%20Resolution%20Requirements"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Address Resolution Requirements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Address%20Resolution%20Requirements"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Address Resolution Requirements</span>
 
    The MPEG IP address resolution process is independent of the choice
    of encapsulation and needs to support a set of IP over MPEG-2
@@ -739,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -795,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -819,7 +792,7 @@ Table of Contents
    router, the receipt of such a packet can lead to unexpected protocol
    behaviour.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Unicast%20Support"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Unicast Support</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Unicast%20Support"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Unicast Support</span>
 
    Unicast address resolution is required at two levels.
 
@@ -840,7 +813,7 @@ Table of Contents
    At the upper level, the AR procedure needs to associate an IP address
    with a specific MAC/NPA address (<a href="#section-5">Section 5</a>).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Multicast%20Support"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Multicast Support</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Multicast%20Support"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Multicast Support</span>
 
    Multicast is an important application for MPEG-2 transmission
    networks, since it exploits the advantages of native support for link
@@ -851,7 +824,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -907,7 +880,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -926,7 +899,7 @@ Table of Contents
    <a href="#section-5.6">Section 5.6</a> describes the binding of IP multicast addresses to
    MAC/NPA addresses.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20MPEG-2%20Address%20Resolution"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  MPEG-2 Address Resolution</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20MPEG-2%20Address%20Resolution"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  MPEG-2 Address Resolution</span>
 
    The first part of this section describes the role of MPEG-2
    signalling to identify streams (TS Logical Channels [<a href="./rfc4259.html" title='"The Use of RSA/SHA-1 Signatures within Encapsulating Security Payload (ESP) and Authentication Header (AH)"'>RFC4259</a>]) within
@@ -963,7 +936,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -978,7 +951,7 @@ Table of Contents
    prefix/address.  The remainder of the section describes IP addresses
    resolution mechanisms relating to MPEG-2.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Static%20Configuration"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Static Configuration</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Static%20Configuration"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Static Configuration</span>
 
    The static mapping option, where IP addresses or flows are statically
    mapped to specific PIDs is the equivalent to signalling "out-of-
@@ -1001,7 +974,7 @@ Table of Contents
    is placed into the specified TS stream.  MAC filtering (and/or
    Section filtering in MPE) may be used to differentiate subnetworks.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20MPEG-2%20Cable%20Networks"></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a>.  MPEG-2 Cable Networks</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20MPEG-2%20Cable%20Networks"></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a>.  MPEG-2 Cable Networks</span>
 
    Cable networks use a different transmission scheme for downstream
    (head-end to cable modem) and upstream (cable modem to head-end)
@@ -1019,7 +992,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1038,7 +1011,7 @@ Table of Contents
    usually acts as a DHCP Relay for IP devices [<a href="./rfc2131.html" title='"Dynamic Host Configuration Protocol"'>RFC2131</a>], [<a href="./rfc3046.html" title='"DHCP Relay Agent Information Option"'>RFC3046</a>], and
    [<a href="./rfc3256.html" title='"The DOCSIS (Data-Over-Cable Service Interface Specifications) Device Class DHCP (Dynamic Host Configuration Protocol) Relay Agent Information Sub-option"'>RFC3256</a>].  Issues in deployment of IPv6 are described in [<a href="./rfc4779.html" title='"ISP IPv6 Deployment Scenarios in Broadband Access Networks"'>RFC4779</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20MPEG-2%20Table-Based%20Address%20Resolution"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  MPEG-2 Table-Based Address Resolution</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20MPEG-2%20Table-Based%20Address%20Resolution"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  MPEG-2 Table-Based Address Resolution</span>
 
    The information about the set of MPEG-2 Transport Streams carried
    over a TS Multiplex can be distributed via SI/PSI Tables.  These
@@ -1075,11 +1048,11 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20IP/MAC%20Notification%20Table%20%28INT%29%20and%20Its%20Usage"></a></body></html><a class="selflink" href="#section-4.2.1" name="section-4.2.1">4.2.1</a>.  IP/MAC Notification Table (INT) and Its Usage</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20IP/MAC%20Notification%20Table%20%28INT%29%20and%20Its%20Usage"></a></body></html><a class="selflink" href="#section-4.2.1" id="section-4.2.1">4.2.1</a>.  IP/MAC Notification Table (INT) and Its Usage</span>
 
    The INT provides a set of descriptors to specify addressing in a DVB
    network.  The use of this method is specified for Multiprotocol
@@ -1131,7 +1104,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1155,7 +1128,7 @@ Table of Contents
    of centralized management prevents the implementation of a more
    dynamic scheme.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Multicast%20Mapping%20Table%20%28MMT%29%20and%20Its%20Usage"></a></body></html><a class="selflink" href="#section-4.2.2" name="section-4.2.2">4.2.2</a>.  Multicast Mapping Table (MMT) and Its Usage</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Multicast%20Mapping%20Table%20%28MMT%29%20and%20Its%20Usage"></a></body></html><a class="selflink" href="#section-4.2.2" id="section-4.2.2">4.2.2</a>.  Multicast Mapping Table (MMT) and Its Usage</span>
 
    In DVB-RCS, unicast AR is seen as a part of a wider configuration and
    control function and does not employ a specific protocol.
@@ -1171,7 +1144,7 @@ Table of Contents
    the SatLabs Forum [<a href="#ref-MMT" title='"SatLabs System Recommendations, Part 1, General Specifications"'>MMT</a>] and is not currently a part of the DVB-RCS
    specification.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.3.%20%20Application%20Information%20Table%20%28AIT%29%20and%20Its%20Usage"></a></body></html><a class="selflink" href="#section-4.2.3" name="section-4.2.3">4.2.3</a>.  Application Information Table (AIT) and Its Usage</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.3.%20%20Application%20Information%20Table%20%28AIT%29%20and%20Its%20Usage"></a></body></html><a class="selflink" href="#section-4.2.3" id="section-4.2.3">4.2.3</a>.  Application Information Table (AIT) and Its Usage</span>
 
    The DVB Multimedia Home Platform (MHP) specification [<a href="#ref-ETSI-MHP" title='"Digital Video Broadcasting (DVB); Multimedia Home Platform (MHP) Specification"'>ETSI-MHP</a>] does
    not define a specific AR function.  However, an Application
@@ -1187,7 +1160,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1195,7 +1168,7 @@ Table of Contents
    or IPv6 descriptors).  In MHP, AR is not seen as a specific function,
    but as a part of a wider configuration and control function.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.4.%20%20Address%20Resolution%20in%20ATSC"></a></body></html><a class="selflink" href="#section-4.2.4" name="section-4.2.4">4.2.4</a>.  Address Resolution in ATSC</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.4.%20%20Address%20Resolution%20in%20ATSC"></a></body></html><a class="selflink" href="#section-4.2.4" id="section-4.2.4">4.2.4</a>.  Address Resolution in ATSC</span>
 
    ATSC [<a href="#ref-ATSC-A54A" title='"Guide to the use of the ATSC Digital Television Standard"'>ATSC-A54A</a>] defines a system that allows transmission of IP
    packets within an MPEG-2 Network.  An MPEG-2 Program (defined by the
@@ -1211,7 +1184,7 @@ Table of Contents
    Elements.  Each application constitutes an independent network.  The
    MPEG-2 Network boundaries establish the IP addressing scope.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.5.%20%20Comparison%20of%20SI/PSI%20Table%20Approaches"></a></body></html><a class="selflink" href="#section-4.2.5" name="section-4.2.5">4.2.5</a>.  Comparison of SI/PSI Table Approaches</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.5.%20%20Comparison%20of%20SI/PSI%20Table%20Approaches"></a></body></html><a class="selflink" href="#section-4.2.5" id="section-4.2.5">4.2.5</a>.  Comparison of SI/PSI Table Approaches</span>
 
    The MPEG-2 methods based on SI/PSI meet the specified requirements of
    the groups that created them and each has their strength:  the INT in
@@ -1221,7 +1194,7 @@ Table of Contents
    fully adopt IP-centric approaches that would enable easier use of the
    MPEG-2 bearer as a link technology within the wider Internet.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20IP-Based%20Address%20Resolution%20for%20TS%20Logical%20Channels"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  IP-Based Address Resolution for TS Logical Channels</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20IP-Based%20Address%20Resolution%20for%20TS%20Logical%20Channels"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  IP-Based Address Resolution for TS Logical Channels</span>
 
    As MPEG-2 Networks evolve to become multi-service networks, the use
    of IP protocols is becoming more prevalent.  Most MPEG-2 Networks now
@@ -1243,7 +1216,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1299,7 +1272,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1310,7 +1283,7 @@ Table of Contents
    (e.g., a hashing technique similar to the mapping of IP Group
    Destination Addresses to Ethernet MAC addresses [<a href="./rfc1112.html" title='"Host extensions for IP multicasting"'>RFC1112</a>] [<a href="./rfc2464.html" title='"Transmission of IPv6 Packets over Ethernet Networks"'>RFC2464</a>]).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Mapping%20IP%20Addresses%20to%20MAC/NPA%20Addresses"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Mapping IP Addresses to MAC/NPA Addresses</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Mapping%20IP%20Addresses%20to%20MAC/NPA%20Addresses"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Mapping IP Addresses to MAC/NPA Addresses</span>
 
    This section reviews IETF protocols that may be used to assign and
    manage the mapping of IP addresses to/from MAC/NPA addresses over
@@ -1355,7 +1328,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1397,7 +1370,7 @@ Table of Contents
    Unreachability Detection (NUD), and Redirect.  These functions are
    useful for hosts, even when address resolution is not required.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Unidirectional%20Links%20Supporting%20Unidirectional%20Connectivity"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Unidirectional Links Supporting Unidirectional Connectivity</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Unidirectional%20Links%20Supporting%20Unidirectional%20Connectivity"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Unidirectional Links Supporting Unidirectional Connectivity</span>
 
    MPEG-2 Networks may provide a Unidirectional Broadcast Link (UDL),
    with no return path.  Such links may be used for unicast applications
@@ -1411,7 +1384,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1440,7 +1413,7 @@ Table of Contents
    which the MAC/NPA address is omitted from the SNDU.  In some
    scenarios, this may relieve an Encapsulator of the need for L2 AR.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Unidirectional%20Links%20with%20Bidirectional%20Connectivity"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Unidirectional Links with Bidirectional Connectivity</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Unidirectional%20Links%20with%20Bidirectional%20Connectivity"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Unidirectional Links with Bidirectional Connectivity</span>
 
    Bidirectional connectivity may be realized using a unidirectional
    link in combination with another network path.  Common combinations
@@ -1467,7 +1440,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1523,7 +1496,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1561,7 +1534,7 @@ Table of Contents
    frequency of the DTCP HELLO message.  Further information about
    tuning DHCP is provided in <a href="#section-5.5">Section 5.5</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Bidirectional%20Links"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Bidirectional Links</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Bidirectional%20Links"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Bidirectional Links</span>
 
    Bidirectional IP networks can be and are constructed by a combination
    of two MPEG-2 transmission links.  One link is usually a broadcast
@@ -1579,11 +1552,11 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20AR%20Server"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  AR Server</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20AR%20Server"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  AR Server</span>
 
    An AR Server can be used to distribute AR information to Receivers in
    an MPEG-2 Network.  In some topologies, this may significantly reduce
@@ -1635,7 +1608,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1643,7 +1616,7 @@ Table of Contents
    non-IETF AR protocols to provide the AR information required by
    Receivers.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20DHCP%20Tuning"></a></body></html><a class="selflink" href="#section-5.5" name="section-5.5">5.5</a>.  DHCP Tuning</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20DHCP%20Tuning"></a></body></html><a class="selflink" href="#section-5.5" id="section-5.5">5.5</a>.  DHCP Tuning</span>
 
    DHCP [<a href="./rfc2131.html" title='"Dynamic Host Configuration Protocol"'>RFC2131</a>] and DHCPv6 [<a href="./rfc3315.html" title='"Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>RFC3315</a>] may be used over MPEG-2 Networks
    with bidirectional connectivity.  DHCP consists of two components: a
@@ -1669,7 +1642,7 @@ Table of Contents
    Request), resulting in potential address conflict.  This value may
    need to be tuned for MPEG-2 Networks.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.%20%20IP%20Multicast%20AR"></a></body></html><a class="selflink" href="#section-5.6" name="section-5.6">5.6</a>.  IP Multicast AR</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.%20%20IP%20Multicast%20AR"></a></body></html><a class="selflink" href="#section-5.6" id="section-5.6">5.6</a>.  IP Multicast AR</span>
 
    <a href="#section-3.2">Section 3.2</a> describes the multicast address resolution requirements.
    This section describes L3 address bindings when the destination
@@ -1691,7 +1664,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1715,7 +1688,7 @@ Table of Contents
    [<a href="./rfc2464.html" title='"Transmission of IPv6 Packets over Ethernet Networks"'>RFC2464</a>], but such mappings need to be consistently bound at the
    Encapsulator and Receiver, using AR procedures in a scalable manner.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.1.%20%20Multicast/Broadcast%20Addressing%20for%20UDLR"></a></body></html><a class="selflink" href="#section-5.6.1" name="section-5.6.1">5.6.1</a>.  Multicast/Broadcast Addressing for UDLR</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.1.%20%20Multicast/Broadcast%20Addressing%20for%20UDLR"></a></body></html><a class="selflink" href="#section-5.6.1" id="section-5.6.1">5.6.1</a>.  Multicast/Broadcast Addressing for UDLR</span>
 
    UDLR is a Layer 2 solution, in which a Receiver may send
    multicast/broadcast frames that are subsequently forwarded natively
@@ -1747,7 +1720,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1758,7 +1731,7 @@ Table of Contents
    at a Receiver, e.g., participation in IPv6 Duplicate Address
    Detection or running a DHCP server.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Link%20Layer%20Support"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Link Layer Support</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Link%20Layer%20Support"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Link Layer Support</span>
 
    This section considers link layer (L2) support for address resolution
    in MPEG-2 Networks.  It considers two issues: The code-point used at
@@ -1766,7 +1739,7 @@ Table of Contents
    support the AR method.  The table below summarizes the options for
    both MPE ([<a href="#ref-ETSI-DAT" title='"Specifications for Data Broadcasting"'>ETSI-DAT</a>], [<a href="#ref-ATSC-A90" title='"ATSC Data Broadcast Standard"'>ATSC-A90</a>]) and ULE [<a href="./rfc4326.html" title='"Unidirectional Lightweight Encapsulation (ULE) for Transmission of IP Datagrams over an MPEG-2 Transport Stream (TS)"'>RFC4326</a>] encapsulations.
 
-   [<a id="ref-RFC4840" name="ref-RFC4840">RFC4840</a>] describes issues and concerns that may arise when a link
+   [<a id="ref-RFC4840">RFC4840</a>] describes issues and concerns that may arise when a link
    can support multiple encapsulations.  In particular, it identifies
    problems that arise when end hosts that belong to the same IP network
    employ different incompatible encapsulation methods.  An Encapsulator
@@ -1803,7 +1776,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1836,7 +1809,7 @@ Table of Contents
    bidirectional communications (see Sections <a href="#section-5.1">5.1</a>, <a href="#section-5.2">5.2</a>, and <a href="#section-5.3">5.3</a> for a
    discussion of this).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20ULE%20without%20a%20Destination%20MAC/NPA%20Address%20%28D%3D1%29"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  ULE without a Destination MAC/NPA Address (D=1)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20ULE%20without%20a%20Destination%20MAC/NPA%20Address%20%28D%3D1%29"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  ULE without a Destination MAC/NPA Address (D=1)</span>
 
    The ULE encapsulation supports a mode (D=1) where the MAC/NPA address
    is not present in the encapsulated frame.  This mode may be used with
@@ -1859,7 +1832,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1874,7 +1847,7 @@ Table of Contents
    Therefore, DAD can not be used with this encapsulation format in
    topologies where this L2 forwarding may occur.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20ULE%20with%20a%20Destination%20MAC/NPA%20Address%20%28D%3D0%29"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  ULE with a Destination MAC/NPA Address (D=0)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20ULE%20with%20a%20Destination%20MAC/NPA%20Address%20%28D%3D0%29"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  ULE with a Destination MAC/NPA Address (D=0)</span>
 
    The IPv4 Address Resolution Protocol (ARP) [<a href="./rfc826.html" title='"Ethernet Address Resolution Protocol: Or Converting Network Protocol Addresses to 48.bit Ethernet Address for Transmission on Ethernet Hardware"'>RFC826</a>] is identified by
    an IEEE EtherType and may be used over ULE [<a href="./rfc4326.html" title='"Unidirectional Lightweight Encapsulation (ULE) for Transmission of IP Datagrams over an MPEG-2 Transport Stream (TS)"'>RFC4326</a>].  Although no
@@ -1893,7 +1866,7 @@ Table of Contents
    Therefore, DAD can not be used with this encapsulation format in
    topologies where this L2 forwarding may occur.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20MPE%20without%20LLC/SNAP%20Encapsulation"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  MPE without LLC/SNAP Encapsulation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20MPE%20without%20LLC/SNAP%20Encapsulation"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  MPE without LLC/SNAP Encapsulation</span>
 
    This is the default (and sometimes only) mode specified by most MPE
    Encapsulators.  MPE does not provide an EtherType field and therefore
@@ -1902,7 +1875,7 @@ Table of Contents
    IPv6 is not supported in this encapsulation format, and therefore it
    is not appropriate to consider the ND protocol.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20MPE%20with%20LLC/SNAP%20Encapsulation"></a></body></html><a class="selflink" href="#section-6.4" name="section-6.4">6.4</a>.  MPE with LLC/SNAP Encapsulation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20MPE%20with%20LLC/SNAP%20Encapsulation"></a></body></html><a class="selflink" href="#section-6.4" id="section-6.4">6.4</a>.  MPE with LLC/SNAP Encapsulation</span>
 
    The LLC/SNAP (Sub-Network Access Protocol) format of MPE provides an
    EtherType field and therefore may support ARP [<a href="./rfc826.html" title='"Ethernet Address Resolution Protocol: Or Converting Network Protocol Addresses to 48.bit Ethernet Address for Transmission on Ethernet Hardware"'>RFC826</a>].  There is no
@@ -1915,7 +1888,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1931,7 +1904,7 @@ Table of Contents
    be used with this encapsulation format in topologies where this L2
    forwarding may occur.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.5.%20%20ULE%20with%20Bridging%20Header%20Extension%20%28D%3D1%29"></a></body></html><a class="selflink" href="#section-6.5" name="section-6.5">6.5</a>.  ULE with Bridging Header Extension (D=1)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.5.%20%20ULE%20with%20Bridging%20Header%20Extension%20%28D%3D1%29"></a></body></html><a class="selflink" href="#section-6.5" id="section-6.5">6.5</a>.  ULE with Bridging Header Extension (D=1)</span>
 
    The ULE encapsulation supports a bridging extension header that
    supplies both a source and destination MAC address.  This can be used
@@ -1954,7 +1927,7 @@ Table of Contents
    the same interface [<a href="#ref-802.1D" title='"IEEE Standard for Local and Metropolitan Area Networks: Media Access Control (MAC) Bridges"'>802.1D</a>].  This prevents duplication on the
    bridged network (e.g., this would otherwise invoke DAD).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.6.%20%20ULE%20with%20Bridging%20Header%20Extension%20and%20NPA%20Address%20%28D%3D0%29"></a></body></html><a class="selflink" href="#section-6.6" name="section-6.6">6.6</a>.  ULE with Bridging Header Extension and NPA Address (D=0)</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.6.%20%20ULE%20with%20Bridging%20Header%20Extension%20and%20NPA%20Address%20%28D%3D0%29"></a></body></html><a class="selflink" href="#section-6.6" id="section-6.6">6.6</a>.  ULE with Bridging Header Extension and NPA Address (D=0)</span>
 
    The combination of an NPA address (D=0) and a bridging extension
    header are allowed in ULE.  This SNDU format supplies both a source
@@ -1971,7 +1944,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -1983,7 +1956,7 @@ Table of Contents
    duplication on the bridged network (e.g., this would otherwise invoke
    DAD).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.7.%20%20MPE%20with%20LLC/SNAP%20%26%20Bridging"></a></body></html><a class="selflink" href="#section-6.7" name="section-6.7">6.7</a>.  MPE with LLC/SNAP &amp; Bridging</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.7.%20%20MPE%20with%20LLC/SNAP%20%26%20Bridging"></a></body></html><a class="selflink" href="#section-6.7" id="section-6.7">6.7</a>.  MPE with LLC/SNAP &amp; Bridging</span>
 
    The LLC/SNAP format MPE frames may optionally support an IEEE
    bridging header [<a href="#ref-LLC" title='"Information technology; Telecommunications and information exchange between systems; Local and metropolitan area networks; Specific requirements; Part 2: Logical Link Control"'>LLC</a>].  This header supplies both a source and
@@ -2009,7 +1982,7 @@ Table of Contents
    duplication on the bridged network (e.g., this would otherwise invoke
    DAD).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Conclusions"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Conclusions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Conclusions"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Conclusions</span>
 
    This document describes addressing and address resolution issues for
    IP protocols over MPEG-2 transmission networks using both wired and
@@ -2027,7 +2000,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -2041,7 +2014,7 @@ Table of Contents
    recommendations to ensure scalability and improve support for the IP
    protocol stack.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Security Considerations</span>
 
    The normal security issues relating to the use of wireless links for
    transmission of Internet traffic should be considered.
@@ -2083,7 +2056,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -2091,7 +2064,7 @@ Table of Contents
    defining AR Servers that interoperate with the SEND protocol
    [<a href="#ref-SP-ND" title='"Securing Proxy Neighbour Discovery Problem Statement"'>SP-ND</a>]).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Acknowledgments</span>
 
    The authors wish to thank the IPDVB WG members for their inputs and
    in particular, Rod Walsh, Jun Takei, and Michael Mercurio.  The
@@ -2103,35 +2076,35 @@ Table of Contents
    inputs to this document (summarized in "Experiments with <a href="./rfc3077.html">RFC 3077</a>",
    July 2003).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" id="section-10.1">10.1</a>.  Normative References</span>
 
-   [<a id="ref-ETSI-DAT" name="ref-ETSI-DAT">ETSI-DAT</a>]    EN 301 192, "Specifications for Data Broadcasting",
+   [<a id="ref-ETSI-DAT">ETSI-DAT</a>]    EN 301 192, "Specifications for Data Broadcasting",
                  v1.3.1, European Telecommunications Standards Institute
                  (ETSI), May 2003.
 
-   [<a id="ref-ETSI-MHP" name="ref-ETSI-MHP">ETSI-MHP</a>]    TS 101 812, "Digital Video Broadcasting (DVB);
+   [<a id="ref-ETSI-MHP">ETSI-MHP</a>]    TS 101 812, "Digital Video Broadcasting (DVB);
                  Multimedia Home Platform (MHP) Specification", v1.2.1,
                  European Telecommunications Standards Institute (ETSI),
                  June 2002.
 
-   [<a id="ref-ETSI-SI" name="ref-ETSI-SI">ETSI-SI</a>]     EN 300 468, "Digital Video Broadcasting (DVB);
+   [<a id="ref-ETSI-SI">ETSI-SI</a>]     EN 300 468, "Digital Video Broadcasting (DVB);
                  Specification for Service Information (SI) in DVB
                  systems", v1.7.1, European Telecommunications Standards
                  Institute (ETSI), December 2005.
 
-   [<a id="ref-ISO-MPEG2" name="ref-ISO-MPEG2">ISO-MPEG2</a>]   ISO/IEC IS 13818-1, "Information technology -- Generic
+   [<a id="ref-ISO-MPEG2">ISO-MPEG2</a>]   ISO/IEC IS 13818-1, "Information technology -- Generic
                  coding of moving pictures and associated audio
                  information -- Part 1: Systems", International
                  Standards Organization (ISO), 2000.
 
-   [<a id="ref-RFC826" name="ref-RFC826">RFC826</a>]      Plummer, D., "Ethernet Address Resolution Protocol: Or
+   [<a id="ref-RFC826">RFC826</a>]      Plummer, D., "Ethernet Address Resolution Protocol: Or
                  Converting Network Protocol Addresses to 48.bit
                  Ethernet Address for Transmission on Ethernet
                  Hardware", STD 37, <a href="./rfc826.html">RFC 826</a>, November 1982.
 
-   [<a id="ref-RFC1112" name="ref-RFC1112">RFC1112</a>]     Deering, S., "Host extensions for IP multicasting", STD
+   [<a id="ref-RFC1112">RFC1112</a>]     Deering, S., "Host extensions for IP multicasting", STD
                  5, <a href="./rfc1112.html">RFC 1112</a>, August 1989.
 
 
@@ -2139,110 +2112,110 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
-   [<a id="ref-RFC2461" name="ref-RFC2461">RFC2461</a>]     Narten, T., Nordmark, E., and W. Simpson, "Neighbor
+   [<a id="ref-RFC2461">RFC2461</a>]     Narten, T., Nordmark, E., and W. Simpson, "Neighbor
                  Discovery for IP Version 6 (IPv6)", <a href="./rfc2461.html">RFC 2461</a>, December
                  1998.
 
-   [<a id="ref-RFC2464" name="ref-RFC2464">RFC2464</a>]     Crawford, M., "Transmission of IPv6 Packets over
+   [<a id="ref-RFC2464">RFC2464</a>]     Crawford, M., "Transmission of IPv6 Packets over
                  Ethernet Networks", <a href="./rfc2464.html">RFC 2464</a>, December 1998.
 
-   [<a id="ref-RFC2131" name="ref-RFC2131">RFC2131</a>]     Droms, R., "Dynamic Host Configuration Protocol", <a href="./rfc2131.html">RFC</a>
+   [<a id="ref-RFC2131">RFC2131</a>]     Droms, R., "Dynamic Host Configuration Protocol", <a href="./rfc2131.html">RFC</a>
                  <a href="./rfc2131.html">2131</a>, March 1997.
 
-   [<a id="ref-RFC3077" name="ref-RFC3077">RFC3077</a>]     Duros, E., Dabbous, W., Izumiyama, H., Fujii, N., and
+   [<a id="ref-RFC3077">RFC3077</a>]     Duros, E., Dabbous, W., Izumiyama, H., Fujii, N., and
                  Y. Zhang, "A Link-Layer Tunneling Mechanism for
                  Unidirectional Links", <a href="./rfc3077.html">RFC 3077</a>, March 2001.
 
-   [<a id="ref-RFC3315" name="ref-RFC3315">RFC3315</a>]     Droms, R., Bound, J., Volz, B., Lemon, T., Perkins, C.,
+   [<a id="ref-RFC3315">RFC3315</a>]     Droms, R., Bound, J., Volz, B., Lemon, T., Perkins, C.,
                  and M. Carney, "Dynamic Host Configuration Protocol for
                  IPv6 (DHCPv6)", <a href="./rfc3315.html">RFC 3315</a>, July 2003.
 
-   [<a id="ref-RFC3736" name="ref-RFC3736">RFC3736</a>]     Droms, R., "Stateless Dynamic Host Configuration
+   [<a id="ref-RFC3736">RFC3736</a>]     Droms, R., "Stateless Dynamic Host Configuration
                  Protocol (DHCP) Service for IPv6", <a href="./rfc3736.html">RFC 3736</a>, April
                  2004.
 
-   [<a id="ref-RFC4326" name="ref-RFC4326">RFC4326</a>]     Fairhurst, G. and B. Collini-Nocker, "Unidirectional
+   [<a id="ref-RFC4326">RFC4326</a>]     Fairhurst, G. and B. Collini-Nocker, "Unidirectional
                  Lightweight Encapsulation (ULE) for Transmission of IP
                  Datagrams over an MPEG-2 Transport Stream (TS)", <a href="./rfc4326.html">RFC</a>
                  <a href="./rfc4326.html">4326</a>, December 2005.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" id="section-10.2">10.2</a>.  Informative References</span>
 
-   [<a id="ref-802.1D" name="ref-802.1D">802.1D</a>]      IEEE 802.1D, "IEEE Standard for Local and Metropolitan
+   [<a id="ref-802.1D">802.1D</a>]      IEEE 802.1D, "IEEE Standard for Local and Metropolitan
                  Area Networks:  Media Access Control (MAC) Bridges",
                  IEEE, 2004.
 
-   [<a id="ref-802.3" name="ref-802.3">802.3</a>]       IEEE 802.3, "Local and metropolitan area networks-
+   [<a id="ref-802.3">802.3</a>]       IEEE 802.3, "Local and metropolitan area networks-
                  Specific requirements Part 3: Carrier sense multiple
                  access with collision detection (CSMA/CD) access method
                  and physical layer specifications", IEEE Computer
                  Society, (also ISO/IEC 8802-3), 2002.
 
-   [<a id="ref-ATSC" name="ref-ATSC">ATSC</a>]        A/53C, "ATSC Digital Television Standard", Advanced
+   [<a id="ref-ATSC">ATSC</a>]        A/53C, "ATSC Digital Television Standard", Advanced
                  Television Systems Committee (ATSC), Doc. A/53C, 2004.
 
-   [<a id="ref-ATSC-A54A" name="ref-ATSC-A54A">ATSC-A54A</a>]   A/54A, "Guide to the use of the ATSC Digital Television
+   [<a id="ref-ATSC-A54A">ATSC-A54A</a>]   A/54A, "Guide to the use of the ATSC Digital Television
                  Standard", Advanced Television Systems Committee
                  (ATSC), Doc. A/54A, 2003.
 
-   [<a id="ref-ATSC-A90" name="ref-ATSC-A90">ATSC-A90</a>]    A/90, "ATSC Data Broadcast Standard", Advanced
+   [<a id="ref-ATSC-A90">ATSC-A90</a>]    A/90, "ATSC Data Broadcast Standard", Advanced
                  Television Systems Committee (ATSC), Doc. A/90, 2000.
 
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
-   [<a id="ref-ATSC-A92" name="ref-ATSC-A92">ATSC-A92</a>]    A/92,  "Delivery of IP Multicast Sessions over ATSC
+   [<a id="ref-ATSC-A92">ATSC-A92</a>]    A/92,  "Delivery of IP Multicast Sessions over ATSC
                  Data Broadcast", Advanced Television Systems Committee
                  (ATSC), Doc. A/92, 2002.
 
-   [<a id="ref-DOCSIS" name="ref-DOCSIS">DOCSIS</a>]      "Data-Over-Cable Service Interface Specifications,
+   [<a id="ref-DOCSIS">DOCSIS</a>]      "Data-Over-Cable Service Interface Specifications,
                  DOCSIS 2.0, Radio Frequency Interface Specification",
                  CableLabs, document CM-SP-RFIv2.0-I10-051209, 2005.
 
-   [<a id="ref-DVB" name="ref-DVB">DVB</a>]         Digital Video Broadcasting (DVB) Project.
+   [<a id="ref-DVB">DVB</a>]         Digital Video Broadcasting (DVB) Project.
                  <a href="http://www.dvb.org">http://www.dvb.org</a>.
 
-   [<a id="ref-ETSI-DVBS" name="ref-ETSI-DVBS">ETSI-DVBS</a>]   EN 301 421,"Digital Video Broadcasting (DVB);
+   [<a id="ref-ETSI-DVBS">ETSI-DVBS</a>]   EN 301 421,"Digital Video Broadcasting (DVB);
                  Modulation and Coding for DBS satellite systems at
                  11/12 GHz", European Telecommunications Standards
                  Institute (ETSI).
 
-   [<a id="ref-ETSI-RCS" name="ref-ETSI-RCS">ETSI-RCS</a>]    EN 301 790, "Digital Video Broadcasting (DVB);
+   [<a id="ref-ETSI-RCS">ETSI-RCS</a>]    EN 301 790, "Digital Video Broadcasting (DVB);
                  Interaction channel for satellite distribution
                  Systems", European Telecommunications Standards
                  Institute (ETSI).
 
-   [<a id="ref-ETSI-SI1" name="ref-ETSI-SI1">ETSI-SI1</a>]    TR 101 162, "Digital Video Broadcasting (DVB);
+   [<a id="ref-ETSI-SI1">ETSI-SI1</a>]    TR 101 162, "Digital Video Broadcasting (DVB);
                  Allocation of Service Information (SI) codes for DVB
                  systems", European Telecommunications Standards
                  Institute (ETSI).
 
-   [<a id="ref-IPDVB-SEC" name="ref-IPDVB-SEC">IPDVB-SEC</a>]   H. Cruickshank, S. Iyengar, L. Duquerroy, P. Pillai,
+   [<a id="ref-IPDVB-SEC">IPDVB-SEC</a>]   H. Cruickshank, S. Iyengar, L. Duquerroy, P. Pillai,
                  "Security requirements for the Unidirectional
                  Lightweight Encapsulation (ULE) protocol", Work in
                  Progress, May 2007.
 
-   [<a id="ref-ISO-DSMCC" name="ref-ISO-DSMCC">ISO-DSMCC</a>]   ISO/IEC IS 13818-6, "Information technology -- Generic
+   [<a id="ref-ISO-DSMCC">ISO-DSMCC</a>]   ISO/IEC IS 13818-6, "Information technology -- Generic
                  coding of moving pictures and associated audio
                  information -- Part 6: Extensions for DSM-CC is a full
                  software implementation", International Standards
                  Organization (ISO), 2002.
 
-   [<a id="ref-LLC" name="ref-LLC">LLC</a>]         ISO/IEC 8802.2, "Information technology;
+   [<a id="ref-LLC">LLC</a>]         ISO/IEC 8802.2, "Information technology;
                  Telecommunications and information exchange between
                  systems; Local and metropolitan area networks; Specific
                  requirements; Part 2: Logical Link Control",
                  International Standards Organization (ISO), 1998.
 
-   [<a id="ref-MMT" name="ref-MMT">MMT</a>]         "SatLabs System Recommendations, Part 1, General
+   [<a id="ref-MMT">MMT</a>]         "SatLabs System Recommendations, Part 1, General
                  Specifications", Version 2.0, SatLabs Forum, 2006.
                  <a href="http://satlabs.org/pdf/SatLabs_System_Recommendations_v2.0_general.pdf">http://satlabs.org/pdf/</a>
                  <a href="http://satlabs.org/pdf/SatLabs_System_Recommendations_v2.0_general.pdf">SatLabs_System_Recommendations_v2.0_general.pdf</a>.
@@ -2251,55 +2224,55 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
-   [<a id="ref-RFC951" name="ref-RFC951">RFC951</a>]      Croft, W. and J. Gilmore, "Bootstrap Protocol", <a href="./rfc951.html">RFC</a>
+   [<a id="ref-RFC951">RFC951</a>]      Croft, W. and J. Gilmore, "Bootstrap Protocol", <a href="./rfc951.html">RFC</a>
                  <a href="./rfc951.html">951</a>, September 1985.
 
-   [<a id="ref-RFC2365" name="ref-RFC2365">RFC2365</a>]     Meyer, D., "Administratively Scoped IP Multicast", <a href="./bcp23.html">BCP</a>
-                 <a href="./bcp23.html">23</a>, <a href="./rfc2365.html">RFC 2365</a>, July 1998.
+   [<a id="ref-RFC2365">RFC2365</a>]     Meyer, D., "Administratively Scoped IP Multicast", <a href="https://www.rfc-editor.org/bcp/bcp23">BCP</a>
+                 <a href="https://www.rfc-editor.org/bcp/bcp23">23</a>, <a href="./rfc2365.html">RFC 2365</a>, July 1998.
 
-   [<a id="ref-RFC2375" name="ref-RFC2375">RFC2375</a>]     Hinden, R. and S. Deering, "IPv6 Multicast Address
+   [<a id="ref-RFC2375">RFC2375</a>]     Hinden, R. and S. Deering, "IPv6 Multicast Address
                  Assignments", <a href="./rfc2375.html">RFC 2375</a>, July 1998.
 
-   [<a id="ref-RFC2462" name="ref-RFC2462">RFC2462</a>]     Thomson, S. and T. Narten, "IPv6 Stateless Address
+   [<a id="ref-RFC2462">RFC2462</a>]     Thomson, S. and T. Narten, "IPv6 Stateless Address
                  Autoconfiguration", <a href="./rfc2462.html">RFC 2462</a>, December 1998.
 
-   [<a id="ref-RFC3046" name="ref-RFC3046">RFC3046</a>]     Patrick, M., "DHCP Relay Agent Information Option", <a href="./rfc3046.html">RFC</a>
+   [<a id="ref-RFC3046">RFC3046</a>]     Patrick, M., "DHCP Relay Agent Information Option", <a href="./rfc3046.html">RFC</a>
                  <a href="./rfc3046.html">3046</a>, January 2001.
 
-   [<a id="ref-RFC3256" name="ref-RFC3256">RFC3256</a>]     Jones, D. and R. Woundy, "The DOCSIS (Data-Over-Cable
+   [<a id="ref-RFC3256">RFC3256</a>]     Jones, D. and R. Woundy, "The DOCSIS (Data-Over-Cable
                  Service Interface Specifications) Device Class DHCP
                  (Dynamic Host Configuration Protocol) Relay Agent
                  Information Sub-option", <a href="./rfc3256.html">RFC 3256</a>, April 2002.
 
-   [<a id="ref-RFC3376" name="ref-RFC3376">RFC3376</a>]     Cain, B., Deering, S., Kouvelas, I., Fenner, B., and A.
+   [<a id="ref-RFC3376">RFC3376</a>]     Cain, B., Deering, S., Kouvelas, I., Fenner, B., and A.
                  Thyagarajan, "Internet Group Management Protocol,
                  Version 3", <a href="./rfc3376.html">RFC 3376</a>, October 2002.
 
-   [<a id="ref-RFC3449" name="ref-RFC3449">RFC3449</a>]     Balakrishnan, H., Padmanabhan, V., Fairhurst, G., and
+   [<a id="ref-RFC3449">RFC3449</a>]     Balakrishnan, H., Padmanabhan, V., Fairhurst, G., and
                  M. Sooriyabandara, "TCP Performance Implications of
-                 Network Path Asymmetry", <a href="./bcp69.html">BCP 69</a>, <a href="./rfc3449.html">RFC 3449</a>, December
+                 Network Path Asymmetry", <a href="https://www.rfc-editor.org/bcp/bcp69">BCP 69</a>, <a href="./rfc3449.html">RFC 3449</a>, December
                  2002.
 
-   [<a id="ref-RFC3451" name="ref-RFC3451">RFC3451</a>]     Luby, M., Gemmell, J., Vicisano, L., Rizzo, L.,
+   [<a id="ref-RFC3451">RFC3451</a>]     Luby, M., Gemmell, J., Vicisano, L., Rizzo, L.,
                  Handley, M., and J. Crowcroft, "Layered Coding
                  Transport (LCT) Building Block", <a href="./rfc3451.html">RFC 3451</a>, December
                  2002.
 
-   [<a id="ref-RFC3569" name="ref-RFC3569">RFC3569</a>]     Bhattacharyya, S., "An Overview of Source-Specific
+   [<a id="ref-RFC3569">RFC3569</a>]     Bhattacharyya, S., "An Overview of Source-Specific
                  Multicast (SSM)", <a href="./rfc3569.html">RFC 3569</a>, July 2003.
 
-   [<a id="ref-RFC3756" name="ref-RFC3756">RFC3756</a>]     Nikander, P., Kempf, J., and E. Nordmark, "IPv6
+   [<a id="ref-RFC3756">RFC3756</a>]     Nikander, P., Kempf, J., and E. Nordmark, "IPv6
                  Neighbor Discovery (ND) Trust Models and Threats", <a href="./rfc3756.html">RFC</a>
                  <a href="./rfc3756.html">3756</a>, May 2004.
 
-   [<a id="ref-RFC3738" name="ref-RFC3738">RFC3738</a>]     Luby, M. and V. Goyal, "Wave and Equation Based Rate
+   [<a id="ref-RFC3738">RFC3738</a>]     Luby, M. and V. Goyal, "Wave and Equation Based Rate
                  Control (WEBRC) Building Block", <a href="./rfc3738.html">RFC 3738</a>, April 2004.
 
-   [<a id="ref-RFC3810" name="ref-RFC3810">RFC3810</a>]     Vida, R. and L. Costa, "Multicast Listener Discovery
+   [<a id="ref-RFC3810">RFC3810</a>]     Vida, R. and L. Costa, "Multicast Listener Discovery
                  Version 2 (MLDv2) for IPv6", <a href="./rfc3810.html">RFC 3810</a>, June 2004.
 
 
@@ -2307,52 +2280,52 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
-   [<a id="ref-RFC3819" name="ref-RFC3819">RFC3819</a>]     Karn, P., Bormann, C., Fairhurst, G., Grossman, D.,
+   [<a id="ref-RFC3819">RFC3819</a>]     Karn, P., Bormann, C., Fairhurst, G., Grossman, D.,
                  Ludwig, R., Mahdavi, J., Montenegro, G., Touch, J., and
                  L. Wood, "Advice for Internet Subnetwork Designers",
-                 <a href="./bcp89.html">BCP 89</a>, <a href="./rfc3819.html">RFC 3819</a>, July 2004.
+                 <a href="https://www.rfc-editor.org/bcp/bcp89">BCP 89</a>, <a href="./rfc3819.html">RFC 3819</a>, July 2004.
 
-   [<a id="ref-RFC3971" name="ref-RFC3971">RFC3971</a>]     Arkko, J., Kempf, J., Zill, B., and P. Nikander,
+   [<a id="ref-RFC3971">RFC3971</a>]     Arkko, J., Kempf, J., Zill, B., and P. Nikander,
                  "SEcure Neighbor Discovery (SEND)", <a href="./rfc3971.html">RFC 3971</a>, March
                  2005.
 
-   [<a id="ref-RFC4259" name="ref-RFC4259">RFC4259</a>]     Weis, B., "The Use of RSA/SHA-1 Signatures within
+   [<a id="ref-RFC4259">RFC4259</a>]     Weis, B., "The Use of RSA/SHA-1 Signatures within
                  Encapsulating Security Payload (ESP) and Authentication
                  Header (AH)", <a href="./rfc4359.html">RFC 4359</a>, January 2006.
 
-   [<a id="ref-RFC4346" name="ref-RFC4346">RFC4346</a>]     Dierks, T. and E. Rescorla, "The Transport Layer
+   [<a id="ref-RFC4346">RFC4346</a>]     Dierks, T. and E. Rescorla, "The Transport Layer
                  Security (TLS) Protocol Version 1.1", <a href="./rfc4346.html">RFC 4346</a>, April
                  2006.
 
-   [<a id="ref-RFC4389" name="ref-RFC4389">RFC4389</a>]     Thaler, D., Talwar, M., and C. Patel, "Neighbor
+   [<a id="ref-RFC4389">RFC4389</a>]     Thaler, D., Talwar, M., and C. Patel, "Neighbor
                  Discovery Proxies (ND Proxy)", <a href="./rfc4389.html">RFC 4389</a>, April 2006.
 
-   [<a id="ref-RFC4601" name="ref-RFC4601">RFC4601</a>]     Fenner, B., Handley, M., Holbrook, H., and I. Kouvelas,
+   [<a id="ref-RFC4601">RFC4601</a>]     Fenner, B., Handley, M., Holbrook, H., and I. Kouvelas,
                  "Protocol Independent Multicast - Sparse Mode (PIM-SM):
                  Protocol Specification (Revised)", <a href="./rfc4601.html">RFC 4601</a>, August
                  2006.
 
-   [<a id="ref-RFC4605" name="ref-RFC4605">RFC4605</a>]     Fenner, B., He, H., Haberman, B., and H. Sandick,
+   [<a id="ref-RFC4605">RFC4605</a>]     Fenner, B., He, H., Haberman, B., and H. Sandick,
                  "Internet Group Management Protocol (IGMP) / Multicast
                  Listener Discovery (MLD)-Based Multicast Forwarding
                  ("IGMP/MLD Proxying")", <a href="./rfc4605.html">RFC 4605</a>, August 2006.
 
-   [<a id="ref-RFC4779" name="ref-RFC4779">RFC4779</a>]     Asadullah, S., Ahmed, A., Popoviciu, C., Savola, P.,
+   [<a id="ref-RFC4779">RFC4779</a>]     Asadullah, S., Ahmed, A., Popoviciu, C., Savola, P.,
                  and J. Palet, "ISP IPv6 Deployment Scenarios in
                  Broadband Access Networks", <a href="./rfc4779.html">RFC 4779</a>, January 2007.
 
-   [<a id="ref-RFC4840" name="ref-RFC4840">RFC4840</a>]     Aboba, B., Davies, E., and D. Thaler, "Multiple
+   [<a id="ref-RFC4840">RFC4840</a>]     Aboba, B., Davies, E., and D. Thaler, "Multiple
                  Encapsulation Methods Considered Harmful", <a href="./rfc4840.html">RFC 4840</a>,
                  April 2007.
 
-   [<a id="ref-SCTE-1" name="ref-SCTE-1">SCTE-1</a>]      "IP Multicast for Digital MPEG Networks", SCTE DVS
+   [<a id="ref-SCTE-1">SCTE-1</a>]      "IP Multicast for Digital MPEG Networks", SCTE DVS
                  311r6, March 2002.
 
-   [<a id="ref-SP-ND" name="ref-SP-ND">SP-ND</a>]       Daley, G., "Securing Proxy Neighbour Discovery Problem
+   [<a id="ref-SP-ND">SP-ND</a>]       Daley, G., "Securing Proxy Neighbour Discovery Problem
                  Statement", Work in Progress, February 2005.
 
 
@@ -2363,7 +2336,7 @@ Table of Contents
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -2419,7 +2392,7 @@ Authors' Addresses
 
 
 <span class="grey">Fairhurst &amp; Montpetit        Informational                     [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc4947.html">RFC 4947</a>       AR Mechanisms for IP over MPEG-2 Networks       July 2007</span>
 
 
@@ -2428,7 +2401,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2007).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -2448,7 +2421,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -2475,11 +2448,6 @@ Acknowledgement
 
 
 Fairhurst &amp; Montpetit        Informational                     [Page 41]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

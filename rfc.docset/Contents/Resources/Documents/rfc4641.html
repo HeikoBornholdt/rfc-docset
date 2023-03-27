@@ -1,27 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="rfc2541" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:4641" name="DC.Identifier"/>
-<meta content="September, 2006" name="DC.Date.Issued"/>
-<meta content="Olaf M. Kolkman &lt;olaf@nlnetlabs.nl&gt;" name="DC.Creator"/>
-<meta content="This document describes a set of practices for operating the DNS with
-security extensions (DNSSEC). The target audience is zone
-administrators deploying DNSSEC.  The document discusses operational
-aspects of using keys and signatures in the DNS. It discusses issues
-of key generation, key storage, signature generation, key rollover,
-and related policies.  This document obsoletes RFC 2541, as it covers
-more operational ground and gives more up-to-date requirements with
-respect to key sizes and the new DNSSEC specification. This memo
-provides information for the Internet community." name="DC.Description.Abstract"/>
-<meta content="DNSSEC Operational Practices" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 4641 - DNSSEC Operational Practices</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="O. Kolkman" name="citation_author"/>
+<meta content="R. Gieben" name="citation_author"/>
+<meta content="September, 2006" name="citation_publication_date"/>
+<meta content="DNSSEC Operational Practices" name="citation_title"/>
+<meta content="10.17487/RFC4641" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc4641" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc4641.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 4641: DNSSEC Operational Practices</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -50,7 +41,7 @@ provides information for the Internet community." name="DC.Description.Abstract"
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -59,7 +50,7 @@ provides information for the Internet community." name="DC.Description.Abstract"
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -138,19 +129,18 @@ provides information for the Internet community." name="DC.Description.Abstract"
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -164,21 +154,9 @@ provides information for the Internet community." name="DC.Description.Abstract"
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgbrown" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc4641.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc4641" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-dnsop-dnssec-operational-practices.html" title="draft-ietf-dnsop-dnssec-operational-practices">draft-ietf-dnsop-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc4641" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc4641" title="Side-by-side diff">Diff2</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=4641&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=4641">Errata</a>]  </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">Obsoleted by: <a href="./rfc6781.html">6781</a>                                         INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                         O. Kolkman
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc4641.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc4641.txt.pdf">PDF</a>|<a href="/rfc/rfc4641.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc4641" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=4641&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc4641" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc4641" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">Obsoleted by: <a href="/rfc/rfc6781" target="_blank">6781</a>                                         INFORMATIONAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                         O. Kolkman
 Request for Comments: 4641                                     R. Gieben
 Obsoletes: <a href="./rfc2541.html">2541</a>                                               NLnet Labs
 Category: Informational                                   September 2006
@@ -230,7 +208,7 @@ Abstract
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -286,11 +264,11 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This document describes how to run a DNS Security (DNSSEC)-enabled
    environment.  It is intended for operators who have knowledge of the
@@ -342,11 +320,11 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20The%20Use%20of%20the%20Term%20%27key%27"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  The Use of the Term 'key'</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20The%20Use%20of%20the%20Term%20%27key%27"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  The Use of the Term 'key'</span>
 
    It is assumed that the reader is familiar with the concept of
    asymmetric keys on which DNSSEC is based (public key cryptography
@@ -358,7 +336,7 @@ Table of Contents
    in the DNSKEY Resource Record and that it is the public part that is
    used in key exchanges.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Time%20Definitions"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Time Definitions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Time%20Definitions"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Time Definitions</span>
 
    In this document, we will be using a number of time-related terms.
    The following definitions apply:
@@ -398,11 +376,11 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Keeping%20the%20Chain%20of%20Trust%20Intact"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Keeping the Chain of Trust Intact</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Keeping%20the%20Chain%20of%20Trust%20Intact"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Keeping the Chain of Trust Intact</span>
 
    Maintaining a valid chain of trust is important because broken chains
    of trust will result in data being marked as Bogus (as defined in [<a href="#ref-4" title='"DNS Security Introduction and Requirements"'>4</a>]
@@ -454,17 +432,17 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Keys%20Generation%20and%20Storage"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Keys Generation and Storage</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Keys%20Generation%20and%20Storage"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Keys Generation and Storage</span>
 
    This section describes a number of considerations with respect to the
    security of keys.  It deals with the generation, effectivity period,
    size, and storage of private keys.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Zone%20and%20Key%20Signing%20Keys"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Zone and Key Signing Keys</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Zone%20and%20Key%20Signing%20Keys"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Zone and Key Signing Keys</span>
 
    The DNSSEC validation protocol does not distinguish between different
    types of DNSKEYs.  All DNSKEYs can be used during the validation.  In
@@ -484,7 +462,7 @@ Table of Contents
    between KSK and SEP keys and we assume the SEP flag to be set on all
    KSKs.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Motivations%20for%20the%20KSK%20and%20ZSK%20Separation"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  Motivations for the KSK and ZSK Separation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Motivations%20for%20the%20KSK%20and%20ZSK%20Separation"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  Motivations for the KSK and ZSK Separation</span>
 
    Differentiating between the KSK and ZSK functions has several
    advantages:
@@ -510,7 +488,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -538,7 +516,7 @@ Table of Contents
    planning for a key effectivity on the order of a few months so that a
    key rollover remains an operational routine.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20KSKs%20for%20High-Level%20Zones"></a></body></html><a class="selflink" href="#section-3.1.2" name="section-3.1.2">3.1.2</a>.  KSKs for High-Level Zones</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20KSKs%20for%20High-Level%20Zones"></a></body></html><a class="selflink" href="#section-3.1.2" id="section-3.1.2">3.1.2</a>.  KSKs for High-Level Zones</span>
 
    Higher-level zones are generally more sensitive than lower-level
    zones.  Anyone controlling or breaking the security of a zone thereby
@@ -566,11 +544,11 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Key%20Generation"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Key Generation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Key%20Generation"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Key Generation</span>
 
    Careful generation of all keys is a sometimes overlooked but
    absolutely essential element in any cryptographically secure system.
@@ -588,7 +566,7 @@ Table of Contents
    from the network via an air gap or, at a minimum, high-level secure
    hardware.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Key%20Effectivity%20Period"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Key Effectivity Period</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Key%20Effectivity%20Period"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Key Effectivity Period</span>
 
    For various reasons, keys in DNSSEC need to be changed once in a
    while.  The longer a key is in use, the greater the probability that
@@ -622,11 +600,11 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Key%20Algorithm"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Key Algorithm</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Key%20Algorithm"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Key Algorithm</span>
 
    There are currently three different types of algorithms that can be
    used in DNSSEC: RSA, DSA, and elliptic curve cryptography.  The
@@ -653,7 +631,7 @@ Table of Contents
    algorithms are available in protocol specifications (see [<a href="#ref-19" title='"Use of RSA/SHA-256 DNSKEY and RRSIG Resource Records in DNSSEC"'>19</a>] and
    [<a href="#ref-20" title='"Use of SHA-256 in DNSSEC Delegation Signer (DS) Resource Records (RRs)"'>20</a>]) and implementations.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Key%20Sizes"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  Key Sizes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Key%20Sizes"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  Key Sizes</span>
 
    When choosing key sizes, zone administrators will need to take into
    account how long a key will be used, how much data will be signed
@@ -678,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -689,7 +667,7 @@ Table of Contents
          for system security.  The 90 bit number should be increased by
          about 2/3 bit/year, or about 96 bits in 2005.
 
-   [<a id="ref-13" name="ref-13">13</a>] goes on to explain how this number "n" can be used to calculate
+   [<a id="ref-13">13</a>] goes on to explain how this number "n" can be used to calculate
    the key sizes in public key cryptography.  This culminated in the
    table given below (slightly modified for our purpose):
 
@@ -734,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -750,7 +728,7 @@ Table of Contents
    validate and create RRSIGs increases with larger keys, so don't
    needlessly double your key sizes.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20Private%20Key%20Storage"></a></body></html><a class="selflink" href="#section-3.6" name="section-3.6">3.6</a>.  Private Key Storage</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.6.%20%20Private%20Key%20Storage"></a></body></html><a class="selflink" href="#section-3.6" id="section-3.6">3.6</a>.  Private Key Storage</span>
 
    It is recommended that, where possible, zone private keys and the
    zone file master copy that is to be signed be kept and used in off-
@@ -790,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -798,9 +776,9 @@ Table of Contents
    the private key that is used to update signatures on updated RRs will
    need to be on-line.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Signature%20Generation%2C%20Key%20Rollover%2C%20and%20Related%20Policies"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Signature Generation, Key Rollover, and Related Policies</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Signature%20Generation%2C%20Key%20Rollover%2C%20and%20Related%20Policies"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Signature Generation, Key Rollover, and Related Policies</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Time%20in%20DNSSEC"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Time in DNSSEC</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Time%20in%20DNSSEC"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Time in DNSSEC</span>
 
    Without DNSSEC, all times in the DNS are relative.  The SOA fields
    REFRESH, RETRY, and EXPIRATION are timers used to determine the time
@@ -813,7 +791,7 @@ Table of Contents
    the signature is marked as invalid and the signed data is to be
    considered Bogus.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Time%20Considerations"></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a>.  Time Considerations</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Time%20Considerations"></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a>.  Time Considerations</span>
 
    Because of the expiration of signatures, one should consider the
    following:
@@ -846,7 +824,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -902,7 +880,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -927,7 +905,7 @@ Table of Contents
          questions are not DNSSEC specific but may influence the choice
          of your signature validity intervals.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Key%20Rollovers"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Key Rollovers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Key%20Rollovers"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Key Rollovers</span>
 
    A DNSSEC key cannot be used forever (see <a href="#section-3.3">Section 3.3</a>).  So key
    rollovers -- or supercessions, as they are sometimes called -- are a
@@ -946,7 +924,7 @@ Table of Contents
    signed with a new key against an old key that lives in a local cache,
    also resulting in data being marked "Bogus".
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Zone%20Signing%20Key%20Rollovers"></a></body></html><a class="selflink" href="#section-4.2.1" name="section-4.2.1">4.2.1</a>.  Zone Signing Key Rollovers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Zone%20Signing%20Key%20Rollovers"></a></body></html><a class="selflink" href="#section-4.2.1" id="section-4.2.1">4.2.1</a>.  Zone Signing Key Rollovers</span>
 
    For "Zone Signing Key rollovers", there are two ways to make sure
    that during the rollover data still cached can be verified with the
@@ -958,7 +936,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -966,7 +944,7 @@ Table of Contents
    <a href="#section-4.2.1.1">4.2.1.1</a>).  The pros, cons, and recommendations are described in
    <a href="#section-4.2.1.3">Section 4.2.1.3</a>.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.1.%20%20Pre-Publish%20Key%20Rollover"></a></body></html><a class="selflink" href="#section-4.2.1.1" name="section-4.2.1.1">4.2.1.1</a>.  Pre-Publish Key Rollover</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.1.%20%20Pre-Publish%20Key%20Rollover"></a></body></html><a class="selflink" href="#section-4.2.1.1" id="section-4.2.1.1">4.2.1.1</a>.  Pre-Publish Key Rollover</span>
 
    This section shows how to perform a ZSK rollover without the need to
    sign all the data in a zone twice -- the "pre-publish key rollover".
@@ -1014,7 +992,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -1070,7 +1048,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -1079,7 +1057,7 @@ Table of Contents
    physically secure manner and does not need to be 'fetched' every time
    a zone needs to be signed.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.2.%20%20Double%20Signature%20Zone%20Signing%20Key%20Rollover"></a></body></html><a class="selflink" href="#section-4.2.1.2" name="section-4.2.1.2">4.2.1.2</a>.  Double Signature Zone Signing Key Rollover</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.2.%20%20Double%20Signature%20Zone%20Signing%20Key%20Rollover"></a></body></html><a class="selflink" href="#section-4.2.1.2" id="section-4.2.1.2">4.2.1.2</a>.  Double Signature Zone Signing Key Rollover</span>
 
    This section shows how to perform a ZSK key rollover using the double
    zone data signature scheme, aptly named "double signature rollover".
@@ -1126,7 +1104,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -1147,7 +1125,7 @@ Table of Contents
    during the rollover.  New data can be introduced in the zone as long
    as it is signed with both keys.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.3.%20%20Pros%20and%20Cons%20of%20the%20Schemes"></a></body></html><a class="selflink" href="#section-4.2.1.3" name="section-4.2.1.3">4.2.1.3</a>.  Pros and Cons of the Schemes</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.3.%20%20Pros%20and%20Cons%20of%20the%20Schemes"></a></body></html><a class="selflink" href="#section-4.2.1.3" id="section-4.2.1.3">4.2.1.3</a>.  Pros and Cons of the Schemes</span>
 
    Pre-publish key rollover: This rollover does not involve signing the
       zone data twice.  Instead, before the actual rollover, the new key
@@ -1162,7 +1140,7 @@ Table of Contents
       doubles; this may be prohibitive if you have very big zones.  An
       advantage is that it only requires three steps.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Key%20Signing%20Key%20Rollovers"></a></body></html><a class="selflink" href="#section-4.2.2" name="section-4.2.2">4.2.2</a>.  Key Signing Key Rollovers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Key%20Signing%20Key%20Rollovers"></a></body></html><a class="selflink" href="#section-4.2.2" id="section-4.2.2">4.2.2</a>.  Key Signing Key Rollovers</span>
 
    For the rollover of a Key Signing Key, the same considerations as for
    the rollover of a Zone Signing Key apply.  However, we can use a
@@ -1182,7 +1160,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -1238,7 +1216,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -1246,7 +1224,7 @@ Table of Contents
    this interaction has not been developed, further discussion is out of
    scope for this document.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.3.%20%20Difference%20Between%20ZSK%20and%20KSK%20Rollovers"></a></body></html><a class="selflink" href="#section-4.2.3" name="section-4.2.3">4.2.3</a>.  Difference Between ZSK and KSK Rollovers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.3.%20%20Difference%20Between%20ZSK%20and%20KSK%20Rollovers"></a></body></html><a class="selflink" href="#section-4.2.3" id="section-4.2.3">4.2.3</a>.  Difference Between ZSK and KSK Rollovers</span>
 
    Note that KSK rollovers and ZSK rollovers are different in the sense
    that a KSK rollover requires interaction with the parent (and
@@ -1294,7 +1272,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -1314,7 +1292,7 @@ Table of Contents
    interaction consists of two steps.  The "double signature" method
    only needs one interaction.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.4.%20%20Automated%20Key%20Rollovers"></a></body></html><a class="selflink" href="#section-4.2.4" name="section-4.2.4">4.2.4</a>.  Automated Key Rollovers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.4.%20%20Automated%20Key%20Rollovers"></a></body></html><a class="selflink" href="#section-4.2.4" id="section-4.2.4">4.2.4</a>.  Automated Key Rollovers</span>
 
    As keys must be renewed periodically, there is some motivation to
    automate the rollover process.  Consider the following:
@@ -1327,7 +1305,7 @@ Table of Contents
       consequently, this data must be authenticated and integrity must
       be guaranteed in order to avoid attacks on the rollover.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Planning%20for%20Emergency%20Key%20Rollover"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Planning for Emergency Key Rollover</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Planning%20for%20Emergency%20Key%20Rollover"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Planning for Emergency Key Rollover</span>
 
    This section deals with preparation for a possible key compromise.
    Our advice is to have a documented procedure ready for when a key
@@ -1350,7 +1328,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -1364,7 +1342,7 @@ Table of Contents
    to take the path of a regular rollover, the malicious key holder can
    spoof data so that it appears to be valid.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.%20%20KSK%20Compromise"></a></body></html><a class="selflink" href="#section-4.3.1" name="section-4.3.1">4.3.1</a>.  KSK Compromise</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.%20%20KSK%20Compromise"></a></body></html><a class="selflink" href="#section-4.3.1" id="section-4.3.1">4.3.1</a>.  KSK Compromise</span>
 
    A zone containing a DNSKEY RRSet with a compromised KSK is vulnerable
    as long as the compromised KSK is configured as trust anchor or a
@@ -1389,7 +1367,7 @@ Table of Contents
    advise not to remove the KSK before the parent has a DS to a new KSK
    in place.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.1.%20%20Keeping%20the%20Chain%20of%20Trust%20Intact"></a></body></html><a class="selflink" href="#section-4.3.1.1" name="section-4.3.1.1">4.3.1.1</a>.  Keeping the Chain of Trust Intact</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.1.%20%20Keeping%20the%20Chain%20of%20Trust%20Intact"></a></body></html><a class="selflink" href="#section-4.3.1.1" id="section-4.3.1.1">4.3.1.1</a>.  Keeping the Chain of Trust Intact</span>
 
    If we follow this advice, the timing of the replacement of the KSK is
    somewhat critical.  The goal is to remove the compromised KSK as soon
@@ -1406,7 +1384,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -1433,7 +1411,7 @@ Table of Contents
    Note that this is only a problem when the DNSKEY and or DS records
    are used for authentication at the parent.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.2.%20%20Breaking%20the%20Chain%20of%20Trust"></a></body></html><a class="selflink" href="#section-4.3.1.2" name="section-4.3.1.2">4.3.1.2</a>.  Breaking the Chain of Trust</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.2.%20%20Breaking%20the%20Chain%20of%20Trust"></a></body></html><a class="selflink" href="#section-4.3.1.2" id="section-4.3.1.2">4.3.1.2</a>.  Breaking the Chain of Trust</span>
 
    There are two methods to break the chain of trust.  The first method
    causes the child zone to appear 'Bogus' to validating resolvers.  The
@@ -1450,7 +1428,7 @@ Table of Contents
    the DS RRs from the parent zone altogether.  As a result, the child
    zone would become insecure.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.2.%20%20ZSK%20Compromise"></a></body></html><a class="selflink" href="#section-4.3.2" name="section-4.3.2">4.3.2</a>.  ZSK Compromise</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.2.%20%20ZSK%20Compromise"></a></body></html><a class="selflink" href="#section-4.3.2" id="section-4.3.2">4.3.2</a>.  ZSK Compromise</span>
 
    Primarily because there is no parental interaction required when a
    ZSK is compromised, the situation is less severe than with a KSK
@@ -1462,7 +1440,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -1471,7 +1449,7 @@ Table of Contents
    long as the RRSIG over the compromised ZSK is not expired the zone
    may be still at risk.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.3.%20%20Compromises%20of%20Keys%20Anchored%20in%20Resolvers"></a></body></html><a class="selflink" href="#section-4.3.3" name="section-4.3.3">4.3.3</a>.  Compromises of Keys Anchored in Resolvers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.3.%20%20Compromises%20of%20Keys%20Anchored%20in%20Resolvers"></a></body></html><a class="selflink" href="#section-4.3.3" id="section-4.3.3">4.3.3</a>.  Compromises of Keys Anchored in Resolvers</span>
 
    A key can also be pre-configured in resolvers.  For instance, if
    DNSSEC is successfully deployed the root key may be pre-configured in
@@ -1488,9 +1466,9 @@ Table of Contents
    of-band, for example, through the use of an announcement website that
    is secured using secure sockets (TLS) [<a href="#ref-21" title='"Transport Layer Security (TLS) Extensions"'>21</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Parental%20Policies"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Parental Policies</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Parental%20Policies"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Parental Policies</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Initial%20Key%20Exchanges%20and%20Parental%20Policies%20Considerations"></a></body></html><a class="selflink" href="#section-4.4.1" name="section-4.4.1">4.4.1</a>.  Initial Key Exchanges and Parental Policies Considerations</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Initial%20Key%20Exchanges%20and%20Parental%20Policies%20Considerations"></a></body></html><a class="selflink" href="#section-4.4.1" id="section-4.4.1">4.4.1</a>.  Initial Key Exchanges and Parental Policies Considerations</span>
 
    The initial key exchange is always subject to the policies set by the
    parent.  When designing a key exchange policy one should take into
@@ -1518,11 +1496,11 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Storing%20Keys%20or%20Hashes%3F"></a></body></html><a class="selflink" href="#section-4.4.2" name="section-4.4.2">4.4.2</a>.  Storing Keys or Hashes?</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Storing%20Keys%20or%20Hashes%3F"></a></body></html><a class="selflink" href="#section-4.4.2" id="section-4.4.2">4.4.2</a>.  Storing Keys or Hashes?</span>
 
    When designing a registry system one should consider which of the
    DNSKEYs and/or the corresponding DSes to store.  Since a child zone
@@ -1547,7 +1525,7 @@ Table of Contents
    DNSSEC extensions to the Extensible Provisioning Protocol (EPP) [<a href="#ref-15" title='"Domain Name System (DNS) Security Extensions Mapping for the Extensible Provisioning Protocol (EPP)"'>15</a>],
    which allows transfer of DS RRs and optionally DNSKEY RRs.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.%20%20Security%20Lameness"></a></body></html><a class="selflink" href="#section-4.4.3" name="section-4.4.3">4.4.3</a>.  Security Lameness</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.%20%20Security%20Lameness"></a></body></html><a class="selflink" href="#section-4.4.3" id="section-4.4.3">4.4.3</a>.  Security Lameness</span>
 
    Security lameness is defined as what happens when a parent has a DS
    RR pointing to a non-existing DNSKEY RR.  When this happens, the
@@ -1574,11 +1552,11 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.4.%20%20DS%20Signature%20Validity%20Period"></a></body></html><a class="selflink" href="#section-4.4.4" name="section-4.4.4">4.4.4</a>.  DS Signature Validity Period</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.4.%20%20DS%20Signature%20Validity%20Period"></a></body></html><a class="selflink" href="#section-4.4.4" id="section-4.4.4">4.4.4</a>.  DS Signature Validity Period</span>
 
    Since the DS can be replayed as long as it has a valid signature, a
    short signature validity period over the DS minimizes the time a
@@ -1611,7 +1589,7 @@ Table of Contents
    persistence of DS RRSets in caches thereby increasing the speed with
    which updated DS RRSets propagate through the DNS.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    DNSSEC adds data integrity to the DNS.  This document tries to assess
    the operational considerations to maintain a stable and secure DNSSEC
@@ -1619,7 +1597,7 @@ Table of Contents
    in the DNS will cause validation failures and may make secured zones
    unavailable to security-aware resolvers.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Acknowledgments</span>
 
    Most of the ideas in this document were the result of collective
    efforts during workshops, discussions, and tryouts.
@@ -1630,7 +1608,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -1655,29 +1633,29 @@ Table of Contents
    While working on this document, Kolkman was employed by the RIPE NCC
    and Gieben was employed by NLnet Labs.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Normative References</span>
 
-   [<a id="ref-1" name="ref-1">1</a>]   Mockapetris, P., "Domain names - concepts and facilities", STD
+   [<a id="ref-1">1</a>]   Mockapetris, P., "Domain names - concepts and facilities", STD
          13, <a href="./rfc1034.html">RFC 1034</a>, November 1987.
 
-   [<a id="ref-2" name="ref-2">2</a>]   Mockapetris, P., "Domain names - implementation and
+   [<a id="ref-2">2</a>]   Mockapetris, P., "Domain names - implementation and
          specification", STD 13, <a href="./rfc1035.html">RFC 1035</a>, November 1987.
 
-   [<a id="ref-3" name="ref-3">3</a>]   Kolkman, O., Schlyter, J., and E. Lewis, "Domain Name System
+   [<a id="ref-3">3</a>]   Kolkman, O., Schlyter, J., and E. Lewis, "Domain Name System
          KEY (DNSKEY) Resource Record (RR) Secure Entry Point (SEP)
          Flag", <a href="./rfc3757.html">RFC 3757</a>, May 2004.
 
-   [<a id="ref-4" name="ref-4">4</a>]   Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose,
+   [<a id="ref-4">4</a>]   Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose,
          "DNS Security Introduction and Requirements", <a href="./rfc4033.html">RFC 4033</a>, March
          2005.
 
-   [<a id="ref-5" name="ref-5">5</a>]   Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose,
+   [<a id="ref-5">5</a>]   Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose,
          "Resource Records for the DNS Security Extensions", <a href="./rfc4034.html">RFC 4034</a>,
          March 2005.
 
-   [<a id="ref-6" name="ref-6">6</a>]   Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose,
+   [<a id="ref-6">6</a>]   Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose,
          "Protocol Modifications for the DNS Security Extensions", <a href="./rfc4035.html">RFC</a>
          <a href="./rfc4035.html">4035</a>, March 2005.
 
@@ -1686,55 +1664,55 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Informative References</span>
 
-   [<a id="ref-7" name="ref-7">7</a>]   Bradner, S., "Key words for use in RFCs to Indicate Requirement
-         Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-7">7</a>]   Bradner, S., "Key words for use in RFCs to Indicate Requirement
+         Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-8" name="ref-8">8</a>]   Ohta, M., "Incremental Zone Transfer in DNS", <a href="./rfc1995.html">RFC 1995</a>, August
+   [<a id="ref-8">8</a>]   Ohta, M., "Incremental Zone Transfer in DNS", <a href="./rfc1995.html">RFC 1995</a>, August
          1996.
 
-   [<a id="ref-9" name="ref-9">9</a>]   Vixie, P., "A Mechanism for Prompt Notification of Zone Changes
+   [<a id="ref-9">9</a>]   Vixie, P., "A Mechanism for Prompt Notification of Zone Changes
          (DNS NOTIFY)", <a href="./rfc1996.html">RFC 1996</a>, August 1996.
 
-   [<a id="ref-10" name="ref-10">10</a>]  Wellington, B., "Secure Domain Name System (DNS) Dynamic
+   [<a id="ref-10">10</a>]  Wellington, B., "Secure Domain Name System (DNS) Dynamic
          Update", <a href="./rfc3007.html">RFC 3007</a>, November 2000.
 
-   [<a id="ref-11" name="ref-11">11</a>]  Andrews, M., "Negative Caching of DNS Queries (DNS NCACHE)",
+   [<a id="ref-11">11</a>]  Andrews, M., "Negative Caching of DNS Queries (DNS NCACHE)",
          <a href="./rfc2308.html">RFC 2308</a>, March 1998.
 
-   [<a id="ref-12" name="ref-12">12</a>]  Eastlake, D., "DNS Security Operational Considerations", <a href="./rfc2541.html">RFC</a>
+   [<a id="ref-12">12</a>]  Eastlake, D., "DNS Security Operational Considerations", <a href="./rfc2541.html">RFC</a>
          <a href="./rfc2541.html">2541</a>, March 1999.
 
-   [<a id="ref-13" name="ref-13">13</a>]  Orman, H. and P. Hoffman, "Determining Strengths For Public
-         Keys Used For Exchanging Symmetric Keys", <a href="./bcp86.html">BCP 86</a>, <a href="./rfc3766.html">RFC 3766</a>,
+   [<a id="ref-13">13</a>]  Orman, H. and P. Hoffman, "Determining Strengths For Public
+         Keys Used For Exchanging Symmetric Keys", <a href="https://www.rfc-editor.org/bcp/bcp86">BCP 86</a>, <a href="./rfc3766.html">RFC 3766</a>,
          April 2004.
 
-   [<a id="ref-14" name="ref-14">14</a>]  Eastlake, D., Schiller, J., and S. Crocker, "Randomness
-         Requirements for Security", <a href="./bcp106.html">BCP 106</a>, <a href="./rfc4086.html">RFC 4086</a>, June 2005.
+   [<a id="ref-14">14</a>]  Eastlake, D., Schiller, J., and S. Crocker, "Randomness
+         Requirements for Security", <a href="https://www.rfc-editor.org/bcp/bcp106">BCP 106</a>, <a href="./rfc4086.html">RFC 4086</a>, June 2005.
 
-   [<a id="ref-15" name="ref-15">15</a>]  Hollenbeck, S., "Domain Name System (DNS) Security Extensions
+   [<a id="ref-15">15</a>]  Hollenbeck, S., "Domain Name System (DNS) Security Extensions
          Mapping for the Extensible Provisioning Protocol (EPP)", <a href="./rfc4310.html">RFC</a>
          <a href="./rfc4310.html">4310</a>, December 2005.
 
-   [<a id="ref-16" name="ref-16">16</a>]  Lenstra, A. and E. Verheul, "Selecting Cryptographic Key
+   [<a id="ref-16">16</a>]  Lenstra, A. and E. Verheul, "Selecting Cryptographic Key
          Sizes", The Journal of Cryptology 14 (255-293), 2001.
 
-   [<a id="ref-17" name="ref-17">17</a>]  Schneier, B., "Applied Cryptography: Protocols, Algorithms, and
+   [<a id="ref-17">17</a>]  Schneier, B., "Applied Cryptography: Protocols, Algorithms, and
          Source Code in C", ISBN (hardcover) 0-471-12845-7, ISBN
          (paperback) 0-471-59756-2, Published by John Wiley &amp; Sons Inc.,
          1996.
 
-   [<a id="ref-18" name="ref-18">18</a>]  Rose, S., "NIST DNSSEC workshop notes", June 2001.
+   [<a id="ref-18">18</a>]  Rose, S., "NIST DNSSEC workshop notes", June 2001.
 
-   [<a id="ref-19" name="ref-19">19</a>]  Jansen, J., "Use of RSA/SHA-256 DNSKEY and RRSIG Resource
+   [<a id="ref-19">19</a>]  Jansen, J., "Use of RSA/SHA-256 DNSKEY and RRSIG Resource
          Records in DNSSEC", Work in Progress, January 2006.
 
-   [<a id="ref-20" name="ref-20">20</a>]  Hardaker, W., "Use of SHA-256 in DNSSEC Delegation Signer (DS)
+   [<a id="ref-20">20</a>]  Hardaker, W., "Use of SHA-256 in DNSSEC Delegation Signer (DS)
          Resource Records (RRs)", <a href="./rfc4509.html">RFC 4509</a>, May 2006.
 
 
@@ -1742,11 +1720,11 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
-   [<a id="ref-21" name="ref-21">21</a>]  Blake-Wilson, S., Nystrom, M., Hopwood, D., Mikkelsen, J., and
+   [<a id="ref-21">21</a>]  Blake-Wilson, S., Nystrom, M., Hopwood, D., Mikkelsen, J., and
          T. Wright, "Transport Layer Security (TLS) Extensions", <a href="./rfc4366.html">RFC</a>
          <a href="./rfc4366.html">4366</a>, April 2006.
 
@@ -1798,11 +1776,11 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Terminology"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Terminology"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Terminology</span>
 
    In this document, there is some jargon used that is defined in other
    documents.  In most cases, we have not copied the text from the
@@ -1854,7 +1832,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -1874,7 +1852,7 @@ Table of Contents
    Zone administrator: The 'role' that is responsible for signing a zone
       and publishing it on the primary authoritative server.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Zone%20Signing%20Key%20Rollover%20How-To"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Zone Signing Key Rollover How-To</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Zone%20Signing%20Key%20Rollover%20How-To"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Zone Signing Key Rollover How-To</span>
 
    Using the pre-published signature scheme and the most conservative
    method to assure oneself that data does not live in caches, here
@@ -1910,11 +1888,11 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20C.%20%20Typographic%20Conventions"></a></body></html><a class="selflink" href="#appendix-C" name="appendix-C">Appendix C</a>.  Typographic Conventions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20C.%20%20Typographic%20Conventions"></a></body></html><a class="selflink" href="#appendix-C" id="appendix-C">Appendix C</a>.  Typographic Conventions</span>
 
    The following typographic conventions are used in this document:
 
@@ -1966,7 +1944,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -2022,7 +2000,7 @@ Table of Contents
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -2078,7 +2056,7 @@ Authors' Addresses
 
 
 <span class="grey">Kolkman &amp; Gieben             Informational                     [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc4641.html">RFC 4641</a>              DNSSEC Operational Practices        September 2006</span>
 
 
@@ -2087,7 +2065,7 @@ Full Copyright Statement
    Copyright (C) The Internet Society (2006).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -2107,7 +2085,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -2134,11 +2112,6 @@ Acknowledgement
 
 
 Kolkman &amp; Gieben             Informational                     [Page 35]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

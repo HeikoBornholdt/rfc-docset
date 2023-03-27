@@ -1,25 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-bryskin-l1vpn-ospf-auto-discovery" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5252" name="DC.Identifier"/>
-<meta content="July, 2008" name="DC.Date.Issued"/>
-<meta content="Berger, Lou" name="DC.Creator"/>
-<meta content="Bryskin, Igor" name="DC.Creator"/>
-<meta content="This document defines an OSPF based layer-1 VPN auto-discovery
-mechanism. This mechanism enables PEs using the OSPF IGP to
-dynamically learn about existence of each other, and attributes of
-currently configured CE-PE links and their associations with L1VPNs.
-This document builds on [RFC4847] and provides an auto-discovery
-mechanism as discussed in [L1VPN-BM].  Contents" name="DC.Description.Abstract"/>
-<meta content="OSPF Based L1VPN Auto-Discovery" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5252 - OSPF Based L1VPN Auto-Discovery</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="I. Bryskin" name="citation_author"/>
+<meta content="L. Berger" name="citation_author"/>
+<meta content="July, 2008" name="citation_publication_date"/>
+<meta content="OSPF-Based Layer 1 VPN Auto-Discovery" name="citation_title"/>
+<meta content="10.17487/RFC5252" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5252" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5252.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5252: OSPF-Based Layer 1 VPN Auto-Discovery</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -48,7 +41,7 @@ mechanism as discussed in [L1VPN-BM].  Contents" name="DC.Description.Abstract"/
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -57,7 +50,7 @@ mechanism as discussed in [L1VPN-BM].  Contents" name="DC.Description.Abstract"/
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -136,19 +129,18 @@ mechanism as discussed in [L1VPN-BM].  Contents" name="DC.Description.Abstract"/
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -162,21 +154,9 @@ mechanism as discussed in [L1VPN-BM].  Contents" name="DC.Description.Abstract"/
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5252.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5252" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-l1vpn-ospf-auto-discovery.html" title="draft-ietf-l1vpn-ospf-auto-discovery">draft-ietf-l1vpn-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5252" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5252" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5252">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                         I. Bryskin
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5252.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5252.txt.pdf">PDF</a>|<a href="/rfc/rfc5252.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5252" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5252&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5252" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5252" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                         I. Bryskin
 Request for Comments: 5252                       ADVA Optical Networking
 Category: Standards Track                                      L. Berger
                                                     LabN Consulting, LLC
@@ -228,13 +208,13 @@ Table of Contents
 
 
 <span class="grey">Bryskin &amp; Berger            Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5252.html">RFC 5252</a>            OSPF-Based L1VPN Auto-Discovery            July 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Overview"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Overview</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Overview"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Overview</span>
 
    The framework for Layer 1 VPNs is described in [<a href="./rfc4847.html" title='"Framework and Requirements for Layer 1 Virtual Private Networks"'>RFC4847</a>].  Basic mode
    operation is further defined in [<a href="./rfc5251.html" title='"Layer 1 VPN Basic Mode"'>RFC5251</a>].  The L1VPN Basic Mode
@@ -284,7 +264,7 @@ Table of Contents
 
 
 <span class="grey">Bryskin &amp; Berger            Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5252.html">RFC 5252</a>            OSPF-Based L1VPN Auto-Discovery            July 2008</span>
 
 
@@ -297,7 +277,7 @@ Table of Contents
    L1VPN LSA may also carry Traffic Engineering (TE) TLVs; see [<a href="./rfc3630.html" title='"Traffic Engineering (TE) Extensions to OSPF Version 2"'>RFC3630</a>]
    and [<a href="./rfc4203.html" title='"OSPF Extensions in Support of Generalized Multi-Protocol Label Switching (GMPLS)"'>RFC4203</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Terminology</span>
 
    The reader of this document should be familiar with the terms used in
    [<a href="./rfc4847.html" title='"Framework and Requirements for Layer 1 Virtual Private Networks"'>RFC4847</a>] and [<a href="./rfc5251.html" title='"Layer 1 VPN Basic Mode"'>RFC5251</a>].  The reader of this document should also be
@@ -340,21 +320,21 @@ Table of Contents
 
 
 <span class="grey">Bryskin &amp; Berger            Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5252.html">RFC 5252</a>            OSPF-Based L1VPN Auto-Discovery            July 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>.  Conventions Used in This Document</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-1.3" id="section-1.3">1.3</a>.  Conventions Used in This Document</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20L1VPN%20LSA%20and%20Its%20TLVs"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  L1VPN LSA and Its TLVs</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20L1VPN%20LSA%20and%20Its%20TLVs"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  L1VPN LSA and Its TLVs</span>
 
    This section defines the L1VPN LSA and its TLVs.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20L1VPN%20LSA"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  L1VPN LSA</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20L1VPN%20LSA"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  L1VPN LSA</span>
 
    The format of a L1VPN LSA is as follows:
 
@@ -396,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Bryskin &amp; Berger            Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5252.html">RFC 5252</a>            OSPF-Based L1VPN Auto-Discovery            July 2008</span>
 
 
@@ -452,11 +432,11 @@ Table of Contents
 
 
 <span class="grey">Bryskin &amp; Berger            Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5252.html">RFC 5252</a>            OSPF-Based L1VPN Auto-Discovery            July 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20L1VPN%20INFO%20TLV"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  L1VPN INFO TLV</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20L1VPN%20INFO%20TLV"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  L1VPN INFO TLV</span>
 
    The following TLV is introduced:
 
@@ -508,7 +488,7 @@ Table of Contents
 
 
 <span class="grey">Bryskin &amp; Berger            Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5252.html">RFC 5252</a>            OSPF-Based L1VPN Auto-Discovery            July 2008</span>
 
 
@@ -523,7 +503,7 @@ Table of Contents
       <em>MUST NOT</em> be present when the size of the L1VPN Auto-discovery
       information field is 4-byte aligned.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20L1VPN%20LSA%20Advertising%20and%20Processing"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  L1VPN LSA Advertising and Processing</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20L1VPN%20LSA%20Advertising%20and%20Processing"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  L1VPN LSA Advertising and Processing</span>
 
    PEs advertise local &lt;CPI, PPI&gt; tuples in L1VPN LSAs containing L1VPN
    Info TLVs.  Each PE <em>MUST</em> originate a separate L1VPN LSA with AS
@@ -553,7 +533,7 @@ Table of Contents
    PEs associated with a particular L1VPN will have identical local PITs
    for an L1VPN.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Discussion%20and%20Example"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Discussion and Example</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Discussion%20and%20Example"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Discussion and Example</span>
 
    The L1VPN auto-discovery mechanism described in this document does
    not prevent a PE from applying any local policy with respect to PIT
@@ -564,7 +544,7 @@ Table of Contents
 
 
 <span class="grey">Bryskin &amp; Berger            Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5252.html">RFC 5252</a>            OSPF-Based L1VPN Auto-Discovery            July 2008</span>
 
 
@@ -610,7 +590,7 @@ Table of Contents
    for scalability concerns and could prove to be problematic in large
    networks.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Backward%20Compatibility"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Backward Compatibility</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Backward%20Compatibility"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Backward Compatibility</span>
 
    Neither the TLV nor the LSA introduced in this document present any
    interoperability issues.  Per [<a href="./rfc5250.html" title='"The OSPF Opaque LSA Option"'>RFC5250</a>], OSPF speakers that do not
@@ -620,14 +600,14 @@ Table of Contents
 
 
 <span class="grey">Bryskin &amp; Berger            Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5252.html">RFC 5252</a>            OSPF-Based L1VPN Auto-Discovery            July 2008</span>
 
 
    participate in the L1VPN LSAs flooding process but should ignore the
    LSAs contents.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    The approach presented in this document describes how PEs dynamically
    learn L1VPN-specific information.  Mechanisms to deliver the VPN
@@ -646,7 +626,7 @@ Table of Contents
    approach can be augmented with an experimental extension to OSPF; see
    [<a href="./rfc2154.html" title='"OSPF with Digital Signatures"'>RFC2154</a>], which supports the signing and authentication of LSAs.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  IANA Considerations</span>
 
    This document requests the assignment of an OSPF Opaque LSA type.
    IANA has made the assignment in the form:
@@ -655,51 +635,51 @@ Table of Contents
       -------  -----------                              ---------
        5       L1VPN LSA                                [<a href="./rfc5252.html">RFC5252</a>]
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgments</span>
 
    We would like to thank Adrian Farrel and Anton Smirnov for their
    useful comments.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC2328" name="ref-RFC2328">RFC2328</a>]  Moy, J., "OSPF Version 2", STD 54, <a href="./rfc2328.html">RFC 2328</a>, April 1998.
+   [<a id="ref-RFC2328">RFC2328</a>]  Moy, J., "OSPF Version 2", STD 54, <a href="./rfc2328.html">RFC 2328</a>, April 1998.
 
-   [<a id="ref-RFC3630" name="ref-RFC3630">RFC3630</a>]  Katz, D., Kompella, K., and D. Yeung, "Traffic Engineering
+   [<a id="ref-RFC3630">RFC3630</a>]  Katz, D., Kompella, K., and D. Yeung, "Traffic Engineering
               (TE) Extensions to OSPF Version 2", <a href="./rfc3630.html">RFC 3630</a>, September
               2003.
 
 
 
 <span class="grey">Bryskin &amp; Berger            Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5252.html">RFC 5252</a>            OSPF-Based L1VPN Auto-Discovery            July 2008</span>
 
 
-   [<a id="ref-RFC4203" name="ref-RFC4203">RFC4203</a>]  Kompella, K., Ed., and Y. Rekhter, Ed., "OSPF Extensions
+   [<a id="ref-RFC4203">RFC4203</a>]  Kompella, K., Ed., and Y. Rekhter, Ed., "OSPF Extensions
               in Support of Generalized Multi-Protocol Label Switching
               (GMPLS)", <a href="./rfc4203.html">RFC 4203</a>, October 2005.
 
-   [<a id="ref-RFC5250" name="ref-RFC5250">RFC5250</a>]  Berger, L., Bryskin, I., and A. Zinin, "The OSPF Opaque
+   [<a id="ref-RFC5250">RFC5250</a>]  Berger, L., Bryskin, I., and A. Zinin, "The OSPF Opaque
               LSA Option", <a href="./rfc5250.html">RFC 5250</a>, July 2008.
 
-   [<a id="ref-RFC5251" name="ref-RFC5251">RFC5251</a>]  Fedyk, D., Ed., Rekhter, Y., Ed., Papadimitriou, D.,
+   [<a id="ref-RFC5251">RFC5251</a>]  Fedyk, D., Ed., Rekhter, Y., Ed., Papadimitriou, D.,
               Rabbat, R., and L. Berger, "Layer 1 VPN Basic Mode", <a href="./rfc5251.html">RFC</a>
               <a href="./rfc5251.html">5251</a>, July 2008.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC2154" name="ref-RFC2154">RFC2154</a>]  Murphy, S., Badger, M., and B. Wellington, "OSPF with
+   [<a id="ref-RFC2154">RFC2154</a>]  Murphy, S., Badger, M., and B. Wellington, "OSPF with
               Digital Signatures", <a href="./rfc2154.html">RFC 2154</a>, June 1997.
 
-   [<a id="ref-RFC4847" name="ref-RFC4847">RFC4847</a>]  Takeda, T., Ed., "Framework and Requirements for Layer 1
+   [<a id="ref-RFC4847">RFC4847</a>]  Takeda, T., Ed., "Framework and Requirements for Layer 1
               Virtual Private Networks", <a href="./rfc4847.html">RFC 4847</a>, April 2007.
 
-   [<a id="ref-RFC5195" name="ref-RFC5195">RFC5195</a>]  Ould-Brahim, H., Fedyk, D., and Y. Rekhter, "BGP-Based
+   [<a id="ref-RFC5195">RFC5195</a>]  Ould-Brahim, H., Fedyk, D., and Y. Rekhter, "BGP-Based
               Auto-Discovery for Layer-1 VPNs", <a href="./rfc5195.html">RFC 5195</a>, June 2008.
 
 Authors' Addresses
@@ -732,7 +712,7 @@ Authors' Addresses
 
 
 <span class="grey">Bryskin &amp; Berger            Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5252.html">RFC 5252</a>            OSPF-Based L1VPN Auto-Discovery            July 2008</span>
 
 
@@ -741,7 +721,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2008).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -761,7 +741,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -788,11 +768,6 @@ Intellectual Property
 
 
 Bryskin &amp; Berger            Standards Track                    [Page 11]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

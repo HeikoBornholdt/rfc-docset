@@ -1,23 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:7094" name="DC.Identifier"/>
-<meta content="This memo discusses architectural implications of IP anycast and
-provides some historical analysis of anycast use by various IETF
-protocols." name="DC.Description.Abstract"/>
-<meta content="McPherson, Danny" name="DC.Creator"/>
-<meta content="Osterweil, Eric" name="DC.Creator"/>
-<meta content="Oran, David" name="DC.Creator"/>
-<meta content="Thaler, Dave" name="DC.Creator"/>
-<meta content="January, 2014" name="DC.Date.Issued"/>
-<meta content="Architectural Considerations of IP Anycast" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7094 - Architectural Considerations of IP Anycast</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="D. McPherson" name="citation_author"/>
+<meta content="D. Oran" name="citation_author"/>
+<meta content="D. Thaler" name="citation_author"/>
+<meta content="E. Osterweil" name="citation_author"/>
+<meta content="January, 2014" name="citation_publication_date"/>
+<meta content="Architectural Considerations of IP Anycast" name="citation_title"/>
+<meta content="10.17487/RFC7094" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7094" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7094.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7094: Architectural Considerations of IP Anycast</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -46,7 +43,7 @@ protocols." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -55,7 +52,7 @@ protocols." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -134,19 +131,18 @@ protocols." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -160,21 +156,9 @@ protocols." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7094.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7094" title="PDF version of this document">pdf</a>] [<a href="./draft-iab-anycast-arch-implications.html" title="draft-iab-anycast-arch-implications">draft-iab-anycast...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc7094" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc7094" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Architecture Board (IAB)                           D. McPherson
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7094.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7094.txt.pdf">PDF</a>|<a href="/rfc/rfc7094.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7094" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7094&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc7094" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Architecture Board (IAB)                           D. McPherson
 Request for Comments: 7094                                Verisign, Inc.
 Category: Informational                                          D. Oran
 ISSN: 2070-1721                                            Cisco Systems
@@ -214,7 +198,7 @@ Copyright Notice
    Copyright (c) 2014 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -226,7 +210,7 @@ Copyright Notice
 
 
 <span class="grey">McPherson, et al.             Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -237,7 +221,7 @@ Table of Contents
       <a href="#section-2.1">2.1</a>. Anycast History ............................................<a href="#page-3">3</a>
       <a href="#section-2.2">2.2</a>. Anycast in IPv6 ............................................<a href="#page-6">6</a>
       <a href="#section-2.3">2.3</a>. DNS Anycast ................................................<a href="#page-6">6</a>
-      <a href="#section-2.4">2.4</a>. <a href="./bcp126.html">BCP 126</a> on Operation of Anycast Services ...................<a href="#page-8">8</a>
+      <a href="#section-2.4">2.4</a>. <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a> on Operation of Anycast Services ...................<a href="#page-8">8</a>
    <a href="#section-3">3</a>. Principles ......................................................<a href="#page-8">8</a>
       <a href="#section-3.1">3.1</a>. Layering and Resiliency ....................................<a href="#page-8">8</a>
       <a href="#section-3.2">3.2</a>. Anycast Addresses as Destinations ..........................<a href="#page-9">9</a>
@@ -254,11 +238,11 @@ Table of Contents
    <a href="#section-7">7</a>. Informative References .........................................<a href="#page-16">16</a>
    <a href="#appendix-A">Appendix A</a>. IAB Members at the Time of Approval ...................<a href="#page-21">21</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Overview"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Overview</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Overview"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Overview</span>
 
    IP anycast is a technique with a long legacy and interesting
    engineering challenges.  However, at its core, it is a relatively
-   simple concept.  As described in <a href="./bcp126.html">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>], the general form
+   simple concept.  As described in <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>], the general form
    of IP anycast is the practice of making a particular Service Address
    available in multiple, discrete, autonomous locations, such that
    datagrams sent are routed to one of several available locations.
@@ -282,7 +266,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -301,13 +285,13 @@ Table of Contents
    operation.  In this document, we aim to capture many of the
    architectural implications of IP anycast.
 
-   <a href="./bcp126.html">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] discusses several different deployment models with
+   <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] discusses several different deployment models with
    IP anycast.  Two additional distinctions beyond that document involve
    "off-link anycast" and "on-link anycast".  "Off-link anycast" takes
    advantage of routing protocol preferences and the IP hop-by-hop
    destination-based forwarding paradigm in order to direct packets to
    the "closest" destination.  This is the traditional method of anycast
-   largely considered in <a href="./bcp126.html">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] and can be used for IPv4 and
+   largely considered in <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] and can be used for IPv4 and
    IPv6.  "On-link anycast" is the formal support of anycast in the
    address resolution (duplicate address detection) protocol and is only
    standardized for IPv6, with the introduction of designated anycast
@@ -315,14 +299,14 @@ Table of Contents
    Discovery (ND) Neighbor Advertisements (NAs) [<a href="./rfc4861.html" title='"Neighbor Discovery for IP version 6 (IPv6)"'>RFC4861</a>].  There is no
    standardized mechanism for this in IPv4.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Background"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Background</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Background"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Background</span>
 
    As of this writing, the term "anycast" appears in 176 RFCs and 144
    active Internet-Drafts.  The following sections capture some of the
    key appearances and discussion of anycasting within the IETF over the
    years.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Anycast%20History"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Anycast History</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Anycast%20History"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Anycast History</span>
 
    The first formal specification of anycast was provided in "Host
    Anycasting Service" [<a href="./rfc1546.html" title='"Host Anycasting Service"'>RFC1546</a>].  The authors of this document did a
@@ -338,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -394,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -436,7 +420,7 @@ Table of Contents
    Anycast was used for routing to rendezvous points (RPs) for PIM
    [<a href="./rfc4610.html" title='"Anycast-RP Using Protocol Independent Multicast (PIM)"'>RFC4610</a>].
 
-   "Operation of Anycast Services" <a href="./bcp126.html">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] deals with how the
+   "Operation of Anycast Services" <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] deals with how the
    routing system interacts with anycast services and the operation of
    anycast services.
 
@@ -450,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -462,7 +446,7 @@ Table of Contents
    mentions how violating transparency can also damage global services
    that use anycast.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Anycast%20in%20IPv6"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Anycast in IPv6</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Anycast%20in%20IPv6"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Anycast in IPv6</span>
 
    Originally, the IPv6 addressing architecture [<a href="./rfc1884.html" title='"IP Version 6 Addressing Architecture"'>RFC1884</a>] [<a href="./rfc2373.html" title='"IP Version 6 Addressing Architecture"'>RFC2373</a>]
    [<a href="./rfc3513.html" title='"Internet Protocol Version 6 (IPv6) Addressing Architecture"'>RFC3513</a>] severely restricted the use of anycast addresses.  In
@@ -483,7 +467,7 @@ Table of Contents
    in IPv6 via ND NAs; see <a href="./rfc4861.html#section-7.2.7">Section 7.2.7 of [RFC4861]</a> for additional
    information.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20DNS%20Anycast"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  DNS Anycast</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20DNS%20Anycast"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  DNS Anycast</span>
 
    "Distributed Authoritative Name Servers via Shared Unicast Addresses"
    [<a href="./rfc3258.html" title='"Distributing Authoritative Name Servers via Shared Unicast Addresses"'>RFC3258</a>] described how to reach authoritative name servers using
@@ -506,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -562,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -570,9 +554,9 @@ Table of Contents
    whatever manner fits their operating environment, either for
    detection or policy associated with a given anycasted node.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20BCP%20126%20on%20Operation%20of%20Anycast%20Services"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  <a href="./bcp126.html">BCP 126</a> on Operation of Anycast Services</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20BCP%20126%20on%20Operation%20of%20Anycast%20Services"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a> on Operation of Anycast Services</span>
 
-   "Operation of Anycast Services" <a href="./bcp126.html">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] was a product of
+   "Operation of Anycast Services" <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] was a product of
    the IETF's GROW working group.  The primary design constraint
    considered was that routing "be stable" for significantly longer than
    a "transaction time", where "transaction time" is loosely defined as
@@ -589,13 +573,13 @@ Table of Contents
    The document primarily deals with global Internet-wide services
    provided by anycast.  Where internal topology issues are discussed,
    they're mostly regarding routing implications rather than application
-   design implications.  <a href="./bcp126.html">BCP 126</a> also views networks employing
+   design implications.  <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a> also views networks employing
    per-packet load balancing on equal cost paths as "pathological".
    This was also discussed in [<a href="./rfc2991.html" title='"Multipath Issues in Unicast and Multicast Next-Hop Selection"'>RFC2991</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Principles"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Principles</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Principles"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Principles</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Layering%20and%20Resiliency"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Layering and Resiliency</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Layering%20and%20Resiliency"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Layering and Resiliency</span>
 
    Preserving the integrity of a modular layered design for IP protocols
    on the Internet is critical to its continued success and flexibility.
@@ -618,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -630,7 +614,7 @@ Table of Contents
    to a protocol working fine in, say, a test lab but not in the global
    Internet.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Anycast%20Addresses%20as%20Destinations"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Anycast Addresses as Destinations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Anycast%20Addresses%20as%20Destinations"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Anycast Addresses as Destinations</span>
 
    When an anycast address is used as a destination address, different
    packets with the same destination IP address may reach different
@@ -674,11 +658,11 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Anycast%20Addresses%20as%20Sources"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Anycast Addresses as Sources</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Anycast%20Addresses%20as%20Sources"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Anycast Addresses as Sources</span>
 
    When an anycast address is used as a source address, the source
    address does not uniquely identify the source host; hence, replies
@@ -696,10 +680,10 @@ Table of Contents
       if unicast reverse path forwarding (RPF) [<a href="./rfc4778.html" title='"Operational Security Current Practices in Internet Service Provider Environments"'>RFC4778</a>] checking is on,
       or the service address is explicitly provisioned to bypass RPF
       checks.  In addition to the application defined in <a href="./rfc4778.html#section-4.4.5">[RFC4778],
-      Section 4.4.5</a> of <a href="./bcp126.html">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] gives explicit consideration to
+      Section 4.4.5</a> of <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] gives explicit consideration to
       RPF checks in anycasting operations.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Service%20Discovery"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Service Discovery</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Service%20Discovery"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Service Discovery</span>
 
    Applications able to tolerate an extra round-trip time (RTT) to learn
    a unicast destination address for multipacket exchanges might safely
@@ -712,7 +696,7 @@ Table of Contents
    to be used to invoke the service.  Only the latter of these will
    avoid potential NAT binding and stateful firewall issues.
 
-   [<a id="ref-DNS-DISC" name="ref-DNS-DISC">DNS-DISC</a>] discussed several options to address the need to configure
+   [<a id="ref-DNS-DISC">DNS-DISC</a>] discussed several options to address the need to configure
    DNS servers, including the use of a "Well-known Anycast Address" for
    recursive DNS service configuration in clients to ease configuration
    and allow those systems to ship with these well-known addresses
@@ -730,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -751,9 +735,9 @@ Table of Contents
       these approaches might not be completely applicable to any
       specific proposal that might be proposed in the future.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Analysis"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Analysis</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Analysis"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Analysis</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Regarding%20Widespread%20Anycast%20Use"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Regarding Widespread Anycast Use</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Regarding%20Widespread%20Anycast%20Use"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Regarding Widespread Anycast Use</span>
 
    Widespread use of anycast for global Internet-wide services or
    inter-domain services has some scaling challenges.  Similar in ways
@@ -776,7 +760,7 @@ Table of Contents
    being unreachable.  Hence, extra precaution must be taken when
    aggregating prefixes used by anycast services.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Transport%20Implications"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Transport Implications</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Transport%20Implications"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Transport Implications</span>
 
    UDP is the "lingua franca" for anycast today.  Stateful transports
    could be enhanced to be more anycast friendly.  This was anticipated
@@ -786,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -821,7 +805,7 @@ Table of Contents
    The features needed for address discovery when doing multihoming in
    the transport layer are similar to those needed to support anycast.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Stateful%20Firewalls%2C%20Middleboxes%2C%20and%20Anycast"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Stateful Firewalls, Middleboxes, and Anycast</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Stateful%20Firewalls%2C%20Middleboxes%2C%20and%20Anycast"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Stateful Firewalls, Middleboxes, and Anycast</span>
 
    Middleboxes (e.g., NATs) and stateful firewalls cause problems when
    used in conjunction with some ways to use anycast.  In particular, a
@@ -830,7 +814,7 @@ Table of Contents
    may not exist in the middlebox, as discussed previously in
    <a href="#section-3.4">Section 3.4</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Security Considerations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Security Considerations</span>
 
    Anycast is often deployed to mitigate or at least localize the
    effects of distributed denial-of-service (DDoS) attacks.  For
@@ -842,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -850,7 +834,7 @@ Table of Contents
    number of the root nameservers have since been replicated using
    anycast to further improve their resistance to DoS".
 
-   "Operation of Anycast Services" <a href="./bcp126.html">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] cites DoS
+   "Operation of Anycast Services" <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] cites DoS
    mitigation, constraining DoS to localized regions, and identifying
    attack sources using spoofed addresses as some motivations to deploy
    services using anycast.  Multiple anycast service instances such as
@@ -898,7 +882,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -925,7 +909,7 @@ Table of Contents
    such, if an unauthorized anycast node can inject a route into the
    network, or be resolved using ARP/Neighbor Discovery on a link with
    an authorized anycast node, traffic can be diverted thereby
-   triggering DoS or other attacks.  <a href="./bcp126.html#section-6.3">Section 6.3 of BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>]
+   triggering DoS or other attacks.  <a href="https://www.rfc-editor.org/bcp/bcp126#section-6.3">Section 6.3 of BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>]
    provides expanded discussion on "Service Hijacking" and "traffic
    stealing", and [<a href="#ref-FanInfocom13">FanInfocom13</a>] discusses measured instances of anycast
    nodes and "benign masquerading or hostile hijacking of anycast
@@ -954,13 +938,13 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Deployment%20Considerations"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  Deployment Considerations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Deployment%20Considerations"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  Deployment Considerations</span>
 
-   <a href="./bcp126.html">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] provides some very solid guidance related to
+   <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a> [<a href="./rfc4786.html" title='"Operation of Anycast Services"'>RFC4786</a>] provides some very solid guidance related to
    operations of anycasted services and, in particular, the operations
    of DNS.
 
@@ -1010,7 +994,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -1034,7 +1018,7 @@ Table of Contents
    Address Detection <em>MUST NOT</em> be performed on anycast addresses"; hence,
    the servers must be configured appropriately.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Conclusions"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Conclusions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Conclusions"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Conclusions</span>
 
    In summary, operators and application vendors alike should consider
    the benefits and implications of anycast in their specific
@@ -1043,7 +1027,7 @@ Table of Contents
    advantage of anycast or how they may be negatively impacted if
    anycasting is employed.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Acknowledgements</span>
 
    Many thanks to Kurtis Lindqvist for his early review and feedback on
    this document.  Thanks to Brian Carpenter, Alfred Hoenes, and Joe
@@ -1053,9 +1037,9 @@ Table of Contents
    received from others including Edward Lewis, Jean-Michel Combes,
    Wolfgang Nagele, Mark Townsley, and Abdussalam Baryun.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Informative References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Informative References</span>
 
-   [<a id="ref-ANYCASTBOF" name="ref-ANYCASTBOF">ANYCASTBOF</a>]
+   [<a id="ref-ANYCASTBOF">ANYCASTBOF</a>]
               Deering, S., "IAB Anycast BOF Announcement", October 1999,
               &lt;<a href="http://www.ietf.org/mail-archive/web/ietf/current/msg11182.html">http://www.ietf.org/mail-archive/web/ietf/current/</a>
               <a href="http://www.ietf.org/mail-archive/web/ietf/current/msg11182.html">msg11182.html</a>&gt;.
@@ -1066,55 +1050,55 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
-   [<a id="ref-DNS-DISC" name="ref-DNS-DISC">DNS-DISC</a>] Durand, A., Hagino, J., and D. Thaler, "Well known site
+   [<a id="ref-DNS-DISC">DNS-DISC</a>] Durand, A., Hagino, J., and D. Thaler, "Well known site
               local unicast addresses for DNS resolver", Work in
               Progress, September 2002.
 
-   [<a id="ref-FanInfocom13" name="ref-FanInfocom13">FanInfocom13</a>]
+   [<a id="ref-FanInfocom13">FanInfocom13</a>]
               Fan, X., Heidemann, J., and R. Govindan, "Evaluating
               Anycast in the Domain Name System", Proceedings of the
               IEEE Infocom 2013, April 2013.
 
-   [<a id="ref-IMR9401" name="ref-IMR9401">IMR9401</a>]  RFC Editor, "INTERNET MONTHLY REPORT", January 1994,
+   [<a id="ref-IMR9401">IMR9401</a>]  RFC Editor, "INTERNET MONTHLY REPORT", January 1994,
               &lt;<a href="ftp://ftp.rfc-editor.org/in-notes/museum/imr/imr9401.txt">ftp://ftp.rfc-editor.org/in-notes/museum/imr/</a>
               <a href="ftp://ftp.rfc-editor.org/in-notes/museum/imr/imr9401.txt">imr9401.txt</a>&gt;.
 
-   [<a id="ref-MAGMA" name="ref-MAGMA">MAGMA</a>]    MAGMA (concluded), "Multicast and Anycast Group Membership
+   [<a id="ref-MAGMA">MAGMA</a>]    MAGMA (concluded), "Multicast and Anycast Group Membership
               (MAGMA)", April 2006,
               &lt;<a href="http://www.ietf.org/wg/concluded/magma">http://www.ietf.org/wg/concluded/magma</a>&gt;.
 
-   [<a id="ref-RFC0793" name="ref-RFC0793">RFC0793</a>]  Postel, J., "Transmission Control Protocol", STD 7, <a href="./rfc793.html">RFC</a>
+   [<a id="ref-RFC0793">RFC0793</a>]  Postel, J., "Transmission Control Protocol", STD 7, <a href="./rfc793.html">RFC</a>
               <a href="./rfc793.html">793</a>, September 1981.
 
-   [<a id="ref-RFC1035" name="ref-RFC1035">RFC1035</a>]  Mockapetris, P., "Domain names - implementation and
+   [<a id="ref-RFC1035">RFC1035</a>]  Mockapetris, P., "Domain names - implementation and
               specification", STD 13, <a href="./rfc1035.html">RFC 1035</a>, November 1987.
 
-   [<a id="ref-RFC1546" name="ref-RFC1546">RFC1546</a>]  Partridge, C., Mendez, T., and W. Milliken, "Host
+   [<a id="ref-RFC1546">RFC1546</a>]  Partridge, C., Mendez, T., and W. Milliken, "Host
               Anycasting Service", <a href="./rfc1546.html">RFC 1546</a>, November 1993.
 
-   [<a id="ref-RFC1884" name="ref-RFC1884">RFC1884</a>]  Hinden, R. and S. Deering, "IP Version 6 Addressing
+   [<a id="ref-RFC1884">RFC1884</a>]  Hinden, R. and S. Deering, "IP Version 6 Addressing
               Architecture", <a href="./rfc1884.html">RFC 1884</a>, December 1995.
 
-   [<a id="ref-RFC2030" name="ref-RFC2030">RFC2030</a>]  Mills, D., "Simple Network Time Protocol (SNTP) Version 4
+   [<a id="ref-RFC2030">RFC2030</a>]  Mills, D., "Simple Network Time Protocol (SNTP) Version 4
               for IPv4, IPv6 and OSI", <a href="./rfc2030.html">RFC 2030</a>, October 1996.
 
-   [<a id="ref-RFC2101" name="ref-RFC2101">RFC2101</a>]  Carpenter, B., Crowcroft, J., and Y. Rekhter, "IPv4
+   [<a id="ref-RFC2101">RFC2101</a>]  Carpenter, B., Crowcroft, J., and Y. Rekhter, "IPv4
               Address Behaviour Today", <a href="./rfc2101.html">RFC 2101</a>, February 1997.
 
-   [<a id="ref-RFC2373" name="ref-RFC2373">RFC2373</a>]  Hinden, R. and S. Deering, "IP Version 6 Addressing
+   [<a id="ref-RFC2373">RFC2373</a>]  Hinden, R. and S. Deering, "IP Version 6 Addressing
               Architecture", <a href="./rfc2373.html">RFC 2373</a>, July 1998.
 
-   [<a id="ref-RFC2439" name="ref-RFC2439">RFC2439</a>]  Villamizar, C., Chandra, R., and R. Govindan, "BGP Route
+   [<a id="ref-RFC2439">RFC2439</a>]  Villamizar, C., Chandra, R., and R. Govindan, "BGP Route
               Flap Damping", <a href="./rfc2439.html">RFC 2439</a>, November 1998.
 
-   [<a id="ref-RFC2526" name="ref-RFC2526">RFC2526</a>]  Johnson, D. and S. Deering, "Reserved IPv6 Subnet Anycast
+   [<a id="ref-RFC2526">RFC2526</a>]  Johnson, D. and S. Deering, "Reserved IPv6 Subnet Anycast
               Addresses", <a href="./rfc2526.html">RFC 2526</a>, March 1999.
 
-   [<a id="ref-RFC2893" name="ref-RFC2893">RFC2893</a>]  Gilligan, R. and E. Nordmark, "Transition Mechanisms for
+   [<a id="ref-RFC2893">RFC2893</a>]  Gilligan, R. and E. Nordmark, "Transition Mechanisms for
               IPv6 Hosts and Routers", <a href="./rfc2893.html">RFC 2893</a>, August 2000.
 
 
@@ -1122,130 +1106,130 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
-   [<a id="ref-RFC2902" name="ref-RFC2902">RFC2902</a>]  Deering, S., Hares, S., Perkins, C., and R. Perlman,
+   [<a id="ref-RFC2902">RFC2902</a>]  Deering, S., Hares, S., Perkins, C., and R. Perlman,
               "Overview of the 1998 IAB Routing Workshop", <a href="./rfc2902.html">RFC 2902</a>,
               August 2000.
 
-   [<a id="ref-RFC2991" name="ref-RFC2991">RFC2991</a>]  Thaler, D. and C. Hopps, "Multipath Issues in Unicast and
+   [<a id="ref-RFC2991">RFC2991</a>]  Thaler, D. and C. Hopps, "Multipath Issues in Unicast and
               Multicast Next-Hop Selection", <a href="./rfc2991.html">RFC 2991</a>, November 2000.
 
-   [<a id="ref-RFC3056" name="ref-RFC3056">RFC3056</a>]  Carpenter, B. and K. Moore, "Connection of IPv6 Domains
+   [<a id="ref-RFC3056">RFC3056</a>]  Carpenter, B. and K. Moore, "Connection of IPv6 Domains
               via IPv4 Clouds", <a href="./rfc3056.html">RFC 3056</a>, February 2001.
 
-   [<a id="ref-RFC3068" name="ref-RFC3068">RFC3068</a>]  Huitema, C., "An Anycast Prefix for 6to4 Relay Routers",
+   [<a id="ref-RFC3068">RFC3068</a>]  Huitema, C., "An Anycast Prefix for 6to4 Relay Routers",
               <a href="./rfc3068.html">RFC 3068</a>, June 2001.
 
-   [<a id="ref-RFC3258" name="ref-RFC3258">RFC3258</a>]  Hardie, T., "Distributing Authoritative Name Servers via
+   [<a id="ref-RFC3258">RFC3258</a>]  Hardie, T., "Distributing Authoritative Name Servers via
               Shared Unicast Addresses", <a href="./rfc3258.html">RFC 3258</a>, April 2002.
 
-   [<a id="ref-RFC3513" name="ref-RFC3513">RFC3513</a>]  Hinden, R. and S. Deering, "Internet Protocol Version 6
+   [<a id="ref-RFC3513">RFC3513</a>]  Hinden, R. and S. Deering, "Internet Protocol Version 6
               (IPv6) Addressing Architecture", <a href="./rfc3513.html">RFC 3513</a>, April 2003.
 
-   [<a id="ref-RFC3775" name="ref-RFC3775">RFC3775</a>]  Johnson, D., Perkins, C., and J. Arkko, "Mobility Support
+   [<a id="ref-RFC3775">RFC3775</a>]  Johnson, D., Perkins, C., and J. Arkko, "Mobility Support
               in IPv6", <a href="./rfc3775.html">RFC 3775</a>, June 2004.
 
-   [<a id="ref-RFC3882" name="ref-RFC3882">RFC3882</a>]  Turk, D., "Configuring BGP to Block Denial-of-Service
+   [<a id="ref-RFC3882">RFC3882</a>]  Turk, D., "Configuring BGP to Block Denial-of-Service
               Attacks", <a href="./rfc3882.html">RFC 3882</a>, September 2004.
 
-   [<a id="ref-RFC3964" name="ref-RFC3964">RFC3964</a>]  Savola, P. and C. Patel, "Security Considerations for
+   [<a id="ref-RFC3964">RFC3964</a>]  Savola, P. and C. Patel, "Security Considerations for
               6to4", <a href="./rfc3964.html">RFC 3964</a>, December 2004.
 
-   [<a id="ref-RFC4033" name="ref-RFC4033">RFC4033</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
+   [<a id="ref-RFC4033">RFC4033</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "DNS Security Introduction and Requirements", <a href="./rfc4033.html">RFC</a>
               <a href="./rfc4033.html">4033</a>, March 2005.
 
-   [<a id="ref-RFC4085" name="ref-RFC4085">RFC4085</a>]  Plonka, D., "Embedding Globally-Routable Internet
-              Addresses Considered Harmful", <a href="./bcp105.html">BCP 105</a>, <a href="./rfc4085.html">RFC 4085</a>, June
+   [<a id="ref-RFC4085">RFC4085</a>]  Plonka, D., "Embedding Globally-Routable Internet
+              Addresses Considered Harmful", <a href="https://www.rfc-editor.org/bcp/bcp105">BCP 105</a>, <a href="./rfc4085.html">RFC 4085</a>, June
               2005.
 
-   [<a id="ref-RFC4213" name="ref-RFC4213">RFC4213</a>]  Nordmark, E. and R. Gilligan, "Basic Transition Mechanisms
+   [<a id="ref-RFC4213">RFC4213</a>]  Nordmark, E. and R. Gilligan, "Basic Transition Mechanisms
               for IPv6 Hosts and Routers", <a href="./rfc4213.html">RFC 4213</a>, October 2005.
 
-   [<a id="ref-RFC4291" name="ref-RFC4291">RFC4291</a>]  Hinden, R. and S. Deering, "IP Version 6 Addressing
+   [<a id="ref-RFC4291">RFC4291</a>]  Hinden, R. and S. Deering, "IP Version 6 Addressing
               Architecture", <a href="./rfc4291.html">RFC 4291</a>, February 2006.
 
-   [<a id="ref-RFC4330" name="ref-RFC4330">RFC4330</a>]  Mills, D., "Simple Network Time Protocol (SNTP) Version 4
+   [<a id="ref-RFC4330">RFC4330</a>]  Mills, D., "Simple Network Time Protocol (SNTP) Version 4
               for IPv4, IPv6 and OSI", <a href="./rfc4330.html">RFC 4330</a>, January 2006.
 
-   [<a id="ref-RFC4339" name="ref-RFC4339">RFC4339</a>]  Jeong, J., "IPv6 Host Configuration of DNS Server
+   [<a id="ref-RFC4339">RFC4339</a>]  Jeong, J., "IPv6 Host Configuration of DNS Server
               Information Approaches", <a href="./rfc4339.html">RFC 4339</a>, February 2006.
 
 
 
 
 <span class="grey">McPherson, et al.             Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
-   [<a id="ref-RFC4610" name="ref-RFC4610">RFC4610</a>]  Farinacci, D. and Y. Cai, "Anycast-RP Using Protocol
+   [<a id="ref-RFC4610">RFC4610</a>]  Farinacci, D. and Y. Cai, "Anycast-RP Using Protocol
               Independent Multicast (PIM)", <a href="./rfc4610.html">RFC 4610</a>, August 2006.
 
-   [<a id="ref-RFC4732" name="ref-RFC4732">RFC4732</a>]  Handley, M., Rescorla, E., and IAB, "Internet Denial-of-
+   [<a id="ref-RFC4732">RFC4732</a>]  Handley, M., Rescorla, E., and IAB, "Internet Denial-of-
               Service Considerations", <a href="./rfc4732.html">RFC 4732</a>, December 2006.
 
-   [<a id="ref-RFC4778" name="ref-RFC4778">RFC4778</a>]  Kaeo, M., "Operational Security Current Practices in
+   [<a id="ref-RFC4778">RFC4778</a>]  Kaeo, M., "Operational Security Current Practices in
               Internet Service Provider Environments", <a href="./rfc4778.html">RFC 4778</a>, January
               2007.
 
-   [<a id="ref-RFC4786" name="ref-RFC4786">RFC4786</a>]  Abley, J. and K. Lindqvist, "Operation of Anycast
-              Services", <a href="./bcp126.html">BCP 126</a>, <a href="./rfc4786.html">RFC 4786</a>, December 2006.
+   [<a id="ref-RFC4786">RFC4786</a>]  Abley, J. and K. Lindqvist, "Operation of Anycast
+              Services", <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a>, <a href="./rfc4786.html">RFC 4786</a>, December 2006.
 
-   [<a id="ref-RFC4861" name="ref-RFC4861">RFC4861</a>]  Narten, T., Nordmark, E., Simpson, W., and H. Soliman,
+   [<a id="ref-RFC4861">RFC4861</a>]  Narten, T., Nordmark, E., Simpson, W., and H. Soliman,
               "Neighbor Discovery for IP version 6 (IPv6)", <a href="./rfc4861.html">RFC 4861</a>,
               September 2007.
 
-   [<a id="ref-RFC4862" name="ref-RFC4862">RFC4862</a>]  Thomson, S., Narten, T., and T. Jinmei, "IPv6 Stateless
+   [<a id="ref-RFC4862">RFC4862</a>]  Thomson, S., Narten, T., and T. Jinmei, "IPv6 Stateless
               Address Autoconfiguration", <a href="./rfc4862.html">RFC 4862</a>, September 2007.
 
-   [<a id="ref-RFC4892" name="ref-RFC4892">RFC4892</a>]  Woolf, S. and D. Conrad, "Requirements for a Mechanism
+   [<a id="ref-RFC4892">RFC4892</a>]  Woolf, S. and D. Conrad, "Requirements for a Mechanism
               Identifying a Name Server Instance", <a href="./rfc4892.html">RFC 4892</a>, June 2007.
 
-   [<a id="ref-RFC4924" name="ref-RFC4924">RFC4924</a>]  Aboba, B. and E. Davies, "Reflections on Internet
+   [<a id="ref-RFC4924">RFC4924</a>]  Aboba, B. and E. Davies, "Reflections on Internet
               Transparency", <a href="./rfc4924.html">RFC 4924</a>, July 2007.
 
-   [<a id="ref-RFC4942" name="ref-RFC4942">RFC4942</a>]  Davies, E., Krishnan, S., and P. Savola, "IPv6 Transition/
+   [<a id="ref-RFC4942">RFC4942</a>]  Davies, E., Krishnan, S., and P. Savola, "IPv6 Transition/
               Co-existence Security Considerations", <a href="./rfc4942.html">RFC 4942</a>, September
               2007.
 
-   [<a id="ref-RFC5001" name="ref-RFC5001">RFC5001</a>]  Austein, R., "DNS Name Server Identifier (NSID) Option",
+   [<a id="ref-RFC5001">RFC5001</a>]  Austein, R., "DNS Name Server Identifier (NSID) Option",
               <a href="./rfc5001.html">RFC 5001</a>, August 2007.
 
-   [<a id="ref-RFC5905" name="ref-RFC5905">RFC5905</a>]  Mills, D., Martin, J., Burbank, J., and W. Kasch, "Network
+   [<a id="ref-RFC5905">RFC5905</a>]  Mills, D., Martin, J., Burbank, J., and W. Kasch, "Network
               Time Protocol Version 4: Protocol and Algorithms
               Specification", <a href="./rfc5905.html">RFC 5905</a>, June 2010.
 
-   [<a id="ref-RFC5909" name="ref-RFC5909">RFC5909</a>]  Combes, J-M., Krishnan, S., and G. Daley, "Securing
+   [<a id="ref-RFC5909">RFC5909</a>]  Combes, J-M., Krishnan, S., and G. Daley, "Securing
               Neighbor Discovery Proxy: Problem Statement", <a href="./rfc5909.html">RFC 5909</a>,
               July 2010.
 
-   [<a id="ref-RFC6071" name="ref-RFC6071">RFC6071</a>]  Frankel, S. and S. Krishnan, "IP Security (IPsec) and
+   [<a id="ref-RFC6071">RFC6071</a>]  Frankel, S. and S. Krishnan, "IP Security (IPsec) and
               Internet Key Exchange (IKE) Document Roadmap", <a href="./rfc6071.html">RFC 6071</a>,
               February 2011.
 
-   [<a id="ref-RFC6275" name="ref-RFC6275">RFC6275</a>]  Perkins, C., Johnson, D., and J. Arkko, "Mobility Support
+   [<a id="ref-RFC6275">RFC6275</a>]  Perkins, C., Johnson, D., and J. Arkko, "Mobility Support
               in IPv6", <a href="./rfc6275.html">RFC 6275</a>, July 2011.
 
 
 
 
 <span class="grey">McPherson, et al.             Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
-   [<a id="ref-RFC6382" name="ref-RFC6382">RFC6382</a>]  McPherson, D., Donnelly, R., and F. Scalzo, "Unique Origin
+   [<a id="ref-RFC6382">RFC6382</a>]  McPherson, D., Donnelly, R., and F. Scalzo, "Unique Origin
               Autonomous System Numbers (ASNs) per Node for Globally
-              Anycasted Services", <a href="./bcp169.html">BCP 169</a>, <a href="./rfc6382.html">RFC 6382</a>, October 2011.
+              Anycasted Services", <a href="https://www.rfc-editor.org/bcp/bcp169">BCP 169</a>, <a href="./rfc6382.html">RFC 6382</a>, October 2011.
 
-   [<a id="ref-RFC6480" name="ref-RFC6480">RFC6480</a>]  Lepinski, M. and S. Kent, "An Infrastructure to Support
+   [<a id="ref-RFC6480">RFC6480</a>]  Lepinski, M. and S. Kent, "An Infrastructure to Support
               Secure Internet Routing", <a href="./rfc6480.html">RFC 6480</a>, February 2012.
 
-   [<a id="ref-RSSAC29" name="ref-RSSAC29">RSSAC29</a>]  "RSSAC 29 Meeting Minutes", December 2007,
+   [<a id="ref-RSSAC29">RSSAC29</a>]  "RSSAC 29 Meeting Minutes", December 2007,
               &lt;<a href="http://www.icann.org/en/groups/rssac/meetings/rssac-29-en.pdf">http://www.icann.org/en/groups/rssac/meetings/</a>
               <a href="http://www.icann.org/en/groups/rssac/meetings/rssac-29-en.pdf">rssac-29-en.pdf</a>&gt;.
 
@@ -1290,11 +1274,11 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20IAB%20Members%20at%20the%20Time%20of%20Approval"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  IAB Members at the Time of Approval</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20IAB%20Members%20at%20the%20Time%20of%20Approval"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  IAB Members at the Time of Approval</span>
 
    Bernard Aboba
    Jari Arkko
@@ -1346,7 +1330,7 @@ Table of Contents
 
 
 <span class="grey">McPherson, et al.             Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc7094.html">RFC 7094</a>            Arch Considerations of IP Anycast       January 2014</span>
 
 
@@ -1402,11 +1386,6 @@ Authors' Addresses
 
 
 McPherson, et al.             Informational                    [Page 22]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

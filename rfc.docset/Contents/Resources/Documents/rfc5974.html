@@ -1,32 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-mcdonald-nsis-qos-nslp" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5974" name="DC.Identifier"/>
-<meta content="October, 2010" name="DC.Date.Issued"/>
-<meta content="Karagiannis, Georgios" name="DC.Creator"/>
-<meta content="McDonald, Andrew" name="DC.Creator"/>
-<meta content="Manner, Jukka" name="DC.Creator"/>
-<meta content="This specification describes the NSIS Signaling Layer Protocol (NSLP)
-for signaling Quality of Service (QoS) reservations in the Internet.
-It is in accordance with the framework and requirements developed in
-NSIS. Together with General Internet Signaling Transport (GIST), it
-provides functionality similar to RSVP and extends it. The QoS NSLP is
-independent of the underlying QoS specification or architecture and
-provides support for different reservation models. It is simplified by
-the elimination of support for multicast flows. This specification
-explains the overall protocol approach, describes the design decisions
-made, and provides examples. It specifies object, message formats, and
-processing rules. This document defines an Experimental Protocol for
-the Internet community." name="DC.Description.Abstract"/>
-<meta content="NSIS Signaling Layer Protocol (NSLP) for Quality-of-Service Signaling" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5974 - NSIS Signaling Layer Protocol (NSLP) for Quality-of-Service Signaling</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="J. Manner" name="citation_author"/>
+<meta content="G. Karagiannis" name="citation_author"/>
+<meta content="A. McDonald" name="citation_author"/>
+<meta content="October, 2010" name="citation_publication_date"/>
+<meta content="NSIS Signaling Layer Protocol (NSLP) for Quality-of-Service Signaling" name="citation_title"/>
+<meta content="10.17487/RFC5974" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5974" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5974.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5974: NSIS Signaling Layer Protocol (NSLP) for Quality-of-Service Signaling</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -55,7 +42,7 @@ the Internet community." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -64,7 +51,7 @@ the Internet community." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -143,19 +130,18 @@ the Internet community." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -169,21 +155,9 @@ the Internet community." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgyellow" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5974.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5974" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-nsis-qos-nslp.html" title="draft-ietf-nsis-qos-nslp">draft-ietf-nsis-q...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5974" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5974" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                         J. Manner
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5974.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5974.txt.pdf">PDF</a>|<a href="/rfc/rfc5974.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5974" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5974&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc5974" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                         J. Manner
 Request for Comments: 5974                              Aalto University
 Category: Experimental                                    G. Karagiannis
 ISSN: 2070-1721                            University of Twente/Ericsson
@@ -235,7 +209,7 @@ Status of This Memo
 
 
 <span class="grey">Manner, et al.                Experimental                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -244,7 +218,7 @@ Copyright Notice
    Copyright (c) 2010 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -291,7 +265,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -347,7 +321,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -361,7 +335,7 @@ Table of Contents
      <a href="#appendix-A.3">A.3</a>.  Configuration Interface  . . . . . . . . . . . . . . . . . <a href="#page-99">99</a>
    <a href="#appendix-B">Appendix B</a>.  Glossary  . . . . . . . . . . . . . . . . . . . . .  <a href="#page-100">100</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This document defines a Quality of Service (QoS) NSIS Signaling Layer
    Protocol (NSLP), henceforth referred to as the "QoS NSLP".  This
@@ -403,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -417,7 +391,7 @@ Table of Contents
    should be the basis for implementers.  The subsequent sections
    describe IANA allocation issues and security considerations.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -459,7 +433,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -499,9 +473,9 @@ Table of Contents
    A glossary of terms and abbreviations used in this document can be
    found in <a href="#appendix-B">Appendix B</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Protocol%20Overview"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Protocol Overview</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Protocol%20Overview"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Protocol Overview</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Overall%20Approach"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Overall Approach</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Overall%20Approach"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Overall Approach</span>
 
    This section presents a logical model for the operation of the QoS
    NSLP and associated provisioning mechanisms within a single node.
@@ -515,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -571,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -627,7 +601,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -649,7 +623,7 @@ Table of Contents
    pass in both directions through the node, depending on the particular
    message and orientation of the reservation.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Protocol%20Messages"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  Protocol Messages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Protocol%20Messages"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  Protocol Messages</span>
 
    The QoS NSLP uses four message types:
 
@@ -683,7 +657,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -716,7 +690,7 @@ Table of Contents
    Object formats are defined in <a href="#section-5.1.3">Section 5.1.3</a>.  Object processing rules
    are defined in <a href="#section-5.3">Section 5.3</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20QoS%20Models%20and%20QoS%20Specifications"></a></body></html><a class="selflink" href="#section-3.1.2" name="section-3.1.2">3.1.2</a>.  QoS Models and QoS Specifications</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20QoS%20Models%20and%20QoS%20Specifications"></a></body></html><a class="selflink" href="#section-3.1.2" id="section-3.1.2">3.1.2</a>.  QoS Models and QoS Specifications</span>
 
    The QoS NSLP provides flexibility over the exact patterns of
    signaling messages that are exchanged.  The decoupling of QoS NSLP
@@ -739,7 +713,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -795,7 +769,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -806,7 +780,7 @@ Table of Contents
    incoming resource request may cause removal of an earlier established
    reservation.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.%20%20Policy%20Control"></a></body></html><a class="selflink" href="#section-3.1.3" name="section-3.1.3">3.1.3</a>.  Policy Control</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.%20%20Policy%20Control"></a></body></html><a class="selflink" href="#section-3.1.3" id="section-3.1.3">3.1.3</a>.  Policy Control</span>
 
    Getting access to network resources, e.g., network access in general
    or access to QoS, typically involves some kind of policy control.
@@ -851,7 +825,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -881,12 +855,12 @@ Table of Contents
    between the ingress and egress edge nodes in order to exchange policy
    information.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Design%20Background"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Design Background</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Design%20Background"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Design Background</span>
 
    This section presents some of the key functionality behind the
    specification of the QoS NSLP.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Soft%20States"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Soft States</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Soft%20States"></a></body></html><a class="selflink" href="#section-3.2.1" id="section-3.2.1">3.2.1</a>.  Soft States</span>
 
    The NSIS protocol suite takes a soft-state approach to state
    management.  This means that reservation state in QNEs must be
@@ -896,7 +870,7 @@ Table of Contents
    is signaled for remains valid.  Maintaining the reservation beyond
    this lifetime can be done by sending a RESERVE message periodically.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Sender%20and%20Receiver%20Initiation"></a></body></html><a class="selflink" href="#section-3.2.2" name="section-3.2.2">3.2.2</a>.  Sender and Receiver Initiation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Sender%20and%20Receiver%20Initiation"></a></body></html><a class="selflink" href="#section-3.2.2" id="section-3.2.2">3.2.2</a>.  Sender and Receiver Initiation</span>
 
    The QoS NSLP supports both sender-initiated and receiver-initiated
    reservations.  For a sender-initiated reservation, RESERVE messages
@@ -907,7 +881,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -922,7 +896,7 @@ Table of Contents
    initial QUERY, the receiver is still in charge of making the actual
    resource request and maintaining the reservation.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Protection%20against%20Message%20Re-ordering%20and%20Duplication"></a></body></html><a class="selflink" href="#section-3.2.3" name="section-3.2.3">3.2.3</a>.  Protection against Message Re-ordering and Duplication</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Protection%20against%20Message%20Re-ordering%20and%20Duplication"></a></body></html><a class="selflink" href="#section-3.2.3" id="section-3.2.3">3.2.3</a>.  Protection against Message Re-ordering and Duplication</span>
 
    RESERVE messages affect the installed reservation state.  Unlike
    NOTIFY, QUERY, and RESPONSE messages, the order in which RESERVE
@@ -933,7 +907,7 @@ Table of Contents
    a Reservation Sequence Number (RSN).  The RSN has local significance
    only, i.e., between a QNE and its downstream peers.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.4.%20%20Explicit%20Confirmations"></a></body></html><a class="selflink" href="#section-3.2.4" name="section-3.2.4">3.2.4</a>.  Explicit Confirmations</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.4.%20%20Explicit%20Confirmations"></a></body></html><a class="selflink" href="#section-3.2.4" id="section-3.2.4">3.2.4</a>.  Explicit Confirmations</span>
 
    A QNE may require a confirmation that the end-to-end reservation is
    in place, or a reply to a query along the path.  For such requests,
@@ -941,7 +915,7 @@ Table of Contents
    to.  This is supported by including a Request Identification
    Information (RII) object in a QoS NSLP message.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.5.%20%20Reduced%20Refreshes"></a></body></html><a class="selflink" href="#section-3.2.5" name="section-3.2.5">3.2.5</a>.  Reduced Refreshes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.5.%20%20Reduced%20Refreshes"></a></body></html><a class="selflink" href="#section-3.2.5" id="section-3.2.5">3.2.5</a>.  Reduced Refreshes</span>
 
    For scalability, the QoS NSLP supports an abbreviated form of refresh
    RESERVE message.  In this case, the refresh RESERVE references the
@@ -963,11 +937,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.6.%20%20Summary%20Refreshes%20and%20Summary%20Tear"></a></body></html><a class="selflink" href="#section-3.2.6" name="section-3.2.6">3.2.6</a>.  Summary Refreshes and Summary Tear</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.6.%20%20Summary%20Refreshes%20and%20Summary%20Tear"></a></body></html><a class="selflink" href="#section-3.2.6" id="section-3.2.6">3.2.6</a>.  Summary Refreshes and Summary Tear</span>
 
    For limiting the number of individual messages, the QoS NSLP supports
    summary refresh and summary tear messages.  When sending a refreshing
@@ -993,7 +967,7 @@ Table of Contents
    information to decide whether summary refresh messages can be sent or
    when a summary tear is possible.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.7.%20%20Message%20Scoping"></a></body></html><a class="selflink" href="#section-3.2.7" name="section-3.2.7">3.2.7</a>.  Message Scoping</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.7.%20%20Message%20Scoping"></a></body></html><a class="selflink" href="#section-3.2.7" id="section-3.2.7">3.2.7</a>.  Message Scoping</span>
 
    A QNE may use local policy when deciding whether to propagate a
    message or not.  For example, the local policy can define/configure
@@ -1019,11 +993,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.8.%20%20Session%20Binding"></a></body></html><a class="selflink" href="#section-3.2.8" name="section-3.2.8">3.2.8</a>.  Session Binding</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.8.%20%20Session%20Binding"></a></body></html><a class="selflink" href="#section-3.2.8" id="section-3.2.8">3.2.8</a>.  Session Binding</span>
 
    Session binding is defined as the enforcement of a relation between
    different QoS NSLP sessions (i.e., signaling flows with different
@@ -1058,7 +1032,7 @@ Table of Contents
    the same time it has a unidirectional dependency relation with
    another session used for the reverse path.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.9.%20%20Message%20Binding"></a></body></html><a class="selflink" href="#section-3.2.9" name="section-3.2.9">3.2.9</a>.  Message Binding</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.9.%20%20Message%20Binding"></a></body></html><a class="selflink" href="#section-3.2.9" id="section-3.2.9">3.2.9</a>.  Message Binding</span>
 
    QoS NSLP supports binding of messages in order to allow for
    expressing dependencies between different messages.  The message
@@ -1075,7 +1049,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -1083,7 +1057,7 @@ Table of Contents
    scenarios where aggregate reservations are used.  <a href="#section-4.6">Section 4.6</a>
    provides more details.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.10.%20%20Layering"></a></body></html><a class="selflink" href="#section-3.2.10" name="section-3.2.10">3.2.10</a>.  Layering</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.10.%20%20Layering"></a></body></html><a class="selflink" href="#section-3.2.10" id="section-3.2.10">3.2.10</a>.  Layering</span>
 
    The QoS NSLP supports layered reservations.  Layered reservations may
    occur when certain parts of the network (domains) implement one or
@@ -1092,7 +1066,7 @@ Table of Contents
    reliable transfer mode).  They may also occur when several per-flow
    reservations are locally combined into an aggregate reservation.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.10.1.%20%20Local%20QoS%20Models"></a></body></html><a class="selflink" href="#section-3.2.10.1" name="section-3.2.10.1">3.2.10.1</a>.  Local QoS Models</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.10.1.%20%20Local%20QoS%20Models"></a></body></html><a class="selflink" href="#section-3.2.10.1" id="section-3.2.10.1">3.2.10.1</a>.  Local QoS Models</span>
 
    A domain may have local policies regarding QoS model implementation,
    i.e., it may map incoming traffic to its own locally defined QoS
@@ -1100,7 +1074,7 @@ Table of Contents
    transparent to the QoS NSLP.  The use of local QoS models within a
    domain is performed in the RMF.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.10.2.%20%20Local%20Control%20Plane%20Properties"></a></body></html><a class="selflink" href="#section-3.2.10.2" name="section-3.2.10.2">3.2.10.2</a>.  Local Control Plane Properties</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.10.2.%20%20Local%20Control%20Plane%20Properties"></a></body></html><a class="selflink" href="#section-3.2.10.2" id="section-3.2.10.2">3.2.10.2</a>.  Local Control Plane Properties</span>
 
    The way signaling messages are handled is mainly determined by the
    parameters that are sent over the GIST-NSLP API and by the domain
@@ -1118,7 +1092,7 @@ Table of Contents
    GIST.  The local session and the end-to-end session are bound at the
    egress QNE by means of the BOUND-SESSION-ID object.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.10.3.%20%20Aggregate%20Reservations"></a></body></html><a class="selflink" href="#section-3.2.10.3" name="section-3.2.10.3">3.2.10.3</a>.  Aggregate Reservations</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.10.3.%20%20Aggregate%20Reservations"></a></body></html><a class="selflink" href="#section-3.2.10.3" id="section-3.2.10.3">3.2.10.3</a>.  Aggregate Reservations</span>
 
    In some cases, it is desirable to create reservations for an
    aggregate, rather than on a per-flow basis, in order to reduce the
@@ -1131,7 +1105,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -1152,7 +1126,7 @@ Table of Contents
    purpose, the end-to-end session contains a BOUND-SESSION-ID carrying
    the SESSION-ID of the aggregate session.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.11.%20%20Support%20for%20Request%20Priorities"></a></body></html><a class="selflink" href="#section-3.2.11" name="section-3.2.11">3.2.11</a>.  Support for Request Priorities</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.11.%20%20Support%20for%20Request%20Priorities"></a></body></html><a class="selflink" href="#section-3.2.11" id="section-3.2.11">3.2.11</a>.  Support for Request Priorities</span>
 
    This specification acknowledges the fact that in some situations,
    some messages or reservations may be more important than others, and
@@ -1187,11 +1161,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.12.%20%20Rerouting"></a></body></html><a class="selflink" href="#section-3.2.12" name="section-3.2.12">3.2.12</a>.  Rerouting</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.12.%20%20Rerouting"></a></body></html><a class="selflink" href="#section-3.2.12" id="section-3.2.12">3.2.12</a>.  Rerouting</span>
 
    The QoS NSLP needs to adapt to route changes in the data path.  This
    assumes the capability to detect rerouting events, create a QoS
@@ -1243,7 +1217,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -1288,7 +1262,7 @@ Table of Contents
    able to affect the discovery of new peers or rerouting can be found
    in the GIST specification.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.12.1.%20%20Last%20Node%20Behavior"></a></body></html><a class="selflink" href="#section-3.2.12.1" name="section-3.2.12.1">3.2.12.1</a>.  Last Node Behavior</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.12.1.%20%20Last%20Node%20Behavior"></a></body></html><a class="selflink" href="#section-3.2.12.1" id="section-3.2.12.1">3.2.12.1</a>.  Last Node Behavior</span>
 
    The design of the QoS NSLP allows reservations to be installed at a
    subset of the nodes along a path.  In particular, usage scenarios
@@ -1299,7 +1273,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -1355,7 +1329,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -1391,7 +1365,7 @@ Table of Contents
    GIST nodes supporting the QoS NSLP are present.  Node A will take
    over as the last node on the signaling path.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.12.2.%20%20Handling%20Spurious%20Route%20Change%20Notifications"></a></body></html><a class="selflink" href="#section-3.2.12.2" name="section-3.2.12.2">3.2.12.2</a>.  Handling Spurious Route Change Notifications</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.12.2.%20%20Handling%20Spurious%20Route%20Change%20Notifications"></a></body></html><a class="selflink" href="#section-3.2.12.2" id="section-3.2.12.2">3.2.12.2</a>.  Handling Spurious Route Change Notifications</span>
 
    The QoS NSLP is notified by GIST (with the NetworkNotification
    primitive) when GIST believes that a rerouting event may have
@@ -1411,7 +1385,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -1467,7 +1441,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -1480,7 +1454,7 @@ Table of Contents
    This is the peer from which it was receiving RESERVE messages (see
    for more details).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.13.%20%20Preemption"></a></body></html><a class="selflink" href="#section-3.2.13" name="section-3.2.13">3.2.13</a>.  Preemption</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.13.%20%20Preemption"></a></body></html><a class="selflink" href="#section-3.2.13" id="section-3.2.13">3.2.13</a>.  Preemption</span>
 
    The QoS NSLP provides building blocks to implement preemption.  This
    specification does not define how preemption should work, but only
@@ -1491,7 +1465,7 @@ Table of Contents
    the signaled session.  How these are used by QoS models is out of
    scope of the QoS NSLP specification.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20GIST%20Interactions"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  GIST Interactions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20GIST%20Interactions"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  GIST Interactions</span>
 
    The QoS NSLP uses GIST for delivery of all its messages.  Messages
    are passed from the NSLP to GIST via an API (defined in <a href="./rfc5971.html#appendix-B">Appendix B of
@@ -1523,7 +1497,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -1531,7 +1505,7 @@ Table of Contents
    firewalls or Network Address Translators (NATs).  It assumes that a
    basic NAT traversal service is provided by GIST.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Support%20for%20Bypassing%20Intermediate%20Nodes"></a></body></html><a class="selflink" href="#section-3.3.1" name="section-3.3.1">3.3.1</a>.  Support for Bypassing Intermediate Nodes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Support%20for%20Bypassing%20Intermediate%20Nodes"></a></body></html><a class="selflink" href="#section-3.3.1" id="section-3.3.1">3.3.1</a>.  Support for Bypassing Intermediate Nodes</span>
 
    The QoS NSLP may want to restrict the handling of its messages to
    specific nodes.  This functionality is needed to support layering
@@ -1550,7 +1524,7 @@ Table of Contents
    operation of modifying the NSLPID must be specified in the relevant
    QoS model specification.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.%20%20Support%20for%20Peer%20Change%20Identification"></a></body></html><a class="selflink" href="#section-3.3.2" name="section-3.3.2">3.3.2</a>.  Support for Peer Change Identification</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.%20%20Support%20for%20Peer%20Change%20Identification"></a></body></html><a class="selflink" href="#section-3.3.2" id="section-3.3.2">3.3.2</a>.  Support for Peer Change Identification</span>
 
    There are several circumstances where it is necessary for a QNE to
    identify the adjacent QNE peer, which is the source of a signaling
@@ -1579,11 +1553,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.3.%20%20Support%20for%20Stateless%20Operation"></a></body></html><a class="selflink" href="#section-3.3.3" name="section-3.3.3">3.3.3</a>.  Support for Stateless Operation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.3.%20%20Support%20for%20Stateless%20Operation"></a></body></html><a class="selflink" href="#section-3.3.3" id="section-3.3.3">3.3.3</a>.  Support for Stateless Operation</span>
 
    Stateless or reduced-state QoS NSLP operation makes the most sense
    when some nodes are able to operate in a stateless way at the GIST
@@ -1594,7 +1568,7 @@ Table of Contents
    service interface supports this functionality with the Retain-State
    attribute in the MessageReceived primitive.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.4.%20%20Priority%20of%20Signaling%20Messages"></a></body></html><a class="selflink" href="#section-3.3.4" name="section-3.3.4">3.3.4</a>.  Priority of Signaling Messages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.4.%20%20Priority%20of%20Signaling%20Messages"></a></body></html><a class="selflink" href="#section-3.3.4" id="section-3.3.4">3.3.4</a>.  Priority of Signaling Messages</span>
 
    The QoS NSLP will generate messages with a range of performance
    requirements for GIST.  These requirements may result from a
@@ -1603,7 +1577,7 @@ Table of Contents
    NSLP.  GIST service interface supports this with the 'priority'
    transfer attribute.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.5.%20%20Knowledge%20of%20Intermediate%20QoS-NSLP-Unaware%20Nodes"></a></body></html><a class="selflink" href="#section-3.3.5" name="section-3.3.5">3.3.5</a>.  Knowledge of Intermediate QoS-NSLP-Unaware Nodes</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.5.%20%20Knowledge%20of%20Intermediate%20QoS-NSLP-Unaware%20Nodes"></a></body></html><a class="selflink" href="#section-3.3.5" id="section-3.3.5">3.3.5</a>.  Knowledge of Intermediate QoS-NSLP-Unaware Nodes</span>
 
    In some cases, it is useful to know that there are routers along the
    path where QoS cannot be provided.  The GIST service interface
@@ -1624,7 +1598,7 @@ Table of Contents
    end RESERVE or QUERY message should not be set by the edges of the
    local domain.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Examples%20of%20QoS%20NSLP%20Operation"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Examples of QoS NSLP Operation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Examples%20of%20QoS%20NSLP%20Operation"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Examples of QoS NSLP Operation</span>
 
    The QoS NSLP can be used in a number of ways.  The examples here give
    an indication of some of the basic processing.  However, they are not
@@ -1635,11 +1609,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Sender-Initiated%20Reservation"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Sender-Initiated Reservation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Sender-Initiated%20Reservation"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Sender-Initiated Reservation</span>
 
    QNI        QNE        QNE        QNR
     |          |          |          |
@@ -1691,7 +1665,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -1718,7 +1692,7 @@ Table of Contents
    can simply refer to the existing reservation, rather than including
    the complete reservation specification.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Sending%20a%20Query"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Sending a Query</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Sending%20a%20Query"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Sending a Query</span>
 
    QUERY messages can be used to gather information from QNEs along the
    path.  For example, they can be used to find out what resources are
@@ -1747,7 +1721,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -1761,7 +1735,7 @@ Table of Contents
    for an RSN object if no RII was present, and act based on the error
    code set in the INFO-SPEC of the RESPONSE.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Basic%20Receiver-Initiated%20Reservation"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Basic Receiver-Initiated Reservation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Basic%20Receiver-Initiated%20Reservation"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Basic Receiver-Initiated Reservation</span>
 
    As described in the NSIS framework [<a href="./rfc4080.html" title='"Next Steps in Signaling (NSIS): Framework"'>RFC4080</a>], in some signaling
    applications, a node at one end of the data flow takes responsibility
@@ -1803,7 +1777,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -1859,11 +1833,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Bidirectional%20Reservations"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Bidirectional Reservations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Bidirectional%20Reservations"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Bidirectional Reservations</span>
 
    The term "bidirectional reservation" refers to two different cases
    that are supported by this specification:
@@ -1915,7 +1889,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -1971,11 +1945,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Aggregate%20Reservations"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  Aggregate Reservations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Aggregate%20Reservations"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  Aggregate Reservations</span>
 
    In order to reduce signaling and per-flow state in the network, the
    reservations for a number of flows may be aggregated.
@@ -2027,7 +2001,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -2070,7 +2044,7 @@ Table of Contents
    aggregate reservation can be updated independently of the per-flow
    end-to-end reservations.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Message%20Binding"></a></body></html><a class="selflink" href="#section-4.6" name="section-4.6">4.6</a>.  Message Binding</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Message%20Binding"></a></body></html><a class="selflink" href="#section-4.6" id="section-4.6">4.6</a>.  Message Binding</span>
 
    <a href="#section-4.5">Section 4.5</a> sketches the interaction of an aggregated end-to-end flow
    and an aggregate.  For this scenario, and probably others, it is
@@ -2083,7 +2057,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -2139,7 +2113,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -2195,7 +2169,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -2251,11 +2225,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Reduced-State%20or%20Stateless%20Interior%20Nodes"></a></body></html><a class="selflink" href="#section-4.7" name="section-4.7">4.7</a>.  Reduced-State or Stateless Interior Nodes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Reduced-State%20or%20Stateless%20Interior%20Nodes"></a></body></html><a class="selflink" href="#section-4.7" id="section-4.7">4.7</a>.  Reduced-State or Stateless Interior Nodes</span>
 
    This example uses a different QoS model within a domain, in
    conjunction with GIST and NSLP functionality that allows the interior
@@ -2273,7 +2247,7 @@ Table of Contents
    to-edge and hop-by-hop sessions.  The reduced-state reservation can
    be updated independently of the per-flow end-to-end reservations.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.1.%20%20Sender-Initiated%20Reservation"></a></body></html><a class="selflink" href="#section-4.7.1" name="section-4.7.1">4.7.1</a>.  Sender-Initiated Reservation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.1.%20%20Sender-Initiated%20Reservation"></a></body></html><a class="selflink" href="#section-4.7.1" id="section-4.7.1">4.7.1</a>.  Sender-Initiated Reservation</span>
 
    The QNI initiates a RESERVE message (see Figure 14).  At the QNEs on
    the edges of the stateless or reduced-state region, the processing is
@@ -2307,7 +2281,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -2363,7 +2337,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -2376,7 +2350,7 @@ Table of Contents
    do.  Eventually, the RESERVE' will reach the egress QNE, and again,
    the QoS model then determines the response.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.2.%20%20Receiver-Initiated%20Reservation"></a></body></html><a class="selflink" href="#section-4.7.2" name="section-4.7.2">4.7.2</a>.  Receiver-Initiated Reservation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.2.%20%20Receiver-Initiated%20Reservation"></a></body></html><a class="selflink" href="#section-4.7.2" id="section-4.7.2">4.7.2</a>.  Receiver-Initiated Reservation</span>
 
    Since NSLP neighbor relationships are not maintained in the reduced-
    state region, only sender-initiated signaling can be supported within
@@ -2419,11 +2393,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.%20%20Proxy%20Mode"></a></body></html><a class="selflink" href="#section-4.8" name="section-4.8">4.8</a>.  Proxy Mode</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.%20%20Proxy%20Mode"></a></body></html><a class="selflink" href="#section-4.8" id="section-4.8">4.8</a>.  Proxy Mode</span>
 
    Besides the sender- and receiver-initiated reservations, the QoS NSLP
    includes a functionality we refer to as Proxy Mode.  Here a QNE is
@@ -2475,13 +2449,13 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20QoS%20NSLP%20Functional%20Specification"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  QoS NSLP Functional Specification</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20QoS%20NSLP%20Functional%20Specification"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  QoS NSLP Functional Specification</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20QoS%20NSLP%20Message%20and%20Object%20Formats"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  QoS NSLP Message and Object Formats</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20QoS%20NSLP%20Message%20and%20Object%20Formats"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  QoS NSLP Message and Object Formats</span>
 
    A QoS NSLP message consists of a common header, followed by a body
    consisting of a variable number of variable-length, typed "objects".
@@ -2499,7 +2473,7 @@ Table of Contents
    objects in the order shown here, but <em>MUST</em> accept the objects in any
    order.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20Common%20Header"></a></body></html><a class="selflink" href="#section-5.1.1" name="section-5.1.1">5.1.1</a>.  Common Header</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20Common%20Header"></a></body></html><a class="selflink" href="#section-5.1.1" id="section-5.1.1">5.1.1</a>.  Common Header</span>
 
    All GIST NSLP-Data objects for the QoS NSLP <em>MUST</em> contain this common
    header as the first 32 bits of the object (this is not the same as
@@ -2531,7 +2505,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 42]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-43" id="page-43" name="page-43"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-43"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -2587,13 +2561,13 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 43]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-44" id="page-44" name="page-44"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-44"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.%20%20Message%20Formats"></a></body></html><a class="selflink" href="#section-5.1.2" name="section-5.1.2">5.1.2</a>.  Message Formats</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.%20%20Message%20Formats"></a></body></html><a class="selflink" href="#section-5.1.2" id="section-5.1.2">5.1.2</a>.  Message Formats</span>
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.1.%20%20RESERVE"></a></body></html><a class="selflink" href="#section-5.1.2.1" name="section-5.1.2.1">5.1.2.1</a>.  RESERVE</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.1.%20%20RESERVE"></a></body></html><a class="selflink" href="#section-5.1.2.1" id="section-5.1.2.1">5.1.2.1</a>.  RESERVE</span>
 
    The format of a RESERVE message is as follows:
 
@@ -2643,7 +2617,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 44]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-45" id="page-45" name="page-45"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-45"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -2699,7 +2673,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 45]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-46" id="page-46" name="page-46"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-46"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -2708,7 +2682,7 @@ Table of Contents
    may, therefore, be appropriate for QNEs to perform rate-limiting on
    the refresh messages that they send.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.2.%20%20QUERY"></a></body></html><a class="selflink" href="#section-5.1.2.2" name="section-5.1.2.2">5.1.2.2</a>.  QUERY</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.2.%20%20QUERY"></a></body></html><a class="selflink" href="#section-5.1.2.2" id="section-5.1.2.2">5.1.2.2</a>.  QUERY</span>
 
    The format of a QUERY message is as follows:
 
@@ -2755,11 +2729,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 46]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-47" id="page-47" name="page-47"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-47"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.3.%20%20RESPONSE"></a></body></html><a class="selflink" href="#section-5.1.2.3" name="section-5.1.2.3">5.1.2.3</a>.  RESPONSE</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.3.%20%20RESPONSE"></a></body></html><a class="selflink" href="#section-5.1.2.3" id="section-5.1.2.3">5.1.2.3</a>.  RESPONSE</span>
 
    The format of a RESPONSE message is as follows:
 
@@ -2777,7 +2751,7 @@ Table of Contents
    No message-specific flags are defined for use in the common header
    with the RESPONSE message.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.4.%20%20NOTIFY"></a></body></html><a class="selflink" href="#section-5.1.2.4" name="section-5.1.2.4">5.1.2.4</a>.  NOTIFY</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.4.%20%20NOTIFY"></a></body></html><a class="selflink" href="#section-5.1.2.4" id="section-5.1.2.4">5.1.2.4</a>.  NOTIFY</span>
 
    The format of a NOTIFY message is as follows:
 
@@ -2791,7 +2765,7 @@ Table of Contents
    No message-specific flags are defined for use with the NOTIFY
    message.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.%20%20Object%20Formats"></a></body></html><a class="selflink" href="#section-5.1.3" name="section-5.1.3">5.1.3</a>.  Object Formats</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.%20%20Object%20Formats"></a></body></html><a class="selflink" href="#section-5.1.3" id="section-5.1.3">5.1.3</a>.  Object Formats</span>
 
    The QoS NSLP uses a Type-Length-Value (TLV) object format similar to
    that used by GIST.  Every object consists of one or more 32-bit words
@@ -2811,7 +2785,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 47]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-48" id="page-48" name="page-48"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-48"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -2867,11 +2841,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 48]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-49" id="page-49" name="page-49"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-49"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.1.%20%20Request%20Identification%20Information%20%28RII%29"></a></body></html><a class="selflink" href="#section-5.1.3.1" name="section-5.1.3.1">5.1.3.1</a>.  Request Identification Information (RII)</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.1.%20%20Request%20Identification%20Information%20%28RII%29"></a></body></html><a class="selflink" href="#section-5.1.3.1" id="section-5.1.3.1">5.1.3.1</a>.  Request Identification Information (RII)</span>
 
    Type: 0x001
 
@@ -2888,7 +2862,7 @@ Table of Contents
    |            Request Identification Information (RII)           |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.2.%20%20Reservation%20Sequence%20Number%20%28RSN%29"></a></body></html><a class="selflink" href="#section-5.1.3.2" name="section-5.1.3.2">5.1.3.2</a>.  Reservation Sequence Number (RSN)</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.2.%20%20Reservation%20Sequence%20Number%20%28RSN%29"></a></body></html><a class="selflink" href="#section-5.1.3.2" id="section-5.1.3.2">5.1.3.2</a>.  Reservation Sequence Number (RSN)</span>
 
    Type: 0x002
 
@@ -2909,7 +2883,7 @@ Table of Contents
    |                       Epoch Identifier                        |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.3.%20%20Refresh%20Period%20%28REFRESH-PERIOD%29"></a></body></html><a class="selflink" href="#section-5.1.3.3" name="section-5.1.3.3">5.1.3.3</a>.  Refresh Period (REFRESH-PERIOD)</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.3.%20%20Refresh%20Period%20%28REFRESH-PERIOD%29"></a></body></html><a class="selflink" href="#section-5.1.3.3" id="section-5.1.3.3">5.1.3.3</a>.  Refresh Period (REFRESH-PERIOD)</span>
 
    Type: 0x003
 
@@ -2923,7 +2897,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 49]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-50" id="page-50" name="page-50"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-50"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -2933,7 +2907,7 @@ Table of Contents
    |                      Refresh Period (R)                       |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.4.%20%20Bound%20Session%20ID%20%28BOUND-SESSION-ID%29"></a></body></html><a class="selflink" href="#section-5.1.3.4" name="section-5.1.3.4">5.1.3.4</a>.  Bound Session ID (BOUND-SESSION-ID)</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.4.%20%20Bound%20Session%20ID%20%28BOUND-SESSION-ID%29"></a></body></html><a class="selflink" href="#section-5.1.3.4" id="section-5.1.3.4">5.1.3.4</a>.  Bound Session ID (BOUND-SESSION-ID)</span>
 
    Type: 0x004
 
@@ -2979,7 +2953,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 50]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-51" id="page-51" name="page-51"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-51"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -2989,7 +2963,7 @@ Table of Contents
    with, e.g., SID_B (the bound session), by including a
    BOUND-SESSION-ID object containing SID_B in its messages.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.5.%20%20Packet%20Classifier%20%28PACKET-CLASSIFIER%29"></a></body></html><a class="selflink" href="#section-5.1.3.5" name="section-5.1.3.5">5.1.3.5</a>.  Packet Classifier (PACKET-CLASSIFIER)</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.5.%20%20Packet%20Classifier%20%28PACKET-CLASSIFIER%29"></a></body></html><a class="selflink" href="#section-5.1.3.5" id="section-5.1.3.5">5.1.3.5</a>.  Packet Classifier (PACKET-CLASSIFIER)</span>
 
    Type: 0x005
 
@@ -3035,7 +3009,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 51]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-52" id="page-52" name="page-52"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-52"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3059,7 +3033,7 @@ Table of Contents
    appropriate method-specific classifier data for the PACKET-CLASSIFIER
    object <em>MUST</em> be defined.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.6.%20%20Information%20Object%20%28INFO-SPEC%29%20and%20Error%20Codes"></a></body></html><a class="selflink" href="#section-5.1.3.6" name="section-5.1.3.6">5.1.3.6</a>.  Information Object (INFO-SPEC) and Error Codes</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.6.%20%20Information%20Object%20%28INFO-SPEC%29%20and%20Error%20Codes"></a></body></html><a class="selflink" href="#section-5.1.3.6" id="section-5.1.3.6">5.1.3.6</a>.  Information Object (INFO-SPEC) and Error Codes</span>
 
    Type: 0x006
 
@@ -3091,7 +3065,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 52]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-53" id="page-53" name="page-53"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-53"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3147,7 +3121,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 53]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-54" id="page-54" name="page-54"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-54"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3203,7 +3177,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 54]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-55" id="page-55" name="page-55"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-55"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3259,7 +3233,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 55]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-56" id="page-56" name="page-56"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-56"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3315,7 +3289,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 56]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-57" id="page-57" name="page-57"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-57"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3360,7 +3334,7 @@ Table of Contents
    be invalid in the original message.  An error message may contain
    more than one Object Value Info object.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.7.%20%20SESSION-ID%20List%20%28SESSION-ID-LIST%29"></a></body></html><a class="selflink" href="#section-5.1.3.7" name="section-5.1.3.7">5.1.3.7</a>.  SESSION-ID List (SESSION-ID-LIST)</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.7.%20%20SESSION-ID%20List%20%28SESSION-ID-LIST%29"></a></body></html><a class="selflink" href="#section-5.1.3.7" id="section-5.1.3.7">5.1.3.7</a>.  SESSION-ID List (SESSION-ID-LIST)</span>
 
    Type: 0x007
 
@@ -3371,7 +3345,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 57]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-58" id="page-58" name="page-58"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-58"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3400,7 +3374,7 @@ Table of Contents
    |                                                               |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.8.%20%20Reservation%20Sequence%20Number%20%28RSN%29%20List%20%28RSN-LIST%29"></a></body></html><a class="selflink" href="#section-5.1.3.8" name="section-5.1.3.8">5.1.3.8</a>.  Reservation Sequence Number (RSN) List (RSN-LIST)</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.8.%20%20Reservation%20Sequence%20Number%20%28RSN%29%20List%20%28RSN-LIST%29"></a></body></html><a class="selflink" href="#section-5.1.3.8" id="section-5.1.3.8">5.1.3.8</a>.  Reservation Sequence Number (RSN) List (RSN-LIST)</span>
 
    Type: 0x008
 
@@ -3427,11 +3401,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 58]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-59" id="page-59" name="page-59"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-59"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.9.%20%20Message%20ID%20%28MSG-ID%29"></a></body></html><a class="selflink" href="#section-5.1.3.9" name="section-5.1.3.9">5.1.3.9</a>.  Message ID (MSG-ID)</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.9.%20%20Message%20ID%20%28MSG-ID%29"></a></body></html><a class="selflink" href="#section-5.1.3.9" id="section-5.1.3.9">5.1.3.9</a>.  Message ID (MSG-ID)</span>
 
    Type: 0x009
 
@@ -3462,7 +3436,7 @@ Table of Contents
 
    * 1 - Bidirectional binding dependency
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.10.%20%20Bound%20Message%20ID%20%28BOUND-MSG-ID%29"></a></body></html><a class="selflink" href="#section-5.1.3.10" name="section-5.1.3.10">5.1.3.10</a>.  Bound Message ID (BOUND-MSG-ID)</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.10.%20%20Bound%20Message%20ID%20%28BOUND-MSG-ID%29"></a></body></html><a class="selflink" href="#section-5.1.3.10" id="section-5.1.3.10">5.1.3.10</a>.  Bound Message ID (BOUND-MSG-ID)</span>
 
    Type: 0x00A
 
@@ -3483,7 +3457,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 59]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-60" id="page-60" name="page-60"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-60"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3507,7 +3481,7 @@ Table of Contents
 
    * 1 - Bidirectional binding dependency
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.11.%20%20QoS%20Specification%20%28QSPEC%29"></a></body></html><a class="selflink" href="#section-5.1.3.11" name="section-5.1.3.11">5.1.3.11</a>.  QoS Specification (QSPEC)</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.11.%20%20QoS%20Specification%20%28QSPEC%29"></a></body></html><a class="selflink" href="#section-5.1.3.11" id="section-5.1.3.11">5.1.3.11</a>.  QoS Specification (QSPEC)</span>
 
    Type: 0x00B
 
@@ -3527,7 +3501,7 @@ Table of Contents
    |                                                               |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20General%20Processing%20Rules"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  General Processing Rules</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20General%20Processing%20Rules"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  General Processing Rules</span>
 
    This section provides the general processing rules used by QoS-NSLP.
    The triggers communicated between RM/QOSM and QoS-NSLP
@@ -3539,11 +3513,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 60]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-61" id="page-61" name="page-61"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-61"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.1.%20%20State%20Manipulation"></a></body></html><a class="selflink" href="#section-5.2.1" name="section-5.2.1">5.2.1</a>.  State Manipulation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.1.%20%20State%20Manipulation"></a></body></html><a class="selflink" href="#section-5.2.1" id="section-5.2.1">5.2.1</a>.  State Manipulation</span>
 
    The processing of a message and its component objects involves
    manipulating the QoS NSLP and reservation state of a QNE.
@@ -3595,7 +3569,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 61]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-62" id="page-62" name="page-62"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-62"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3611,7 +3585,7 @@ Table of Contents
    on the state to be kept by a QNE.  The need to keep state depends on
    the desired functionality at the NSLP layer.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.2.%20%20Message%20Forwarding"></a></body></html><a class="selflink" href="#section-5.2.2" name="section-5.2.2">5.2.2</a>.  Message Forwarding</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.2.%20%20Message%20Forwarding"></a></body></html><a class="selflink" href="#section-5.2.2" id="section-5.2.2">5.2.2</a>.  Message Forwarding</span>
 
    QoS NSLP messages are sent peer-to-peer along the path.  The QoS NSLP
    does not have the concept of a message being sent directly to the end
@@ -3624,7 +3598,7 @@ Table of Contents
    affected by the value of the SCOPING or PROXY flags, or by the
    presence of an RII object.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.3.%20%20Standard%20Message%20Processing%20Rules"></a></body></html><a class="selflink" href="#section-5.2.3" name="section-5.2.3">5.2.3</a>.  Standard Message Processing Rules</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.3.%20%20Standard%20Message%20Processing%20Rules"></a></body></html><a class="selflink" href="#section-5.2.3" id="section-5.2.3">5.2.3</a>.  Standard Message Processing Rules</span>
 
    If a mandatory object is missing from a message then the receiving
    QNE <em>MUST NOT</em> propagate the message any further.  It <em>MUST</em> construct a
@@ -3638,7 +3612,7 @@ Table of Contents
    QNE must set the same flag in all QoS NSLP messages it sends that are
    related to this session.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.4.%20%20Retransmissions"></a></body></html><a class="selflink" href="#section-5.2.4" name="section-5.2.4">5.2.4</a>.  Retransmissions</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.4.%20%20Retransmissions"></a></body></html><a class="selflink" href="#section-5.2.4" id="section-5.2.4">5.2.4</a>.  Retransmissions</span>
 
    Retransmissions may happen end-to-end (e.g., between QNI and QNR
    using an RII object) or peer-to-peer (between two adjacent QNEs).
@@ -3651,7 +3625,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 62]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-63" id="page-63" name="page-63"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-63"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3676,9 +3650,9 @@ Table of Contents
 
    Retransmissions <em>SHOULD</em> be disabled for tear messages.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.5.%20%20Rerouting"></a></body></html><a class="selflink" href="#section-5.2.5" name="section-5.2.5">5.2.5</a>.  Rerouting</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.5.%20%20Rerouting"></a></body></html><a class="selflink" href="#section-5.2.5" id="section-5.2.5">5.2.5</a>.  Rerouting</span>
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.5.1.%20%20Last%20Node%20Behavior"></a></body></html><a class="selflink" href="#section-5.2.5.1" name="section-5.2.5.1">5.2.5.1</a>.  Last Node Behavior</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.5.1.%20%20Last%20Node%20Behavior"></a></body></html><a class="selflink" href="#section-5.2.5.1" id="section-5.2.5.1">5.2.5.1</a>.  Last Node Behavior</span>
 
    As discussed in <a href="#section-3.2.12">Section 3.2.12</a>, some care needs to be taken to handle
    cases where the last node on the path may change.
@@ -3695,7 +3669,7 @@ Table of Contents
    the path.  This must be done in order to handle the "Path Truncation"
    case described in <a href="#section-5.2.5.1">Section 5.2.5.1</a>.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.5.2.%20%20Avoiding%20Mistaken%20Teardown"></a></body></html><a class="selflink" href="#section-5.2.5.2" name="section-5.2.5.2">5.2.5.2</a>.  Avoiding Mistaken Teardown</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.5.2.%20%20Avoiding%20Mistaken%20Teardown"></a></body></html><a class="selflink" href="#section-5.2.5.2" id="section-5.2.5.2">5.2.5.2</a>.  Avoiding Mistaken Teardown</span>
 
    In order to handle the spurious route change problem described in
    <a href="#section-3.2.12.2">Section 3.2.12.2</a>, the RSN must be used in a particular way when
@@ -3707,7 +3681,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 63]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-64" id="page-64" name="page-64"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-64"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3731,7 +3705,7 @@ Table of Contents
    <em>MAY</em> elect not to send the tearing RESERVE, since this indicates that
    the path is unchanged.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.5.3.%20%20Upstream%20Route%20Change%20Notification"></a></body></html><a class="selflink" href="#section-5.2.5.3" name="section-5.2.5.3">5.2.5.3</a>.  Upstream Route Change Notification</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.5.3.%20%20Upstream%20Route%20Change%20Notification"></a></body></html><a class="selflink" href="#section-5.2.5.3" id="section-5.2.5.3">5.2.5.3</a>.  Upstream Route Change Notification</span>
 
    GIST may notify the QoS NSLP that a possible upstream route change
    has occurred over the GIST API.  On receiving such a notification,
@@ -3745,7 +3719,7 @@ Table of Contents
    be out of date.  The QoS NSLP <em>SHOULD</em> send a NOTIFY message upstream.
    The NOTIFY message should be propagated back to the QNI or QNR.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.5.4.%20%20Route%20Change%20Oscillation"></a></body></html><a class="selflink" href="#section-5.2.5.4" name="section-5.2.5.4">5.2.5.4</a>.  Route Change Oscillation</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.5.4.%20%20Route%20Change%20Oscillation"></a></body></html><a class="selflink" href="#section-5.2.5.4" id="section-5.2.5.4">5.2.5.4</a>.  Route Change Oscillation</span>
 
    In some circumstances, a route change may occur, but the path then
    falls back to the original route.
@@ -3763,7 +3737,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 64]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-65" id="page-65" name="page-65"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-65"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3779,12 +3753,12 @@ Table of Contents
    upstream peer refreshes its routing state until the state at that
    node is explicitly torn down or times out.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Object%20Processing"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Object Processing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Object%20Processing"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Object Processing</span>
 
    This section presents processing rules for individual QoS NSLP
    objects.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.1.%20%20Reservation%20Sequence%20Number%20%28RSN%29"></a></body></html><a class="selflink" href="#section-5.3.1" name="section-5.3.1">5.3.1</a>.  Reservation Sequence Number (RSN)</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.1.%20%20Reservation%20Sequence%20Number%20%28RSN%29"></a></body></html><a class="selflink" href="#section-5.3.1" id="section-5.3.1">5.3.1</a>.  Reservation Sequence Number (RSN)</span>
 
    A QNE's own RSN is a sequence number which applies to a particular
    signaling session (i.e., with a particular SESSION-ID).  It <em>MUST</em> be
@@ -3819,7 +3793,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 65]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-66" id="page-66" name="page-66"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-66"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3842,7 +3816,7 @@ Table of Contents
    <em>MUST</em> also copy the same RSN into the RESERVE message (if any) that it
    sends as a consequence of receiving this one.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.2.%20%20Request%20Identification%20Information%20%28RII%29"></a></body></html><a class="selflink" href="#section-5.3.2" name="section-5.3.2">5.3.2</a>.  Request Identification Information (RII)</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.2.%20%20Request%20Identification%20Information%20%28RII%29"></a></body></html><a class="selflink" href="#section-5.3.2" id="section-5.3.2">5.3.2</a>.  Request Identification Information (RII)</span>
 
    A QNE sending QUERY or RESERVE messages may require a response to be
    sent.  It does so by including a Request Identification Information
@@ -3875,7 +3849,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 66]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-67" id="page-67" name="page-67"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-67"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3901,7 +3875,7 @@ Table of Contents
    processing the message, send an error message upstream to indicate an
    RII collision, and request a retry with a new RII value.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.3.%20%20BOUND-SESSION-ID"></a></body></html><a class="selflink" href="#section-5.3.3" name="section-5.3.3">5.3.3</a>.  BOUND-SESSION-ID</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.3.%20%20BOUND-SESSION-ID"></a></body></html><a class="selflink" href="#section-5.3.3" id="section-5.3.3">5.3.3</a>.  BOUND-SESSION-ID</span>
 
    As shown in the examples in <a href="#section-4">Section 4</a>, the QoS NSLP can relate
    multiple sessions together.  It does this by including the SESSION-ID
@@ -3922,7 +3896,7 @@ Table of Contents
    the aggregate.  A QoS NSLP implementation <em>MUST</em> be ready to process
    more than one BOUND-SESSION-ID object within a single message.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.4.%20%20REFRESH-PERIOD"></a></body></html><a class="selflink" href="#section-5.3.4" name="section-5.3.4">5.3.4</a>.  REFRESH-PERIOD</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.4.%20%20REFRESH-PERIOD"></a></body></html><a class="selflink" href="#section-5.3.4" id="section-5.3.4">5.3.4</a>.  REFRESH-PERIOD</span>
 
    Refresh timer management values are carried by the REFRESH-PERIOD
    object, which has local significance only.  At the expiration of a
@@ -3931,7 +3905,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 67]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-68" id="page-68" name="page-68"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-68"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -3960,7 +3934,7 @@ Table of Contents
    received and stored.  The values for R and L may vary from peer to
    peer.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.5.%20%20INFO-SPEC"></a></body></html><a class="selflink" href="#section-5.3.5" name="section-5.3.5">5.3.5</a>.  INFO-SPEC</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.5.%20%20INFO-SPEC"></a></body></html><a class="selflink" href="#section-5.3.5" id="section-5.3.5">5.3.5</a>.  INFO-SPEC</span>
 
    The INFO-SPEC object is carried by the RESPONSE and NOTIFY messages,
    and it is used to report a successful, an unsuccessful, or an error
@@ -3987,7 +3961,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 68]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-69" id="page-69" name="page-69"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-69"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4043,7 +4017,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 69]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-70" id="page-70" name="page-70"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-70"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4068,7 +4042,7 @@ Table of Contents
    used.  The processing rules of these errors are not specified in this
    document.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.6.%20%20SESSION-ID-LIST"></a></body></html><a class="selflink" href="#section-5.3.6" name="section-5.3.6">5.3.6</a>.  SESSION-ID-LIST</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.6.%20%20SESSION-ID-LIST"></a></body></html><a class="selflink" href="#section-5.3.6" id="section-5.3.6">5.3.6</a>.  SESSION-ID-LIST</span>
 
    A SESSION-ID-LIST is carried in RESERVE messages.  It is used in two
    cases, to refresh or to tear down the indicated sessions.  A SESSION-
@@ -4099,7 +4073,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 70]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-71" id="page-71" name="page-71"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-71"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4110,7 +4084,7 @@ Table of Contents
    Note that a stateless QNE cannot support summary or single reduced
    refreshes, and always needs full single refreshes.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.7.%20%20RSN-LIST"></a></body></html><a class="selflink" href="#section-5.3.7" name="section-5.3.7">5.3.7</a>.  RSN-LIST</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.7.%20%20RSN-LIST"></a></body></html><a class="selflink" href="#section-5.3.7" id="section-5.3.7">5.3.7</a>.  RSN-LIST</span>
 
    An RSN-LIST <em>MUST</em> be carried in RESERVE messages when a QNE wants to
    perform a refresh or teardown of several sessions with a single NSLP
@@ -4145,7 +4119,7 @@ Table of Contents
    sessions were not in synch, the remaining sessions in the SESSION-ID-
    LIST and RSN-LIST are refreshed.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.8.%20%20QSPEC"></a></body></html><a class="selflink" href="#section-5.3.8" name="section-5.3.8">5.3.8</a>.  QSPEC</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.8.%20%20QSPEC"></a></body></html><a class="selflink" href="#section-5.3.8" id="section-5.3.8">5.3.8</a>.  QSPEC</span>
 
    The contents of the QSPEC depend on the QoS model being used.  A
    template for QSPEC objects can be found in [<a href="./rfc5975.html" title='"QSPEC Template for the Quality-of-Service NSIS Signaling Layer Protocol (NSLP)"'>RFC5975</a>].
@@ -4155,7 +4129,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 71]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-72" id="page-72" name="page-72"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-72"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4165,7 +4139,7 @@ Table of Contents
    INFO-SPEC that includes a partial or full QSPEC.  This will also be
    passed to the RMF.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Message%20Processing%20Rules"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Message Processing Rules</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Message%20Processing%20Rules"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Message Processing Rules</span>
 
    This section provides rules for message processing.  Not all possible
    error situations are considered.  A general rule for dealing with
@@ -4184,7 +4158,7 @@ Table of Contents
    order to let it know that there is an inconsistency in the states of
    adjacent QNEs.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.1.%20%20RESERVE%20Messages"></a></body></html><a class="selflink" href="#section-5.4.1" name="section-5.4.1">5.4.1</a>.  RESERVE Messages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.1.%20%20RESERVE%20Messages"></a></body></html><a class="selflink" href="#section-5.4.1" id="section-5.4.1">5.4.1</a>.  RESERVE Messages</span>
 
    The RESERVE message is used to manipulate QoS reservation state in
    QNEs.  A RESERVE message may create, refresh, modify, or remove such
@@ -4211,7 +4185,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 72]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-73" id="page-73" name="page-73"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-73"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4267,7 +4241,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 73]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-74" id="page-74" name="page-74"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-74"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4323,7 +4297,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 74]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-75" id="page-75" name="page-75"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-75"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4379,7 +4353,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 75]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-76" id="page-76" name="page-76"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-76"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4435,11 +4409,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 76]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-77" id="page-77" name="page-77"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-77"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.2.%20%20QUERY%20Messages"></a></body></html><a class="selflink" href="#section-5.4.2" name="section-5.4.2">5.4.2</a>.  QUERY Messages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.2.%20%20QUERY%20Messages"></a></body></html><a class="selflink" href="#section-5.4.2" id="section-5.4.2">5.4.2</a>.  QUERY Messages</span>
 
    A QUERY message is used to request information about the data path
    without making a reservation.  This functionality can be used to
@@ -4491,7 +4465,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 77]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-78" id="page-78" name="page-78"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-78"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4523,7 +4497,7 @@ Table of Contents
    message was successful, the stateful QNE <em>SHOULD</em> send back a RESPONSE
    with an INFO-SPEC carrying the acknowledgement success code.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.3.%20%20RESPONSE%20Messages"></a></body></html><a class="selflink" href="#section-5.4.3" name="section-5.4.3">5.4.3</a>.  RESPONSE Messages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.3.%20%20RESPONSE%20Messages"></a></body></html><a class="selflink" href="#section-5.4.3" id="section-5.4.3">5.4.3</a>.  RESPONSE Messages</span>
 
    The RESPONSE message is used to provide information about the result
    of a previous QoS NSLP message, e.g., confirmation of a reservation
@@ -4547,7 +4521,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 78]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-79" id="page-79" name="page-79"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-79"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4591,7 +4565,7 @@ Table of Contents
    flag set, then the BREAK flag of newly generated message (e.g.,
    RESPONSE) <em>MUST</em> be set.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.4.%20%20NOTIFY%20Messages"></a></body></html><a class="selflink" href="#section-5.4.4" name="section-5.4.4">5.4.4</a>.  NOTIFY Messages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.4.%20%20NOTIFY%20Messages"></a></body></html><a class="selflink" href="#section-5.4.4" id="section-5.4.4">5.4.4</a>.  NOTIFY Messages</span>
 
    NOTIFY messages are used to convey information to a QNE
    asynchronously.  NOTIFY messages do not cause any state to be
@@ -4603,7 +4577,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 79]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-80" id="page-80" name="page-80"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-80"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4628,11 +4602,11 @@ Table of Contents
    preemption can be found in the QSPEC Template [<a href="./rfc5975.html" title='"QSPEC Template for the Quality-of-Service NSIS Signaling Layer Protocol (NSLP)"'>RFC5975</a>] and the
    individual QoS Model specifications.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  IANA Considerations</span>
 
    This section provides guidance to the Internet Assigned Numbers
    Authority (IANA) regarding registration of values related to the QoS
-   NSLP, in accordance with <a href="./bcp26.html">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a> [<a href="./rfc5226.html" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>RFC5226</a>].
+   NSLP, in accordance with <a href="https://www.rfc-editor.org/bcp/bcp26">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a> [<a href="./rfc5226.html" title="">RFC5226</a>].
 
    Per QoS NSLP, IANA has created a number of new registries:
 
@@ -4659,11 +4633,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 80]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-81" id="page-81" name="page-81"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-81"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20QoS%20NSLP%20Message%20Type"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  QoS NSLP Message Type</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20QoS%20NSLP%20Message%20Type"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  QoS NSLP Message Type</span>
 
    The QoS NSLP Message Type is an 8-bit value.  This specification
    defines four QoS NSLP message types, which form the initial contents
@@ -4676,7 +4650,7 @@ Table of Contents
    When a new message type is defined, any message flags used with it
    must also be defined.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20NSLP%20Message%20Objects"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  NSLP Message Objects</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20NSLP%20Message%20Objects"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  NSLP Message Objects</span>
 
    A new registry has been created for NSLP Message Objects.  This is a
    12-bit field (giving values from 0 to 4095).  This registry is shared
@@ -4715,11 +4689,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 81]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-82" id="page-82" name="page-82"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-82"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20QoS%20NSLP%20Binding%20Codes"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  QoS NSLP Binding Codes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20QoS%20NSLP%20Binding%20Codes"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  QoS NSLP Binding Codes</span>
 
    A new registry has been created for the 8-bit Binding Codes used in
    the BOUND-SESSION-ID object.  The initial values for this registry
@@ -4729,7 +4703,7 @@ Table of Contents
    Values 128 to 159 are for Experimental/Private Use.  Other values are
    Reserved.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20QoS%20NSLP%20Error%20Classes%20and%20Error%20Codes"></a></body></html><a class="selflink" href="#section-6.4" name="section-6.4">6.4</a>.  QoS NSLP Error Classes and Error Codes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20QoS%20NSLP%20Error%20Classes%20and%20Error%20Codes"></a></body></html><a class="selflink" href="#section-6.4" id="section-6.4">6.4</a>.  QoS NSLP Error Classes and Error Codes</span>
 
    In addition, Error Classes and Error Codes for the INFO-SPEC object
    are defined.  These are described in <a href="#section-5.1.3.6">Section 5.1.3.6</a>.
@@ -4771,7 +4745,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 82]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-83" id="page-83" name="page-83"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-83"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4783,7 +4757,7 @@ Table of Contents
    <a href="#section-5.1.3.6">Section 5.1.3.6</a>.  Experimental and Reserved values are relevant to
    all Error classes.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.5.%20%20QoS%20NSLP%20Error%20Source%20Identifiers"></a></body></html><a class="selflink" href="#section-6.5" name="section-6.5">6.5</a>.  QoS NSLP Error Source Identifiers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.5.%20%20QoS%20NSLP%20Error%20Source%20Identifiers"></a></body></html><a class="selflink" href="#section-6.5" id="section-6.5">6.5</a>.  QoS NSLP Error Source Identifiers</span>
 
    <a href="#section-5.1.3.6">Section 5.1.3.6</a> defines Error Source Identifiers, the type of which
    is identified by a 4-bit value.
@@ -4796,7 +4770,7 @@ Table of Contents
 
    The registration procedure is Specification Required.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.6.%20%20NSLP%20IDs%20and%20Router%20Alert%20Option%20Values"></a></body></html><a class="selflink" href="#section-6.6" name="section-6.6">6.6</a>.  NSLP IDs and Router Alert Option Values</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.6.%20%20NSLP%20IDs%20and%20Router%20Alert%20Option%20Values"></a></body></html><a class="selflink" href="#section-6.6" id="section-6.6">6.6</a>.  NSLP IDs and Router Alert Option Values</span>
 
    This specification defines an NSLP for use with GIST.  Furthermore,
    it specifies that a number of NSLPID values are used for the support
@@ -4813,7 +4787,7 @@ Table of Contents
    IPv6 RAO values have been assigned, corresponding to QoS NSLP
    Aggregation Levels 0 to 31.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    The security requirement for the QoS NSLP is to protect the signaling
    exchange for establishing QoS reservations against identified
@@ -4827,7 +4801,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 83]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-84" id="page-84" name="page-84"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-84"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4883,7 +4857,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 84]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-85" id="page-85" name="page-85"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-85"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4892,7 +4866,7 @@ Table of Contents
    where NSIS is used, it is very difficult to make general statements
    without reducing its flexibility.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Trust%20Relationship%20Model"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Trust Relationship Model</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Trust%20Relationship%20Model"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Trust Relationship Model</span>
 
    This specification is based on a model that requires trust between
    neighboring NSLP nodes to establish a chain-of-trust along the QoS
@@ -4939,7 +4913,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 85]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-86" id="page-86" name="page-86"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-86"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -4995,7 +4969,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 86]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-87" id="page-87" name="page-87"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-87"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -5024,12 +4998,12 @@ Table of Contents
    the exception that mobility and the security implications are not
    addressed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Authorization%20Model%20Examples"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Authorization Model Examples</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Authorization%20Model%20Examples"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Authorization Model Examples</span>
 
    Various authorization models can be used in conjunction with the QoS
    NSLP.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.1.%20%20Authorization%20for%20the%20Two-Party%20Approach"></a></body></html><a class="selflink" href="#section-7.2.1" name="section-7.2.1">7.2.1</a>.  Authorization for the Two-Party Approach</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.1.%20%20Authorization%20for%20the%20Two-Party%20Approach"></a></body></html><a class="selflink" href="#section-7.2.1" id="section-7.2.1">7.2.1</a>.  Authorization for the Two-Party Approach</span>
 
    The two-party approach (Figure 17) is conceptually the simplest
    authorization model.
@@ -5051,7 +5025,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 87]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-88" id="page-88" name="page-88"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-88"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -5065,7 +5039,7 @@ Table of Contents
    other out-of-band mechanisms) exists to manage charging and provides
    sufficient information to authorize individual requests.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.2.%20%20Token-Based%20Three-Party%20Approach"></a></body></html><a class="selflink" href="#section-7.2.2" name="section-7.2.2">7.2.2</a>.  Token-Based Three-Party Approach</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.2.%20%20Token-Based%20Three-Party%20Approach"></a></body></html><a class="selflink" href="#section-7.2.2" id="section-7.2.2">7.2.2</a>.  Token-Based Three-Party Approach</span>
 
    An alternative approach makes use of tokens, such as those described
    in <a href="./rfc3520.html">RFC 3520</a> [<a href="./rfc3520.html" title='"Session Authorization Policy Element"'>RFC3520</a>] and <a href="./rfc3521.html">RFC 3521</a> [<a href="./rfc3521.html" title='"Framework for Session Set-up with Media Authorization"'>RFC3521</a>] or used as part of the
@@ -5107,7 +5081,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 88]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-89" id="page-89" name="page-89"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-89"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -5163,11 +5137,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 89]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-90" id="page-90" name="page-90"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-90"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.3.%20%20Generic%20Three-Party%20Approach"></a></body></html><a class="selflink" href="#section-7.2.3" name="section-7.2.3">7.2.3</a>.  Generic Three-Party Approach</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.3.%20%20Generic%20Three-Party%20Approach"></a></body></html><a class="selflink" href="#section-7.2.3" id="section-7.2.3">7.2.3</a>.  Generic Three-Party Approach</span>
 
    Another method is for the node performing the QoS reservation to
    delegate the authorization decision to a third party, as illustrated
@@ -5194,7 +5168,7 @@ Table of Contents
 
                       Figure 19: Three-Party Approach
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Computing%20the%20Authorization%20Decision"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  Computing the Authorization Decision</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Computing%20the%20Authorization%20Decision"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  Computing the Authorization Decision</span>
 
    Whenever an authorization decision has to be made there is the
    question about which information serves as an input to the
@@ -5219,11 +5193,11 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 90]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-91" id="page-91" name="page-91"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-91"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgments</span>
 
    The authors would like to thank Eleanor Hepworth, Ruediger Geib,
    Roland Bless, Nemeth Krisztian, Markus Ott, Mayi Zoumaro-Djayoon,
@@ -5232,7 +5206,7 @@ Table of Contents
    protocol is well defined.  Bob Braden provided helpful comments and
    guidance which were gratefully received.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Contributors"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Contributors</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Contributors"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Contributors</span>
 
    This document combines work from three individual documents.  The
    following authors from these documents also contributed to this
@@ -5249,119 +5223,119 @@ Table of Contents
    on AAA.  Charles Shen and Henning Schulzrinne suggested the use of
    the reason field in the BOUND-SESSION-ID.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" id="section-10.1">10.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC1982" name="ref-RFC1982">RFC1982</a>]    Elz, R. and R. Bush, "Serial Number Arithmetic",
+   [<a id="ref-RFC1982">RFC1982</a>]    Elz, R. and R. Bush, "Serial Number Arithmetic",
                 <a href="./rfc1982.html">RFC 1982</a>, August 1996.
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]    Bradner, S., "Key words for use in RFCs to Indicate
-                Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]    Bradner, S., "Key words for use in RFCs to Indicate
+                Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC5971" name="ref-RFC5971">RFC5971</a>]    Schulzrinne, H. and R. Hancock, "GIST: General Internet
+   [<a id="ref-RFC5971">RFC5971</a>]    Schulzrinne, H. and R. Hancock, "GIST: General Internet
                 Signalling Transport", <a href="./rfc5971.html">RFC 5971</a>, October 2010.
 
-   [<a id="ref-RFC5975" name="ref-RFC5975">RFC5975</a>]    Ash, G., Bader, A., Kappler, C., and D. Oran, "QSPEC
+   [<a id="ref-RFC5975">RFC5975</a>]    Ash, G., Bader, A., Kappler, C., and D. Oran, "QSPEC
                 Template for the Quality-of-Service NSIS Signaling Layer
                 Protocol (NSLP)", <a href="./rfc5975.html">RFC 5975</a>, October 2010.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" id="section-10.2">10.2</a>.  Informative References</span>
 
-   [<a id="ref-NSIS-AUTH" name="ref-NSIS-AUTH">NSIS-AUTH</a>]  Manner, J., Stiemerling, M., Tschofenig, H., and R.
+   [<a id="ref-NSIS-AUTH">NSIS-AUTH</a>]  Manner, J., Stiemerling, M., Tschofenig, H., and R.
                 Bless, Ed., "Authorization for NSIS Signaling Layer
                 Protocols", Work in Progress, May 2010.
 
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 91]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-92" id="page-92" name="page-92"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-92"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-   [<a id="ref-NSIS-MOB" name="ref-NSIS-MOB">NSIS-MOB</a>]   Sanda, T., Fu, X., Jeong, S., Manner, J., and H.
+   [<a id="ref-NSIS-MOB">NSIS-MOB</a>]   Sanda, T., Fu, X., Jeong, S., Manner, J., and H.
                 Tschofenig, "NSIS Protocols operation in Mobile
                 Environments", Work in Progress, May 2010.
 
-   [<a id="ref-RFC1633" name="ref-RFC1633">RFC1633</a>]    Braden, B., Clark, D., and S. Shenker, "Integrated
+   [<a id="ref-RFC1633">RFC1633</a>]    Braden, B., Clark, D., and S. Shenker, "Integrated
                 Services in the Internet Architecture: an Overview",
                 <a href="./rfc1633.html">RFC 1633</a>, June 1994.
 
-   [<a id="ref-RFC2205" name="ref-RFC2205">RFC2205</a>]    Braden, B., Zhang, L., Berson, S., Herzog, S., and S.
+   [<a id="ref-RFC2205">RFC2205</a>]    Braden, B., Zhang, L., Berson, S., Herzog, S., and S.
                 Jamin, "Resource ReSerVation Protocol (RSVP) -- Version
                 1 Functional Specification", <a href="./rfc2205.html">RFC 2205</a>, September 1997.
 
-   [<a id="ref-RFC2210" name="ref-RFC2210">RFC2210</a>]    Wroclawski, J., "The Use of RSVP with IETF Integrated
+   [<a id="ref-RFC2210">RFC2210</a>]    Wroclawski, J., "The Use of RSVP with IETF Integrated
                 Services", <a href="./rfc2210.html">RFC 2210</a>, September 1997.
 
-   [<a id="ref-RFC2961" name="ref-RFC2961">RFC2961</a>]    Berger, L., Gan, D., Swallow, G., Pan, P., Tommasi, F.,
+   [<a id="ref-RFC2961">RFC2961</a>]    Berger, L., Gan, D., Swallow, G., Pan, P., Tommasi, F.,
                 and S. Molendini, "RSVP Refresh Overhead Reduction
                 Extensions", <a href="./rfc2961.html">RFC 2961</a>, April 2001.
 
-   [<a id="ref-RFC3175" name="ref-RFC3175">RFC3175</a>]    Baker, F., Iturralde, C., Le Faucheur, F., and B. Davie,
+   [<a id="ref-RFC3175">RFC3175</a>]    Baker, F., Iturralde, C., Le Faucheur, F., and B. Davie,
                 "Aggregation of RSVP for IPv4 and IPv6 Reservations",
                 <a href="./rfc3175.html">RFC 3175</a>, September 2001.
 
-   [<a id="ref-RFC3520" name="ref-RFC3520">RFC3520</a>]    Hamer, L-N., Gage, B., Kosinski, B., and H. Shieh,
+   [<a id="ref-RFC3520">RFC3520</a>]    Hamer, L-N., Gage, B., Kosinski, B., and H. Shieh,
                 "Session Authorization Policy Element", <a href="./rfc3520.html">RFC 3520</a>,
                 April 2003.
 
-   [<a id="ref-RFC3521" name="ref-RFC3521">RFC3521</a>]    Hamer, L-N., Gage, B., and H. Shieh, "Framework for
+   [<a id="ref-RFC3521">RFC3521</a>]    Hamer, L-N., Gage, B., and H. Shieh, "Framework for
                 Session Set-up with Media Authorization", <a href="./rfc3521.html">RFC 3521</a>,
                 April 2003.
 
-   [<a id="ref-RFC3726" name="ref-RFC3726">RFC3726</a>]    Brunner, M., "Requirements for Signaling Protocols",
+   [<a id="ref-RFC3726">RFC3726</a>]    Brunner, M., "Requirements for Signaling Protocols",
                 <a href="./rfc3726.html">RFC 3726</a>, April 2004.
 
-   [<a id="ref-RFC4080" name="ref-RFC4080">RFC4080</a>]    Hancock, R., Karagiannis, G., Loughney, J., and S. Van
+   [<a id="ref-RFC4080">RFC4080</a>]    Hancock, R., Karagiannis, G., Loughney, J., and S. Van
                 den Bosch, "Next Steps in Signaling (NSIS): Framework",
                 <a href="./rfc4080.html">RFC 4080</a>, June 2005.
 
-   [<a id="ref-RFC4081" name="ref-RFC4081">RFC4081</a>]    Tschofenig, H. and D. Kroeselberg, "Security Threats for
+   [<a id="ref-RFC4081">RFC4081</a>]    Tschofenig, H. and D. Kroeselberg, "Security Threats for
                 Next Steps in Signaling (NSIS)", <a href="./rfc4081.html">RFC 4081</a>, June 2005.
 
-   [<a id="ref-RFC5226" name="ref-RFC5226">RFC5226</a>]    Narten, T. and H. Alvestrand, "Guidelines for Writing an
-                IANA Considerations Section in RFCs", <a href="./bcp26.html">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a>,
+   [<a id="ref-RFC5226">RFC5226</a>]    Narten, T. and H. Alvestrand, "Guidelines for Writing an
+                IANA Considerations Section in RFCs", <a href="https://www.rfc-editor.org/bcp/bcp26">BCP 26</a>, <a href="./rfc5226.html">RFC 5226</a>,
                 May 2008.
 
-   [<a id="ref-RFC5234" name="ref-RFC5234">RFC5234</a>]    Crocker, D. and P. Overell, "Augmented BNF for Syntax
+   [<a id="ref-RFC5234">RFC5234</a>]    Crocker, D. and P. Overell, "Augmented BNF for Syntax
                 Specifications: ABNF", STD 68, <a href="./rfc5234.html">RFC 5234</a>, January 2008.
 
 
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 92]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-93" id="page-93" name="page-93"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-93"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-   [<a id="ref-RFC5973" name="ref-RFC5973">RFC5973</a>]    Stiemerling, M., Tschofenig, H., Aoun, C., and E.
+   [<a id="ref-RFC5973">RFC5973</a>]    Stiemerling, M., Tschofenig, H., Aoun, C., and E.
                 Davies, "NAT/Firewall NSIS Signaling Layer Protocol
                 (NSLP)", <a href="./rfc5973.html">RFC 5973</a>, October 2010.
 
-   [<a id="ref-RFC5977" name="ref-RFC5977">RFC5977</a>]    Bader, A., Westberg, L., Karagiannis, G., Kappler, C.,
+   [<a id="ref-RFC5977">RFC5977</a>]    Bader, A., Westberg, L., Karagiannis, G., Kappler, C.,
                 Tschofenig, H., and T. Phelan, "RMD-QOSM: The NSIS
                 Quality-of-Service Model for Resource Management in
                 Diffserv", <a href="./rfc5977.html">RFC 5977</a>, October 2010.
 
-   [<a id="ref-lrsvp" name="ref-lrsvp">lrsvp</a>]      Manner, J. and K. Raatikainen, "Localized QoS Management
+   [<a id="ref-lrsvp">lrsvp</a>]      Manner, J. and K. Raatikainen, "Localized QoS Management
                 for Multimedia Applications in Wireless Access
                 Networks", IASTED IMSA, Technical Specification 101 321,
                 p. 193-200, August 2004.
 
-   [<a id="ref-opwa95" name="ref-opwa95">opwa95</a>]     Breslau, L., "Two Issues in Reservation Establishment",
+   [<a id="ref-opwa95">opwa95</a>]     Breslau, L., "Two Issues in Reservation Establishment",
                 Proc. ACM SIGCOMM '95, Cambridge MA, August 1995.
 
-   [<a id="ref-osp" name="ref-osp">osp</a>]        ETSI, "Telecommunications and Internet Protocol
+   [<a id="ref-osp">osp</a>]        ETSI, "Telecommunications and Internet Protocol
                 Harmonization Over Networks (TIPHON); Open Settlement
                 Protocol (OSP) for Inter-Domain pricing, authorization,
                 and usage exchange", Technical Specification 101 321,
                 version 4.1.1.
 
-   [<a id="ref-qos-auth" name="ref-qos-auth">qos-auth</a>]   Tschofenig, H., <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22QoS+NSLP+Authorization+Issues%22" style="text-decoration: none">"QoS NSLP Authorization Issues"</a>, Work
+   [<a id="ref-qos-auth">qos-auth</a>]   Tschofenig, H., <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22QoS+NSLP+Authorization+Issues%22" style="text-decoration: none">"QoS NSLP Authorization Issues"</a>, Work
                 in Progress, June 2003.
 
-   [<a id="ref-shenker" name="ref-shenker">shenker</a>]    Shenker, S., et al., "Pricing in computer networks:
+   [<a id="ref-shenker">shenker</a>]    Shenker, S., et al., "Pricing in computer networks:
                 Reshaping the research agenda", Proc. of TPRC 1995,
                 1995.
 
@@ -5387,18 +5361,18 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 93]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-94" id="page-94" name="page-94"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-94"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Abstract%20NSLP-RMF%20API"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Abstract NSLP-RMF API</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Abstract%20NSLP-RMF%20API"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Abstract NSLP-RMF API</span>
 
    This appendix is purely informational and provides an abstract API
    between the QoS NSLP and the RMF.  It should not be taken as a strict
    rule for implementors, but rather it helps clarify the interface
    between the NSLP and RMF.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Triggers%20from%20QOS-NSLP%20towards%20RMF"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>.  Triggers from QOS-NSLP towards RMF</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Triggers%20from%20QOS-NSLP%20towards%20RMF"></a></body></html><a class="selflink" href="#appendix-A.1" id="appendix-A.1">A.1</a>.  Triggers from QOS-NSLP towards RMF</span>
 
    The QoS-NSLP triggers the RMF/QOSM functionality by using the
    sendrmf() primitive:
@@ -5443,7 +5417,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 94]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-95" id="page-95" name="page-95"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-95"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -5499,7 +5473,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 95]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-96" id="page-96" name="page-96"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-96"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -5519,7 +5493,7 @@ Table of Contents
       when the QNE reserves resources on outgoing interface.  Default is
       0 (no reservations on outgoing interface)
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Triggers%20from%20RMF/QOSM%20towards%20QOS-NSLP"></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>.  Triggers from RMF/QOSM towards QOS-NSLP</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Triggers%20from%20RMF/QOSM%20towards%20QOS-NSLP"></a></body></html><a class="selflink" href="#appendix-A.2" id="appendix-A.2">A.2</a>.  Triggers from RMF/QOSM towards QOS-NSLP</span>
 
    The RMF triggers the QoS-NSLP functionality using the "recvrmf()" and
    "config()" primitives to perform either all or a subset of the
@@ -5555,7 +5529,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 96]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-97" id="page-97" name="page-97"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-97"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -5611,7 +5585,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 97]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-98" id="page-98" name="page-98"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-98"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -5667,7 +5641,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 98]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-99" id="page-99" name="page-99"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-99"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -5709,7 +5683,7 @@ Table of Contents
       when the QNE reserves resources on the outgoing interface.
       Default is 0 (no reservations on the outgoing interface).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20%20Configuration%20Interface"></a></body></html><a class="selflink" href="#appendix-A.3" name="appendix-A.3">A.3</a>.  Configuration Interface</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20%20Configuration%20Interface"></a></body></html><a class="selflink" href="#appendix-A.3" id="appendix-A.3">A.3</a>.  Configuration Interface</span>
 
    The config() function is meant for configuring per-session settings,
    from the RMF towards the NSLP.
@@ -5723,7 +5697,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                     [Page 99]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-100" id="page-100" name="page-100"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-100"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -5756,7 +5730,7 @@ Table of Contents
    o  bypassing_type: it defines if a QNE bypasses end-to-end messages
       or not
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Glossary"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Glossary</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Glossary"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Glossary</span>
 
    AAA: Authentication, Authorization, and Accounting
 
@@ -5779,7 +5753,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                    [Page 100]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-101" id="page-101" name="page-101"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-101"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -5835,7 +5809,7 @@ Table of Contents
 
 
 <span class="grey">Manner, et al.                Experimental                    [Page 101]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-102" id="page-102" name="page-102"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-102"></span>
 <span class="grey"><a href="./rfc5974.html">RFC 5974</a>                        QoS NSLP                    October 2010</span>
 
 
@@ -5891,11 +5865,6 @@ Authors' Addresses
 
 
 Manner, et al.                Experimental                    [Page 102]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

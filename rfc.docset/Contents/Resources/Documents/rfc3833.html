@@ -1,28 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:3833" name="DC.Identifier"/>
-<meta content="Although the DNS Security Extensions (DNSSEC) have been under
-development for most of the last decade, the IETF has never written
-down the specific set of threats against which DNSSEC is designed to
-protect. Among other drawbacks, this cart-before-the-horse situation
-has made it difficult to determine whether DNSSEC meets its design
-goals, since its design goals are not well specified. This note
-attempts to document some of the known threats to the DNS, and, in
-doing so, attempts to measure to what extent (if any) DNSSEC is a
-useful tool in defending against these threats. This memo provides
-information for the Internet community." name="DC.Description.Abstract"/>
-<meta content="Atkins, Derek" name="DC.Creator"/>
-<meta content="Austein, Rob" name="DC.Creator"/>
-<meta content="August, 2004" name="DC.Date.Issued"/>
-<meta content="Threat Analysis of the Domain Name System (DNS)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 3833 - Threat Analysis of the Domain Name System (DNS)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="D. Atkins" name="citation_author"/>
+<meta content="R. Austein" name="citation_author"/>
+<meta content="August, 2004" name="citation_publication_date"/>
+<meta content=" Threat Analysis of the Domain Name System (DNS) " name="citation_title"/>
+<meta content="10.17487/RFC3833" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc3833" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc3833.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 3833:  Threat Analysis of the Domain Name System (DNS) </title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -51,7 +41,7 @@ information for the Internet community." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -60,7 +50,7 @@ information for the Internet community." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -139,19 +129,18 @@ information for the Internet community." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -165,21 +154,9 @@ information for the Internet community." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc3833.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc3833" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-dnsext-dns-threats.html" title="draft-ietf-dnsext-dns-threats">draft-ietf-dnsext...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc3833" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc3833" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                          D. Atkins
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc3833.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc3833.txt.pdf">PDF</a>|<a href="/rfc/rfc3833.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc3833" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=3833&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc3833" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                          D. Atkins
 Request for Comments: 3833                              IHTFP Consulting
 Category: Informational                                       R. Austein
                                                                      ISC
@@ -210,7 +187,7 @@ Abstract
    doing so, attempts to measure to what extent (if any) DNSSEC is a
    useful tool in defending against these threats.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>. Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>. Introduction</span>
 
    The earliest organized work on DNSSEC within the IETF was an open
    design team meeting organized by members of the DNS working group in
@@ -231,7 +208,7 @@ Abstract
 
 
 <span class="grey">Atkins &amp; Austein             Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
@@ -287,17 +264,17 @@ Abstract
 
 
 <span class="grey">Atkins &amp; Austein             Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Known%20Threats"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Known Threats</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Known%20Threats"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Known Threats</span>
 
    There are several distinct classes of threats to the DNS, most of
    which are DNS-related instances of more general problems, but a few
    of which are specific to peculiarities of the DNS protocol.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Packet%20Interception"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Packet Interception</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Packet%20Interception"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Packet Interception</span>
 
    Some of the simplest threats against DNS are various forms of packet
    interception: monkey-in-the-middle attacks, eavesdropping on requests
@@ -343,7 +320,7 @@ Abstract
 
 
 <span class="grey">Atkins &amp; Austein             Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
@@ -365,7 +342,7 @@ Abstract
    - Resign itself to the possibility of being attacked via packet
      interception (and via other techniques discussed below).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20ID%20Guessing%20and%20Query%20Prediction"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  ID Guessing and Query Prediction</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20ID%20Guessing%20and%20Query%20Prediction"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  ID Guessing and Query Prediction</span>
 
    Since DNS is for the most part used over UDP/IP, it is relatively
    easy for an attacker to generate packets which will match the
@@ -399,7 +376,7 @@ Abstract
 
 
 <span class="grey">Atkins &amp; Austein             Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
@@ -417,7 +394,7 @@ Abstract
    with a recursive name server that does perform DNSSEC signature
    checking.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Name%20Chaining"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Name Chaining</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Name%20Chaining"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Name Chaining</span>
 
    Perhaps the most interesting class of DNS-specific threats are the
    name chaining attacks.  These are a subset of a larger class of
@@ -455,7 +432,7 @@ Abstract
 
 
 <span class="grey">Atkins &amp; Austein             Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
@@ -511,7 +488,7 @@ Abstract
 
 
 <span class="grey">Atkins &amp; Austein             Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
@@ -525,7 +502,7 @@ Abstract
    in order to fetch the signed authoritative version of the same data,
    then checking the signatures on the authoritative version.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Betrayal%20By%20Trusted%20Server"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Betrayal By Trusted Server</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Betrayal%20By%20Trusted%20Server"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Betrayal By Trusted Server</span>
 
    Another variation on the packet interception attack is the trusted
    server that turns out not to be so trustworthy, whether by accident
@@ -567,7 +544,7 @@ Abstract
 
 
 <span class="grey">Atkins &amp; Austein             Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
@@ -592,7 +569,7 @@ Abstract
    resolver must always perform its own signature checking, and that
    this rule even applies to stub resolvers.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Denial%20of%20Service"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  Denial of Service</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Denial%20of%20Service"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  Denial of Service</span>
 
    As with any network service (or, indeed, almost any service of any
    kind in any domain of discourse), DNS is vulnerable to denial of
@@ -607,7 +584,7 @@ Abstract
    longer than DNS query packets.  Unsurprisingly, DNSSEC doesn't help
    here either.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20Authenticated%20Denial%20of%20Domain%20Names"></a></body></html><a class="selflink" href="#section-2.6" name="section-2.6">2.6</a>.  Authenticated Denial of Domain Names</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20Authenticated%20Denial%20of%20Domain%20Names"></a></body></html><a class="selflink" href="#section-2.6" id="section-2.6">2.6</a>.  Authenticated Denial of Domain Names</span>
 
    Much discussion has taken place over the question of authenticated
    denial of domain names.  The particular question is whether there is
@@ -623,7 +600,7 @@ Abstract
 
 
 <span class="grey">Atkins &amp; Austein             Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
@@ -643,13 +620,13 @@ Abstract
    resource record types exist at those names.  The DNSSEC protections
    do not cover non-authoritative data such as glue records.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.%20%20Wildcards"></a></body></html><a class="selflink" href="#section-2.7" name="section-2.7">2.7</a>.  Wildcards</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.%20%20Wildcards"></a></body></html><a class="selflink" href="#section-2.7" id="section-2.7">2.7</a>.  Wildcards</span>
 
    Much discussion has taken place over whether and how to provide data
    integrity and data origin authentication for "wildcard" DNS names.
    Conceptually, RRs with wildcard names are patterns for synthesizing
-   RRs on the fly according to the matching rules described in <a href="#section-4.3.2">section</a>
-   <a href="#section-4.3.2">4.3.2</a> of <a href="./rfc1034.html">RFC 1034</a>.  While the rules that control the behavior of
+   RRs on the fly according to the matching rules described in <a href="./rfc1034.html#section-4.3.2">section</a>
+   <a href="./rfc1034.html#section-4.3.2">4.3.2 of RFC 1034</a>.  While the rules that control the behavior of
    wildcard names have a few quirks that can make them a trap for the
    unwary zone administrator, it's clear that a number of sites make
    heavy use of wildcard RRs, particularly wildcard MX RRs.
@@ -679,11 +656,11 @@ Abstract
 
 
 <span class="grey">Atkins &amp; Austein             Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Weaknesses%20of%20DNSSEC"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Weaknesses of DNSSEC</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Weaknesses%20of%20DNSSEC"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Weaknesses of DNSSEC</span>
 
    DNSSEC has some problems of its own:
 
@@ -735,7 +712,7 @@ Abstract
 
 
 <span class="grey">Atkins &amp; Austein             Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
@@ -768,12 +745,12 @@ Abstract
      DNSSEC rollout period when the resolver cannot reasonably expect
      the root and TLD zones to be signed.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Topics%20for%20Future%20Work"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Topics for Future Work</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Topics%20for%20Future%20Work"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Topics for Future Work</span>
 
    This section lists a few subjects not covered above which probably
    need additional study, additional mechanisms, or both.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Interactions%20With%20Other%20Protocols"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Interactions With Other Protocols</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Interactions%20With%20Other%20Protocols"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Interactions With Other Protocols</span>
 
    The above discussion has concentrated exclusively on attacks within
    the boundaries of the DNS protocol itself, since those are (some of)
@@ -781,7 +758,7 @@ Abstract
    are, however, other potential problems at the boundaries where DNS
    interacts with other protocols.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Securing%20DNS%20Dynamic%20Update"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Securing DNS Dynamic Update</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Securing%20DNS%20Dynamic%20Update"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Securing DNS Dynamic Update</span>
 
    DNS dynamic update opens a number of potential problems when combined
    with DNSSEC.  Dynamic update of a non-secure zone can use TSIG to
@@ -791,7 +768,7 @@ Abstract
 
 
 <span class="grey">Atkins &amp; Austein             Informational                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
@@ -834,7 +811,7 @@ Abstract
    Scaling properties of the key management problem here are a
    particular concern that needs more study.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Securing%20DNS%20Zone%20Replication"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Securing DNS Zone Replication</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Securing%20DNS%20Zone%20Replication"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Securing DNS Zone Replication</span>
 
    As discussed in previous sections, DNSSEC per se attempts to provide
    data integrity and data origin authentication services on top of the
@@ -847,7 +824,7 @@ Abstract
 
 
 <span class="grey">Atkins &amp; Austein             Informational                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
@@ -867,7 +844,7 @@ Abstract
    existing DNSSEC model, but the DNSEXT WG has not yet discussed either
    the desirability of or the requirements for such an enhancement.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Conclusion"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Conclusion</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Conclusion"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Conclusion</span>
 
    Based on the above analysis, the DNSSEC extensions do appear to solve
    a set of problems that do need to be solved, and are worth deploying.
@@ -903,7 +880,7 @@ Acknowledgments
 
 
 <span class="grey">Atkins &amp; Austein             Informational                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
@@ -918,35 +895,35 @@ Acknowledgments
 
 Normative References
 
-   [<a id="ref-RFC1034" name="ref-RFC1034">RFC1034</a>]    Mockapetris, P., "Domain names - concepts and
+   [<a id="ref-RFC1034">RFC1034</a>]    Mockapetris, P., "Domain names - concepts and
                 facilities", STD 13, <a href="./rfc1034.html">RFC 1034</a>, November 1987.
 
-   [<a id="ref-RFC1035" name="ref-RFC1035">RFC1035</a>]    Mockapetris, P., "Domain names - implementation and
+   [<a id="ref-RFC1035">RFC1035</a>]    Mockapetris, P., "Domain names - implementation and
                 specification", STD 13, <a href="./rfc1035.html">RFC 1035</a>, November 1987.
 
-   [<a id="ref-RFC1123" name="ref-RFC1123">RFC1123</a>]    Braden, R., "Requirements for Internet Hosts -
+   [<a id="ref-RFC1123">RFC1123</a>]    Braden, R., "Requirements for Internet Hosts -
                 Application and Support", STD 3, <a href="./rfc1123.html">RFC 1123</a>, October 1989.
 
-   [<a id="ref-RFC2181" name="ref-RFC2181">RFC2181</a>]    Elz, R. and R. Bush, "Clarifications to the DNS
+   [<a id="ref-RFC2181">RFC2181</a>]    Elz, R. and R. Bush, "Clarifications to the DNS
                 Specification", <a href="./rfc2181.html">RFC 2181</a>, July 1997.
 
-   [<a id="ref-RFC2308" name="ref-RFC2308">RFC2308</a>]    Andrews, M., "Negative Caching of DNS Queries (DNS
+   [<a id="ref-RFC2308">RFC2308</a>]    Andrews, M., "Negative Caching of DNS Queries (DNS
                 NCACHE)", <a href="./rfc2308.html">RFC 2308</a>, March 1998.
 
-   [<a id="ref-RFC2671" name="ref-RFC2671">RFC2671</a>]    Vixie, P., "Extension Mechanisms for DNS (EDNS0)", <a href="./rfc2671.html">RFC</a>
+   [<a id="ref-RFC2671">RFC2671</a>]    Vixie, P., "Extension Mechanisms for DNS (EDNS0)", <a href="./rfc2671.html">RFC</a>
                 <a href="./rfc2671.html">2671</a>, August 1999.
 
-   [<a id="ref-RFC2845" name="ref-RFC2845">RFC2845</a>]    Vixie, P., Gudmundsson, O., Eastlake 3rd, D., and B.
+   [<a id="ref-RFC2845">RFC2845</a>]    Vixie, P., Gudmundsson, O., Eastlake 3rd, D., and B.
                 Wellington, "Secret Key Transaction Authentication for
                 DNS (TSIG)", <a href="./rfc2845.html">RFC 2845</a>, May 2000.
 
-   [<a id="ref-RFC2930" name="ref-RFC2930">RFC2930</a>]    Eastlake 3rd, D., "Secret Key Establishment for DNS
+   [<a id="ref-RFC2930">RFC2930</a>]    Eastlake 3rd, D., "Secret Key Establishment for DNS
                 (TKEY RR)", <a href="./rfc2930.html">RFC 2930</a>, September 2000.
 
-   [<a id="ref-RFC3007" name="ref-RFC3007">RFC3007</a>]    Wellington, B., "Secure Domain Name System (DNS) Dynamic
+   [<a id="ref-RFC3007">RFC3007</a>]    Wellington, B., "Secure Domain Name System (DNS) Dynamic
                 Update", <a href="./rfc3007.html">RFC 3007</a>, November 2000.
 
-   [<a id="ref-RFC2535" name="ref-RFC2535">RFC2535</a>]    Eastlake 3rd, D., "Domain Name System Security
+   [<a id="ref-RFC2535">RFC2535</a>]    Eastlake 3rd, D., "Domain Name System Security
                 Extensions", <a href="./rfc2535.html">RFC 2535</a>, March 1999.
 
 
@@ -959,29 +936,29 @@ Normative References
 
 
 <span class="grey">Atkins &amp; Austein             Informational                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
 Informative References
 
-   [<a id="ref-RFC3552" name="ref-RFC3552">RFC3552</a>]    Rescorla, E. and B. Korver, "Guidelines for Writing RFC
-                Text on Security Considerations", <a href="./bcp72.html">BCP 72</a>, <a href="./rfc3552.html">RFC 3552</a>, July
+   [<a id="ref-RFC3552">RFC3552</a>]    Rescorla, E. and B. Korver, "Guidelines for Writing RFC
+                Text on Security Considerations", <a href="https://www.rfc-editor.org/bcp/bcp72">BCP 72</a>, <a href="./rfc3552.html">RFC 3552</a>, July
                 2003.
 
-   [<a id="ref-Bellovin95" name="ref-Bellovin95">Bellovin95</a>] Bellovin, S., "Using the Domain Name System for System
+   [<a id="ref-Bellovin95">Bellovin95</a>] Bellovin, S., "Using the Domain Name System for System
                 Break-Ins", Proceedings of the Fifth Usenix Unix
                 Security Symposium, June 1995.
 
-   [<a id="ref-Galvin93" name="ref-Galvin93">Galvin93</a>]   Design team meeting summary message posted to dns-
+   [<a id="ref-Galvin93">Galvin93</a>]   Design team meeting summary message posted to dns-
                 security@tis.com mailing list by Jim Galvin on 19
                 November 1993.
 
-   [<a id="ref-Schuba93" name="ref-Schuba93">Schuba93</a>]   Schuba, C., "Addressing Weaknesses in the Domain Name
+   [<a id="ref-Schuba93">Schuba93</a>]   Schuba, C., "Addressing Weaknesses in the Domain Name
                 System Protocol", Master's thesis, Purdue University
                 Department of Computer Sciences,  August 1993.
 
-   [<a id="ref-Vixie95" name="ref-Vixie95">Vixie95</a>]    Vixie, P, "DNS and BIND Security Issues", Proceedings of
+   [<a id="ref-Vixie95">Vixie95</a>]    Vixie, P, "DNS and BIND Security Issues", Proceedings of
                 the Fifth Usenix Unix Security Symposium, June 1995.
 
 Authors' Addresses
@@ -1015,14 +992,14 @@ Authors' Addresses
 
 
 <span class="grey">Atkins &amp; Austein             Informational                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc3833.html">RFC 3833</a>                  DNS Threat Analysis                August 2004</span>
 
 
 Full Copyright Statement
 
    Copyright (C) The Internet Society (2004).  This document is subject
-   to the rights, licenses and restrictions contained in <a href="./bcp78.html">BCP 78</a>, and
+   to the rights, licenses and restrictions contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and
    except as set forth therein, the authors retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1042,7 +1019,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1071,11 +1048,6 @@ Acknowledgement
 
 
 Atkins &amp; Austein             Informational                     [Page 16]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

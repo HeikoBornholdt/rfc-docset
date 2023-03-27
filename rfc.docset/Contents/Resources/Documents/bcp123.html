@@ -1,1178 +1,1180 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-<meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<link href="" rel="icon" type="image/png"/>
-<link href="" rel="shortcut icon" type="image/png"/>
-<title>BCP 123 - Observed DNS Resolution Misbehavior</title>
-<style type="text/css">
-	@media only screen 
-	  and (min-width: 992px)
-	  and (max-width: 1199px) {
-	    body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 768px)
-	  and (max-width: 991px) {
-            body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 480px)
-	  and (max-width: 767px) {
-            body { font-size: 11pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (max-width: 479px) {
-            body { font-size: 8pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-device-width : 375px) 
-	  and (max-device-width : 667px) {
-            body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
-        }
-	@media only screen 
-	  and (min-device-width: 1200px) {
-            body { font-size: 10pt; margin: 0 4em; }
-            div.content { width: 96ex; margin: 0; }
-        }
-        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-	    font-weight: bold;
-            line-height: 0pt;
-            display: inline;
-            white-space: pre;
-            font-family: monospace;
-            font-size: 1em;
-	    font-weight: bold;
-        }
-        pre {
-            font-size: 1em;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-	.pre {
-	    white-space: pre;
-	    font-family: monospace;
-	}
-	.header{
-	    font-weight: bold;
-	}
-        .newpage {
-            page-break-before: always;
-        }
-        .invisible {
-            text-decoration: none;
-            color: white;
-        }
-        a.selflink {
-          color: black;
-          text-decoration: none;
-        }
-        @media print {
-            body {
-                font-family: monospace;
-                font-size: 10.5pt;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                font-size: 1em;
-            }
-        
-            a:link, a:visited {
-                color: inherit;
-                text-decoration: none;
-            }
-            .noprint {
-                display: none;
-            }
-        }
-	@media screen {
-	    .grey, .grey a:link, .grey a:visited {
-		color: #777;
-	    }
-            .docinfo {
-                background-color: #EEE;
-            }
-            .top {
-                border-top: 7px solid #EEE;
-            }
-            .bgwhite  { background-color: white; }
-            .bgred    { background-color: #F44; }
-            .bggrey   { background-color: #666; }
-            .bgbrown  { background-color: #840; }            
-            .bgorange { background-color: #FA0; }
-            .bgyellow { background-color: #EE0; }
-            .bgmagenta{ background-color: #F4F; }
-            .bgblue   { background-color: #66F; }
-            .bgcyan   { background-color: #4DD; }
-            .bggreen  { background-color: #4F4; }
-
-            .legend   { font-size: 90%; }
-            .cplate   { font-size: 70%; border: solid grey 1px; }
-	}
-    </style>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="http://gmpg.org/xfn/11" rel="profile"/>
+<meta charset="utf-8"/>
+<meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/> <title>Information on BCP 123 » RFC Editor</title>
+<meta content="WordPress 6.0.3" name="generator"/> <!-- leave this for stats -->
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/style.css" media="screen" rel="stylesheet" type="text/css"/>
 <!--[if IE]>
-    <style>
-    body {
-       font-size: 13px;
-       margin: 10px 10px;
-    }
+                <style type="text/css">
+                #headerimg{ filter:alpha(opacity=80);}
+                .top img{ filter:alpha(opacity=60);}
+                .top img:hover{ filter:alpha(opacity=100);}
+                ul.comment-preview li{ filter:alpha(opacity=70);}
+                ul.comment-preview li:hover{ filter:alpha(opacity=100);}
+                #commentform input[type="text"],#commentform .comment-form-author .required, 
+                #commentform .comment-form-email .required{padding-left: 65px !important;}
+                .top a {position: relative;top: 2px;}
+                </style>
+        <![endif]-->
+<!--[if IE 7]>
+                <style type="text/css">
+                #headerimgwrap{ position:absolute;left:20%}
+                .hleft{position:absolute;}
+                .hright{position:absolute; right:0;}
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<!--[if IE 8 ]>
+                <style type="text/css">
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<link href="https://www.rfc-editor.org/xmlrpc.php" rel="pingback"/>
+<meta content="max-image-preview:large" name="robots"/>
+<link href="./fonts.googleapis.com.html" rel="dns-prefetch"/>
+<link href="./s.w.org.html" rel="dns-prefetch"/>
+<link href="https://www.rfc-editor.org/feed/" rel="alternate" title="RFC Editor » Feed" type="application/rss+xml"/>
+<link href="https://www.rfc-editor.org/comments/feed/" rel="alternate" title="RFC Editor » Comments Feed" type="application/rss+xml"/>
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.rfc-editor.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.3"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dist/block-library/style.min.css?ver=6.0.3" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<style id="responsive-menu-inline-css" type="text/css">
+/** This file is major component of this plugin so please don't try to edit here. */
+#rmp_menu_trigger-2538 {
+  width: 55px;
+  height: 55px;
+  position: fixed;
+  top: 15px;
+  border-radius: 5px;
+  display: none;
+  text-decoration: none;
+  right: 5%;
+  background: #000000;
+  transition: transform 0.5s, background-color 0.5s;
+}
+#rmp_menu_trigger-2538:hover, #rmp_menu_trigger-2538:focus {
+  background: #000000;
+  text-decoration: unset;
+}
+#rmp_menu_trigger-2538.is-active {
+  background: #000000;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-box {
+  width: 25px;
+  color: #ffffff;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-icon-active, #rmp_menu_trigger-2538 .rmp-trigger-text-open {
+  display: none;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-active, #rmp_menu_trigger-2538.is-active .rmp-trigger-text-open {
+  display: inline;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-inactive, #rmp_menu_trigger-2538.is-active .rmp-trigger-text {
+  display: none;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label {
+  color: #ffffff;
+  pointer-events: none;
+  line-height: 13px;
+  font-family: inherit;
+  font-size: 14px;
+  display: inline;
+  text-transform: inherit;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-top {
+  display: block;
+  margin-bottom: 12px;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-bottom {
+  display: block;
+  margin-top: 12px;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner {
+  display: block;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::after {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  position: absolute;
+}
+#rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+#rmp_menu_trigger-2538:hover .responsive-menu-pro-inner, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+/* Hamburger menu styling */
+@media screen and (max-width: 1024px) {
+  /** Menu Title Style */
+  /** Menu Additional Content Style */
+  #l_sidebar {
+    display: none !important;
+  }
+  #rmp_menu_trigger-2538 {
+    display: block;
+  }
+  #rmp-container-2538 {
+    position: fixed;
+    top: 0;
+    margin: 0;
+    transition: transform 0.5s;
+    overflow: auto;
+    display: block;
+    width: 75%;
+    background-color: #212121;
+    background-image: url("");
+    height: 100%;
+    left: 0;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+  }
+  #rmp-menu-wrap-2538 {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu, #rmp-menu-wrap-2538 .rmp-submenu {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-1 .rmp-menu-item-link {
+    padding-left: 10%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-2 .rmp-menu-item-link {
+    padding-left: 15%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-3 .rmp-menu-item-link {
+    padding-left: 20%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-4 .rmp-menu-item-link {
+    padding-left: 25%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu.rmp-submenu-open {
+    display: block;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+    font-weight: normal;
+    letter-spacing: 0px;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.5s, border-color 0.5s, 0.5s;
+    padding: 0 5%;
+    padding-right: 50px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:after, #rmp-menu-wrap-2538 .rmp-menu-item-link:before {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:focus {
+    outline: none;
+    border-color: unset;
+    box-shadow: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link .rmp-font-icon {
+    height: 40px;
+    line-height: 40px;
+    margin-right: 10px;
+    font-size: 13px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    overflow: hidden;
+    background-size: cover;
+    overflow: hidden;
+    right: 0;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow .rmp-font-icon {
+    margin-right: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow * {
+    vertical-align: middle;
+    line-height: 40px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active {
+    display: block;
+    background-size: cover;
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow {
+    right: 0;
+    border-right: unset;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-description {
+    margin: 0;
+    padding: 5px 5%;
+    opacity: 0.8;
+    color: #ffffff;
+  }
+  #rmp-search-box-2538 {
+    display: block;
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+  }
+  #rmp-search-box-2538 .rmp-search-form {
+    margin: 0;
+  }
+  #rmp-search-box-2538 .rmp-search-box {
+    background: #ffffff;
+    border: 1px solid #dadada;
+    color: #333333;
+    width: 100%;
+    padding: 0 5%;
+    border-radius: 30px;
+    height: 45px;
+    -webkit-appearance: none;
+  }
+  #rmp-search-box-2538 .rmp-search-box::placeholder {
+    color: #c7c7cd;
+  }
+  #rmp-search-box-2538 .rmp-search-box:focus {
+    background-color: #ffffff;
+    outline: 2px solid #dadada;
+    color: #333333;
+  }
+  #rmp-menu-title-2538 {
+    background-color: #212121;
+    color: #ffffff;
+    text-align: left;
+    font-size: 13px;
+    padding-top: 10%;
+    padding-left: 5%;
+    padding-bottom: 0%;
+    padding-right: 5%;
+    font-weight: 400;
+    transition: background-color 0.5s, border-color 0.5s, color 0.5s;
+  }
+  #rmp-menu-title-2538:hover {
+    background-color: #212121;
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 > a {
+    color: #ffffff;
+    width: 100%;
+    background-color: unset;
+    text-decoration: none;
+  }
+  #rmp-menu-title-2538 > a:hover {
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 .rmp-font-icon {
+    font-size: 13px;
+  }
+  #rmp-menu-additional-content-2538 {
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+    color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+/**
+This file contents common styling of menus.
+*/
+.rmp-container {
+  display: none;
+  visibility: visible;
+  padding: 0px 0px 0px 0px;
+  z-index: 99998;
+  transition: all 0.3s;
+  /** Scrolling bar in menu setting box **/
+}
+.rmp-container.rmp-fade-top, .rmp-container.rmp-fade-left, .rmp-container.rmp-fade-right, .rmp-container.rmp-fade-bottom {
+  display: none;
+}
+.rmp-container.rmp-slide-left, .rmp-container.rmp-push-left {
+  transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+}
+.rmp-container.rmp-slide-left.rmp-menu-open, .rmp-container.rmp-push-left.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-right, .rmp-container.rmp-push-right {
+  transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+}
+.rmp-container.rmp-slide-right.rmp-menu-open, .rmp-container.rmp-push-right.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-top, .rmp-container.rmp-push-top {
+  transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+}
+.rmp-container.rmp-slide-top.rmp-menu-open, .rmp-container.rmp-push-top.rmp-menu-open {
+  transform: translateY(0);
+  -ms-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+}
+.rmp-container.rmp-slide-bottom, .rmp-container.rmp-push-bottom {
+  transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+  -moz-transform: translateY(100%);
+}
+.rmp-container.rmp-slide-bottom.rmp-menu-open, .rmp-container.rmp-push-bottom.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container::-webkit-scrollbar {
+  width: 0px;
+}
+.rmp-container ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+.rmp-container .rmp-menu-wrap .rmp-menu {
+  transition: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  border: 0;
+  bottom: auto;
+  box-sizing: border-box;
+  clip: auto;
+  color: #666;
+  display: block;
+  float: none;
+  font-family: inherit;
+  font-size: 14px;
+  height: auto;
+  left: auto;
+  line-height: 1.7;
+  list-style-type: none;
+  margin: 0;
+  min-height: auto;
+  max-height: none;
+  opacity: 1;
+  outline: none;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  pointer-events: auto;
+  right: auto;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  transform: none;
+  top: auto;
+  visibility: inherit;
+  width: auto;
+  word-wrap: break-word;
+  white-space: normal;
+}
+.rmp-container .rmp-menu-additional-content {
+  display: block;
+  word-break: break-word;
+}
+.rmp-container .rmp-menu-title {
+  display: flex;
+  flex-direction: column;
+}
+.rmp-container .rmp-menu-title .rmp-menu-title-image {
+  max-width: 100%;
+  margin-bottom: 15px;
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+}
+button.rmp_menu_trigger {
+  z-index: 999999;
+  overflow: hidden;
+  outline: none;
+  border: 0;
+  display: none;
+  margin: 0;
+  transition: transform 0.5s, background-color 0.5s;
+  padding: 0;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before, button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  content: "";
+  display: block;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before {
+  top: 10px;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  bottom: 10px;
+}
+button.rmp_menu_trigger .rmp-trigger-box {
+  width: 40px;
+  display: inline-block;
+  position: relative;
+  pointer-events: none;
+  vertical-align: super;
+}
+.admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+  margin-top: 32px !important;
+}
+@media screen and (max-width: 782px) {
+  .admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+    margin-top: 46px !important;
+  }
+}
+/*  Menu Trigger Boring Animation */
+.rmp-menu-trigger-boring .responsive-menu-pro-inner {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring .responsive-menu-pro-inner::after, .rmp-menu-trigger-boring .responsive-menu-pro-inner::before {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner {
+  transform: rotate(45deg);
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:before {
+  top: 0;
+  opacity: 0;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:after {
+  bottom: 0;
+  transform: rotate(-90deg);
+}
+
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dashicons.min.css?ver=6.0.3" id="dashicons-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/css/mobile.css?ver=0.1" id="tech-mobile-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans%7C&amp;ver=6.0.3" id="google_fonts-css" media="screen" rel="stylesheet" type="text/css"/>
+<script id="jquery-core-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" type="text/javascript"></script>
+<script id="jquery-migrate-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" type="text/javascript"></script>
+<script id="rmp_menu_scripts-js-extra" type="text/javascript">
+/* <![CDATA[ */
+var rmp_menu = {"ajaxURL":"https:\/\/www.rfc-editor.org\/wp-admin\/admin-ajax.php","wp_nonce":"2262d2d074","menu":[{"menu_theme":null,"theme_type":"default","theme_location_menu":"","submenu_submenu_arrow_width":"40","submenu_submenu_arrow_width_unit":"px","submenu_submenu_arrow_height":"40","submenu_submenu_arrow_height_unit":"px","submenu_arrow_position":"right","submenu_sub_arrow_background_colour":"#212121","submenu_sub_arrow_background_hover_colour":"#3f3f3f","submenu_sub_arrow_background_colour_active":"#212121","submenu_sub_arrow_background_hover_colour_active":"#3f3f3f","submenu_sub_arrow_border_width":"1","submenu_sub_arrow_border_width_unit":"px","submenu_sub_arrow_border_colour":"#212121","submenu_sub_arrow_border_hover_colour":"#3f3f3f","submenu_sub_arrow_border_colour_active":"#212121","submenu_sub_arrow_border_hover_colour_active":"#3f3f3f","submenu_sub_arrow_shape_colour":"#ffffff","submenu_sub_arrow_shape_hover_colour":"#ffffff","submenu_sub_arrow_shape_colour_active":"#ffffff","submenu_sub_arrow_shape_hover_colour_active":"#ffffff","use_header_bar":"off","header_bar_items_order":"{\"logo\":\"on\",\"title\":\"on\",\"search\":\"on\",\"html content\":\"on\"}","header_bar_title":"","header_bar_html_content":"","header_bar_logo":"","header_bar_logo_link":"","header_bar_logo_width":null,"header_bar_logo_width_unit":"%","header_bar_logo_height":null,"header_bar_logo_height_unit":"%","header_bar_height":"80","header_bar_height_unit":"px","header_bar_padding":{"top":"0px","right":"5%","bottom":"0px","left":"5%"},"header_bar_font":"","header_bar_font_size":"14","header_bar_font_size_unit":"px","header_bar_text_color":"#ffffff","header_bar_background_color":"#ffffff","header_bar_breakpoint":"800","header_bar_position_type":"fixed","header_bar_adjust_page":null,"header_bar_scroll_enable":"off","header_bar_scroll_background_color":"#36bdf6","mobile_breakpoint":"600","tablet_breakpoint":"1024","transition_speed":"0.5","sub_menu_speed":"0.2","show_menu_on_page_load":"","menu_disable_scrolling":"off","menu_overlay":"off","menu_overlay_colour":"rgba(0, 0, 0, 0.7)","desktop_menu_width":"","desktop_menu_width_unit":"px","desktop_menu_positioning":"fixed","desktop_menu_side":"","desktop_menu_to_hide":"","use_current_theme_location":"off","mega_menu":{"225":"off","227":"off","229":"off","228":"off","226":"off"},"desktop_submenu_open_animation":"none","desktop_submenu_open_animation_speed":"100ms","desktop_submenu_open_on_click":"off","desktop_menu_hide_and_show":"off","menu_name":"Default Menu","menu_to_use":"responsive-menu","different_menu_for_mobile":"off","menu_to_use_in_mobile":"main-menu","use_mobile_menu":"on","use_tablet_menu":"on","use_desktop_menu":null,"menu_display_on":"all-pages","menu_to_hide":"#l_sidebar,.hright,#r_sidebar","submenu_descriptions_on":"","custom_walker":"","menu_background_colour":"#212121","menu_depth":"5","smooth_scroll_on":"off","smooth_scroll_speed":"500","menu_font_icons":[],"menu_links_height":"40","menu_links_height_unit":"px","menu_links_line_height":"40","menu_links_line_height_unit":"px","menu_depth_0":"5","menu_depth_0_unit":"%","menu_font_size":"13","menu_font_size_unit":"px","menu_font":"","menu_font_weight":"normal","menu_text_alignment":"left","menu_text_letter_spacing":"","menu_word_wrap":"off","menu_link_colour":"#ffffff","menu_link_hover_colour":"#ffffff","menu_current_link_colour":"#ffffff","menu_current_link_hover_colour":"#ffffff","menu_item_background_colour":"#212121","menu_item_background_hover_colour":"#3f3f3f","menu_current_item_background_colour":"#212121","menu_current_item_background_hover_colour":"#3f3f3f","menu_border_width":"1","menu_border_width_unit":"px","menu_item_border_colour":"#212121","menu_item_border_colour_hover":"#212121","menu_current_item_border_colour":"#212121","menu_current_item_border_hover_colour":"#3f3f3f","submenu_links_height":"40","submenu_links_height_unit":"px","submenu_links_line_height":"40","submenu_links_line_height_unit":"px","menu_depth_side":"left","menu_depth_1":"10","menu_depth_1_unit":"%","menu_depth_2":"15","menu_depth_2_unit":"%","menu_depth_3":"20","menu_depth_3_unit":"%","menu_depth_4":"25","menu_depth_4_unit":"%","submenu_item_background_colour":"#212121","submenu_item_background_hover_colour":"#3f3f3f","submenu_current_item_background_colour":"#212121","submenu_current_item_background_hover_colour":"#3f3f3f","submenu_border_width":"1","submenu_border_width_unit":"px","submenu_item_border_colour":"#212121","submenu_item_border_colour_hover":"#212121","submenu_current_item_border_colour":"#212121","submenu_current_item_border_hover_colour":"#3f3f3f","submenu_font_size":"13","submenu_font_size_unit":"px","submenu_font":"","submenu_font_weight":"normal","submenu_text_letter_spacing":"","submenu_text_alignment":"left","submenu_link_colour":"#ffffff","submenu_link_hover_colour":"#ffffff","submenu_current_link_colour":"#ffffff","submenu_current_link_hover_colour":"#ffffff","inactive_arrow_shape":"\u25bc","active_arrow_shape":"\u25b2","inactive_arrow_font_icon":"","active_arrow_font_icon":"","inactive_arrow_image":"","active_arrow_image":"","submenu_arrow_width":"40","submenu_arrow_width_unit":"px","submenu_arrow_height":"40","submenu_arrow_height_unit":"px","arrow_position":"right","menu_sub_arrow_shape_colour":"#ffffff","menu_sub_arrow_shape_hover_colour":"#ffffff","menu_sub_arrow_shape_colour_active":"#ffffff","menu_sub_arrow_shape_hover_colour_active":"#ffffff","menu_sub_arrow_border_width":"1","menu_sub_arrow_border_width_unit":"px","menu_sub_arrow_border_colour":"#212121","menu_sub_arrow_border_hover_colour":"#3f3f3f","menu_sub_arrow_border_colour_active":"#212121","menu_sub_arrow_border_hover_colour_active":"#3f3f3f","menu_sub_arrow_background_colour":"#212121","menu_sub_arrow_background_hover_colour":"#3f3f3f","menu_sub_arrow_background_colour_active":"#212121","menu_sub_arrow_background_hover_colour_active":"#3f3f3f","fade_submenus":"off","fade_submenus_side":"left","fade_submenus_delay":"100","fade_submenus_speed":"500","use_slide_effect":"off","slide_effect_back_to_text":"Back","accordion_animation":"off","auto_expand_all_submenus":"off","auto_expand_current_submenus":"off","menu_item_click_to_trigger_submenu":"off","button_width":"55","button_width_unit":"px","button_height":"55","button_height_unit":"px","button_background_colour":"#000000","button_background_colour_hover":"#000000","button_background_colour_active":"#000000","toggle_button_border_radius":"5","button_transparent_background":"off","button_left_or_right":"right","button_position_type":"fixed","button_distance_from_side":"5","button_distance_from_side_unit":"%","button_top":"15","button_top_unit":"px","button_push_with_animation":"off","button_click_animation":"boring","button_line_margin":"5","button_line_margin_unit":"px","button_line_width":"25","button_line_width_unit":"px","button_line_height":"3","button_line_height_unit":"px","button_line_colour":"#ffffff","button_line_colour_hover":"#ffffff","button_line_colour_active":"#ffffff","button_font_icon":"","button_font_icon_when_clicked":"","button_image":"","button_image_when_clicked":"","button_title":"","button_title_open":"","button_title_position":"left","button_font":"","button_font_size":"14","button_font_size_unit":"px","button_title_line_height":"13","button_title_line_height_unit":"px","button_text_colour":"#ffffff","button_trigger_type_click":"on","button_trigger_type_hover":"off","button_click_trigger":"#responsive-menu-button","items_order":{"title":"on","menu":"on","search":"","additional content":"on"},"menu_title":"","menu_title_link":"","menu_title_link_location":"_self","menu_title_image":"","menu_title_font_icon":"","menu_title_section_padding":{"top":"10%","right":"5%","bottom":"0%","left":"5%"},"menu_title_background_colour":"#212121","menu_title_background_hover_colour":"#212121","menu_title_font_size":"13","menu_title_font_size_unit":"px","menu_title_alignment":"left","menu_title_font_weight":"400","menu_title_font_family":"","menu_title_colour":"#ffffff","menu_title_hover_colour":"#ffffff","menu_title_image_width":null,"menu_title_image_width_unit":"%","menu_title_image_height":null,"menu_title_image_height_unit":"px","menu_additional_content":"<a href=\"\/search\/rfc_search.php\">Advanced Search<\/a>\r\n<form id=\"search_query_separator_id\" name=\"search_query_separator_name\"  action=\"\/search\/rfc_search_detail.php\" method=\"POST\" onsubmit=\"return validateComboBox(this);\"> \r\n<input type=\"text\" id =\"combo_box_id\" name=\"combo_box\"  maxlength=\"20\" size =\"35\" placeholder=\"number, title, keyword, or author surname\"><\/form>\r\n","menu_additional_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_additional_content_font_size":"16","menu_additional_content_font_size_unit":"px","menu_additional_content_alignment":"center","menu_additional_content_colour":"#ffffff","menu_search_box_text":"Search","menu_search_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_search_box_height":"45","menu_search_box_height_unit":"px","menu_search_box_border_radius":"30","menu_search_box_text_colour":"#333333","menu_search_box_background_colour":"#ffffff","menu_search_box_placeholder_colour":"#c7c7cd","menu_search_box_border_colour":"#dadada","menu_section_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_width":"75","menu_width_unit":"%","menu_maximum_width":"","menu_maximum_width_unit":"px","menu_minimum_width":"","menu_minimum_width_unit":"px","menu_auto_height":"off","menu_container_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_container_background_colour":"#212121","menu_background_image":"","animation_type":"slide","menu_appear_from":"left","animation_speed":"0.5","page_wrapper":"","menu_close_on_body_click":"off","menu_close_on_scroll":"off","menu_close_on_link_click":"off","enable_touch_gestures":"","breakpoint":"1024","menu_depth_5":"30","menu_depth_5_unit":"%","keyboard_shortcut_close_menu":"27,37","keyboard_shortcut_open_menu":"32,39","button_image_alt":"","button_image_alt_when_clicked":"","button_font_icon_type":"font-awesome","button_font_icon_when_clicked_type":"font-awesome","button_trigger_type":"click","active_arrow_image_alt":"","inactive_arrow_image_alt":"","active_arrow_font_icon_type":"font-awesome","inactive_arrow_font_icon_type":"font-awesome","menu_adjust_for_wp_admin_bar":"off","menu_title_image_alt":"","menu_title_font_icon_type":"font-awesome","minify_scripts":"off","scripts_in_footer":"off","external_files":"off","remove_fontawesome":"","remove_bootstrap":"","shortcode":"off","mobile_only":"off","custom_css":"","single_menu_height":"80","single_menu_height_unit":"px","single_menu_font":"","single_menu_font_size":"14","single_menu_font_size_unit":"px","single_menu_submenu_height":"40","single_menu_submenu_height_unit":"px","single_menu_submenu_font":"","single_menu_submenu_font_size":"12","single_menu_submenu_font_size_unit":"px","single_menu_item_link_colour":"#000000","single_menu_item_link_colour_hover":"#000000","single_menu_item_background_colour":"#ffffff","single_menu_item_background_colour_hover":"#ffffff","single_menu_item_submenu_link_colour":"#000000","single_menu_item_submenu_link_colour_hover":"#000000","single_menu_item_submenu_background_colour":"#ffffff","single_menu_item_submenu_background_colour_hover":"#ffffff","header_bar_logo_alt":"","desktop_menu_options":"{}","admin_theme":"light","single_menu_line_height":"80","single_menu_line_height_unit":"px","single_menu_submenu_line_height":"40","single_menu_submenu_line_height_unit":"px","hide_on_mobile":"off","hide_on_desktop":"off","menu_title_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_id":2538,"active_toggle_contents":"\u25b2","inactive_toggle_contents":"\u25bc"}]};
+/* ]]> */
+</script>
+<script id="rmp_menu_scripts-js" src="https://www.rfc-editor.org/wp-content/plugins/responsive-menu/v4.0.0/assets/js/rmp-menu.js?ver=4.1.11" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-json/" rel="https://api.w.org/"/><link href="https://www.rfc-editor.org/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+<link href="https://www.rfc-editor.org/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+<meta content="WordPress 6.0.3" name="generator"/>
+<script type="text/javascript">
+        jQuery(document).ready(function($){
+	/* toggle nav */
+	$("#menu-icon").on("click", function(){
+		$(".top-menu").slideToggle();
+		$(this).toggleClass("active");
+	});
+
+        });
+        </script><script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/matomo-tracking.js" type="text/javascript"></script>
+<style type="text/css">/*Variable Styles*/
+#page{ 
+background:#FFFFFF url() repeat top center scroll;
+}
+body{
+font:normal 14px/1.3em Noto Sans, Sans-Serif;
+background:#FFFFFF url() repeat top center scroll;
+}
+.techozoic_font_size{
+font-size: 14px;
+}
+.narrowcolumn .entry,.widecolumn .entry, .top {
+font:normal 14px/1.5em Noto Sans, Sans-Serif;
+color: #2C4353;
+}
+.noclass,.home .narrowcolumn .entry, home .widecolumn .entry, .top,.post .singlepost,.archive .narrowcolumn .entry, .archive .widecolumn .entry, .top{
+background-color:#E3E3E3;
+border-top:1px #A0B3C2 solid;
+}
+.top{
+border:none;
+}
+.blog_title, .blog_title a, .blog_title a:hover, .blog_title a:visited{
+font:normal 40px/1.3em Courier, Sans-Serif;
+color:  	#000000;
+}
+h1.post_title{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.post_title a{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.entry h1{
+font:bold 3em/2.2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h2{
+font:bold 2em/2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h3{
+font:bold 1.4em/1.6em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h4{
+font:bold 1.3em/1.4em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h5{
+font:bold 1.2em/1.3em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.sidebar h2, .sidebar h3, #footer h2{
+font: bold 18px/1.3em Noto Sans, Sans-Serif;
+color:#2C4353;
+}
+.widgettitle {
+font-size: 18px;
+margin: 1px 0;
+}
+#content {
+font-size: 14px;
+}
+acronym,abbr,span.caps,small,.trackback li,.sidebar, .postmetadata {
+font-size: 12px;
+}
+.postmetadata{
+font: normal 12px/1.3em Noto Sans, Sans-Serif;
+color: #777777;
+}
+ul#nav a, ul#admin a, #dropdown li.current_page_item a:hover, .top-menu li.current-menu-item a:hover, #dropdown li.current_page_item ul a, .top-menu li.current-menu-item ul a, ul#nav li.current_page_item a:hover, {
+color: #A0B3C2;
+}
+.commenlist .author,#searchform #s, #searchsubmit:hover,#catsubmit:hover,#wp-submit:hover,#TB_ajaxContent {
+background-color: #A0B3C2 ;
+}
+ul#admin li, ul#dropdown li, #navmenu .top-menu li{
+/*background-color: #E3E3E3;*/
+}
+ul#admin li a, ul#dropdown li a, #navmenu .top-menu li a{
+font-style: bold; 
+font-size:14px;
+font-family: Noto Sans, Sans-Serif;
+color:#A0B3C2;
+}
+ul#admin li a:hover, ul#dropdown li a:hover, #navmenu .top-menu li a:hover{
+color: #A0B3C2;
+}
+#dropdown > li, ul.top-menu > li{
+margin: 0 3px;
+}
+.ribbon ul.top-menu > li, .square ul.top-menu > li, #dropdown > li{
+margin: 0;
+padding: 0 3px;
+}
+.ribbon ul.top-menu > li.has_children:hover:after, .square ul.top-menu > li.has_children:hover:after, #dropdown > li.has_children:hover:after {
+border-bottom: 5px solid #E3E3E3;
+}
+#dropdown ul, .top-menu ul{
+background-color: #E3E3E3;
+}
+.ribbon, .square, #dropdown{
+background-color: #E3E3E3;
+background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E3E3E3), to(#CCCCCC));
+background-image: -webkit-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:    -moz-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:     -ms-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:      -o-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:         linear-gradient(top, #E3E3E3, #CCCCCC);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E3E3E3', endColorstr='#CCCCCC');
+}
+.ribbon ul.top-menu:before{
+border-right: 10px solid #CCCCCC;
+}
+.ribbon ul.top-menu:after{
+border-left: 10px solid #CCCCCC;
+}.ribbon ul.top-menu > li:last-child, .square ul.top-menu > li:last-child, #dropdown > li:last-child{
+margin-right: 100px;
+}#navmenu .top-menu li, #navmenu .top-menu ul.sub-menu, ul#admin li, #navmenu #dropdown li{
+background-color: #E3E3E3;
+}       
+#navmenu #dropdown li.current_page_item, #navmenu .top-menu li.current-menu-item, #navmenu .top-menu ul.sub-menu li.current-menu-item {
+background-color: #A0B3C2 ;
+}
+#navmenu #dropdown li:hover, #navmenu .top-menu li:hover, #navmenu .top-menu ul.sub-menu > li:hover {
+background-color:#EFEFEF;
+}
+#navmenu #dropdown li.current_page_item > a:hover, #navmenu .top-menu li.current-menu-item > a:hover, #navmenu .top-menu li.current-menu-item:hover > a, #navmenu .top-menu li:hover > a, #navmenu #dropdown li:hover > a {
+color:#A0B3C2;
+}
+#navmenu #dropdown li.current_page_item > a, #navmenu .top-menu li.current-menu-item > a{
+color:#F7F7F7;
+}
+ul#admin li:hover{
+background:#EFEFEF;
+box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-moz-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-webkit-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+}#dropdown li ul li, .top-menu li ul li, #dropdown li ul , .top-menu li ul{
+width: 250px !important;
+}
+#dropdown li ul ul, .top-menu li ul ul{
+left:250px ; 
+}
+.tags {
+border-bottom:1px #A0B3C2 solid;
+border-top:1px #A0B3C2 solid;
+}
+a,h2 a:hover,h3 a:hover,#user_login,#user_pass, #sidenav a:visited {
+color:#597EAA; 
+text-decoration:none;
+}
+#searchform #s {
+color:#E3E3E3; 
+text-decoration:none;
+}
+a:hover {
+color:#114477; 
+text-decoration:underline;
+}
+a:visited{
+color:#476588;
+}
+.description {
+color:#A0B3C2;
+}
+#headerimg {
+;
+float:left;margin-left:10px;
+}
+#header-logo{
+float:left;margin-left:10px;
+padding-top:0px;
+padding-left:0px;
+}
+.single .blog_title a:hover {
+cursor:default;
+text-decoration:none;
+}
+.noclass{
+-moz-box-shadow:none !important;
+box-shadow:none !important;
+-webkit-box-shadow: none !important;
+opacity:1 !important;
+border: none !important;
+}#headerimgwrap{
+top:20%;
+}  #page {
+width: 90%;
+}
+.narrowcolumn {
+float:left;
+margin:0;
+padding:25px 3% 20px 2%;
+width:75%;
+}
+#l_sidebar {
+float:left;
+padding:25px 1% 0 2%;
+width:17%
+}#dropdown, .top-menu{
+text-align:left;
+}#header {
+background-repeat: no-repeat;  
+background-position: center center;
+height: 110px;
+}
+.hleft, .hright {
+height: 70px;
+}table.statictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.statictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #CACACA;
+}
+table.statictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+
+
+table.statictable tr{
+        background-color: #F6F6F6;
+}
+
+table.statictable td.special {
+          font-weight: bold;
+          color:grey
+}
+table.statictable td.title {
+         font-weight: bold;
+         letter-spacing: inherit
+}
+
+table.statictable .boldtext {
+       font-weight: bold;
+       color: #597eaa;
+}
+
+table.dynamictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.dynamictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #FEFEFEFE;
+}
+table.dynamictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+table.dynamictable tr.even{
+        background-color: #ffffff;
+}
+table.dynamictable tr.odd{
+        background-color: #F6F6F6;
+}
+table.erratasearch {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-color: #666666;
+        border-collapse: collapse;
+        text-align:center;
+}
+table.erratasearch th {
+        border-width: 1px;
+        padding: 8px;
+        
+        text-decoration: underline;
+        border-color: #666666;
+        //background-color: #ffffff;
+        background-color: silver;
+}
+
+table.erratasearch td {
+        border-width: 1px;
+        padding: 8px;
+        border-color: #666666;
+        background-color: #ffffff;
+        text-align:left;
+}
+table.erratasearch td.sbar { 
+          background-color: silver;
+          text-align: center;
+        }
+
+
+.nosidebar{
+    float:left;
+    margin:0 10%;
+    padding:0 0 10px;
+    width:70%;
+}
+
+input[type="button"], .button, div#infinite-handle span {
+    display: inline-block;
+    zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+    *display: inline;
+    vertical-align: baseline;
+    margin: 0 2px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    padding: .3em 1em .35em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .25em; 
+    -moz-border-radius: .25em;
+    border-radius: .25em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    color: #505050;
+    border: solid 1px #b7b7b7;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+    background: -moz-linear-gradient(top,  #fff,  #ededed);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+}
+input[type="button"]:hover, .button:hover, div#infinite-handle span:hover {
+    text-decoration: none;
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+    background: -moz-linear-gradient(top,  #fff,  #dcdcdc);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+}
+input[type="button"]:active, .button:active, div#infinite-handle span: active {
+    position: relative;
+    top: 1px;
+    color: #999;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+    background: -moz-linear-gradient(top,  #ededed,  #fff);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
+}
+
+.search_label_bold { text-align: left;
+                     border-style: none;
+                     font-weight: bold;
+                   }
+
+.error { font-weight: bold; color: red; }
+
+textarea {
+   font-family: inherit;
+   font-size: inherit;
+}
+/*DIV to hold scroll tables*/
+.scrolltable{
+   width:95%
+
+}
+
+/*--------------------------------------------------------------------------------
+----------------------------RFCMETA PAGE  Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+ body.rfcmeta {
+font-family: 'Noto Sans', sans-serif;
+color: #2C4353;
+width: 100%;}
+
+ body.rfcmeta #page {
+width: 100%;
+box-shadow:none;
+margin-top: 0px;}
+
+ body.rfcmeta .hright { height:120px;}
+
+ body.rfcmeta #header {width: 100%;
+ background-color: #fff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 0px;;}
+
+ body.rfcmeta .singlepost.entry {padding-top: 0px!important;}
+ body.rfcmeta .singlepost.entry dl,  body.rfcmeta .singlepost.entry p, body.rfcmeta .singlepost.entry h2, body.rfcmeta .singlepost.entry h3 { margin-left:40px;
+ margin-right: 20px; }
+
+ body.rfcmeta .singlepost.entry dt{
+         font-weight: bold!important;
+         margin-top: 15px;}
+
+          body.rfcmeta .singlepost.entry dd{
+         margin-left: 15px;}
+
+ body.rfcmeta a{
+color: #597eaa;}
+  body.rfcmeta .entryheader {background-color:#2C4353 !important;
+  border-bottom: 10px solid #FFF !important;
+  margin-top: 0px;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;}
+
+   body.rfcmeta .entryheader h2 a, body.rfcmeta .entryheader h2 {color: #fff  !important;
+   font-size: 50px;
+   padding: 0px !important;
+   line-height: 1.2;
+   font:bold !important;}
+
+   body.rfcmeta .entryheader h2 a:hover {color: #aob3c2 !important;}
+
+   body.rfcmeta .entryheader h3 {color: #fff  !important;
+   font-size: 18px;
+   padding: 0px;
+   line-height: 1.2;
+   padding-top: 10px;
+   }
+
+      body.rfcmeta .entryheader h3 span {font-weight: normal;
+          font-size: 14px;
+          text-transform: uppercase;}
+    h2 {font-weight: bold;}
+
+ body.rfcmeta   #search_query_separator_id  {padding-bottom: 5px;
+ padding-top: 5px;}
+
+ body.rfcmeta .page {margin-top: 0px!important;
+ padding-top: 0px!important;}
+
+    /*--------------------------------------------------------------------------------
+----------------------------end RFCMETA PAGE Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+
+.cluster_heading {
+ font-size: 14px;
+}
+</style> <style type="text/css">
+        #header {
+            background-image: url();
+        }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
-    function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
-                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
-                }
-	    }
-	}
-    }
-    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
-    function showElem(id) {
-        var elem = document.getElementById(id);
-        elem.innerHTML = eval(id+"_html");
-        elem.style.visibility='visible';
-    }
-    function hideElem(id) {
-        var elem = document.getElementById(id);
-        elem.style.visibility='hidden';        
-        elem.innerHTML = "";
-    }
-    // -->
-    </script>
+<script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/iterate-survey.js" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="32x32"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="192x192"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="apple-touch-icon"/>
+<meta content="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" name="msapplication-TileImage"/>
 </head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo " onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
+<body class="rfcmeta">
+<a id="top"></a>
+<div id="page">
+<div id="header">
+<div class="hright">
+<div class="hwidget widget_text"><h2 class="widgettitle">Search RFCs</h2> <div class="textwidget"><form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="40" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+<a href="/search/rfc_search.php">Advanced Search</a>
+</div>
+</div></div>
+<div id="headerimgwrap">
+<div id="headerimg">
+<h1 class="blog_title"> <a href="https://www.rfc-editor.org/">RFC Editor</a>
+</h1> </div><!--end headerimg-->
+</div><!--end headerimgwrap-->
+</div><!--end header-->
+<div class="nosidebar" id="content">
+<h1 class="post_title"></h1>
+<div class="post-127 page type-page status-publish hentry post clear" id="post-127">
+<div class="singlepost entry">
+<div class="entryheader"><h2><a href="https://www.rfc-editor.org/bcp/bcp123.txt">BCP 123</a></h2><h2><a href="https://www.rfc-editor.org/rfc/rfc4697.txt">RFC 4697</a></h2>
+<h3>Observed DNS Resolution Misbehavior, <span>October 2006</span></h3>
+</div><dl>
+<dt><b>File formats:</b></dt><dd><a href="https://www.rfc-editor.org/rfc/rfc4697.txt"><img alt="icon for text file" src="/rfcscripts/images/RFC_ICONS_Text_40x50.png" title="text"/></a> <a href="https://www.rfc-editor.org/rfc/pdfrfc/rfc4697.txt.pdf"><img alt="icon for PDF" src="/rfcscripts/images/RFC_ICONS_PDF_2019_50x40.png" title="PDF"/></a> <a href="https://www.rfc-editor.org/rfc/rfc4697.html"><img alt="icon for HTML" src="/rfcscripts/images/RFC_ICONS_HTML_40x50.png" title="HTML"/></a></dd>
+<dt><b>Status:</b></dt><dd>BEST CURRENT PRACTICE</dd>
+<dt><b>Authors:</b></dt><dd>M. Larson<br/>P. Barber</dd>
+<dt><b>Stream:</b></dt><dd><a href="https://www.ietf.org">IETF</a></dd>
+<dt><b>Source:</b></dt><dd><a href="./datatracker.ietf.org/wg/dnsop/about/.html">dnsop</a> 
+                                      (<a href="./datatracker.ietf.org/wg/.html#ops">ops</a>)</dd>
+</dl>
+<p>
+<b>Cite this BCP</b>: 
+<a href="/refs/ref-bcp123.txt">TXT</a></p>
+<p><b>Discuss this RFC</b>: Send questions or comments to the mailing list <a href="mailto:iesg@ietf.org?subject=Question regarding RFC  ">iesg@ietf.org</a></p><p>
+<b>Other actions</b>: 
+<a href="/errata.php#reportnew">Submit Errata</a>  | 
+<a href="https://datatracker.ietf.org/ipr/search/?draft=&amp;rfc=rfc4697&amp;submit=rfc">
+Find IPR Disclosures from the IETF</a>  | 
+<a href="https://datatracker.ietf.org/doc/rfc/">
+View History of RFC </a>
+</p>
+<hr/>
+<h2>Abstract</h2>
+<p>This memo describes DNS iterative resolver behavior that results in a
+significant query volume sent to the root and top-level domain (TLD)
+name servers.  We offer implementation advice to iterative resolver
+developers to alleviate these unnecessary queries.  The
+recommendations made in this document are a direct byproduct of
+observation and analysis of abnormal query traffic patterns seen at
+two of the thirteen root name servers and all thirteen com/net TLD
+name servers.  This document specifies an Internet Best Current Practices for the
+Internet Community, and requests discussion and suggestions for
+improvements.</p> <hr/>
+<p>
+For the definition of <b>Status</b>,
+see <a href="/info/rfc2026">RFC 2026</a>.
+</p><p>
+For the definition of <b>Stream</b>, see <a href="/info/rfc8729">RFC 8729</a>.
+</p>
+<hr/> </div>
 </div>
 </div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/bcp/bcp123.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/bcp123" title="PDF version of this document">pdf</a>]                                                        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                          M. Larson
-Request for Comments: 4697                                     P. Barber
-BCP: 123                                                  VeriSign, Inc.
-Category: Best Current Practice                             October 2006
-
-
-                  <span class="h1">Observed DNS Resolution Misbehavior</span>
-
-Status of This Memo
-
-   This document specifies an Internet Best Current Practices for the
-   Internet Community, and requests discussion and suggestions for
-   improvements.  Distribution of this memo is unlimited.
-
-Copyright Notice
-
-   Copyright (C) The Internet Society (2006).
-
-Abstract
-
-   This memo describes DNS iterative resolver behavior that results in a
-   significant query volume sent to the root and top-level domain (TLD)
-   name servers.  We offer implementation advice to iterative resolver
-   developers to alleviate these unnecessary queries.  The
-   recommendations made in this document are a direct byproduct of
-   observation and analysis of abnormal query traffic patterns seen at
-   two of the thirteen root name servers and all thirteen com/net TLD
-   name servers.
-
-Table of Contents
-
-   <a href="#section-1">1</a>. Introduction ....................................................<a href="#page-2">2</a>
-      <a href="#section-1.1">1.1</a>. A Note about Terminology in this Memo ......................<a href="#page-3">3</a>
-      <a href="#section-1.2">1.2</a>. Key Words ..................................................<a href="#page-3">3</a>
-   <a href="#section-2">2</a>. Observed Iterative Resolver Misbehavior .........................<a href="#page-3">3</a>
-      <a href="#section-2.1">2.1</a>. Aggressive Requerying for Delegation Information ...........<a href="#page-3">3</a>
-           <a href="#section-2.1.1">2.1.1</a>. Recommendation ......................................<a href="#page-5">5</a>
-      <a href="#section-2.2">2.2</a>. Repeated Queries to Lame Servers ...........................<a href="#page-6">6</a>
-           <a href="#section-2.2.1">2.2.1</a>. Recommendation ......................................<a href="#page-6">6</a>
-      <a href="#section-2.3">2.3</a>. Inability to Follow Multiple Levels of Indirection .........<a href="#page-7">7</a>
-           <a href="#section-2.3.1">2.3.1</a>. Recommendation ......................................<a href="#page-7">7</a>
-      <a href="#section-2.4">2.4</a>. Aggressive Retransmission when Fetching Glue ...............<a href="#page-8">8</a>
-           <a href="#section-2.4.1">2.4.1</a>. Recommendation ......................................<a href="#page-9">9</a>
-      <a href="#section-2.5">2.5</a>. Aggressive Retransmission behind Firewalls .................<a href="#page-9">9</a>
-           <a href="#section-2.5.1">2.5.1</a>. Recommendation .....................................<a href="#page-10">10</a>
-      <a href="#section-2.6">2.6</a>. Misconfigured NS Records ..................................<a href="#page-10">10</a>
-           <a href="#section-2.6.1">2.6.1</a>. Recommendation .....................................<a href="#page-11">11</a>
-
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                  [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-      <a href="#section-2.7">2.7</a>. Name Server Records with Zero TTL .........................<a href="#page-11">11</a>
-           <a href="#section-2.7.1">2.7.1</a>. Recommendation .....................................<a href="#page-12">12</a>
-      <a href="#section-2.8">2.8</a>. Unnecessary Dynamic Update Messages .......................<a href="#page-12">12</a>
-           <a href="#section-2.8.1">2.8.1</a>. Recommendation .....................................<a href="#page-13">13</a>
-      <a href="#section-2.9">2.9</a>. Queries for Domain Names Resembling IPv4 Addresses ........<a href="#page-13">13</a>
-           <a href="#section-2.9.1">2.9.1</a>. Recommendation .....................................<a href="#page-14">14</a>
-      <a href="#section-2.10">2.10</a>. Misdirected Recursive Queries ............................<a href="#page-14">14</a>
-           <a href="#section-2.10.1">2.10.1</a>. Recommendation ....................................<a href="#page-14">14</a>
-      <a href="#section-2.11">2.11</a>. Suboptimal Name Server Selection Algorithm ...............<a href="#page-15">15</a>
-           <a href="#section-2.11.1">2.11.1</a>. Recommendation ....................................<a href="#page-15">15</a>
-   <a href="#section-3">3</a>. Security Considerations ........................................<a href="#page-16">16</a>
-   <a href="#section-4">4</a>. Acknowledgements ...............................................<a href="#page-16">16</a>
-   <a href="#section-5">5</a>. Internationalization Considerations ............................<a href="#page-16">16</a>
-   <a href="#section-6">6</a>. References .....................................................<a href="#page-16">16</a>
-      <a href="#section-6.1">6.1</a>. Normative References ......................................<a href="#page-16">16</a>
-      <a href="#section-6.2">6.2</a>. Informative References ....................................<a href="#page-16">16</a>
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
-
-   Observation of query traffic received by two root name servers and
-   the thirteen com/net Top-Level Domain (TLD) name servers has revealed
-   that a large proportion of the total traffic often consists of
-   "requeries".  A requery is the same question (&lt;QNAME, QTYPE, QCLASS&gt;)
-   asked repeatedly at an unexpectedly high rate.  We have observed
-   requeries from both a single IP address and multiple IP addresses
-   (i.e., the same query received simultaneously from multiple IP
-   addresses).
-
-   By analyzing requery events, we have found that the cause of the
-   duplicate traffic is almost always a deficient iterative resolver,
-   stub resolver, or application implementation combined with an
-   operational anomaly.  The implementation deficiencies we have
-   identified to date include well-intentioned recovery attempts gone
-   awry, insufficient caching of failures, early abort when multiple
-   levels of indirection must be followed, and aggressive retry by stub
-   resolvers or applications.  Anomalies that we have seen trigger
-   requery events include lame delegations, unusual glue records, and
-   anything that makes all authoritative name servers for a zone
-   unreachable (Denial of Service (DoS) attacks, crashes, maintenance,
-   routing failures, congestion, etc.).
-
-   In the following sections, we provide a detailed explanation of the
-   observed behavior and recommend changes that will reduce the requery
-   rate.  None of the changes recommended affects the core DNS protocol
-   specification; instead, this document consists of guidelines to
-   implementors of iterative resolvers.
-
-
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                  [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20A%20Note%20about%20Terminology%20in%20This%20Memo"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  A Note about Terminology in This Memo</span>
-
-   To recast an old saying about standards, the nice thing about DNS
-   terms is that there are so many of them to choose from.  Writing or
-   talking about DNS can be difficult and can cause confusion resulting
-   from a lack of agreed-upon terms for its various components.  Further
-   complicating matters are implementations that combine multiple roles
-   into one piece of software, which makes naming the result
-   problematic.  An example is the entity that accepts recursive
-   queries, issues iterative queries as necessary to resolve the initial
-   recursive query, caches responses it receives, and which is also able
-   to answer questions about certain zones authoritatively.  This entity
-   is an iterative resolver combined with an authoritative name server
-   and is often called a "recursive name server" or a "caching name
-   server".
-
-   This memo is concerned principally with the behavior of iterative
-   resolvers, which are typically found as part of a recursive name
-   server.  This memo uses the more precise term "iterative resolver",
-   because the focus is usually on that component.  In instances where
-   the name server role of this entity requires mentioning, this memo
-   uses the term "recursive name server".  As an example of the
-   difference, the name server component of a recursive name server
-   receives DNS queries and the iterative resolver component sends
-   queries.
-
-   The advent of IPv6 requires mentioning AAAA records as well as A
-   records when discussing glue.  To avoid continuous repetition and
-   qualification, this memo uses the general term "address record" to
-   encompass both A and AAAA records when a particular situation is
-   relevant to both types.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Key%20Words"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Key Words</span>
-
-   The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
-   "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
-   document are to be interpreted as described in <a href="./rfc2119.html">RFC 2119</a> [<a href="#ref-1" title='"Key words for use in RFCs to Indicate Requirement Levels"'>1</a>].
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Observed%20Iterative%20Resolver%20Misbehavior"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Observed Iterative Resolver Misbehavior</span>
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Aggressive%20Requerying%20for%20Delegation%20Information"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Aggressive Requerying for Delegation Information</span>
-
-   There can be times when every name server in a zone's NS RRSet is
-   unreachable (e.g., during a network outage), unavailable (e.g., the
-   name server process is not running on the server host), or
-   misconfigured (e.g., the name server is not authoritative for the
-   given zone, also known as "lame").  Consider an iterative resolver
-   that attempts to resolve a query for a domain name in such a zone and
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                  [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-   discovers that none of the zone's name servers can provide an answer.
-   We have observed a recursive name server implementation whose
-   iterative resolver then verifies the zone's NS RRSet in its cache by
-   querying for the zone's delegation information: it sends a query for
-   the zone's NS RRSet to one of the parent zone's name servers.  (Note
-   that queries with QTYPE=NS are not required by the standard
-   resolution algorithm described in <a href="./rfc1034.html#section-4.3.2">Section 4.3.2 of RFC 1034</a> [<a href="#ref-2" title='"Domain names - concepts and facilities"'>2</a>].
-   These NS queries represent this implementation's addition to that
-   algorithm.)
-
-   For example, suppose that "example.com" has the following NS RRSet:
-
-     example.com.   IN   NS   ns1.example.com.
-     example.com.   IN   NS   ns2.example.com.
-
-   Upon receipt of a query for "www.example.com" and assuming that
-   neither "ns1.example.com" nor "ns2.example.com" can provide an
-   answer, this iterative resolver implementation immediately queries a
-   "com" zone name server for the "example.com" NS RRSet to verify that
-   it has the proper delegation information.  This implementation
-   performs this query to a zone's parent zone for each recursive query
-   it receives that fails because of a completely unresponsive set of
-   name servers for the target zone.  Consider the effect when a popular
-   zone experiences a catastrophic failure of all its name servers: now
-   every recursive query for domain names in that zone sent to this
-   recursive name server implementation results in a query to the failed
-   zone's parent name servers.  On one occasion when several dozen
-   popular zones became unreachable, the query load on the com/net name
-   servers increased by 50%.
-
-   We believe this verification query is not reasonable.  Consider the
-   circumstances: when an iterative resolver is resolving a query for a
-   domain name in a zone it has not previously searched, it uses the
-   list of name servers in the referral from the target zone's parent.
-   If on its first attempt to search the target zone, none of the name
-   servers in the referral is reachable, a verification query to the
-   parent would be pointless: this query to the parent would come so
-   quickly on the heels of the referral that it would be almost certain
-   to contain the same list of name servers.  The chance of discovering
-   any new information is slim.
-
-   The other possibility is that the iterative resolver successfully
-   contacts one of the target zone's name servers and then caches the NS
-   RRSet from the authority section of a response, the proper behavior
-   according to <a href="./rfc2181.html#section-5.4.1">Section 5.4.1 of RFC 2181</a> [<a href="#ref-3" title='"Clarifications to the DNS Specification"'>3</a>], because the NS RRSet from
-   the target zone is more trustworthy than delegation information from
-   the parent zone.  If, while processing a subsequent recursive query,
-   the iterative resolver discovers that none of the name servers
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                  [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-   specified in the cached NS RRSet is available or authoritative,
-   querying the parent would be wrong.  An NS RRSet from the parent zone
-   would now be less trustworthy than data already in the cache.
-
-   For this query of the parent zone to be useful, the target zone's
-   entire set of name servers would have to change AND the former set of
-   name servers would have to be deconfigured or decommissioned AND the
-   delegation information in the parent zone would have to be updated
-   with the new set of name servers, all within the Time to Live (TTL)
-   of the target zone's NS RRSet.  We believe this scenario is uncommon:
-   administrative best practices dictate that changes to a zone's set of
-   name servers happen gradually when at all possible, with servers
-   removed from the NS RRSet left authoritative for the zone as long as
-   possible.  The scenarios that we can envision that would benefit from
-   the parent requery behavior do not outweigh its damaging effects.
-
-   This section should not be understood to claim that all queries to a
-   zone's parent are bad.  In some cases, such queries are not only
-   reasonable but required.  Consider the situation when required
-   information, such as the address of a name server (i.e., the address
-   record corresponding to the RDATA of an NS record), has timed out of
-   an iterative resolver's cache before the corresponding NS record.  If
-   the name of the name server is below the apex of the zone, then the
-   name server's address record is only available as glue in the parent
-   zone.  For example, consider this NS record:
-
-     example.com.        IN   NS   ns.example.com.
-
-   If a cache has this NS record but not the address record for
-   "ns.example.com", it is unable to contact the "example.com" zone
-   directly and must query the "com" zone to obtain the address record.
-   Note, however, that such a query would not have QTYPE=NS according to
-   the standard resolution algorithm.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.1.%20%20Recommendation"></a></body></html><a class="selflink" href="#section-2.1.1" name="section-2.1.1">2.1.1</a>.  Recommendation</span>
-
-   An iterative resolver <em>MUST NOT</em> send a query for the NS RRSet of a
-   non-responsive zone to any of the name servers for that zone's parent
-   zone.  For the purposes of this injunction, a non-responsive zone is
-   defined as a zone for which every name server listed in the zone's NS
-   RRSet:
-
-   1.  is not authoritative for the zone (i.e., lame), or
-
-   2.  returns a server failure response (RCODE=2), or
-
-   3.  is dead or unreachable according to <a href="./rfc2308.html#section-7.2">Section 7.2 of RFC 2308</a> [<a href="#ref-4" title='"Negative Caching of DNS Queries (DNS NCACHE)"'>4</a>].
-
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                  [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Repeated%20Queries%20to%20Lame%20Servers"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Repeated Queries to Lame Servers</span>
-
-   <a href="#section-2.1">Section 2.1</a> describes a catastrophic failure: when every name server
-   for a zone is unable to provide an answer for one reason or another.
-   A more common occurrence is when a subset of a zone's name servers is
-   unavailable or misconfigured.  Different failure modes have different
-   expected durations.  Some symptoms indicate problems that are
-   potentially transient, for example, various types of ICMP unreachable
-   messages because a name server process is not running or a host or
-   network is unreachable, or a complete lack of a response to a query.
-   Such responses could be the result of a host rebooting or temporary
-   outages; these events do not necessarily require any human
-   intervention and can be reasonably expected to be temporary.
-
-   Other symptoms clearly indicate a condition requiring human
-   intervention, such as lame server: if a name server is misconfigured
-   and not authoritative for a zone delegated to it, it is reasonable to
-   assume that this condition has potential to last longer than
-   unreachability or unresponsiveness.  Consequently, repeated queries
-   to known lame servers are not useful.  In this case of a condition
-   with potential to persist for a long time, a better practice would be
-   to maintain a list of known lame servers and avoid querying them
-   repeatedly in a short interval.
-
-   It should also be noted, however, that some authoritative name server
-   implementations appear to be lame only for queries of certain types
-   as described in <a href="./rfc4074.html">RFC 4074</a> [<a href="#ref-5" title='"Common Misbehavior Against DNS Queries for IPv6 Addresses"'>5</a>].  In this case, it makes sense to retry
-   the "lame" servers for other types of queries, particularly when all
-   known authoritative name servers appear to be "lame".
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.1.%20%20Recommendation"></a></body></html><a class="selflink" href="#section-2.2.1" name="section-2.2.1">2.2.1</a>.  Recommendation</span>
-
-   Iterative resolvers <em>SHOULD</em> cache name servers that they discover are
-   not authoritative for zones delegated to them (i.e., lame servers).
-   If this caching is performed, lame servers <em>MUST</em> be cached against the
-   specific query tuple &lt;zone name, class, server IP address&gt;.  Zone
-   name can be derived from the owner name of the NS record that was
-   referenced to query the name server that was discovered to be lame.
-
-   Implementations that perform lame server caching <em>MUST</em> refrain from
-   sending queries to known lame servers for a configurable time
-   interval after the server is discovered to be lame.  A minimum
-   interval of thirty minutes is <em>RECOMMENDED</em>.
-
-
-
-
-
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                  [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-   An exception to this recommendation occurs if all name servers for a
-   zone are marked lame.  In that case, the iterative resolver <em>SHOULD</em>
-   temporarily ignore the servers' lameness status and query one or more
-   servers.  This behavior is a workaround for the type-specific
-   lameness issue described in the previous section.
-
-   Implementors should take care not to make lame server avoidance logic
-   overly broad: note that a name server could be lame for a parent zone
-   but not a child zone, e.g., lame for "example.com" but properly
-   authoritative for "sub.example.com".  Therefore, a name server should
-   not be automatically considered lame for subzones.  In the case
-   above, even if a name server is known to be lame for "example.com",
-   it should be queried for QNAMEs at or below "sub.example.com" if an
-   NS record indicates that it should be authoritative for that zone.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Inability%20to%20Follow%20Multiple%20Levels%20of%20Indirection"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Inability to Follow Multiple Levels of Indirection</span>
-
-   Some iterative resolver implementations are unable to follow
-   sufficient levels of indirection.  For example, consider the
-   following delegations:
-
-     foo.example.        IN   NS   ns1.example.com.
-     foo.example.        IN   NS   ns2.example.com.
-
-     example.com.        IN   NS   ns1.test.example.net.
-     example.com.        IN   NS   ns2.test.example.net.
-
-     test.example.net.   IN   NS   ns1.test.example.net.
-     test.example.net.   IN   NS   ns2.test.example.net.
-
-   An iterative resolver resolving the name "www.foo.example" must
-   follow two levels of indirection, first obtaining address records for
-   "ns1.test.example.net" or "ns2.test.example.net" in order to obtain
-   address records for "ns1.example.com" or "ns2.example.com" in order
-   to query those name servers for the address records of
-   "www.foo.example".  Although this situation may appear contrived, we
-   have seen multiple similar occurrences and expect more as new generic
-   top-level domains (gTLDs) become active.  We anticipate many zones in
-   new gTLDs will use name servers in existing gTLDs, increasing the
-   number of delegations using out-of-zone name servers.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.%20%20Recommendation"></a></body></html><a class="selflink" href="#section-2.3.1" name="section-2.3.1">2.3.1</a>.  Recommendation</span>
-
-   Clearly constructing a delegation that relies on multiple levels of
-   indirection is not a good administrative practice.  However, the
-   practice is widespread enough to require that iterative resolvers be
-   able to cope with it.  Iterative resolvers <em>SHOULD</em> be able to handle
-   arbitrary levels of indirection resulting from out-of-zone name
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                  [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-   servers.  Iterative resolvers <em>SHOULD</em> implement a level-of-effort
-   counter to avoid loops or otherwise performing too much work in
-   resolving pathological cases.
-
-   A best practice that avoids this entire issue of indirection is to
-   name one or more of a zone's name servers in the zone itself.  For
-   example, if the zone is named "example.com", consider naming some of
-   the name servers "ns{1,2,...}.example.com" (or similar).
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Aggressive%20Retransmission%20when%20Fetching%20Glue"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Aggressive Retransmission when Fetching Glue</span>
-
-   When an authoritative name server responds with a referral, it
-   includes NS records in the authority section of the response.
-   According to the algorithm in <a href="./rfc1034.html#section-4.3.2">Section 4.3.2 of RFC 1034</a> [<a href="#ref-2" title='"Domain names - concepts and facilities"'>2</a>], the name
-   server should also "put whatever addresses are available into the
-   additional section, using glue RRs if the addresses are not available
-   from authoritative data or the cache."  Some name server
-   implementations take this address inclusion a step further with a
-   feature called "glue fetching".  A name server that implements glue
-   fetching attempts to include address records for every NS record in
-   the authority section.  If necessary, the name server issues multiple
-   queries of its own to obtain any missing address records.
-
-   Problems with glue fetching can arise in the context of
-   "authoritative-only" name servers, which only serve authoritative
-   data and ignore requests for recursion.  Such an entity will not
-   normally generate any queries of its own.  Instead it answers non-
-   recursive queries from iterative resolvers looking for information in
-   zones it serves.  With glue fetching enabled, however, an
-   authoritative server invokes an iterative resolver to look up an
-   unknown address record to complete the additional section of a
-   response.
-
-   We have observed situations where the iterative resolver of a glue-
-   fetching name server can send queries that reach other name servers,
-   but is apparently prevented from receiving the responses.  For
-   example, perhaps the name server is authoritative-only and therefore
-   its administrators expect it to receive only queries and not
-   responses.  Perhaps unaware of glue fetching and presuming that the
-   name server's iterative resolver will generate no queries, its
-   administrators place the name server behind a network device that
-   prevents it from receiving responses.  If this is the case, all
-   glue-fetching queries will go unanswered.
-
-   We have observed name server implementations whose iterative
-   resolvers retry excessively when glue-fetching queries are
-   unanswered.  A single com/net name server has received hundreds of
-   queries per second from a single such source.  Judging from the
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                  [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-   specific queries received and based on additional analysis, we
-   believe these queries result from overly aggressive glue fetching.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.1.%20%20Recommendation"></a></body></html><a class="selflink" href="#section-2.4.1" name="section-2.4.1">2.4.1</a>.  Recommendation</span>
-
-   Implementers whose name servers support glue fetching <em>SHOULD</em> take
-   care to avoid sending queries at excessive rates.  Implementations
-   <em>SHOULD</em> support throttling logic to detect when queries are sent but
-   no responses are received.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Aggressive%20Retransmission%20behind%20Firewalls"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  Aggressive Retransmission behind Firewalls</span>
-
-   A common occurrence and one of the largest sources of repeated
-   queries at the com/net and root name servers appears to result from
-   resolvers behind misconfigured firewalls.  In this situation, an
-   iterative resolver is apparently allowed to send queries through a
-   firewall to other name servers, but not receive the responses.  The
-   result is more queries than necessary because of retransmission, all
-   of which are useless because the responses are never received.  Just
-   as with the glue-fetching scenario described in <a href="#section-2.4">Section 2.4</a>, the
-   queries are sometimes sent at excessive rates.  To make matters
-   worse, sometimes the responses, sent in reply to legitimate queries,
-   trigger an alarm on the originator's intrusion detection system.  We
-   are frequently contacted by administrators responding to such alarms
-   who believe our name servers are attacking their systems.
-
-   Not only do some resolvers in this situation retransmit queries at an
-   excessive rate, but they continue to do so for days or even weeks.
-   This scenario could result from an organization with multiple
-   recursive name servers, only a subset of whose iterative resolvers'
-   traffic is improperly filtered in this manner.  Stub resolvers in the
-   organization could be configured to query multiple recursive name
-   servers.  Consider the case where a stub resolver queries a filtered
-   recursive name server first.  The iterative resolver of this
-   recursive name server sends one or more queries whose replies are
-   filtered, so it cannot respond to the stub resolver, which times out.
-   Then the stub resolver retransmits to a recursive name server that is
-   able to provide an answer.  Since resolution ultimately succeeds the
-   underlying problem might not be recognized or corrected.  A popular
-   stub resolver implementation has a very aggressive retransmission
-   schedule, including simultaneous queries to multiple recursive name
-   servers, which could explain how such a situation could persist
-   without being detected.
-
-
-
-
-
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                  [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.%20%20Recommendation"></a></body></html><a class="selflink" href="#section-2.5.1" name="section-2.5.1">2.5.1</a>.  Recommendation</span>
-
-   The most obvious recommendation is that administrators <em>SHOULD</em> take
-   care not to place iterative resolvers behind a firewall that allows
-   queries, but not the resulting replies, to pass through.
-
-   Iterative resolvers <em>SHOULD</em> take care to avoid sending queries at
-   excessive rates.  Implementations <em>SHOULD</em> support throttling logic to
-   detect when queries are sent but no responses are received.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20Misconfigured%20NS%20Records"></a></body></html><a class="selflink" href="#section-2.6" name="section-2.6">2.6</a>.  Misconfigured NS Records</span>
-
-   Sometimes a zone administrator forgets to add the trailing dot on the
-   domain names in the RDATA of a zone's NS records.  Consider this
-   fragment of the zone file for "example.com":
-
-     $ORIGIN example.com.
-     example.com.      3600   IN   NS   ns1.example.com  ; Note missing
-     example.com.      3600   IN   NS   ns2.example.com  ; trailing dots
-
-   The zone's authoritative servers will parse the NS RDATA as
-   "ns1.example.com.example.com" and "ns2.example.com.example.com" and
-   return NS records with this incorrect RDATA in responses, including
-   typically the authority section of every response containing records
-   from the "example.com" zone.
-
-   Now consider a typical sequence of queries.  An iterative resolver
-   attempting to resolve address records for "www.example.com" with no
-   cached information for this zone will query a "com" authoritative
-   server.  The "com" server responds with a referral to the
-   "example.com" zone, consisting of NS records with valid RDATA and
-   associated glue records.  (This example assumes that the
-   "example.com" zone delegation information is correct in the "com"
-   zone.)  The iterative resolver caches the NS RRSet from the "com"
-   server and follows the referral by querying one of the "example.com"
-   authoritative servers.  This server responds with the
-   "www.example.com" address record in the answer section and,
-   typically, the "example.com" NS records in the authority section and,
-   if space in the message remains, glue address records in the
-   additional section.  According to <a href="./rfc2181.html#section-5.4.1">Section 5.4.1 of RFC 2181</a> [<a href="#ref-3" title='"Clarifications to the DNS Specification"'>3</a>], NS
-   records in the authority section of an authoritative answer are more
-   trustworthy than NS records from the authority section of a non-
-   authoritative answer.  Thus, the "example.com" NS RRSet just received
-   from the "example.com" authoritative server overrides the
-   "example.com" NS RRSet received moments ago from the "com"
-   authoritative server.
-
-
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                 [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-   But the "example.com" zone contains the erroneous NS RRSet as shown
-   in the example above.  Subsequent queries for names in "example.com"
-   will cause the iterative resolver to attempt to use the incorrect NS
-   records and so it will try to resolve the nonexistent names
-   "ns1.example.com.example.com" and "ns2.example.com.example.com".  In
-   this example, since all of the zone's name servers are named in the
-   zone itself (i.e., "ns1.example.com.example.com" and
-   "ns2.example.com.example.com" both end in "example.com") and all are
-   bogus, the iterative resolver cannot reach any "example.com" name
-   servers.  Therefore, attempts to resolve these names result in
-   address record queries to the "com" authoritative servers.  Queries
-   for such obviously bogus glue address records occur frequently at the
-   com/net name servers.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.1.%20%20Recommendation"></a></body></html><a class="selflink" href="#section-2.6.1" name="section-2.6.1">2.6.1</a>.  Recommendation</span>
-
-   An authoritative server can detect this situation.  A trailing dot
-   missing from an NS record's RDATA always results by definition in a
-   name server name that exists somewhere under the apex of the zone
-   that the NS record appears in.  Note that further levels of
-   delegation are possible, so a missing trailing dot could
-   inadvertently create a name server name that actually exists in a
-   subzone.
-
-   An authoritative name server <em>SHOULD</em> issue a warning when one of a
-   zone's NS records references a name server below the zone's apex when
-   a corresponding address record does not exist in the zone AND there
-   are no delegated subzones where the address record could exist.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.%20%20Name%20Server%20Records%20with%20Zero%20TTL"></a></body></html><a class="selflink" href="#section-2.7" name="section-2.7">2.7</a>.  Name Server Records with Zero TTL</span>
-
-   Sometimes a popular com/net subdomain's zone is configured with a TTL
-   of zero on the zone's NS records, which prohibits these records from
-   being cached and will result in a higher query volume to the zone's
-   authoritative servers.  The zone's administrator should understand
-   the consequences of such a configuration and provision resources
-   accordingly.  A zero TTL on the zone's NS RRSet, however, carries
-   additional consequences beyond the zone itself: if an iterative
-   resolver cannot cache a zone's NS records because of a zero TTL, it
-   will be forced to query that zone's parent's name servers each time
-   it resolves a name in the zone.  The com/net authoritative servers do
-   see an increased query load when a popular com/net subdomain's zone
-   is configured with a TTL of zero on the zone's NS records.
-
-   A zero TTL on an RRSet expected to change frequently is extreme but
-   permissible.  A zone's NS RRSet is a special case, however, because
-   changes to it must be coordinated with the zone's parent.  In most
-   zone parent/child relationships that we are aware of, there is
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                 [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-   typically some delay involved in effecting changes.  Furthermore,
-   changes to the set of a zone's authoritative name servers (and
-   therefore to the zone's NS RRSet) are typically relatively rare:
-   providing reliable authoritative service requires a reasonably stable
-   set of servers.  Therefore, an extremely low or zero TTL on a zone's
-   NS RRSet rarely makes sense, except in anticipation of an upcoming
-   change.  In this case, when the zone's administrator has planned a
-   change and does not want iterative resolvers throughout the Internet
-   to cache the NS RRSet for a long period of time, a low TTL is
-   reasonable.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.7.1.%20%20Recommendation"></a></body></html><a class="selflink" href="#section-2.7.1" name="section-2.7.1">2.7.1</a>.  Recommendation</span>
-
-   Because of the additional load placed on a zone's parent's
-   authoritative servers resulting from a zero TTL on a zone's NS RRSet,
-   under such circumstances authoritative name servers <em>SHOULD</em> issue a
-   warning when loading a zone.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.8.%20%20Unnecessary%20Dynamic%20Update%20Messages"></a></body></html><a class="selflink" href="#section-2.8" name="section-2.8">2.8</a>.  Unnecessary Dynamic Update Messages</span>
-
-   The UPDATE message specified in <a href="./rfc2136.html">RFC 2136</a> [<a href="#ref-6" title='"Dynamic Updates in the Domain Name System (DNS UPDATE)"'>6</a>] allows an authorized
-   agent to update a zone's data on an authoritative name server using a
-   DNS message sent over the network.  Consider the case of an agent
-   desiring to add a particular resource record.  Because of zone cuts,
-   the agent does not necessarily know the proper zone to which the
-   record should be added.  The dynamic update process requires that the
-   agent determine the appropriate zone so the UPDATE message can be
-   sent to one of the zone's authoritative servers (typically the
-   primary master as specified in the zone's Start of Authority (SOA)
-   record's MNAME field).
-
-   The appropriate zone to update is the closest enclosing zone, which
-   cannot be determined only by inspecting the domain name of the record
-   to be updated, since zone cuts can occur anywhere.  One way to
-   determine the closest enclosing zone entails walking up the name
-   space tree by sending repeated UPDATE messages until successful.  For
-   example, consider an agent attempting to add an address record with
-   the name "foo.bar.example.com".  The agent could first attempt to
-   update the "foo.bar.example.com" zone.  If the attempt failed, the
-   update could be directed to the "bar.example.com" zone, then the
-   "example.com" zone, then the "com" zone, and finally the root zone.
-
-   A popular dynamic agent follows this algorithm.  The result is many
-   UPDATE messages received by the root name servers, the com/net
-   authoritative servers, and presumably other TLD authoritative
-   servers.  A valid question is why the algorithm proceeds to send
-   updates all the way to TLD and root name servers.  This behavior is
-   not entirely unreasonable: in enterprise DNS architectures with an
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                 [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-   "internal root" design, there could conceivably be private, non-
-   public TLD or root zones that would be the appropriate targets for a
-   dynamic update.
-
-   A significant deficiency with this algorithm is that knowledge of a
-   given UPDATE message's failure is not helpful in directing future
-   UPDATE messages to the appropriate servers.  A better algorithm would
-   be to find the closest enclosing zone by walking up the name space
-   with queries for SOA or NS rather than "probing" with UPDATE
-   messages.  Once the appropriate zone is found, an UPDATE message can
-   be sent.  In addition, the results of these queries can be cached to
-   aid in determining the closest enclosing zones for future updates.
-   Once the closest enclosing zone is determined with this method, the
-   update will either succeed or fail and there is no need to send
-   further updates to higher-level zones.  The important point is that
-   walking up the tree with queries yields cacheable information,
-   whereas walking up the tree by sending UPDATE messages does not.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.8.1.%20%20Recommendation"></a></body></html><a class="selflink" href="#section-2.8.1" name="section-2.8.1">2.8.1</a>.  Recommendation</span>
-
-   Dynamic update agents <em>SHOULD</em> send SOA or NS queries to progressively
-   higher-level names to find the closest enclosing zone for a given
-   name to update.  Only after the appropriate zone is found should the
-   client send an UPDATE message to one of the zone's authoritative
-   servers.  Update clients <em>SHOULD NOT</em> "probe" using UPDATE messages by
-   walking up the tree to progressively higher-level zones.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.9.%20%20Queries%20for%20Domain%20Names%20Resembling%20IPv4%20Addresses"></a></body></html><a class="selflink" href="#section-2.9" name="section-2.9">2.9</a>.  Queries for Domain Names Resembling IPv4 Addresses</span>
-
-   The root name servers receive a significant number of A record
-   queries where the QNAME looks like an IPv4 address.  The source of
-   these queries is unknown.  It could be attributed to situations where
-   a user believes that an application will accept either a domain name
-   or an IP address in a given configuration option.  The user enters an
-   IP address, but the application assumes that any input is a domain
-   name and attempts to resolve it, resulting in an A record lookup.
-   There could also be applications that produce such queries in a
-   misguided attempt to reverse map IP addresses.
-
-   These queries result in Name Error (RCODE=3) responses.  An iterative
-   resolver can negatively cache such responses, but each response
-   requires a separate cache entry; i.e., a negative cache entry for the
-   domain name "192.0.2.1" does not prevent a subsequent query for the
-   domain name "192.0.2.2".
-
-
-
-
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                 [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.9.1.%20%20Recommendation"></a></body></html><a class="selflink" href="#section-2.9.1" name="section-2.9.1">2.9.1</a>.  Recommendation</span>
-
-   It would be desirable for the root name servers not to have to answer
-   these queries: they unnecessarily consume CPU resources and network
-   bandwidth.  A possible solution is to delegate these numeric TLDs
-   from the root zone to a separate set of servers to absorb the
-   traffic.  The "black hole servers" used by the AS 112 Project
-   (<a href="http://www.as112.net">http://www.as112.net</a>), which are currently delegated the
-   in-addr.arpa zones corresponding to <a href="./rfc1918.html">RFC 1918</a> [<a href="#ref-7" title='"Address Allocation for Private Internets"'>7</a>] private use address
-   space, would be a possible choice to receive these delegations.  Of
-   course, the proper and usual root zone change procedures would have
-   to be followed to make such a change to the root zone.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.10.%20%20Misdirected%20Recursive%20Queries"></a></body></html><a class="selflink" href="#section-2.10" name="section-2.10">2.10</a>.  Misdirected Recursive Queries</span>
-
-   The root name servers receive a significant number of recursive
-   queries (i.e., queries with the Recursion Desired (RD) bit set in the
-   header).  Since none of the root servers offers recursion, the
-   servers' response in such a situation ignores the request for
-   recursion and the response probably does not contain the data the
-   querier anticipated.  Some of these queries result from users
-   configuring stub resolvers to query a root server.  (This situation
-   is not hypothetical: we have received complaints from users when this
-   configuration does not work as hoped.)  Of course, users should not
-   direct stub resolvers to use name servers that do not offer
-   recursion, but we are not aware of any stub resolver implementation
-   that offers any feedback to the user when so configured, aside from
-   simply "not working".
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.10.1.%20%20Recommendation"></a></body></html><a class="selflink" href="#section-2.10.1" name="section-2.10.1">2.10.1</a>.  Recommendation</span>
-
-   When the IP address of a name server that supposedly offers recursion
-   is configured in a stub resolver using an interactive user interface,
-   the resolver could send a test query to verify that the server indeed
-   supports recursion (i.e., verify that the response has the RA bit set
-   in the header).  The user could be notified immediately if the server
-   is non-recursive.
-
-   The stub resolver could also report an error, either through a user
-   interface or in a log file, if the queried server does not support
-   recursion.  Error reporting <em>SHOULD</em> be throttled to avoid a
-   notification or log message for every response from a non-recursive
-   server.
-
-
-
-
-
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                 [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.11.%20%20Suboptimal%20Name%20Server%20Selection%20Algorithm"></a></body></html><a class="selflink" href="#section-2.11" name="section-2.11">2.11</a>.  Suboptimal Name Server Selection Algorithm</span>
-
-   An entire document could be devoted to the topic of problems with
-   different implementations of the recursive resolution algorithm.  The
-   entire process of recursion is woefully under-specified, requiring
-   each implementor to design an algorithm.  Sometimes implementors make
-   poor design choices that could be avoided if a suggested algorithm
-   and best practices were documented, but that is a topic for another
-   document.
-
-   Some deficiencies cause significant operational impact and are
-   therefore worth mentioning here.  One of these is name server
-   selection by an iterative resolver.  When an iterative resolver wants
-   to contact one of a zone's authoritative name servers, how does it
-   choose from the NS records listed in the zone's NS RRSet?  If the
-   selection mechanism is suboptimal, queries are not spread evenly
-   among a zone's authoritative servers.  The details of the selection
-   mechanism are up to the implementor, but we offer some suggestions.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.11.1.%20%20Recommendation"></a></body></html><a class="selflink" href="#section-2.11.1" name="section-2.11.1">2.11.1</a>.  Recommendation</span>
-
-   This list is not conclusive, but reflects the changes that would
-   produce the most impact in terms of reducing disproportionate query
-   load among a zone's authoritative servers.  That is, these changes
-   would help spread the query load evenly.
-
-   o  Do not make assumptions based on NS RRSet order: all NS RRs <em>SHOULD</em>
-      be treated equally.  (In the case of the "com" zone, for example,
-      most of the root servers return the NS record for
-      "a.gtld-servers.net" first in the authority section of referrals.
-      Apparently as a result, this server receives disproportionately
-      more traffic than the other twelve authoritative servers for
-      "com".)
-
-   o  Use all NS records in an RRSet.  (For example, we are aware of
-      implementations that hard-coded information for a subset of the
-      root servers.)
-
-   o  Maintain state and favor the best-performing of a zone's
-      authoritative servers.  A good definition of performance is
-      response time.  Non-responsive servers can be penalized with an
-      extremely high response time.
-
-   o  Do not lock onto the best-performing of a zone's name servers.  An
-      iterative resolver <em>SHOULD</em> periodically check the performance of
-      all of a zone's name servers to adjust its determination of the
-      best-performing one.
-
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                 [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Security Considerations</span>
-
-   The iterative resolver misbehavior discussed in this document exposes
-   the root and TLD name servers to increased risk of both intentional
-   and unintentional Denial of Service attacks.
-
-   We believe that implementation of the recommendations offered in this
-   document will reduce the amount of unnecessary traffic seen at root
-   and TLD name servers, thus reducing the opportunity for an attacker
-   to use such queries to his or her advantage.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Acknowledgements</span>
-
-   The authors would like to thank the following people for their
-   comments that improved this document: Andras Salamon, Dave Meyer,
-   Doug Barton, Jaap Akkerhuis, Jinmei Tatuya, John Brady, Kevin Darcy,
-   Olafur Gudmundsson, Pekka Savola, Peter Koch, and Rob Austein.  We
-   apologize if we have omitted anyone; any oversight was unintentional.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Internationalization%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Internationalization Considerations</span>
-
-   There are no new internationalization considerations introduced by
-   this memo.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  References</span>
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Normative References</span>
-
-   [<a id="ref-1" name="ref-1">1</a>]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
-        Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
-
-   [<a id="ref-2" name="ref-2">2</a>]  Mockapetris, P., "Domain names - concepts and facilities", STD
-        13, <a href="./rfc1034.html">RFC 1034</a>, November 1987.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Informative References</span>
-
-   [<a id="ref-3" name="ref-3">3</a>]  Elz, R. and R. Bush, "Clarifications to the DNS Specification",
-        <a href="./rfc2181.html">RFC 2181</a>, July 1997.
-
-   [<a id="ref-4" name="ref-4">4</a>]  Andrews, M., "Negative Caching of DNS Queries (DNS NCACHE)", <a href="./rfc2308.html">RFC</a>
-        <a href="./rfc2308.html">2308</a>, March 1998.
-
-   [<a id="ref-5" name="ref-5">5</a>]  Morishita, Y. and T. Jinmei, "Common Misbehavior Against DNS
-        Queries for IPv6 Addresses", <a href="./rfc4074.html">RFC 4074</a>, May 2005.
-
-   [<a id="ref-6" name="ref-6">6</a>]  Vixie, P., Thomson, S., Rekhter, Y., and J. Bound, "Dynamic
-        Updates in the Domain Name System (DNS UPDATE)", <a href="./rfc2136.html">RFC 2136</a>, April
-        1997.
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                 [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-   [<a id="ref-7" name="ref-7">7</a>]  Rekhter, Y., Moskowitz, B., Karrenberg, D., de Groot, G., and E.
-        Lear, "Address Allocation for Private Internets", <a href="./bcp5.html">BCP 5</a>, <a href="./rfc1918.html">RFC</a>
-        <a href="./rfc1918.html">1918</a>, February 1996.
-
-Authors' Addresses
-
-   Matt Larson
-   VeriSign, Inc.
-   21345 Ridgetop Circle
-   Dulles, VA  20166-6503
-   USA
-
-   EMail: mlarson@verisign.com
-
-
-   Piet Barber
-   VeriSign, Inc.
-   21345 Ridgetop Circle
-   Dulles, VA  20166-6503
-   USA
-
-   EMail: pbarber@verisign.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Larson &amp; Barber          Best Current Practice                 [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
-<span class="grey"><a href="./rfc4697.html">RFC 4697</a>          Observed DNS Resolution Misbehavior       October 2006</span>
-
-
-Full Copyright Statement
-
-   Copyright (C) The Internet Society (2006).
-
-   This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
-   retain all their rights.
-
-   This document and the information contained herein are provided on an
-   "AS IS" basis and THE CONTRIBUTOR, THE ORGANIZATION HE/SHE REPRESENTS
-   OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY AND THE INTERNET
-   ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED,
-   INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE
-   INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
-   WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
-
-Intellectual Property
-
-   The IETF takes no position regarding the validity or scope of any
-   Intellectual Property Rights or other rights that might be claimed to
-   pertain to the implementation or use of the technology described in
-   this document or the extent to which any license under such rights
-   might or might not be available; nor does it represent that it has
-   made any independent effort to identify any such rights.  Information
-   on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
-
-   Copies of IPR disclosures made to the IETF Secretariat and any
-   assurances of licenses to be made available, or the result of an
-   attempt made to obtain a general license or permission for the use of
-   such proprietary rights by implementers or users of this
-   specification can be obtained from the IETF on-line IPR repository at
-   <a href="http://www.ietf.org/ipr">http://www.ietf.org/ipr</a>.
-
-   The IETF invites any interested party to bring to its attention any
-   copyrights, patents or patent applications, or other proprietary
-   rights that may cover technology that may be required to implement
-   this standard.  Please address the information to the IETF at
-   ietf-ipr@ietf.org.
-
-Acknowledgement
-
-   Funding for the RFC Editor function is provided by the IETF
-   Administrative Support Activity (IASA).
-
-
-
-
-
-
-
-Larson &amp; Barber          Best Current Practice                 [Page 18]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
+<br/><br/><div id="footer">
+<div id="footerdivs">
+</div>
+<div style="clear:both"></div>
+<p class="credit">
+<a href="./www.iab.org/.html">IAB</a> • <a href="./www.iana.org/.html">IANA</a>  • <a href="./www.ietf.org.html">IETF</a> • <a href="./www.irtf.org.html">IRTF</a> • <a href="/about/independent">ISE</a> • <a href="./www.internetsociety.org.html">ISOC</a> • <a href="./trustee.ietf.org/.html">IETF Trust</a>
+<br/>
+<a href="/report-summary">Reports</a> • <a href="./www.ietf.org/privacy-statement/.html">Privacy Statement</a> • <a href="/sitemap">Site Map</a> • <a href="/contact">Contact Us</a> </p>
+</div><!--footer-->
+</div><!--page-->
+<button aria-controls="rmp-container-2538" aria-label="Menu Trigger" class="rmp_menu_trigger rmp-menu-trigger-boring" id="rmp_menu_trigger-2538" type="button">
+<span class="rmp-trigger-box">
+<span class="responsive-menu-pro-inner"></span>
+</span>
+</button>
+<div class="rmp-container rmp-container rmp-slide-left" id="rmp-container-2538">
+<div class="rmp-menu-title" id="rmp-menu-title-2538">
+<a href="" id="rmp-menu-title-link" target="_self">
+<span></span>
+</a>
+</div>
+<div class="rmp-menu-wrap" id="rmp-menu-wrap-2538"><ul aria-label="Default Menu" class="rmp-menu" id="rmp-menu-2538" role="menubar"><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-632" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/retrieve/" role="menuitem">Document Retrieval</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-633" role="none"><a class="rmp-menu-item-link" href="/errata.php" role="menuitem">Errata</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-634" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/faq/" role="menuitem">Frequently Asked Questions</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-636" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/rse/format-faq/" role="menuitem">Future Format FAQ</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-637" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/history/" role="menuitem">History</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-638" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/about/" role="menuitem">About Us</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-639" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/other/" role="menuitem">Other Information</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-640" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/pubprocess/" role="menuitem">Publication Process</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-641" role="none"><a class="rmp-menu-item-link" href="/current_queue.php" role="menuitem">Publication Queue</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-642" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/styleguide/" role="menuitem">Style Guide</a></li></ul></div> <div class="rmp-menu-additional-content" id="rmp-menu-additional-content-2538">
+<a href="/search/rfc_search.php">Advanced Search</a>
+<form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="20" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+</div>
 </div>
 </body>
 </html>

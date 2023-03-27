@@ -1,32 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-briscoe-tsvwg-byte-pkt-mark" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:7141" name="DC.Identifier"/>
-<meta content="February, 2014" name="DC.Date.Issued"/>
-<meta content="Briscoe, Bob" name="DC.Creator"/>
-<meta content="Manner, Jukka" name="DC.Creator"/>
-<meta content="This document provides recommendations of best current practice for
-dropping or marking packets using any active queue management (AQM)
-algorithm, including Random Early Detection (RED), BLUE, Pre-
-Congestion Notification (PCN), and newer schemes such as CoDel
-(Controlled Delay) and PIE (Proportional Integral controller
-Enhanced). We give three strong recommendations: (1) packet size
-should be taken into account when transports detect and respond to
-congestion indications, (2) packet size should not be taken into
-account when network equipment creates congestion signals (marking,
-dropping), and therefore (3) in the specific case of RED, the byte-
-mode packet drop variant that drops fewer small packets should not be
-used. This memo updates RFC 2309 to deprecate deliberate preferential
-treatment of small packets in AQM algorithms." name="DC.Description.Abstract"/>
-<meta content="Byte and Packet Congestion Notification" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7141 - Byte and Packet Congestion Notification</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="B. Briscoe" name="citation_author"/>
+<meta content="J. Manner" name="citation_author"/>
+<meta content="February, 2014" name="citation_publication_date"/>
+<meta content="Byte and Packet Congestion Notification" name="citation_title"/>
+<meta content="10.17487/RFC7141" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7141" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7141.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7141: Byte and Packet Congestion Notification</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -55,7 +41,7 @@ treatment of small packets in AQM algorithms." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -64,7 +50,7 @@ treatment of small packets in AQM algorithms." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -143,19 +129,18 @@ treatment of small packets in AQM algorithms." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -169,21 +154,9 @@ treatment of small packets in AQM algorithms." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgmagenta" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7141.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7141" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-tsvwg-byte-pkt-congest.html" title="draft-ietf-tsvwg-byte-pkt-congest">draft-ietf-tsvwg-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc7141" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc7141" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                   BEST CURRENT PRACTICE</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                        B. Briscoe
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7141.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7141.txt.pdf">PDF</a>|<a href="/rfc/rfc7141.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7141" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7141&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc7141" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc7141" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                   BEST CURRENT PRACTICE</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Engineering Task Force (IETF)                        B. Briscoe
 Request for Comments: 7141                                            BT
 BCP: 41                                                        J. Manner
 Updates: <a href="./rfc2309.html">2309</a>, <a href="./rfc2914.html">2914</a>                                     Aalto University
@@ -235,7 +208,7 @@ Status of This Memo
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                 [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -244,7 +217,7 @@ Copyright Notice
    Copyright (c) 2014 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -291,7 +264,7 @@ Copyright Notice
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                 [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -347,11 +320,11 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                 [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This document provides recommendations of best current practice for
    how we should correctly scale congestion control functions with
@@ -403,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                 [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -419,7 +392,7 @@ Table of Contents
    It recommends that (1) packet size should be taken into account when
    transports detect and respond to congestion indications, (2) not when
    network equipment creates them.  This memo also adds to the
-   congestion control principles enumerated in <a href="./bcp41.html">BCP 41</a> [<a href="./rfc2914.html" title='"Congestion Control Principles"'>RFC2914</a>].
+   congestion control principles enumerated in <a href="https://www.rfc-editor.org/bcp/bcp41">BCP 41</a> [<a href="./rfc2914.html" title='"Congestion Control Principles"'>RFC2914</a>].
 
    In the particular case of Random Early Detection (RED), this means
    that the byte-mode packet drop variant should not be used to drop
@@ -459,11 +432,11 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                 [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology%20and%20Scoping"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Terminology and Scoping</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology%20and%20Scoping"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Terminology and Scoping</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -515,7 +488,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                 [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -561,7 +534,7 @@ Table of Contents
       should not be used without specifying whether they apply to queue
       measurement or to drop.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Example%20Comparing%20Packet-Mode%20Drop%20and%20Byte-Mode%20Drop"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Example Comparing Packet-Mode Drop and Byte-Mode Drop</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Example%20Comparing%20Packet-Mode%20Drop%20and%20Byte-Mode%20Drop"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Example Comparing Packet-Mode Drop and Byte-Mode Drop</span>
 
    Taking RED as a well-known example algorithm, a central question
    addressed by this document is whether to recommend RED's packet-mode
@@ -571,7 +544,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                 [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -627,7 +600,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                 [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -637,13 +610,13 @@ Table of Contents
       The byte-mode drop algorithm drops any bit with a probability
       proportionate to the size of the packet it is in.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Recommendations"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Recommendations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Recommendations"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Recommendations</span>
 
    This section gives recommendations related to network equipment in
    Sections <a href="#section-2.1">2.1</a> and <a href="#section-2.2">2.2</a>, and we discuss the implications on transport
    protocols in Sections <a href="#section-2.3">2.3</a> and <a href="#section-2.4">2.4</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Recommendation%20on%20Queue%20Measurement"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Recommendation on Queue Measurement</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Recommendation%20on%20Queue%20Measurement"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Recommendation on Queue Measurement</span>
 
    Ideally, an AQM would measure the service time of the queue to
    measure congestion of a resource.  However service time can only be
@@ -683,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                 [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -702,7 +675,7 @@ Table of Contents
    buffers are merely a symptom of the underlying congestion of the
    line.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Recommendation%20on%20Encoding%20Congestion%20Notification"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Recommendation on Encoding Congestion Notification</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Recommendation%20on%20Encoding%20Congestion%20Notification"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Recommendation on Encoding Congestion Notification</span>
 
    When encoding congestion notification (e.g., by drop, ECN, or PCN),
    the probability that network equipment drops or marks a particular
@@ -739,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -758,7 +731,7 @@ Table of Contents
    that deprecating byte-mode drop will have little, if any, incremental
    deployment impact.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Recommendation%20on%20Responding%20to%20Congestion"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Recommendation on Responding to Congestion</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Recommendation%20on%20Responding%20to%20Congestion"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Recommendation on Responding to Congestion</span>
 
    When a transport detects that a packet has been lost or congestion
    marked, it <em>SHOULD</em> consider the strength of the congestion indication
@@ -795,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -820,7 +793,7 @@ Table of Contents
    compatibility with pre-existing versions of a transport protocol make
    the recommendations impractical.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Recommendation%20on%20Handling%20Congestion%20Indications%20When%20Splitting"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Recommendation on Handling Congestion Indications When Splitting</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Recommendation%20on%20Handling%20Congestion%20Indications%20When%20Splitting"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Recommendation on Handling Congestion Indications When Splitting</span>
 <span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20or%20Merging%20Packets"></a></body></html>      or Merging Packets</span>
 
    Packets carrying congestion indications may be split or merged in
@@ -851,7 +824,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -859,12 +832,12 @@ Table of Contents
    positive remainder in the conceptual counter should trigger the next
    outgoing packet to be marked (causing the counter to go negative).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Motivating%20Arguments"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Motivating Arguments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Motivating%20Arguments"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Motivating Arguments</span>
 
    This section is informative.  It justifies the recommendations made
    in the previous section.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Avoiding%20Perverse%20Incentives%20to%20%28Ab%29use%20Smaller%20Packets"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Avoiding Perverse Incentives to (Ab)use Smaller Packets</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Avoiding%20Perverse%20Incentives%20to%20%28Ab%29use%20Smaller%20Packets"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Avoiding Perverse Incentives to (Ab)use Smaller Packets</span>
 
    Increasingly, it is being recognised that a protocol design must take
    care not to cause unintended consequences by giving the parties in
@@ -907,7 +880,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -929,7 +902,7 @@ Table of Contents
    even more (see Security Considerations in <a href="#section-6">Section 6</a>).  Wherever
    possible, neither should be used.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Small%20%21%3D%20Control"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Small != Control</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Small%20%21%3D%20Control"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Small != Control</span>
 
    Dropping fewer control packets considerably improves performance.  It
    is tempting to drop small packets with lower probability in order to
@@ -949,7 +922,7 @@ Table of Contents
    transport should be made more robust against losses of control
    packets (see <a href="#section-4.2.3">Section 4.2.3</a>).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Transport-Independent%20Network"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Transport-Independent Network</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Transport-Independent%20Network"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Transport-Independent Network</span>
 
    TCP congestion control ensures that flows competing for the same
    resource each maintain the same number of segments in flight,
@@ -963,7 +936,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -1019,11 +992,11 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Partial%20Deployment%20of%20AQM"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Partial Deployment of AQM</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Partial%20Deployment%20of%20AQM"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Partial Deployment of AQM</span>
 
    In overview, the argument in this section runs as follows:
 
@@ -1075,7 +1048,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -1096,7 +1069,7 @@ Table of Contents
    packet, while others will (e.g., TCP-Friendly Rate Control for Small
    Packets (TFRC-SP) [<a href="./rfc4828.html" title='"TCP Friendly Rate Control (TFRC): The Small-Packet (SP) Variant"'>RFC4828</a>]).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Implementation%20Efficiency"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  Implementation Efficiency</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Implementation%20Efficiency"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  Implementation Efficiency</span>
 
    Biasing against large packets typically requires an extra multiply
    and divide in the network (see the example byte-mode drop formula in
@@ -1110,7 +1083,7 @@ Table of Contents
    element.  These aren't principled reasons in themselves, but they are
    a happy consequence of the other principled reasons.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20A%20Survey%20and%20Critique%20of%20Past%20Advice"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  A Survey and Critique of Past Advice</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20A%20Survey%20and%20Critique%20of%20Past%20Advice"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  A Survey and Critique of Past Advice</span>
 
    This section is informative, not normative.
 
@@ -1131,7 +1104,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -1149,7 +1122,7 @@ Table of Contents
 
    The rest of this section is structured accordingly.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Congestion%20Measurement%20Advice"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Congestion Measurement Advice</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Congestion%20Measurement%20Advice"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Congestion Measurement Advice</span>
 
    The choice of which metric to use to measure queue length was left
    open in <a href="./rfc2309.html">RFC 2309</a>.  It is now well understood that queues for bit-
@@ -1169,7 +1142,7 @@ Table of Contents
    the buffer will eventually revert to tail drop, which discards
    proportionately more large packets.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Fixed-Size%20Packet%20Buffers"></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a>.  Fixed-Size Packet Buffers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20Fixed-Size%20Packet%20Buffers"></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a>.  Fixed-Size Packet Buffers</span>
 
    The question of whether to measure queues in bytes or packets seems
    to be well understood.  However, measuring congestion is confusing
@@ -1187,7 +1160,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -1233,7 +1206,7 @@ Table of Contents
    up waiting for the line measures how congested the line is, and it is
    rarely important to measure how congested the buffering system is.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20Congestion%20Measurement%20without%20a%20Queue"></a></body></html><a class="selflink" href="#section-4.1.2" name="section-4.1.2">4.1.2</a>.  Congestion Measurement without a Queue</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20Congestion%20Measurement%20without%20a%20Queue"></a></body></html><a class="selflink" href="#section-4.1.2" id="section-4.1.2">4.1.2</a>.  Congestion Measurement without a Queue</span>
 
    AQM algorithms are nearly always described assuming there is a queue
    for a congested resource and the algorithm can use the queue length
@@ -1243,7 +1216,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -1271,11 +1244,11 @@ Table of Contents
    all the bits being transferred.  So the time that TXOPs are queued
    directly reflects bit congestion of the spectrum.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Congestion%20Notification%20Advice"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Congestion Notification Advice</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Congestion%20Notification%20Advice"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Congestion Notification Advice</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Network%20Bias%20When%20Encoding"></a></body></html><a class="selflink" href="#section-4.2.1" name="section-4.2.1">4.2.1</a>.  Network Bias When Encoding</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Network%20Bias%20When%20Encoding"></a></body></html><a class="selflink" href="#section-4.2.1" id="section-4.2.1">4.2.1</a>.  Network Bias When Encoding</span>
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.1.%20%20Advice%20on%20Packet-Size%20Bias%20in%20RED"></a></body></html><a class="selflink" href="#section-4.2.1.1" name="section-4.2.1.1">4.2.1.1</a>.  Advice on Packet-Size Bias in RED</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.1.%20%20Advice%20on%20Packet-Size%20Bias%20in%20RED"></a></body></html><a class="selflink" href="#section-4.2.1.1" id="section-4.2.1.1">4.2.1.1</a>.  Advice on Packet-Size Bias in RED</span>
 
    The previously mentioned email [<a href="#ref-pktByteEmail">pktByteEmail</a>] referred to by
    [<a href="./rfc2309.html" title='"Recommendations on Queue Management and Congestion Avoidance in the Internet"'>RFC2309</a>] advised that most scarce resources in the Internet were
@@ -1299,7 +1272,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -1344,7 +1317,7 @@ Table of Contents
    without disabling byte-mode drop are likely to behave very
    differently from RED in production networks.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.2.%20%20Packet-Size%20Bias%20Regardless%20of%20AQM"></a></body></html><a class="selflink" href="#section-4.2.1.2" name="section-4.2.1.2">4.2.1.2</a>.  Packet-Size Bias Regardless of AQM</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.2.%20%20Packet-Size%20Bias%20Regardless%20of%20AQM"></a></body></html><a class="selflink" href="#section-4.2.1.2" id="section-4.2.1.2">4.2.1.2</a>.  Packet-Size Bias Regardless of AQM</span>
 
    The byte-mode drop variant of RED (or a similar variant of other AQM
    algorithms) is not the only possible bias towards small packets in
@@ -1355,7 +1328,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -1376,7 +1349,7 @@ Table of Contents
    prevent large-packet lockout is to ensure that smaller packets never
    use the last available buffer in any of the pools for larger packets.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Transport%20Bias%20When%20Decoding"></a></body></html><a class="selflink" href="#section-4.2.2" name="section-4.2.2">4.2.2</a>.  Transport Bias When Decoding</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Transport%20Bias%20When%20Decoding"></a></body></html><a class="selflink" href="#section-4.2.2" id="section-4.2.2">4.2.2</a>.  Transport Bias When Decoding</span>
 
    The above proposals to alter the network equipment to bias towards
    smaller packets have largely carried on outside the IETF process.
@@ -1411,7 +1384,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -1443,7 +1416,7 @@ Table of Contents
    monitoring the fraction of marking at the edge of the network, as
    recommended here.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.3.%20%20Making%20Transports%20Robust%20against%20Control%20Packet%20Losses"></a></body></html><a class="selflink" href="#section-4.2.3" name="section-4.2.3">4.2.3</a>.  Making Transports Robust against Control Packet Losses</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.3.%20%20Making%20Transports%20Robust%20against%20Control%20Packet%20Losses"></a></body></html><a class="selflink" href="#section-4.2.3" id="section-4.2.3">4.2.3</a>.  Making Transports Robust against Control Packet Losses</span>
 
    Recently, two RFCs have defined changes to TCP that make it more
    robust against losing small control packets [<a href="./rfc5562.html" title="&quot;Adding Explicit Congestion Notification (ECN) Capability to TCP's SYN/ACK Packets&quot;">RFC5562</a>] [<a href="./rfc5690.html" title='"Adding Acknowledgement Congestion Control to TCP"'>RFC5690</a>].  In
@@ -1467,7 +1440,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -1489,7 +1462,7 @@ Table of Contents
    packets by making similar use of Diffserv, data duplication, FEC,
    etc.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.4.%20%20Congestion%20Notification%3A%20Summary%20of%20Conflicting%20Advice"></a></body></html><a class="selflink" href="#section-4.2.4" name="section-4.2.4">4.2.4</a>.  Congestion Notification: Summary of Conflicting Advice</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.4.%20%20Congestion%20Notification%3A%20Summary%20of%20Conflicting%20Advice"></a></body></html><a class="selflink" href="#section-4.2.4" id="section-4.2.4">4.2.4</a>.  Congestion Notification: Summary of Conflicting Advice</span>
 
    +-----------+-----------------+-----------------+-------------------+
    | transport |  RED_1 (packet- |  RED_4 (linear  |   RED_5 (square   |
@@ -1523,7 +1496,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -1550,9 +1523,9 @@ Table of Contents
    who responded to a survey of 84 equipment vendors, none had
    implemented byte-mode drop in RED (see <a href="#appendix-A">Appendix A</a> for details).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Outstanding%20Issues%20and%20Next%20Steps"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Outstanding Issues and Next Steps</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Outstanding%20Issues%20and%20Next%20Steps"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Outstanding Issues and Next Steps</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Bit-congestible%20Network"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Bit-congestible Network</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Bit-congestible%20Network"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Bit-congestible Network</span>
 
    For a connectionless network with nearly all resources being bit-
    congestible, the recommended position is clear -- the network should
@@ -1579,11 +1552,11 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Bit-%20and%20Packet-Congestible%20Network"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Bit- and Packet-Congestible Network</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Bit-%20and%20Packet-Congestible%20Network"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Bit- and Packet-Congestible Network</span>
 
    The position is much less clear-cut if the Internet becomes populated
    by a more even mix of both packet-congestible and bit-congestible
@@ -1606,7 +1579,7 @@ Table of Contents
    the root cause of congestion of the underlying spectrum is overload
    of bits (see <a href="#section-4.1.2">Section 4.1.2</a>).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    This memo recommends that queues do not bias drop probability due to
    packets size.  For instance, dropping small packets less often than
@@ -1635,7 +1608,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -1648,7 +1621,7 @@ Table of Contents
    therefore irreversibly complicate any attempt to fix the Internet's
    incentive structures.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Conclusions"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Conclusions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Conclusions"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Conclusions</span>
 
    This memo identifies the three distinct stages of the congestion
    notification process where implementations need to decide whether to
@@ -1691,7 +1664,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -1709,7 +1682,7 @@ Table of Contents
    Internet Congestion Control Research Group (ICCRG) is currently
    working on these problems [<a href="./rfc6077.html" title='"Open Research Issues in Internet Congestion Control"'>RFC6077</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgements</span>
 
    Thank you to Sally Floyd, who gave extensive and useful review
    comments.  Also thanks for the reviews from Philip Eardley, David
@@ -1728,14 +1701,14 @@ Table of Contents
    the European Community under its Seventh Framework Programme.  The
    views expressed here are those of the authors only.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC2309" name="ref-RFC2309">RFC2309</a>]  Braden, B., Clark, D., Crowcroft, J., Davie, B., Deering,
+   [<a id="ref-RFC2309">RFC2309</a>]  Braden, B., Clark, D., Crowcroft, J., Davie, B., Deering,
               S., Estrin, D., Floyd, S., Jacobson, V., Minshall, G.,
               Partridge, C., Peterson, L., Ramakrishnan, K., Shenker,
               S., Wroclawski, J., and L. Zhang, "Recommendations on
@@ -1747,51 +1720,51 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
-   [<a id="ref-RFC2914" name="ref-RFC2914">RFC2914</a>]  Floyd, S., "Congestion Control Principles", <a href="./bcp41.html">BCP 41</a>, <a href="./rfc2914.html">RFC</a>
+   [<a id="ref-RFC2914">RFC2914</a>]  Floyd, S., "Congestion Control Principles", <a href="https://www.rfc-editor.org/bcp/bcp41">BCP 41</a>, <a href="./rfc2914.html">RFC</a>
               <a href="./rfc2914.html">2914</a>, September 2000.
 
-   [<a id="ref-RFC3168" name="ref-RFC3168">RFC3168</a>]  Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
+   [<a id="ref-RFC3168">RFC3168</a>]  Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
               of Explicit Congestion Notification (ECN) to IP", <a href="./rfc3168.html">RFC</a>
               <a href="./rfc3168.html">3168</a>, September 2001.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-BLUE02" name="ref-BLUE02">BLUE02</a>]   Feng, W-c., Shin, K., Kandlur, D., and D. Saha, "The BLUE
+   [<a id="ref-BLUE02">BLUE02</a>]   Feng, W-c., Shin, K., Kandlur, D., and D. Saha, "The BLUE
               active queue management algorithms", IEEE/ACM Transactions
               on Networking 10(4) 513-528, August 2002,
               &lt;<a href="http://dx.doi.org/10.1109/TNET.2002.801399">http://dx.doi.org/10.1109/TNET.2002.801399</a>&gt;.
 
-   [<a id="ref-CCvarPktSize" name="ref-CCvarPktSize">CCvarPktSize</a>]
+   [<a id="ref-CCvarPktSize">CCvarPktSize</a>]
               Widmer, J., Boutremans, C., and J-Y. Le Boudec, "End-to-
               end congestion control for TCP-friendly flows with
               variable packet size", ACM CCR 34(2) 137-151, April 2004,
               &lt;<a href="http://doi.acm.org/10.1145/997150.997162">http://doi.acm.org/10.1145/997150.997162</a>&gt;.
 
-   [<a id="ref-CHOKe_Var_Pkt" name="ref-CHOKe_Var_Pkt">CHOKe_Var_Pkt</a>]
+   [<a id="ref-CHOKe_Var_Pkt">CHOKe_Var_Pkt</a>]
               Psounis, K., Pan, R., and B. Prabhaker, "Approximate Fair
               Dropping for Variable-Length Packets", IEEE Micro
               21(1):48-56, January-February 2001,
               &lt;<a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=903061">http://ieeexplore.ieee.org/xpl/</a>
               <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=903061">articleDetails.jsp?arnumber=903061</a>&gt;.
 
-   [<a id="ref-CoDel" name="ref-CoDel">CoDel</a>]    Nichols, K. and V. Jacobson, "Controlled Delay Active
+   [<a id="ref-CoDel">CoDel</a>]    Nichols, K. and V. Jacobson, "Controlled Delay Active
               Queue Management", Work in Progress, February 2013.
 
-   [<a id="ref-DRQ" name="ref-DRQ">DRQ</a>]      Shin, M., Chong, S., and I. Rhee, "Dual-Resource TCP/AQM
+   [<a id="ref-DRQ">DRQ</a>]      Shin, M., Chong, S., and I. Rhee, "Dual-Resource TCP/AQM
               for Processing-Constrained Networks", IEEE/ACM
               Transactions on Networking Vol 16, issue 2, April 2008,
               &lt;<a href="http://dx.doi.org/10.1109/TNET.2007.900415">http://dx.doi.org/10.1109/TNET.2007.900415</a>&gt;.
 
-   [<a id="ref-DupTCP" name="ref-DupTCP">DupTCP</a>]   Wischik, D., "Short messages", Philosophical Transactions
+   [<a id="ref-DupTCP">DupTCP</a>]   Wischik, D., "Short messages", Philosophical Transactions
               of the Royal Society A 366(1872):1941-1953, June 2008,
               &lt;<a href="http://rsta.royalsocietypublishing.org/content/366/1872/">http://rsta.royalsocietypublishing.org/content/366/1872/</a>
               1941.full.pdf+html&gt;.
 
-   [<a id="ref-ECNFixedWireless" name="ref-ECNFixedWireless">ECNFixedWireless</a>]
+   [<a id="ref-ECNFixedWireless">ECNFixedWireless</a>]
               Siris, V., "Resource Control for Elastic Traffic in CDMA
               Networks", Proc. ACM MOBICOM'02 , September 2002,
               &lt;<a href="http://www.ics.forth.gr/netlab/publications/resource_control_elastic_cdma.html">http://www.ics.forth.gr/netlab/publications/</a>
@@ -1803,50 +1776,50 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
-   [<a id="ref-Evol_cc" name="ref-Evol_cc">Evol_cc</a>]  Gibbens, R. and F. Kelly, "Resource pricing and the
+   [<a id="ref-Evol_cc">Evol_cc</a>]  Gibbens, R. and F. Kelly, "Resource pricing and the
               evolution of congestion control", Automatica
               35(12)1969-1985, December 1999,
               &lt;<a href="http://www.sciencedirect.com/science/article/pii/S0005109899001351">http://www.sciencedirect.com/science/article/pii/</a>
               <a href="http://www.sciencedirect.com/science/article/pii/S0005109899001351">S0005109899001351</a>&gt;.
 
-   [<a id="ref-GentleAggro" name="ref-GentleAggro">GentleAggro</a>]
+   [<a id="ref-GentleAggro">GentleAggro</a>]
               Flach, T., Dukkipati, N., Terzis, A., Raghavan, B.,
               Cardwell, N., Cheng, Y., Jain, A., Hao, S., Katz-Bassett,
               E., and R. Govindan, "Reducing web latency: the virtue of
               gentle aggression", ACM SIGCOMM CCR 43(4)159-170, August
               2013, &lt;<a href="http://doi.acm.org/10.1145/2486001.2486014">http://doi.acm.org/10.1145/2486001.2486014</a>&gt;.
 
-   [<a id="ref-IOSArch" name="ref-IOSArch">IOSArch</a>]  Bollapragada, V., White, R., and C. Murphy, "Inside Cisco
+   [<a id="ref-IOSArch">IOSArch</a>]  Bollapragada, V., White, R., and C. Murphy, "Inside Cisco
               IOS Software Architecture", Cisco Press: CCIE Professional
               Development ISBN13: 978-1-57870-181-0, July 2000.
 
-   [<a id="ref-PIE" name="ref-PIE">PIE</a>]      Pan, R., Natarajan, P., Piglione, C., Prabhu, M.,
+   [<a id="ref-PIE">PIE</a>]      Pan, R., Natarajan, P., Piglione, C., Prabhu, M.,
               Subramanian, V., Baker, F., and B. Steeg, "PIE: A
               Lightweight Control Scheme To Address the Bufferbloat
               Problem", Work in Progress, February 2014.
 
-   [<a id="ref-PktSizeEquCC" name="ref-PktSizeEquCC">PktSizeEquCC</a>]
+   [<a id="ref-PktSizeEquCC">PktSizeEquCC</a>]
               Vasallo, P., "Variable Packet Size Equation-Based
               Congestion Control", ICSI Technical Report tr-00-008,
               2000, &lt;<a href="http://http.icsi.berkeley.edu/ftp/global/pub/techreports/2000/tr-00-008.pdf">http://http.icsi.berkeley.edu/ftp/global/pub/</a>
               <a href="http://http.icsi.berkeley.edu/ftp/global/pub/techreports/2000/tr-00-008.pdf">techreports/2000/tr-00-008.pdf</a>&gt;.
 
-   [<a id="ref-RED93" name="ref-RED93">RED93</a>]    Floyd, S. and V. Jacobson, "Random Early Detection (RED)
+   [<a id="ref-RED93">RED93</a>]    Floyd, S. and V. Jacobson, "Random Early Detection (RED)
               gateways for Congestion Avoidance", IEEE/ACM Transactions
               on Networking 1(4) 397--413, August 1993,
               &lt;<a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=251892">http://ieeexplore.ieee.org/xpls/</a>
               <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=251892">abs_all.jsp?arnumber=251892</a>&gt;.
 
-   [<a id="ref-REDbias" name="ref-REDbias">REDbias</a>]  Eddy, W. and M. Allman, "A Comparison of RED's Byte and
+   [<a id="ref-REDbias">REDbias</a>]  Eddy, W. and M. Allman, "A Comparison of RED's Byte and
               Packet Modes", Computer Networks 42(3) 261--280, June
               2003,
               &lt;<a href="http://www.ir.bbn.com/documents/articles/redbias.ps">http://www.ir.bbn.com/documents/articles/redbias.ps</a>&gt;.
 
-   [<a id="ref-REDbyte" name="ref-REDbyte">REDbyte</a>]  De Cnodder, S., Elloumi, O., and K. Pauwels, "Effect of
+   [<a id="ref-REDbyte">REDbyte</a>]  De Cnodder, S., Elloumi, O., and K. Pauwels, "Effect of
               different packet sizes on RED performance", Proc. 5th IEEE
               Symposium on Computers and Communications (ISCC) 793-799,
               July 2000, &lt;<a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=860741">http://ieeexplore.ieee.org/xpls/</a>
@@ -1859,54 +1832,54 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
-   [<a id="ref-RFC2474" name="ref-RFC2474">RFC2474</a>]  Nichols, K., Blake, S., Baker, F., and D. Black,
+   [<a id="ref-RFC2474">RFC2474</a>]  Nichols, K., Blake, S., Baker, F., and D. Black,
               "Definition of the Differentiated Services Field (DS
               Field) in the IPv4 and IPv6 Headers", <a href="./rfc2474.html">RFC 2474</a>, December
               1998.
 
-   [<a id="ref-RFC3426" name="ref-RFC3426">RFC3426</a>]  Floyd, S., "General Architectural and Policy
+   [<a id="ref-RFC3426">RFC3426</a>]  Floyd, S., "General Architectural and Policy
               Considerations", <a href="./rfc3426.html">RFC 3426</a>, November 2002.
 
-   [<a id="ref-RFC3550" name="ref-RFC3550">RFC3550</a>]  Schulzrinne, H., Casner, S., Frederick, R., and V.
+   [<a id="ref-RFC3550">RFC3550</a>]  Schulzrinne, H., Casner, S., Frederick, R., and V.
               Jacobson, "RTP: A Transport Protocol for Real-Time
               Applications", STD 64, <a href="./rfc3550.html">RFC 3550</a>, July 2003.
 
-   [<a id="ref-RFC3714" name="ref-RFC3714">RFC3714</a>]  Floyd, S. and J. Kempf, "IAB Concerns Regarding Congestion
+   [<a id="ref-RFC3714">RFC3714</a>]  Floyd, S. and J. Kempf, "IAB Concerns Regarding Congestion
               Control for Voice Traffic in the Internet", <a href="./rfc3714.html">RFC 3714</a>,
               March 2004.
 
-   [<a id="ref-RFC4828" name="ref-RFC4828">RFC4828</a>]  Floyd, S. and E. Kohler, "TCP Friendly Rate Control
+   [<a id="ref-RFC4828">RFC4828</a>]  Floyd, S. and E. Kohler, "TCP Friendly Rate Control
               (TFRC): The Small-Packet (SP) Variant", <a href="./rfc4828.html">RFC 4828</a>, April
               2007.
 
-   [<a id="ref-RFC5348" name="ref-RFC5348">RFC5348</a>]  Floyd, S., Handley, M., Padhye, J., and J. Widmer, "TCP
+   [<a id="ref-RFC5348">RFC5348</a>]  Floyd, S., Handley, M., Padhye, J., and J. Widmer, "TCP
               Friendly Rate Control (TFRC): Protocol Specification", <a href="./rfc5348.html">RFC</a>
               <a href="./rfc5348.html">5348</a>, September 2008.
 
-   [<a id="ref-RFC5562" name="ref-RFC5562">RFC5562</a>]  Kuzmanovic, A., Mondal, A., Floyd, S., and K.
+   [<a id="ref-RFC5562">RFC5562</a>]  Kuzmanovic, A., Mondal, A., Floyd, S., and K.
               Ramakrishnan, "Adding Explicit Congestion Notification
               (ECN) Capability to TCP's SYN/ACK Packets", <a href="./rfc5562.html">RFC 5562</a>, June
               2009.
 
-   [<a id="ref-RFC5670" name="ref-RFC5670">RFC5670</a>]  Eardley, P., "Metering and Marking Behaviour of PCN-
+   [<a id="ref-RFC5670">RFC5670</a>]  Eardley, P., "Metering and Marking Behaviour of PCN-
               Nodes", <a href="./rfc5670.html">RFC 5670</a>, November 2009.
 
-   [<a id="ref-RFC5681" name="ref-RFC5681">RFC5681</a>]  Allman, M., Paxson, V., and E. Blanton, "TCP Congestion
+   [<a id="ref-RFC5681">RFC5681</a>]  Allman, M., Paxson, V., and E. Blanton, "TCP Congestion
               Control", <a href="./rfc5681.html">RFC 5681</a>, September 2009.
 
-   [<a id="ref-RFC5690" name="ref-RFC5690">RFC5690</a>]  Floyd, S., Arcia, A., Ros, D., and J. Iyengar, "Adding
+   [<a id="ref-RFC5690">RFC5690</a>]  Floyd, S., Arcia, A., Ros, D., and J. Iyengar, "Adding
               Acknowledgement Congestion Control to TCP", <a href="./rfc5690.html">RFC 5690</a>,
               February 2010.
 
-   [<a id="ref-RFC6077" name="ref-RFC6077">RFC6077</a>]  Papadimitriou, D., Welzl, M., Scharf, M., and B. Briscoe,
+   [<a id="ref-RFC6077">RFC6077</a>]  Papadimitriou, D., Welzl, M., Scharf, M., and B. Briscoe,
               "Open Research Issues in Internet Congestion Control", <a href="./rfc6077.html">RFC</a>
               <a href="./rfc6077.html">6077</a>, February 2011.
 
-   [<a id="ref-RFC6679" name="ref-RFC6679">RFC6679</a>]  Westerlund, M., Johansson, I., Perkins, C., O'Hanlon, P.,
+   [<a id="ref-RFC6679">RFC6679</a>]  Westerlund, M., Johansson, I., Perkins, C., O'Hanlon, P.,
               and K. Carlberg, "Explicit Congestion Notification (ECN)
               for RTP over UDP", <a href="./rfc6679.html">RFC 6679</a>, August 2012.
 
@@ -1915,30 +1888,30 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
-   [<a id="ref-RFC6789" name="ref-RFC6789">RFC6789</a>]  Briscoe, B., Woundy, R., and A. Cooper, "Congestion
+   [<a id="ref-RFC6789">RFC6789</a>]  Briscoe, B., Woundy, R., and A. Cooper, "Congestion
               Exposure (ConEx) Concepts and Use Cases", <a href="./rfc6789.html">RFC 6789</a>,
               December 2012.
 
-   [<a id="ref-Rate_fair_Dis" name="ref-Rate_fair_Dis">Rate_fair_Dis</a>]
+   [<a id="ref-Rate_fair_Dis">Rate_fair_Dis</a>]
               Briscoe, B., "Flow Rate Fairness: Dismantling a Religion",
               ACM CCR 37(2)63-74, April 2007,
               &lt;<a href="http://portal.acm.org/citation.cfm?id=1232926">http://portal.acm.org/citation.cfm?id=1232926</a>&gt;.
 
-   [<a id="ref-gentle_RED" name="ref-gentle_RED">gentle_RED</a>]
+   [<a id="ref-gentle_RED">gentle_RED</a>]
               Floyd, S., "Recommendation on using the "gentle_" variant
               of RED", Web page , March 2000,
               &lt;<a href="http://www.icir.org/floyd/red/gentle.html">http://www.icir.org/floyd/red/gentle.html</a>&gt;.
 
-   [<a id="ref-pBox" name="ref-pBox">pBox</a>]     Floyd, S. and K. Fall, "Promoting the Use of End-to-End
+   [<a id="ref-pBox">pBox</a>]     Floyd, S. and K. Fall, "Promoting the Use of End-to-End
               Congestion Control", IEEE/ACM Transactions on Networking
               7(4) 458--472, August 1999, &lt;<a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=793002">http://ieeexplore.ieee.org/</a>
               <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=793002">xpls/abs_all.jsp?arnumber=793002</a>&gt;.
 
-   [<a id="ref-pktByteEmail" name="ref-pktByteEmail">pktByteEmail</a>]
+   [<a id="ref-pktByteEmail">pktByteEmail</a>]
               Floyd, S., "RED: Discussions of Byte and Packet Modes",
               email, March 1997,
               &lt;<a href="http://ee.lbl.gov/floyd/REDaveraging.txt">http://ee.lbl.gov/floyd/REDaveraging.txt</a>&gt;.
@@ -1971,11 +1944,11 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Survey%20of%20RED%20Implementation%20Status"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Survey of RED Implementation Status</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Survey%20of%20RED%20Implementation%20Status"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Survey of RED Implementation Status</span>
 
    This Appendix is informative, not normative.
 
@@ -2027,7 +2000,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -2038,7 +2011,7 @@ Table of Contents
    prevalent, it is likely there is still some bias towards small
    packets in the Internet due to tail-drop and fixed-buffer borrowing.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Sufficiency%20of%20Packet-Mode%20Drop"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Sufficiency of Packet-Mode Drop</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Sufficiency%20of%20Packet-Mode%20Drop"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Sufficiency of Packet-Mode Drop</span>
 
    This Appendix is informative, not normative.
 
@@ -2083,7 +2056,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -2100,7 +2073,7 @@ Table of Contents
       p_b, and in the packet-congestible case by p_p.  When either case
       is implied, the letter p alone will denote path congestion.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.1.%20%20Packet-Size%20%28In%29Dependence%20in%20Transports"></a></body></html><a class="selflink" href="#appendix-B.1" name="appendix-B.1">B.1</a>.  Packet-Size (In)Dependence in Transports</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.1.%20%20Packet-Size%20%28In%29Dependence%20in%20Transports"></a></body></html><a class="selflink" href="#appendix-B.1" id="appendix-B.1">B.1</a>.  Packet-Size (In)Dependence in Transports</span>
 
    In all cases, we consider a packet-mode drop queue that indicates
    congestion by dropping (or marking) packets with probability p
@@ -2139,7 +2112,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -2195,7 +2168,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -2251,14 +2224,14 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
    choose not to take packet size into account if it wishes.  We will
    now consider whether the transport can know which to do.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.2.%20%20Bit-Congestible%20and%20Packet-Congestible%20Indications"></a></body></html><a class="selflink" href="#appendix-B.2" name="appendix-B.2">B.2</a>.  Bit-Congestible and Packet-Congestible Indications</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.2.%20%20Bit-Congestible%20and%20Packet-Congestible%20Indications"></a></body></html><a class="selflink" href="#appendix-B.2" id="appendix-B.2">B.2</a>.  Bit-Congestible and Packet-Congestible Indications</span>
 
    As a thought-experiment, imagine an idealised congestion notification
    protocol that supports both bit-congestible and packet-congestible
@@ -2307,7 +2280,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -2344,7 +2317,7 @@ Table of Contents
    engine to use excessive processor cycles in order to decide how to
    say it has no spare processor cycles.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20C.%20%20Byte-Mode%20Drop%20Complicates%20Policing%20Congestion%20Response"></a></body></html><a class="selflink" href="#appendix-C" name="appendix-C">Appendix C</a>.  Byte-Mode Drop Complicates Policing Congestion Response</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20C.%20%20Byte-Mode%20Drop%20Complicates%20Policing%20Congestion%20Response"></a></body></html><a class="selflink" href="#appendix-C" id="appendix-C">Appendix C</a>.  Byte-Mode Drop Complicates Policing Congestion Response</span>
 
    This section is informative, not normative.
 
@@ -2363,7 +2336,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -2419,7 +2392,7 @@ Table of Contents
 
 
 <span class="grey">Briscoe &amp; Manner          Best Current Practice                [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc7141.html">RFC 7141</a>         Byte and Packet Congestion Notification   February 2014</span>
 
 
@@ -2475,11 +2448,6 @@ Authors' Addresses
 
 
 Briscoe &amp; Manner          Best Current Practice                [Page 41]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

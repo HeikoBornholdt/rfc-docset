@@ -1,1066 +1,1171 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-<meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<link href="" rel="icon" type="image/png"/>
-<link href="" rel="shortcut icon" type="image/png"/>
-<title>BCP 50 - End-to-end Performance Implications of Links with Errors</title>
-<style type="text/css">
-	@media only screen 
-	  and (min-width: 992px)
-	  and (max-width: 1199px) {
-	    body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 768px)
-	  and (max-width: 991px) {
-            body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 480px)
-	  and (max-width: 767px) {
-            body { font-size: 11pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (max-width: 479px) {
-            body { font-size: 8pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-device-width : 375px) 
-	  and (max-device-width : 667px) {
-            body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
-        }
-	@media only screen 
-	  and (min-device-width: 1200px) {
-            body { font-size: 10pt; margin: 0 4em; }
-            div.content { width: 96ex; margin: 0; }
-        }
-        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-	    font-weight: bold;
-            line-height: 0pt;
-            display: inline;
-            white-space: pre;
-            font-family: monospace;
-            font-size: 1em;
-	    font-weight: bold;
-        }
-        pre {
-            font-size: 1em;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-	.pre {
-	    white-space: pre;
-	    font-family: monospace;
-	}
-	.header{
-	    font-weight: bold;
-	}
-        .newpage {
-            page-break-before: always;
-        }
-        .invisible {
-            text-decoration: none;
-            color: white;
-        }
-        a.selflink {
-          color: black;
-          text-decoration: none;
-        }
-        @media print {
-            body {
-                font-family: monospace;
-                font-size: 10.5pt;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                font-size: 1em;
-            }
-        
-            a:link, a:visited {
-                color: inherit;
-                text-decoration: none;
-            }
-            .noprint {
-                display: none;
-            }
-        }
-	@media screen {
-	    .grey, .grey a:link, .grey a:visited {
-		color: #777;
-	    }
-            .docinfo {
-                background-color: #EEE;
-            }
-            .top {
-                border-top: 7px solid #EEE;
-            }
-            .bgwhite  { background-color: white; }
-            .bgred    { background-color: #F44; }
-            .bggrey   { background-color: #666; }
-            .bgbrown  { background-color: #840; }            
-            .bgorange { background-color: #FA0; }
-            .bgyellow { background-color: #EE0; }
-            .bgmagenta{ background-color: #F4F; }
-            .bgblue   { background-color: #66F; }
-            .bgcyan   { background-color: #4DD; }
-            .bggreen  { background-color: #4F4; }
-
-            .legend   { font-size: 90%; }
-            .cplate   { font-size: 70%; border: solid grey 1px; }
-	}
-    </style>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="http://gmpg.org/xfn/11" rel="profile"/>
+<meta charset="utf-8"/>
+<meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/> <title>Information on BCP 50 » RFC Editor</title>
+<meta content="WordPress 6.0.3" name="generator"/> <!-- leave this for stats -->
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/style.css" media="screen" rel="stylesheet" type="text/css"/>
 <!--[if IE]>
-    <style>
-    body {
-       font-size: 13px;
-       margin: 10px 10px;
-    }
+                <style type="text/css">
+                #headerimg{ filter:alpha(opacity=80);}
+                .top img{ filter:alpha(opacity=60);}
+                .top img:hover{ filter:alpha(opacity=100);}
+                ul.comment-preview li{ filter:alpha(opacity=70);}
+                ul.comment-preview li:hover{ filter:alpha(opacity=100);}
+                #commentform input[type="text"],#commentform .comment-form-author .required, 
+                #commentform .comment-form-email .required{padding-left: 65px !important;}
+                .top a {position: relative;top: 2px;}
+                </style>
+        <![endif]-->
+<!--[if IE 7]>
+                <style type="text/css">
+                #headerimgwrap{ position:absolute;left:20%}
+                .hleft{position:absolute;}
+                .hright{position:absolute; right:0;}
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<!--[if IE 8 ]>
+                <style type="text/css">
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<link href="https://www.rfc-editor.org/xmlrpc.php" rel="pingback"/>
+<meta content="max-image-preview:large" name="robots"/>
+<link href="./fonts.googleapis.com.html" rel="dns-prefetch"/>
+<link href="./s.w.org.html" rel="dns-prefetch"/>
+<link href="https://www.rfc-editor.org/feed/" rel="alternate" title="RFC Editor » Feed" type="application/rss+xml"/>
+<link href="https://www.rfc-editor.org/comments/feed/" rel="alternate" title="RFC Editor » Comments Feed" type="application/rss+xml"/>
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.rfc-editor.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.3"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dist/block-library/style.min.css?ver=6.0.3" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<style id="responsive-menu-inline-css" type="text/css">
+/** This file is major component of this plugin so please don't try to edit here. */
+#rmp_menu_trigger-2538 {
+  width: 55px;
+  height: 55px;
+  position: fixed;
+  top: 15px;
+  border-radius: 5px;
+  display: none;
+  text-decoration: none;
+  right: 5%;
+  background: #000000;
+  transition: transform 0.5s, background-color 0.5s;
+}
+#rmp_menu_trigger-2538:hover, #rmp_menu_trigger-2538:focus {
+  background: #000000;
+  text-decoration: unset;
+}
+#rmp_menu_trigger-2538.is-active {
+  background: #000000;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-box {
+  width: 25px;
+  color: #ffffff;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-icon-active, #rmp_menu_trigger-2538 .rmp-trigger-text-open {
+  display: none;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-active, #rmp_menu_trigger-2538.is-active .rmp-trigger-text-open {
+  display: inline;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-inactive, #rmp_menu_trigger-2538.is-active .rmp-trigger-text {
+  display: none;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label {
+  color: #ffffff;
+  pointer-events: none;
+  line-height: 13px;
+  font-family: inherit;
+  font-size: 14px;
+  display: inline;
+  text-transform: inherit;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-top {
+  display: block;
+  margin-bottom: 12px;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-bottom {
+  display: block;
+  margin-top: 12px;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner {
+  display: block;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::after {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  position: absolute;
+}
+#rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+#rmp_menu_trigger-2538:hover .responsive-menu-pro-inner, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+/* Hamburger menu styling */
+@media screen and (max-width: 1024px) {
+  /** Menu Title Style */
+  /** Menu Additional Content Style */
+  #l_sidebar {
+    display: none !important;
+  }
+  #rmp_menu_trigger-2538 {
+    display: block;
+  }
+  #rmp-container-2538 {
+    position: fixed;
+    top: 0;
+    margin: 0;
+    transition: transform 0.5s;
+    overflow: auto;
+    display: block;
+    width: 75%;
+    background-color: #212121;
+    background-image: url("");
+    height: 100%;
+    left: 0;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+  }
+  #rmp-menu-wrap-2538 {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu, #rmp-menu-wrap-2538 .rmp-submenu {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-1 .rmp-menu-item-link {
+    padding-left: 10%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-2 .rmp-menu-item-link {
+    padding-left: 15%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-3 .rmp-menu-item-link {
+    padding-left: 20%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-4 .rmp-menu-item-link {
+    padding-left: 25%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu.rmp-submenu-open {
+    display: block;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+    font-weight: normal;
+    letter-spacing: 0px;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.5s, border-color 0.5s, 0.5s;
+    padding: 0 5%;
+    padding-right: 50px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:after, #rmp-menu-wrap-2538 .rmp-menu-item-link:before {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:focus {
+    outline: none;
+    border-color: unset;
+    box-shadow: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link .rmp-font-icon {
+    height: 40px;
+    line-height: 40px;
+    margin-right: 10px;
+    font-size: 13px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    overflow: hidden;
+    background-size: cover;
+    overflow: hidden;
+    right: 0;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow .rmp-font-icon {
+    margin-right: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow * {
+    vertical-align: middle;
+    line-height: 40px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active {
+    display: block;
+    background-size: cover;
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow {
+    right: 0;
+    border-right: unset;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-description {
+    margin: 0;
+    padding: 5px 5%;
+    opacity: 0.8;
+    color: #ffffff;
+  }
+  #rmp-search-box-2538 {
+    display: block;
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+  }
+  #rmp-search-box-2538 .rmp-search-form {
+    margin: 0;
+  }
+  #rmp-search-box-2538 .rmp-search-box {
+    background: #ffffff;
+    border: 1px solid #dadada;
+    color: #333333;
+    width: 100%;
+    padding: 0 5%;
+    border-radius: 30px;
+    height: 45px;
+    -webkit-appearance: none;
+  }
+  #rmp-search-box-2538 .rmp-search-box::placeholder {
+    color: #c7c7cd;
+  }
+  #rmp-search-box-2538 .rmp-search-box:focus {
+    background-color: #ffffff;
+    outline: 2px solid #dadada;
+    color: #333333;
+  }
+  #rmp-menu-title-2538 {
+    background-color: #212121;
+    color: #ffffff;
+    text-align: left;
+    font-size: 13px;
+    padding-top: 10%;
+    padding-left: 5%;
+    padding-bottom: 0%;
+    padding-right: 5%;
+    font-weight: 400;
+    transition: background-color 0.5s, border-color 0.5s, color 0.5s;
+  }
+  #rmp-menu-title-2538:hover {
+    background-color: #212121;
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 > a {
+    color: #ffffff;
+    width: 100%;
+    background-color: unset;
+    text-decoration: none;
+  }
+  #rmp-menu-title-2538 > a:hover {
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 .rmp-font-icon {
+    font-size: 13px;
+  }
+  #rmp-menu-additional-content-2538 {
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+    color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+/**
+This file contents common styling of menus.
+*/
+.rmp-container {
+  display: none;
+  visibility: visible;
+  padding: 0px 0px 0px 0px;
+  z-index: 99998;
+  transition: all 0.3s;
+  /** Scrolling bar in menu setting box **/
+}
+.rmp-container.rmp-fade-top, .rmp-container.rmp-fade-left, .rmp-container.rmp-fade-right, .rmp-container.rmp-fade-bottom {
+  display: none;
+}
+.rmp-container.rmp-slide-left, .rmp-container.rmp-push-left {
+  transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+}
+.rmp-container.rmp-slide-left.rmp-menu-open, .rmp-container.rmp-push-left.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-right, .rmp-container.rmp-push-right {
+  transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+}
+.rmp-container.rmp-slide-right.rmp-menu-open, .rmp-container.rmp-push-right.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-top, .rmp-container.rmp-push-top {
+  transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+}
+.rmp-container.rmp-slide-top.rmp-menu-open, .rmp-container.rmp-push-top.rmp-menu-open {
+  transform: translateY(0);
+  -ms-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+}
+.rmp-container.rmp-slide-bottom, .rmp-container.rmp-push-bottom {
+  transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+  -moz-transform: translateY(100%);
+}
+.rmp-container.rmp-slide-bottom.rmp-menu-open, .rmp-container.rmp-push-bottom.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container::-webkit-scrollbar {
+  width: 0px;
+}
+.rmp-container ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+.rmp-container .rmp-menu-wrap .rmp-menu {
+  transition: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  border: 0;
+  bottom: auto;
+  box-sizing: border-box;
+  clip: auto;
+  color: #666;
+  display: block;
+  float: none;
+  font-family: inherit;
+  font-size: 14px;
+  height: auto;
+  left: auto;
+  line-height: 1.7;
+  list-style-type: none;
+  margin: 0;
+  min-height: auto;
+  max-height: none;
+  opacity: 1;
+  outline: none;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  pointer-events: auto;
+  right: auto;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  transform: none;
+  top: auto;
+  visibility: inherit;
+  width: auto;
+  word-wrap: break-word;
+  white-space: normal;
+}
+.rmp-container .rmp-menu-additional-content {
+  display: block;
+  word-break: break-word;
+}
+.rmp-container .rmp-menu-title {
+  display: flex;
+  flex-direction: column;
+}
+.rmp-container .rmp-menu-title .rmp-menu-title-image {
+  max-width: 100%;
+  margin-bottom: 15px;
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+}
+button.rmp_menu_trigger {
+  z-index: 999999;
+  overflow: hidden;
+  outline: none;
+  border: 0;
+  display: none;
+  margin: 0;
+  transition: transform 0.5s, background-color 0.5s;
+  padding: 0;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before, button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  content: "";
+  display: block;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before {
+  top: 10px;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  bottom: 10px;
+}
+button.rmp_menu_trigger .rmp-trigger-box {
+  width: 40px;
+  display: inline-block;
+  position: relative;
+  pointer-events: none;
+  vertical-align: super;
+}
+.admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+  margin-top: 32px !important;
+}
+@media screen and (max-width: 782px) {
+  .admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+    margin-top: 46px !important;
+  }
+}
+/*  Menu Trigger Boring Animation */
+.rmp-menu-trigger-boring .responsive-menu-pro-inner {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring .responsive-menu-pro-inner::after, .rmp-menu-trigger-boring .responsive-menu-pro-inner::before {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner {
+  transform: rotate(45deg);
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:before {
+  top: 0;
+  opacity: 0;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:after {
+  bottom: 0;
+  transform: rotate(-90deg);
+}
+
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dashicons.min.css?ver=6.0.3" id="dashicons-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/css/mobile.css?ver=0.1" id="tech-mobile-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans%7C&amp;ver=6.0.3" id="google_fonts-css" media="screen" rel="stylesheet" type="text/css"/>
+<script id="jquery-core-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" type="text/javascript"></script>
+<script id="jquery-migrate-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" type="text/javascript"></script>
+<script id="rmp_menu_scripts-js-extra" type="text/javascript">
+/* <![CDATA[ */
+var rmp_menu = {"ajaxURL":"https:\/\/www.rfc-editor.org\/wp-admin\/admin-ajax.php","wp_nonce":"2262d2d074","menu":[{"menu_theme":null,"theme_type":"default","theme_location_menu":"","submenu_submenu_arrow_width":"40","submenu_submenu_arrow_width_unit":"px","submenu_submenu_arrow_height":"40","submenu_submenu_arrow_height_unit":"px","submenu_arrow_position":"right","submenu_sub_arrow_background_colour":"#212121","submenu_sub_arrow_background_hover_colour":"#3f3f3f","submenu_sub_arrow_background_colour_active":"#212121","submenu_sub_arrow_background_hover_colour_active":"#3f3f3f","submenu_sub_arrow_border_width":"1","submenu_sub_arrow_border_width_unit":"px","submenu_sub_arrow_border_colour":"#212121","submenu_sub_arrow_border_hover_colour":"#3f3f3f","submenu_sub_arrow_border_colour_active":"#212121","submenu_sub_arrow_border_hover_colour_active":"#3f3f3f","submenu_sub_arrow_shape_colour":"#ffffff","submenu_sub_arrow_shape_hover_colour":"#ffffff","submenu_sub_arrow_shape_colour_active":"#ffffff","submenu_sub_arrow_shape_hover_colour_active":"#ffffff","use_header_bar":"off","header_bar_items_order":"{\"logo\":\"on\",\"title\":\"on\",\"search\":\"on\",\"html content\":\"on\"}","header_bar_title":"","header_bar_html_content":"","header_bar_logo":"","header_bar_logo_link":"","header_bar_logo_width":null,"header_bar_logo_width_unit":"%","header_bar_logo_height":null,"header_bar_logo_height_unit":"%","header_bar_height":"80","header_bar_height_unit":"px","header_bar_padding":{"top":"0px","right":"5%","bottom":"0px","left":"5%"},"header_bar_font":"","header_bar_font_size":"14","header_bar_font_size_unit":"px","header_bar_text_color":"#ffffff","header_bar_background_color":"#ffffff","header_bar_breakpoint":"800","header_bar_position_type":"fixed","header_bar_adjust_page":null,"header_bar_scroll_enable":"off","header_bar_scroll_background_color":"#36bdf6","mobile_breakpoint":"600","tablet_breakpoint":"1024","transition_speed":"0.5","sub_menu_speed":"0.2","show_menu_on_page_load":"","menu_disable_scrolling":"off","menu_overlay":"off","menu_overlay_colour":"rgba(0, 0, 0, 0.7)","desktop_menu_width":"","desktop_menu_width_unit":"px","desktop_menu_positioning":"fixed","desktop_menu_side":"","desktop_menu_to_hide":"","use_current_theme_location":"off","mega_menu":{"225":"off","227":"off","229":"off","228":"off","226":"off"},"desktop_submenu_open_animation":"none","desktop_submenu_open_animation_speed":"100ms","desktop_submenu_open_on_click":"off","desktop_menu_hide_and_show":"off","menu_name":"Default Menu","menu_to_use":"responsive-menu","different_menu_for_mobile":"off","menu_to_use_in_mobile":"main-menu","use_mobile_menu":"on","use_tablet_menu":"on","use_desktop_menu":null,"menu_display_on":"all-pages","menu_to_hide":"#l_sidebar,.hright,#r_sidebar","submenu_descriptions_on":"","custom_walker":"","menu_background_colour":"#212121","menu_depth":"5","smooth_scroll_on":"off","smooth_scroll_speed":"500","menu_font_icons":[],"menu_links_height":"40","menu_links_height_unit":"px","menu_links_line_height":"40","menu_links_line_height_unit":"px","menu_depth_0":"5","menu_depth_0_unit":"%","menu_font_size":"13","menu_font_size_unit":"px","menu_font":"","menu_font_weight":"normal","menu_text_alignment":"left","menu_text_letter_spacing":"","menu_word_wrap":"off","menu_link_colour":"#ffffff","menu_link_hover_colour":"#ffffff","menu_current_link_colour":"#ffffff","menu_current_link_hover_colour":"#ffffff","menu_item_background_colour":"#212121","menu_item_background_hover_colour":"#3f3f3f","menu_current_item_background_colour":"#212121","menu_current_item_background_hover_colour":"#3f3f3f","menu_border_width":"1","menu_border_width_unit":"px","menu_item_border_colour":"#212121","menu_item_border_colour_hover":"#212121","menu_current_item_border_colour":"#212121","menu_current_item_border_hover_colour":"#3f3f3f","submenu_links_height":"40","submenu_links_height_unit":"px","submenu_links_line_height":"40","submenu_links_line_height_unit":"px","menu_depth_side":"left","menu_depth_1":"10","menu_depth_1_unit":"%","menu_depth_2":"15","menu_depth_2_unit":"%","menu_depth_3":"20","menu_depth_3_unit":"%","menu_depth_4":"25","menu_depth_4_unit":"%","submenu_item_background_colour":"#212121","submenu_item_background_hover_colour":"#3f3f3f","submenu_current_item_background_colour":"#212121","submenu_current_item_background_hover_colour":"#3f3f3f","submenu_border_width":"1","submenu_border_width_unit":"px","submenu_item_border_colour":"#212121","submenu_item_border_colour_hover":"#212121","submenu_current_item_border_colour":"#212121","submenu_current_item_border_hover_colour":"#3f3f3f","submenu_font_size":"13","submenu_font_size_unit":"px","submenu_font":"","submenu_font_weight":"normal","submenu_text_letter_spacing":"","submenu_text_alignment":"left","submenu_link_colour":"#ffffff","submenu_link_hover_colour":"#ffffff","submenu_current_link_colour":"#ffffff","submenu_current_link_hover_colour":"#ffffff","inactive_arrow_shape":"\u25bc","active_arrow_shape":"\u25b2","inactive_arrow_font_icon":"","active_arrow_font_icon":"","inactive_arrow_image":"","active_arrow_image":"","submenu_arrow_width":"40","submenu_arrow_width_unit":"px","submenu_arrow_height":"40","submenu_arrow_height_unit":"px","arrow_position":"right","menu_sub_arrow_shape_colour":"#ffffff","menu_sub_arrow_shape_hover_colour":"#ffffff","menu_sub_arrow_shape_colour_active":"#ffffff","menu_sub_arrow_shape_hover_colour_active":"#ffffff","menu_sub_arrow_border_width":"1","menu_sub_arrow_border_width_unit":"px","menu_sub_arrow_border_colour":"#212121","menu_sub_arrow_border_hover_colour":"#3f3f3f","menu_sub_arrow_border_colour_active":"#212121","menu_sub_arrow_border_hover_colour_active":"#3f3f3f","menu_sub_arrow_background_colour":"#212121","menu_sub_arrow_background_hover_colour":"#3f3f3f","menu_sub_arrow_background_colour_active":"#212121","menu_sub_arrow_background_hover_colour_active":"#3f3f3f","fade_submenus":"off","fade_submenus_side":"left","fade_submenus_delay":"100","fade_submenus_speed":"500","use_slide_effect":"off","slide_effect_back_to_text":"Back","accordion_animation":"off","auto_expand_all_submenus":"off","auto_expand_current_submenus":"off","menu_item_click_to_trigger_submenu":"off","button_width":"55","button_width_unit":"px","button_height":"55","button_height_unit":"px","button_background_colour":"#000000","button_background_colour_hover":"#000000","button_background_colour_active":"#000000","toggle_button_border_radius":"5","button_transparent_background":"off","button_left_or_right":"right","button_position_type":"fixed","button_distance_from_side":"5","button_distance_from_side_unit":"%","button_top":"15","button_top_unit":"px","button_push_with_animation":"off","button_click_animation":"boring","button_line_margin":"5","button_line_margin_unit":"px","button_line_width":"25","button_line_width_unit":"px","button_line_height":"3","button_line_height_unit":"px","button_line_colour":"#ffffff","button_line_colour_hover":"#ffffff","button_line_colour_active":"#ffffff","button_font_icon":"","button_font_icon_when_clicked":"","button_image":"","button_image_when_clicked":"","button_title":"","button_title_open":"","button_title_position":"left","button_font":"","button_font_size":"14","button_font_size_unit":"px","button_title_line_height":"13","button_title_line_height_unit":"px","button_text_colour":"#ffffff","button_trigger_type_click":"on","button_trigger_type_hover":"off","button_click_trigger":"#responsive-menu-button","items_order":{"title":"on","menu":"on","search":"","additional content":"on"},"menu_title":"","menu_title_link":"","menu_title_link_location":"_self","menu_title_image":"","menu_title_font_icon":"","menu_title_section_padding":{"top":"10%","right":"5%","bottom":"0%","left":"5%"},"menu_title_background_colour":"#212121","menu_title_background_hover_colour":"#212121","menu_title_font_size":"13","menu_title_font_size_unit":"px","menu_title_alignment":"left","menu_title_font_weight":"400","menu_title_font_family":"","menu_title_colour":"#ffffff","menu_title_hover_colour":"#ffffff","menu_title_image_width":null,"menu_title_image_width_unit":"%","menu_title_image_height":null,"menu_title_image_height_unit":"px","menu_additional_content":"<a href=\"\/search\/rfc_search.php\">Advanced Search<\/a>\r\n<form id=\"search_query_separator_id\" name=\"search_query_separator_name\"  action=\"\/search\/rfc_search_detail.php\" method=\"POST\" onsubmit=\"return validateComboBox(this);\"> \r\n<input type=\"text\" id =\"combo_box_id\" name=\"combo_box\"  maxlength=\"20\" size =\"35\" placeholder=\"number, title, keyword, or author surname\"><\/form>\r\n","menu_additional_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_additional_content_font_size":"16","menu_additional_content_font_size_unit":"px","menu_additional_content_alignment":"center","menu_additional_content_colour":"#ffffff","menu_search_box_text":"Search","menu_search_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_search_box_height":"45","menu_search_box_height_unit":"px","menu_search_box_border_radius":"30","menu_search_box_text_colour":"#333333","menu_search_box_background_colour":"#ffffff","menu_search_box_placeholder_colour":"#c7c7cd","menu_search_box_border_colour":"#dadada","menu_section_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_width":"75","menu_width_unit":"%","menu_maximum_width":"","menu_maximum_width_unit":"px","menu_minimum_width":"","menu_minimum_width_unit":"px","menu_auto_height":"off","menu_container_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_container_background_colour":"#212121","menu_background_image":"","animation_type":"slide","menu_appear_from":"left","animation_speed":"0.5","page_wrapper":"","menu_close_on_body_click":"off","menu_close_on_scroll":"off","menu_close_on_link_click":"off","enable_touch_gestures":"","breakpoint":"1024","menu_depth_5":"30","menu_depth_5_unit":"%","keyboard_shortcut_close_menu":"27,37","keyboard_shortcut_open_menu":"32,39","button_image_alt":"","button_image_alt_when_clicked":"","button_font_icon_type":"font-awesome","button_font_icon_when_clicked_type":"font-awesome","button_trigger_type":"click","active_arrow_image_alt":"","inactive_arrow_image_alt":"","active_arrow_font_icon_type":"font-awesome","inactive_arrow_font_icon_type":"font-awesome","menu_adjust_for_wp_admin_bar":"off","menu_title_image_alt":"","menu_title_font_icon_type":"font-awesome","minify_scripts":"off","scripts_in_footer":"off","external_files":"off","remove_fontawesome":"","remove_bootstrap":"","shortcode":"off","mobile_only":"off","custom_css":"","single_menu_height":"80","single_menu_height_unit":"px","single_menu_font":"","single_menu_font_size":"14","single_menu_font_size_unit":"px","single_menu_submenu_height":"40","single_menu_submenu_height_unit":"px","single_menu_submenu_font":"","single_menu_submenu_font_size":"12","single_menu_submenu_font_size_unit":"px","single_menu_item_link_colour":"#000000","single_menu_item_link_colour_hover":"#000000","single_menu_item_background_colour":"#ffffff","single_menu_item_background_colour_hover":"#ffffff","single_menu_item_submenu_link_colour":"#000000","single_menu_item_submenu_link_colour_hover":"#000000","single_menu_item_submenu_background_colour":"#ffffff","single_menu_item_submenu_background_colour_hover":"#ffffff","header_bar_logo_alt":"","desktop_menu_options":"{}","admin_theme":"light","single_menu_line_height":"80","single_menu_line_height_unit":"px","single_menu_submenu_line_height":"40","single_menu_submenu_line_height_unit":"px","hide_on_mobile":"off","hide_on_desktop":"off","menu_title_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_id":2538,"active_toggle_contents":"\u25b2","inactive_toggle_contents":"\u25bc"}]};
+/* ]]> */
+</script>
+<script id="rmp_menu_scripts-js" src="https://www.rfc-editor.org/wp-content/plugins/responsive-menu/v4.0.0/assets/js/rmp-menu.js?ver=4.1.11" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-json/" rel="https://api.w.org/"/><link href="https://www.rfc-editor.org/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+<link href="https://www.rfc-editor.org/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+<meta content="WordPress 6.0.3" name="generator"/>
+<script type="text/javascript">
+        jQuery(document).ready(function($){
+	/* toggle nav */
+	$("#menu-icon").on("click", function(){
+		$(".top-menu").slideToggle();
+		$(this).toggleClass("active");
+	});
+
+        });
+        </script><script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/matomo-tracking.js" type="text/javascript"></script>
+<style type="text/css">/*Variable Styles*/
+#page{ 
+background:#FFFFFF url() repeat top center scroll;
+}
+body{
+font:normal 14px/1.3em Noto Sans, Sans-Serif;
+background:#FFFFFF url() repeat top center scroll;
+}
+.techozoic_font_size{
+font-size: 14px;
+}
+.narrowcolumn .entry,.widecolumn .entry, .top {
+font:normal 14px/1.5em Noto Sans, Sans-Serif;
+color: #2C4353;
+}
+.noclass,.home .narrowcolumn .entry, home .widecolumn .entry, .top,.post .singlepost,.archive .narrowcolumn .entry, .archive .widecolumn .entry, .top{
+background-color:#E3E3E3;
+border-top:1px #A0B3C2 solid;
+}
+.top{
+border:none;
+}
+.blog_title, .blog_title a, .blog_title a:hover, .blog_title a:visited{
+font:normal 40px/1.3em Courier, Sans-Serif;
+color:  	#000000;
+}
+h1.post_title{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.post_title a{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.entry h1{
+font:bold 3em/2.2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h2{
+font:bold 2em/2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h3{
+font:bold 1.4em/1.6em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h4{
+font:bold 1.3em/1.4em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h5{
+font:bold 1.2em/1.3em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.sidebar h2, .sidebar h3, #footer h2{
+font: bold 18px/1.3em Noto Sans, Sans-Serif;
+color:#2C4353;
+}
+.widgettitle {
+font-size: 18px;
+margin: 1px 0;
+}
+#content {
+font-size: 14px;
+}
+acronym,abbr,span.caps,small,.trackback li,.sidebar, .postmetadata {
+font-size: 12px;
+}
+.postmetadata{
+font: normal 12px/1.3em Noto Sans, Sans-Serif;
+color: #777777;
+}
+ul#nav a, ul#admin a, #dropdown li.current_page_item a:hover, .top-menu li.current-menu-item a:hover, #dropdown li.current_page_item ul a, .top-menu li.current-menu-item ul a, ul#nav li.current_page_item a:hover, {
+color: #A0B3C2;
+}
+.commenlist .author,#searchform #s, #searchsubmit:hover,#catsubmit:hover,#wp-submit:hover,#TB_ajaxContent {
+background-color: #A0B3C2 ;
+}
+ul#admin li, ul#dropdown li, #navmenu .top-menu li{
+/*background-color: #E3E3E3;*/
+}
+ul#admin li a, ul#dropdown li a, #navmenu .top-menu li a{
+font-style: bold; 
+font-size:14px;
+font-family: Noto Sans, Sans-Serif;
+color:#A0B3C2;
+}
+ul#admin li a:hover, ul#dropdown li a:hover, #navmenu .top-menu li a:hover{
+color: #A0B3C2;
+}
+#dropdown > li, ul.top-menu > li{
+margin: 0 3px;
+}
+.ribbon ul.top-menu > li, .square ul.top-menu > li, #dropdown > li{
+margin: 0;
+padding: 0 3px;
+}
+.ribbon ul.top-menu > li.has_children:hover:after, .square ul.top-menu > li.has_children:hover:after, #dropdown > li.has_children:hover:after {
+border-bottom: 5px solid #E3E3E3;
+}
+#dropdown ul, .top-menu ul{
+background-color: #E3E3E3;
+}
+.ribbon, .square, #dropdown{
+background-color: #E3E3E3;
+background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E3E3E3), to(#CCCCCC));
+background-image: -webkit-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:    -moz-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:     -ms-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:      -o-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:         linear-gradient(top, #E3E3E3, #CCCCCC);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E3E3E3', endColorstr='#CCCCCC');
+}
+.ribbon ul.top-menu:before{
+border-right: 10px solid #CCCCCC;
+}
+.ribbon ul.top-menu:after{
+border-left: 10px solid #CCCCCC;
+}.ribbon ul.top-menu > li:last-child, .square ul.top-menu > li:last-child, #dropdown > li:last-child{
+margin-right: 100px;
+}#navmenu .top-menu li, #navmenu .top-menu ul.sub-menu, ul#admin li, #navmenu #dropdown li{
+background-color: #E3E3E3;
+}       
+#navmenu #dropdown li.current_page_item, #navmenu .top-menu li.current-menu-item, #navmenu .top-menu ul.sub-menu li.current-menu-item {
+background-color: #A0B3C2 ;
+}
+#navmenu #dropdown li:hover, #navmenu .top-menu li:hover, #navmenu .top-menu ul.sub-menu > li:hover {
+background-color:#EFEFEF;
+}
+#navmenu #dropdown li.current_page_item > a:hover, #navmenu .top-menu li.current-menu-item > a:hover, #navmenu .top-menu li.current-menu-item:hover > a, #navmenu .top-menu li:hover > a, #navmenu #dropdown li:hover > a {
+color:#A0B3C2;
+}
+#navmenu #dropdown li.current_page_item > a, #navmenu .top-menu li.current-menu-item > a{
+color:#F7F7F7;
+}
+ul#admin li:hover{
+background:#EFEFEF;
+box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-moz-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-webkit-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+}#dropdown li ul li, .top-menu li ul li, #dropdown li ul , .top-menu li ul{
+width: 250px !important;
+}
+#dropdown li ul ul, .top-menu li ul ul{
+left:250px ; 
+}
+.tags {
+border-bottom:1px #A0B3C2 solid;
+border-top:1px #A0B3C2 solid;
+}
+a,h2 a:hover,h3 a:hover,#user_login,#user_pass, #sidenav a:visited {
+color:#597EAA; 
+text-decoration:none;
+}
+#searchform #s {
+color:#E3E3E3; 
+text-decoration:none;
+}
+a:hover {
+color:#114477; 
+text-decoration:underline;
+}
+a:visited{
+color:#476588;
+}
+.description {
+color:#A0B3C2;
+}
+#headerimg {
+;
+float:left;margin-left:10px;
+}
+#header-logo{
+float:left;margin-left:10px;
+padding-top:0px;
+padding-left:0px;
+}
+.single .blog_title a:hover {
+cursor:default;
+text-decoration:none;
+}
+.noclass{
+-moz-box-shadow:none !important;
+box-shadow:none !important;
+-webkit-box-shadow: none !important;
+opacity:1 !important;
+border: none !important;
+}#headerimgwrap{
+top:20%;
+}  #page {
+width: 90%;
+}
+.narrowcolumn {
+float:left;
+margin:0;
+padding:25px 3% 20px 2%;
+width:75%;
+}
+#l_sidebar {
+float:left;
+padding:25px 1% 0 2%;
+width:17%
+}#dropdown, .top-menu{
+text-align:left;
+}#header {
+background-repeat: no-repeat;  
+background-position: center center;
+height: 110px;
+}
+.hleft, .hright {
+height: 70px;
+}table.statictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.statictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #CACACA;
+}
+table.statictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+
+
+table.statictable tr{
+        background-color: #F6F6F6;
+}
+
+table.statictable td.special {
+          font-weight: bold;
+          color:grey
+}
+table.statictable td.title {
+         font-weight: bold;
+         letter-spacing: inherit
+}
+
+table.statictable .boldtext {
+       font-weight: bold;
+       color: #597eaa;
+}
+
+table.dynamictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.dynamictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #FEFEFEFE;
+}
+table.dynamictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+table.dynamictable tr.even{
+        background-color: #ffffff;
+}
+table.dynamictable tr.odd{
+        background-color: #F6F6F6;
+}
+table.erratasearch {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-color: #666666;
+        border-collapse: collapse;
+        text-align:center;
+}
+table.erratasearch th {
+        border-width: 1px;
+        padding: 8px;
+        
+        text-decoration: underline;
+        border-color: #666666;
+        //background-color: #ffffff;
+        background-color: silver;
+}
+
+table.erratasearch td {
+        border-width: 1px;
+        padding: 8px;
+        border-color: #666666;
+        background-color: #ffffff;
+        text-align:left;
+}
+table.erratasearch td.sbar { 
+          background-color: silver;
+          text-align: center;
+        }
+
+
+.nosidebar{
+    float:left;
+    margin:0 10%;
+    padding:0 0 10px;
+    width:70%;
+}
+
+input[type="button"], .button, div#infinite-handle span {
+    display: inline-block;
+    zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+    *display: inline;
+    vertical-align: baseline;
+    margin: 0 2px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    padding: .3em 1em .35em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .25em; 
+    -moz-border-radius: .25em;
+    border-radius: .25em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    color: #505050;
+    border: solid 1px #b7b7b7;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+    background: -moz-linear-gradient(top,  #fff,  #ededed);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+}
+input[type="button"]:hover, .button:hover, div#infinite-handle span:hover {
+    text-decoration: none;
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+    background: -moz-linear-gradient(top,  #fff,  #dcdcdc);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+}
+input[type="button"]:active, .button:active, div#infinite-handle span: active {
+    position: relative;
+    top: 1px;
+    color: #999;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+    background: -moz-linear-gradient(top,  #ededed,  #fff);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
+}
+
+.search_label_bold { text-align: left;
+                     border-style: none;
+                     font-weight: bold;
+                   }
+
+.error { font-weight: bold; color: red; }
+
+textarea {
+   font-family: inherit;
+   font-size: inherit;
+}
+/*DIV to hold scroll tables*/
+.scrolltable{
+   width:95%
+
+}
+
+/*--------------------------------------------------------------------------------
+----------------------------RFCMETA PAGE  Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+ body.rfcmeta {
+font-family: 'Noto Sans', sans-serif;
+color: #2C4353;
+width: 100%;}
+
+ body.rfcmeta #page {
+width: 100%;
+box-shadow:none;
+margin-top: 0px;}
+
+ body.rfcmeta .hright { height:120px;}
+
+ body.rfcmeta #header {width: 100%;
+ background-color: #fff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 0px;;}
+
+ body.rfcmeta .singlepost.entry {padding-top: 0px!important;}
+ body.rfcmeta .singlepost.entry dl,  body.rfcmeta .singlepost.entry p, body.rfcmeta .singlepost.entry h2, body.rfcmeta .singlepost.entry h3 { margin-left:40px;
+ margin-right: 20px; }
+
+ body.rfcmeta .singlepost.entry dt{
+         font-weight: bold!important;
+         margin-top: 15px;}
+
+          body.rfcmeta .singlepost.entry dd{
+         margin-left: 15px;}
+
+ body.rfcmeta a{
+color: #597eaa;}
+  body.rfcmeta .entryheader {background-color:#2C4353 !important;
+  border-bottom: 10px solid #FFF !important;
+  margin-top: 0px;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;}
+
+   body.rfcmeta .entryheader h2 a, body.rfcmeta .entryheader h2 {color: #fff  !important;
+   font-size: 50px;
+   padding: 0px !important;
+   line-height: 1.2;
+   font:bold !important;}
+
+   body.rfcmeta .entryheader h2 a:hover {color: #aob3c2 !important;}
+
+   body.rfcmeta .entryheader h3 {color: #fff  !important;
+   font-size: 18px;
+   padding: 0px;
+   line-height: 1.2;
+   padding-top: 10px;
+   }
+
+      body.rfcmeta .entryheader h3 span {font-weight: normal;
+          font-size: 14px;
+          text-transform: uppercase;}
+    h2 {font-weight: bold;}
+
+ body.rfcmeta   #search_query_separator_id  {padding-bottom: 5px;
+ padding-top: 5px;}
+
+ body.rfcmeta .page {margin-top: 0px!important;
+ padding-top: 0px!important;}
+
+    /*--------------------------------------------------------------------------------
+----------------------------end RFCMETA PAGE Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+
+.cluster_heading {
+ font-size: 14px;
+}
+</style> <style type="text/css">
+        #header {
+            background-image: url();
+        }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
-    function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
-                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
-                }
-	    }
-	}
-    }
-    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
-    function showElem(id) {
-        var elem = document.getElementById(id);
-        elem.innerHTML = eval(id+"_html");
-        elem.style.visibility='visible';
-    }
-    function hideElem(id) {
-        var elem = document.getElementById(id);
-        elem.style.visibility='hidden';        
-        elem.innerHTML = "";
-    }
-    // -->
-    </script>
+<script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/iterate-survey.js" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="32x32"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="192x192"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="apple-touch-icon"/>
+<meta content="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" name="msapplication-TileImage"/>
 </head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo " onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
+<body class="rfcmeta">
+<a id="top"></a>
+<div id="page">
+<div id="header">
+<div class="hright">
+<div class="hwidget widget_text"><h2 class="widgettitle">Search RFCs</h2> <div class="textwidget"><form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="40" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+<a href="/search/rfc_search.php">Advanced Search</a>
+</div>
+</div></div>
+<div id="headerimgwrap">
+<div id="headerimg">
+<h1 class="blog_title"> <a href="https://www.rfc-editor.org/">RFC Editor</a>
+</h1> </div><!--end headerimg-->
+</div><!--end headerimgwrap-->
+</div><!--end header-->
+<div class="nosidebar" id="content">
+<h1 class="post_title"></h1>
+<div class="post-127 page type-page status-publish hentry post clear" id="post-127">
+<div class="singlepost entry">
+<div class="entryheader"><h2><a href="https://www.rfc-editor.org/bcp/bcp50.txt">BCP 50</a></h2><h2><a href="https://www.rfc-editor.org/rfc/rfc3155.txt">RFC 3155</a></h2>
+<h3>End-to-end Performance Implications of Links with Errors, <span>August 2001</span></h3>
+</div><dl>
+<dt><b>File formats:</b></dt><dd><a href="https://www.rfc-editor.org/rfc/rfc3155.txt"><img alt="icon for text file" src="/rfcscripts/images/RFC_ICONS_Text_40x50.png" title="text"/></a> <a href="https://www.rfc-editor.org/rfc/pdfrfc/rfc3155.txt.pdf"><img alt="icon for PDF" src="/rfcscripts/images/RFC_ICONS_PDF_2019_50x40.png" title="PDF"/></a> <a href="https://www.rfc-editor.org/rfc/rfc3155.html"><img alt="icon for HTML" src="/rfcscripts/images/RFC_ICONS_HTML_40x50.png" title="HTML"/></a></dd>
+<dt><b>Status:</b></dt><dd>BEST CURRENT PRACTICE</dd>
+<dt><b>Authors:</b></dt><dd>S. Dawkins<br/>G. Montenegro<br/>M. Kojo<br/>V. Magret<br/>N. Vaidya</dd>
+<dt><b>Stream:</b></dt><dd><a href="https://www.ietf.org">IETF</a></dd>
+<dt><b>Source:</b></dt><dd><a href="./datatracker.ietf.org/wg/pilc/about/.html">pilc</a> 
+                                      (<a href="./datatracker.ietf.org/wg/.html#tsv">tsv</a>)</dd>
+</dl>
+<p>
+<b>Cite this BCP</b>: 
+<a href="/refs/ref-bcp50.txt">TXT</a></p>
+<p><b>Discuss this RFC</b>: Send questions or comments to the mailing list <a href="mailto:iesg@ietf.org?subject=Question regarding RFC  ">iesg@ietf.org</a></p><p>
+<b>Other actions</b>: 
+<a href="/errata.php#reportnew">Submit Errata</a>  | 
+<a href="https://datatracker.ietf.org/ipr/search/?draft=&amp;rfc=rfc3155&amp;submit=rfc">
+Find IPR Disclosures from the IETF</a>  | 
+<a href="https://datatracker.ietf.org/doc/rfc/">
+View History of RFC </a>
+</p>
+<hr/>
+<h2>Abstract</h2>
+<p> This document discusses the specific TCP mechanisms that are problematic in environments with high uncorrected error rates, and discusses what can be done to mitigate the problems without introducing intermediate devices into the connection.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.  </p> <hr/>
+<p>
+For the definition of <b>Status</b>,
+see <a href="/info/rfc2026">RFC 2026</a>.
+</p><p>
+For the definition of <b>Stream</b>, see <a href="/info/rfc8729">RFC 8729</a>.
+</p>
+<hr/> </div>
 </div>
 </div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/bcp/bcp50.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/bcp50" title="PDF version of this document">pdf</a>]                                                        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                         S. Dawkins
-Request for Comments: 3155                                 G. Montenegro
-BCP: 50                                                          M. Kojo
-Category: Best Current Practice                                V. Magret
-                                                               N. Vaidya
-                                                             August 2001
-
-
-        <span class="h1">End-to-end Performance Implications of Links with Errors</span>
-
-Status of this Memo
-
-   This document specifies an Internet Best Current Practices for the
-   Internet Community, and requests discussion and suggestions for
-   improvements.  Distribution of this memo is unlimited.
-
-Copyright Notice
-
-   Copyright (C) The Internet Society (2001).  All Rights Reserved.
-
-Abstract
-
-   This document discusses the specific TCP mechanisms that are
-   problematic in environments with high uncorrected error rates, and
-   discusses what can be done to mitigate the problems without
-   introducing intermediate devices into the connection.
-
-Table of Contents
-
-   <a href="#section-1.0">1.0</a> Introduction .............................................    <a href="#page-2">2</a>
-      <a href="#section-1.1">1.1</a> Should you be reading this recommendation?  ...........    <a href="#page-3">3</a>
-      <a href="#section-1.2">1.2</a> Relationship of this recommendation to PEPs ...........    <a href="#page-4">4</a>
-      1.3 Relationship of this recommendation to Link Layer
-          Mechanisms.............................................    <a href="#page-4">4</a>
-   <a href="#section-2.0">2.0</a> Errors and Interactions with TCP Mechanisms ..............    <a href="#page-5">5</a>
-      <a href="#section-2.1">2.1</a> Slow Start and Congestion Avoidance [<a href="./rfc2581.html" title='"TCP Congestion Control"'>RFC2581</a>] .........    <a href="#page-5">5</a>
-      <a href="#section-2.2">2.2</a> Fast Retransmit and Fast Recovery [<a href="./rfc2581.html" title='"TCP Congestion Control"'>RFC2581</a>] ...........    <a href="#page-6">6</a>
-      <a href="#section-2.3">2.3</a> Selective Acknowledgements [RFC2018, <a href="./rfc2883.html">RFC2883</a>] .........    <a href="#page-7">7</a>
-   <a href="#section-3.0">3.0</a> Summary of Recommendations ...............................    <a href="#page-8">8</a>
-   <a href="#section-4.0">4.0</a> Topics For Further Work ..................................    <a href="#page-9">9</a>
-      <a href="#section-4.1">4.1</a> Achieving, and maintaining, large windows .............   <a href="#page-10">10</a>
-   <a href="#section-5.0">5.0</a> Security Considerations ..................................   <a href="#page-11">11</a>
-   <a href="#section-6.0">6.0</a> IANA Considerations ......................................   <a href="#page-11">11</a>
-   <a href="#section-7.0">7.0</a> Acknowledgements .........................................   <a href="#page-11">11</a>
-   References ...................................................   <a href="#page-11">11</a>
-   Authors' Addresses ...........................................   <a href="#page-14">14</a>
-   Full Copyright Statement .....................................   <a href="#page-16">16</a>
-
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                  [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.0%20Introduction"></a></body></html><a class="selflink" href="#section-1.0" name="section-1.0">1.0</a> Introduction</span>
-
-   The rapidly-growing Internet is being accessed by an increasingly
-   wide range of devices over an increasingly wide variety of links.  At
-   least some of these links do not provide the degree of reliability
-   that hosts expect, and this expansion into unreliable links causes
-   some Internet protocols, especially TCP [<a href="./rfc793.html" title='"Transmission Control Protocol"'>RFC793</a>], to perform poorly.
-
-   Specifically, TCP congestion control [<a href="./rfc2581.html" title='"TCP Congestion Control"'>RFC2581</a>], while appropriate for
-   connections that lose traffic primarily because of congestion and
-   buffer exhaustion, interacts badly with uncorrected errors when TCP
-   connections traverse links with high uncorrected error rates.  The
-   result is that sending TCPs may spend an excessive amount of time
-   waiting for acknowledgement that do not arrive, and then, although
-   these losses are not due to congestion-related buffer exhaustion, the
-   sending TCP transmits at substantially reduced traffic levels as it
-   probes the network to determine "safe" traffic levels.
-
-   This document does not address issues with other transport protocols,
-   for example, UDP.
-
-   Congestion avoidance in the Internet is based on an assumption that
-   most packet losses are due to congestion.  TCP's congestion avoidance
-   strategy treats the absence of acknowledgement as a congestion
-   signal.  This has worked well since it was introduced in 1988 [VJ-
-   DCAC], because most links and subnets have relatively low error rates
-   in normal operation, and congestion is the primary cause of loss in
-   these environments.  However, links and subnets that do not enjoy low
-   uncorrected error rates are becoming more prevalent in parts of the
-   Internet.  In particular, these include terrestrial and satellite
-   wireless links.  Users relying on traffic traversing these links may
-   see poor performance because their TCP connections are spending
-   excessive time in congestion avoidance and/or slow start procedures
-   triggered by packet losses due to transmission errors.
-
-   The recommendations in this document aim at improving utilization of
-   available path capacity over such high error-rate links in ways that
-   do not threaten the stability of the Internet.
-
-   Applications use TCP in very different ways, and these have
-   interactions with TCP's behavior [<a href="./rfc2861.html" title='"TCP Congestion Window Validation"'>RFC2861</a>].  Nevertheless, it is
-   possible to make some basic assumptions about TCP flows.
-   Accordingly, the mechanisms discussed here are applicable to all uses
-   of TCP, albeit in varying degrees according to different scenarios
-   (as noted where appropriate).
-
-
-
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                  [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-   This recommendation is based on the explicit assumption that major
-   changes to the entire installed base of routers and hosts are not a
-   practical possibility.  This constrains any changes to hosts that are
-   directly affected by errored links.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1%20Should%20you%20be%20reading%20this%20recommendation%3F"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a> Should you be reading this recommendation?</span>
-
-   All known subnetwork technologies provide an "imperfect" subnetwork
-   service - the bit error rate is non-zero.  But there's no obvious way
-   for end stations to tell the difference between packets discarded due
-   to congestion and losses due to transmission errors.
-
-   If a directly-attached subnetwork is reporting transmission errors to
-   a host, these reports matter, but we can't rely on explicit
-   transmission error reports to both hosts.
-
-   Another way of deciding if a subnetwork should be considered to have
-   a "high error rate" is by appealing to mathematics.
-
-   An approximate formula for the TCP Reno response function is given in
-   [<a href="#ref-PFTK98" title='"TCP Throughput: A simple model and its empirical validation"'>PFTK98</a>]:
-
-                                s
-   T = --------------------------------------------------
-       RTT*sqrt(2p/3) + tRTO*(3*sqrt(3p/8))*p*(1 + 32p**2)
-
-   where
-
-       T = the sending rate in bytes per second
-       s = the packet size in bytes
-       RTT = round-trip time in seconds
-       tRTO = TCP retransmit timeout value in seconds
-       p = steady-state packet loss rate
-
-   If one plugs in an observed packet loss rate, does the math and then
-   sees predicted bandwidth utilization that is greater than the link
-   speed, the connection will not benefit from recommendations in this
-   document, because the level of packet losses being encountered won't
-   affect the ability of TCP to utilize the link.  If, however, the
-   predicted bandwidth is less than the link speed, packet losses are
-   affecting the ability of TCP to utilize the link.
-
-   If further investigation reveals a subnetwork with significant
-   transmission error rates, the recommendations in this document will
-   improve the ability of TCP to utilize the link.
-
-
-
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                  [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-   A few caveats are in order, when doing this calculation:
-
-   (1)   the RTT is the end-to-end RTT, not the link RTT.
-   (2)   Max(1.0, 4*RTT) can be substituted as a simplification for
-         tRTO.
-   (3)   losses may be bursty - a loss rate measured over an interval
-         that includes multiple bursty loss events may understate the
-         impact of these loss events on the sending rate.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2%20Relationship%20of%20this%20recommendation%20to%20PEPs"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a> Relationship of this recommendation to PEPs</span>
-
-   This document discusses end-to-end mechanisms that do not require
-   TCP-level awareness by intermediate nodes.  This places severe
-   limitations on what the end nodes can know about the nature of losses
-   that are occurring between the end nodes.  Attempts to apply
-   heuristics to distinguish between congestion and transmission error
-   have not been successful [<a href="#ref-BV97" title='"Using End-to-end Statistics to Distinguish Congestion and Corruption Losses: A Negative Result,"'>BV97</a>, <a href="#ref-BV98" title='"Sender-Based heuristics for Distinguishing Congestion Losses from Wireless Transmission Losses,"'>BV98</a>, <a href="#ref-BV98a" title='"Discriminating Congestion Losses from Wireless Losses using Inter-Arrival Times at the Receiver,"'>BV98a</a>].  This restriction is
-   relaxed in an informational document on Performance Enhancing Proxies
-   (PEPs) [<a href="./rfc3135.html" title='"Performance Enhancing Proxies Intended to Mitigate Link-Related Degradations"'>RFC3135</a>]. Because PEPs can be placed on boundaries where
-   network characteristics change dramatically, PEPs have an additional
-   opportunity to improve performance over links with uncorrected
-   errors.
-
-   However, generalized use of PEPs contravenes the end-to-end principle
-   and is highly undesirable given their deleterious implications, which
-   include the following: lack of fate sharing (a PEP adds a third point
-   of failure besides the endpoints themselves), end-to-end reliability
-   and diagnostics, preventing end-to-end security (particularly network
-   layer security such as IPsec), mobility (handoffs are much more
-   complex because state must be transferred), asymmetric routing (PEPs
-   typically require being on both the forward and reverse paths of a
-   connection), scalability (PEPs add more state to maintain), QoS
-   transparency and guarantees.
-
-   Not every type of PEP has all the drawbacks listed above.
-   Nevertheless, the use of PEPs may have very serious consequences
-   which must be weighed carefully.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3%20Relationship%20of%20this%20recommendation%20to%20Link%20Layer%20Mechanisms"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a> Relationship of this recommendation to Link Layer Mechanisms</span>
-
-   This recommendation is for use with TCP over subnetwork technologies
-   (link layers) that have already been deployed.  Subnetworks that are
-   intended to carry Internet protocols, but have not been completely
-   specified are the subject of a best common practices (BCP) document
-   which has been developed or is under development by the Performance
-
-
-
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                  [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-   Implications of Link Characteristics WG (PILC) [<a href="#ref-PILC-WEB">PILC-WEB</a>].  This last
-   document is aimed at designers who still have the opportunity to
-   reduce the number of uncorrected errors TCP will encounter.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.0%20Errors%20and%20Interactions%20with%20TCP%20Mechanisms"></a></body></html><a class="selflink" href="#section-2.0" name="section-2.0">2.0</a> Errors and Interactions with TCP Mechanisms</span>
-
-   A TCP sender adapts its use of network path capacity based on
-   feedback from the TCP receiver.  As TCP is not able to distinguish
-   between losses due to congestion and losses due to uncorrected
-   errors, it is not able to accurately determine available path
-   capacity in the presence of significant uncorrected errors.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1%20Slow%20Start%20and%20Congestion%20Avoidance%20%5BRFC2581%5D"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a> Slow Start and Congestion Avoidance [<a href="./rfc2581.html" title='"TCP Congestion Control"'>RFC2581</a>]</span>
-
-   Slow Start and Congestion Avoidance [<a href="./rfc2581.html" title='"TCP Congestion Control"'>RFC2581</a>] are essential to the
-   current stability of the Internet.  These mechanisms were designed to
-   accommodate networks that do not provide explicit congestion
-   notification.  Although experimental mechanisms such as [<a href="./rfc2481.html" title='"A Proposal to add Explicit Congestion Notification (ECN) to IP"'>RFC2481</a>] are
-   moving in the direction of explicit congestion notification, the
-   effect of ECN on ECN-aware TCPs is essentially the same as the effect
-   of implicit congestion notification through congestion-related loss,
-   except that ECN provides this notification before packets are lost,
-   and must then be retransmitted.
-
-   TCP connections experiencing high error rates on their paths interact
-   badly with Slow Start and with Congestion Avoidance, because high
-   error rates make the interpretation of losses ambiguous - the sender
-   cannot know whether detected losses are due to congestion or to data
-   corruption.  TCP makes the "safe" choice and assumes that the losses
-   are due to congestion.
-
-      -  Whenever sending TCPs receive three out-of-order
-         acknowledgement, they assume the network is mildly congested
-         and invoke fast retransmit/fast recovery (described below).
-
-      -  Whenever TCP's retransmission timer expires, the sender assumes
-         that the network is congested and invokes slow start.
-
-      -  Less-reliable link layers often use small link MTUs.  This
-         slows the rate of increase in the sender's window size during
-         slow start, because the sender's window is increased in units
-         of segments.  Small link MTUs alone don't improve reliability.
-         Path MTU discovery [<a href="./rfc1191.html" title='"Path MTU Discovery"'>RFC1191</a>] must also be used to prevent
-         fragmentation.  Path MTU discovery allows the most rapid
-         opening of the sender's window size during slow start, but a
-         number of round trips may still be required to open the window
-         completely.
-
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                  [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-   Recommendation: Any standards-conformant TCP will implement Slow
-   Start and Congestion Avoidance, which are <em>MUST</em>s in STD 3 [<a href="./rfc1122.html" title='"Requirements for Internet Hosts -- Communication Layers"'>RFC1122</a>].
-   Recommendations in this document will not interfere with these
-   mechanisms.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2%20Fast%20Retransmit%20and%20Fast%20Recovery%20%5BRFC2581%5D"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a> Fast Retransmit and Fast Recovery [<a href="./rfc2581.html" title='"TCP Congestion Control"'>RFC2581</a>]</span>
-
-   TCP provides reliable delivery of data as a byte-stream to an
-   application, so that when a segment is lost (whether due to either
-   congestion or transmission loss), the receiver TCP implementation
-   must wait to deliver data to the receiving application until the
-   missing data is received.  The receiver TCP implementation detects
-   missing segments by segments arriving with out-of-order sequence
-   numbers.
-
-   TCPs should immediately send an acknowledgement when data is received
-   out-of-order [<a href="./rfc2581.html" title='"TCP Congestion Control"'>RFC2581</a>], providing the next expected sequence number
-   with no delay, so that the sender can retransmit the required data as
-   quickly as possible and the receiver can resume delivery of data to
-   the receiving application.  When an acknowledgement carries the same
-   expected sequence number as an acknowledgement that has already been
-   sent for the last in-order segment received, these acknowledgement
-   are called "duplicate ACKs".
-
-   Because IP networks are allowed to reorder packets, the receiver may
-   send duplicate acknowledgments for segments that arrive out of order
-   due to routing changes, link-level retransmission, etc.  When a TCP
-   sender receives three duplicate ACKs, fast retransmit [<a href="./rfc2581.html" title='"TCP Congestion Control"'>RFC2581</a>]
-   allows it to infer that a segment was lost.  The sender retransmits
-   what it considers to be this lost segment without waiting for the
-   full retransmission timeout, thus saving time.
-
-   After a fast retransmit, a sender halves its congestion window and
-   invokes the fast recovery [<a href="./rfc2581.html" title='"TCP Congestion Control"'>RFC2581</a>] algorithm, whereby it invokes
-   congestion avoidance from a halved congestion window, but does not
-   invoke slow start from a one-segment congestion window as it would do
-   after a retransmission timeout.  As the sender is still receiving
-   dupacks, it knows the receiver is receiving packets sent, so the full
-   reduction after a timeout when no communication has been received is
-   not called for.  This relatively safe optimization also saves time.
-
-   It is important to be realistic about the maximum throughput that TCP
-   can have over a connection that traverses a high error-rate link.  In
-   general, TCP will increase its congestion window beyond the delay-
-   bandwidth product.  TCP's congestion avoidance strategy is additive-
-   increase, multiplicative-decrease, which means that if additional
-   errors are encountered before the congestion window recovers
-   completely from a 50-percent reduction, the effect can be a "downward
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                  [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-   spiral" of the congestion window due to additional 50-percent
-   reductions.  Even using Fast Retransmit/Fast Recovery, the sender
-   will halve the congestion window each time a window contains one or
-   more segments that are lost, and will re-open the window by one
-   additional segment for each congestion window's worth of
-   acknowledgement received.
-
-   If a connection's path traverses a link that loses one or more
-   segments during this recovery period, the one-half reduction takes
-   place again, this time on a reduced congestion window - and this
-   downward spiral will continue to hold the congestion window below
-   path capacity until the connection is able to recover completely by
-   additive increase without experiencing loss.
-
-   Of course, no downward spiral occurs if the error rate is constantly
-   high and the congestion window always remains small; the
-   multiplicative-increase "slow start" will be exited early, and the
-   congestion window remains low for the duration of the TCP connection.
-   In links with high error rates, the TCP window may remain rather
-   small for long periods of time.
-
-   Not all causes of small windows are related to errors.  For example,
-   HTTP/1.0 commonly closes TCP connections to indicate boundaries
-   between requested resources.  This means that these applications are
-   constantly closing "trained" TCP connections and opening "untrained"
-   TCP connections which will execute slow start, beginning with one or
-   two segments.  This can happen even with HTTP/1.1, if webmasters
-   configure their HTTP/1.1 servers to close connections instead of
-   waiting to see if the connection will be useful again.
-
-   A small window - especially a window of less than four segments -
-   effectively prevents the sender from taking advantage of Fast
-   Retransmits.  Moreover, efficient recovery from multiple losses
-   within a single window requires adoption of new proposals (NewReno
-   [<a href="./rfc2582.html" title="&quot;The NewReno Modification to TCP's Fast Recovery Algorithm&quot;">RFC2582</a>]).
-
-   Recommendation: Implement Fast Retransmit and Fast Recovery at this
-   time.  This is a widely-implemented optimization and is currently at
-   Proposed Standard level.  [<a href="./rfc2488.html" title='"Enhancing TCP Over Satellite Channels using Standard Mechanisms"'>RFC2488</a>] recommends implementation of Fast
-   Retransmit/Fast Recovery in satellite environments.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3%20Selective%20Acknowledgements%20%5BRFC2018%2C%20RFC2883%5D"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a> Selective Acknowledgements [RFC2018, <a href="./rfc2883.html">RFC2883</a>]</span>
-
-   Selective Acknowledgements [<a href="./rfc2018.html" title='"TCP Selective Acknowledgment Options"'>RFC2018</a>] allow the repair of multiple
-   segment losses per window without requiring one (or more) round-trips
-   per loss.
-
-
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                  [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-   [<a id="ref-RFC2883" name="ref-RFC2883">RFC2883</a>] proposes a minor extension to SACK that allows receiving
-   TCPs to provide more information about the order of delivery of
-   segments, allowing "more robust operation in an environment of
-   reordered packets, ACK loss, packet replication, and/or early
-   retransmit timeouts".  Unless explicitly stated otherwise, in this
-   document, "Selective Acknowledgements" (or "SACK") refers to the
-   combination of [<a href="./rfc2018.html" title='"TCP Selective Acknowledgment Options"'>RFC2018</a>] and [<a href="./rfc2883.html" title='"An Extension to the Selective Acknowledgement (SACK) Option for TCP"'>RFC2883</a>].
-
-   Selective acknowledgments are most useful in LFNs ("Long Fat
-   Networks") because of the long round trip times that may be
-   encountered in these environments, according to <a href="./rfc1323.html#section-1.1">Section 1.1 of
-   [RFC1323]</a>, and are especially useful if large windows are required,
-   because there is a higher probability of multiple segment losses per
-   window.
-
-   On the other hand, if error rates are generally low but occasionally
-   higher due to channel conditions, TCP will have the opportunity to
-   increase its window to larger values during periods of improved
-   channel conditions between bursts of errors.  When bursts of errors
-   occur, multiple losses within a window are likely to occur.  In this
-   case, SACK would provide benefits in speeding the recovery and
-   preventing unnecessary reduction of the window size.
-
-   Recommendation: Implement SACK as specified in [<a href="./rfc2018.html" title='"TCP Selective Acknowledgment Options"'>RFC2018</a>] and updated
-   by [<a href="./rfc2883.html" title='"An Extension to the Selective Acknowledgement (SACK) Option for TCP"'>RFC2883</a>], both Proposed Standards.  In cases where SACK cannot be
-   enabled for both sides of a connection, TCP senders may use NewReno
-   [<a href="./rfc2582.html" title="&quot;The NewReno Modification to TCP's Fast Recovery Algorithm&quot;">RFC2582</a>] to better handle partial ACKs and multiple losses within a
-   single window.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.0%20Summary%20of%20Recommendations"></a></body></html><a class="selflink" href="#section-3.0" name="section-3.0">3.0</a> Summary of Recommendations</span>
-
-   The Internet does not provide a widely-available loss feedback
-   mechanism that allows TCP to distinguish between congestion loss and
-   transmission error.  Because congestion affects all traffic on a path
-   while transmission loss affects only the specific traffic
-   encountering uncorrected errors, avoiding congestion has to take
-   precedence over quickly repairing transmission errors.  This means
-   that the best that can be achieved without new feedback mechanisms is
-   minimizing the amount of time that is spent unnecessarily in
-   congestion avoidance.
-
-   The Fast Retransmit/Fast Recovery mechanism allows quick repair of
-   loss without giving up the safety of congestion avoidance.  In order
-   for Fast Retransmit/Fast Recovery to work, the window size must be
-   large enough to force the receiver to send three duplicate
-   acknowledgments before the retransmission timeout interval expires,
-   forcing full TCP slow-start.
-
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                  [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-   Selective Acknowledgements (SACK) extend the benefit of Fast
-   Retransmit/Fast Recovery to situations where multiple segment losses
-   in the window need to be repaired more quickly than can be
-   accomplished by executing Fast Retransmit for each segment loss, only
-   to discover the next segment loss.
-
-   These mechanisms are not limited to wireless environments.  They are
-   usable in all environments.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.0%20Topics%20For%20Further%20Work"></a></body></html><a class="selflink" href="#section-4.0" name="section-4.0">4.0</a> Topics For Further Work</span>
-
-   "Limited Transmit" [<a href="./rfc3042.html" title="&quot;Enhancing TCP's Loss Recovery Using Limited Transmit&quot;">RFC3042</a>] has been specified as an optimization
-   extending Fast Retransmit/Fast Recovery for TCP connections with
-   small congestion windows that will not trigger three duplicate
-   acknowledgments.  This specification is deemed safe, and it also
-   provides benefits for TCP connections that experience a large amount
-   of packet (data or ACK) loss.  Implementors should evaluate this
-   standards track specification for TCP in loss environments.
-
-   Delayed Duplicate Acknowledgements [<a href="#ref-MV97" title='"Delayed Duplicate- Acknowledgements: A Proposal to Improve Performance of TCP on Wireless Links,"'>MV97</a>, <a href="#ref-VMPM99" title='"Delayed Duplicate Acknowledgements: A TCP-Unaware Approach to Improve Performance of TCP over Wireless,"'>VMPM99</a>] attempts to prevent
-   TCP-level retransmission when link-level retransmission is still in
-   progress, adding additional traffic to the network.  This proposal is
-   worthy of additional study, but is not recommended at this time,
-   because we don't know how to calculate appropriate amounts of delay
-   for an arbitrary network topology.
-
-   It is not possible to use explicit congestion notification [<a href="./rfc2481.html" title='"A Proposal to add Explicit Congestion Notification (ECN) to IP"'>RFC2481</a>]
-   as a surrogate for explicit transmission error notification (no
-   matter how much we wish it was!).  Some mechanism to provide explicit
-   notification of transmission error would be very helpful.  This might
-   be more easily provided in a PEP environment, especially when the PEP
-   is the "first hop" in a connection path, because current checksum
-   mechanisms do not distinguish between transmission error to a payload
-   and transmission error to the header.  Furthermore, if the header is
-   damaged, sending explicit transmission error notification to the
-   right endpoint is problematic.
-
-   Losses that take place on the ACK stream, especially while a TCP is
-   learning network characteristics, can make the data stream quite
-   bursty (resulting in losses on the data stream, as well).  Several
-   ways of limiting this burstiness have been proposed, including TCP
-   transmit pacing at the sender and ACK rate control within the
-   network.
-
-   "Appropriate Byte Counting" (ABC) [<a href="#ref-ALL99" title='"TCP Byte Counting Refinements,"'>ALL99</a>], has been proposed as a way
-   of opening the congestion window based on the number of bytes that
-   have been successfully transfered to the receiver, giving more
-   appropriate behavior for application protocols that initiate
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                  [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-   connections with relatively short packets.  For SMTP [<a href="./rfc2821.html" title='"Simple Mail Transfer Protocol"'>RFC2821</a>], for
-   instance, the client might send a short HELO packet, a short MAIL
-   packet, one or more short RCPT packets, and a short DATA packet -
-   followed by the entire mail body sent as maximum-length packets.  An
-   ABC TCP sender would not use ACKs for each of these short packets to
-   increase the congestion window to allow additional full-length
-   packets.  ABC is worthy of additional study, but is not recommended
-   at this time, because ABC can lead to increased burstiness when
-   acknowledgments are lost.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1%20Achieving%2C%20and%20maintaining%2C%20large%20windows"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a> Achieving, and maintaining, large windows</span>
-
-   The recommendations described in this document will aid TCPs in
-   injecting packets into ERRORed connections as fast as possible
-   without destabilizing the Internet, and so optimizing the use of
-   available bandwidth.
-
-   In addition to these TCP-level recommendations, there is still
-   additional work to do at the application level, especially with the
-   dominant application protocol on the World Wide Web, HTTP.
-
-   HTTP/1.0 (and earlier versions) closes TCP connections to signal a
-   receiver that all of a requested resource had been transmitted.
-   Because WWW objects tend to be small in size [<a href="#ref-MOGUL" title='"The Case for Persistent-Connection HTTP"'>MOGUL</a>], TCPs carrying
-   HTTP/1.0 traffic experience difficulty in "training" on available
-   path capacity (a substantial portion of the transfer has already
-   happened by the time TCP exits slow start).
-
-   Several HTTP modifications have been introduced to improve this
-   interaction with TCP ("persistent connections" in HTTP/1.0, with
-   improvements in HTTP/1.1 [<a href="./rfc2616.html" title='"Hypertext Transfer Protocol -- HTTP/1.1"'>RFC2616</a>]).  For a variety of reasons, many
-   HTTP interactions are still HTTP/1.0-style - relatively short-lived.
-
-   Proposals which reuse TCP congestion information across connections,
-   like TCP Control Block Interdependence [<a href="./rfc2140.html" title='"TCP Control Block Interdependence"'>RFC2140</a>], or the more recent
-   Congestion Manager [<a href="#ref-BS00" title='"The Congestion Manager"'>BS00</a>] proposal, will have the effect of making
-   multiple parallel connections impact the network as if they were a
-   single connection, "trained" after a single startup transient.  These
-   proposals are critical to the long-term stability of the Internet,
-   because today's users always have the choice of clicking on the
-   "reload" button in their browsers and cutting off TCP's exponential
-   backoff - replacing connections which are building knowledge of the
-   available bandwidth with connections with no knowledge at all.
-
-
-
-
-
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                 [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.0%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5.0" name="section-5.0">5.0</a> Security Considerations</span>
-
-   A potential vulnerability introduced by Fast Retransmit/Fast Recovery
-   is (as pointed out in [<a href="./rfc2581.html" title='"TCP Congestion Control"'>RFC2581</a>]) that an attacker may force TCP
-   connections to grind to a halt, or, more dangerously, behave more
-   aggressively.  The latter possibility may lead to congestion
-   collapse, at least in some regions of the network.
-
-   Selective acknowledgments is believed to neither strengthen nor
-   weaken TCP's current security properties [<a href="./rfc2018.html" title='"TCP Selective Acknowledgment Options"'>RFC2018</a>].
-
-   Given that the recommendations in this document are performed on an
-   end-to-end basis, they continue working even in the presence of end-
-   to-end IPsec.  This is in direct contrast with mechanisms such as
-   PEP's which are implemented in intermediate nodes (<a href="#section-1.2">section 1.2</a>).
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.0%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6.0" name="section-6.0">6.0</a> IANA Considerations</span>
-
-   This document is a pointer to other, existing IETF standards.  There
-   are no new IANA considerations.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.0%20Acknowledgements"></a></body></html><a class="selflink" href="#section-7.0" name="section-7.0">7.0</a> Acknowledgements</span>
-
-   This recommendation has grown out of <a href="./rfc2757.html">RFC 2757</a>, "Long Thin Networks",
-   which was in turn based on work done in the IETF TCPSAT working
-   group.  The authors are indebted to the active members of the PILC
-   working group.  In particular, Mark Allman and Lloyd Wood gave us
-   copious and insightful feedback, and Dan Grossman and Jamshid Mahdavi
-   provided text replacements.
-
-References
-
-   [<a id="ref-ALL99" name="ref-ALL99">ALL99</a>]    M. Allman, "TCP Byte Counting Refinements," ACM Computer
-              Communication Review, Volume 29, Number 3, July 1999.
-              <a href="http://www.acm.org/sigcomm/ccr/archive/ccr-toc/ccr-toc-99.html">http://www.acm.org/sigcomm/ccr/archive/ccr-toc/ccr-toc-</a>
-              <a href="http://www.acm.org/sigcomm/ccr/archive/ccr-toc/ccr-toc-99.html">99.html</a>
-
-   [<a id="ref-BS00" name="ref-BS00">BS00</a>]     Balakrishnan, H. and S. Seshan, "The Congestion Manager",
-              <a href="./rfc3124.html">RFC 3124</a>, June 2001.
-
-   [<a id="ref-BV97" name="ref-BV97">BV97</a>]     S. Biaz and N. Vaidya, "Using End-to-end Statistics to
-              Distinguish Congestion and Corruption Losses: A Negative
-              Result," Texas A&amp;M University, Technical Report 97-009,
-              August 18, 1997.
-
-
-
-
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                 [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-   [<a id="ref-BV98" name="ref-BV98">BV98</a>]     S. Biaz and N. Vaidya, "Sender-Based heuristics for
-              Distinguishing Congestion Losses from Wireless
-              Transmission Losses," Texas A&amp;M University, Technical
-              Report 98-013, June 1998.
-
-   [<a id="ref-BV98a" name="ref-BV98a">BV98a</a>]    S. Biaz and N. Vaidya, "Discriminating Congestion Losses
-              from Wireless Losses using Inter-Arrival Times at the
-              Receiver," Texas A&amp;M University, Technical Report 98-014,
-              June 1998.
-
-   [<a id="ref-MOGUL" name="ref-MOGUL">MOGUL</a>]    "The Case for Persistent-Connection HTTP", J. C. Mogul,
-              Research Report 95/4, May 1995. Available as
-              <a href="http://www.research.digital.com/wrl/techreports/abstracts/95.4.html">http://www.research.digital.com/wrl/techreports/abstracts/</a>
-              <a href="http://www.research.digital.com/wrl/techreports/abstracts/95.4.html">95.4.html</a>
-
-   [<a id="ref-MV97" name="ref-MV97">MV97</a>]     M. Mehta and N. Vaidya, "Delayed Duplicate-
-              Acknowledgements:  A Proposal to Improve Performance of
-              TCP on Wireless Links," Texas A&amp;M University, December 24,
-              1997.  Available at
-              <a href="http://www.cs.tamu.edu/faculty/vaidya/mobile.html">http://www.cs.tamu.edu/faculty/vaidya/mobile.html</a>
-
-   [<a id="ref-PILC-WEB" name="ref-PILC-WEB">PILC-WEB</a>] <a href="http://pilc.grc.nasa.gov/">http://pilc.grc.nasa.gov/</a>
-
-   [<a id="ref-PFTK98" name="ref-PFTK98">PFTK98</a>]   Padhye, J., Firoiu, V., Towsley, D. and J.Kurose, "TCP
-              Throughput: A simple model and its empirical validation",
-              SIGCOMM Symposium on Communications Architectures and
-              Protocols, August 1998.
-
-   [<a id="ref-RFC793" name="ref-RFC793">RFC793</a>]   Postel, J., "Transmission Control Protocol", STD 7, <a href="./rfc793.html">RFC</a>
-              <a href="./rfc793.html">793</a>, September 1981.
-
-   [<a id="ref-RFC2821" name="ref-RFC2821">RFC2821</a>]  Klensin, J., Editor, "Simple Mail Transfer Protocol", <a href="./rfc2821.html">RFC</a>
-              <a href="./rfc2821.html">2821</a>, April 2001.
-
-   [<a id="ref-RFC1122" name="ref-RFC1122">RFC1122</a>]  Braden, R., "Requirements for Internet Hosts --
-              Communication Layers", STD 3, <a href="./rfc1122.html">RFC 1122</a>, October 1989.
-
-   [<a id="ref-RFC1191" name="ref-RFC1191">RFC1191</a>]  Mogul J., and S. Deering, "Path MTU Discovery", <a href="./rfc1191.html">RFC 1191</a>,
-              November 1990.
-
-   [<a id="ref-RFC1323" name="ref-RFC1323">RFC1323</a>]  Jacobson, V., Braden, R. and D. Borman. "TCP Extensions
-              for High Performance", <a href="./rfc1323.html">RFC 1323</a>, May 1992.
-
-   [<a id="ref-RFC2018" name="ref-RFC2018">RFC2018</a>]  Mathis, M., Mahdavi, J., Floyd, S. and A. Romanow "TCP
-              Selective Acknowledgment Options", <a href="./rfc2018.html">RFC 2018</a>, October 1996.
-
-   [<a id="ref-RFC2140" name="ref-RFC2140">RFC2140</a>]  Touch, J., "TCP Control Block Interdependence", <a href="./rfc2140.html">RFC 2140</a>,
-              April 1997.
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                 [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-   [<a id="ref-RFC2309" name="ref-RFC2309">RFC2309</a>]  Braden, B., Clark, D., Crowcrfot, J., Davie, B., Deering,
-              S., Estrin, D., Floyd, S., Jacobson, V., Minshall, G.,
-              Partridge, C., Peterson, L., Ramakrishnan, K., Shecker,
-              S., Wroclawski, J. and L, Zhang, "Recommendations on Queue
-              Management and Congestion Avoidance in the Internet", <a href="./rfc2309.html">RFC</a>
-              <a href="./rfc2309.html">2309</a>, April 1998.
-
-   [<a id="ref-RFC2481" name="ref-RFC2481">RFC2481</a>]  Ramakrishnan K. and S. Floyd, "A Proposal to add Explicit
-              Congestion Notification (ECN) to IP", <a href="./rfc2481.html">RFC 2481</a>, January
-              1999.
-
-   [<a id="ref-RFC2488" name="ref-RFC2488">RFC2488</a>]  Allman, M., Glover, D. and L. Sanchez. "Enhancing TCP Over
-              Satellite Channels using Standard Mechanisms", <a href="./bcp28.html">BCP 28</a>, <a href="./rfc2488.html">RFC</a>
-              <a href="./rfc2488.html">2488</a>, January 1999.
-
-   [<a id="ref-RFC2581" name="ref-RFC2581">RFC2581</a>]  Allman, M., Paxson, V. and W. Stevens, "TCP Congestion
-              Control", <a href="./rfc2581.html">RFC 2581</a>, April 1999.
-
-   [<a id="ref-RFC2582" name="ref-RFC2582">RFC2582</a>]  Floyd, S. and T. Henderson, "The NewReno Modification to
-              TCP's Fast Recovery Algorithm", <a href="./rfc2582.html">RFC 2582</a>, April 1999.
-
-   [<a id="ref-RFC2616" name="ref-RFC2616">RFC2616</a>]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
-              Masinter, L., Leach P. and T. Berners-Lee, "Hypertext
-              Transfer Protocol -- HTTP/1.1", <a href="./rfc2616.html">RFC 2616</a>, June 1999.
-
-   [<a id="ref-RFC2861" name="ref-RFC2861">RFC2861</a>]  Handley, H., Padhye, J. and S., Floyd, "TCP Congestion
-              Window Validation", <a href="./rfc2861.html">RFC 2861</a>, June 2000.
-
-   [<a id="ref-RFC2883" name="ref-RFC2883">RFC2883</a>]  Floyd, S., Mahdavi, M., Mathis, M. and M. Podlosky, "An
-              Extension to the Selective Acknowledgement (SACK) Option
-              for TCP", <a href="./rfc2883.html">RFC 2883</a>, August 1999.
-
-   [<a id="ref-RFC2923" name="ref-RFC2923">RFC2923</a>]  Lahey, K., "TCP Problems with Path MTU Discovery", <a href="./rfc2923.html">RFC</a>
-              <a href="./rfc2923.html">2923</a>, September 2000.
-
-   [<a id="ref-RFC3042" name="ref-RFC3042">RFC3042</a>]  Allman, M., Balakrishnan, H. and S. Floyd, "Enhancing
-              TCP's Loss Recovery Using Limited Transmit", <a href="./rfc3042.html">RFC 3042</a>,
-              January, 2001.
-
-   [<a id="ref-RFC3135" name="ref-RFC3135">RFC3135</a>]  Border, J., Kojo, M., Griner, J., Montenegro, G. and Z.
-              Shelby, "Performance Enhancing Proxies Intended to
-              Mitigate Link-Related Degradations", <a href="./rfc3135.html">RFC 3135</a>, June 2001.
-
-   [<a id="ref-VJ-DCAC" name="ref-VJ-DCAC">VJ-DCAC</a>]  Jacobson, V., "Dynamic Congestion Avoidance / Control" e-
-              mail dated February 11, 1988, available from
-              <a href="http://www.kohala.com/~rstevens/vanj.88feb11.txt">http://www.kohala.com/~rstevens/vanj.88feb11.txt</a>
-
-
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                 [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-   [<a id="ref-VMPM99" name="ref-VMPM99">VMPM99</a>]   N. Vaidya, M. Mehta, C. Perkins, and G. Montenegro,
-              "Delayed Duplicate Acknowledgements: A TCP-Unaware
-              Approach to Improve Performance of TCP over Wireless,"
-              Technical Report 99-003, Computer Science Dept., Texas A&amp;M
-              University, February 1999. Also, to appear in Journal of
-              Wireless Communications and Wireless Computing (Special
-              Issue on Reliable Transport Protocols for Mobile
-              Computing).
-
-Authors' Addresses
-
-   Questions about this document may be directed to:
-
-   Spencer Dawkins
-   Fujitsu Network Communications
-   2801 Telecom Parkway
-   Richardson, Texas 75082
-
-   Phone: +1-972-479-3782
-   EMail: spencer.dawkins@fnc.fujitsu.com
-
-
-   Gabriel E. Montenegro
-   Sun Microsystems
-   Laboratories, Europe
-   29, chemin du Vieux Chene
-   38240 Meylan
-   FRANCE
-
-   Phone: +33 476 18 80 45
-   EMail: gab@sun.com
-
-
-   Markku Kojo
-   Department of Computer Science
-   University of Helsinki
-   P.O. Box 26 (Teollisuuskatu 23)
-   FIN-00014 HELSINKI
-   Finland
-
-   Phone: +358-9-1914-4179
-   EMail: kojo@cs.helsinki.fi
-
-
-
-
-
-
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                 [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-   Vincent Magret
-   Alcatel Internetworking, Inc.
-   26801 W. Agoura road
-   Calabasas, CA, 91301
-
-   Phone: +1 818 878 4485
-   EMail: vincent.magret@alcatel.com
-
-
-   Nitin H. Vaidya
-   458 Coodinated Science Laboratory, MC-228
-   1308 West Main Street
-   Urbana, IL 61801
-
-   Phone: 217-265-5414
-   E-mail: nhv@crhc.uiuc.edu
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Dawkins, et al.          Best Current Practice                 [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
-<span class="grey"><a href="./rfc3155.html">RFC 3155</a>                PILC - Links with Errors             August 2001</span>
-
-
-Full Copyright Statement
-
-   Copyright (C) The Internet Society (2001).  All Rights Reserved.
-
-   This document and translations of it may be copied and furnished to
-   others, and derivative works that comment on or otherwise explain it
-   or assist in its implementation may be prepared, copied, published
-   and distributed, in whole or in part, without restriction of any
-   kind, provided that the above copyright notice and this paragraph are
-   included on all such copies and derivative works.  However, this
-   document itself may not be modified in any way, such as by removing
-   the copyright notice or references to the Internet Society or other
-   Internet organizations, except as needed for the purpose of
-   developing Internet standards in which case the procedures for
-   copyrights defined in the Internet Standards process must be
-   followed, or as required to translate it into languages other than
-   English.
-
-   The limited permissions granted above are perpetual and will not be
-   revoked by the Internet Society or its successors or assigns.
-
-   This document and the information contained herein is provided on an
-   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
-   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
-   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
-   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
-   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
-
-Acknowledgement
-
-   Funding for the RFC Editor function is currently provided by the
-   Internet Society.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Dawkins, et al.          Best Current Practice                 [Page 16]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
+<br/><br/><div id="footer">
+<div id="footerdivs">
+</div>
+<div style="clear:both"></div>
+<p class="credit">
+<a href="./www.iab.org/.html">IAB</a> • <a href="./www.iana.org/.html">IANA</a>  • <a href="./www.ietf.org.html">IETF</a> • <a href="./www.irtf.org.html">IRTF</a> • <a href="/about/independent">ISE</a> • <a href="./www.internetsociety.org.html">ISOC</a> • <a href="./trustee.ietf.org/.html">IETF Trust</a>
+<br/>
+<a href="/report-summary">Reports</a> • <a href="./www.ietf.org/privacy-statement/.html">Privacy Statement</a> • <a href="/sitemap">Site Map</a> • <a href="/contact">Contact Us</a> </p>
+</div><!--footer-->
+</div><!--page-->
+<button aria-controls="rmp-container-2538" aria-label="Menu Trigger" class="rmp_menu_trigger rmp-menu-trigger-boring" id="rmp_menu_trigger-2538" type="button">
+<span class="rmp-trigger-box">
+<span class="responsive-menu-pro-inner"></span>
+</span>
+</button>
+<div class="rmp-container rmp-container rmp-slide-left" id="rmp-container-2538">
+<div class="rmp-menu-title" id="rmp-menu-title-2538">
+<a href="" id="rmp-menu-title-link" target="_self">
+<span></span>
+</a>
+</div>
+<div class="rmp-menu-wrap" id="rmp-menu-wrap-2538"><ul aria-label="Default Menu" class="rmp-menu" id="rmp-menu-2538" role="menubar"><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-632" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/retrieve/" role="menuitem">Document Retrieval</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-633" role="none"><a class="rmp-menu-item-link" href="/errata.php" role="menuitem">Errata</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-634" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/faq/" role="menuitem">Frequently Asked Questions</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-636" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/rse/format-faq/" role="menuitem">Future Format FAQ</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-637" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/history/" role="menuitem">History</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-638" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/about/" role="menuitem">About Us</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-639" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/other/" role="menuitem">Other Information</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-640" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/pubprocess/" role="menuitem">Publication Process</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-641" role="none"><a class="rmp-menu-item-link" href="/current_queue.php" role="menuitem">Publication Queue</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-642" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/styleguide/" role="menuitem">Style Guide</a></li></ul></div> <div class="rmp-menu-additional-content" id="rmp-menu-additional-content-2538">
+<a href="/search/rfc_search.php">Advanced Search</a>
+<form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="20" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+</div>
 </div>
 </body>
 </html>

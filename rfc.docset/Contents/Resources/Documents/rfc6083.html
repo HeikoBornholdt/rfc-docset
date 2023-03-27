@@ -1,32 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-tuexen-tsvwg-dtls-for-sctp" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:6083" name="DC.Identifier"/>
-<meta content="January, 2011" name="DC.Date.Issued"/>
-<meta content="Tuexen, Michael" name="DC.Creator"/>
-<meta content="Seggelmann, Robin" name="DC.Creator"/>
-<meta content="Rescorla, Eric" name="DC.Creator"/>
-<meta content="This document describes the usage of the Datagram Transport Layer
-Security (DTLS) protocol over the Stream Control Transmission Protocol
-(SCTP).  The user of DTLS over SCTP can take advantage of most of the
-features provided by SCTP and its extensions, especially support of  o
-multi-homing to provide network level fault tolerance.  o dynamic
-reconfiguration of IPv4 and IPv6 addresses.  o multiple streams to
-avoid head of line blocking.  o unordered delivery.  o dynamic
-reconfiguration of streams.  o partially reliable data transfer.
-However, the DTLS maximum user message size limit of 2^14 bytes
-applies also to DTLS over SCTP. Since DTLS over SCTP uses the SCTP-
-AUTH extension, the DTLS user can not manage the keying material,
-since this is done by the DTLS layer." name="DC.Description.Abstract"/>
-<meta content="Datagram Transport Layer Security for Stream Control Transmission Protocol" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6083 - Datagram Transport Layer Security for Stream Control Transmission Protocol</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="M. Tuexen" name="citation_author"/>
+<meta content="R. Seggelmann" name="citation_author"/>
+<meta content="E. Rescorla" name="citation_author"/>
+<meta content="January, 2011" name="citation_publication_date"/>
+<meta content="Datagram Transport Layer Security (DTLS) for Stream Control Transmission Protocol (SCTP)" name="citation_title"/>
+<meta content="10.17487/RFC6083" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6083" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6083.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6083: Datagram Transport Layer Security (DTLS) for Stream Control Transmission Protocol (SCTP)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -55,7 +42,7 @@ since this is done by the DTLS layer." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -64,7 +51,7 @@ since this is done by the DTLS layer." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -143,19 +130,18 @@ since this is done by the DTLS layer." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -169,21 +155,9 @@ since this is done by the DTLS layer." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6083.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6083" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-tsvwg-dtls-for-sctp.html" title="draft-ietf-tsvwg-dtls-for-sctp">draft-ietf-tsvwg-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6083" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6083" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                         M. Tuexen
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6083.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6083.txt.pdf">PDF</a>|<a href="/rfc/rfc6083.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6083" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6083&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc6083" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc6083" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo">Updated by: <a href="/rfc/rfc8996" target="_blank">8996</a> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Engineering Task Force (IETF)                         M. Tuexen
 Request for Comments: 6083                                 R. Seggelmann
 Category: Standards Track             Muenster Univ. of Applied Sciences
 ISSN: 2070-1721                                              E. Rescorla
@@ -235,7 +209,7 @@ Status of This Memo
 
 
 <span class="grey">Tuexen, et al.               Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6083.html">RFC 6083</a>                      DTLS for SCTP                 January 2011</span>
 
 
@@ -244,7 +218,7 @@ Copyright Notice
    Copyright (c) 2011 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -265,9 +239,9 @@ Table of Contents
    <a href="#section-7">7</a>.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . <a href="#page-8">8</a>
    <a href="#section-8">8</a>.  References  . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="#page-8">8</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Overview"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Overview</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Overview"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Overview</span>
 
    This document describes the usage of the Datagram Transport Layer
    Security (DTLS) protocol, as defined in [<a href="./rfc4347.html" title='"Datagram Transport Layer Security"'>RFC4347</a>], over the Stream
@@ -291,7 +265,7 @@ Table of Contents
 
 
 <span class="grey">Tuexen, et al.               Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6083.html">RFC 6083</a>                      DTLS for SCTP                 January 2011</span>
 
 
@@ -335,7 +309,7 @@ Table of Contents
    user messages as defined in [<a href="./rfc4960.html" title='"Stream Control Transmission Protocol"'>RFC4960</a>] and the SCTP authentication
    extension defined in [<a href="./rfc4895.html" title='"Authenticated Chunks for the Stream Control Transmission Protocol (SCTP)"'>RFC4895</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Terminology</span>
 
    This document uses the following terms:
 
@@ -347,11 +321,11 @@ Table of Contents
 
 
 <span class="grey">Tuexen, et al.               Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6083.html">RFC 6083</a>                      DTLS for SCTP                 January 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Abbreviations"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>.  Abbreviations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Abbreviations"></a></body></html><a class="selflink" href="#section-1.3" id="section-1.3">1.3</a>.  Abbreviations</span>
 
    DTLS:  Datagram Transport Layer Security
 
@@ -365,34 +339,34 @@ Table of Contents
 
    TLS:  Transport Layer Security
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Conventions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Conventions"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Conventions</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20DTLS%20Considerations"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  DTLS Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20DTLS%20Considerations"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  DTLS Considerations</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Version%20of%20DTLS"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Version of DTLS</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Version%20of%20DTLS"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Version of DTLS</span>
 
    This document is based on [<a href="./rfc4347.html" title='"Datagram Transport Layer Security"'>RFC4347</a>], and it is expected that DTLS/
    SCTP as described in this document will work with future versions of
    DTLS.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Message%20Sizes"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Message Sizes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Message%20Sizes"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Message Sizes</span>
 
    DTLS limits the DTLS user message size to the current Path MTU minus
    the header sizes.  For the purposes of running over SCTP, the DTLS
    path MTU <em>MUST</em> be considered to be 2^14.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Replay%20Detection"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Replay Detection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Replay%20Detection"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Replay Detection</span>
 
    The replay detection of DTLS may result in the DTLS layer dropping
    messages.  Since DTLS/SCTP provides a reliable service if requested
    by the application, replay detection cannot be used.  Therefore,
    replay detection of DTLS <em>MUST NOT</em> be used.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Path%20MTU%20Discovery"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Path MTU Discovery</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Path%20MTU%20Discovery"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Path MTU Discovery</span>
 
    SCTP provides Path MTU discovery and fragmentation/reassembly for
    user messages.  According to <a href="#section-3.2">Section 3.2</a>, DTLS can send maximum sized
@@ -403,19 +377,19 @@ Table of Contents
 
 
 <span class="grey">Tuexen, et al.               Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6083.html">RFC 6083</a>                      DTLS for SCTP                 January 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Retransmission%20of%20Messages"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  Retransmission of Messages</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Retransmission%20of%20Messages"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  Retransmission of Messages</span>
 
    SCTP provides a reliable and in-sequence transport service for DTLS
    messages that require it.  See <a href="#section-4.4">Section 4.4</a>.  Therefore, DTLS
    procedures for retransmissions <em>MUST NOT</em> be used.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20SCTP%20Considerations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  SCTP Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20SCTP%20Considerations"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  SCTP Considerations</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Mapping%20of%20DTLS%20Records"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Mapping of DTLS Records</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Mapping%20of%20DTLS%20Records"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Mapping of DTLS Records</span>
 
    The supported maximum length of SCTP user messages <em>MUST</em> be at least
    2^14 + 2048 + 13 = 18445 bytes (2^14 + 2048 is the maximum length of
@@ -425,13 +399,13 @@ Table of Contents
 
    Every SCTP user message <em>MUST</em> consist of exactly one DTLS record.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20DTLS%20Connection%20Handling"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  DTLS Connection Handling</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20DTLS%20Connection%20Handling"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  DTLS Connection Handling</span>
 
    Each DTLS connection <em>MUST</em> be established and terminated within the
    same SCTP association.  A DTLS connection <em>MUST NOT</em> span multiple SCTP
    associations.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Payload%20Protocol%20Identifier%20Usage"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Payload Protocol Identifier Usage</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Payload%20Protocol%20Identifier%20Usage"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Payload Protocol Identifier Usage</span>
 
    Application protocols using DTLS over SCTP <em>SHOULD</em> register and use a
    separate payload protocol identifier (PPID) and <em>SHOULD NOT</em> reuse the
@@ -443,7 +417,7 @@ Table of Contents
 
    This means, in particular, that there is no specific PPID for DTLS.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Stream%20Usage"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Stream Usage</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Stream%20Usage"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Stream Usage</span>
 
    All DTLS messages of the ChangeCipherSpec, Alert, or Handshake
    protocol <em>MUST</em> be transported on stream 0 with unlimited reliability
@@ -459,11 +433,11 @@ Table of Contents
 
 
 <span class="grey">Tuexen, et al.               Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6083.html">RFC 6083</a>                      DTLS for SCTP                 January 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Chunk%20Handling"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  Chunk Handling</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20Chunk%20Handling"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  Chunk Handling</span>
 
    DATA chunks of SCTP <em>MUST</em> be sent in an authenticated way as described
    in [<a href="./rfc4895.html" title='"Authenticated Chunks for the Stream Control Transmission Protocol (SCTP)"'>RFC4895</a>].  Other chunks <em>MAY</em> be sent in an authenticated way.
@@ -477,14 +451,14 @@ Table of Contents
    and use forged FORWARD-TSN, SACK, and/or SHUTDOWN chunks to hide this
    dropping.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Renegotiation"></a></body></html><a class="selflink" href="#section-4.6" name="section-4.6">4.6</a>.  Renegotiation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Renegotiation"></a></body></html><a class="selflink" href="#section-4.6" id="section-4.6">4.6</a>.  Renegotiation</span>
 
    DTLS supports renegotiation, and therefore this feature is also
    available by DTLS/SCTP.  It is up to the upper layer to use/allow it
    or not.  Application writers should be aware that allowing
    renegotiations may result in changes of security parameters.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Handshake"></a></body></html><a class="selflink" href="#section-4.7" name="section-4.7">4.7</a>.  Handshake</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.7.%20%20Handshake"></a></body></html><a class="selflink" href="#section-4.7" id="section-4.7">4.7</a>.  Handshake</span>
 
    A DTLS implementation discards DTLS messages from older epochs after
    some time, as described in <a href="./rfc4347.html#section-4.1">Section 4.1 of [RFC4347]</a>.  This is not
@@ -504,7 +478,7 @@ Table of Contents
    message and <em>MUST</em> be buffered by DTLS until the Finished message is
    read.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.%20%20Handling%20of%20Endpoint-Pair%20Shared%20Secrets"></a></body></html><a class="selflink" href="#section-4.8" name="section-4.8">4.8</a>.  Handling of Endpoint-Pair Shared Secrets</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.8.%20%20Handling%20of%20Endpoint-Pair%20Shared%20Secrets"></a></body></html><a class="selflink" href="#section-4.8" id="section-4.8">4.8</a>.  Handling of Endpoint-Pair Shared Secrets</span>
 
    The endpoint-pair shared secret for Shared Key Identifier 0 is empty
    and <em>MUST</em> be used when establishing a DTLS connection.  Whenever the
@@ -515,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Tuexen, et al.               Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6083.html">RFC 6083</a>                      DTLS for SCTP                 January 2011</span>
 
 
@@ -529,7 +503,7 @@ Table of Contents
    Once the corresponding Finished message from the peer has been
    received, the old SCTP-AUTH key <em>SHOULD</em> be removed.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.9.%20%20Shutdown"></a></body></html><a class="selflink" href="#section-4.9" name="section-4.9">4.9</a>.  Shutdown</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.9.%20%20Shutdown"></a></body></html><a class="selflink" href="#section-4.9" id="section-4.9">4.9</a>.  Shutdown</span>
 
    To prevent DTLS from discarding DTLS user messages while it is
    shutting down, a CloseNotify message <em>MUST</em> only be sent after all
@@ -540,12 +514,12 @@ Table of Contents
    user messages that are buffered in the SCTP layer <em>MUST</em> be read and
    processed by DTLS.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  IANA Considerations</span>
 
    IANA added a value to the TLS Exporter Label registry as described in
    [<a href="./rfc5705.html" title='"Keying Material Exporters for Transport Layer Security (TLS)"'>RFC5705</a>].  The label is "EXPORTER_DTLS_OVER_SCTP".
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    The security considerations given in [<a href="./rfc4347.html" title='"Datagram Transport Layer Security"'>RFC4347</a>], [<a href="./rfc4895.html" title='"Authenticated Chunks for the Stream Control Transmission Protocol (SCTP)"'>RFC4895</a>], and
    [<a href="./rfc4960.html" title='"Stream Control Transmission Protocol"'>RFC4960</a>] also apply to this document.
@@ -571,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Tuexen, et al.               Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6083.html">RFC 6083</a>                      DTLS for SCTP                 January 2011</span>
 
 
@@ -580,43 +554,43 @@ Table of Contents
    privacy for applications and will not provide privacy for user
    messages.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgments</span>
 
    The authors wish to thank Anna Brunstrom, Lars Eggert, Gorry
    Fairhurst, Ian Goldberg, Alfred Hoenes, Carsten Hohendorf, Stefan
    Lindskog, Daniel Mentz, and Sean Turner for their invaluable
    comments.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC3758" name="ref-RFC3758">RFC3758</a>]  Stewart, R., Ramalho, M., Xie, Q., Tuexen, M., and P.
+   [<a id="ref-RFC3758">RFC3758</a>]  Stewart, R., Ramalho, M., Xie, Q., Tuexen, M., and P.
               Conrad, "Stream Control Transmission Protocol (SCTP)
               Partial Reliability Extension", <a href="./rfc3758.html">RFC 3758</a>, May 2004.
 
-   [<a id="ref-RFC4347" name="ref-RFC4347">RFC4347</a>]  Rescorla, E. and N. Modadugu, "Datagram Transport Layer
+   [<a id="ref-RFC4347">RFC4347</a>]  Rescorla, E. and N. Modadugu, "Datagram Transport Layer
               Security", <a href="./rfc4347.html">RFC 4347</a>, April 2006.
 
-   [<a id="ref-RFC4895" name="ref-RFC4895">RFC4895</a>]  Tuexen, M., Stewart, R., Lei, P., and E. Rescorla,
+   [<a id="ref-RFC4895">RFC4895</a>]  Tuexen, M., Stewart, R., Lei, P., and E. Rescorla,
               "Authenticated Chunks for the Stream Control Transmission
               Protocol (SCTP)", <a href="./rfc4895.html">RFC 4895</a>, August 2007.
 
-   [<a id="ref-RFC4960" name="ref-RFC4960">RFC4960</a>]  Stewart, R., "Stream Control Transmission Protocol",
+   [<a id="ref-RFC4960">RFC4960</a>]  Stewart, R., "Stream Control Transmission Protocol",
               <a href="./rfc4960.html">RFC 4960</a>, September 2007.
 
-   [<a id="ref-RFC5705" name="ref-RFC5705">RFC5705</a>]  Rescorla, E., "Keying Material Exporters for Transport
+   [<a id="ref-RFC5705">RFC5705</a>]  Rescorla, E., "Keying Material Exporters for Transport
               Layer Security (TLS)", <a href="./rfc5705.html">RFC 5705</a>, March 2010.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC0793" name="ref-RFC0793">RFC0793</a>]  Postel, J., "Transmission Control Protocol", STD 7,
+   [<a id="ref-RFC0793">RFC0793</a>]  Postel, J., "Transmission Control Protocol", STD 7,
               <a href="./rfc793.html">RFC 793</a>, September 1981.
 
-   [<a id="ref-RFC3436" name="ref-RFC3436">RFC3436</a>]  Jungmaier, A., Rescorla, E., and M. Tuexen, "Transport
+   [<a id="ref-RFC3436">RFC3436</a>]  Jungmaier, A., Rescorla, E., and M. Tuexen, "Transport
               Layer Security over Stream Control Transmission Protocol",
               <a href="./rfc3436.html">RFC 3436</a>, December 2002.
 
@@ -627,11 +601,11 @@ Table of Contents
 
 
 <span class="grey">Tuexen, et al.               Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6083.html">RFC 6083</a>                      DTLS for SCTP                 January 2011</span>
 
 
-   [<a id="ref-RFC5061" name="ref-RFC5061">RFC5061</a>]  Stewart, R., Xie, Q., Tuexen, M., Maruyama, S., and M.
+   [<a id="ref-RFC5061">RFC5061</a>]  Stewart, R., Xie, Q., Tuexen, M., Maruyama, S., and M.
               Kozuka, "Stream Control Transmission Protocol (SCTP)
               Dynamic Address Reconfiguration", <a href="./rfc5061.html">RFC 5061</a>,
               September 2007.
@@ -683,11 +657,6 @@ Authors' Addresses
 
 
 Tuexen, et al.               Standards Track                    [Page 9]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,32 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:6950" name="DC.Identifier"/>
-<meta content="A number of Internet applications rely on the Domain Name System (DNS)
-to support their operations. Many applications use the DNS to locate
-services for a domain; some, for example, transform identifiers other
-than domain names into formats that the DNS can process, and then
-fetch application data or service location data from the DNS.
-Proposals incorporating sophisticated application behavior using DNS
-as a substrate have raised questions about the role of the DNS as an
-application platform. This document explores the architectural
-consequences of using the DNS to implement certain application
-features, and it provides guidance to future application designers as
-to the limitations of the DNS as a substrate and the situations in
-which alternative designs should be considered." name="DC.Description.Abstract"/>
-<meta content="Aboba, Bernard" name="DC.Creator"/>
-<meta content="Peterson, Jon" name="DC.Creator"/>
-<meta content="Kolkman, Olaf" name="DC.Creator"/>
-<meta content="Tschofenig, Hannes" name="DC.Creator"/>
-<meta content="October, 2013" name="DC.Date.Issued"/>
-<meta content="Architectural Considerations on Application Features in the DNS" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6950 - Architectural Considerations on Application Features in the DNS</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="J. Peterson" name="citation_author"/>
+<meta content="O. Kolkman" name="citation_author"/>
+<meta content="H. Tschofenig" name="citation_author"/>
+<meta content="B. Aboba" name="citation_author"/>
+<meta content="October, 2013" name="citation_publication_date"/>
+<meta content="Architectural Considerations on Application Features in the DNS" name="citation_title"/>
+<meta content="10.17487/RFC6950" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6950" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6950.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6950: Architectural Considerations on Application Features in the DNS</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -55,7 +43,7 @@ which alternative designs should be considered." name="DC.Description.Abstract"/
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -64,7 +52,7 @@ which alternative designs should be considered." name="DC.Description.Abstract"/
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -143,19 +131,18 @@ which alternative designs should be considered." name="DC.Description.Abstract"/
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -169,21 +156,9 @@ which alternative designs should be considered." name="DC.Description.Abstract"/
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6950.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6950" title="PDF version of this document">pdf</a>] [<a href="./draft-iab-dns-applications.html" title="draft-iab-dns-applications">draft-iab-dns-app...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6950" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6950" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Architecture Board (IAB)                            J. Peterson
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6950.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6950.txt.pdf">PDF</a>|<a href="/rfc/rfc6950.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6950" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6950&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6950" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Architecture Board (IAB)                            J. Peterson
 Request for Comments: 6950                                 NeuStar, Inc.
 Category: Informational                                       O. Kolkman
 ISSN: 2070-1721                                               NLnet Labs
@@ -235,7 +210,7 @@ Status of This Memo
 
 
 <span class="grey">Peterson, et al.              Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -244,7 +219,7 @@ Copyright Notice
    Copyright (c) 2013 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -273,7 +248,7 @@ Table of Contents
    <a href="#section-8">8</a>. Acknowledgements ...............................................<a href="#page-26">26</a>
    <a href="#section-9">9</a>. Informative References .........................................<a href="#page-27">27</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Motivation"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Motivation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Motivation"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Motivation</span>
 
    The Domain Name System (DNS) has long provided a general means of
    translating domain names into Internet Protocol addresses, which
@@ -291,7 +266,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -347,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -372,9 +347,9 @@ Table of Contents
    demand further changes and extensions that are fundamentally at odds
    with the strengths of the DNS.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Overview%20of%20DNS%20Application%20Usages"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Overview of DNS Application Usages</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Overview%20of%20DNS%20Application%20Usages"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Overview of DNS Application Usages</span>
 
-   [<a id="ref-RFC0882" name="ref-RFC0882">RFC0882</a>] identifies the original and fundamental connection between
+   [<a id="ref-RFC0882">RFC0882</a>] identifies the original and fundamental connection between
    the DNS and applications.  It begins by describing how the
    interdomain scope of applications creates "formidable problems when
    we wish to create consistent methods for referencing particular
@@ -403,11 +378,11 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Locating%20Services%20in%20a%20Domain"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Locating Services in a Domain</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Locating%20Services%20in%20a%20Domain"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Locating Services in a Domain</span>
 
    The MX Resource Record provides the simplest example of an
    application advertising its domain-level resources in the Domain Name
@@ -459,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -487,7 +462,7 @@ Table of Contents
    section of the DNS answers because of the trustworthiness issues
    described in [<a href="./rfc2181.html" title='"Clarifications to the DNS Specification"'>RFC2181</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20NAPTR%20and%20DDDS"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  NAPTR and DDDS</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20NAPTR%20and%20DDDS"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  NAPTR and DDDS</span>
 
    The NAPTR Resource Record evolved to fulfill a need in the transition
    from Uniform Resource Locators (URLs) to the more mature Uniform
@@ -515,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -571,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -594,7 +569,7 @@ Table of Contents
    the result of resolving a NAPTR record -- which, as the next section
    explores, essentially means arbitrary data.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Arbitrary%20Data%20in%20the%20DNS"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Arbitrary Data in the DNS</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Arbitrary%20Data%20in%20the%20DNS"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Arbitrary Data in the DNS</span>
 
    URI encoding has ways of encapsulating basically arbitrary data: the
    most extreme example is a data URL [<a href="./rfc2397.html" title='"The "'>RFC2397</a>].  Thus, the returned
@@ -627,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -683,11 +658,11 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Challenges%20for%20the%20DNS"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Challenges for the DNS</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Challenges%20for%20the%20DNS"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Challenges for the DNS</span>
 
    The methods discussed in the previous section for transforming
    arbitrary identifiers into domain names and returning arbitrary data
@@ -726,7 +701,7 @@ Table of Contents
    however, any application using the DNS as a feature-rich database
    could easily end up with similar requirements.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Compound%20Queries"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Compound Queries</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Compound%20Queries"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Compound Queries</span>
 
    Traditionally, DNS RRsets are uniquely identified by domain name,
    resource record type, and class.  DNS queries are based on this
@@ -739,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -795,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -818,7 +793,7 @@ Table of Contents
    not considered where intermediaries are employed, as is normally the
    case in the global DNS, brokenness might occur.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Responses%20Tailored%20to%20the%20Originator"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  Responses Tailored to the Originator</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Responses%20Tailored%20to%20the%20Originator"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  Responses Tailored to the Originator</span>
 
    DNS responses tailored to the identity of their originator, where
    some sort of administrative identity of the originator must be
@@ -851,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -907,11 +882,11 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Using%20DNS%20as%20a%20Generic%20Database"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Using DNS as a Generic Database</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Using%20DNS%20as%20a%20Generic%20Database"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Using DNS as a Generic Database</span>
 
    As previously noted, applications can use a method like the "First
    Well Known Rule" of DDDS to transform an arbitrary string into a
@@ -928,7 +903,7 @@ Table of Contents
    generic database.  Similar concerns apply to the size of DNS
    responses.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Large%20Data%20in%20the%20DNS"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Large Data in the DNS</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Large%20Data%20in%20the%20DNS"></a></body></html><a class="selflink" href="#section-3.2.1" id="section-3.2.1">3.2.1</a>.  Large Data in the DNS</span>
 
    While the "data" URL specification [<a href="./rfc2397.html" title='"The "'>RFC2397</a>] notes that it is "only
    useful for short values", unfortunately it gives no particular
@@ -963,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -1019,7 +994,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -1028,7 +1003,7 @@ Table of Contents
    that TCP fallback is to be minimized, is likely to be closer to
    several hundred octets than a few thousand octets.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Administrative%20Structures%20Misaligned%20with%20the%20DNS"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Administrative Structures Misaligned with the DNS</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Administrative%20Structures%20Misaligned%20with%20the%20DNS"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Administrative Structures Misaligned with the DNS</span>
 
    While the DDDS framework enables any sort of alphanumeric data to
    serve as a domain name through the application of the "First Well
@@ -1075,7 +1050,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -1131,11 +1106,11 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Metadata%20about%20Tree%20Structure"></a></body></html><a class="selflink" href="#section-3.3.1" name="section-3.3.1">3.3.1</a>.  Metadata about Tree Structure</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Metadata%20about%20Tree%20Structure"></a></body></html><a class="selflink" href="#section-3.3.1" id="section-3.3.1">3.3.1</a>.  Metadata about Tree Structure</span>
 
    There are also other ways in which the delegative structure of an
    identifier may not map well onto the DNS.  Traditionally, DNS
@@ -1187,7 +1162,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -1243,11 +1218,11 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Domain%20Redirection"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Domain Redirection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Domain%20Redirection"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Domain Redirection</span>
 
    Most Internet application services provide a redirection feature --
    when one attempts to contact a service, the service may refer the
@@ -1299,7 +1274,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -1324,7 +1299,7 @@ Table of Contents
    performance, load, and related factors, but in these application
    environments, the security properties typically take priority.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Private%20DNS%20and%20Split%20Horizon"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Private DNS and Split Horizon</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Private%20DNS%20and%20Split%20Horizon"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Private DNS and Split Horizon</span>
 
    The classic view of the uniqueness of domain names in the DNS is
    given in [<a href="./rfc2826.html" title='"IAB Technical Comment on the Unique DNS Root"'>RFC2826</a>]:
@@ -1336,7 +1311,7 @@ Table of Contents
       deployed on the Internet which use the DNS assume this, and
       Internet users expect such behavior from DNS names.
 
-   [<a id="ref-RFC2826" name="ref-RFC2826">RFC2826</a>] "does not preclude private networks from operating their
+   [<a id="ref-RFC2826">RFC2826</a>] "does not preclude private networks from operating their
    own private name spaces" but notes that if private networks "wish to
    make use of names uniquely defined for the global Internet, they have
    to fetch that information from the global DNS naming hierarchy".
@@ -1355,7 +1330,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -1411,7 +1386,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -1439,7 +1414,7 @@ Table of Contents
    implementations with similar "private" extensions to the DNS
    protocols would not similarly end up in use in public environments.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Principles%20and%20Guidance"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Principles and Guidance</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Principles%20and%20Guidance"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Principles and Guidance</span>
 
    The success of the global public DNS relies on the fact that it is a
    distributed database, one that has the property that it is loosely
@@ -1467,7 +1442,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -1523,7 +1498,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -1552,7 +1527,7 @@ Table of Contents
    network state, latency, and so on, but implementing some features
    simply requires heavier structures than others.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    Many of the concerns about how applications use the DNS discussed in
    this document involve security.  The perceived need to authenticate
@@ -1579,7 +1554,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -1593,7 +1568,7 @@ Table of Contents
    large data in the DNS be treated in accordance with the guidance in
    <a href="#section-3.2.1">Section 3.2.1</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IAB%20Members%20at%20the%20Time%20of%20Approval"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  IAB Members at the Time of Approval</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IAB%20Members%20at%20the%20Time%20of%20Approval"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  IAB Members at the Time of Approval</span>
 
    Internet Architecture Board Members at the time this document was
    approved were:
@@ -1612,7 +1587,7 @@ Table of Contents
    Dave Thaler
    Hannes Tschofenig
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgements</span>
 
    The IAB appreciates the comments and often spirited disagreements of
    Eric Osterweil, John Levine, Stephane Bortzmeyer, Ed Lewis, Dave
@@ -1635,167 +1610,167 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Informative References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Informative References</span>
 
-   [<a id="ref-DNS-REDIRECT" name="ref-DNS-REDIRECT">DNS-REDIRECT</a>]
+   [<a id="ref-DNS-REDIRECT">DNS-REDIRECT</a>]
               Creighton, T., Griffiths, C., Livingood, J., and R. Weber,
               "DNS Redirect Use by Service Providers", Work in Progress,
               October 2010.
 
-   [<a id="ref-EDNS-CLIENT-IP" name="ref-EDNS-CLIENT-IP">EDNS-CLIENT-IP</a>]
+   [<a id="ref-EDNS-CLIENT-IP">EDNS-CLIENT-IP</a>]
               Contavalli, C., van der Gaast, W., Leach, S., and D.
               Rodden, "Client IP information in DNS requests", Work in
               Progress, May 2010.
 
-   [<a id="ref-EDNS-OPT-CODE" name="ref-EDNS-OPT-CODE">EDNS-OPT-CODE</a>]
+   [<a id="ref-EDNS-OPT-CODE">EDNS-OPT-CODE</a>]
               Kaplan, H., Walter, R., Gorman, P., and M. Maharishi,
               "EDNS Option Code for SIP and PSTN Source Reference Info",
               Work in Progress, October 2011.
 
-   [<a id="ref-ENUM-Send-N" name="ref-ENUM-Send-N">ENUM-Send-N</a>]
+   [<a id="ref-ENUM-Send-N">ENUM-Send-N</a>]
               Bellis, R., "IANA Registrations for the 'Send-N'
               Enumservice", Work in Progress, June 2008.
 
-   [<a id="ref-ENUM-UNUSED" name="ref-ENUM-UNUSED">ENUM-UNUSED</a>]
+   [<a id="ref-ENUM-UNUSED">ENUM-UNUSED</a>]
               Stastny, R., Conroy, L., and J. Reid, "IANA Registration
               for Enumservice UNUSED", Work in Progress, March 2008.
 
-   [<a id="ref-HARD-PROBLEM" name="ref-HARD-PROBLEM">HARD-PROBLEM</a>]
+   [<a id="ref-HARD-PROBLEM">HARD-PROBLEM</a>]
               Barnes, R. and P. Saint-Andre, "High Assurance
               Re-Direction (HARD) Problem Statement", Work in Progress,
               July 2010.
 
-   [<a id="ref-Lindsay" name="ref-Lindsay">Lindsay</a>]  Lindsay, G., "DNSSEC and DNS Amplification Attacks",
+   [<a id="ref-Lindsay">Lindsay</a>]  Lindsay, G., "DNSSEC and DNS Amplification Attacks",
               April 2012.
 
-   [<a id="ref-RFC0882" name="ref-RFC0882">RFC0882</a>]  Mockapetris, P., "Domain names: Concepts and facilities",
+   [<a id="ref-RFC0882">RFC0882</a>]  Mockapetris, P., "Domain names: Concepts and facilities",
               <a href="./rfc882.html">RFC 882</a>, November 1983.
 
-   [<a id="ref-RFC0883" name="ref-RFC0883">RFC0883</a>]  Mockapetris, P., "Domain names: Implementation
+   [<a id="ref-RFC0883">RFC0883</a>]  Mockapetris, P., "Domain names: Implementation
               specification", <a href="./rfc883.html">RFC 883</a>, November 1983.
 
-   [<a id="ref-RFC0974" name="ref-RFC0974">RFC0974</a>]  Partridge, C., "Mail routing and the domain system",
+   [<a id="ref-RFC0974">RFC0974</a>]  Partridge, C., "Mail routing and the domain system",
               STD 10, <a href="./rfc974.html">RFC 974</a>, January 1986.
 
-   [<a id="ref-RFC1034" name="ref-RFC1034">RFC1034</a>]  Mockapetris, P., "Domain names - concepts and facilities",
+   [<a id="ref-RFC1034">RFC1034</a>]  Mockapetris, P., "Domain names - concepts and facilities",
               STD 13, <a href="./rfc1034.html">RFC 1034</a>, November 1987.
 
-   [<a id="ref-RFC1035" name="ref-RFC1035">RFC1035</a>]  Mockapetris, P., "Domain names - implementation and
+   [<a id="ref-RFC1035">RFC1035</a>]  Mockapetris, P., "Domain names - implementation and
               specification", STD 13, <a href="./rfc1035.html">RFC 1035</a>, November 1987.
 
 
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
-   [<a id="ref-RFC1464" name="ref-RFC1464">RFC1464</a>]  Rosenbaum, R., "Using the Domain Name System To Store
+   [<a id="ref-RFC1464">RFC1464</a>]  Rosenbaum, R., "Using the Domain Name System To Store
               Arbitrary String Attributes", <a href="./rfc1464.html">RFC 1464</a>, May 1993.
 
-   [<a id="ref-RFC1530" name="ref-RFC1530">RFC1530</a>]  Malamud, C. and M. Rose, "Principles of Operation for the
+   [<a id="ref-RFC1530">RFC1530</a>]  Malamud, C. and M. Rose, "Principles of Operation for the
               TPC.INT Subdomain: General Principles and Policy",
               <a href="./rfc1530.html">RFC 1530</a>, October 1993.
 
-   [<a id="ref-RFC1794" name="ref-RFC1794">RFC1794</a>]  Brisco, T., "DNS Support for Load Balancing", <a href="./rfc1794.html">RFC 1794</a>,
+   [<a id="ref-RFC1794">RFC1794</a>]  Brisco, T., "DNS Support for Load Balancing", <a href="./rfc1794.html">RFC 1794</a>,
               April 1995.
 
-   [<a id="ref-RFC1918" name="ref-RFC1918">RFC1918</a>]  Rekhter, Y., Moskowitz, B., Karrenberg, D., de Groot, G.,
+   [<a id="ref-RFC1918">RFC1918</a>]  Rekhter, Y., Moskowitz, B., Karrenberg, D., de Groot, G.,
               and E. Lear, "Address Allocation for Private Internets",
-              <a href="./bcp5.html">BCP 5</a>, <a href="./rfc1918.html">RFC 1918</a>, February 1996.
+              <a href="https://www.rfc-editor.org/bcp/bcp5">BCP 5</a>, <a href="./rfc1918.html">RFC 1918</a>, February 1996.
 
-   [<a id="ref-RFC1995" name="ref-RFC1995">RFC1995</a>]  Ohta, M., "Incremental Zone Transfer in DNS", <a href="./rfc1995.html">RFC 1995</a>,
+   [<a id="ref-RFC1995">RFC1995</a>]  Ohta, M., "Incremental Zone Transfer in DNS", <a href="./rfc1995.html">RFC 1995</a>,
               August 1996.
 
-   [<a id="ref-RFC2052" name="ref-RFC2052">RFC2052</a>]  Gulbrandsen, A. and P. Vixie, "A DNS RR for specifying the
+   [<a id="ref-RFC2052">RFC2052</a>]  Gulbrandsen, A. and P. Vixie, "A DNS RR for specifying the
               location of services (DNS SRV)", <a href="./rfc2052.html">RFC 2052</a>, October 1996.
 
-   [<a id="ref-RFC2168" name="ref-RFC2168">RFC2168</a>]  Daniel, R. and M. Mealling, "Resolution of Uniform
+   [<a id="ref-RFC2168">RFC2168</a>]  Daniel, R. and M. Mealling, "Resolution of Uniform
               Resource Identifiers using the Domain Name System",
               <a href="./rfc2168.html">RFC 2168</a>, June 1997.
 
-   [<a id="ref-RFC2181" name="ref-RFC2181">RFC2181</a>]  Elz, R. and R. Bush, "Clarifications to the DNS
+   [<a id="ref-RFC2181">RFC2181</a>]  Elz, R. and R. Bush, "Clarifications to the DNS
               Specification", <a href="./rfc2181.html">RFC 2181</a>, July 1997.
 
-   [<a id="ref-RFC2397" name="ref-RFC2397">RFC2397</a>]  Masinter, L., "The "data" URL scheme", <a href="./rfc2397.html">RFC 2397</a>,
+   [<a id="ref-RFC2397">RFC2397</a>]  Masinter, L., "The "data" URL scheme", <a href="./rfc2397.html">RFC 2397</a>,
               August 1998.
 
-   [<a id="ref-RFC2671" name="ref-RFC2671">RFC2671</a>]  Vixie, P., "Extension Mechanisms for DNS (EDNS0)",
+   [<a id="ref-RFC2671">RFC2671</a>]  Vixie, P., "Extension Mechanisms for DNS (EDNS0)",
               <a href="./rfc2671.html">RFC 2671</a>, August 1999.
 
-   [<a id="ref-RFC2818" name="ref-RFC2818">RFC2818</a>]  Rescorla, E., "HTTP Over TLS", <a href="./rfc2818.html">RFC 2818</a>, May 2000.
+   [<a id="ref-RFC2818">RFC2818</a>]  Rescorla, E., "HTTP Over TLS", <a href="./rfc2818.html">RFC 2818</a>, May 2000.
 
-   [<a id="ref-RFC2826" name="ref-RFC2826">RFC2826</a>]  Internet Architecture Board, "IAB Technical Comment on the
+   [<a id="ref-RFC2826">RFC2826</a>]  Internet Architecture Board, "IAB Technical Comment on the
               Unique DNS Root", <a href="./rfc2826.html">RFC 2826</a>, May 2000.
 
-   [<a id="ref-RFC2845" name="ref-RFC2845">RFC2845</a>]  Vixie, P., Gudmundsson, O., Eastlake 3rd, D., and B.
+   [<a id="ref-RFC2845">RFC2845</a>]  Vixie, P., Gudmundsson, O., Eastlake 3rd, D., and B.
               Wellington, "Secret Key Transaction Authentication for DNS
               (TSIG)", <a href="./rfc2845.html">RFC 2845</a>, May 2000.
 
-   [<a id="ref-RFC2915" name="ref-RFC2915">RFC2915</a>]  Mealling, M. and R. Daniel, "The Naming Authority Pointer
+   [<a id="ref-RFC2915">RFC2915</a>]  Mealling, M. and R. Daniel, "The Naming Authority Pointer
               (NAPTR) DNS Resource Record", <a href="./rfc2915.html">RFC 2915</a>, September 2000.
 
-   [<a id="ref-RFC2916" name="ref-RFC2916">RFC2916</a>]  Faltstrom, P., "E.164 number and DNS", <a href="./rfc2916.html">RFC 2916</a>,
+   [<a id="ref-RFC2916">RFC2916</a>]  Faltstrom, P., "E.164 number and DNS", <a href="./rfc2916.html">RFC 2916</a>,
               September 2000.
 
 
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
-   [<a id="ref-RFC3007" name="ref-RFC3007">RFC3007</a>]  Wellington, B., "Secure Domain Name System (DNS) Dynamic
+   [<a id="ref-RFC3007">RFC3007</a>]  Wellington, B., "Secure Domain Name System (DNS) Dynamic
               Update", <a href="./rfc3007.html">RFC 3007</a>, November 2000.
 
-   [<a id="ref-RFC3261" name="ref-RFC3261">RFC3261</a>]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
+   [<a id="ref-RFC3261">RFC3261</a>]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
               A., Peterson, J., Sparks, R., Handley, M., and E.
               Schooler, "SIP: Session Initiation Protocol", <a href="./rfc3261.html">RFC 3261</a>,
               June 2002.
 
-   [<a id="ref-RFC3263" name="ref-RFC3263">RFC3263</a>]  Rosenberg, J. and H. Schulzrinne, "Session Initiation
+   [<a id="ref-RFC3263">RFC3263</a>]  Rosenberg, J. and H. Schulzrinne, "Session Initiation
               Protocol (SIP): Locating SIP Servers", <a href="./rfc3263.html">RFC 3263</a>,
               June 2002.
 
-   [<a id="ref-RFC3401" name="ref-RFC3401">RFC3401</a>]  Mealling, M., "Dynamic Delegation Discovery System (DDDS)
+   [<a id="ref-RFC3401">RFC3401</a>]  Mealling, M., "Dynamic Delegation Discovery System (DDDS)
               Part One: The Comprehensive DDDS", <a href="./rfc3401.html">RFC 3401</a>, October 2002.
 
-   [<a id="ref-RFC3402" name="ref-RFC3402">RFC3402</a>]  Mealling, M., "Dynamic Delegation Discovery System (DDDS)
+   [<a id="ref-RFC3402">RFC3402</a>]  Mealling, M., "Dynamic Delegation Discovery System (DDDS)
               Part Two: The Algorithm", <a href="./rfc3402.html">RFC 3402</a>, October 2002.
 
-   [<a id="ref-RFC3403" name="ref-RFC3403">RFC3403</a>]  Mealling, M., "Dynamic Delegation Discovery System (DDDS)
+   [<a id="ref-RFC3403">RFC3403</a>]  Mealling, M., "Dynamic Delegation Discovery System (DDDS)
               Part Three: The Domain Name System (DNS) Database",
               <a href="./rfc3403.html">RFC 3403</a>, October 2002.
 
-   [<a id="ref-RFC3596" name="ref-RFC3596">RFC3596</a>]  Thomson, S., Huitema, C., Ksinant, V., and M. Souissi,
+   [<a id="ref-RFC3596">RFC3596</a>]  Thomson, S., Huitema, C., Ksinant, V., and M. Souissi,
               "DNS Extensions to Support IP Version 6", <a href="./rfc3596.html">RFC 3596</a>,
               October 2003.
 
-   [<a id="ref-RFC3986" name="ref-RFC3986">RFC3986</a>]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+   [<a id="ref-RFC3986">RFC3986</a>]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66,
               <a href="./rfc3986.html">RFC 3986</a>, January 2005.
 
-   [<a id="ref-RFC4033" name="ref-RFC4033">RFC4033</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
+   [<a id="ref-RFC4033">RFC4033</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "DNS Security Introduction and Requirements",
               <a href="./rfc4033.html">RFC 4033</a>, March 2005.
 
-   [<a id="ref-RFC4367" name="ref-RFC4367">RFC4367</a>]  Rosenberg, J., Ed., and IAB, "What's in a Name: False
+   [<a id="ref-RFC4367">RFC4367</a>]  Rosenberg, J., Ed., and IAB, "What's in a Name: False
               Assumptions about DNS Names", <a href="./rfc4367.html">RFC 4367</a>, February 2006.
 
-   [<a id="ref-RFC4398" name="ref-RFC4398">RFC4398</a>]  Josefsson, S., "Storing Certificates in the Domain Name
+   [<a id="ref-RFC4398">RFC4398</a>]  Josefsson, S., "Storing Certificates in the Domain Name
               System (DNS)", <a href="./rfc4398.html">RFC 4398</a>, March 2006.
 
-   [<a id="ref-RFC4732" name="ref-RFC4732">RFC4732</a>]  Handley, M., Ed., Rescorla, E., Ed., and IAB, "Internet
+   [<a id="ref-RFC4732">RFC4732</a>]  Handley, M., Ed., Rescorla, E., Ed., and IAB, "Internet
               Denial-of-Service Considerations", <a href="./rfc4732.html">RFC 4732</a>,
               December 2006.
 
-   [<a id="ref-RFC4985" name="ref-RFC4985">RFC4985</a>]  Santesson, S., "Internet X.509 Public Key Infrastructure
+   [<a id="ref-RFC4985">RFC4985</a>]  Santesson, S., "Internet X.509 Public Key Infrastructure
               Subject Alternative Name for Expression of Service Name",
               <a href="./rfc4985.html">RFC 4985</a>, August 2007.
 
@@ -1803,51 +1778,51 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
-   [<a id="ref-RFC5486" name="ref-RFC5486">RFC5486</a>]  Malas, D., Ed., and D. Meyer, Ed., "Session Peering for
+   [<a id="ref-RFC5486">RFC5486</a>]  Malas, D., Ed., and D. Meyer, Ed., "Session Peering for
               Multimedia Interconnect (SPEERMINT) Terminology",
               <a href="./rfc5486.html">RFC 5486</a>, March 2009.
 
-   [<a id="ref-RFC5507" name="ref-RFC5507">RFC5507</a>]  IAB, Faltstrom, P., Ed., Austein, R., Ed., and P. Koch,
+   [<a id="ref-RFC5507">RFC5507</a>]  IAB, Faltstrom, P., Ed., Austein, R., Ed., and P. Koch,
               Ed., "Design Choices When Expanding the DNS", <a href="./rfc5507.html">RFC 5507</a>,
               April 2009.
 
-   [<a id="ref-RFC5922" name="ref-RFC5922">RFC5922</a>]  Gurbani, V., Lawrence, S., and A. Jeffrey, "Domain
+   [<a id="ref-RFC5922">RFC5922</a>]  Gurbani, V., Lawrence, S., and A. Jeffrey, "Domain
               Certificates in the Session Initiation Protocol (SIP)",
               <a href="./rfc5922.html">RFC 5922</a>, June 2010.
 
-   [<a id="ref-RFC6055" name="ref-RFC6055">RFC6055</a>]  Thaler, D., Klensin, J., and S. Cheshire, "IAB Thoughts on
+   [<a id="ref-RFC6055">RFC6055</a>]  Thaler, D., Klensin, J., and S. Cheshire, "IAB Thoughts on
               Encodings for Internationalized Domain Names", <a href="./rfc6055.html">RFC 6055</a>,
               February 2011.
 
-   [<a id="ref-RFC6125" name="ref-RFC6125">RFC6125</a>]  Saint-Andre, P. and J. Hodges, "Representation and
+   [<a id="ref-RFC6125">RFC6125</a>]  Saint-Andre, P. and J. Hodges, "Representation and
               Verification of Domain-Based Application Service Identity
               within Internet Public Key Infrastructure Using X.509
               (PKIX) Certificates in the Context of Transport Layer
               Security (TLS)", <a href="./rfc6125.html">RFC 6125</a>, March 2011.
 
-   [<a id="ref-RFC6269" name="ref-RFC6269">RFC6269</a>]  Ford, M., Ed., Boucadair, M., Durand, A., Levis, P., and
+   [<a id="ref-RFC6269">RFC6269</a>]  Ford, M., Ed., Boucadair, M., Durand, A., Levis, P., and
               P. Roberts, "Issues with IP Address Sharing", <a href="./rfc6269.html">RFC 6269</a>,
               June 2011.
 
-   [<a id="ref-RFC6376" name="ref-RFC6376">RFC6376</a>]  Crocker, D., Ed., Hansen, T., Ed., and M. Kucherawy, Ed.,
+   [<a id="ref-RFC6376">RFC6376</a>]  Crocker, D., Ed., Hansen, T., Ed., and M. Kucherawy, Ed.,
               "DomainKeys Identified Mail (DKIM) Signatures", <a href="./rfc6376.html">RFC 6376</a>,
               September 2011.
 
-   [<a id="ref-RFC6394" name="ref-RFC6394">RFC6394</a>]  Barnes, R., "Use Cases and Requirements for DNS-Based
+   [<a id="ref-RFC6394">RFC6394</a>]  Barnes, R., "Use Cases and Requirements for DNS-Based
               Authentication of Named Entities (DANE)", <a href="./rfc6394.html">RFC 6394</a>,
               October 2011.
 
-   [<a id="ref-RFC6763" name="ref-RFC6763">RFC6763</a>]  Cheshire, S. and M. Krochmal, "DNS-Based Service
+   [<a id="ref-RFC6763">RFC6763</a>]  Cheshire, S. and M. Krochmal, "DNS-Based Service
               Discovery", <a href="./rfc6763.html">RFC 6763</a>, February 2013.
 
-   [<a id="ref-RFC6891" name="ref-RFC6891">RFC6891</a>]  Damas, J., Graff, M., and P. Vixie, "Extension Mechanisms
+   [<a id="ref-RFC6891">RFC6891</a>]  Damas, J., Graff, M., and P. Vixie, "Extension Mechanisms
               for DNS (EDNS(0))", STD 75, <a href="./rfc6891.html">RFC 6891</a>, April 2013.
 
-   [<a id="ref-URI-RR" name="ref-URI-RR">URI-RR</a>]   Faltstrom, P. and O. Kolkman, "The Uniform Resource
+   [<a id="ref-URI-RR">URI-RR</a>]   Faltstrom, P. and O. Kolkman, "The Uniform Resource
               Identifier (URI) DNS Resource Record", Work in Progress,
               July 2013.
 
@@ -1859,7 +1834,7 @@ Table of Contents
 
 
 <span class="grey">Peterson, et al.              Informational                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc6950.html">RFC 6950</a>               Application Features in DNS          October 2013</span>
 
 
@@ -1915,11 +1890,6 @@ Authors' Addresses
 
 
 Peterson, et al.              Informational                    [Page 31]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

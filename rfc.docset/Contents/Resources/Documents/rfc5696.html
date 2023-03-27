@@ -1,32 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-moncaster-pcn-baseline-encoding" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5696" name="DC.Identifier"/>
-<meta content="November, 2009" name="DC.Date.Issued"/>
-<meta content="Moncaster, Toby" name="DC.Creator"/>
-<meta content="Menth, Michael" name="DC.Creator"/>
-<meta content="Briscoe, Bob" name="DC.Creator"/>
-<meta content="The objective of the Pre-Congestion Notification (PCN) architecture is
-to protect the quality of service (QoS) of inelastic flows within a
-Diffserv domain. It achieves this by marking packets belonging to PCN-
-flows when the rate of traffic exceeds certain configured thresholds
-on links in the domain. These marks can then be evaluated to determine
-how close the domain is to being congested. This document specifies
-how such marks are encoded into the IP header by redefining the
-Explicit Congestion Notification (ECN) codepoints within such domains.
-The baseline encoding described here provides only two PCN encoding
-states: Not-marked and PCN-marked. Future extensions to this encoding
-may be needed in order to provide more than one level of marking
-severity. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
-<meta content="Baseline Encoding and Transport of Pre-Congestion Information" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5696 - Baseline Encoding and Transport of Pre-Congestion Information</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="T. Moncaster" name="citation_author"/>
+<meta content="B. Briscoe" name="citation_author"/>
+<meta content="M. Menth" name="citation_author"/>
+<meta content="November, 2009" name="citation_publication_date"/>
+<meta content="Baseline Encoding and Transport of Pre-Congestion Information" name="citation_title"/>
+<meta content="10.17487/RFC5696" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5696" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5696.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5696: Baseline Encoding and Transport of Pre-Congestion Information</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -55,7 +42,7 @@ severity. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -64,7 +51,7 @@ severity. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -143,19 +130,18 @@ severity. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -169,21 +155,9 @@ severity. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgbrown" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5696.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5696" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-pcn-baseline-encoding.html" title="draft-ietf-pcn-baseline-encoding">draft-ietf-pcn-ba...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5696" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5696" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5696">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">Obsoleted by: <a href="./rfc6660.html">6660</a>                                     PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                       T. Moncaster
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5696.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5696.txt.pdf">PDF</a>|<a href="/rfc/rfc5696.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5696" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5696&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5696" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5696" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">Obsoleted by: <a href="/rfc/rfc6660" target="_blank">6660</a>                                     PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                       T. Moncaster
 Request for Comments: 5696                                    B. Briscoe
 Category: Standards Track                                             BT
                                                                 M. Menth
@@ -221,7 +195,7 @@ Copyright Notice
    Copyright (c) 2009 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -235,7 +209,7 @@ Copyright Notice
 
 
 <span class="grey">Moncaster, et al.           Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
@@ -291,11 +265,11 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    The objective of the Pre-Congestion Notification (PCN) architecture
    [<a href="./rfc5559.html" title='"Pre-Congestion Notification (PCN) Architecture"'>RFC5559</a>] is to protect the quality of service (QoS) of inelastic
@@ -319,15 +293,15 @@ Table of Contents
    the encoding can be easily extended to provide more states.  Rules
    for such extensions are given in <a href="#section-5">Section 5</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Requirements Notation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Requirements%20Notation"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Requirements Notation</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Terminology%20and%20Abbreviations"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Terminology and Abbreviations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Terminology%20and%20Abbreviations"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Terminology and Abbreviations</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Terminology</span>
 
    The terms PCN-capable, PCN-domain, PCN-node, PCN-interior-node, PCN-
    ingress-node, PCN-egress-node, PCN-boundary-node, PCN-traffic, PCN-
@@ -347,7 +321,7 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
@@ -357,7 +331,7 @@ Table of Contents
    o  not-PCN codepoint - a codepoint that indicates packets that are
       not PCN-capable.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20List%20of%20Abbreviations"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  List of Abbreviations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20List%20of%20Abbreviations"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  List of Abbreviations</span>
 
    The following abbreviations are used in this document:
 
@@ -383,7 +357,7 @@ Table of Contents
 
    o  PM = PCN-marked
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Encoding%20Two%20PCN%20States%20in%20IP"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Encoding Two PCN States in IP</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Encoding%20Two%20PCN%20States%20in%20IP"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Encoding Two PCN States in IP</span>
 
    The PCN encoding states are defined using a combination of the DSCP
    and ECN fields within the IP header.  The baseline PCN encoding
@@ -403,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
@@ -442,9 +416,9 @@ Table of Contents
       <a href="#appendix-B">Appendix B</a> provides more information and summarises other
       alternative actions that might be taken.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Marking%20Packets"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Marking Packets</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Marking%20Packets"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Marking Packets</span>
 
-   [<a id="ref-RFC5670" name="ref-RFC5670">RFC5670</a>] states that any encoding scheme document must specify the
+   [<a id="ref-RFC5670">RFC5670</a>] states that any encoding scheme document must specify the
    required action to take if one of the marking algorithms indicates
    that a packet needs to be marked.  For the baseline encoding scheme,
    the required action is simply as follows:
@@ -459,11 +433,11 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Valid%20and%20Invalid%20Codepoint%20Transitions"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Valid and Invalid Codepoint Transitions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Valid%20and%20Invalid%20Codepoint%20Transitions"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Valid and Invalid Codepoint Transitions</span>
 
    A PCN-ingress-node <em>MUST</em> set the Not-marked (10) codepoint on any
    arriving packet that belongs to a PCN-flow.  It <em>MUST</em> set the not-PCN
@@ -515,11 +489,11 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Rationale%20for%20Encoding"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Rationale for Encoding</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Rationale%20for%20Encoding"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Rationale for Encoding</span>
 
    The exact choice of encoding was dictated by the constraints imposed
    by existing IETF RFCs, in particular [<a href="./rfc3168.html" title='"The Addition of Explicit Congestion Notification (ECN) to IP"'>RFC3168</a>], [<a href="./rfc4301.html" title='"Security Architecture for the Internet Protocol"'>RFC4301</a>], and
@@ -545,7 +519,7 @@ Table of Contents
    ends up looking very similar to ECN.  This is perhaps not surprising
    given the similarity in architectural intent between PCN and ECN.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20PCN-Compatible%20Diffserv%20Codepoints"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  PCN-Compatible Diffserv Codepoints</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20PCN-Compatible%20Diffserv%20Codepoints"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  PCN-Compatible Diffserv Codepoints</span>
 
    Equipment complying with the baseline PCN encoding <em>MUST</em> allow PCN to
    be enabled for certain Diffserv codepoints.  This document defines
@@ -571,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
@@ -579,7 +553,7 @@ Table of Contents
    inelastic traffic.  More details are given in the informational
    <a href="#appendix-A.1">Appendix A.1</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Co-Existence%20of%20PCN%20and%20Not-PCN%20Traffic"></a></body></html><a class="selflink" href="#section-4.4.1" name="section-4.4.1">4.4.1</a>.  Co-Existence of PCN and Not-PCN Traffic</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Co-Existence%20of%20PCN%20and%20Not-PCN%20Traffic"></a></body></html><a class="selflink" href="#section-4.4.1" id="section-4.4.1">4.4.1</a>.  Co-Existence of PCN and Not-PCN Traffic</span>
 
    The scarcity of pool 1 DSCPs, coupled with the fact that PCN is
    envisaged as a marking behaviour that could be applied to a number of
@@ -591,7 +565,7 @@ Table of Contents
    not-PCN state within the encoding scheme.  <a href="./rfc5559.html#section-3.5">Section 3.5 of [RFC5559]</a>
    discusses how competing-non-PCN-traffic should be handled.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Rules%20for%20Experimental%20Encoding%20Schemes"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Rules for Experimental Encoding Schemes</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Rules%20for%20Experimental%20Encoding%20Schemes"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Rules for Experimental Encoding Schemes</span>
 
    Any experimental encoding scheme <em>MUST</em> follow these rules to ensure
    backward compatibility with this baseline scheme:
@@ -627,19 +601,19 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Backward%20Compatibility"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Backward Compatibility</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Backward%20Compatibility"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Backward Compatibility</span>
 
-   <a href="./bcp124.html">BCP 124</a> [<a href="./rfc4774.html" title='"Specifying Alternate Semantics for the Explicit Congestion Notification (ECN) Field"'>RFC4774</a>] gives guidelines for specifying alternative
+   <a href="https://www.rfc-editor.org/bcp/bcp124">BCP 124</a> [<a href="./rfc4774.html" title='"Specifying Alternate Semantics for the Explicit Congestion Notification (ECN) Field"'>RFC4774</a>] gives guidelines for specifying alternative
    semantics for the ECN field.  It sets out a number of factors to be
    taken into consideration.  It also suggests various techniques to
    allow the co-existence of default ECN and alternative ECN semantics.
    The baseline encoding specified in this document defines PCN-
    compatible Diffserv codepoints as no longer supporting the default
-   ECN semantics.  As such, this document is compatible with <a href="./bcp124.html">BCP 124</a>.
+   ECN semantics.  As such, this document is compatible with <a href="https://www.rfc-editor.org/bcp/bcp124">BCP 124</a>.
 
    On its own, this baseline encoding cannot support both ECN marking
    end-to-end (e2e) and PCN-marking within a PCN-domain.  It is possible
@@ -656,7 +630,7 @@ Table of Contents
    prevents unintended leakage of ECN marks into or out of the PCN-
    domain, and thus reduces backward-compatibility issues.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    PCN-marking only carries a meaning within the confines of a PCN-
    domain.  This encoding document is intended to stand independently of
@@ -683,14 +657,14 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
    be able to quickly spot the problem since the overall utilisation of
    the domain will rapidly fall.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Conclusions"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Conclusions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Conclusions"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Conclusions</span>
 
    This document defines the baseline PCN encoding, utilising a
    combination of a PCN-compatible DSCP and the ECN field in the IP
@@ -703,29 +677,29 @@ Table of Contents
    for this decision along with advice relating to the choice of
    suitable DSCPs can be found in <a href="#appendix-A.1">Appendix A.1</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Acknowledgements</span>
 
    This document builds extensively on work done in the PCN working
    group by Kwok Ho Chan, Georgios Karagiannis, Philip Eardley, Anna
    Charny, Joe Babiarz, and others.  Thanks to Ruediger Geib and Gorry
    Fairhurst for providing detailed comments on this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" id="section-10.1">10.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC3168" name="ref-RFC3168">RFC3168</a>]  Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
+   [<a id="ref-RFC3168">RFC3168</a>]  Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
               of Explicit Congestion Notification (ECN) to IP",
               <a href="./rfc3168.html">RFC 3168</a>, September 2001.
 
-   [<a id="ref-RFC4774" name="ref-RFC4774">RFC4774</a>]  Floyd, S., "Specifying Alternate Semantics for the
-              Explicit Congestion Notification (ECN) Field", <a href="./bcp124.html">BCP 124</a>,
+   [<a id="ref-RFC4774">RFC4774</a>]  Floyd, S., "Specifying Alternate Semantics for the
+              Explicit Congestion Notification (ECN) Field", <a href="https://www.rfc-editor.org/bcp/bcp124">BCP 124</a>,
               <a href="./rfc4774.html">RFC 4774</a>, November 2006.
 
-   [<a id="ref-RFC5670" name="ref-RFC5670">RFC5670</a>]  Eardley, P., Ed., "Metering and Marking Behaviour of PCN-
+   [<a id="ref-RFC5670">RFC5670</a>]  Eardley, P., Ed., "Metering and Marking Behaviour of PCN-
               Nodes", <a href="./rfc5670.html">RFC 5670</a>, November 2009.
 
 
@@ -739,47 +713,47 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" id="section-10.2">10.2</a>.  Informative References</span>
 
-   [<a id="ref-ECN-TUN" name="ref-ECN-TUN">ECN-TUN</a>]  Briscoe, B., "Tunnelling of Explicit Congestion
+   [<a id="ref-ECN-TUN">ECN-TUN</a>]  Briscoe, B., "Tunnelling of Explicit Congestion
               Notification", Work in Progress, July 2009.
 
-   [<a id="ref-PCN-ENC" name="ref-PCN-ENC">PCN-ENC</a>]  Moncaster, T., Briscoe, B., and M. Menth, "A PCN encoding
+   [<a id="ref-PCN-ENC">PCN-ENC</a>]  Moncaster, T., Briscoe, B., and M. Menth, "A PCN encoding
               using 2 DSCPs to provide 3 or more states", Work
               in Progress, April 2009.
 
-   [<a id="ref-RFC2474" name="ref-RFC2474">RFC2474</a>]  Nichols, K., Blake, S., Baker, F., and D. Black,
+   [<a id="ref-RFC2474">RFC2474</a>]  Nichols, K., Blake, S., Baker, F., and D. Black,
               "Definition of the Differentiated Services Field (DS
               Field) in the IPv4 and IPv6 Headers", <a href="./rfc2474.html">RFC 2474</a>,
               December 1998.
 
-   [<a id="ref-RFC2597" name="ref-RFC2597">RFC2597</a>]  Heinanen, J., Baker, F., Weiss, W., and J. Wroclawski,
+   [<a id="ref-RFC2597">RFC2597</a>]  Heinanen, J., Baker, F., Weiss, W., and J. Wroclawski,
               "Assured Forwarding PHB Group", <a href="./rfc2597.html">RFC 2597</a>, June 1999.
 
-   [<a id="ref-RFC3246" name="ref-RFC3246">RFC3246</a>]  Davie, B., Charny, A., Bennet, J., Benson, K., Le Boudec,
+   [<a id="ref-RFC3246">RFC3246</a>]  Davie, B., Charny, A., Bennet, J., Benson, K., Le Boudec,
               J., Courtney, W., Davari, S., Firoiu, V., and D.
               Stiliadis, "An Expedited Forwarding PHB (Per-Hop
               Behavior)", <a href="./rfc3246.html">RFC 3246</a>, March 2002.
 
-   [<a id="ref-RFC3540" name="ref-RFC3540">RFC3540</a>]  Spring, N., Wetherall, D., and D. Ely, "Robust Explicit
+   [<a id="ref-RFC3540">RFC3540</a>]  Spring, N., Wetherall, D., and D. Ely, "Robust Explicit
               Congestion Notification (ECN) Signaling with Nonces",
               <a href="./rfc3540.html">RFC 3540</a>, June 2003.
 
-   [<a id="ref-RFC4301" name="ref-RFC4301">RFC4301</a>]  Kent, S. and K. Seo, "Security Architecture for the
+   [<a id="ref-RFC4301">RFC4301</a>]  Kent, S. and K. Seo, "Security Architecture for the
               Internet Protocol", <a href="./rfc4301.html">RFC 4301</a>, December 2005.
 
-   [<a id="ref-RFC4594" name="ref-RFC4594">RFC4594</a>]  Babiarz, J., Chan, K., and F. Baker, "Configuration
+   [<a id="ref-RFC4594">RFC4594</a>]  Babiarz, J., Chan, K., and F. Baker, "Configuration
               Guidelines for DiffServ Service Classes", <a href="./rfc4594.html">RFC 4594</a>,
               August 2006.
 
-   [<a id="ref-RFC5127" name="ref-RFC5127">RFC5127</a>]  Chan, K., Babiarz, J., and F. Baker, "Aggregation of
+   [<a id="ref-RFC5127">RFC5127</a>]  Chan, K., Babiarz, J., and F. Baker, "Aggregation of
               DiffServ Service Classes", <a href="./rfc5127.html">RFC 5127</a>, February 2008.
 
-   [<a id="ref-RFC5559" name="ref-RFC5559">RFC5559</a>]  Eardley, P., "Pre-Congestion Notification (PCN)
+   [<a id="ref-RFC5559">RFC5559</a>]  Eardley, P., "Pre-Congestion Notification (PCN)
               Architecture", <a href="./rfc5559.html">RFC 5559</a>, June 2009.
 
 
@@ -795,13 +769,13 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20PCN%20Deployment%20Considerations%20%28Informative%29"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  PCN Deployment Considerations (Informative)</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20PCN%20Deployment%20Considerations%20%28Informative%29"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  PCN Deployment Considerations (Informative)</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Choice%20of%20Suitable%20DSCPs"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>.  Choice of Suitable DSCPs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Choice%20of%20Suitable%20DSCPs"></a></body></html><a class="selflink" href="#appendix-A.1" id="appendix-A.1">A.1</a>.  Choice of Suitable DSCPs</span>
 
    The PCN working group chose not to define a single DSCP for use with
    PCN for several reasons.  Firstly, the PCN mechanism is applicable to
@@ -851,14 +825,14 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
    certain service classes and whether to use PCN as their mechanism of
    choice.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Rationale%20for%20Using%20ECT%280%29%20for%20Not-Marked"></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>.  Rationale for Using ECT(0) for Not-Marked</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Rationale%20for%20Using%20ECT%280%29%20for%20Not-Marked"></a></body></html><a class="selflink" href="#appendix-A.2" id="appendix-A.2">A.2</a>.  Rationale for Using ECT(0) for Not-Marked</span>
 
    The choice of which ECT codepoint to use for the Not-marked state was
    based on the following considerations:
@@ -907,7 +881,7 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
@@ -924,7 +898,7 @@ Table of Contents
    Overall, this seemed to suggest that ECT(0) was most appropriate to
    use.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Co-Existence%20of%20PCN%20and%20ECN%20%28Informative%29"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Co-Existence of PCN and ECN (Informative)</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Co-Existence%20of%20PCN%20and%20ECN%20%28Informative%29"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  Co-Existence of PCN and ECN (Informative)</span>
 
    This baseline encoding scheme redefines the ECN codepoints within the
    PCN-domain.  As packets with a PCN-compatible DSCP leave the PCN-
@@ -963,7 +937,7 @@ Table of Contents
 
 
 <span class="grey">Moncaster, et al.           Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5696.html">RFC 5696</a>                 Baseline PCN Encoding             November 2009</span>
 
 
@@ -1019,11 +993,6 @@ Authors' Addresses
 
 
 Moncaster, et al.           Standards Track                    [Page 15]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

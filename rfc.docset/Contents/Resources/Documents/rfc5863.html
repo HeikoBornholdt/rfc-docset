@@ -1,38 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:5863" name="DC.Identifier"/>
-<meta content="DomainKeys Identified Mail (DKIM) allows an organization to claim
-responsibility for transmitting a message, in a way that can be
-validated by a recipient. The organization can be the author's, the
-originating sending site, an intermediary, or one of their agents. A
-message can contain multiple signatures, from the same or different
-organizations involved with the message. DKIM defines a domain-level
-digital signature authentication framework for email, using public key
-cryptography and using the domain name service as its key server
-technology. This permits verification of a responsible organization,
-as well as the integrity of the message content. DKIM will also
-provide a mechanism that permits potential email signers to publish
-information about their email signing practices; this will permit
-email receivers to make additional assessments about messages.
-DKIM's authentication of email identity can assist in the global
-control of &quot;spam&quot; and &quot;phishing&quot;. This document provides
-implementation, deployment, operational, and migration considerations
-for DKIM. This document is not an Internet Standards Track
-specification; it is published for informational purposes." name="DC.Description.Abstract"/>
-<meta content="Hansen, Tony" name="DC.Creator"/>
-<meta content="Crocker, Dave" name="DC.Creator"/>
-<meta content="Hallam-Baker, Phillip" name="DC.Creator"/>
-<meta content="Siegel, Ellen" name="DC.Creator"/>
-<meta content="May, 2010" name="DC.Date.Issued"/>
-<meta content="DomainKeys Identified Mail (DKIM) Development, Deployment, and Operations" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5863 - DomainKeys Identified Mail (DKIM) Development, Deployment, and Operations</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="T. Hansen" name="citation_author"/>
+<meta content="E. Siegel" name="citation_author"/>
+<meta content="P. Hallam-Baker" name="citation_author"/>
+<meta content="D. Crocker" name="citation_author"/>
+<meta content="May, 2010" name="citation_publication_date"/>
+<meta content="DomainKeys Identified Mail (DKIM) Development, Deployment, and Operations" name="citation_title"/>
+<meta content="10.17487/RFC5863" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5863" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5863.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5863: DomainKeys Identified Mail (DKIM) Development, Deployment, and Operations</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -61,7 +43,7 @@ specification; it is published for informational purposes." name="DC.Description
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -70,7 +52,7 @@ specification; it is published for informational purposes." name="DC.Description
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -149,19 +131,18 @@ specification; it is published for informational purposes." name="DC.Description
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -175,21 +156,9 @@ specification; it is published for informational purposes." name="DC.Description
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5863.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5863" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-dkim-deployment.html" title="draft-ietf-dkim-deployment">draft-ietf-dkim-d...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5863" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5863" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                         T. Hansen
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5863.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5863.txt.pdf">PDF</a>|<a href="/rfc/rfc5863.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5863" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5863&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc5863" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                         T. Hansen
 Request for Comments: 5863                             AT&amp;T Laboratories
 Category: Informational                                        E. Siegel
 ISSN: 2070-1721                                               Consultant
@@ -241,7 +210,7 @@ Status of This Memo
 
 
 <span class="grey">Hansen, et al.                Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -254,7 +223,7 @@ Copyright Notice
    Copyright (c) 2010 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -297,7 +266,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -353,11 +322,11 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    DomainKeys Identified Mail (DKIM) allows an organization to claim
    responsibility for transmitting a message, in a way that can be
@@ -380,9 +349,9 @@ Table of Contents
    appropriate.  The possibility of the use of DKIM results as input to
    a local reputation database is also discussed.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Using%20DKIM%20as%20Part%20of%20Trust%20Assessment"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Using DKIM as Part of Trust Assessment</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Using%20DKIM%20as%20Part%20of%20Trust%20Assessment"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Using DKIM as Part of Trust Assessment</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20A%20Systems%20View%20of%20Email%20Trust%20Assessment"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  A Systems View of Email Trust Assessment</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20A%20Systems%20View%20of%20Email%20Trust%20Assessment"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  A Systems View of Email Trust Assessment</span>
 
    DKIM participates in a trust-oriented enhancement to the Internet's
    email service, to facilitate message handling decisions, such as for
@@ -409,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -465,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -509,7 +478,7 @@ Table of Contents
 
               Figure 1: Actors in a Trust Sequence Using DKIM
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Choosing%20a%20DKIM%20Tag%20for%20the%20Assessment%20Identifier"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Choosing a DKIM Tag for the Assessment Identifier</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Choosing%20a%20DKIM%20Tag%20for%20the%20Assessment%20Identifier"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Choosing a DKIM Tag for the Assessment Identifier</span>
 
    The signer of a message needs to be able to provide precise data and
    know what that data will mean upon delivery to the Assessor.  If
@@ -521,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -577,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -616,7 +585,7 @@ Table of Contents
    i= string might provide a useful adjunct value for additional
    (heuristic) processing by the Handling Filter.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Choosing%20the%20Signing%20Domain%20Name"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Choosing the Signing Domain Name</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Choosing%20the%20Signing%20Domain%20Name"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Choosing the Signing Domain Name</span>
 
    A DKIM signing entity can serve different roles, such as being the
    author of content, the operator of the mail service, or the operator
@@ -633,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -689,7 +658,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -736,7 +705,7 @@ Table of Contents
    translate the same partitioning of traffic, using domain names in
    place of the different IP Addresses.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Recipient-Based%20Assessments"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Recipient-Based Assessments</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Recipient-Based%20Assessments"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Recipient-Based Assessments</span>
 
    DKIM gives the recipient site's Identity Assessor a verifiable
    identifier to use for analysis.  Although the mechanism does not make
@@ -745,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -801,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -809,7 +778,7 @@ Table of Contents
    might include that fact in the vector of data it provides to the
    Handling Filter.  This is also discussed briefly in <a href="#section-5.4">Section 5.4</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Filtering"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  Filtering</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Filtering"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  Filtering</span>
 
    The assessment of the signing identifier is given to a Handling
    Filter that is defined by local policies, according to a potentially
@@ -857,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -893,7 +862,7 @@ Table of Contents
 
           Figure 2: Trust versus Risk Handling Tradeoffs Example
 
-   [<a id="ref-LEGEND" name="ref-LEGEND">LEGEND</a>]
+   [<a id="ref-LEGEND">LEGEND</a>]
 
       AXES
 
@@ -913,7 +882,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -969,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -983,7 +952,7 @@ Table of Contents
          receiver blocks the stream and works quickly with the
          organization to resolve the matter.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20DKIM%20Key%20Generation%2C%20Storage%2C%20and%20Management"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  DKIM Key Generation, Storage, and Management</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20DKIM%20Key%20Generation%2C%20Storage%2C%20and%20Management"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  DKIM Key Generation, Storage, and Management</span>
 
    By itself, verification of a digital signature only allows the
    verifier to conclude with a very high degree of certainty that the
@@ -1025,7 +994,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -1040,7 +1009,7 @@ Table of Contents
    is necessary for the verifier to assume that the operational security
    of the DNS zone and corresponding private key are adequate.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Private%20Key%20Management%3A%20Deployment%20and%20Ongoing%20Operations"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Private Key Management: Deployment and Ongoing Operations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Private%20Key%20Management%3A%20Deployment%20and%20Ongoing%20Operations"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Private Key Management: Deployment and Ongoing Operations</span>
 
    Access to signing keys needs to be carefully managed to prevent use
    by unauthorized parties and to minimize the consequences if a
@@ -1081,7 +1050,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -1104,7 +1073,7 @@ Table of Contents
    year is considerably more desirable than one in which the signature
    key is changed on an hourly basis but maintained in software.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Storing%20Public%20Keys%3A%20DNS%20Server%20Software%20Considerations"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Storing Public Keys: DNS Server Software Considerations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Storing%20Public%20Keys%3A%20DNS%20Server%20Software%20Considerations"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Storing Public Keys: DNS Server Software Considerations</span>
 
    In order to use DKIM, a DNS domain holder requires (1) the ability to
    create the necessary DKIM DNS records and (2) sufficient operational
@@ -1137,11 +1106,11 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Assignment%20of%20Selectors"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Assignment of Selectors</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Assignment%20of%20Selectors"></a></body></html><a class="selflink" href="#section-3.2.1" id="section-3.2.1">3.2.1</a>.  Assignment of Selectors</span>
 
    Selectors are assigned according to the administrative needs of the
    signing domain, such as for rolling over to a new key or for the
@@ -1159,7 +1128,7 @@ Table of Contents
    administrative changes such as a change of signing software can cause
    such heuristics to fail at any time.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Per-User%20Signing%20Key%20Management%20Issues"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Per-User Signing Key Management Issues</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Per-User%20Signing%20Key%20Management%20Issues"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Per-User Signing Key Management Issues</span>
 
    While a signer can establish business rules, such as the issue of
    individual signature keys for each end-user, DKIM makes no provision
@@ -1193,11 +1162,11 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Third-Party%20Signer%20Key%20Management%20and%20Selector%20Administration"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Third-Party Signer Key Management and Selector Administration</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Third-Party%20Signer%20Key%20Management%20and%20Selector%20Administration"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Third-Party Signer Key Management and Selector Administration</span>
 
    A DKIM key record only asserts that the holder of the corresponding
    domain name makes a claim of responsibility for messages signed under
@@ -1231,12 +1200,12 @@ Table of Contents
    the domain holder NOT allow a third-party signer unrestricted access
    to its DNS service for the purpose of publishing key records.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Key%20Pair%20/%20Selector%20Life%20Cycle%20Management"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  Key Pair / Selector Life Cycle Management</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Key%20Pair%20/%20Selector%20Life%20Cycle%20Management"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  Key Pair / Selector Life Cycle Management</span>
 
    Deployments need to establish, document, and observe processes for
    managing the entire life cycle of an asymmetric key pair.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.1.%20%20Example%20Key%20Deployment%20Process"></a></body></html><a class="selflink" href="#section-3.5.1" name="section-3.5.1">3.5.1</a>.  Example Key Deployment Process</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.1.%20%20Example%20Key%20Deployment%20Process"></a></body></html><a class="selflink" href="#section-3.5.1" id="section-3.5.1">3.5.1</a>.  Example Key Deployment Process</span>
 
    When it is determined that a new key pair is required:
 
@@ -1249,7 +1218,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -1271,7 +1240,7 @@ Table of Contents
    6.  The signer terminates any private keys that are no longer
        required due to issue of replacement.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.2.%20%20Example%20Key%20Termination%20Process"></a></body></html><a class="selflink" href="#section-3.5.2" name="section-3.5.2">3.5.2</a>.  Example Key Termination Process</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.2.%20%20Example%20Key%20Termination%20Process"></a></body></html><a class="selflink" href="#section-3.5.2" id="section-3.5.2">3.5.2</a>.  Example Key Termination Process</span>
 
    When it is determined that a private signature key is no longer
    required:
@@ -1305,7 +1274,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -1317,7 +1286,7 @@ Table of Contents
        likely that the selector might be accidentally reused with a
        different public key.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Signing"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Signing</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Signing"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Signing</span>
 
    Creating messages that have one or more DKIM signatures requires
    support in only two outbound email service components:
@@ -1335,7 +1304,7 @@ Table of Contents
    number of names are used for signing, it will help to have the
    administrative tool support a batch-processing mode.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20DNS%20Records"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  DNS Records</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20DNS%20Records"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  DNS Records</span>
 
    A receiver attempting to verify a DKIM signature obtains the public
    key that is associated with the signature for that message.  The
@@ -1352,7 +1321,7 @@ Table of Contents
    its abilities to support DKIM names, such as with underscores, and to
    add new types of DNS information.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Signing%20Module"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Signing Module</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Signing%20Module"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Signing Module</span>
 
    The module doing signing can be placed anywhere within an
    organization's trusted Administrative Management Domain (ADMD);
@@ -1361,7 +1330,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -1388,7 +1357,7 @@ Table of Contents
    convenience, it is best not to hard-code key information into
    software.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Signing%20Policies%20and%20Practices"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Signing Policies and Practices</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Signing%20Policies%20and%20Practices"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Signing Policies and Practices</span>
 
    Every organization (ADMD) will have its own policies and practices
    for deciding when to sign messages (message stream) and with what
@@ -1417,11 +1386,11 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Verifying"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Verifying</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Verifying"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Verifying</span>
 
    A message recipient can verify a DKIM signature to determine if a
    claim of responsibility has been made for the message by a trusted
@@ -1433,7 +1402,7 @@ Table of Contents
    and needs to be combined with additional sources of information such
    as reputation data to arrive at an access control decision.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Intended%20Scope%20of%20Use"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Intended Scope of Use</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Intended%20Scope%20of%20Use"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Intended Scope of Use</span>
 
    DKIM requires that a message with a signature that is found to be
    invalid is to be treated as if the message had not been signed at
@@ -1453,7 +1422,7 @@ Table of Contents
    invalid signatures need to be treated no better and no worse than
    those with no signature at all.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Signature%20Scope"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Signature Scope</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Signature%20Scope"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Signature Scope</span>
 
    As with any other digital signature scheme, verifiers need to
    consider only the part of the message that is inside the scope of the
@@ -1473,11 +1442,11 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Design%20Scope%20of%20Use"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Design Scope of Use</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Design%20Scope%20of%20Use"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Design Scope of Use</span>
 
    Public key cryptography provides an exceptionally high degree of
    assurance, bordering on absolute certainty, that the party that
@@ -1516,7 +1485,7 @@ Table of Contents
    to consider replacing or supplementing the DNS key retrieval
    mechanism with one that is designed to meet the intended purposes.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Inbound%20Mail%20Filtering"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Inbound Mail Filtering</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Inbound%20Mail%20Filtering"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Inbound Mail Filtering</span>
 
    DKIM is frequently employed in a mail filtering strategy to avoid
    performing content analysis on email originating from trusted
@@ -1529,7 +1498,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -1538,13 +1507,13 @@ Table of Contents
    accreditation services.  The precise means by which this is
    accomplished is outside the scope of DKIM.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.1.%20%20Non-Verifying%20Adaptive%20Spam%20Filtering%20Systems"></a></body></html><a class="selflink" href="#section-5.4.1" name="section-5.4.1">5.4.1</a>.  Non-Verifying Adaptive Spam Filtering Systems</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.1.%20%20Non-Verifying%20Adaptive%20Spam%20Filtering%20Systems"></a></body></html><a class="selflink" href="#section-5.4.1" id="section-5.4.1">5.4.1</a>.  Non-Verifying Adaptive Spam Filtering Systems</span>
 
    Adaptive (or learning) spam filtering mechanisms that are not capable
    of verifying DKIM signatures need to, at minimum, be configured to
    ignore DKIM header data entirely.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20Messages%20Sent%20through%20Mailing%20Lists%20and%20Other%20Intermediaries"></a></body></html><a class="selflink" href="#section-5.5" name="section-5.5">5.5</a>.  Messages Sent through Mailing Lists and Other Intermediaries</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20Messages%20Sent%20through%20Mailing%20Lists%20and%20Other%20Intermediaries"></a></body></html><a class="selflink" href="#section-5.5" id="section-5.5">5.5</a>.  Messages Sent through Mailing Lists and Other Intermediaries</span>
 
    Intermediaries, such as mailing lists, pose a particular challenge
    for DKIM implementations, as the message processing steps performed
@@ -1555,7 +1524,7 @@ Table of Contents
    that a verifiable claim of responsibility remains available to
    parties attempting to verify the modified message.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.%20%20Generation%2C%20Transmission%2C%20and%20Use%20of%20Results%20Headers"></a></body></html><a class="selflink" href="#section-5.6" name="section-5.6">5.6</a>.  Generation, Transmission, and Use of Results Headers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.%20%20Generation%2C%20Transmission%2C%20and%20Use%20of%20Results%20Headers"></a></body></html><a class="selflink" href="#section-5.6" id="section-5.6">5.6</a>.  Generation, Transmission, and Use of Results Headers</span>
 
    In many deployments, it is desirable to separate signature
    verification from the application relying on the verification.  A
@@ -1585,7 +1554,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -1597,7 +1566,7 @@ Table of Contents
    Further discussion on trusting the results as relayed from a verifier
    to something downstream can be found in [<a href="./rfc5451.html" title='"Message Header Field for Indicating Message Authentication Status"'>RFC5451</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Taxonomy%20of%20Signatures"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Taxonomy of Signatures</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Taxonomy%20of%20Signatures"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Taxonomy of Signatures</span>
 
    As described in <a href="#section-2.1">Section 2.1</a>, a DKIM signature tells the signature
    verifier that the owner of a particular domain name accepts some
@@ -1612,7 +1581,7 @@ Table of Contents
    or combinations of identities, that might usefully be represented by
    a DKIM signature.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Single%20Domain%20Signature"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Single Domain Signature</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Single%20Domain%20Signature"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Single Domain Signature</span>
 
    Perhaps the simplest case is when an organization signs its own
    outbound email using its own domain in the SDID [<a href="./rfc5672.html" title='"RFC 4871 DomainKeys Identified Mail (DKIM) Signatures -- Update"'>RFC5672</a>] of the
@@ -1641,7 +1610,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -1655,7 +1624,7 @@ Table of Contents
    external process to attach a meaningful reputation to that
    identifier.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Parent%20Domain%20Signature"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Parent Domain Signature</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Parent%20Domain%20Signature"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Parent Domain Signature</span>
 
    Another approach that might be taken by an organization with multiple
    active subdomains is to apply the same (single) signature domain to
@@ -1687,7 +1656,7 @@ Table of Contents
    effective differentiator if there is an out-of-band agreement about
    the i= semantics.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Third-Party%20Signature"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  Third-Party Signature</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Third-Party%20Signature"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  Third-Party Signature</span>
 
    A signature whose domain does not match the domain of the
    <a href="./rfc5322.html">RFC5322</a>.From address is sometimes referred to as a third-party
@@ -1697,7 +1666,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -1753,7 +1722,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -1770,7 +1739,7 @@ Table of Contents
       provider.  Such a signature would indicate to receivers that the
       message was being vouched for by that third party.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20Using%20Trusted%20Third-Party%20Senders"></a></body></html><a class="selflink" href="#section-6.4" name="section-6.4">6.4</a>.  Using Trusted Third-Party Senders</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20Using%20Trusted%20Third-Party%20Senders"></a></body></html><a class="selflink" href="#section-6.4" id="section-6.4">6.4</a>.  Using Trusted Third-Party Senders</span>
 
    For most of the cases described so far, there has been an assumption
    that the signing agent was responsible for creating and maintaining
@@ -1809,11 +1778,11 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.1.%20%20DNS%20Delegation"></a></body></html><a class="selflink" href="#section-6.4.1" name="section-6.4.1">6.4.1</a>.  DNS Delegation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.1.%20%20DNS%20Delegation"></a></body></html><a class="selflink" href="#section-6.4.1" id="section-6.4.1">6.4.1</a>.  DNS Delegation</span>
 
    Another possibility for configuring trusted third-party access, as
    discussed in <a href="#section-3.4">Section 3.4</a>, is to have Company A use DNS delegation and
@@ -1824,7 +1793,7 @@ Table of Contents
    records.  When revocation becomes necessary, Company A could simply
    remove the DNS delegation record.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.5.%20%20Multiple%20Signatures"></a></body></html><a class="selflink" href="#section-6.5" name="section-6.5">6.5</a>.  Multiple Signatures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.5.%20%20Multiple%20Signatures"></a></body></html><a class="selflink" href="#section-6.5" id="section-6.5">6.5</a>.  Multiple Signatures</span>
 
    A simple configuration for DKIM-signed mail is to have a single
    signature on a given message.  This works well for domains that
@@ -1865,7 +1834,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -1910,7 +1879,7 @@ Table of Contents
    using either the second or third of these, but it can take some time
    before one approach becomes pervasive.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Example%20Usage%20Scenarios"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Example Usage Scenarios</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Example%20Usage%20Scenarios"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Example Usage Scenarios</span>
 
    Signatures are created by different types of email actors, based on
    different criteria, such as where the actor operates in the sequence
@@ -1921,7 +1890,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -1929,7 +1898,7 @@ Table of Contents
    deployments; the selection is not intended to be exhaustive but to
    illustrate a set of key deployment considerations.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Author%27s%20Organization%20-%20Simple"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Author's Organization - Simple</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Author%27s%20Organization%20-%20Simple"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Author's Organization - Simple</span>
 
    The simplest DKIM configuration is to have some mail from a given
    organization (Company A) be signed with the same d= value (e.g.,
@@ -1942,7 +1911,7 @@ Table of Contents
    signing module would then tailor the AUID value as needed at signing
    time.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Author%27s%20Organization%20-%20Differentiated%20Types%20of%20Mail"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Author's Organization - Differentiated Types of Mail</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Author%27s%20Organization%20-%20Differentiated%20Types%20of%20Mail"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Author's Organization - Differentiated Types of Mail</span>
 
    A slight variation of the one signature case is where Company A signs
    some of its mail, but it wants to differentiate among categories of
@@ -1952,9 +1921,9 @@ Table of Contents
    billing.companya.example, and companya.example, respectively, where
    each category is assigned a unique subdomain and unique signing keys.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Author%20Domain%20Signing%20Practices"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  Author Domain Signing Practices</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Author%20Domain%20Signing%20Practices"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  Author Domain Signing Practices</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-7.3.1" name="section-7.3.1">7.3.1</a>.  Introduction</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-7.3.1" id="section-7.3.1">7.3.1</a>.  Introduction</span>
 
    Some domains might decide to sign all of their outgoing mail.  If all
    of the legitimate mail for a domain is signed, recipients can be more
@@ -1977,14 +1946,14 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
    This section covers some examples of ADSP usage.  For the complete
    specification, see [<a href="./rfc5617.html" title='"DomainKeys Identified Mail (DKIM) Author Domain Signing Practices (ADSP)"'>RFC5617</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.2.%20%20A%20Few%20Definitions"></a></body></html><a class="selflink" href="#section-7.3.2" name="section-7.3.2">7.3.2</a>.  A Few Definitions</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.2.%20%20A%20Few%20Definitions"></a></body></html><a class="selflink" href="#section-7.3.2" id="section-7.3.2">7.3.2</a>.  A Few Definitions</span>
 
    In the ADSP specification, an address in the <a href="./rfc5322.html">RFC5322</a>.From header
    field of a message is defined as an "Author Address", and an "Author
@@ -2005,7 +1974,7 @@ Table of Contents
    include an author signature on their outbound mail to avoid ADSP
    verification failures.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.3.%20%20Some%20ADSP%20Examples"></a></body></html><a class="selflink" href="#section-7.3.3" name="section-7.3.3">7.3.3</a>.  Some ADSP Examples</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.3.%20%20Some%20ADSP%20Examples"></a></body></html><a class="selflink" href="#section-7.3.3" id="section-7.3.3">7.3.3</a>.  Some ADSP Examples</span>
 
    An organization (Company A) can specify its signing practices by
    publishing an ADSP record with "dkim=all" or "dkim=discardable".  In
@@ -2033,7 +2002,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -2054,7 +2023,7 @@ Table of Contents
    author signature (e.g., mailing lists, courtesy forwarders, and other
    paths that could add or modify headers or modify the message body).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Delegated%20Signing"></a></body></html><a class="selflink" href="#section-7.4" name="section-7.4">7.4</a>.  Delegated Signing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Delegated%20Signing"></a></body></html><a class="selflink" href="#section-7.4" id="section-7.4">7.4</a>.  Delegated Signing</span>
 
    An organization might choose to outsource certain key services to an
    independent company.  For example, Company A might outsource its
@@ -2089,11 +2058,11 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Independent%20Third-Party%20Service%20Providers"></a></body></html><a class="selflink" href="#section-7.5" name="section-7.5">7.5</a>.  Independent Third-Party Service Providers</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Independent%20Third-Party%20Service%20Providers"></a></body></html><a class="selflink" href="#section-7.5" id="section-7.5">7.5</a>.  Independent Third-Party Service Providers</span>
 
    Another way to manage the service provider configuration would be to
    have the service provider sign the outgoing mail on behalf of its
@@ -2118,7 +2087,7 @@ Table of Contents
    exclusive.  In some cases, it can be desirable to sign the same
    message with both the ESP and the ESP client identities.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.6.%20%20Mail%20Streams%20Based%20on%20Behavioral%20Assessment"></a></body></html><a class="selflink" href="#section-7.6" name="section-7.6">7.6</a>.  Mail Streams Based on Behavioral Assessment</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.6.%20%20Mail%20Streams%20Based%20on%20Behavioral%20Assessment"></a></body></html><a class="selflink" href="#section-7.6" id="section-7.6">7.6</a>.  Mail Streams Based on Behavioral Assessment</span>
 
    An ISP (ISP A) might want to assign signatures to outbound mail from
    its users according to each user's past sending behavior
@@ -2145,7 +2114,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -2164,7 +2133,7 @@ Table of Contents
    However, some organizations might also find the information useful
    for their own purposes in processing bounces or abuse reports.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.7.%20%20Agent%20or%20Mediator%20Signatures"></a></body></html><a class="selflink" href="#section-7.7" name="section-7.7">7.7</a>.  Agent or Mediator Signatures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.7.%20%20Agent%20or%20Mediator%20Signatures"></a></body></html><a class="selflink" href="#section-7.7" id="section-7.7">7.7</a>.  Agent or Mediator Signatures</span>
 
    Another scenario is that of an agent, usually a re-mailer of some
    kind, that signs on behalf of the service or organization that it
@@ -2176,9 +2145,9 @@ Table of Contents
    configured in such a way that its forwarding would break existing
    DKIM signatures, it needs to always add its own signature.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Usage%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Usage Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Usage%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Usage Considerations</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Non-Standard%20Submission%20and%20Delivery%20Scenarios"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Non-Standard Submission and Delivery Scenarios</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Non-Standard%20Submission%20and%20Delivery%20Scenarios"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Non-Standard Submission and Delivery Scenarios</span>
 
    The robustness of DKIM's verification mechanism is based on the fact
    that only authorized signing modules have access to the designated
@@ -2201,7 +2170,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -2231,7 +2200,7 @@ Table of Contents
    message is received in Joe's ISP-1 account, the original signature
    will fail verification.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Protection%20of%20Internal%20Mail"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Protection of Internal Mail</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Protection%20of%20Internal%20Mail"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Protection of Internal Mail</span>
 
    One identity is particularly amenable to easy and accurate
    assessment: the organization's own identity.  Members of an
@@ -2257,11 +2226,11 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.3.%20%20Signature%20Granularity"></a></body></html><a class="selflink" href="#section-8.3" name="section-8.3">8.3</a>.  Signature Granularity</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.3.%20%20Signature%20Granularity"></a></body></html><a class="selflink" href="#section-8.3" id="section-8.3">8.3</a>.  Signature Granularity</span>
 
    Although DKIM's use of domain names is optimized for a scope of
    organization-level signing, it is possible to administer subdomains
@@ -2313,7 +2282,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -2338,7 +2307,7 @@ Table of Contents
    local part or subdomain extension in the i= tag rather than by
    extending the d= domain and publishing individual keys.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.4.%20%20Email%20Infrastructure%20Agents"></a></body></html><a class="selflink" href="#section-8.4" name="section-8.4">8.4</a>.  Email Infrastructure Agents</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.4.%20%20Email%20Infrastructure%20Agents"></a></body></html><a class="selflink" href="#section-8.4" id="section-8.4">8.4</a>.  Email Infrastructure Agents</span>
 
    It is expected that the most common venue for a DKIM implementation
    will be within the infrastructure of an organization's email service,
@@ -2369,7 +2338,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -2404,7 +2373,7 @@ Table of Contents
          +  sign the modified message including the verification results
             (e.g., the Authentication-Results header field).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.5.%20%20Mail%20User%20Agent"></a></body></html><a class="selflink" href="#section-8.5" name="section-8.5">8.5</a>.  Mail User Agent</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.5.%20%20Mail%20User%20Agent"></a></body></html><a class="selflink" href="#section-8.5" id="section-8.5">8.5</a>.  Mail User Agent</span>
 
    The DKIM specification is expected to be used primarily between
    Boundary MTAs, or other infrastructure components of the originating
@@ -2425,7 +2394,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -2468,12 +2437,12 @@ Table of Contents
    verifying need a basis for knowing that their associated email
    infrastructure will not break a signature.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Security Considerations</span>
 
    The security considerations of the DKIM protocol are described in the
    DKIM base specification [<a href="./rfc4871.html" title='"NEWALG"'>RFC4871</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Acknowledgements</span>
 
    The effort of the DKIM Working Group is gratefully acknowledged.
 
@@ -2481,46 +2450,46 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20References"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20References"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-11.1" name="section-11.1">11.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-11.1" id="section-11.1">11.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC4871" name="ref-RFC4871">RFC4871</a>]  Allman, E., Callas, J., Delany, M., Libbey, M., Fenton,
+   [<a id="ref-RFC4871">RFC4871</a>]  Allman, E., Callas, J., Delany, M., Libbey, M., Fenton,
               J., and M. Thomas, "DomainKeys Identified Mail (DKIM)
               Signatures", <a href="./rfc4871.html">RFC 4871</a>, May 2007.
 
-   [<a id="ref-RFC5322" name="ref-RFC5322">RFC5322</a>]  Resnick, P., Ed., "Internet Message Format", <a href="./rfc5322.html">RFC 5322</a>,
+   [<a id="ref-RFC5322">RFC5322</a>]  Resnick, P., Ed., "Internet Message Format", <a href="./rfc5322.html">RFC 5322</a>,
               October 2008.
 
-   [<a id="ref-RFC5451" name="ref-RFC5451">RFC5451</a>]  Kucherawy, M., "Message Header Field for Indicating
+   [<a id="ref-RFC5451">RFC5451</a>]  Kucherawy, M., "Message Header Field for Indicating
               Message Authentication Status", <a href="./rfc5451.html">RFC 5451</a>, April 2009.
 
-   [<a id="ref-RFC5585" name="ref-RFC5585">RFC5585</a>]  Hansen, T., Crocker, D., and P. Hallam-Baker, "DomainKeys
+   [<a id="ref-RFC5585">RFC5585</a>]  Hansen, T., Crocker, D., and P. Hallam-Baker, "DomainKeys
               Identified Mail (DKIM) Service Overview", <a href="./rfc5585.html">RFC 5585</a>,
               July 2009.
 
-   [<a id="ref-RFC5617" name="ref-RFC5617">RFC5617</a>]  Allman, E., Fenton, J., Delany, M., and J. Levine,
+   [<a id="ref-RFC5617">RFC5617</a>]  Allman, E., Fenton, J., Delany, M., and J. Levine,
               "DomainKeys Identified Mail (DKIM) Author Domain Signing
               Practices (ADSP)", <a href="./rfc5617.html">RFC 5617</a>, August 2009.
 
-   [<a id="ref-RFC5672" name="ref-RFC5672">RFC5672</a>]  Crocker, D., "<a href="./rfc4871.html">RFC 4871</a> DomainKeys Identified Mail (DKIM)
+   [<a id="ref-RFC5672">RFC5672</a>]  Crocker, D., "<a href="./rfc4871.html">RFC 4871</a> DomainKeys Identified Mail (DKIM)
               Signatures -- Update", <a href="./rfc5672.html">RFC 5672</a>, August 2009.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-11.2" name="section-11.2">11.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-11.2" id="section-11.2">11.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC4034" name="ref-RFC4034">RFC4034</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
+   [<a id="ref-RFC4034">RFC4034</a>]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "Resource Records for the DNS Security Extensions",
               <a href="./rfc4034.html">RFC 4034</a>, March 2005.
 
-   [<a id="ref-RFC4870" name="ref-RFC4870">RFC4870</a>]  Delany, M., "Domain-Based Email Authentication Using
+   [<a id="ref-RFC4870">RFC4870</a>]  Delany, M., "Domain-Based Email Authentication Using
               Public Keys Advertised in the DNS (DomainKeys)", <a href="./rfc4870.html">RFC 4870</a>,
               May 2007.
 
-   [<a id="ref-RFC5155" name="ref-RFC5155">RFC5155</a>]  Laurie, B., Sisson, G., Arends, R., and D. Blacka, "DNS
+   [<a id="ref-RFC5155">RFC5155</a>]  Laurie, B., Sisson, G., Arends, R., and D. Blacka, "DNS
               Security (DNSSEC) Hashed Authenticated Denial of
               Existence", <a href="./rfc5155.html">RFC 5155</a>, March 2008.
 
@@ -2537,11 +2506,11 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 42]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-43" id="page-43" name="page-43"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-43"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Migration%20Strategies"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Migration Strategies</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Migration%20Strategies"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Migration Strategies</span>
 
    There are three migration occasions worth noting in particular for
    DKIM:
@@ -2566,12 +2535,12 @@ Table of Contents
 
    Signers and verifiers have different considerations.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Migrating%20from%20DomainKeys"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>.  Migrating from DomainKeys</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20%20Migrating%20from%20DomainKeys"></a></body></html><a class="selflink" href="#appendix-A.1" id="appendix-A.1">A.1</a>.  Migrating from DomainKeys</span>
 
    DKIM replaces the earlier DomainKeys (DK) specification.  Selector
    files are mostly compatible between the two specifications.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.1.%20%20Signers"></a></body></html><a class="selflink" href="#appendix-A.1.1" name="appendix-A.1.1">A.1.1</a>.  Signers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.1.%20%20Signers"></a></body></html><a class="selflink" href="#appendix-A.1.1" id="appendix-A.1.1">A.1.1</a>.  Signers</span>
 
    A signer that currently signs with DK will go through various stages
    as it migrates to using DKIM, not all of which are required for all
@@ -2593,7 +2562,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 43]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-44" id="page-44" name="page-44"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-44"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -2649,7 +2618,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 44]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-45" id="page-45" name="page-45"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-45"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -2671,7 +2640,7 @@ Table of Contents
    Note that when you have separate key records for DK and DKIM, you can
    use the same public key for both.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.1.1.%20%20DNS%20Selector%20Key%20Records"></a></body></html><a class="selflink" href="#appendix-A.1.1.1" name="appendix-A.1.1.1">A.1.1.1</a>.  DNS Selector Key Records</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.1.1.%20%20DNS%20Selector%20Key%20Records"></a></body></html><a class="selflink" href="#appendix-A.1.1.1" id="appendix-A.1.1.1">A.1.1.1</a>.  DNS Selector Key Records</span>
 
    The first step in some of the above scenarios is ensuring that the
    selector DNS key records are compatible for both DK and DKIM.  The
@@ -2705,7 +2674,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 45]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-46" id="page-46" name="page-46"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-46"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -2718,7 +2687,7 @@ Table of Contents
       "v=DKIM1;" in it.  It is strongly encouraged that if use of an
       empty "g" field in the DKIM selector, include the "v" field.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.1.2.%20%20Removing%20DomainKeys%20Signatures"></a></body></html><a class="selflink" href="#appendix-A.1.1.2" name="appendix-A.1.1.2">A.1.1.2</a>.  Removing DomainKeys Signatures</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.1.2.%20%20Removing%20DomainKeys%20Signatures"></a></body></html><a class="selflink" href="#appendix-A.1.1.2" id="appendix-A.1.1.2">A.1.1.2</a>.  Removing DomainKeys Signatures</span>
 
    The principal use of DomainKeys is at boundary MTAs.  Because no
    operational transition is ever instantaneous, it is advisable to
@@ -2761,15 +2730,15 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 46]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-47" id="page-47" name="page-47"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-47"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.2.%20%20Verifiers"></a></body></html><a class="selflink" href="#appendix-A.1.2" name="appendix-A.1.2">A.1.2</a>.  Verifiers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.2.%20%20Verifiers"></a></body></html><a class="selflink" href="#appendix-A.1.2" id="appendix-A.1.2">A.1.2</a>.  Verifiers</span>
 
    As a verifier, several issues need to be considered:
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.2.1.%20%20Ought%20DK%20signature%20verification%20be%20performed%3F"></a></body></html><a class="selflink" href="#appendix-A.1.2.1" name="appendix-A.1.2.1">A.1.2.1</a>.  Ought DK signature verification be performed?</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.2.1.%20%20Ought%20DK%20signature%20verification%20be%20performed%3F"></a></body></html><a class="selflink" href="#appendix-A.1.2.1" id="appendix-A.1.2.1">A.1.2.1</a>.  Ought DK signature verification be performed?</span>
 
    At the time of writing, there is still a significant number of sites
    that are only producing DK signatures.  Over time, it is expected
@@ -2777,7 +2746,7 @@ Table of Contents
    So it would be prudent for the foreseeable future for a verifier to
    look for and verify both DKIM and DK signatures.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.2.2.%20%20Ought%20both%20DK%20and%20DKIM%20signatures%20be%20evaluated%20on%20a%20single"></a></body></html><a class="selflink" href="#appendix-A.1.2.2" name="appendix-A.1.2.2">A.1.2.2</a>.  Ought both DK and DKIM signatures be evaluated on a single</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.2.2.%20%20Ought%20both%20DK%20and%20DKIM%20signatures%20be%20evaluated%20on%20a%20single"></a></body></html><a class="selflink" href="#appendix-A.1.2.2" id="appendix-A.1.2.2">A.1.2.2</a>.  Ought both DK and DKIM signatures be evaluated on a single</span>
           message?
 
    For a period of time, there will be sites that sign with both DK and
@@ -2788,7 +2757,7 @@ Table of Contents
    selectors.  One transition strategy is to verify the DKIM signature,
    then only verify the DK signature if the DKIM verification fails.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.2.3.%20%20DNS%20Selector%20Key%20Records"></a></body></html><a class="selflink" href="#appendix-A.1.2.3" name="appendix-A.1.2.3">A.1.2.3</a>.  DNS Selector Key Records</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.2.3.%20%20DNS%20Selector%20Key%20Records"></a></body></html><a class="selflink" href="#appendix-A.1.2.3" id="appendix-A.1.2.3">A.1.2.3</a>.  DNS Selector Key Records</span>
 
    The format of the DNS key record was intentionally meant to be
    backwardly compatible between DK and DKIM, but not necessarily
@@ -2817,7 +2786,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 47]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-48" id="page-48" name="page-48"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-48"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -2830,9 +2799,9 @@ Table of Contents
        such records using the first interpretation, and treat such
        records as if the signer did not have a "g" field in the record.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Migrating%20Hash%20Algorithms"></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>.  Migrating Hash Algorithms</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20%20Migrating%20Hash%20Algorithms"></a></body></html><a class="selflink" href="#appendix-A.2" id="appendix-A.2">A.2</a>.  Migrating Hash Algorithms</span>
 
-   [<a id="ref-RFC4871" name="ref-RFC4871">RFC4871</a>] defines the use of two hash algorithms: SHA-1 and SHA-256.
+   [<a id="ref-RFC4871">RFC4871</a>] defines the use of two hash algorithms: SHA-1 and SHA-256.
    The security of all hash algorithms is constantly under attack, and
    SHA-1 has already shown weaknesses as of this writing.  Migrating
    from SHA-1 to SHA-256 is not an issue, because all verifiers are
@@ -2842,7 +2811,7 @@ Table of Contents
    new hash algorithm.  <a href="./rfc4871.html#section-4.1">Section 4.1 of [RFC4871]</a> briefly discusses this
    scenario.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.1.%20%20Signers"></a></body></html><a class="selflink" href="#appendix-A.2.1" name="appendix-A.2.1">A.2.1</a>.  Signers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.1.%20%20Signers"></a></body></html><a class="selflink" href="#appendix-A.2.1" id="appendix-A.2.1">A.2.1</a>.  Signers</span>
 
    As with migrating from DK to DKIM, migrating hash algorithms is
    dependent on the signer's best guess as to the utility of continuing
@@ -2873,7 +2842,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 48]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-49" id="page-49" name="page-49"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-49"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -2883,20 +2852,20 @@ Table of Contents
    added to the list, as in "h=sha256:NEWHASH;".  (When the signer is no
    longer using SHA-256, it can be removed from the "h=" list.)
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.2.%20%20Verifiers"></a></body></html><a class="selflink" href="#appendix-A.2.2" name="appendix-A.2.2">A.2.2</a>.  Verifiers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.2.%20%20Verifiers"></a></body></html><a class="selflink" href="#appendix-A.2.2" id="appendix-A.2.2">A.2.2</a>.  Verifiers</span>
 
    When a new hash algorithm becomes standardized, it is best for a
    verifier to start supporting it as quickly as possible.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20%20Migrating%20Signing%20Algorithms"></a></body></html><a class="selflink" href="#appendix-A.3" name="appendix-A.3">A.3</a>.  Migrating Signing Algorithms</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20%20Migrating%20Signing%20Algorithms"></a></body></html><a class="selflink" href="#appendix-A.3" id="appendix-A.3">A.3</a>.  Migrating Signing Algorithms</span>
 
-   [<a id="ref-RFC4871" name="ref-RFC4871">RFC4871</a>] defines the use of the RSA signing algorithm.  Similar to
+   [<a id="ref-RFC4871">RFC4871</a>] defines the use of the RSA signing algorithm.  Similar to
    hashes, signing algorithms are constantly under attack, and when it
    becomes necessary to replace RSA with a newer signing algorithm,
    there will be a migratory period.  In the following, "NEWALG" is used
    to represent a new signing algorithm.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.1.%20%20Signers"></a></body></html><a class="selflink" href="#appendix-A.3.1" name="appendix-A.3.1">A.3.1</a>.  Signers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.1.%20%20Signers"></a></body></html><a class="selflink" href="#appendix-A.3.1" id="appendix-A.3.1">A.3.1</a>.  Signers</span>
 
    As with the other migration issues discussed above, migrating signing
    algorithms is dependent on the signer's best guess as to the utility
@@ -2929,16 +2898,16 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 49]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-50" id="page-50" name="page-50"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-50"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.2.%20%20Verifiers"></a></body></html><a class="selflink" href="#appendix-A.3.2" name="appendix-A.3.2">A.3.2</a>.  Verifiers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.2.%20%20Verifiers"></a></body></html><a class="selflink" href="#appendix-A.3.2" id="appendix-A.3.2">A.3.2</a>.  Verifiers</span>
 
    When a new hash algorithm becomes standardized, it is best for a
    verifier to start supporting it as quickly as possible.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20General%20Coding%20Criteria%20for%20Cryptographic%20Applications"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  General Coding Criteria for Cryptographic Applications</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20General%20Coding%20Criteria%20for%20Cryptographic%20Applications"></a></body></html><a class="selflink" href="#appendix-B" id="appendix-B">Appendix B</a>.  General Coding Criteria for Cryptographic Applications</span>
 
    NOTE: This section could possibly be changed into a reference to
    something else, such as another RFC.
@@ -2985,7 +2954,7 @@ Table of Contents
 
 
 <span class="grey">Hansen, et al.                Informational                    [Page 50]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-51" id="page-51" name="page-51"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-51"></span>
 <span class="grey"><a href="./rfc5863.html">RFC 5863</a>         DKIM Development/Deployment/Operations         May 2010</span>
 
 
@@ -3041,11 +3010,6 @@ Authors' Addresses
 
 
 Hansen, et al.                Informational                    [Page 51]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

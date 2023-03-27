@@ -1,32 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:6074" name="DC.Identifier"/>
-<meta content='Provider Provisioned Layer 2 Virtual Private Networks (L2VPNs) may
-have different "provisioning models", i.e., models for what
-information needs to be configured in what entities. Once configured,
-the provisioning information is distributed by a "discovery process".
-When the discovery process is complete, a signaling protocol is
-automatically invoked to set up the mesh of pseudowires (PWs) that
-form the (virtual) backbone of the L2VPN. This document specifies a
-number of L2VPN provisioning models, and further specifies the
-semantic structure of the endpoint identifiers required by each model.
-It discusses the distribution of these identifiers by the discovery
-process, especially when discovery is based on the Border Gateway
-Protocol (BGP). It then specifies how the endpoint identifiers are
-carried in the two signaling protocols that are used to set up PWs,
-the Label Distribution Protocol (LDP), and the Layer 2 Tunneling
-Protocol version 3 (L2TPv3). [STANDARDS- TRACK]' name="DC.Description.Abstract"/>
-<meta content="Eric Rosen &lt;erosen@cisco.com&gt;" name="DC.Creator"/>
-<meta content="January, 2011" name="DC.Date.Issued"/>
-<meta content="Provisioning, Auto-Discovery, and Signaling in Layer 2 Virtual Private Networks (L2VPNs)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6074 - Provisioning, Auto-Discovery, and Signaling in Layer 2 Virtual Private Networks (L2VPNs)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="E. Rosen" name="citation_author"/>
+<meta content="B. Davie" name="citation_author"/>
+<meta content="V. Radoaca" name="citation_author"/>
+<meta content="W. Luo" name="citation_author"/>
+<meta content="January, 2011" name="citation_publication_date"/>
+<meta content="Provisioning, Auto-Discovery, and Signaling in Layer 2 Virtual Private Networks (L2VPNs)" name="citation_title"/>
+<meta content="10.17487/RFC6074" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6074" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6074.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6074: Provisioning, Auto-Discovery, and Signaling in Layer 2 Virtual Private Networks (L2VPNs)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -55,7 +43,7 @@ Protocol version 3 (L2TPv3). [STANDARDS- TRACK]' name="DC.Description.Abstract"/
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -64,7 +52,7 @@ Protocol version 3 (L2TPv3). [STANDARDS- TRACK]' name="DC.Description.Abstract"/
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -143,19 +131,18 @@ Protocol version 3 (L2TPv3). [STANDARDS- TRACK]' name="DC.Description.Abstract"/
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -169,21 +156,9 @@ Protocol version 3 (L2TPv3). [STANDARDS- TRACK]' name="DC.Description.Abstract"/
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6074.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6074" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-l2vpn-signaling.html" title="draft-ietf-l2vpn-signaling">draft-ietf-l2vpn-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6074" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6074" title="Side-by-side diff">Diff2</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6074&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>]           </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                          E. Rosen
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6074.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6074.txt.pdf">PDF</a>|<a href="/rfc/rfc6074.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6074" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6074&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6074" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                          E. Rosen
 Request for Comments: 6074                                      B. Davie
 Category: Standards Track                            Cisco Systems, Inc.
 ISSN: 2070-1721                                               V. Radoaca
@@ -235,7 +210,7 @@ Status of This Memo
 
 
 <span class="grey">Rosen, et al.                Standards Track                    [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -244,7 +219,7 @@ Copyright Notice
    Copyright (c) 2011 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -291,7 +266,7 @@ Copyright Notice
 
 
 <span class="grey">Rosen, et al.                Standards Track                    [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -347,13 +322,13 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                    [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
-   [<a id="ref-RFC4664" name="ref-RFC4664">RFC4664</a>] describes a number of different ways in which sets of
+   [<a id="ref-RFC4664">RFC4664</a>] describes a number of different ways in which sets of
    pseudowires may be combined together into "Provider Provisioned Layer
    2 VPNs" (L2 PPVPNs, or L2VPNs), resulting in a number of different
    kinds of L2VPN.  Different kinds of L2VPN may have different
@@ -403,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                    [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -415,9 +390,9 @@ Table of Contents
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>]
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Signaling%20Protocol%20Framework"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Signaling Protocol Framework</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Signaling%20Protocol%20Framework"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Signaling Protocol Framework</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Endpoint%20Identification"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Endpoint Identification</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Endpoint%20Identification"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Endpoint Identification</span>
 
    Per [<a href="./rfc4664.html" title='"Framework for Layer 2 Virtual Private Networks (L2VPNs)"'>RFC4664</a>], a pseudowire can be thought of as a relationship
    between a pair of "Forwarders".  In simple instances of Virtual
@@ -446,7 +421,7 @@ Table of Contents
    the same purpose.  In the context of this document, "Attachment
    Identifier" and "Forwarder Identifier" are used interchangeably.
 
-   [<a id="ref-RFC4447" name="ref-RFC4447">RFC4447</a>] specifies two Forwarding Equivalence Class (FEC) elements
+   [<a id="ref-RFC4447">RFC4447</a>] specifies two Forwarding Equivalence Class (FEC) elements
    that can be used when setting up pseudowires, the PWid FEC element,
    and the Generalized ID FEC element.  The PWid FEC element carries
    only one Forwarder identifier; it can be thus be used only when both
@@ -459,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                    [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -515,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                    [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -525,7 +500,7 @@ Table of Contents
    the communication of administrative information, perhaps combined
    with information learned during auto-discovery.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Creating%20a%20Single%20Bidirectional%20Pseudowire"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Creating a Single Bidirectional Pseudowire</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Creating%20a%20Single%20Bidirectional%20Pseudowire"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Creating a Single Bidirectional Pseudowire</span>
 
    In any form of LDP-based signaling, each PW endpoint must initiate
    the creation of a unidirectional LSP.  A PW is a pair of such LSPs.
@@ -548,7 +523,7 @@ Table of Contents
    pseudowire tie.  The procedures of detecting a pseudowire tie are
    described in [<a href="./rfc4667.html" title='"Layer 2 Virtual Private Network (L2VPN) Extensions for Layer 2 Tunneling Protocol (L2TP)"'>RFC4667</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Attachment%20Identifiers%20and%20Forwarders"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Attachment Identifiers and Forwarders</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Attachment%20Identifiers%20and%20Forwarders"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Attachment Identifiers and Forwarders</span>
 
    Every Forwarder in a PE must be associated with an Attachment
    Identifier (AI), either through configuration or through some
@@ -571,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                    [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -627,11 +602,11 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                    [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Applications"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Applications</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Applications"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Applications</span>
 
    In this section, we specify the way in which the pseudowire signaling
    using the notion of source and target Forwarder is applied for a
@@ -641,7 +616,7 @@ Table of Contents
    applications, or an exhaustive list of the provisioning models that
    can be applied to each application.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Individual%20Point-to-Point%20Pseudowires"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Individual Point-to-Point Pseudowires</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Individual%20Point-to-Point%20Pseudowires"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Individual Point-to-Point Pseudowires</span>
 
    The signaling specified in this document can be used to set up
    individually provisioned point-to-point pseudowires.  In this
@@ -650,9 +625,9 @@ Table of Contents
    Attachment Circuits, and then certain parameters must be provisioned
    for each Attachment Circuit.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Provisioning%20Models"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  Provisioning Models</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Provisioning%20Models"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  Provisioning Models</span>
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.1.%20%20Double-Sided%20Provisioning"></a></body></html><a class="selflink" href="#section-3.1.1.1" name="section-3.1.1.1">3.1.1.1</a>.  Double-Sided Provisioning</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.1.%20%20Double-Sided%20Provisioning"></a></body></html><a class="selflink" href="#section-3.1.1.1" id="section-3.1.1.1">3.1.1.1</a>.  Double-Sided Provisioning</span>
 
    In this model, the Attachment Circuit must be provisioned with a
    local name, a remote PE address, and a remote name.  During
@@ -671,7 +646,7 @@ Table of Contents
    the remote name are the same, Local End ID AVP can be omitted from
    L2TP signaling messages.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.2.%20%20Single-Sided%20Provisioning%20with%20Discovery"></a></body></html><a class="selflink" href="#section-3.1.1.2" name="section-3.1.1.2">3.1.1.2</a>.  Single-Sided Provisioning with Discovery</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.2.%20%20Single-Sided%20Provisioning%20with%20Discovery"></a></body></html><a class="selflink" href="#section-3.1.1.2" id="section-3.1.1.2">3.1.1.2</a>.  Single-Sided Provisioning with Discovery</span>
 
    In this model, each Attachment Circuit must be provisioned with a
    local name.  The local name consists of a VPN-ID (signaled as the
@@ -683,7 +658,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                    [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -710,7 +685,7 @@ Table of Contents
    advertised individually (i.e., there is no aggregation of Attachment
    Circuit names in this simple scheme).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Signaling"></a></body></html><a class="selflink" href="#section-3.1.2" name="section-3.1.2">3.1.2</a>.  Signaling</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Signaling"></a></body></html><a class="selflink" href="#section-3.1.2" id="section-3.1.2">3.1.2</a>.  Signaling</span>
 
    The LDP-based signaling follows the procedures specified in
    [<a href="./rfc4447.html" title='"Pseudowire Setup and Maintenance Using the Label Distribution Protocol (LDP)"'>RFC4447</a>].  That is, one PE (PE1) sends a Label Mapping message to
@@ -739,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -767,7 +742,7 @@ Table of Contents
 
    These errors could occur as the result of misconfigurations.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Virtual%20Private%20LAN%20Service"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Virtual Private LAN Service</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Virtual%20Private%20LAN%20Service"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Virtual Private LAN Service</span>
 
    In the VPLS application [<a href="./rfc4762.html" title='"Virtual Private LAN Service (VPLS) Using Label Distribution Protocol (LDP) Signaling"'>RFC4762</a>], the Attachment Circuits can be
    thought of as LAN interfaces that attach to "virtual LAN switches",
@@ -778,7 +753,7 @@ Table of Contents
    the same VPLS.  Each PE device may have multiple VSIs, where each VSI
    belongs to a different VPLS.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Provisioning"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Provisioning</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Provisioning"></a></body></html><a class="selflink" href="#section-3.2.1" id="section-3.2.1">3.2.1</a>.  Provisioning</span>
 
    Each VPLS must have a globally unique identifier, which in [<a href="./rfc4762.html" title='"Virtual Private LAN Service (VPLS) Using Label Distribution Protocol (LDP) Signaling"'>RFC4762</a>]
    is referred to as the VPLS identifier (or VPLS-id).  Every VSI must
@@ -795,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -803,9 +778,9 @@ Table of Contents
    instance.  See <a href="#section-4.4">Section 4.4</a> for a discussion of the assignment of
    identifiers in the case of multiple providers.)
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Auto-Discovery"></a></body></html><a class="selflink" href="#section-3.2.2" name="section-3.2.2">3.2.2</a>.  Auto-Discovery</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Auto-Discovery"></a></body></html><a class="selflink" href="#section-3.2.2" id="section-3.2.2">3.2.2</a>.  Auto-Discovery</span>
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.1.%20%20BGP-Based%20Auto-Discovery"></a></body></html><a class="selflink" href="#section-3.2.2.1" name="section-3.2.2.1">3.2.2.1</a>.  BGP-Based Auto-Discovery</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.1.%20%20BGP-Based%20Auto-Discovery"></a></body></html><a class="selflink" href="#section-3.2.2.1" id="section-3.2.2.1">3.2.2.1</a>.  BGP-Based Auto-Discovery</span>
 
    This section specifies how BGP can be used to discover the
    information necessary to build VPLS instances.
@@ -851,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -881,8 +856,8 @@ Table of Contents
    If a PE has a VSI with a particular RT, it can then import all the
    NLRIs that have that same RT, and from the BGP next hop attribute of
    these NLRI it will learn the IP addresses of the other PE routers
-   which have VSIs with the same RT.  The considerations in <a href="#section-4.3.3">Section</a>
-   <a href="#section-4.3.3">4.3.3</a> of [<a href="./rfc4364.html" title='"BGP/MPLS IP Virtual Private Networks (VPNs)"'>RFC4364</a>] on the use of route reflectors apply.
+   which have VSIs with the same RT.  The considerations in <a href="./rfc4364.html#section-4.3.3">Section</a>
+   <a href="./rfc4364.html#section-4.3.3">4.3.3 of [RFC4364]</a> on the use of route reflectors apply.
 
    If a particular VPLS is meant to be a single fully connected LAN, all
    its VSIs will have the same RT, in which case the RT could be (though
@@ -907,7 +882,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -939,7 +914,7 @@ Table of Contents
    VPLS scheme defined here and that defined in [<a href="./rfc4761.html" title='"Virtual Private LAN Service (VPLS) Using BGP for Auto-Discovery and Signaling"'>RFC4761</a>] is beyond the
    scope of this document.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Signaling"></a></body></html><a class="selflink" href="#section-3.2.3" name="section-3.2.3">3.2.3</a>.  Signaling</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Signaling"></a></body></html><a class="selflink" href="#section-3.2.3" id="section-3.2.3">3.2.3</a>.  Signaling</span>
 
    It is necessary to create Attachment Identifiers that identify the
    VSIs.  In the preceding section, a VSI-ID was encoded as RD:PE_addr,
@@ -963,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -976,7 +951,7 @@ Table of Contents
    Note that it is not possible using this technique to set up more than
    one PW per pair of VSIs.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.4.%20%20Pseudowires%20as%20VPLS%20Attachment%20Circuits"></a></body></html><a class="selflink" href="#section-3.2.4" name="section-3.2.4">3.2.4</a>.  Pseudowires as VPLS Attachment Circuits</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.4.%20%20Pseudowires%20as%20VPLS%20Attachment%20Circuits"></a></body></html><a class="selflink" href="#section-3.2.4" id="section-3.2.4">3.2.4</a>.  Pseudowires as VPLS Attachment Circuits</span>
 
    It is also possible using this technique to set up a PW that attaches
    at one endpoint to a VSI, but at the other endpoint only to an
@@ -984,7 +959,7 @@ Table of Contents
    given VSI, which must somehow be distinguished, so each PW must have
    an SAII that is unique relative to the VSI-ID.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Colored%20Pools%3A%20Full%20Mesh%20of%20Point-to-Point%20Pseudowires"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Colored Pools: Full Mesh of Point-to-Point Pseudowires</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Colored%20Pools%3A%20Full%20Mesh%20of%20Point-to-Point%20Pseudowires"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Colored Pools: Full Mesh of Point-to-Point Pseudowires</span>
 
    The "Colored Pools" model of operation provides an automated way to
    deliver VPWS.  In this model, each PE may contain several pools of
@@ -994,7 +969,7 @@ Table of Contents
    between each pair of pools that are in the same VPN; the result would
    be to create a full mesh of CE-CE Virtual Circuits for each VPN.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Provisioning"></a></body></html><a class="selflink" href="#section-3.3.1" name="section-3.3.1">3.3.1</a>.  Provisioning</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Provisioning"></a></body></html><a class="selflink" href="#section-3.3.1" id="section-3.3.1">3.3.1</a>.  Provisioning</span>
 
    Each pool is configured, and associated with:
 
@@ -1019,7 +994,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -1044,9 +1019,9 @@ Table of Contents
    identifier.  With this option, the same pairs of Attachment Circuits
    will always be bound via pseudowires.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.%20%20Auto-Discovery"></a></body></html><a class="selflink" href="#section-3.3.2" name="section-3.3.2">3.3.2</a>.  Auto-Discovery</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.%20%20Auto-Discovery"></a></body></html><a class="selflink" href="#section-3.3.2" id="section-3.3.2">3.3.2</a>.  Auto-Discovery</span>
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.1.%20%20BGP-Based%20Auto-Discovery"></a></body></html><a class="selflink" href="#section-3.3.2.1" name="section-3.3.2.1">3.3.2.1</a>.  BGP-Based Auto-Discovery</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.1.%20%20BGP-Based%20Auto-Discovery"></a></body></html><a class="selflink" href="#section-3.3.2.1" id="section-3.3.2.1">3.3.2.1</a>.  BGP-Based Auto-Discovery</span>
 
    This section specifies how BGP can be used to discover the
    information necessary to build VPWS instances.
@@ -1075,7 +1050,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -1131,13 +1106,13 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
    See <a href="#section-6">Section 6</a> for discussion of the AFI and SAFI values.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.3.%20%20Signaling"></a></body></html><a class="selflink" href="#section-3.3.3" name="section-3.3.3">3.3.3</a>.  Signaling</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.3.%20%20Signaling"></a></body></html><a class="selflink" href="#section-3.3.3" id="section-3.3.3">3.3.3</a>.  Signaling</span>
 
    The LDP-based signaling follows the procedures specified in
    [<a href="./rfc4447.html" title='"Pseudowire Setup and Maintenance Using the Label Distribution Protocol (LDP)"'>RFC4447</a>].  That is, one PE (PE1) sends a Label Mapping message to
@@ -1187,11 +1162,11 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Colored%20Pools%3A%20Partial%20Mesh"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Colored Pools: Partial Mesh</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Colored%20Pools%3A%20Partial%20Mesh"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  Colored Pools: Partial Mesh</span>
 
    The procedures for creating a partial mesh of pseudowires among a set
    of colored pools are substantially the same as those for creating a
@@ -1218,7 +1193,7 @@ Table of Contents
    spokes, and vice-versa, but the spoke pools will not connect to each
    other.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Distributed%20VPLS"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>.  Distributed VPLS</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20%20Distributed%20VPLS"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>.  Distributed VPLS</span>
 
    In Distributed VPLS ([<a href="./rfc4664.html" title='"Framework for Layer 2 Virtual Private Networks (L2VPNs)"'>RFC4664</a>]), the VPLS functionality of a PE
    router is divided among two systems: a U-PE and an N-PE.  The U-PE
@@ -1243,7 +1218,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -1299,7 +1274,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -1328,7 +1303,7 @@ Table of Contents
    connections per U-PE.  Whether this is worthwhile depends, of course,
    on what the bottleneck is.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.1.%20%20Signaling"></a></body></html><a class="selflink" href="#section-3.5.1" name="section-3.5.1">3.5.1</a>.  Signaling</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.1.%20%20Signaling"></a></body></html><a class="selflink" href="#section-3.5.1" id="section-3.5.1">3.5.1</a>.  Signaling</span>
 
    The signaling to support Distributed VPLS can be done with the
    mechanisms described in this document.  However, the procedures for
@@ -1355,7 +1330,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -1411,7 +1386,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -1435,7 +1410,7 @@ Table of Contents
    also ensure that a U-PW from each such U-PE is spliced to a U-PW from
    each of the other U-PEs.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.2.%20%20Provisioning%20and%20Discovery"></a></body></html><a class="selflink" href="#section-3.5.2" name="section-3.5.2">3.5.2</a>.  Provisioning and Discovery</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.2.%20%20Provisioning%20and%20Discovery"></a></body></html><a class="selflink" href="#section-3.5.2" id="section-3.5.2">3.5.2</a>.  Provisioning and Discovery</span>
 
    Every N-PE must be provisioned with the set of VPLS instances it
    supports, a VPN-id for each one, and a list of local U-PEs for each
@@ -1448,7 +1423,7 @@ Table of Contents
    the VPLS.  This information is sufficient to enable one to compute
    the local list and the remote list for each N-PE.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.3.%20%20Non-Distributed%20VPLS%20as%20a%20Sub-Case"></a></body></html><a class="selflink" href="#section-3.5.3" name="section-3.5.3">3.5.3</a>.  Non-Distributed VPLS as a Sub-Case</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.3.%20%20Non-Distributed%20VPLS%20as%20a%20Sub-Case"></a></body></html><a class="selflink" href="#section-3.5.3" id="section-3.5.3">3.5.3</a>.  Non-Distributed VPLS as a Sub-Case</span>
 
    A PE that is providing "non-distributed VPLS" (i.e., a PE that
    performs both the U-PE and N-PE functions) can interoperate with
@@ -1467,11 +1442,11 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.4.%20%20Splicing%20and%20the%20Data%20Plane"></a></body></html><a class="selflink" href="#section-3.5.4" name="section-3.5.4">3.5.4</a>.  Splicing and the Data Plane</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.4.%20%20Splicing%20and%20the%20Data%20Plane"></a></body></html><a class="selflink" href="#section-3.5.4" id="section-3.5.4">3.5.4</a>.  Splicing and the Data Plane</span>
 
    Splicing two PWs together is quite straightforward in the MPLS data
    plane, as moving a packet from one PW directly to another is just a
@@ -1482,13 +1457,13 @@ Table of Contents
 
    Further details on splicing are discussed in [<a href="./rfc6073.html" title='"Segmented Pseudowire"'>RFC6073</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Inter-AS%20Operation"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Inter-AS Operation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Inter-AS%20Operation"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Inter-AS Operation</span>
 
    The provisioning, auto-discovery, and signaling mechanisms described
    above can all be applied in an inter-AS environment.  As in
    [<a href="./rfc4364.html" title='"BGP/MPLS IP Virtual Private Networks (VPNs)"'>RFC4364</a>], there are a number of options for inter-AS operation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Multihop%20EBGP%20Redistribution%20of%20L2VPN%20NLRIs"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Multihop EBGP Redistribution of L2VPN NLRIs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Multihop%20EBGP%20Redistribution%20of%20L2VPN%20NLRIs"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Multihop EBGP Redistribution of L2VPN NLRIs</span>
 
    This option is most like option (c) in [<a href="./rfc4364.html" title='"BGP/MPLS IP Virtual Private Networks (VPNs)"'>RFC4364</a>].  That is, we use
    multihop External BGP (EBGP) redistribution of L2VPN NLRIs between
@@ -1523,7 +1498,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -1538,7 +1513,7 @@ Table of Contents
    than one provider requires some co-ordination in the use of RTs and
    RDs.  This subject is discussed in more detail in <a href="#section-4.4">Section 4.4</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20EBGP%20Redistribution%20of%20L2VPN%20NLRIs%20with%20Multi-Segment%20Pseudowires"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  EBGP Redistribution of L2VPN NLRIs with Multi-Segment Pseudowires</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20EBGP%20Redistribution%20of%20L2VPN%20NLRIs%20with%20Multi-Segment%20Pseudowires"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  EBGP Redistribution of L2VPN NLRIs with Multi-Segment Pseudowires</span>
 
    A possible drawback of the approach of the previous section is that
    it creates PW signaling sessions among all the PEs of a given L2VPN
@@ -1554,7 +1529,7 @@ Table of Contents
    provider sessions.  These concerns motivate the approach described
    here.
 
-   [<a id="ref-RFC6073" name="ref-RFC6073">RFC6073</a>] describes an approach to "switching" packets from one
+   [<a id="ref-RFC6073">RFC6073</a>] describes an approach to "switching" packets from one
    pseudowire to another at a particular node.  This approach allows an
    end-to-end, multi-segment pseudowire to be constructed out of several
    pseudowire segments, without maintaining an end-to-end control
@@ -1579,7 +1554,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -1620,7 +1595,7 @@ Table of Contents
    than one provider requires some co-ordination in the use of RTs and
    RDs.  This subject is discussed in more detail in <a href="#section-4.4">Section 4.4</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Inter-Provider%20Application%20of%20Distributed%20VPLS%20Signaling"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Inter-Provider Application of Distributed VPLS Signaling</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Inter-Provider%20Application%20of%20Distributed%20VPLS%20Signaling"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Inter-Provider Application of Distributed VPLS Signaling</span>
 
    An alternative approach to inter-provider VPLS can be derived from
    the Distributed VPLS approach described above.  Consider the
@@ -1635,7 +1610,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -1667,7 +1642,7 @@ Table of Contents
    This requires the PEs within a VPLS to be numbered from 1-n (relative
    to that VPLS) within a given network.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20RT%20and%20RD%20Assignment%20Considerations"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  RT and RD Assignment Considerations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20RT%20and%20RD%20Assignment%20Considerations"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  RT and RD Assignment Considerations</span>
 
    We note that, in order for any of the inter-AS procedures described
    above to work correctly, the two ASes must use RTs and RDs
@@ -1691,7 +1666,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -1708,7 +1683,7 @@ Table of Contents
    choice to the other provider(s), who must use the same value for
    sites in the same VPLS or VPWS instance.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    This document describes a number of different L2VPN provisioning
    models, and specifies the endpoint identifiers that are required to
@@ -1734,7 +1709,7 @@ Table of Contents
    The way in which endpoint identifiers are mapped into protocol fields
    does not create any additional security issues.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  IANA Considerations</span>
 
    IANA has assigned an AFI and a SAFI for L2VPN NLRI.  Both the AFI and
    SAFI are the same as the values assigned for [<a href="./rfc4761.html" title='"Virtual Private LAN Service (VPLS) Using BGP for Auto-Discovery and Signaling"'>RFC4761</a>].  That is, the
@@ -1747,11 +1722,11 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
-   [<a id="ref-RFC4446" name="ref-RFC4446">RFC4446</a>] defines registries for "Attachment Group Identifier (AGI)
+   [<a id="ref-RFC4446">RFC4446</a>] defines registries for "Attachment Group Identifier (AGI)
    Type" and "Attachment Individual Identifier (AII) Type".  Type 1 in
    each registry has been assigned to the AGI and AII formats defined in
    this document.
@@ -1774,19 +1749,19 @@ Table of Contents
 
    28: Attachment Circuit bound to different remote Attachment Circuit
 
-   [<a id="ref-RFC4360" name="ref-RFC4360">RFC4360</a>] defines a registry entitled "Two-octet AS Specific Extended
+   [<a id="ref-RFC4360">RFC4360</a>] defines a registry entitled "Two-octet AS Specific Extended
    Community".  IANA has assigned a value in this registry from the
    "transitive" range (0x0000-0x00FF).  The value is as follows:
 
    o  0x000A Two-octet AS specific Layer 2 VPN Identifier
 
-   [<a id="ref-RFC4360" name="ref-RFC4360">RFC4360</a>] defines a registry entitled "IPv4 Address Specific Extended
+   [<a id="ref-RFC4360">RFC4360</a>] defines a registry entitled "IPv4 Address Specific Extended
    Community".  IANA has assigned a value in this registry from the
    "transitive" range (0x0100-0x01FF).  The value is as follows:
 
    o  0x010A Layer 2 VPN Identifier
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20BGP-AD%20and%20VPLS-BGP%20Interoperability"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  BGP-AD and VPLS-BGP Interoperability</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20BGP-AD%20and%20VPLS-BGP%20Interoperability"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  BGP-AD and VPLS-BGP Interoperability</span>
 
    Both BGP-AD and VPLS-BGP [<a href="./rfc4761.html" title='"Virtual Private LAN Service (VPLS) Using BGP for Auto-Discovery and Signaling"'>RFC4761</a>] use the same AFI/SAFI.  In order
    for both BGP-AD and VPLS-BGP to co-exist, the NLRI length must be
@@ -1803,11 +1778,11 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgments</span>
 
    Thanks to Dan Tappan, Ted Qian, Ali Sajassi, Skip Booth, Luca
    Martini, Dave McDysan, Francois Le Faucheur, Russ Gardo, Keyur Patel,
@@ -1820,83 +1795,83 @@ Table of Contents
    Thanks to Vach Kompella for a continuing discussion of the proper
    semantics of the generalized identifiers.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC3438" name="ref-RFC3438">RFC3438</a>]  Townsley, W., "Layer Two Tunneling Protocol (L2TP)
+   [<a id="ref-RFC3438">RFC3438</a>]  Townsley, W., "Layer Two Tunneling Protocol (L2TP)
               Internet Assigned Numbers Authority (IANA) Considerations
-              Update", <a href="./bcp68.html">BCP 68</a>, <a href="./rfc3438.html">RFC 3438</a>, December 2002.
+              Update", <a href="https://www.rfc-editor.org/bcp/bcp68">BCP 68</a>, <a href="./rfc3438.html">RFC 3438</a>, December 2002.
 
-   [<a id="ref-RFC3931" name="ref-RFC3931">RFC3931</a>]  Lau, J., Townsley, M., and I. Goyret, "Layer Two Tunneling
+   [<a id="ref-RFC3931">RFC3931</a>]  Lau, J., Townsley, M., and I. Goyret, "Layer Two Tunneling
               Protocol - Version 3 (L2TPv3)", <a href="./rfc3931.html">RFC 3931</a>, March 2005.
 
-   [<a id="ref-RFC4360" name="ref-RFC4360">RFC4360</a>]  Sangli, S., Tappan, D., and Y. Rekhter, "BGP Extended
+   [<a id="ref-RFC4360">RFC4360</a>]  Sangli, S., Tappan, D., and Y. Rekhter, "BGP Extended
               Communities Attribute", <a href="./rfc4360.html">RFC 4360</a>, February 2006.
 
-   [<a id="ref-RFC4364" name="ref-RFC4364">RFC4364</a>]  Rosen, E. and Y. Rekhter, "BGP/MPLS IP Virtual Private
+   [<a id="ref-RFC4364">RFC4364</a>]  Rosen, E. and Y. Rekhter, "BGP/MPLS IP Virtual Private
               Networks (VPNs)", <a href="./rfc4364.html">RFC 4364</a>, February 2006.
 
-   [<a id="ref-RFC4447" name="ref-RFC4447">RFC4447</a>]  Martini, L., Rosen, E., El-Aawar, N., Smith, T., and G.
+   [<a id="ref-RFC4447">RFC4447</a>]  Martini, L., Rosen, E., El-Aawar, N., Smith, T., and G.
               Heron, "Pseudowire Setup and Maintenance Using the Label
               Distribution Protocol (LDP)", <a href="./rfc4447.html">RFC 4447</a>, April 2006.
 
-   [<a id="ref-RFC4667" name="ref-RFC4667">RFC4667</a>]  Luo, W., "Layer 2 Virtual Private Network (L2VPN)
+   [<a id="ref-RFC4667">RFC4667</a>]  Luo, W., "Layer 2 Virtual Private Network (L2VPN)
               Extensions for Layer 2 Tunneling Protocol (L2TP)",
               <a href="./rfc4667.html">RFC 4667</a>, September 2006.
 
-   [<a id="ref-RFC4760" name="ref-RFC4760">RFC4760</a>]  Bates, T., Chandra, R., Katz, D., and Y. Rekhter,
+   [<a id="ref-RFC4760">RFC4760</a>]  Bates, T., Chandra, R., Katz, D., and Y. Rekhter,
               "Multiprotocol Extensions for BGP-4", <a href="./rfc4760.html">RFC 4760</a>,
               January 2007.
 
-   [<a id="ref-RFC5036" name="ref-RFC5036">RFC5036</a>]  Andersson, L., Minei, I., and B. Thomas, "LDP
+   [<a id="ref-RFC5036">RFC5036</a>]  Andersson, L., Minei, I., and B. Thomas, "LDP
               Specification", <a href="./rfc5036.html">RFC 5036</a>, October 2007.
 
 
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
-   [<a id="ref-RFC6073" name="ref-RFC6073">RFC6073</a>]  Martini, L., Metz, C., Nadeau, T., Bocci, M., and M.
+   [<a id="ref-RFC6073">RFC6073</a>]  Martini, L., Metz, C., Nadeau, T., Bocci, M., and M.
               Aissaoui, "Segmented Pseudowire", <a href="./rfc6073.html">RFC 6073</a>, January 2011.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC3985" name="ref-RFC3985">RFC3985</a>]  Bryant, S. and P. Pate, "Pseudo Wire Emulation Edge-to-
+   [<a id="ref-RFC3985">RFC3985</a>]  Bryant, S. and P. Pate, "Pseudo Wire Emulation Edge-to-
               Edge (PWE3) Architecture", <a href="./rfc3985.html">RFC 3985</a>, March 2005.
 
-   [<a id="ref-RFC4026" name="ref-RFC4026">RFC4026</a>]  Andersson, L. and T. Madsen, "Provider Provisioned Virtual
+   [<a id="ref-RFC4026">RFC4026</a>]  Andersson, L. and T. Madsen, "Provider Provisioned Virtual
               Private Network (VPN) Terminology", <a href="./rfc4026.html">RFC 4026</a>, March 2005.
 
-   [<a id="ref-RFC4446" name="ref-RFC4446">RFC4446</a>]  Martini, L., "IANA Allocations for Pseudowire Edge to Edge
-              Emulation (PWE3)", <a href="./bcp116.html">BCP 116</a>, <a href="./rfc4446.html">RFC 4446</a>, April 2006.
+   [<a id="ref-RFC4446">RFC4446</a>]  Martini, L., "IANA Allocations for Pseudowire Edge to Edge
+              Emulation (PWE3)", <a href="https://www.rfc-editor.org/bcp/bcp116">BCP 116</a>, <a href="./rfc4446.html">RFC 4446</a>, April 2006.
 
-   [<a id="ref-RFC4664" name="ref-RFC4664">RFC4664</a>]  Andersson, L. and E. Rosen, "Framework for Layer 2 Virtual
+   [<a id="ref-RFC4664">RFC4664</a>]  Andersson, L. and E. Rosen, "Framework for Layer 2 Virtual
               Private Networks (L2VPNs)", <a href="./rfc4664.html">RFC 4664</a>, September 2006.
 
-   [<a id="ref-RFC4665" name="ref-RFC4665">RFC4665</a>]  Augustyn, W. and Y. Serbest, "Service Requirements for
+   [<a id="ref-RFC4665">RFC4665</a>]  Augustyn, W. and Y. Serbest, "Service Requirements for
               Layer 2 Provider-Provisioned Virtual Private Networks",
               <a href="./rfc4665.html">RFC 4665</a>, September 2006.
 
-   [<a id="ref-RFC4761" name="ref-RFC4761">RFC4761</a>]  Kompella, K. and Y. Rekhter, "Virtual Private LAN Service
+   [<a id="ref-RFC4761">RFC4761</a>]  Kompella, K. and Y. Rekhter, "Virtual Private LAN Service
               (VPLS) Using BGP for Auto-Discovery and Signaling",
               <a href="./rfc4761.html">RFC 4761</a>, January 2007.
 
-   [<a id="ref-RFC4762" name="ref-RFC4762">RFC4762</a>]  Lasserre, M. and V. Kompella, "Virtual Private LAN Service
+   [<a id="ref-RFC4762">RFC4762</a>]  Lasserre, M. and V. Kompella, "Virtual Private LAN Service
               (VPLS) Using Label Distribution Protocol (LDP) Signaling",
               <a href="./rfc4762.html">RFC 4762</a>, January 2007.
 
-   [<a id="ref-RFC5003" name="ref-RFC5003">RFC5003</a>]  Metz, C., Martini, L., Balus, F., and J. Sugimoto,
+   [<a id="ref-RFC5003">RFC5003</a>]  Metz, C., Martini, L., Balus, F., and J. Sugimoto,
               "Attachment Individual Identifier (AII) Types for
               Aggregation", <a href="./rfc5003.html">RFC 5003</a>, September 2007.
 
-   [<a id="ref-RFC5659" name="ref-RFC5659">RFC5659</a>]  Bocci, M. and S. Bryant, "An Architecture for Multi-
+   [<a id="ref-RFC5659">RFC5659</a>]  Bocci, M. and S. Bryant, "An Architecture for Multi-
               Segment Pseudowire Emulation Edge-to-Edge", <a href="./rfc5659.html">RFC 5659</a>,
               October 2009.
 
@@ -1915,7 +1890,7 @@ Table of Contents
 
 
 <span class="grey">Rosen, et al.                Standards Track                   [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc6074.html">RFC 6074</a>                     L2VPN Signaling                January 2011</span>
 
 
@@ -1971,11 +1946,6 @@ Authors' Addresses
 
 
 Rosen, et al.                Standards Track                   [Page 32]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

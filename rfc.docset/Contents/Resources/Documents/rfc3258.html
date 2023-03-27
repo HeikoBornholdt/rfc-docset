@@ -1,33 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:3258" name="DC.Identifier"/>
-<meta content="This memo describes a set of practices intended to enable an
-authoritative name server operator to provide access to a single named
-server in multiple locations. The primary motivation for the
-development and deployment of these practices is to increase the
-distribution of DNS servers to previously under-served areas of the
-network topology and to reduce the latency for DNS query responses in
-those areas. This document presumes a one-to-one mapping between named
-authoritative servers and administrative entities (operators). This
-document contains no guidelines or recommendations for caching name
-servers. The shared unicast system described here is specific to IPv4;
-IPv6 uses anycast differently from IPv4 and those differences prevent
-this system from being used in IPv6 environments. It should also be
-noted that the system described here is related to that describe in
-[ANYCAST], but it does not require dedicated address space, routing
-changes, or the other elements of a full anycast infrastructure which
-that document describes." name="DC.Description.Abstract"/>
-<meta content="Ted Hardie &lt;ted.hardie@nominum.com&gt;" name="DC.Creator"/>
-<meta content="April, 2002" name="DC.Date.Issued"/>
-<meta content="Distributing Authoritative Name Servers via Shared Unicast Addresses" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 3258 - Distributing Authoritative Name Servers via Shared Unicast Addresses</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="T. Hardie" name="citation_author"/>
+<meta content="April, 2002" name="citation_publication_date"/>
+<meta content=" Distributing Authoritative Name Servers via Shared Unicast Addresses " name="citation_title"/>
+<meta content="10.17487/RFC3258" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc3258" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc3258.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 3258:  Distributing Authoritative Name Servers via Shared Unicast Addresses </title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -56,7 +40,7 @@ that document describes." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -65,7 +49,7 @@ that document describes." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -144,19 +128,18 @@ that document describes." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -170,21 +153,9 @@ that document describes." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc3258.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc3258" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-dnsop-hardie-shared-root-server.html" title="draft-ietf-dnsop-hardie-shared-root-server">draft-ietf-dnsop-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc3258" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc3258" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                          T. Hardie
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc3258.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc3258.txt.pdf">PDF</a>|<a href="/rfc/rfc3258.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc3258" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=3258&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc3258" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                          T. Hardie
 Request for Comments: 3258                                 Nominum, Inc.
 Category: Informational                                       April 2002
 
@@ -211,7 +182,7 @@ Abstract
    under-served areas of the network topology and to reduce the latency
    for DNS  query responses in those areas.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This memo describes a set of practices intended to enable an
    authoritative name server operator to provide access to a single
@@ -236,13 +207,13 @@ Abstract
 
 
 <span class="grey">Hardie                       Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc3258.html">RFC 3258</a>        Distributing Authoritative Name Servers       April 2002</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Architecture"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Architecture</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Architecture"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Architecture</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1%20Server%20Requirements"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a> Server Requirements</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1%20Server%20Requirements"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a> Server Requirements</span>
 
    Operators of authoritative name servers may wish to refer to
    [<a href="#ref-SECONDARY" title='"Selection and Operation of Secondary DNS Servers"'>SECONDARY</a>] and [<a href="#ref-ROOT" title='"Root Name Server Operational Requirements"'>ROOT</a>] for general guidance on appropriate practice
@@ -260,7 +231,7 @@ Abstract
    mesh of anycast hosts, it is good practice to limit responses on that
    interface to zones for which the host is authoritative.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2%20Zone%20file%20delivery"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a> Zone file delivery</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2%20Zone%20file%20delivery"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a> Zone file delivery</span>
 
    In order to minimize the risk of man-in-the-middle attacks, zone
    files should be delivered to the administrative interface of the
@@ -271,7 +242,7 @@ Abstract
    in order to avoid the problems with potential routing changes for TCP
    traffic noted in <a href="#section-2.5">section 2.5</a> below.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3%20Synchronization"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a> Synchronization</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3%20Synchronization"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a> Synchronization</span>
 
    Authoritative name servers may be loosely or tightly synchronized,
    depending on the practices set by the operating organization.  As
@@ -292,7 +263,7 @@ Abstract
 
 
 <span class="grey">Hardie                       Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc3258.html">RFC 3258</a>        Distributing Authoritative Name Servers       April 2002</span>
 
 
@@ -320,7 +291,7 @@ Abstract
    improvement in performance will not be sufficient to justify the
    additional complexity for most uses.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4%20Server%20Placement"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a> Server Placement</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4%20Server%20Placement"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a> Server Placement</span>
 
    Though the geographic diversity of server placement helps reduce the
    effects of service disruptions due to local problems, it is diversity
@@ -330,7 +301,7 @@ Abstract
    topologically near the points at which the operator exchanges routes
    and traffic with other networks.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5%20Routing"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a> Routing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5%20Routing"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a> Routing</span>
 
    The organization administering the mesh of servers sharing a unicast
    address must have an autonomous system number and speak BGP to its
@@ -348,7 +319,7 @@ Abstract
 
 
 <span class="grey">Hardie                       Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc3258.html">RFC 3258</a>        Distributing Authoritative Name Servers       April 2002</span>
 
 
@@ -404,7 +375,7 @@ Abstract
 
 
 <span class="grey">Hardie                       Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc3258.html">RFC 3258</a>        Distributing Authoritative Name Servers       April 2002</span>
 
 
@@ -416,9 +387,9 @@ Abstract
    synchronization needed would not require that source to be either
    local or a stratum one NTP server.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Administration"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>. Administration</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Administration"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>. Administration</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1%20Points%20of%20Contact"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a> Points of Contact</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1%20Points%20of%20Contact"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a> Points of Contact</span>
 
    A single point of contact for reporting problems is crucial to the
    correct administration of this system.  If an external user of the
@@ -427,16 +398,16 @@ Abstract
    not indicate a problem, the contact may, of course, need to work with
    the external user to identify which server generated the error.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>. Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>. Security Considerations</span>
 
    As a core piece of Internet infrastructure, authoritative name
    servers are common targets of attack.  The practices outlined here
    increase the risk of certain kinds of attacks and reduce the risk of
    others.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1%20Increased%20Risks"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a> Increased Risks</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1%20Increased%20Risks"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a> Increased Risks</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1%20Increase%20in%20physical%20servers"></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a> Increase in physical servers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1%20Increase%20in%20physical%20servers"></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a> Increase in physical servers</span>
 
    The architecture outlined in this document increases the number of
    physical servers, which could increase the possibility that a server
@@ -451,7 +422,7 @@ Abstract
    different shared-unicast meshes or between a mesh and a related
    unicast authoritative server.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2%20Data%20synchronization%20problems"></a></body></html><a class="selflink" href="#section-4.1.2" name="section-4.1.2">4.1.2</a> Data synchronization problems</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2%20Data%20synchronization%20problems"></a></body></html><a class="selflink" href="#section-4.1.2" id="section-4.1.2">4.1.2</a> Data synchronization problems</span>
 
    The level of systemic synchronization described above should be
    augmented by synchronization of the data present at each of the
@@ -460,7 +431,7 @@ Abstract
 
 
 <span class="grey">Hardie                       Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc3258.html">RFC 3258</a>        Distributing Authoritative Name Servers       April 2002</span>
 
 
@@ -477,7 +448,7 @@ Abstract
    must not roll-back to a previous version; it must cease to respond to
    queries so that other servers are queried.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3%20Distribution%20risks"></a></body></html><a class="selflink" href="#section-4.1.3" name="section-4.1.3">4.1.3</a> Distribution risks</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3%20Distribution%20risks"></a></body></html><a class="selflink" href="#section-4.1.3" id="section-4.1.3">4.1.3</a> Distribution risks</span>
 
    If the mechanism used to distribute zone files among the servers is
    not well secured, a man-in-the-middle attack could result in the
@@ -489,7 +460,7 @@ Abstract
    administrative interface of the server or servers, rather than their
    shared unicast addresses.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2%20Decreased%20Risks"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a> Decreased Risks</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2%20Decreased%20Risks"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a> Decreased Risks</span>
 
    The increase in number of physical servers reduces the likelihood
    that a denial-of-service attack will take out a significant portion
@@ -497,7 +468,7 @@ Abstract
    effect of machine crashes, fiber cuts, and localized disasters by
    reducing the number of users dependent on a specific machine.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20Acknowledgments"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>. Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20Acknowledgments"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>. Acknowledgments</span>
 
    Masataka Ohta, Bill Manning, Randy Bush, Chris Yarnell, Ray Plzak,
    Mark Andrews, Robert Elz, Geoff Huston, Bill Norton, Akira Kato,
@@ -516,21 +487,21 @@ Abstract
 
 
 <span class="grey">Hardie                       Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc3258.html">RFC 3258</a>        Distributing Authoritative Name Servers       April 2002</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20References"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>. References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20References"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>. References</span>
 
-   [<a id="ref-SECONDARY" name="ref-SECONDARY">SECONDARY</a>] Elz, R., Bush, R., Bradner, S. and M. Patton, "Selection
-               and Operation of Secondary DNS Servers", <a href="./bcp16.html">BCP 16</a>, <a href="./rfc2182.html">RFC</a>
+   [<a id="ref-SECONDARY">SECONDARY</a>] Elz, R., Bush, R., Bradner, S. and M. Patton, "Selection
+               and Operation of Secondary DNS Servers", <a href="https://www.rfc-editor.org/bcp/bcp16">BCP 16</a>, <a href="./rfc2182.html">RFC</a>
                <a href="./rfc2182.html">2182</a>, July 1997.
 
-   [<a id="ref-ROOT" name="ref-ROOT">ROOT</a>]      Bush, R., Karrenberg, D., Kosters, M. and R. Plzak, "Root
-               Name Server Operational Requirements", <a href="./bcp40.html">BCP 40</a>, <a href="./rfc2870.html">RFC 2870</a>,
+   [<a id="ref-ROOT">ROOT</a>]      Bush, R., Karrenberg, D., Kosters, M. and R. Plzak, "Root
+               Name Server Operational Requirements", <a href="https://www.rfc-editor.org/bcp/bcp40">BCP 40</a>, <a href="./rfc2870.html">RFC 2870</a>,
                June 2000.
 
-   [<a id="ref-ANYCAST" name="ref-ANYCAST">ANYCAST</a>]   Patridge, C., Mendez, T. and W. Milliken, "Host
+   [<a id="ref-ANYCAST">ANYCAST</a>]   Patridge, C., Mendez, T. and W. Milliken, "Host
                Anycasting Service", <a href="./rfc1546.html">RFC 1546</a>, November 1993.
 
 
@@ -572,7 +543,7 @@ Abstract
 
 
 <span class="grey">Hardie                       Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc3258.html">RFC 3258</a>        Distributing Authoritative Name Servers       April 2002</span>
 
 
@@ -628,7 +599,7 @@ etc    |                |--|Router5|---|----|----------|Router6|---WAN-|
 
 
 <span class="grey">Hardie                       Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc3258.html">RFC 3258</a>        Distributing Authoritative Name Servers       April 2002</span>
 
 
@@ -684,11 +655,11 @@ etc    |                |--|Router7|---|----|----------|Router8|---WAN-|
 
 
 <span class="grey">Hardie                       Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc3258.html">RFC 3258</a>        Distributing Authoritative Name Servers       April 2002</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20Editor%27s%20Address"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>. Editor's Address</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20Editor%27s%20Address"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>. Editor's Address</span>
 
    Ted Hardie
    Nominum, Inc.
@@ -740,11 +711,11 @@ etc    |                |--|Router7|---|----|----------|Router8|---WAN-|
 
 
 <span class="grey">Hardie                       Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc3258.html">RFC 3258</a>        Distributing Authoritative Name Servers       April 2002</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Full%20Copyright%20Statement"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Full Copyright Statement</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Full%20Copyright%20Statement"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Full Copyright Statement</span>
 
    Copyright (C) The Internet Society (2002).  All Rights Reserved.
 
@@ -796,11 +767,6 @@ Acknowledgement
 
 
 Hardie                       Informational                     [Page 11]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

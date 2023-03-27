@@ -1,29 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:4584" name="DC.Identifier"/>
-<meta content="This document describes data structures and API support for Mobile
-IPv6 as an extension to the Advanced Socket API for IPv6.  Just as the
-Advanced Sockets API for IPv6 gives access to various extension
-headers and the ICMPv6 protocol, this document specifies the same
-level of access for Mobile IPv6 components. It specifies a mechanism
-for applications to retrieve and set information for Mobility Header
-messages, Home Address destination options, and Routing Header Type 2
-extension headers. It also specifies the common data structures and
-definitions that might be used by certain advanced Mobile IPv6 socket
-applications. This memo provides information for the Internet
-community." name="DC.Description.Abstract"/>
-<meta content="Chakrabarti, Samita" name="DC.Creator"/>
-<meta content="Nordmark, Erik" name="DC.Creator"/>
-<meta content="July, 2006" name="DC.Date.Issued"/>
-<meta content="Extension to Sockets API for Mobile IPv6" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 4584 - Extension to Sockets API for Mobile IPv6</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="S. Chakrabarti" name="citation_author"/>
+<meta content="E. Nordmark" name="citation_author"/>
+<meta content="July, 2006" name="citation_publication_date"/>
+<meta content="Extension to Sockets API for Mobile IPv6" name="citation_title"/>
+<meta content="10.17487/RFC4584" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc4584" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc4584.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 4584: Extension to Sockets API for Mobile IPv6</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -52,7 +41,7 @@ community." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -61,7 +50,7 @@ community." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -140,19 +129,18 @@ community." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -166,21 +154,9 @@ community." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc4584.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc4584" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-mip6-mipext-advapi.html" title="draft-ietf-mip6-mipext-advapi">draft-ietf-mip6-m...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc4584" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc4584" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=4584">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                     S. Chakrabarti
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc4584.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc4584.txt.pdf">PDF</a>|<a href="/rfc/rfc4584.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc4584" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=4584&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc4584" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc4584" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                     S. Chakrabarti
 Request for Comments: 4584                                   E. Nordmark
 Category: Informational                                 Sun Microsystems
                                                                July 2006
@@ -232,7 +208,7 @@ Abstract
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -288,11 +264,11 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Mobility Support in IPv6 [<a href="#ref-2" title='"Mobility Support in IPv6"'>2</a>] defines a new Mobility Protocol header,
    a Home Address destination option and a new Routing Header type.  It
@@ -344,7 +320,7 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -352,7 +328,7 @@ Table of Contents
    being able to tell whether the host is at home or not, is out of
    scope for this API.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Applicability"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Applicability</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Applicability"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Applicability</span>
 
    This API document can be applied in the following cases:
 
@@ -400,11 +376,11 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Overview"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Overview</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Overview"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Overview</span>
 
    This document can be divided into the following parts:
 
@@ -456,11 +432,11 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Common%20Structures%20and%20Definitions"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Common Structures and Definitions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Common%20Structures%20and%20Definitions"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Common Structures and Definitions</span>
 
    In this section, the structures are specified in a way so that they
    maximize the probability that the compiler-layout of data structures
@@ -482,9 +458,9 @@ Table of Contents
    The structures and constants below will be included when the (new)
    header file is included : &lt;netinet/ip6mh.h&gt;
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20The%20Mobility%20Header%20Data%20Structures"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  The Mobility Header Data Structures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20The%20Mobility%20Header%20Data%20Structures"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  The Mobility Header Data Structures</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20The%20ip6_mh%20Structure"></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a>.  The ip6_mh Structure</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20The%20ip6_mh%20Structure"></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a>.  The ip6_mh Structure</span>
 
    The following structure is defined as a result of including
    &lt;netinet/ip6mh.h&gt;.  This is the fixed part of the Mobility Header.
@@ -512,11 +488,11 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20Binding%20Refresh%20Request%20Mobility%20Message"></a></body></html><a class="selflink" href="#section-4.1.2" name="section-4.1.2">4.1.2</a>.  Binding Refresh Request Mobility Message</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20Binding%20Refresh%20Request%20Mobility%20Message"></a></body></html><a class="selflink" href="#section-4.1.2" id="section-4.1.2">4.1.2</a>.  Binding Refresh Request Mobility Message</span>
 
       struct  ip6_mh_binding_request {
           uint8_t    ip6mhbr_proto;
@@ -528,7 +504,7 @@ Table of Contents
           /* Followed by optional Mobility Options */
       };
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3.%20%20Home%20Address%20Test%20Init%20%28HoTI%29%20Message"></a></body></html><a class="selflink" href="#section-4.1.3" name="section-4.1.3">4.1.3</a>.  Home Address Test Init (HoTI) Message</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3.%20%20Home%20Address%20Test%20Init%20%28HoTI%29%20Message"></a></body></html><a class="selflink" href="#section-4.1.3" id="section-4.1.3">4.1.3</a>.  Home Address Test Init (HoTI) Message</span>
 
       struct   ip6_mh_home_test_init {
          uint8_t    ip6mhhti_proto;
@@ -541,7 +517,7 @@ Table of Contents
          /* Followed by optional Mobility Options */
       };
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.4.%20%20Care-of%20Address%20Test%20Init%20%28CoTI%29%20Message"></a></body></html><a class="selflink" href="#section-4.1.4" name="section-4.1.4">4.1.4</a>.  Care-of Address Test Init (CoTI) Message</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.4.%20%20Care-of%20Address%20Test%20Init%20%28CoTI%29%20Message"></a></body></html><a class="selflink" href="#section-4.1.4" id="section-4.1.4">4.1.4</a>.  Care-of Address Test Init (CoTI) Message</span>
 
       struct   ip6_mh_careof_test_init {
          uint8_t    ip6mhcti_proto;
@@ -568,11 +544,11 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.5.%20%20Home%20Address%20Test%20%28HOT%29%20Message"></a></body></html><a class="selflink" href="#section-4.1.5" name="section-4.1.5">4.1.5</a>.  Home Address Test (HOT) Message</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.5.%20%20Home%20Address%20Test%20%28HOT%29%20Message"></a></body></html><a class="selflink" href="#section-4.1.5" id="section-4.1.5">4.1.5</a>.  Home Address Test (HOT) Message</span>
 
        struct  ip6_mh_home_test {
           uint8_t    ip6mhht_proto;
@@ -586,7 +562,7 @@ Table of Contents
           /* Followed by optional Mobility Options */
       };
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.6.%20%20Care%20Of%20Address%20Test%20%28COT%29%20Message"></a></body></html><a class="selflink" href="#section-4.1.6" name="section-4.1.6">4.1.6</a>.  Care Of Address Test (COT) Message</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.6.%20%20Care%20Of%20Address%20Test%20%28COT%29%20Message"></a></body></html><a class="selflink" href="#section-4.1.6" id="section-4.1.6">4.1.6</a>.  Care Of Address Test (COT) Message</span>
 
       struct  ip6_mh_careof_test {
          uint8_t    ip6mhct_proto;
@@ -600,7 +576,7 @@ Table of Contents
          /* Followed by optional Mobility Options */
       };
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.7.%20%20Binding%20Update%20Mobility%20Message"></a></body></html><a class="selflink" href="#section-4.1.7" name="section-4.1.7">4.1.7</a>.  Binding Update Mobility Message</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.7.%20%20Binding%20Update%20Mobility%20Message"></a></body></html><a class="selflink" href="#section-4.1.7" id="section-4.1.7">4.1.7</a>.  Binding Update Mobility Message</span>
 
       struct ip6_mh_binding_update {
           uint8_t     ip6mhbu_proto;
@@ -624,11 +600,11 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.8.%20%20Binding%20Acknowledgement%20Mobility%20Message"></a></body></html><a class="selflink" href="#section-4.1.8" name="section-4.1.8">4.1.8</a>.  Binding Acknowledgement Mobility Message</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.8.%20%20Binding%20Acknowledgement%20Mobility%20Message"></a></body></html><a class="selflink" href="#section-4.1.8" id="section-4.1.8">4.1.8</a>.  Binding Acknowledgement Mobility Message</span>
 
       struct  ip6_mh_binding_ack {
          uint8_t   ip6mhba_proto;
@@ -646,7 +622,7 @@ Table of Contents
        /* Binding Acknowledgement Flags */
        #define IP6_MH_BA_KEYM       0x80  /* Key management mobility */
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.9.%20%20Binding%20Error%20Mobility%20Message"></a></body></html><a class="selflink" href="#section-4.1.9" name="section-4.1.9">4.1.9</a>.  Binding Error Mobility Message</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.9.%20%20Binding%20Error%20Mobility%20Message"></a></body></html><a class="selflink" href="#section-4.1.9" id="section-4.1.9">4.1.9</a>.  Binding Error Mobility Message</span>
 
        struct   ip6_mh_binding_error {
           uint8_t   ip6mhbe_proto;
@@ -660,7 +636,7 @@ Table of Contents
           /* Followed by optional Mobility Options */
         };
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.10.%20%20Mobility%20Option%20TLV%20data%20structure"></a></body></html><a class="selflink" href="#section-4.1.10" name="section-4.1.10">4.1.10</a>.  Mobility Option TLV data structure</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.10.%20%20Mobility%20Option%20TLV%20data%20structure"></a></body></html><a class="selflink" href="#section-4.1.10" id="section-4.1.10">4.1.10</a>.  Mobility Option TLV data structure</span>
 
       struct   ip6_mh_opt {
          uint8_t    ip6mhopt_type;   /* Option Type */
@@ -680,13 +656,13 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.11.%20%20Mobility%20Option%20Data%20Structures"></a></body></html><a class="selflink" href="#section-4.1.11" name="section-4.1.11">4.1.11</a>.  Mobility Option Data Structures</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.11.%20%20Mobility%20Option%20Data%20Structures"></a></body></html><a class="selflink" href="#section-4.1.11" id="section-4.1.11">4.1.11</a>.  Mobility Option Data Structures</span>
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.11.1.%20%20Binding%20Refresh%20Advice"></a></body></html><a class="selflink" href="#section-4.1.11.1" name="section-4.1.11.1">4.1.11.1</a>.  Binding Refresh Advice</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.11.1.%20%20Binding%20Refresh%20Advice"></a></body></html><a class="selflink" href="#section-4.1.11.1" id="section-4.1.11.1">4.1.11.1</a>.  Binding Refresh Advice</span>
 
       struct ip6_mh_opt_refresh_advice {
           uint8_t  ip6mora_type;
@@ -694,7 +670,7 @@ Table of Contents
           uint16_t ip6mora_interval; /* Refresh interval in 4 sec */
       };
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.11.2.%20%20Alternate%20Care-of%20Address"></a></body></html><a class="selflink" href="#section-4.1.11.2" name="section-4.1.11.2">4.1.11.2</a>.  Alternate Care-of Address</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.11.2.%20%20Alternate%20Care-of%20Address"></a></body></html><a class="selflink" href="#section-4.1.11.2" id="section-4.1.11.2">4.1.11.2</a>.  Alternate Care-of Address</span>
 
       struct ip6_mh_opt_altcoa {
           uint8_t ip6moa_type;
@@ -702,7 +678,7 @@ Table of Contents
           struct in6_addr ip6moa_addr; /* Alternate CoA */
       };
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.11.3.%20%20Nonce%20Indices"></a></body></html><a class="selflink" href="#section-4.1.11.3" name="section-4.1.11.3">4.1.11.3</a>.  Nonce Indices</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.11.3.%20%20Nonce%20Indices"></a></body></html><a class="selflink" href="#section-4.1.11.3" id="section-4.1.11.3">4.1.11.3</a>.  Nonce Indices</span>
 
       struct ip6_mh_opt_nonce_index {
           uint8_t ip6moni_type;
@@ -711,7 +687,7 @@ Table of Contents
           uint16_t ip6moni_coa_nonce;
       };
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.11.4.%20%20Binding%20Authorization%20Data"></a></body></html><a class="selflink" href="#section-4.1.11.4" name="section-4.1.11.4">4.1.11.4</a>.  Binding Authorization Data</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.11.4.%20%20Binding%20Authorization%20Data"></a></body></html><a class="selflink" href="#section-4.1.11.4" id="section-4.1.11.4">4.1.11.4</a>.  Binding Authorization Data</span>
 
       struct ip6_mh_opt_auth_data {
           uint8_t ip6moad_type;
@@ -719,7 +695,7 @@ Table of Contents
           uint8_t ip6moad_data[12];
       };
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Mobility%20Header%20Constants"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Mobility Header Constants</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Mobility%20Header%20Constants"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Mobility Header Constants</span>
 
    IPv6 Next Header Value for Mobility:
 
@@ -736,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -792,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -812,7 +788,7 @@ Table of Contents
       #define IP6_MH_BES_UNKNOWN_HAO    1 /* Unknown binding for HOA */
       #define IP6_MH_BES_UNKNOWN_MH     2 /* Unknown MH Type */
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20IPv6%20Home%20Address%20Destination%20Option"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  IPv6 Home Address Destination Option</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20IPv6%20Home%20Address%20Destination%20Option"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  IPv6 Home Address Destination Option</span>
 
       Due to alignment issues in the compiler, and the alignment
       requirements for this option, the included IPv6 address must be
@@ -831,7 +807,7 @@ Table of Contents
 
    #define IP6OPT_HOME_ADDRESS        0xc9    /* 11 0 01001 */
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Type%202%20Routing%20Header"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Type 2 Routing Header</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Type%202%20Routing%20Header"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Type 2 Routing Header</span>
 
       &lt;netinet/ip6.h&gt;
 
@@ -848,11 +824,11 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20New%20ICMP%20Messages%20for%20Mobile%20IPv6"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  New ICMP Messages for Mobile IPv6</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20New%20ICMP%20Messages%20for%20Mobile%20IPv6"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  New ICMP Messages for Mobile IPv6</span>
 
    ICMP message types and definitions for Mobile IPv6 are defined in
    &lt;netinet/icmp6.h&gt;.
@@ -904,7 +880,7 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -930,7 +906,7 @@ Table of Contents
    the 'Modifications to IPv6 Neighbor Discovery' section.  Prefix
    Options for Mobile IP are defined in the following section.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20IPv6%20Neighbor%20Discovery%20Changes"></a></body></html><a class="selflink" href="#section-4.6" name="section-4.6">4.6</a>.  IPv6 Neighbor Discovery Changes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20IPv6%20Neighbor%20Discovery%20Changes"></a></body></html><a class="selflink" href="#section-4.6" id="section-4.6">4.6</a>.  IPv6 Neighbor Discovery Changes</span>
 
    IPv6 Neighbor Discovery changes are also defined in
    &lt;netinet/icmp6.h&gt;.
@@ -960,7 +936,7 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -987,7 +963,7 @@ Table of Contents
          uint16_t       nd_opt_hai_lifetime;
       };
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Access%20to%20Home%20Address%20Destination%20Option%20and%20Routing%20Headers"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Access to Home Address Destination Option and Routing Headers</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Access%20to%20Home%20Address%20Destination%20Option%20and%20Routing%20Headers"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Access to Home Address Destination Option and Routing Headers</span>
 
    Applications that need to be able to access Home Address destination
    option and Type 2 Routing Header information can do so by setting the
@@ -1016,7 +992,7 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -1072,7 +1048,7 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -1102,7 +1078,7 @@ Table of Contents
    otherwise, they should properly handle the Home Address destination
    option and the Routing Header Type 2 specified in this document.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Routing%20Header%20Access%20Functions"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Routing Header Access Functions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Routing%20Header%20Access%20Functions"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Routing Header Access Functions</span>
 
    IPV6 Protocol [<a href="#ref-3" title='"Internet Protocol, Version 6 (IPv6) Specification"'>3</a>] defines a Routing header extension header for Type
    0.  Thus, in order to access the IPv6 Routing header Type 2 extension
@@ -1128,7 +1104,7 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -1162,7 +1138,7 @@ Table of Contents
               }
       }
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Content%20of%20Type%202%20Routing%20Header"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Content of Type 2 Routing Header</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Content%20of%20Type%202%20Routing%20Header"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Content of Type 2 Routing Header</span>
 
    It is recommended that no portable applications send Type 2 Routing
    Header ancillary data from the application layer, since many
@@ -1184,7 +1160,7 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -1203,7 +1179,7 @@ Table of Contents
    it will follow the process described in <a href="#section-4.4">Section 4.4</a> of the IPv6 [<a href="#ref-3" title='"Internet Protocol, Version 6 (IPv6) Specification"'>3</a>]
    base specification.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Order%20of%20Extension%20Headers%20for%20Home%20Address%20Destination%20Options"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Order of Extension Headers for Home Address Destination Options</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Order%20of%20Extension%20Headers%20for%20Home%20Address%20Destination%20Options"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Order of Extension Headers for Home Address Destination Options</span>
 
    <a href="#section-6.3">Section 6.3</a> of Mobile IPV6 [<a href="#ref-2" title='"Mobility Support in IPv6"'>2</a>] defines the extension header order for
    the Home address destination option.
@@ -1240,11 +1216,11 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Home%20Address%20Destination%20Option%20Access%20Functions"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Home Address Destination Option Access Functions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Home%20Address%20Destination%20Option%20Access%20Functions"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Home Address Destination Option Access Functions</span>
 
    The application must enable the IPV6_RECVDSTOPTS socket option in
    order to receive the Home Address destination option (error checking
@@ -1276,7 +1252,7 @@ Table of Contents
    inet6_opt_set_val() functions, described in <a href="#section-10">Section 10</a> of the
    Advanced sockets API for IPv6 [<a href="#ref-1" title='"Advanced Sockets Application Program Interface (API) for IPv6"'>1</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20Content%20of%20Home%20Address%20Destination%20Option"></a></body></html><a class="selflink" href="#section-5.5" name="section-5.5">5.5</a>.  Content of Home Address Destination Option</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20Content%20of%20Home%20Address%20Destination%20Option"></a></body></html><a class="selflink" href="#section-5.5" id="section-5.5">5.5</a>.  Content of Home Address Destination Option</span>
 
    The received ancillary data object for the Home Address destination
    option <em>SHOULD</em> contain the care-of address of the mobile node.  It is
@@ -1296,7 +1272,7 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -1321,7 +1297,7 @@ Table of Contents
    regular user applications must not set the home address destination
    option.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Mobility%20Protocol%20Headers"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Mobility Protocol Headers</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Mobility%20Protocol%20Headers"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Mobility Protocol Headers</span>
 
    Mobile IPv6 [<a href="#ref-2" title='"Mobility Support in IPv6"'>2</a>] defines a new IPv6 protocol header to carry mobility
    messages between Mobile Nodes, Home Agents and Correspondent Nodes.
@@ -1338,7 +1314,7 @@ Table of Contents
    authentication protocol involving the mobility header at the user-
    level.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Receiving%20and%20Sending%20Mobility%20Header%20Messages"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Receiving and Sending Mobility Header Messages</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Receiving%20and%20Sending%20Mobility%20Header%20Messages"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Receiving and Sending Mobility Header Messages</span>
 
    This specification recommends that the IPv6 RAW sockets mechanism
    send and receive Mobility Header (MH) packets.  The behavior is
@@ -1352,7 +1328,7 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -1395,7 +1371,7 @@ Table of Contents
    Mobile IPv6 RAW sockets in order to send and receive data,
    respectively.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Protocols%20File"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Protocols File</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Protocols%20File"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Protocols File</span>
 
    Many hosts provide the file /etc/protocols, which contains the names
    of the various IP protocols and their protocol numbers.  The protocol
@@ -1408,7 +1384,7 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -1417,7 +1393,7 @@ Table of Contents
 
       ipv6-mh           135      # Mobility Protocol Header
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20IPv4-Mapped%20IPv6%20Addresses"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  IPv4-Mapped IPv6 Addresses</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20IPv4-Mapped%20IPv6%20Addresses"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  IPv4-Mapped IPv6 Addresses</span>
 
    The various socket options and ancillary data specifications defined
    in this document apply only to true IPv6 sockets.  It is possible to
@@ -1427,7 +1403,7 @@ Table of Contents
    this document.  The above statement is in compliance with <a href="#section-13">Section 13</a>
    of the IPv6 Socket API [<a href="#ref-1" title='"Advanced Sockets Application Program Interface (API) for IPv6"'>1</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Security Considerations</span>
 
    The setting of the Home Address Destination option and Route Header
    Type 2 IPV6_RTHDR socket option may not be allowed at the application
@@ -1439,14 +1415,14 @@ Table of Contents
    sending a bogus mobility header or other IPv6 packets using the Home
    Address option and Type 2 Routing Header extensions.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  IANA Considerations</span>
 
    This document does not define a new protocol.  However, it uses the
    Mobility Header Protocol for IPv6 to define an API for the
    /etc/protocols file. (ref: <a href="http://www.iana.org/assignments/protocol-numbers">http://www.iana.org/assignments/protocol-</a>
    <a href="http://www.iana.org/assignments/protocol-numbers">numbers</a>)
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  Acknowledgements</span>
 
    Thanks to Brian Haley for the thorough review of this document and
    many helpful comments.  Keiichi Shima, Alexandru Petrescu, Ryuji
@@ -1464,34 +1440,34 @@ Table of Contents
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20References"></a></body></html><a class="selflink" href="#section-12" name="section-12">12</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20References"></a></body></html><a class="selflink" href="#section-12" id="section-12">12</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-12.1" name="section-12.1">12.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-12.1" id="section-12.1">12.1</a>.  Normative References</span>
 
-   [<a id="ref-1" name="ref-1">1</a>]  Stevens, W., Thomas, M., Nordmark, E., and T. Jinmei, "Advanced
+   [<a id="ref-1">1</a>]  Stevens, W., Thomas, M., Nordmark, E., and T. Jinmei, "Advanced
         Sockets Application Program Interface (API) for IPv6", <a href="./rfc3542.html">RFC 3542</a>,
         May 2003.
 
-   [<a id="ref-2" name="ref-2">2</a>]  Johnson, D., Perkins, C., and J. Arkko, "Mobility Support in
+   [<a id="ref-2">2</a>]  Johnson, D., Perkins, C., and J. Arkko, "Mobility Support in
         IPv6", <a href="./rfc3775.html">RFC 3775</a>, June 2004.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-12.2" name="section-12.2">12.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-12.2" id="section-12.2">12.2</a>.  Informative References</span>
 
-   [<a id="ref-3" name="ref-3">3</a>]  Deering, S. and R. Hinden, "Internet Protocol, Version 6 (IPv6)
+   [<a id="ref-3">3</a>]  Deering, S. and R. Hinden, "Internet Protocol, Version 6 (IPv6)
         Specification", <a href="./rfc2460.html">RFC 2460</a>, December 1998.
 
-   [<a id="ref-4" name="ref-4">4</a>]  Devarapalli, V., Wakikawa, R., Petrescu, A., and P. Thubert,
+   [<a id="ref-4">4</a>]  Devarapalli, V., Wakikawa, R., Petrescu, A., and P. Thubert,
         "Network Mobility (NEMO) Basic Support Protocol", <a href="./rfc3963.html">RFC 3963</a>,
         January 2005.
 
-   [<a id="ref-5" name="ref-5">5</a>]  Nordmark, E., <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22IPv6+Socket+API+for+source+address+selection%22" style="text-decoration: none">"IPv6 Socket API for source address selection"</a>,
+   [<a id="ref-5">5</a>]  Nordmark, E., <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22IPv6+Socket+API+for+source+address+selection%22" style="text-decoration: none">"IPv6 Socket API for source address selection"</a>,
         Work in Progress, July 2005.
 
-   [<a id="ref-6" name="ref-6">6</a>]  Gilligan, R., Thomson, S., Bound, J., McCann, J., and W.
+   [<a id="ref-6">6</a>]  Gilligan, R., Thomson, S., Bound, J., McCann, J., and W.
         Stevens, "Basic Socket Interface Extensions for IPv6", <a href="./rfc3493.html">RFC 3493</a>,
         February 2003.
 
@@ -1520,7 +1496,7 @@ Authors' Addresses
 
 
 <span class="grey">Chakrabarti &amp; Nordmark       Informational                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc4584.html">RFC 4584</a>            Sockets for API for Mobile IPv6            July 2006</span>
 
 
@@ -1529,7 +1505,7 @@ Full Copyright Statement
    Copyright (C) The Internet Society (2006).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1549,7 +1525,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1576,11 +1552,6 @@ Acknowledgement
 
 
 Chakrabarti &amp; Nordmark       Informational                     [Page 25]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

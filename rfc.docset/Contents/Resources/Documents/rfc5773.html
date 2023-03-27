@@ -1,38 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:5773" name="DC.Identifier"/>
-<meta content="This document analyses the state of the Internet domain-based routing
-system, concentrating on Inter-Domain Routing (IDR) and also
-considering the relationship between inter-domain and intra-domain
-routing. The analysis is carried out with respect to RFC 1126 and
-other IDR requirements and design efforts looking at the routing
-system as it appeared to be in 2001 with editorial additions
-reflecting developments up to 2006. It is the companion document to &quot;A
-Set of Possible Requirements for a Future Routing Architecture&quot; [I-D
-.irtf-routing-reqs], which is a discussion of requirements for the
-future routing architecture, addressing systems developments and
-future routing protocols. This document summarizes discussions held
-several years ago by members of the IRTF Routing Research Group (IRTF
-RRG) and other interested parties. The document is published with the
-support of the IRTF RRG as a record of the work completed at that
-time, but with the understanding that it does not necessarily
-represent either the latest technical understanding or the technical
-concensus of the research group at the date of publication. [Note to
-RFC Editor: Please replace the reference in the abstract with a non-
-reference quoting the RFC number of the companion document when it is
-allocated, i.e., '(RFC xxxx)' and remove this note.]" name="DC.Description.Abstract"/>
-<meta content="Davies, Elwyn B." name="DC.Creator"/>
-<meta content="Doria, Avri" name="DC.Creator"/>
-<meta content="February, 2010" name="DC.Date.Issued"/>
-<meta content="Analysis of Inter-Domain Routing Requirements and History" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5773 - Analysis of Inter-Domain Routing Requirements and History</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="E. Davies" name="citation_author"/>
+<meta content="A. Doria" name="citation_author"/>
+<meta content="February, 2010" name="citation_publication_date"/>
+<meta content="Analysis of Inter-Domain Routing Requirements and History" name="citation_title"/>
+<meta content="10.17487/RFC5773" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5773" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5773.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5773: Analysis of Inter-Domain Routing Requirements and History</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -61,7 +41,7 @@ allocated, i.e., '(RFC xxxx)' and remove this note.]" name="DC.Description.Abstr
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -70,7 +50,7 @@ allocated, i.e., '(RFC xxxx)' and remove this note.]" name="DC.Description.Abstr
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -149,19 +129,18 @@ allocated, i.e., '(RFC xxxx)' and remove this note.]" name="DC.Description.Abstr
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -175,21 +154,9 @@ allocated, i.e., '(RFC xxxx)' and remove this note.]" name="DC.Description.Abstr
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bggrey" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5773.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5773" title="PDF version of this document">pdf</a>] [<a href="./draft-irtf-routing-history.html" title="draft-irtf-routing-history">draft-irtf-routin...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5773" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5773" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5773">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                                HISTORIC</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Internet Research Task Force (IRTF)                            E. Davies
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5773.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5773.txt.pdf">PDF</a>|<a href="/rfc/rfc5773.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5773" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5773&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5773" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5773" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                                HISTORIC</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Research Task Force (IRTF)                            E. Davies
 Request for Comments: 5773                              Folly Consulting
 Category: Historic                                              A. Doria
 ISSN: 2070-1721                                                      LTU
@@ -241,7 +208,7 @@ Status of This Memo
 
 
 <span class="grey">Davies &amp; Doria                  Historic                        [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -250,7 +217,7 @@ Copyright Notice
    Copyright (c) 2010 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -297,7 +264,7 @@ Copyright Notice
 
 
 <span class="grey">Davies &amp; Doria                  Historic                        [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -353,11 +320,11 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                        [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Provenance%20of%20This%20Document"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Provenance of This Document</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Provenance%20of%20This%20Document"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Provenance of This Document</span>
 
    In 2001, the IRTF Routing Research Group (IRTF RRG) chairs, Abha
    Ahuja and Sean Doran, decided to establish a sub-group to look at
@@ -409,11 +376,11 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                        [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Introduction"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Introduction"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Introduction</span>
 
    For the greater part of its existence, the Internet has used a
    domain-oriented routing system whereby the routers and other nodes
@@ -465,7 +432,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                        [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -521,11 +488,11 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                        [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Background"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Background</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Background"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Background</span>
 
    Today's Internet uses an addressing and routing structure that has
    developed in an ad hoc, more or less upwards-compatible fashion.  The
@@ -556,9 +523,9 @@ Table of Contents
    problems, but others may require a new architecture and new
    protocols.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Historical%20Perspective"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Historical Perspective</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Historical%20Perspective"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Historical Perspective</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20The%20Legacy%20of%20RFC%201126"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  The Legacy of <a href="./rfc1126.html">RFC 1126</a></span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20The%20Legacy%20of%20RFC%201126"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  The Legacy of <a href="./rfc1126.html">RFC 1126</a></span>
 
    <a href="./rfc1126.html">RFC 1126</a> [<a href="./rfc1126.html" title='"Goals and functional requirements for inter- autonomous system routing"'>RFC1126</a>] outlined a set of requirements that were intended
    to guide the development of BGP.
@@ -577,7 +544,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                        [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -613,9 +580,9 @@ Table of Contents
    Current practice:  How well is the requirement met by current
                       protocols and practice?
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20General%20Requirements"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  General Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20General%20Requirements"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  General Requirements</span>
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.1.%20%20%22Route%20to%20Destination%22"></a></body></html><a class="selflink" href="#section-3.1.1.1" name="section-3.1.1.1">3.1.1.1</a>.  "Route to Destination"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.1.%20%20%22Route%20to%20Destination%22"></a></body></html><a class="selflink" href="#section-3.1.1.1" id="section-3.1.1.1">3.1.1.1</a>.  "Route to Destination"</span>
 
    Timely routing to all reachable destinations, including multi-homing
    and multicast.
@@ -633,7 +600,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                        [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -653,7 +620,7 @@ Table of Contents
                          [<a href="./rfc2362.html" title='"Protocol Independent Multicast-Sparse Mode (PIM-SM): Protocol Specification"'>RFC2362</a>], [<a href="./rfc4601.html" title='"Protocol Independent Multicast - Sparse Mode (PIM-SM): Protocol Specification (Revised)"'>RFC4601</a>], especially the Source
                          Specific Multicast (SSM) subset.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.2.%20%20%22Routing%20is%20Assured%22"></a></body></html><a class="selflink" href="#section-3.1.1.2" name="section-3.1.1.2">3.1.1.2</a>.  "Routing is Assured"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.2.%20%20%22Routing%20is%20Assured%22"></a></body></html><a class="selflink" href="#section-3.1.1.2" id="section-3.1.1.2">3.1.1.2</a>.  "Routing is Assured"</span>
 
    This requires that a user be notified within a reasonable time period
    after persistent attempts, about inability to provide a service.
@@ -669,7 +636,7 @@ Table of Contents
                       as they may have alternative addresses that could
                       be used to exploit an alternative routing.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.3.%20%20%22Large%20System%22"></a></body></html><a class="selflink" href="#section-3.1.1.3" name="section-3.1.1.3">3.1.1.3</a>.  "Large System"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.3.%20%20%22Large%20System%22"></a></body></html><a class="selflink" href="#section-3.1.1.3" id="section-3.1.1.3">3.1.1.3</a>.  "Large System"</span>
 
    The architecture was designed to accommodate the growth of the
    Internet.
@@ -689,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                        [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -704,7 +671,7 @@ Table of Contents
                       domain (see <a href="#section-5.9">Section 5.9</a>), limited support for
                       hierarchy, etc.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.4.%20%20%22Autonomous%20Operation%22"></a></body></html><a class="selflink" href="#section-3.1.1.4" name="section-3.1.1.4">3.1.1.4</a>.  "Autonomous Operation"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.4.%20%20%22Autonomous%20Operation%22"></a></body></html><a class="selflink" href="#section-3.1.1.4" id="section-3.1.1.4">3.1.1.4</a>.  "Autonomous Operation"</span>
 
    This requirement encapsulates the need for administrative domains
    ("Autonomous Systems" - AS) to be able to operate autonomously as
@@ -745,11 +712,11 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.5.%20%20%22Distributed%20System%22"></a></body></html><a class="selflink" href="#section-3.1.1.5" name="section-3.1.1.5">3.1.1.5</a>.  "Distributed System"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.5.%20%20%22Distributed%20System%22"></a></body></html><a class="selflink" href="#section-3.1.1.5" id="section-3.1.1.5">3.1.1.5</a>.  "Distributed System"</span>
 
    The routing environment is a distributed system.  The distributed
    routing environment supports redundancy and diversity of nodes and
@@ -778,7 +745,7 @@ Table of Contents
                          to each router, giving opportunities for
                          mismatch and error.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.6.%20%20%22Provide%20A%20Credible%20Environment%22"></a></body></html><a class="selflink" href="#section-3.1.1.6" name="section-3.1.1.6">3.1.1.6</a>.  "Provide A Credible Environment"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.6.%20%20%22Provide%20A%20Credible%20Environment%22"></a></body></html><a class="selflink" href="#section-3.1.1.6" id="section-3.1.1.6">3.1.1.6</a>.  "Provide A Credible Environment"</span>
 
    The routing environment and services should be based upon mechanisms
    and information that exhibit both integrity and security.  That is,
@@ -801,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -817,7 +784,7 @@ Table of Contents
                          Routing (sidr) working group from 2006 through
                          2008.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.7.%20%20%22Be%20A%20Managed%20Entity%22"></a></body></html><a class="selflink" href="#section-3.1.1.7" name="section-3.1.1.7">3.1.1.7</a>.  "Be A Managed Entity"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.7.%20%20%22Be%20A%20Managed%20Entity%22"></a></body></html><a class="selflink" href="#section-3.1.1.7" id="section-3.1.1.7">3.1.1.7</a>.  "Be A Managed Entity"</span>
 
    This requires that the routing system provides adequate information
    on the state of the network to allow resource, problem, and fault
@@ -857,11 +824,11 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.8.%20%20%22Minimize%20Required%20Resources%22"></a></body></html><a class="selflink" href="#section-3.1.1.8" name="section-3.1.1.8">3.1.1.8</a>.  "Minimize Required Resources"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.8.%20%20%22Minimize%20Required%20Resources%22"></a></body></html><a class="selflink" href="#section-3.1.1.8" id="section-3.1.1.8">3.1.1.8</a>.  "Minimize Required Resources"</span>
 
    Relevance:         Valid.  However, the paragraph states that
                       assumptions on significant upgrades shouldn't be
@@ -880,11 +847,11 @@ Table of Contents
                       of networks in the Internet dominates memory
                       requirements -- this is a scaling problem.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20%22Functional%20Requirements%22"></a></body></html><a class="selflink" href="#section-3.1.2" name="section-3.1.2">3.1.2</a>.  "Functional Requirements"</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20%22Functional%20Requirements%22"></a></body></html><a class="selflink" href="#section-3.1.2" id="section-3.1.2">3.1.2</a>.  "Functional Requirements"</span>
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.%20%20%22Route%20Synthesis%20Requirements%22"></a></body></html><a class="selflink" href="#section-3.1.2.1" name="section-3.1.2.1">3.1.2.1</a>.  "Route Synthesis Requirements"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.%20%20%22Route%20Synthesis%20Requirements%22"></a></body></html><a class="selflink" href="#section-3.1.2.1" id="section-3.1.2.1">3.1.2.1</a>.  "Route Synthesis Requirements"</span>
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.1.%20%20%22Route%20around%20failures%20dynamically%22"></a></body></html><a class="selflink" href="#section-3.1.2.1.1" name="section-3.1.2.1.1">3.1.2.1.1</a>.  "Route around failures dynamically"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.1.%20%20%22Route%20around%20failures%20dynamically%22"></a></body></html><a class="selflink" href="#section-3.1.2.1.1" id="section-3.1.2.1.1">3.1.2.1.1</a>.  "Route around failures dynamically"</span>
 
    Relevance:         Valid.  Should perhaps be stronger.  Only
                       providing a best-effort attempt may not be enough
@@ -895,7 +862,7 @@ Table of Contents
    Current practice:  Latency of fail-over is too high; sometimes
                       minutes or longer.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.2.%20%20%22Provide%20loop%20free%20paths%22"></a></body></html><a class="selflink" href="#section-3.1.2.1.2" name="section-3.1.2.1.2">3.1.2.1.2</a>.  "Provide loop free paths"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.2.%20%20%22Provide%20loop%20free%20paths%22"></a></body></html><a class="selflink" href="#section-3.1.2.1.2" id="section-3.1.2.1.2">3.1.2.1.2</a>.  "Provide loop free paths"</span>
 
    Relevance:         Valid.  Loops should occur only with negligible
                       probability and duration.
@@ -913,7 +880,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -925,7 +892,7 @@ Table of Contents
                       assuming a suitable modification could be
                       developed.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.3.%20%20%22Know%20when%20a%20path%20or%20destination%20is%20unavailable%22"></a></body></html><a class="selflink" href="#section-3.1.2.1.3" name="section-3.1.2.1.3">3.1.2.1.3</a>.  "Know when a path or destination is unavailable"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.3.%20%20%22Know%20when%20a%20path%20or%20destination%20is%20unavailable%22"></a></body></html><a class="selflink" href="#section-3.1.2.1.3" id="section-3.1.2.1.3">3.1.2.1.3</a>.  "Know when a path or destination is unavailable"</span>
 
    Relevance:         Valid to some extent, but there is a trade-off
                       between aggregation and immediate knowledge of
@@ -938,7 +905,7 @@ Table of Contents
                       slowly through the networks due to slow
                       convergence for route withdrawals.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.4.%20%20%22Provide%20paths%20sensitive%20to%20administrative%20policies%22"></a></body></html><a class="selflink" href="#section-3.1.2.1.4" name="section-3.1.2.1.4">3.1.2.1.4</a>.  "Provide paths sensitive to administrative policies"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.4.%20%20%22Provide%20paths%20sensitive%20to%20administrative%20policies%22"></a></body></html><a class="selflink" href="#section-3.1.2.1.4" id="section-3.1.2.1.4">3.1.2.1.4</a>.  "Provide paths sensitive to administrative policies"</span>
 
    Relevance:         Valid.  Policy control of routing has become
                       increasingly important as the Internet has turned
@@ -969,11 +936,11 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.5.%20%20%22Provide%20paths%20sensitive%20to%20user%20policies%22"></a></body></html><a class="selflink" href="#section-3.1.2.1.5" name="section-3.1.2.1.5">3.1.2.1.5</a>.  "Provide paths sensitive to user policies"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.5.%20%20%22Provide%20paths%20sensitive%20to%20user%20policies%22"></a></body></html><a class="selflink" href="#section-3.1.2.1.5" id="section-3.1.2.1.5">3.1.2.1.5</a>.  "Provide paths sensitive to user policies"</span>
 
    Relevance:         Valid to some extent, as they may conflict with
                       the policies of the network administrator.  It is
@@ -1000,7 +967,7 @@ Table of Contents
                          say "total failure" rather than "limited
                          success".
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.6.%20%20%22Provide%20paths%20which%20characterize%20user%20quality-of-service"></a></body></html><a class="selflink" href="#section-3.1.2.1.6" name="section-3.1.2.1.6">3.1.2.1.6</a>.  "Provide paths which characterize user quality-of-service</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.6.%20%20%22Provide%20paths%20which%20characterize%20user%20quality-of-service"></a></body></html><a class="selflink" href="#section-3.1.2.1.6" id="section-3.1.2.1.6">3.1.2.1.6</a>.  "Provide paths which characterize user quality-of-service</span>
 <span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20%20%20%20%20%20%20requirements%22"></a></body></html>            requirements"</span>
 
    Relevance:         Valid to some extent, as they may conflict with
@@ -1025,11 +992,11 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.7.%20%20%22Provide%20autonomy%20between%20inter-%20and%20intra-autonomous%20system"></a></body></html><a class="selflink" href="#section-3.1.2.1.7" name="section-3.1.2.1.7">3.1.2.1.7</a>.  "Provide autonomy between inter- and intra-autonomous system</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.1.7.%20%20%22Provide%20autonomy%20between%20inter-%20and%20intra-autonomous%20system"></a></body></html><a class="selflink" href="#section-3.1.2.1.7" id="section-3.1.2.1.7">3.1.2.1.7</a>.  "Provide autonomy between inter- and intra-autonomous system</span>
 <span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20%20%20%20%20%20%20route%20synthesis%22"></a></body></html>            route synthesis"</span>
 
    Relevance:         Inter- and intra-domain routing should stay
@@ -1043,9 +1010,9 @@ Table of Contents
                       however, especially in transit domains, very
                       interrelated with inter-domain routing.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.2.%20%20%22Forwarding%20Requirements%22"></a></body></html><a class="selflink" href="#section-3.1.2.2" name="section-3.1.2.2">3.1.2.2</a>.  "Forwarding Requirements"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.2.%20%20%22Forwarding%20Requirements%22"></a></body></html><a class="selflink" href="#section-3.1.2.2" id="section-3.1.2.2">3.1.2.2</a>.  "Forwarding Requirements"</span>
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.2.1.%20%20%22Decouple%20inter-%20and%20intra-autonomous%20system%20forwarding"></a></body></html><a class="selflink" href="#section-3.1.2.2.1" name="section-3.1.2.2.1">3.1.2.2.1</a>.  "Decouple inter- and intra-autonomous system forwarding</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.2.1.%20%20%22Decouple%20inter-%20and%20intra-autonomous%20system%20forwarding"></a></body></html><a class="selflink" href="#section-3.1.2.2.1" id="section-3.1.2.2.1">3.1.2.2.1</a>.  "Decouple inter- and intra-autonomous system forwarding</span>
 <span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20%20%20%20%20%20%20decisions%22"></a></body></html>            decisions"</span>
 
    Relevance:         Valid.
@@ -1054,7 +1021,7 @@ Table of Contents
                       forwarding in transit domains is dependent on
                       inter-domain forwarding decisions.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.2.2.%20%20%22Do%20not%20forward%20datagrams%20deemed%20administratively"></a></body></html><a class="selflink" href="#section-3.1.2.2.2" name="section-3.1.2.2.2">3.1.2.2.2</a>.  "Do not forward datagrams deemed administratively</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.2.2.%20%20%22Do%20not%20forward%20datagrams%20deemed%20administratively"></a></body></html><a class="selflink" href="#section-3.1.2.2.2" id="section-3.1.2.2.2">3.1.2.2.2</a>.  "Do not forward datagrams deemed administratively</span>
 <span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20%20%20%20%20%20%20inappropriate%22"></a></body></html>            inappropriate"</span>
 
    Relevance:         Valid, and increasingly important in the context
@@ -1081,7 +1048,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -1092,7 +1059,7 @@ Table of Contents
                       denials.  In the backbone, intentional packet
                       dropping based on policies is not common.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.2.3.%20%20%22Do%20not%20forward%20datagrams%20to%20failed%20resources%22"></a></body></html><a class="selflink" href="#section-3.1.2.2.3" name="section-3.1.2.2.3">3.1.2.2.3</a>.  "Do not forward datagrams to failed resources"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.2.3.%20%20%22Do%20not%20forward%20datagrams%20to%20failed%20resources%22"></a></body></html><a class="selflink" href="#section-3.1.2.2.3" id="section-3.1.2.2.3">3.1.2.2.3</a>.  "Do not forward datagrams to failed resources"</span>
 
    Relevance:         Unclear, although it is clearly desirable to
                       minimize the waste of forwarding resources by
@@ -1122,7 +1089,7 @@ Table of Contents
                       failures of such boxes will not affect the routing
                       system.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.2.4.%20%20%22Forward%20datagram%20according%20to%20its%20characteristics%22"></a></body></html><a class="selflink" href="#section-3.1.2.2.4" name="section-3.1.2.2.4">3.1.2.2.4</a>.  "Forward datagram according to its characteristics"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.2.4.%20%20%22Forward%20datagram%20according%20to%20its%20characteristics%22"></a></body></html><a class="selflink" href="#section-3.1.2.2.4" id="section-3.1.2.2.4">3.1.2.2.4</a>.  "Forward datagram according to its characteristics"</span>
 
    Relevance:         Valid.  This is necessary in enabling
                       differentiation in the network, based on QoS,
@@ -1137,13 +1104,13 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.3.%20%20%22Information%20Requirements%22"></a></body></html><a class="selflink" href="#section-3.1.2.3" name="section-3.1.2.3">3.1.2.3</a>.  "Information Requirements"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.3.%20%20%22Information%20Requirements%22"></a></body></html><a class="selflink" href="#section-3.1.2.3" id="section-3.1.2.3">3.1.2.3</a>.  "Information Requirements"</span>
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.3.1.%20%20%22Provide%20a%20distributed%20and%20descriptive%20information%20base%22"></a></body></html><a class="selflink" href="#section-3.1.2.3.1" name="section-3.1.2.3.1">3.1.2.3.1</a>.  "Provide a distributed and descriptive information base"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.3.1.%20%20%22Provide%20a%20distributed%20and%20descriptive%20information%20base%22"></a></body></html><a class="selflink" href="#section-3.1.2.3.1" id="section-3.1.2.3.1">3.1.2.3.1</a>.  "Provide a distributed and descriptive information base"</span>
 
    Relevance:         Valid.  However, an alternative arrangement of
                       information bases, possibly with an element of
@@ -1156,7 +1123,7 @@ Table of Contents
                       unclear whether it supports all necessary routing
                       functionality.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.3.2.%20%20%22Determine%20resource%20availability%22"></a></body></html><a class="selflink" href="#section-3.1.2.3.2" name="section-3.1.2.3.2">3.1.2.3.2</a>.  "Determine resource availability"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.3.2.%20%20%22Determine%20resource%20availability%22"></a></body></html><a class="selflink" href="#section-3.1.2.3.2" id="section-3.1.2.3.2">3.1.2.3.2</a>.  "Determine resource availability"</span>
 
    Relevance:         Valid.  It should be possible to determine the
                       availability and levels of availability of any
@@ -1170,7 +1137,7 @@ Table of Contents
    Current practice:  Resource availability is predominantly handled
                       outside of the routing system.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.3.3.%20%20%22Restrain%20transmission%20utilization%22"></a></body></html><a class="selflink" href="#section-3.1.2.3.3" name="section-3.1.2.3.3">3.1.2.3.3</a>.  "Restrain transmission utilization"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.3.3.%20%20%22Restrain%20transmission%20utilization%22"></a></body></html><a class="selflink" href="#section-3.1.2.3.3" id="section-3.1.2.3.3">3.1.2.3.3</a>.  "Restrain transmission utilization"</span>
 
    Relevance:         Valid.  However, certain requirements in the
                       control plane, such as fast detection of faults
@@ -1193,11 +1160,11 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.3.4.%20%20%22Allow%20limited%20information%20exchange%22"></a></body></html><a class="selflink" href="#section-3.1.2.3.4" name="section-3.1.2.3.4">3.1.2.3.4</a>.  "Allow limited information exchange"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.3.4.%20%20%22Allow%20limited%20information%20exchange%22"></a></body></html><a class="selflink" href="#section-3.1.2.3.4" id="section-3.1.2.3.4">3.1.2.3.4</a>.  "Allow limited information exchange"</span>
 
    Relevance:         Valid.  But perhaps routing could be improved if
                       certain information (especially policies) could be
@@ -1216,16 +1183,16 @@ Table of Contents
                       the information are not generally aware of the
                       policies that resulted in this export.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.4.%20%20%22Environmental%20Requirements%22"></a></body></html><a class="selflink" href="#section-3.1.2.4" name="section-3.1.2.4">3.1.2.4</a>.  "Environmental Requirements"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.4.%20%20%22Environmental%20Requirements%22"></a></body></html><a class="selflink" href="#section-3.1.2.4" id="section-3.1.2.4">3.1.2.4</a>.  "Environmental Requirements"</span>
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.4.1.%20%20%22Support%20a%20packet-switching%20environment%22"></a></body></html><a class="selflink" href="#section-3.1.2.4.1" name="section-3.1.2.4.1">3.1.2.4.1</a>.  "Support a packet-switching environment"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.4.1.%20%20%22Support%20a%20packet-switching%20environment%22"></a></body></html><a class="selflink" href="#section-3.1.2.4.1" id="section-3.1.2.4.1">3.1.2.4.1</a>.  "Support a packet-switching environment"</span>
 
    Relevance:         Valid, but routing system should, perhaps, not be
                       limited to this exclusively.
 
    Current practice:  Supported.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.4.2.%20%20%22Accommodate%20a%20connection-less%20oriented%20user%20transport"></a></body></html><a class="selflink" href="#section-3.1.2.4.2" name="section-3.1.2.4.2">3.1.2.4.2</a>.  "Accommodate a connection-less oriented user transport</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.4.2.%20%20%22Accommodate%20a%20connection-less%20oriented%20user%20transport"></a></body></html><a class="selflink" href="#section-3.1.2.4.2" id="section-3.1.2.4.2">3.1.2.4.2</a>.  "Accommodate a connection-less oriented user transport</span>
 <span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20%20%20%20%20%20%20service%22"></a></body></html>            service"</span>
 
    Relevance:         Valid, but routing system should, perhaps, not be
@@ -1233,7 +1200,7 @@ Table of Contents
 
    Current practice:  Accommodated.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.4.3.%20%20%22Accommodate%2010K%20autonomous%20systems%20and%20100K%20networks%22"></a></body></html><a class="selflink" href="#section-3.1.2.4.3" name="section-3.1.2.4.3">3.1.2.4.3</a>.  "Accommodate 10K autonomous systems and 100K networks"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.4.3.%20%20%22Accommodate%2010K%20autonomous%20systems%20and%20100K%20networks%22"></a></body></html><a class="selflink" href="#section-3.1.2.4.3" id="section-3.1.2.4.3">3.1.2.4.3</a>.  "Accommodate 10K autonomous systems and 100K networks"</span>
 
    Relevance:         No longer valid.  Needs to be increased --
                       potentially indefinitely.  It is extremely
@@ -1249,7 +1216,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -1267,16 +1234,16 @@ Table of Contents
                          bit AS numbers have been introduced and are
                          being deployed.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.4.4.%20%20%22Allow%20for%20arbitrary%20interconnection%20of%20autonomous%20systems%22"></a></body></html><a class="selflink" href="#section-3.1.2.4.4" name="section-3.1.2.4.4">3.1.2.4.4</a>.  "Allow for arbitrary interconnection of autonomous systems"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.4.4.%20%20%22Allow%20for%20arbitrary%20interconnection%20of%20autonomous%20systems%22"></a></body></html><a class="selflink" href="#section-3.1.2.4.4" id="section-3.1.2.4.4">3.1.2.4.4</a>.  "Allow for arbitrary interconnection of autonomous systems"</span>
 
    Relevance:         Valid.  However, perhaps not all interconnections
                       should be accessible globally.
 
    Current practice:  BGP-4 allows for arbitrary interconnections.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.5.%20%20%22General%20Objectives%22"></a></body></html><a class="selflink" href="#section-3.1.2.5" name="section-3.1.2.5">3.1.2.5</a>.  "General Objectives"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.5.%20%20%22General%20Objectives%22"></a></body></html><a class="selflink" href="#section-3.1.2.5" id="section-3.1.2.5">3.1.2.5</a>.  "General Objectives"</span>
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.5.1.%20%20%22Provide%20routing%20services%20in%20a%20timely%20manner%22"></a></body></html><a class="selflink" href="#section-3.1.2.5.1" name="section-3.1.2.5.1">3.1.2.5.1</a>.  "Provide routing services in a timely manner"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.5.1.%20%20%22Provide%20routing%20services%20in%20a%20timely%20manner%22"></a></body></html><a class="selflink" href="#section-3.1.2.5.1" id="section-3.1.2.5.1">3.1.2.5.1</a>.  "Provide routing services in a timely manner"</span>
 
    Relevance:         Valid, as stated before.  It might be acceptable
                       for a more complex service to take longer to
@@ -1293,7 +1260,7 @@ Table of Contents
    Current practice:  More or less, with the exception of convergence
                       and fault robustness.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.5.2.%20%20%22Minimize%20constraints%20on%20systems%20with%20limited%20resources%22"></a></body></html><a class="selflink" href="#section-3.1.2.5.2" name="section-3.1.2.5.2">3.1.2.5.2</a>.  "Minimize constraints on systems with limited resources"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.5.2.%20%20%22Minimize%20constraints%20on%20systems%20with%20limited%20resources%22"></a></body></html><a class="selflink" href="#section-3.1.2.5.2" id="section-3.1.2.5.2">3.1.2.5.2</a>.  "Minimize constraints on systems with limited resources"</span>
 
    Relevance:         Valid.
 
@@ -1305,11 +1272,11 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.5.3.%20%20%22Minimize%20impact%20of%20dissimilarities%20between%20autonomous"></a></body></html><a class="selflink" href="#section-3.1.2.5.3" name="section-3.1.2.5.3">3.1.2.5.3</a>.  "Minimize impact of dissimilarities between autonomous</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.5.3.%20%20%22Minimize%20impact%20of%20dissimilarities%20between%20autonomous"></a></body></html><a class="selflink" href="#section-3.1.2.5.3" id="section-3.1.2.5.3">3.1.2.5.3</a>.  "Minimize impact of dissimilarities between autonomous</span>
 <span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20%20%20%20%20%20%20systems%22"></a></body></html>            systems"</span>
 
    Relevance:         Important.  This requirement is critical to a
@@ -1324,7 +1291,7 @@ Table of Contents
                       domain attributes are broadly similar across
                       domains.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.5.4.%20%20%22Accommodate%20the%20addressing%20schemes%20and%20protocol%20mechanisms"></a></body></html><a class="selflink" href="#section-3.1.2.5.4" name="section-3.1.2.5.4">3.1.2.5.4</a>.  "Accommodate the addressing schemes and protocol mechanisms</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.5.4.%20%20%22Accommodate%20the%20addressing%20schemes%20and%20protocol%20mechanisms"></a></body></html><a class="selflink" href="#section-3.1.2.5.4" id="section-3.1.2.5.4">3.1.2.5.4</a>.  "Accommodate the addressing schemes and protocol mechanisms</span>
 <span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20%20%20%20%20%20%20of%20the%20autonomous%20systems%22"></a></body></html>            of the autonomous systems"</span>
 
    Relevance:         Important, probably more so than when <a href="./rfc1126.html">RFC 1126</a> was
@@ -1337,7 +1304,7 @@ Table of Contents
                       IPv6 services is steadily increasing.  Some global
                       backbones support IPv6 routing and forwarding.
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.5.5.%20%20%22Must%20be%20implementable%20by%20network%20vendors%22"></a></body></html><a class="selflink" href="#section-3.1.2.5.5" name="section-3.1.2.5.5">3.1.2.5.5</a>.  "Must be implementable by network vendors"</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.5.5.%20%20%22Must%20be%20implementable%20by%20network%20vendors%22"></a></body></html><a class="selflink" href="#section-3.1.2.5.5" id="section-3.1.2.5.5">3.1.2.5.5</a>.  "Must be implementable by network vendors"</span>
 
    Relevance:         Valid, but note that what can be implemented today
                       is different from what was possible when <a href="./rfc1126.html">RFC 1126</a>
@@ -1348,7 +1315,7 @@ Table of Contents
    Current practice:  BGP was implemented and meets a large proportion
                       of the original requirements.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.%20%20%22Non-Goals%22"></a></body></html><a class="selflink" href="#section-3.1.3" name="section-3.1.3">3.1.3</a>.  "Non-Goals"</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.%20%20%22Non-Goals%22"></a></body></html><a class="selflink" href="#section-3.1.3" id="section-3.1.3">3.1.3</a>.  "Non-Goals"</span>
 
    <a href="./rfc1126.html">RFC 1126</a> also included a section discussing non-goals.  This section
    discusses the extent to which these are still non-goals.  It also
@@ -1361,11 +1328,11 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.1.%20%20%22Ubiquity%22"></a></body></html><a class="selflink" href="#section-3.1.3.1" name="section-3.1.3.1">3.1.3.1</a>.  "Ubiquity"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.1.%20%20%22Ubiquity%22"></a></body></html><a class="selflink" href="#section-3.1.3.1" id="section-3.1.3.1">3.1.3.1</a>.  "Ubiquity"</span>
 
    The authors of <a href="./rfc1126.html">RFC 1126</a> were explicitly saying that IP and its inter-
    domain routing system need not be deployed in every AS, and a
@@ -1417,13 +1384,13 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
    Current practice:  De facto ubiquity achieved.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.2.%20%20%22Congestion%20control%22"></a></body></html><a class="selflink" href="#section-3.1.3.2" name="section-3.1.3.2">3.1.3.2</a>.  "Congestion control"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.2.%20%20%22Congestion%20control%22"></a></body></html><a class="selflink" href="#section-3.1.3.2" id="section-3.1.3.2">3.1.3.2</a>.  "Congestion control"</span>
 
    Relevance:         It is not clear if this non-goal was to be applied
                       to routing or forwarding.  It is definitely a non-
@@ -1444,7 +1411,7 @@ Table of Contents
                       message into the application that is providing the
                       source.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.3.%20%20%22Load%20splitting%22"></a></body></html><a class="selflink" href="#section-3.1.3.3" name="section-3.1.3.3">3.1.3.3</a>.  "Load splitting"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.3.%20%20%22Load%20splitting%22"></a></body></html><a class="selflink" href="#section-3.1.3.3" id="section-3.1.3.3">3.1.3.3</a>.  "Load splitting"</span>
 
    Relevance:         This should neither be a non-goal nor an explicit
                       goal.  It might be desirable in some cases and
@@ -1473,11 +1440,11 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.4.%20%20%22Maximizing%20the%20utilization%20of%20resources%22"></a></body></html><a class="selflink" href="#section-3.1.3.4" name="section-3.1.3.4">3.1.3.4</a>.  "Maximizing the utilization of resources"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.4.%20%20%22Maximizing%20the%20utilization%20of%20resources%22"></a></body></html><a class="selflink" href="#section-3.1.3.4" id="section-3.1.3.4">3.1.3.4</a>.  "Maximizing the utilization of resources"</span>
 
    Relevance:         Valid.  Cost-efficiency should be striven for; we
                       note that maximizing resource utilization does not
@@ -1487,7 +1454,7 @@ Table of Contents
                       "hacked in" feature done with manual
                       configuration.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.5.%20%20%22Schedule%20to%20deadline%20service%22"></a></body></html><a class="selflink" href="#section-3.1.3.5" name="section-3.1.3.5">3.1.3.5</a>.  "Schedule to deadline service"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.5.%20%20%22Schedule%20to%20deadline%20service%22"></a></body></html><a class="selflink" href="#section-3.1.3.5" id="section-3.1.3.5">3.1.3.5</a>.  "Schedule to deadline service"</span>
 
    This non-goal was put in place to ensure that the IDR did not have to
    meet real-time deadline goals such as might apply to Constant Bit
@@ -1505,7 +1472,7 @@ Table of Contents
                       requirement for a rather looser form of delay
                       sensitive routing.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.6.%20%20%22Non-interference%20policies%20of%20resource%20utilization%22"></a></body></html><a class="selflink" href="#section-3.1.3.6" name="section-3.1.3.6">3.1.3.6</a>.  "Non-interference policies of resource utilization"</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.6.%20%20%22Non-interference%20policies%20of%20resource%20utilization%22"></a></body></html><a class="selflink" href="#section-3.1.3.6" id="section-3.1.3.6">3.1.3.6</a>.  "Non-interference policies of resource utilization"</span>
 
    The requirement in <a href="./rfc1126.html">RFC 1126</a> is somewhat opaque, but appears to imply
    that what we would today call QoS routing is a non-goal and that
@@ -1529,7 +1496,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -1537,7 +1504,7 @@ Table of Contents
                       availability.  Forwarding can support service
                       differentiation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20ISO%20OSI%20IDRP%2C%20BGP%2C%20and%20the%20Development%20of%20Policy%20Routing"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  ISO OSI IDRP, BGP, and the Development of Policy Routing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20ISO%20OSI%20IDRP%2C%20BGP%2C%20and%20the%20Development%20of%20Policy%20Routing"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  ISO OSI IDRP, BGP, and the Development of Policy Routing</span>
 
    During the decade before the widespread success of the World Wide
    Web, ISO was developing the communications architecture and protocol
@@ -1585,7 +1552,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -1641,7 +1608,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -1697,7 +1664,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -1753,7 +1720,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -1809,7 +1776,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -1852,7 +1819,7 @@ Table of Contents
    from the confederation mechanism in today's BGP) as an extra level in
    the hierarchy of routing.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Nimrod%20Requirements"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Nimrod Requirements</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Nimrod%20Requirements"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Nimrod Requirements</span>
 
    Nimrod as expressed by Noel Chiappa in his early document, "A New IP
    Routing and Addressing Architecture" [<a href="#ref-Chiappa91">Chiappa91</a>] and later in the
@@ -1865,7 +1832,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -1921,7 +1888,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -1948,7 +1915,7 @@ Table of Contents
    from Nimrod, neither of them can be said to be an implementation of
    this architecture.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20PNNI"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  PNNI</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20PNNI"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>.  PNNI</span>
 
    The Private Network-Node Interface (PNNI) routing protocol was
    developed under the ATM Forum's auspices as a hierarchical route
@@ -1977,7 +1944,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -1986,9 +1953,9 @@ Table of Contents
    Further research on these issues based on operational experience is
    required.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Recent%20Research%20Work"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Recent Research Work</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Recent%20Research%20Work"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Recent Research Work</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Developments%20in%20Internet%20Connectivity"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Developments in Internet Connectivity</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Developments%20in%20Internet%20Connectivity"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Developments in Internet Connectivity</span>
 
    The work commissioned from Geoff Huston by the Internet Architecture
    Board [<a href="./rfc3221.html" title='"Commentary on Inter-Domain Routing in the Internet"'>RFC3221</a>] draws a number of conclusions from the analysis of
@@ -2033,7 +2000,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -2047,7 +2014,7 @@ Table of Contents
    o  Aggregation cannot be relied upon to constrain the size of routing
       tables for an all-informed routing system.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20DARPA%20NewArch%20Project"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  DARPA NewArch Project</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20DARPA%20NewArch%20Project"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  DARPA NewArch Project</span>
 
    DARPA funded a project to think about a new architecture for future
    generation Internet, called NewArch (see
@@ -2089,7 +2056,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -2109,7 +2076,7 @@ Table of Contents
    The conclusions of the work are now summarized in the final report
    [<a href="#ref-NewArch03">NewArch03</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Defending%20the%20End-to-End%20Principle"></a></body></html><a class="selflink" href="#section-4.2.1" name="section-4.2.1">4.2.1</a>.  Defending the End-to-End Principle</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Defending%20the%20End-to-End%20Principle"></a></body></html><a class="selflink" href="#section-4.2.1" id="section-4.2.1">4.2.1</a>.  Defending the End-to-End Principle</span>
 
    One of the participants in DARPA NewArch work (Dave Clark) with one
    of his associates has also published a very interesting paper
@@ -2131,7 +2098,7 @@ Table of Contents
    has done).  The hope is that by that time, a new Internet will appear
    to offer a context for unfettered innovation.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Existing%20Problems%20of%20BGP%20and%20the%20Current%20Inter-/Intra-Domain"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Existing Problems of BGP and the Current Inter-/Intra-Domain</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Existing%20Problems%20of%20BGP%20and%20the%20Current%20Inter-/Intra-Domain"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Existing Problems of BGP and the Current Inter-/Intra-Domain</span>
 <span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20Architecture"></a></body></html>    Architecture</span>
 
    Although most of the people who have to work with BGP today believe
@@ -2145,7 +2112,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -2157,7 +2124,7 @@ Table of Contents
    particularly with respect to its stability and the problems produced
    by explosions in the size of the Internet.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20BGP%20and%20Auto-Aggregation"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  BGP and Auto-Aggregation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20BGP%20and%20Auto-Aggregation"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  BGP and Auto-Aggregation</span>
 
    The initial stability followed by linear growth rates of the number
    of routing objects (prefixes) that was achieved by the introduction
@@ -2177,7 +2144,7 @@ Table of Contents
    the net as described in [<a href="./rfc3221.html" title='"Commentary on Inter-Domain Routing in the Internet"'>RFC3221</a>] and <a href="#section-2.5.1">Section 2.5.1</a> may limit the
    usefulness of auto-aggregation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Convergence%20and%20Recovery%20Issues"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Convergence and Recovery Issues</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Convergence%20and%20Recovery%20Issues"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Convergence and Recovery Issues</span>
 
    BGP today is a stable protocol under most circumstances, but this has
    been achieved at the expense of making the convergence time of the
@@ -2201,7 +2168,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -2222,7 +2189,7 @@ Table of Contents
    really globally converges.  Can a global, and beyond, network be
    designed with the requirement of global convergence?
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Non-Locality%20of%20Effects%20of%20Instability%20and%20Misconfiguration"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Non-Locality of Effects of Instability and Misconfiguration</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Non-Locality%20of%20Effects%20of%20Instability%20and%20Misconfiguration"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Non-Locality of Effects of Instability and Misconfiguration</span>
 
    There have been a number of instances, some of which are well
    documented, of a mistake in BGP configuration in a single peripheral
@@ -2238,7 +2205,7 @@ Table of Contents
    argument for an architecture that does not require global
    convergence.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Multi-Homing%20Issues"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Multi-Homing Issues</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Multi-Homing%20Issues"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Multi-Homing Issues</span>
 
    As discussed previously, the increasing use of multi-homing as a
    robustness technique by peripheral networks requires that multiple
@@ -2257,7 +2224,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -2304,7 +2271,7 @@ Table of Contents
       Editors' Note: A more recent analysis of multi-homing can be found
       in [<a href="./rfc4116.html" title='"IPv4 Multihoming Practices and Limitations"'>RFC4116</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20AS%20Number%20Exhaustion"></a></body></html><a class="selflink" href="#section-5.5" name="section-5.5">5.5</a>.  AS Number Exhaustion</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.5.%20%20AS%20Number%20Exhaustion"></a></body></html><a class="selflink" href="#section-5.5" id="section-5.5">5.5</a>.  AS Number Exhaustion</span>
 
    The domain identifier or AS number is a 16-bit number.  When this
    paper was originally written in 2001, allocation of AS numbers was
@@ -2313,7 +2280,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -2352,7 +2319,7 @@ Table of Contents
       on 1 January 2009, but there are concerns that significant numbers
       of routers will not have been upgraded by then.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.%20%20Partitioned%20ASs"></a></body></html><a class="selflink" href="#section-5.6" name="section-5.6">5.6</a>.  Partitioned ASs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.6.%20%20Partitioned%20ASs"></a></body></html><a class="selflink" href="#section-5.6" id="section-5.6">5.6</a>.  Partitioned ASs</span>
 
    Tricks with discontinuous ASs are used by operators, for example, to
    implement anycast.  Discontinuous ASs may also come into being by
@@ -2369,18 +2336,18 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.7.%20%20Load%20Sharing"></a></body></html><a class="selflink" href="#section-5.7" name="section-5.7">5.7</a>.  Load Sharing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.7.%20%20Load%20Sharing"></a></body></html><a class="selflink" href="#section-5.7" id="section-5.7">5.7</a>.  Load Sharing</span>
 
    Load splitting or sharing was not a goal of the original designers of
    BGP and it is now a problem for today's network designers and
    managers.  Trying to fool BGP into load sharing between several links
    is a constantly recurring exercise for most operators today.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.8.%20%20Hold-Down%20Issues"></a></body></html><a class="selflink" href="#section-5.8" name="section-5.8">5.8</a>.  Hold-Down Issues</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.8.%20%20Hold-Down%20Issues"></a></body></html><a class="selflink" href="#section-5.8" id="section-5.8">5.8</a>.  Hold-Down Issues</span>
 
    As with the interval between "hello" messages in OSPF, the typical
    size and defined granularity (seconds to tens of seconds) of the
@@ -2411,7 +2378,7 @@ Table of Contents
    databases.  Various techniques have been implemented to try to reduce
    this problem, but they have not yet been standardized.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.9.%20%20Interaction%20between%20Inter-Domain%20Routing%20and%20Intra-Domain%20Routing"></a></body></html><a class="selflink" href="#section-5.9" name="section-5.9">5.9</a>.  Interaction between Inter-Domain Routing and Intra-Domain Routing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.9.%20%20Interaction%20between%20Inter-Domain%20Routing%20and%20Intra-Domain%20Routing"></a></body></html><a class="selflink" href="#section-5.9" id="section-5.9">5.9</a>.  Interaction between Inter-Domain Routing and Intra-Domain Routing</span>
 
    Today, many operators' backbone routers run both I-BGP and an intra-
    domain protocol to maintain the routes that reach between the borders
@@ -2425,7 +2392,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -2481,7 +2448,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -2497,7 +2464,7 @@ Table of Contents
       changes in BGP routing that affect the exit taken by traffic
       require corresponding re-routing in the intra-domain routing).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.10.%20%20Policy%20Issues"></a></body></html><a class="selflink" href="#section-5.10" name="section-5.10">5.10</a>.  Policy Issues</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.10.%20%20Policy%20Issues"></a></body></html><a class="selflink" href="#section-5.10" id="section-5.10">5.10</a>.  Policy Issues</span>
 
    There are several classes of issues with current BGP policy:
 
@@ -2524,7 +2491,7 @@ Table of Contents
    within a complete BGP training course and specialized policy
    management training courses are not generally available.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.11.%20%20Security%20Issues"></a></body></html><a class="selflink" href="#section-5.11" name="section-5.11">5.11</a>.  Security Issues</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.11.%20%20Security%20Issues"></a></body></html><a class="selflink" href="#section-5.11" id="section-5.11">5.11</a>.  Security Issues</span>
 
    While many of the issues with BGP security have been traced either to
    implementation issues or to operational issues, BGP is vulnerable to
@@ -2537,7 +2504,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 42]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-43" id="page-43" name="page-43"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-43"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -2552,7 +2519,7 @@ Table of Contents
       in great detail [<a href="./rfc4593.html" title='"Generic Threats to Routing Protocols"'>RFC4593</a>] and readers should refer to that work to
       understand the security issues.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.12.%20%20Support%20of%20MPLS%20and%20VPNS"></a></body></html><a class="selflink" href="#section-5.12" name="section-5.12">5.12</a>.  Support of MPLS and VPNS</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.12.%20%20Support%20of%20MPLS%20and%20VPNS"></a></body></html><a class="selflink" href="#section-5.12" id="section-5.12">5.12</a>.  Support of MPLS and VPNS</span>
 
    Recently, BGP has been modified to function as a signaling protocol
    for MPLS and for VPNs [<a href="./rfc4364.html" title='"BGP/MPLS IP Virtual Private Networks (VPNs)"'>RFC4364</a>].  Some people see this overloading of
@@ -2568,7 +2535,7 @@ Table of Contents
    It is an open question whether VPN signaling protocols should remain
    separate from the route determination protocols.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.13.%20%20IPv4/IPv6%20Ships%20in%20the%20Night"></a></body></html><a class="selflink" href="#section-5.13" name="section-5.13">5.13</a>.  IPv4/IPv6 Ships in the Night</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.13.%20%20IPv4/IPv6%20Ships%20in%20the%20Night"></a></body></html><a class="selflink" href="#section-5.13" id="section-5.13">5.13</a>.  IPv4/IPv6 Ships in the Night</span>
 
    The fact that service providers need to maintain two completely
    separate networks, one for IPv4 and one for IPv6, has been a real
@@ -2593,7 +2560,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 43]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-44" id="page-44" name="page-44"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-44"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -2604,7 +2571,7 @@ Table of Contents
    be improved, but currently results in independent UPDATEs being
    exchanged for each address family.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.14.%20%20Existing%20Tools%20to%20Support%20Effective%20Deployment%20of%20Inter-Domain"></a></body></html><a class="selflink" href="#section-5.14" name="section-5.14">5.14</a>.  Existing Tools to Support Effective Deployment of Inter-Domain</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.14.%20%20Existing%20Tools%20to%20Support%20Effective%20Deployment%20of%20Inter-Domain"></a></body></html><a class="selflink" href="#section-5.14" id="section-5.14">5.14</a>.  Existing Tools to Support Effective Deployment of Inter-Domain</span>
 <span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20%20Routing"></a></body></html>       Routing</span>
 
    The tools available to network operators to assist in configuring and
@@ -2634,7 +2601,7 @@ Table of Contents
    skilled inter-domain routing configurers but limited assistance for
    the novice.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.14.1.%20%20Routing%20Policy%20Specification%20Language%20RPSL%20%28RFC%202622%20and%20RFC"></a></body></html><a class="selflink" href="#section-5.14.1" name="section-5.14.1">5.14.1</a>.  Routing Policy Specification Language RPSL (<a href="./rfc2622.html">RFC 2622</a> and <a href="./rfc2650.html">RFC</a></span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.14.1.%20%20Routing%20Policy%20Specification%20Language%20RPSL%20%28RFC%202622%20and%20RFC"></a></body></html><a class="selflink" href="#section-5.14.1" id="section-5.14.1">5.14.1</a>.  Routing Policy Specification Language RPSL (<a href="./rfc2622.html">RFC 2622</a> and <a href="./rfc2650.html">RFC</a></span>
          <a href="./rfc2650.html">2650</a>) and RIPE NCC Database (RIPE 157)
 
    Routing Policy Specification Language (RPSL) [<a href="./rfc2622.html" title='"Routing Policy Specification Language (RPSL)"'>RFC2622</a>] enables a
@@ -2649,7 +2616,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 44]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-45" id="page-45" name="page-45"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-45"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -2683,7 +2650,7 @@ Table of Contents
       Internet Systems Consortium (ISC) for ongoing maintenance as a
       public resource.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    As this is an informational document on the history of requirements
    in IDR and on the problems facing the current Internet IDR
@@ -2692,7 +2659,7 @@ Table of Contents
    architecture do create security problems, and these have been
    discussed in the text above.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgments</span>
 
    The document is derived from work originally produced by Babylon.
    Babylon was a loose association of individuals from academia, service
@@ -2705,7 +2672,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 45]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-46" id="page-46" name="page-46"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-46"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -2736,23 +2703,23 @@ Table of Contents
    Finally, it is the editors who are responsible for any lack of
    clarity, any errors, glaring omissions or misunderstandings.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Informative References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Informative References</span>
 
-   [<a id="ref-Alaettinoglu00" name="ref-Alaettinoglu00">Alaettinoglu00</a>]
+   [<a id="ref-Alaettinoglu00">Alaettinoglu00</a>]
               Alaettinoglu, C., Jacobson, V., and H. Yu, "Towards Milli-
               Second IGP Convergence", Work in Progress, November 2000.
 
-   [<a id="ref-Berkowitz01" name="ref-Berkowitz01">Berkowitz01</a>]
+   [<a id="ref-Berkowitz01">Berkowitz01</a>]
               Berkowitz, H. and D. Krioukov, "To Be Multihomed:
               Requirements and Definitions", Work in Progress,
               July 2001.
 
-   [<a id="ref-Breslau90" name="ref-Breslau90">Breslau90</a>]
+   [<a id="ref-Breslau90">Breslau90</a>]
               Breslau, L. and D. Estrin, "An Architecture for Network-
               Layer Routing in OSI", Proceedings of the ACM symposium on
               Communications architectures &amp; protocols , 1990.
 
-   [<a id="ref-Chapin94" name="ref-Chapin94">Chapin94</a>]
+   [<a id="ref-Chapin94">Chapin94</a>]
               Piscitello, D. and A. Chapin, "Open Systems Networking:
               TCP/IP &amp; OSI", Addison-Wesley Copyright assigned to
               authors, 1994, &lt;<a href="http://www.interisle.net/OSN/OSN.html">http://www.interisle.net/OSN/OSN.html</a>&gt;.
@@ -2761,110 +2728,110 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 46]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-47" id="page-47" name="page-47"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-47"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-   [<a id="ref-Chiappa91" name="ref-Chiappa91">Chiappa91</a>]
+   [<a id="ref-Chiappa91">Chiappa91</a>]
               Chiappa, J., "A New IP Routing and Addressing
               Architecture", Work in Progress, 1991.
 
-   [<a id="ref-Clark00" name="ref-Clark00">Clark00</a>]  Clark, D. and M. Blumenthal, "Rethinking the design of the
+   [<a id="ref-Clark00">Clark00</a>]  Clark, D. and M. Blumenthal, "Rethinking the design of the
               Internet: The end to end arguments vs. the brave new
               world", August 2000,
               &lt;<a href="http://dspace.mit.edu/handle/1721.1/1519">http://dspace.mit.edu/handle/1721.1/1519</a>&gt;.
 
-   [<a id="ref-Griffin99" name="ref-Griffin99">Griffin99</a>]
+   [<a id="ref-Griffin99">Griffin99</a>]
               Griffin, T. and G. Wilfong, "An Analysis of BGP
               Convergence Properties", Association for Computing
               Machinery Proceedings of SIGCOMM '99, 1999.
 
-   [<a id="ref-Huitema90" name="ref-Huitema90">Huitema90</a>]
+   [<a id="ref-Huitema90">Huitema90</a>]
               Huitema, C. and W. Dabbous, "Routeing protocols
               development in the OSI architecture",  Proceedings of
               ISCIS V Turkey, 1990.
 
-   [<a id="ref-Huston05" name="ref-Huston05">Huston05</a>]
+   [<a id="ref-Huston05">Huston05</a>]
               Huston, G., "Exploring Autonomous System Numbers", The ISP
               Column , August 2005,
               &lt;<a href="http://www.potaroo.net/ispcol/2005-08/as.html">http://www.potaroo.net/ispcol/2005-08/as.html</a>&gt;.
 
-   [<a id="ref-INARC89" name="ref-INARC89">INARC89</a>]  Mills, D., Ed. and M. Davis, Ed., "Internet Architecture
+   [<a id="ref-INARC89">INARC89</a>]  Mills, D., Ed. and M. Davis, Ed., "Internet Architecture
               Workshop: Future of the Internet System Architecture and
               TCP/IP Protocols - Report", Internet Architecture Task
               Force INARC, 1990, &lt;<a href="http://www.eecis.udel.edu/~mills/database/papers/inarc.pdf">http://www.eecis.udel.edu/~mills/</a>
               <a href="http://www.eecis.udel.edu/~mills/database/papers/inarc.pdf">database/papers/inarc.pdf</a>&gt;.
 
-   [<a id="ref-IRRToolSet" name="ref-IRRToolSet">IRRToolSet</a>]
+   [<a id="ref-IRRToolSet">IRRToolSet</a>]
               Internet Systems Consortium, "Internet Routing Registry
               Toolset Project", IRR Tool Set Website, 2006,
               &lt;<a href="http://www.isc.org/index.pl?/sw/IRRToolSet/">http://www.isc.org/index.pl?/sw/IRRToolSet/</a>&gt;.
 
-   [<a id="ref-ISO10747" name="ref-ISO10747">ISO10747</a>]
+   [<a id="ref-ISO10747">ISO10747</a>]
               ISO/IEC, "Protocol for Exchange of Inter-Domain Routeing
               Information among Intermediate Systems to support
               Forwarding of ISO 8473 PDUs", International Standard
               10747 , 1993.
 
-   [<a id="ref-Jiang02" name="ref-Jiang02">Jiang02</a>]  Jiang, Y., Doria, A., Olsson, D., and F. Pettersson,
+   [<a id="ref-Jiang02">Jiang02</a>]  Jiang, Y., Doria, A., Olsson, D., and F. Pettersson,
               "Inter-domain Routing Stability Measurement", 2002,
               &lt;<a href="http://psg.com/~avri/papers/paper-yong-hpsr2002-final.pdf">http://psg.com/~avri/papers/paper-yong-</a>
               <a href="http://psg.com/~avri/papers/paper-yong-hpsr2002-final.pdf">hpsr2002-final.pdf</a>&gt;.
 
-   [<a id="ref-Katz10" name="ref-Katz10">Katz10</a>]   Katz, D. and D. Ward, "Bidirectional Forwarding
+   [<a id="ref-Katz10">Katz10</a>]   Katz, D. and D. Ward, "Bidirectional Forwarding
               Detection", Work in Progress, January 2010.
 
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 47]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-48" id="page-48" name="page-48"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-48"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-   [<a id="ref-Labovitz02" name="ref-Labovitz02">Labovitz02</a>]
+   [<a id="ref-Labovitz02">Labovitz02</a>]
               Labovitz, C., Ahuja, A., Farnam, J., and A. Bose,
               "Experimental Measurement of Delayed Convergence", NANOG ,
               2002.
 
-   [<a id="ref-NewArch03" name="ref-NewArch03">NewArch03</a>]
+   [<a id="ref-NewArch03">NewArch03</a>]
               Clark, D., Sollins, K., Wroclawski, J., Katabi, D., Kulik,
               J., Yang, X., Braden, R., Faber, T., Falk, A., Pingali,
               V., Handley, M., and N. Chiappa, "New Arch: Future
               Generation Internet Architecture", December 2003,
               &lt;<a href="http://www.isi.edu/newarch/iDOCS/final.finalreport.pdf">http://www.isi.edu/newarch/iDOCS/final.finalreport.pdf</a>&gt;.
 
-   [<a id="ref-RFC0904" name="ref-RFC0904">RFC0904</a>]  Mills, D., "Exterior Gateway Protocol formal
+   [<a id="ref-RFC0904">RFC0904</a>]  Mills, D., "Exterior Gateway Protocol formal
               specification", <a href="./rfc904.html">RFC 904</a>, April 1984.
 
-   [<a id="ref-RFC0975" name="ref-RFC0975">RFC0975</a>]  Mills, D., "Autonomous confederations", <a href="./rfc975.html">RFC 975</a>,
+   [<a id="ref-RFC0975">RFC0975</a>]  Mills, D., "Autonomous confederations", <a href="./rfc975.html">RFC 975</a>,
               February 1986.
 
-   [<a id="ref-RFC1105" name="ref-RFC1105">RFC1105</a>]  Lougheed, K. and J. Rekhter, "Border Gateway Protocol
+   [<a id="ref-RFC1105">RFC1105</a>]  Lougheed, K. and J. Rekhter, "Border Gateway Protocol
               (BGP)", <a href="./rfc1105.html">RFC 1105</a>, June 1989.
 
-   [<a id="ref-RFC1126" name="ref-RFC1126">RFC1126</a>]  Little, M., "Goals and functional requirements for inter-
+   [<a id="ref-RFC1126">RFC1126</a>]  Little, M., "Goals and functional requirements for inter-
               autonomous system routing", <a href="./rfc1126.html">RFC 1126</a>, October 1989.
 
-   [<a id="ref-RFC1163" name="ref-RFC1163">RFC1163</a>]  Lougheed, K. and Y. Rekhter, "Border Gateway Protocol
+   [<a id="ref-RFC1163">RFC1163</a>]  Lougheed, K. and Y. Rekhter, "Border Gateway Protocol
               (BGP)", <a href="./rfc1163.html">RFC 1163</a>, June 1990.
 
-   [<a id="ref-RFC1267" name="ref-RFC1267">RFC1267</a>]  Lougheed, K. and Y. Rekhter, "Border Gateway Protocol 3
+   [<a id="ref-RFC1267">RFC1267</a>]  Lougheed, K. and Y. Rekhter, "Border Gateway Protocol 3
               (BGP-3)", <a href="./rfc1267.html">RFC 1267</a>, October 1991.
 
-   [<a id="ref-RFC1752" name="ref-RFC1752">RFC1752</a>]  Bradner, S. and A. Mankin, "The Recommendation for the IP
+   [<a id="ref-RFC1752">RFC1752</a>]  Bradner, S. and A. Mankin, "The Recommendation for the IP
               Next Generation Protocol", <a href="./rfc1752.html">RFC 1752</a>, January 1995.
 
-   [<a id="ref-RFC1753" name="ref-RFC1753">RFC1753</a>]  Chiappa, J., "IPng Technical Requirements Of the Nimrod
+   [<a id="ref-RFC1753">RFC1753</a>]  Chiappa, J., "IPng Technical Requirements Of the Nimrod
               Routing and Addressing Architecture", <a href="./rfc1753.html">RFC 1753</a>,
               December 1994.
 
-   [<a id="ref-RFC1771" name="ref-RFC1771">RFC1771</a>]  Rekhter, Y. and T. Li, "A Border Gateway Protocol 4
+   [<a id="ref-RFC1771">RFC1771</a>]  Rekhter, Y. and T. Li, "A Border Gateway Protocol 4
               (BGP-4)", <a href="./rfc1771.html">RFC 1771</a>, March 1995.
 
-   [<a id="ref-RFC1992" name="ref-RFC1992">RFC1992</a>]  Castineyra, I., Chiappa, N., and M. Steenstrup, "The
+   [<a id="ref-RFC1992">RFC1992</a>]  Castineyra, I., Chiappa, N., and M. Steenstrup, "The
               Nimrod Routing Architecture", <a href="./rfc1992.html">RFC 1992</a>, August 1996.
 
-   [<a id="ref-RFC2362" name="ref-RFC2362">RFC2362</a>]  Estrin, D., Farinacci, D., Helmy, A., Thaler, D., Deering,
+   [<a id="ref-RFC2362">RFC2362</a>]  Estrin, D., Farinacci, D., Helmy, A., Thaler, D., Deering,
               S., Handley, M., and V. Jacobson, "Protocol Independent
               Multicast-Sparse Mode (PIM-SM): Protocol Specification",
               <a href="./rfc2362.html">RFC 2362</a>, June 1998.
@@ -2873,96 +2840,96 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 48]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-49" id="page-49" name="page-49"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-49"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-   [<a id="ref-RFC2622" name="ref-RFC2622">RFC2622</a>]  Alaettinoglu, C., Villamizar, C., Gerich, E., Kessens, D.,
+   [<a id="ref-RFC2622">RFC2622</a>]  Alaettinoglu, C., Villamizar, C., Gerich, E., Kessens, D.,
               Meyer, D., Bates, T., Karrenberg, D., and M. Terpstra,
               "Routing Policy Specification Language (RPSL)", <a href="./rfc2622.html">RFC 2622</a>,
               June 1999.
 
-   [<a id="ref-RFC2650" name="ref-RFC2650">RFC2650</a>]  Meyer, D., Schmitz, J., Orange, C., Prior, M., and C.
+   [<a id="ref-RFC2650">RFC2650</a>]  Meyer, D., Schmitz, J., Orange, C., Prior, M., and C.
               Alaettinoglu, "Using RPSL in Practice", <a href="./rfc2650.html">RFC 2650</a>,
               August 1999.
 
-   [<a id="ref-RFC2791" name="ref-RFC2791">RFC2791</a>]  Yu, J., "Scalable Routing Design Principles", <a href="./rfc2791.html">RFC 2791</a>,
+   [<a id="ref-RFC2791">RFC2791</a>]  Yu, J., "Scalable Routing Design Principles", <a href="./rfc2791.html">RFC 2791</a>,
               July 2000.
 
-   [<a id="ref-RFC3221" name="ref-RFC3221">RFC3221</a>]  Huston, G., "Commentary on Inter-Domain Routing in the
+   [<a id="ref-RFC3221">RFC3221</a>]  Huston, G., "Commentary on Inter-Domain Routing in the
               Internet", <a href="./rfc3221.html">RFC 3221</a>, December 2001.
 
-   [<a id="ref-RFC3277" name="ref-RFC3277">RFC3277</a>]  McPherson, D., "Intermediate System to Intermediate System
+   [<a id="ref-RFC3277">RFC3277</a>]  McPherson, D., "Intermediate System to Intermediate System
               (IS-IS) Transient Blackhole Avoidance", <a href="./rfc3277.html">RFC 3277</a>,
               April 2002.
 
-   [<a id="ref-RFC3345" name="ref-RFC3345">RFC3345</a>]  McPherson, D., Gill, V., Walton, D., and A. Retana,
+   [<a id="ref-RFC3345">RFC3345</a>]  McPherson, D., Gill, V., Walton, D., and A. Retana,
               "Border Gateway Protocol (BGP) Persistent Route
               Oscillation Condition", <a href="./rfc3345.html">RFC 3345</a>, August 2002.
 
-   [<a id="ref-RFC3618" name="ref-RFC3618">RFC3618</a>]  Fenner, B. and D. Meyer, "Multicast Source Discovery
+   [<a id="ref-RFC3618">RFC3618</a>]  Fenner, B. and D. Meyer, "Multicast Source Discovery
               Protocol (MSDP)", <a href="./rfc3618.html">RFC 3618</a>, October 2003.
 
-   [<a id="ref-RFC3765" name="ref-RFC3765">RFC3765</a>]  Huston, G., "NOPEER Community for Border Gateway Protocol
+   [<a id="ref-RFC3765">RFC3765</a>]  Huston, G., "NOPEER Community for Border Gateway Protocol
               (BGP) Route Scope Control", <a href="./rfc3765.html">RFC 3765</a>, April 2004.
 
-   [<a id="ref-RFC3913" name="ref-RFC3913">RFC3913</a>]  Thaler, D., "Border Gateway Multicast Protocol (BGMP):
+   [<a id="ref-RFC3913">RFC3913</a>]  Thaler, D., "Border Gateway Multicast Protocol (BGMP):
               Protocol Specification", <a href="./rfc3913.html">RFC 3913</a>, September 2004.
 
-   [<a id="ref-RFC4116" name="ref-RFC4116">RFC4116</a>]  Abley, J., Lindqvist, K., Davies, E., Black, B., and V.
+   [<a id="ref-RFC4116">RFC4116</a>]  Abley, J., Lindqvist, K., Davies, E., Black, B., and V.
               Gill, "IPv4 Multihoming Practices and Limitations",
               <a href="./rfc4116.html">RFC 4116</a>, July 2005.
 
-   [<a id="ref-RFC4204" name="ref-RFC4204">RFC4204</a>]  Lang, J., "Link Management Protocol (LMP)", <a href="./rfc4204.html">RFC 4204</a>,
+   [<a id="ref-RFC4204">RFC4204</a>]  Lang, J., "Link Management Protocol (LMP)", <a href="./rfc4204.html">RFC 4204</a>,
               October 2005.
 
-   [<a id="ref-RFC4271" name="ref-RFC4271">RFC4271</a>]  Rekhter, Y., Li, T., and S. Hares, "A Border Gateway
+   [<a id="ref-RFC4271">RFC4271</a>]  Rekhter, Y., Li, T., and S. Hares, "A Border Gateway
               Protocol 4 (BGP-4)", <a href="./rfc4271.html">RFC 4271</a>, January 2006.
 
-   [<a id="ref-RFC4364" name="ref-RFC4364">RFC4364</a>]  Rosen, E. and Y. Rekhter, "BGP/MPLS IP Virtual Private
+   [<a id="ref-RFC4364">RFC4364</a>]  Rosen, E. and Y. Rekhter, "BGP/MPLS IP Virtual Private
               Networks (VPNs)", <a href="./rfc4364.html">RFC 4364</a>, February 2006.
 
-   [<a id="ref-RFC4593" name="ref-RFC4593">RFC4593</a>]  Barbir, A., Murphy, S., and Y. Yang, "Generic Threats to
+   [<a id="ref-RFC4593">RFC4593</a>]  Barbir, A., Murphy, S., and Y. Yang, "Generic Threats to
               Routing Protocols", <a href="./rfc4593.html">RFC 4593</a>, October 2006.
 
 
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 49]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-50" id="page-50" name="page-50"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-50"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
-   [<a id="ref-RFC4601" name="ref-RFC4601">RFC4601</a>]  Fenner, B., Handley, M., Holbrook, H., and I. Kouvelas,
+   [<a id="ref-RFC4601">RFC4601</a>]  Fenner, B., Handley, M., Holbrook, H., and I. Kouvelas,
               "Protocol Independent Multicast - Sparse Mode (PIM-SM):
               Protocol Specification (Revised)", <a href="./rfc4601.html">RFC 4601</a>, August 2006.
 
-   [<a id="ref-RFC4724" name="ref-RFC4724">RFC4724</a>]  Sangli, S., Chen, E., Fernando, R., Scudder, J., and Y.
+   [<a id="ref-RFC4724">RFC4724</a>]  Sangli, S., Chen, E., Fernando, R., Scudder, J., and Y.
               Rekhter, "Graceful Restart Mechanism for BGP", <a href="./rfc4724.html">RFC 4724</a>,
               January 2007.
 
-   [<a id="ref-RFC4760" name="ref-RFC4760">RFC4760</a>]  Bates, T., Chandra, R., Katz, D., and Y. Rekhter,
+   [<a id="ref-RFC4760">RFC4760</a>]  Bates, T., Chandra, R., Katz, D., and Y. Rekhter,
               "Multiprotocol Extensions for BGP-4", <a href="./rfc4760.html">RFC 4760</a>,
               January 2007.
 
-   [<a id="ref-RFC4893" name="ref-RFC4893">RFC4893</a>]  Vohra, Q. and E. Chen, "BGP Support for Four-octet AS
+   [<a id="ref-RFC4893">RFC4893</a>]  Vohra, Q. and E. Chen, "BGP Support for Four-octet AS
               Number Space", <a href="./rfc4893.html">RFC 4893</a>, May 2007.
 
-   [<a id="ref-RFC5772" name="ref-RFC5772">RFC5772</a>]  Doria, A., Davies, E., and F. Kastenholz, "A Set of
+   [<a id="ref-RFC5772">RFC5772</a>]  Doria, A., Davies, E., and F. Kastenholz, "A Set of
               Possible Requirements for a Future Routing Architecture",
               <a href="./rfc5772.html">RFC 5772</a>, February 2010.
 
-   [<a id="ref-Sandiick00" name="ref-Sandiick00">Sandiick00</a>]
+   [<a id="ref-Sandiick00">Sandiick00</a>]
               Sandick, H., Squire, M., Cain, B., Duncan, I., and B.
               Haberman, "Fast LIveness Protocol (FLIP)", Work
               in Progress, February 2000.
 
-   [<a id="ref-Tsuchiya87" name="ref-Tsuchiya87">Tsuchiya87</a>]
+   [<a id="ref-Tsuchiya87">Tsuchiya87</a>]
               Tsuchiya, P., "An Architecture for Network-Layer Routing
               in OSI", Proceedings of the ACM workshop on Frontiers in
               computer communications technology , 1987.
 
-   [<a id="ref-Xu97" name="ref-Xu97">Xu97</a>]     Xu, Z., Dai, S., and J. Garcia-Luna-Aceves, "A More
+   [<a id="ref-Xu97">Xu97</a>]     Xu, Z., Dai, S., and J. Garcia-Luna-Aceves, "A More
               Efficient Distance Vector Routing Algorithm", Proc IEEE
               MILCOM 97, Monterey, California, Nov 1997, &lt;<a href="http://www.cse.ucsc.edu/research/ccrg/publications/zhengyu.milcom97.pdf">http://</a>
               <a href="http://www.cse.ucsc.edu/research/ccrg/publications/zhengyu.milcom97.pdf">www.cse.ucsc.edu/research/ccrg/publications/</a>
@@ -2985,7 +2952,7 @@ Table of Contents
 
 
 <span class="grey">Davies &amp; Doria                  Historic                       [Page 50]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-51" id="page-51" name="page-51"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-51"></span>
 <span class="grey"><a href="./rfc5773.html">RFC 5773</a>                       IDR History                 February 2010</span>
 
 
@@ -3041,11 +3008,6 @@ Authors' Addresses
 
 
 Davies &amp; Doria                  Historic                       [Page 51]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

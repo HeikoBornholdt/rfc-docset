@@ -1,2298 +1,1177 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-<meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<link href="" rel="icon" type="image/png"/>
-<link href="" rel="shortcut icon" type="image/png"/>
-<title>BCP 158 - RADIUS Design Guidelines</title>
-<style type="text/css">
-	@media only screen 
-	  and (min-width: 992px)
-	  and (max-width: 1199px) {
-	    body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 768px)
-	  and (max-width: 991px) {
-            body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 480px)
-	  and (max-width: 767px) {
-            body { font-size: 11pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (max-width: 479px) {
-            body { font-size: 8pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-device-width : 375px) 
-	  and (max-device-width : 667px) {
-            body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
-        }
-	@media only screen 
-	  and (min-device-width: 1200px) {
-            body { font-size: 10pt; margin: 0 4em; }
-            div.content { width: 96ex; margin: 0; }
-        }
-        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-	    font-weight: bold;
-            line-height: 0pt;
-            display: inline;
-            white-space: pre;
-            font-family: monospace;
-            font-size: 1em;
-	    font-weight: bold;
-        }
-        pre {
-            font-size: 1em;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-	.pre {
-	    white-space: pre;
-	    font-family: monospace;
-	}
-	.header{
-	    font-weight: bold;
-	}
-        .newpage {
-            page-break-before: always;
-        }
-        .invisible {
-            text-decoration: none;
-            color: white;
-        }
-        a.selflink {
-          color: black;
-          text-decoration: none;
-        }
-        @media print {
-            body {
-                font-family: monospace;
-                font-size: 10.5pt;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                font-size: 1em;
-            }
-        
-            a:link, a:visited {
-                color: inherit;
-                text-decoration: none;
-            }
-            .noprint {
-                display: none;
-            }
-        }
-	@media screen {
-	    .grey, .grey a:link, .grey a:visited {
-		color: #777;
-	    }
-            .docinfo {
-                background-color: #EEE;
-            }
-            .top {
-                border-top: 7px solid #EEE;
-            }
-            .bgwhite  { background-color: white; }
-            .bgred    { background-color: #F44; }
-            .bggrey   { background-color: #666; }
-            .bgbrown  { background-color: #840; }            
-            .bgorange { background-color: #FA0; }
-            .bgyellow { background-color: #EE0; }
-            .bgmagenta{ background-color: #F4F; }
-            .bgblue   { background-color: #66F; }
-            .bgcyan   { background-color: #4DD; }
-            .bggreen  { background-color: #4F4; }
-
-            .legend   { font-size: 90%; }
-            .cplate   { font-size: 70%; border: solid grey 1px; }
-	}
-    </style>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="http://gmpg.org/xfn/11" rel="profile"/>
+<meta charset="utf-8"/>
+<meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/> <title>Information on BCP 158 » RFC Editor</title>
+<meta content="WordPress 6.0.3" name="generator"/> <!-- leave this for stats -->
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/style.css" media="screen" rel="stylesheet" type="text/css"/>
 <!--[if IE]>
-    <style>
-    body {
-       font-size: 13px;
-       margin: 10px 10px;
-    }
+                <style type="text/css">
+                #headerimg{ filter:alpha(opacity=80);}
+                .top img{ filter:alpha(opacity=60);}
+                .top img:hover{ filter:alpha(opacity=100);}
+                ul.comment-preview li{ filter:alpha(opacity=70);}
+                ul.comment-preview li:hover{ filter:alpha(opacity=100);}
+                #commentform input[type="text"],#commentform .comment-form-author .required, 
+                #commentform .comment-form-email .required{padding-left: 65px !important;}
+                .top a {position: relative;top: 2px;}
+                </style>
+        <![endif]-->
+<!--[if IE 7]>
+                <style type="text/css">
+                #headerimgwrap{ position:absolute;left:20%}
+                .hleft{position:absolute;}
+                .hright{position:absolute; right:0;}
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<!--[if IE 8 ]>
+                <style type="text/css">
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<link href="https://www.rfc-editor.org/xmlrpc.php" rel="pingback"/>
+<meta content="max-image-preview:large" name="robots"/>
+<link href="./fonts.googleapis.com.html" rel="dns-prefetch"/>
+<link href="./s.w.org.html" rel="dns-prefetch"/>
+<link href="https://www.rfc-editor.org/feed/" rel="alternate" title="RFC Editor » Feed" type="application/rss+xml"/>
+<link href="https://www.rfc-editor.org/comments/feed/" rel="alternate" title="RFC Editor » Comments Feed" type="application/rss+xml"/>
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.rfc-editor.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.3"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dist/block-library/style.min.css?ver=6.0.3" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<style id="responsive-menu-inline-css" type="text/css">
+/** This file is major component of this plugin so please don't try to edit here. */
+#rmp_menu_trigger-2538 {
+  width: 55px;
+  height: 55px;
+  position: fixed;
+  top: 15px;
+  border-radius: 5px;
+  display: none;
+  text-decoration: none;
+  right: 5%;
+  background: #000000;
+  transition: transform 0.5s, background-color 0.5s;
+}
+#rmp_menu_trigger-2538:hover, #rmp_menu_trigger-2538:focus {
+  background: #000000;
+  text-decoration: unset;
+}
+#rmp_menu_trigger-2538.is-active {
+  background: #000000;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-box {
+  width: 25px;
+  color: #ffffff;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-icon-active, #rmp_menu_trigger-2538 .rmp-trigger-text-open {
+  display: none;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-active, #rmp_menu_trigger-2538.is-active .rmp-trigger-text-open {
+  display: inline;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-inactive, #rmp_menu_trigger-2538.is-active .rmp-trigger-text {
+  display: none;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label {
+  color: #ffffff;
+  pointer-events: none;
+  line-height: 13px;
+  font-family: inherit;
+  font-size: 14px;
+  display: inline;
+  text-transform: inherit;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-top {
+  display: block;
+  margin-bottom: 12px;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-bottom {
+  display: block;
+  margin-top: 12px;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner {
+  display: block;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::after {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  position: absolute;
+}
+#rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+#rmp_menu_trigger-2538:hover .responsive-menu-pro-inner, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+/* Hamburger menu styling */
+@media screen and (max-width: 1024px) {
+  /** Menu Title Style */
+  /** Menu Additional Content Style */
+  #l_sidebar {
+    display: none !important;
+  }
+  #rmp_menu_trigger-2538 {
+    display: block;
+  }
+  #rmp-container-2538 {
+    position: fixed;
+    top: 0;
+    margin: 0;
+    transition: transform 0.5s;
+    overflow: auto;
+    display: block;
+    width: 75%;
+    background-color: #212121;
+    background-image: url("");
+    height: 100%;
+    left: 0;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+  }
+  #rmp-menu-wrap-2538 {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu, #rmp-menu-wrap-2538 .rmp-submenu {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-1 .rmp-menu-item-link {
+    padding-left: 10%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-2 .rmp-menu-item-link {
+    padding-left: 15%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-3 .rmp-menu-item-link {
+    padding-left: 20%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-4 .rmp-menu-item-link {
+    padding-left: 25%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu.rmp-submenu-open {
+    display: block;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+    font-weight: normal;
+    letter-spacing: 0px;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.5s, border-color 0.5s, 0.5s;
+    padding: 0 5%;
+    padding-right: 50px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:after, #rmp-menu-wrap-2538 .rmp-menu-item-link:before {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:focus {
+    outline: none;
+    border-color: unset;
+    box-shadow: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link .rmp-font-icon {
+    height: 40px;
+    line-height: 40px;
+    margin-right: 10px;
+    font-size: 13px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    overflow: hidden;
+    background-size: cover;
+    overflow: hidden;
+    right: 0;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow .rmp-font-icon {
+    margin-right: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow * {
+    vertical-align: middle;
+    line-height: 40px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active {
+    display: block;
+    background-size: cover;
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow {
+    right: 0;
+    border-right: unset;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-description {
+    margin: 0;
+    padding: 5px 5%;
+    opacity: 0.8;
+    color: #ffffff;
+  }
+  #rmp-search-box-2538 {
+    display: block;
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+  }
+  #rmp-search-box-2538 .rmp-search-form {
+    margin: 0;
+  }
+  #rmp-search-box-2538 .rmp-search-box {
+    background: #ffffff;
+    border: 1px solid #dadada;
+    color: #333333;
+    width: 100%;
+    padding: 0 5%;
+    border-radius: 30px;
+    height: 45px;
+    -webkit-appearance: none;
+  }
+  #rmp-search-box-2538 .rmp-search-box::placeholder {
+    color: #c7c7cd;
+  }
+  #rmp-search-box-2538 .rmp-search-box:focus {
+    background-color: #ffffff;
+    outline: 2px solid #dadada;
+    color: #333333;
+  }
+  #rmp-menu-title-2538 {
+    background-color: #212121;
+    color: #ffffff;
+    text-align: left;
+    font-size: 13px;
+    padding-top: 10%;
+    padding-left: 5%;
+    padding-bottom: 0%;
+    padding-right: 5%;
+    font-weight: 400;
+    transition: background-color 0.5s, border-color 0.5s, color 0.5s;
+  }
+  #rmp-menu-title-2538:hover {
+    background-color: #212121;
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 > a {
+    color: #ffffff;
+    width: 100%;
+    background-color: unset;
+    text-decoration: none;
+  }
+  #rmp-menu-title-2538 > a:hover {
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 .rmp-font-icon {
+    font-size: 13px;
+  }
+  #rmp-menu-additional-content-2538 {
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+    color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+/**
+This file contents common styling of menus.
+*/
+.rmp-container {
+  display: none;
+  visibility: visible;
+  padding: 0px 0px 0px 0px;
+  z-index: 99998;
+  transition: all 0.3s;
+  /** Scrolling bar in menu setting box **/
+}
+.rmp-container.rmp-fade-top, .rmp-container.rmp-fade-left, .rmp-container.rmp-fade-right, .rmp-container.rmp-fade-bottom {
+  display: none;
+}
+.rmp-container.rmp-slide-left, .rmp-container.rmp-push-left {
+  transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+}
+.rmp-container.rmp-slide-left.rmp-menu-open, .rmp-container.rmp-push-left.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-right, .rmp-container.rmp-push-right {
+  transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+}
+.rmp-container.rmp-slide-right.rmp-menu-open, .rmp-container.rmp-push-right.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-top, .rmp-container.rmp-push-top {
+  transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+}
+.rmp-container.rmp-slide-top.rmp-menu-open, .rmp-container.rmp-push-top.rmp-menu-open {
+  transform: translateY(0);
+  -ms-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+}
+.rmp-container.rmp-slide-bottom, .rmp-container.rmp-push-bottom {
+  transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+  -moz-transform: translateY(100%);
+}
+.rmp-container.rmp-slide-bottom.rmp-menu-open, .rmp-container.rmp-push-bottom.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container::-webkit-scrollbar {
+  width: 0px;
+}
+.rmp-container ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+.rmp-container .rmp-menu-wrap .rmp-menu {
+  transition: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  border: 0;
+  bottom: auto;
+  box-sizing: border-box;
+  clip: auto;
+  color: #666;
+  display: block;
+  float: none;
+  font-family: inherit;
+  font-size: 14px;
+  height: auto;
+  left: auto;
+  line-height: 1.7;
+  list-style-type: none;
+  margin: 0;
+  min-height: auto;
+  max-height: none;
+  opacity: 1;
+  outline: none;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  pointer-events: auto;
+  right: auto;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  transform: none;
+  top: auto;
+  visibility: inherit;
+  width: auto;
+  word-wrap: break-word;
+  white-space: normal;
+}
+.rmp-container .rmp-menu-additional-content {
+  display: block;
+  word-break: break-word;
+}
+.rmp-container .rmp-menu-title {
+  display: flex;
+  flex-direction: column;
+}
+.rmp-container .rmp-menu-title .rmp-menu-title-image {
+  max-width: 100%;
+  margin-bottom: 15px;
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+}
+button.rmp_menu_trigger {
+  z-index: 999999;
+  overflow: hidden;
+  outline: none;
+  border: 0;
+  display: none;
+  margin: 0;
+  transition: transform 0.5s, background-color 0.5s;
+  padding: 0;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before, button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  content: "";
+  display: block;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before {
+  top: 10px;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  bottom: 10px;
+}
+button.rmp_menu_trigger .rmp-trigger-box {
+  width: 40px;
+  display: inline-block;
+  position: relative;
+  pointer-events: none;
+  vertical-align: super;
+}
+.admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+  margin-top: 32px !important;
+}
+@media screen and (max-width: 782px) {
+  .admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+    margin-top: 46px !important;
+  }
+}
+/*  Menu Trigger Boring Animation */
+.rmp-menu-trigger-boring .responsive-menu-pro-inner {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring .responsive-menu-pro-inner::after, .rmp-menu-trigger-boring .responsive-menu-pro-inner::before {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner {
+  transform: rotate(45deg);
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:before {
+  top: 0;
+  opacity: 0;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:after {
+  bottom: 0;
+  transform: rotate(-90deg);
+}
+
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dashicons.min.css?ver=6.0.3" id="dashicons-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/css/mobile.css?ver=0.1" id="tech-mobile-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans%7C&amp;ver=6.0.3" id="google_fonts-css" media="screen" rel="stylesheet" type="text/css"/>
+<script id="jquery-core-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" type="text/javascript"></script>
+<script id="jquery-migrate-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" type="text/javascript"></script>
+<script id="rmp_menu_scripts-js-extra" type="text/javascript">
+/* <![CDATA[ */
+var rmp_menu = {"ajaxURL":"https:\/\/www.rfc-editor.org\/wp-admin\/admin-ajax.php","wp_nonce":"2262d2d074","menu":[{"menu_theme":null,"theme_type":"default","theme_location_menu":"","submenu_submenu_arrow_width":"40","submenu_submenu_arrow_width_unit":"px","submenu_submenu_arrow_height":"40","submenu_submenu_arrow_height_unit":"px","submenu_arrow_position":"right","submenu_sub_arrow_background_colour":"#212121","submenu_sub_arrow_background_hover_colour":"#3f3f3f","submenu_sub_arrow_background_colour_active":"#212121","submenu_sub_arrow_background_hover_colour_active":"#3f3f3f","submenu_sub_arrow_border_width":"1","submenu_sub_arrow_border_width_unit":"px","submenu_sub_arrow_border_colour":"#212121","submenu_sub_arrow_border_hover_colour":"#3f3f3f","submenu_sub_arrow_border_colour_active":"#212121","submenu_sub_arrow_border_hover_colour_active":"#3f3f3f","submenu_sub_arrow_shape_colour":"#ffffff","submenu_sub_arrow_shape_hover_colour":"#ffffff","submenu_sub_arrow_shape_colour_active":"#ffffff","submenu_sub_arrow_shape_hover_colour_active":"#ffffff","use_header_bar":"off","header_bar_items_order":"{\"logo\":\"on\",\"title\":\"on\",\"search\":\"on\",\"html content\":\"on\"}","header_bar_title":"","header_bar_html_content":"","header_bar_logo":"","header_bar_logo_link":"","header_bar_logo_width":null,"header_bar_logo_width_unit":"%","header_bar_logo_height":null,"header_bar_logo_height_unit":"%","header_bar_height":"80","header_bar_height_unit":"px","header_bar_padding":{"top":"0px","right":"5%","bottom":"0px","left":"5%"},"header_bar_font":"","header_bar_font_size":"14","header_bar_font_size_unit":"px","header_bar_text_color":"#ffffff","header_bar_background_color":"#ffffff","header_bar_breakpoint":"800","header_bar_position_type":"fixed","header_bar_adjust_page":null,"header_bar_scroll_enable":"off","header_bar_scroll_background_color":"#36bdf6","mobile_breakpoint":"600","tablet_breakpoint":"1024","transition_speed":"0.5","sub_menu_speed":"0.2","show_menu_on_page_load":"","menu_disable_scrolling":"off","menu_overlay":"off","menu_overlay_colour":"rgba(0, 0, 0, 0.7)","desktop_menu_width":"","desktop_menu_width_unit":"px","desktop_menu_positioning":"fixed","desktop_menu_side":"","desktop_menu_to_hide":"","use_current_theme_location":"off","mega_menu":{"225":"off","227":"off","229":"off","228":"off","226":"off"},"desktop_submenu_open_animation":"none","desktop_submenu_open_animation_speed":"100ms","desktop_submenu_open_on_click":"off","desktop_menu_hide_and_show":"off","menu_name":"Default Menu","menu_to_use":"responsive-menu","different_menu_for_mobile":"off","menu_to_use_in_mobile":"main-menu","use_mobile_menu":"on","use_tablet_menu":"on","use_desktop_menu":null,"menu_display_on":"all-pages","menu_to_hide":"#l_sidebar,.hright,#r_sidebar","submenu_descriptions_on":"","custom_walker":"","menu_background_colour":"#212121","menu_depth":"5","smooth_scroll_on":"off","smooth_scroll_speed":"500","menu_font_icons":[],"menu_links_height":"40","menu_links_height_unit":"px","menu_links_line_height":"40","menu_links_line_height_unit":"px","menu_depth_0":"5","menu_depth_0_unit":"%","menu_font_size":"13","menu_font_size_unit":"px","menu_font":"","menu_font_weight":"normal","menu_text_alignment":"left","menu_text_letter_spacing":"","menu_word_wrap":"off","menu_link_colour":"#ffffff","menu_link_hover_colour":"#ffffff","menu_current_link_colour":"#ffffff","menu_current_link_hover_colour":"#ffffff","menu_item_background_colour":"#212121","menu_item_background_hover_colour":"#3f3f3f","menu_current_item_background_colour":"#212121","menu_current_item_background_hover_colour":"#3f3f3f","menu_border_width":"1","menu_border_width_unit":"px","menu_item_border_colour":"#212121","menu_item_border_colour_hover":"#212121","menu_current_item_border_colour":"#212121","menu_current_item_border_hover_colour":"#3f3f3f","submenu_links_height":"40","submenu_links_height_unit":"px","submenu_links_line_height":"40","submenu_links_line_height_unit":"px","menu_depth_side":"left","menu_depth_1":"10","menu_depth_1_unit":"%","menu_depth_2":"15","menu_depth_2_unit":"%","menu_depth_3":"20","menu_depth_3_unit":"%","menu_depth_4":"25","menu_depth_4_unit":"%","submenu_item_background_colour":"#212121","submenu_item_background_hover_colour":"#3f3f3f","submenu_current_item_background_colour":"#212121","submenu_current_item_background_hover_colour":"#3f3f3f","submenu_border_width":"1","submenu_border_width_unit":"px","submenu_item_border_colour":"#212121","submenu_item_border_colour_hover":"#212121","submenu_current_item_border_colour":"#212121","submenu_current_item_border_hover_colour":"#3f3f3f","submenu_font_size":"13","submenu_font_size_unit":"px","submenu_font":"","submenu_font_weight":"normal","submenu_text_letter_spacing":"","submenu_text_alignment":"left","submenu_link_colour":"#ffffff","submenu_link_hover_colour":"#ffffff","submenu_current_link_colour":"#ffffff","submenu_current_link_hover_colour":"#ffffff","inactive_arrow_shape":"\u25bc","active_arrow_shape":"\u25b2","inactive_arrow_font_icon":"","active_arrow_font_icon":"","inactive_arrow_image":"","active_arrow_image":"","submenu_arrow_width":"40","submenu_arrow_width_unit":"px","submenu_arrow_height":"40","submenu_arrow_height_unit":"px","arrow_position":"right","menu_sub_arrow_shape_colour":"#ffffff","menu_sub_arrow_shape_hover_colour":"#ffffff","menu_sub_arrow_shape_colour_active":"#ffffff","menu_sub_arrow_shape_hover_colour_active":"#ffffff","menu_sub_arrow_border_width":"1","menu_sub_arrow_border_width_unit":"px","menu_sub_arrow_border_colour":"#212121","menu_sub_arrow_border_hover_colour":"#3f3f3f","menu_sub_arrow_border_colour_active":"#212121","menu_sub_arrow_border_hover_colour_active":"#3f3f3f","menu_sub_arrow_background_colour":"#212121","menu_sub_arrow_background_hover_colour":"#3f3f3f","menu_sub_arrow_background_colour_active":"#212121","menu_sub_arrow_background_hover_colour_active":"#3f3f3f","fade_submenus":"off","fade_submenus_side":"left","fade_submenus_delay":"100","fade_submenus_speed":"500","use_slide_effect":"off","slide_effect_back_to_text":"Back","accordion_animation":"off","auto_expand_all_submenus":"off","auto_expand_current_submenus":"off","menu_item_click_to_trigger_submenu":"off","button_width":"55","button_width_unit":"px","button_height":"55","button_height_unit":"px","button_background_colour":"#000000","button_background_colour_hover":"#000000","button_background_colour_active":"#000000","toggle_button_border_radius":"5","button_transparent_background":"off","button_left_or_right":"right","button_position_type":"fixed","button_distance_from_side":"5","button_distance_from_side_unit":"%","button_top":"15","button_top_unit":"px","button_push_with_animation":"off","button_click_animation":"boring","button_line_margin":"5","button_line_margin_unit":"px","button_line_width":"25","button_line_width_unit":"px","button_line_height":"3","button_line_height_unit":"px","button_line_colour":"#ffffff","button_line_colour_hover":"#ffffff","button_line_colour_active":"#ffffff","button_font_icon":"","button_font_icon_when_clicked":"","button_image":"","button_image_when_clicked":"","button_title":"","button_title_open":"","button_title_position":"left","button_font":"","button_font_size":"14","button_font_size_unit":"px","button_title_line_height":"13","button_title_line_height_unit":"px","button_text_colour":"#ffffff","button_trigger_type_click":"on","button_trigger_type_hover":"off","button_click_trigger":"#responsive-menu-button","items_order":{"title":"on","menu":"on","search":"","additional content":"on"},"menu_title":"","menu_title_link":"","menu_title_link_location":"_self","menu_title_image":"","menu_title_font_icon":"","menu_title_section_padding":{"top":"10%","right":"5%","bottom":"0%","left":"5%"},"menu_title_background_colour":"#212121","menu_title_background_hover_colour":"#212121","menu_title_font_size":"13","menu_title_font_size_unit":"px","menu_title_alignment":"left","menu_title_font_weight":"400","menu_title_font_family":"","menu_title_colour":"#ffffff","menu_title_hover_colour":"#ffffff","menu_title_image_width":null,"menu_title_image_width_unit":"%","menu_title_image_height":null,"menu_title_image_height_unit":"px","menu_additional_content":"<a href=\"\/search\/rfc_search.php\">Advanced Search<\/a>\r\n<form id=\"search_query_separator_id\" name=\"search_query_separator_name\"  action=\"\/search\/rfc_search_detail.php\" method=\"POST\" onsubmit=\"return validateComboBox(this);\"> \r\n<input type=\"text\" id =\"combo_box_id\" name=\"combo_box\"  maxlength=\"20\" size =\"35\" placeholder=\"number, title, keyword, or author surname\"><\/form>\r\n","menu_additional_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_additional_content_font_size":"16","menu_additional_content_font_size_unit":"px","menu_additional_content_alignment":"center","menu_additional_content_colour":"#ffffff","menu_search_box_text":"Search","menu_search_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_search_box_height":"45","menu_search_box_height_unit":"px","menu_search_box_border_radius":"30","menu_search_box_text_colour":"#333333","menu_search_box_background_colour":"#ffffff","menu_search_box_placeholder_colour":"#c7c7cd","menu_search_box_border_colour":"#dadada","menu_section_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_width":"75","menu_width_unit":"%","menu_maximum_width":"","menu_maximum_width_unit":"px","menu_minimum_width":"","menu_minimum_width_unit":"px","menu_auto_height":"off","menu_container_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_container_background_colour":"#212121","menu_background_image":"","animation_type":"slide","menu_appear_from":"left","animation_speed":"0.5","page_wrapper":"","menu_close_on_body_click":"off","menu_close_on_scroll":"off","menu_close_on_link_click":"off","enable_touch_gestures":"","breakpoint":"1024","menu_depth_5":"30","menu_depth_5_unit":"%","keyboard_shortcut_close_menu":"27,37","keyboard_shortcut_open_menu":"32,39","button_image_alt":"","button_image_alt_when_clicked":"","button_font_icon_type":"font-awesome","button_font_icon_when_clicked_type":"font-awesome","button_trigger_type":"click","active_arrow_image_alt":"","inactive_arrow_image_alt":"","active_arrow_font_icon_type":"font-awesome","inactive_arrow_font_icon_type":"font-awesome","menu_adjust_for_wp_admin_bar":"off","menu_title_image_alt":"","menu_title_font_icon_type":"font-awesome","minify_scripts":"off","scripts_in_footer":"off","external_files":"off","remove_fontawesome":"","remove_bootstrap":"","shortcode":"off","mobile_only":"off","custom_css":"","single_menu_height":"80","single_menu_height_unit":"px","single_menu_font":"","single_menu_font_size":"14","single_menu_font_size_unit":"px","single_menu_submenu_height":"40","single_menu_submenu_height_unit":"px","single_menu_submenu_font":"","single_menu_submenu_font_size":"12","single_menu_submenu_font_size_unit":"px","single_menu_item_link_colour":"#000000","single_menu_item_link_colour_hover":"#000000","single_menu_item_background_colour":"#ffffff","single_menu_item_background_colour_hover":"#ffffff","single_menu_item_submenu_link_colour":"#000000","single_menu_item_submenu_link_colour_hover":"#000000","single_menu_item_submenu_background_colour":"#ffffff","single_menu_item_submenu_background_colour_hover":"#ffffff","header_bar_logo_alt":"","desktop_menu_options":"{}","admin_theme":"light","single_menu_line_height":"80","single_menu_line_height_unit":"px","single_menu_submenu_line_height":"40","single_menu_submenu_line_height_unit":"px","hide_on_mobile":"off","hide_on_desktop":"off","menu_title_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_id":2538,"active_toggle_contents":"\u25b2","inactive_toggle_contents":"\u25bc"}]};
+/* ]]> */
+</script>
+<script id="rmp_menu_scripts-js" src="https://www.rfc-editor.org/wp-content/plugins/responsive-menu/v4.0.0/assets/js/rmp-menu.js?ver=4.1.11" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-json/" rel="https://api.w.org/"/><link href="https://www.rfc-editor.org/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+<link href="https://www.rfc-editor.org/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+<meta content="WordPress 6.0.3" name="generator"/>
+<script type="text/javascript">
+        jQuery(document).ready(function($){
+	/* toggle nav */
+	$("#menu-icon").on("click", function(){
+		$(".top-menu").slideToggle();
+		$(this).toggleClass("active");
+	});
+
+        });
+        </script><script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/matomo-tracking.js" type="text/javascript"></script>
+<style type="text/css">/*Variable Styles*/
+#page{ 
+background:#FFFFFF url() repeat top center scroll;
+}
+body{
+font:normal 14px/1.3em Noto Sans, Sans-Serif;
+background:#FFFFFF url() repeat top center scroll;
+}
+.techozoic_font_size{
+font-size: 14px;
+}
+.narrowcolumn .entry,.widecolumn .entry, .top {
+font:normal 14px/1.5em Noto Sans, Sans-Serif;
+color: #2C4353;
+}
+.noclass,.home .narrowcolumn .entry, home .widecolumn .entry, .top,.post .singlepost,.archive .narrowcolumn .entry, .archive .widecolumn .entry, .top{
+background-color:#E3E3E3;
+border-top:1px #A0B3C2 solid;
+}
+.top{
+border:none;
+}
+.blog_title, .blog_title a, .blog_title a:hover, .blog_title a:visited{
+font:normal 40px/1.3em Courier, Sans-Serif;
+color:  	#000000;
+}
+h1.post_title{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.post_title a{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.entry h1{
+font:bold 3em/2.2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h2{
+font:bold 2em/2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h3{
+font:bold 1.4em/1.6em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h4{
+font:bold 1.3em/1.4em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h5{
+font:bold 1.2em/1.3em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.sidebar h2, .sidebar h3, #footer h2{
+font: bold 18px/1.3em Noto Sans, Sans-Serif;
+color:#2C4353;
+}
+.widgettitle {
+font-size: 18px;
+margin: 1px 0;
+}
+#content {
+font-size: 14px;
+}
+acronym,abbr,span.caps,small,.trackback li,.sidebar, .postmetadata {
+font-size: 12px;
+}
+.postmetadata{
+font: normal 12px/1.3em Noto Sans, Sans-Serif;
+color: #777777;
+}
+ul#nav a, ul#admin a, #dropdown li.current_page_item a:hover, .top-menu li.current-menu-item a:hover, #dropdown li.current_page_item ul a, .top-menu li.current-menu-item ul a, ul#nav li.current_page_item a:hover, {
+color: #A0B3C2;
+}
+.commenlist .author,#searchform #s, #searchsubmit:hover,#catsubmit:hover,#wp-submit:hover,#TB_ajaxContent {
+background-color: #A0B3C2 ;
+}
+ul#admin li, ul#dropdown li, #navmenu .top-menu li{
+/*background-color: #E3E3E3;*/
+}
+ul#admin li a, ul#dropdown li a, #navmenu .top-menu li a{
+font-style: bold; 
+font-size:14px;
+font-family: Noto Sans, Sans-Serif;
+color:#A0B3C2;
+}
+ul#admin li a:hover, ul#dropdown li a:hover, #navmenu .top-menu li a:hover{
+color: #A0B3C2;
+}
+#dropdown > li, ul.top-menu > li{
+margin: 0 3px;
+}
+.ribbon ul.top-menu > li, .square ul.top-menu > li, #dropdown > li{
+margin: 0;
+padding: 0 3px;
+}
+.ribbon ul.top-menu > li.has_children:hover:after, .square ul.top-menu > li.has_children:hover:after, #dropdown > li.has_children:hover:after {
+border-bottom: 5px solid #E3E3E3;
+}
+#dropdown ul, .top-menu ul{
+background-color: #E3E3E3;
+}
+.ribbon, .square, #dropdown{
+background-color: #E3E3E3;
+background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E3E3E3), to(#CCCCCC));
+background-image: -webkit-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:    -moz-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:     -ms-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:      -o-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:         linear-gradient(top, #E3E3E3, #CCCCCC);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E3E3E3', endColorstr='#CCCCCC');
+}
+.ribbon ul.top-menu:before{
+border-right: 10px solid #CCCCCC;
+}
+.ribbon ul.top-menu:after{
+border-left: 10px solid #CCCCCC;
+}.ribbon ul.top-menu > li:last-child, .square ul.top-menu > li:last-child, #dropdown > li:last-child{
+margin-right: 100px;
+}#navmenu .top-menu li, #navmenu .top-menu ul.sub-menu, ul#admin li, #navmenu #dropdown li{
+background-color: #E3E3E3;
+}       
+#navmenu #dropdown li.current_page_item, #navmenu .top-menu li.current-menu-item, #navmenu .top-menu ul.sub-menu li.current-menu-item {
+background-color: #A0B3C2 ;
+}
+#navmenu #dropdown li:hover, #navmenu .top-menu li:hover, #navmenu .top-menu ul.sub-menu > li:hover {
+background-color:#EFEFEF;
+}
+#navmenu #dropdown li.current_page_item > a:hover, #navmenu .top-menu li.current-menu-item > a:hover, #navmenu .top-menu li.current-menu-item:hover > a, #navmenu .top-menu li:hover > a, #navmenu #dropdown li:hover > a {
+color:#A0B3C2;
+}
+#navmenu #dropdown li.current_page_item > a, #navmenu .top-menu li.current-menu-item > a{
+color:#F7F7F7;
+}
+ul#admin li:hover{
+background:#EFEFEF;
+box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-moz-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-webkit-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+}#dropdown li ul li, .top-menu li ul li, #dropdown li ul , .top-menu li ul{
+width: 250px !important;
+}
+#dropdown li ul ul, .top-menu li ul ul{
+left:250px ; 
+}
+.tags {
+border-bottom:1px #A0B3C2 solid;
+border-top:1px #A0B3C2 solid;
+}
+a,h2 a:hover,h3 a:hover,#user_login,#user_pass, #sidenav a:visited {
+color:#597EAA; 
+text-decoration:none;
+}
+#searchform #s {
+color:#E3E3E3; 
+text-decoration:none;
+}
+a:hover {
+color:#114477; 
+text-decoration:underline;
+}
+a:visited{
+color:#476588;
+}
+.description {
+color:#A0B3C2;
+}
+#headerimg {
+;
+float:left;margin-left:10px;
+}
+#header-logo{
+float:left;margin-left:10px;
+padding-top:0px;
+padding-left:0px;
+}
+.single .blog_title a:hover {
+cursor:default;
+text-decoration:none;
+}
+.noclass{
+-moz-box-shadow:none !important;
+box-shadow:none !important;
+-webkit-box-shadow: none !important;
+opacity:1 !important;
+border: none !important;
+}#headerimgwrap{
+top:20%;
+}  #page {
+width: 90%;
+}
+.narrowcolumn {
+float:left;
+margin:0;
+padding:25px 3% 20px 2%;
+width:75%;
+}
+#l_sidebar {
+float:left;
+padding:25px 1% 0 2%;
+width:17%
+}#dropdown, .top-menu{
+text-align:left;
+}#header {
+background-repeat: no-repeat;  
+background-position: center center;
+height: 110px;
+}
+.hleft, .hright {
+height: 70px;
+}table.statictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.statictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #CACACA;
+}
+table.statictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+
+
+table.statictable tr{
+        background-color: #F6F6F6;
+}
+
+table.statictable td.special {
+          font-weight: bold;
+          color:grey
+}
+table.statictable td.title {
+         font-weight: bold;
+         letter-spacing: inherit
+}
+
+table.statictable .boldtext {
+       font-weight: bold;
+       color: #597eaa;
+}
+
+table.dynamictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.dynamictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #FEFEFEFE;
+}
+table.dynamictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+table.dynamictable tr.even{
+        background-color: #ffffff;
+}
+table.dynamictable tr.odd{
+        background-color: #F6F6F6;
+}
+table.erratasearch {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-color: #666666;
+        border-collapse: collapse;
+        text-align:center;
+}
+table.erratasearch th {
+        border-width: 1px;
+        padding: 8px;
+        
+        text-decoration: underline;
+        border-color: #666666;
+        //background-color: #ffffff;
+        background-color: silver;
+}
+
+table.erratasearch td {
+        border-width: 1px;
+        padding: 8px;
+        border-color: #666666;
+        background-color: #ffffff;
+        text-align:left;
+}
+table.erratasearch td.sbar { 
+          background-color: silver;
+          text-align: center;
+        }
+
+
+.nosidebar{
+    float:left;
+    margin:0 10%;
+    padding:0 0 10px;
+    width:70%;
+}
+
+input[type="button"], .button, div#infinite-handle span {
+    display: inline-block;
+    zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+    *display: inline;
+    vertical-align: baseline;
+    margin: 0 2px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    padding: .3em 1em .35em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .25em; 
+    -moz-border-radius: .25em;
+    border-radius: .25em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    color: #505050;
+    border: solid 1px #b7b7b7;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+    background: -moz-linear-gradient(top,  #fff,  #ededed);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+}
+input[type="button"]:hover, .button:hover, div#infinite-handle span:hover {
+    text-decoration: none;
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+    background: -moz-linear-gradient(top,  #fff,  #dcdcdc);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+}
+input[type="button"]:active, .button:active, div#infinite-handle span: active {
+    position: relative;
+    top: 1px;
+    color: #999;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+    background: -moz-linear-gradient(top,  #ededed,  #fff);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
+}
+
+.search_label_bold { text-align: left;
+                     border-style: none;
+                     font-weight: bold;
+                   }
+
+.error { font-weight: bold; color: red; }
+
+textarea {
+   font-family: inherit;
+   font-size: inherit;
+}
+/*DIV to hold scroll tables*/
+.scrolltable{
+   width:95%
+
+}
+
+/*--------------------------------------------------------------------------------
+----------------------------RFCMETA PAGE  Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+ body.rfcmeta {
+font-family: 'Noto Sans', sans-serif;
+color: #2C4353;
+width: 100%;}
+
+ body.rfcmeta #page {
+width: 100%;
+box-shadow:none;
+margin-top: 0px;}
+
+ body.rfcmeta .hright { height:120px;}
+
+ body.rfcmeta #header {width: 100%;
+ background-color: #fff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 0px;;}
+
+ body.rfcmeta .singlepost.entry {padding-top: 0px!important;}
+ body.rfcmeta .singlepost.entry dl,  body.rfcmeta .singlepost.entry p, body.rfcmeta .singlepost.entry h2, body.rfcmeta .singlepost.entry h3 { margin-left:40px;
+ margin-right: 20px; }
+
+ body.rfcmeta .singlepost.entry dt{
+         font-weight: bold!important;
+         margin-top: 15px;}
+
+          body.rfcmeta .singlepost.entry dd{
+         margin-left: 15px;}
+
+ body.rfcmeta a{
+color: #597eaa;}
+  body.rfcmeta .entryheader {background-color:#2C4353 !important;
+  border-bottom: 10px solid #FFF !important;
+  margin-top: 0px;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;}
+
+   body.rfcmeta .entryheader h2 a, body.rfcmeta .entryheader h2 {color: #fff  !important;
+   font-size: 50px;
+   padding: 0px !important;
+   line-height: 1.2;
+   font:bold !important;}
+
+   body.rfcmeta .entryheader h2 a:hover {color: #aob3c2 !important;}
+
+   body.rfcmeta .entryheader h3 {color: #fff  !important;
+   font-size: 18px;
+   padding: 0px;
+   line-height: 1.2;
+   padding-top: 10px;
+   }
+
+      body.rfcmeta .entryheader h3 span {font-weight: normal;
+          font-size: 14px;
+          text-transform: uppercase;}
+    h2 {font-weight: bold;}
+
+ body.rfcmeta   #search_query_separator_id  {padding-bottom: 5px;
+ padding-top: 5px;}
+
+ body.rfcmeta .page {margin-top: 0px!important;
+ padding-top: 0px!important;}
+
+    /*--------------------------------------------------------------------------------
+----------------------------end RFCMETA PAGE Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+
+.cluster_heading {
+ font-size: 14px;
+}
+</style> <style type="text/css">
+        #header {
+            background-image: url();
+        }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
-    function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
-                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
-                }
-	    }
-	}
-    }
-    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
-    function showElem(id) {
-        var elem = document.getElementById(id);
-        elem.innerHTML = eval(id+"_html");
-        elem.style.visibility='visible';
-    }
-    function hideElem(id) {
-        var elem = document.getElementById(id);
-        elem.style.visibility='hidden';        
-        elem.innerHTML = "";
-    }
-    // -->
-    </script>
+<script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/iterate-survey.js" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="32x32"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="192x192"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="apple-touch-icon"/>
+<meta content="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" name="msapplication-TileImage"/>
 </head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo " onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
+<body class="rfcmeta">
+<a id="top"></a>
+<div id="page">
+<div id="header">
+<div class="hright">
+<div class="hwidget widget_text"><h2 class="widgettitle">Search RFCs</h2> <div class="textwidget"><form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="40" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+<a href="/search/rfc_search.php">Advanced Search</a>
+</div>
+</div></div>
+<div id="headerimgwrap">
+<div id="headerimg">
+<h1 class="blog_title"> <a href="https://www.rfc-editor.org/">RFC Editor</a>
+</h1> </div><!--end headerimg-->
+</div><!--end headerimgwrap-->
+</div><!--end header-->
+<div class="nosidebar" id="content">
+<h1 class="post_title"></h1>
+<div class="post-127 page type-page status-publish hentry post clear" id="post-127">
+<div class="singlepost entry">
+<div class="entryheader"><h2><a href="https://www.rfc-editor.org/bcp/bcp158.txt">BCP 158</a></h2><h2><a href="https://www.rfc-editor.org/rfc/rfc6158.txt">RFC 6158</a></h2>
+<h3>RADIUS Design Guidelines, <span>March 2011</span></h3>
+</div><dl>
+<dt><b>File formats:</b></dt><dd><a href="https://www.rfc-editor.org/rfc/rfc6158.txt"><img alt="icon for text file" src="/rfcscripts/images/RFC_ICONS_Text_40x50.png" title="text"/></a> <a href="https://www.rfc-editor.org/rfc/pdfrfc/rfc6158.txt.pdf"><img alt="icon for PDF" src="/rfcscripts/images/RFC_ICONS_PDF_2019_50x40.png" title="PDF"/></a> <a href="https://www.rfc-editor.org/rfc/rfc6158.html"><img alt="icon for HTML" src="/rfcscripts/images/RFC_ICONS_HTML_40x50.png" title="HTML"/></a></dd>
+<dt><b>Status:</b></dt><dd>BEST CURRENT PRACTICE</dd>
+<dt><b>Updated by:</b></dt><dd><a href="/info/rfc6929">RFC 6929</a>, <a href="/info/rfc8044">RFC 8044</a></dd>
+<dt><b>Authors:</b></dt><dd>A. DeKok, Ed.<br/>G. Weber</dd>
+<dt><b>Stream:</b></dt><dd><a href="https://www.ietf.org">IETF</a></dd>
+<dt><b>Source:</b></dt><dd><a href="./datatracker.ietf.org/wg/radext/about/.html">radext</a> 
+                                      (<a href="./datatracker.ietf.org/wg/.html#sec">sec</a>)</dd>
+</dl>
+<p>
+<b>Cite this BCP</b>: 
+<a href="/refs/ref-bcp158.txt">TXT</a></p>
+<p><b>Discuss this RFC</b>: Send questions or comments to the mailing list <a href="mailto:iesg@ietf.org?subject=Question regarding RFC  ">iesg@ietf.org</a></p><p>
+<b>Other actions</b>: 
+<a href="/errata.php#reportnew">Submit Errata</a>  | 
+<a href="https://datatracker.ietf.org/ipr/search/?draft=&amp;rfc=rfc6158&amp;submit=rfc">
+Find IPR Disclosures from the IETF</a>  | 
+<a href="https://datatracker.ietf.org/doc/rfc/">
+View History of RFC </a>
+</p>
+<hr/>
+<h2>Abstract</h2>
+<p>This document provides guidelines for the design of attributes used
+by the Remote Authentication Dial In User Service (RADIUS) protocol.
+It is expected that these guidelines will prove useful to authors and
+reviewers of future RADIUS attribute specifications, within the
+IETF as well as other Standards Development Organizations (SDOs).
+This memo documents an Internet Best Current Practice.</p> <hr/>
+<p>
+For the definition of <b>Status</b>,
+see <a href="/info/rfc2026">RFC 2026</a>.
+</p><p>
+For the definition of <b>Stream</b>, see <a href="/info/rfc8729">RFC 8729</a>.
+</p>
+<hr/> </div>
 </div>
 </div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/bcp/bcp158.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/bcp158" title="PDF version of this document">pdf</a>]                                                        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                     A. DeKok, Ed.
-Request for Comments: 6158                                    FreeRADIUS
-BCP: 158                                                        G. Weber
-Category: Best Current Practice                   Individual Contributor
-ISSN: 2070-1721                                               March 2011
-
-
-
-                        <span class="h1">RADIUS Design Guidelines</span>
-
-Abstract
-
-   This document provides guidelines for the design of attributes used
-   by the Remote Authentication Dial In User Service (RADIUS) protocol.
-   It is expected that these guidelines will prove useful to authors and
-   reviewers of future RADIUS attribute specifications, within the IETF
-   as well as other Standards Development Organizations (SDOs).
-
-Status of This Memo
-
-   This memo documents an Internet Best Current Practice.
-
-   This document is a product of the Internet Engineering Task Force
-   (IETF).  It represents the consensus of the IETF community.  It has
-   received public review and has been approved for publication by the
-   Internet Engineering Steering Group (IESG).  Further information on
-   BCPs is available in <a href="./rfc5741.html#section-2">Section 2 of RFC 5741</a>.
-
-   Information about the current status of this document, any errata,
-   and how to provide feedback on it may be obtained at
-   <a href="http://www.rfc-editor.org/info/rfc6158">http://www.rfc-editor.org/info/rfc6158</a>.
-
-Copyright Notice
-
-   Copyright (c) 2011 IETF Trust and the persons identified as the
-   document authors.  All rights reserved.
-
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
-   Provisions Relating to IETF Documents
-   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
-   publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
-   to this document.  Code Components extracted from this document must
-   include Simplified BSD License text as described in Section 4.e of
-   the Trust Legal Provisions and are provided without warranty as
-   described in the Simplified BSD License.
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                 [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   This document may contain material from IETF Documents or IETF
-   Contributions published or made publicly available before November
-   10, 2008.  The person(s) controlling the copyright in some of this
-   material may not have granted the IETF Trust the right to allow
-   modifications of such material outside the IETF Standards Process.
-   Without obtaining an adequate license from the person(s) controlling
-   the copyright in such materials, this document may not be modified
-   outside the IETF Standards Process, and derivative works of it may
-   not be created outside the IETF Standards Process, except to format
-   it for publication as an RFC or to translate it into languages other
-   than English.
-
-Table of Contents
-
-   <a href="#section-1">1</a>. Introduction ....................................................<a href="#page-3">3</a>
-      <a href="#section-1.1">1.1</a>. Terminology ................................................<a href="#page-4">4</a>
-      <a href="#section-1.2">1.2</a>. Requirements Language ......................................<a href="#page-4">4</a>
-      <a href="#section-1.3">1.3</a>. Applicability ..............................................<a href="#page-5">5</a>
-           <a href="#section-1.3.1">1.3.1</a>. Reviews .............................................<a href="#page-5">5</a>
-   <a href="#section-2">2</a>. Guidelines ......................................................<a href="#page-6">6</a>
-      <a href="#section-2.1">2.1</a>. Data Types .................................................<a href="#page-8">8</a>
-      <a href="#section-2.2">2.2</a>. Vendor Space ...............................................<a href="#page-9">9</a>
-      <a href="#section-2.3">2.3</a>. Service Definitions and RADIUS .............................<a href="#page-9">9</a>
-      <a href="#section-2.4">2.4</a>. Translation of Vendor Specifications ......................<a href="#page-10">10</a>
-   <a href="#section-3">3</a>. Rationale ......................................................<a href="#page-11">11</a>
-      <a href="#section-3.1">3.1</a>. RADIUS Operational Model ..................................<a href="#page-11">11</a>
-      <a href="#section-3.2">3.2</a>. Data Model Issues .........................................<a href="#page-14">14</a>
-           <a href="#section-3.2.1">3.2.1</a>. Issues with Definitions of Types ...................<a href="#page-15">15</a>
-           <a href="#section-3.2.2">3.2.2</a>. Tagging Mechanism ..................................<a href="#page-16">16</a>
-           <a href="#section-3.2.3">3.2.3</a>. Complex Data Types .................................<a href="#page-16">16</a>
-           <a href="#section-3.2.4">3.2.4</a>. Complex Data Type Exceptions .......................<a href="#page-18">18</a>
-      <a href="#section-3.3">3.3</a>. Vendor Space ..............................................<a href="#page-19">19</a>
-           <a href="#section-3.3.1">3.3.1</a>. Interoperability Considerations ....................<a href="#page-20">20</a>
-           <a href="#section-3.3.2">3.3.2</a>. Vendor Allocations .................................<a href="#page-20">20</a>
-           <a href="#section-3.3.3">3.3.3</a>. SDO Allocations ....................................<a href="#page-20">20</a>
-      <a href="#section-3.4">3.4</a>. Polymorphic Attributes ....................................<a href="#page-21">21</a>
-   <a href="#section-4">4</a>. IANA Considerations ............................................<a href="#page-22">22</a>
-   <a href="#section-5">5</a>. Security Considerations ........................................<a href="#page-22">22</a>
-      <a href="#section-5.1">5.1</a>. New Data Types and Complex Attributes .....................<a href="#page-23">23</a>
-   <a href="#section-6">6</a>. References .....................................................<a href="#page-24">24</a>
-      <a href="#section-6.1">6.1</a>. Normative References ......................................<a href="#page-24">24</a>
-      <a href="#section-6.2">6.2</a>. Informative References ....................................<a href="#page-24">24</a>
-   <a href="#appendix-A">Appendix A</a>.  Design Guidelines Checklist ..........................<a href="#page-27">27</a>
-      <a href="#appendix-A.1">A.1</a>. Types Matching the RADIUS Data Model ......................<a href="#page-27">27</a>
-         <a href="#appendix-A.1.1">A.1.1</a>. Transport of Basic Data Types ........................<a href="#page-27">27</a>
-         <a href="#appendix-A.1.2">A.1.2</a>. Transport of Authentication and Security Data ........<a href="#page-27">27</a>
-         <a href="#appendix-A.1.3">A.1.3</a>. Opaque Data Types ....................................<a href="#page-27">27</a>
-         <a href="#appendix-A.1.4">A.1.4</a>. Pre-existing Data Types ..............................<a href="#page-28">28</a>
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                 [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-      <a href="#appendix-A.2">A.2</a>. Improper Data Types .......................................<a href="#page-28">28</a>
-         <a href="#appendix-A.2.1">A.2.1</a>. Simple Data Types ....................................<a href="#page-28">28</a>
-         <a href="#appendix-A.2.2">A.2.2</a>. More Complex Data Types ..............................<a href="#page-29">29</a>
-      <a href="#appendix-A.3">A.3</a>. Vendor-Specific Formats ...................................<a href="#page-29">29</a>
-      <a href="#appendix-A.4">A.4</a>. Changes to the RADIUS Operational Model ...................<a href="#page-30">30</a>
-      <a href="#appendix-A.5">A.5</a>. Allocation of Attributes ..................................<a href="#page-31">31</a>
-   <a href="#appendix-B">Appendix B</a>.  Complex Attributes ...................................<a href="#page-32">32</a>
-      <a href="#appendix-B.1">B.1</a>. CHAP-Password .............................................<a href="#page-32">32</a>
-      <a href="#appendix-B.2">B.2</a>. CHAP-Challenge ............................................<a href="#page-32">32</a>
-      <a href="#appendix-B.3">B.3</a>. Tunnel-Password ...........................................<a href="#page-33">33</a>
-      <a href="#appendix-B.4">B.4</a>. ARAP-Password .............................................<a href="#page-33">33</a>
-      <a href="#appendix-B.5">B.5</a>. ARAP-Features .............................................<a href="#page-34">34</a>
-      <a href="#appendix-B.6">B.6</a>. Connect-Info ..............................................<a href="#page-34">34</a>
-      <a href="#appendix-B.7">B.7</a>. Framed-IPv6-Prefix ........................................<a href="#page-35">35</a>
-      <a href="#appendix-B.8">B.8</a>. Egress-VLANID .............................................<a href="#page-36">36</a>
-      <a href="#appendix-B.9">B.9</a>. Egress-VLAN-Name ..........................................<a href="#page-37">37</a>
-      <a href="#appendix-B.10">B.10</a>. Digest-* .................................................<a href="#page-37">37</a>
-   Acknowledgments ...................................................<a href="#page-37">37</a>
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
-
-   This document provides guidelines for the design of Remote
-   Authentication Dial In User Service (RADIUS) attributes within the
-   IETF as well as within other Standards Development Organizations
-   (SDOs).  By articulating RADIUS design guidelines, it is hoped that
-   this document will encourage the development and publication of high-
-   quality RADIUS attribute specifications.
-
-   However, the advice in this document will not be helpful unless it is
-   put to use.  As with "Guidelines for Authors and Reviewers of MIB
-   Documents" [<a href="./rfc4181.html" title='"Guidelines for Authors and Reviewers of MIB Documents"'>RFC4181</a>], it is expected that authors will check their
-   document against the guidelines in this document prior to publication
-   or requesting review (such as an "Expert Review" described in
-   [<a href="./rfc3575.html" title='"IANA Considerations for RADIUS (Remote Authentication Dial In User Service)"'>RFC3575</a>]).  Similarly, it is expected that this document will be
-   used by reviewers (such as WG participants or the Authentication,
-   Authorization, and Accounting (AAA) Doctors [<a href="#ref-DOCTORS">DOCTORS</a>]), resulting in
-   an improvement in the consistency of reviews.
-
-   In order to meet these objectives, this document needs to cover not
-   only the science of attribute design but also the art.  Therefore, in
-   addition to covering the most frequently encountered issues, this
-   document explains some of the considerations motivating the
-   guidelines.  These considerations include complexity trade-offs that
-   make it difficult to provide "hard and fast" rules for attribute
-   design.  This document explains those trade-offs through reviews of
-   current attribute usage.
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                 [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   The rest of the document is organized as follows.  <a href="#section-1">Section 1</a>
-   discusses the applicability of the guidelines and defines a
-   recommended review process for RADIUS specifications.  <a href="#section-2">Section 2</a>
-   defines the design guidelines in terms of what is "<em>RECOMMENDED</em>" and
-   "NOT <em>RECOMMENDED</em>".  <a href="#section-3">Section 3</a> gives a longer explanation of the
-   rationale behind the guidelines given in the previous section.
-   <a href="#appendix-A">Appendix A</a> repeats the guidelines in a "checklist" format.  <a href="#appendix-B">Appendix</a>
-   <a href="#appendix-B">B</a> discusses previously defined attributes that do not follow the
-   guidelines.
-
-   Authors of new RADIUS specifications can be compliant with the design
-   guidelines by working through the checklists given in <a href="#appendix-A">Appendix A</a>.
-   Reviewers of RADIUS specifications are expected to be familiar with
-   the entire document.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Terminology</span>
-
-   This document uses the following terms:
-
-   Network Access Server (NAS)
-      A device that provides an access service for a user to a network.
-
-   RADIUS server
-      A RADIUS authentication, authorization, and accounting (AAA)
-      server is an entity that provides one or more AAA services to a
-      NAS.
-
-   Standard space
-      Codes in the RADIUS Attribute Type Space that are allocated by
-      IANA and that follow the format defined in <a href="./rfc2865.html#section-5">Section 5 of RFC 2865</a>
-      [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>].
-
-   Vendor space
-      The contents of the Vendor-Specific Attribute (VSA), as defined in
-      <a href="./rfc2865.html#section-5.26">[RFC2865], Section 5.26</a>.  These attributes provide a unique
-      attribute type space in the "String" field for each vendor
-      (identified by the Vendor-Type field), which they can self-
-      allocate.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Requirements%20Language"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Requirements Language</span>
-
-   The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
-   "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
-   document are to be interpreted as described in [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
-
-
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                 [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Applicability"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>.  Applicability</span>
-
-   The advice in this document applies to RADIUS attributes used to
-   encode service-provisioning, authentication, or accounting data based
-   on the attribute encodings and data formats defined in <a href="./rfc2865.html">RFC 2865</a>
-   [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>], <a href="./rfc2866.html">RFC 2866</a> [<a href="./rfc2866.html" title='"RADIUS Accounting"'>RFC2866</a>], and subsequent RADIUS RFCs.
-
-   Since this document represents a Best Current Practice, it does not
-   update or deprecate existing standards.  As a result, uses of the
-   terms "<em>MUST</em>" and "<em>MUST NOT</em>" are limited to requirements already
-   present in existing documents.
-
-   It is <em>RECOMMENDED</em> that these guidelines be followed for all new
-   RADIUS specifications, whether they originate from a vendor, an SDO,
-   or the IETF.  Doing so will ensure the widest possible applicability
-   and interoperability of the specifications, while requiring minimal
-   changes to existing systems.  In particular, it is expected that
-   RADIUS specifications requesting allocation within the standard space
-   will follow these guidelines and will explain why this is not
-   possible if they cannot.
-
-   However, there are situations in which vendors or SDOs can choose not
-   to follow these guidelines without major consequences.  As noted in
-   <a href="./rfc2865.html#section-5.26">Section 5.26 of [RFC2865]</a>, Vendor-Specific Attributes (VSAs) are
-   "available to allow vendors to support their own extended Attributes
-   not suitable for general usage".  Where vendors or SDOs develop
-   specifications "not suitable for general usage", limited
-   interoperability and inability to use existing implementations may be
-   acceptable, and, in these situations, vendors and SDOs <em>MAY</em> choose not
-   to conform to these guidelines.
-
-   Note that the RADEXT WG is currently (as of 2011) involved in
-   developing updates to RADIUS.  Those updates will provide their own
-   usage guidelines that may modify some of the guidelines defined here,
-   such as defining new data types, practices, etc.
-
-   RADIUS protocol changes, or specification of attributes (such as
-   Service-Type), that can, in effect, provide new RADIUS commands
-   require greater expertise and deeper review, as do changes to the
-   RADIUS operational model.  As a result, such changes are outside the
-   scope of this document and <em>MUST NOT</em> be undertaken outside the IETF.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.1.%20%20Reviews"></a></body></html><a class="selflink" href="#section-1.3.1" name="section-1.3.1">1.3.1</a>.  Reviews</span>
-
-   For specifications utilizing attributes within the standard space,
-   conformance with the design guidelines in this document is expected
-   unless a good case can be made for an exception.  Reviewers <em>SHOULD</em>
-   use the design guidelines as a review checklist.
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                 [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   While not required, IETF review may also be beneficial for
-   specifications utilizing the vendor space.  Experience has shown that
-   attributes not originally designed for general usage can subsequently
-   garner wide-spread deployment.  An example is the Vendor-Specific
-   Attributes defined in [<a href="./rfc2548.html" title='"Microsoft Vendor-specific RADIUS Attributes"'>RFC2548</a>], which have been widely implemented
-   within IEEE 802.11 Access Points.
-
-   In order to assist in the development of specifications conforming to
-   these guidelines, authors can request review by sending an email to
-   the AAA Doctors [<a href="#ref-DOCTORS">DOCTORS</a>] or equivalent mailing list.  The IETF
-   Operations &amp; Management Area Directors will then arrange for the
-   review to be completed and posted to the AAA Doctors mailing list
-   [<a href="#ref-DOCTORS">DOCTORS</a>], RADEXT WG mailing list, or other IETF mailing lists.
-   Since reviews are handled by volunteers, responses are provided on a
-   best-effort basis, with no service-level guarantees.  Authors are
-   encouraged to seek review as early as possible, so as to avoid
-   potential delays.
-
-   As reviewers require access to the specification, vendors and SDOs
-   are encouraged to make it publicly available.  Where the RADIUS
-   specification is embedded within a larger document that cannot be
-   made public, the RADIUS attribute and value definitions can be made
-   available on a public web site or can be published as an
-   Informational RFC, as with [<a href="./rfc4679.html" title='"DSL Forum Vendor-Specific RADIUS Attributes"'>RFC4679</a>].
-
-   The review process requires neither allocation of attributes within
-   the standard space nor publication of an RFC.  Requiring SDOs or
-   vendors to rehost VSAs into the standard space solely for the purpose
-   of obtaining review would put pressure on the standard space and may
-   be harmful to interoperability since it would create two ways to
-   provision the same service.  Rehosting may also require changes to
-   the RADIUS data model, which will affect implementations that do not
-   intend to support the SDO or vendor specifications.
-
-   Similarly, vendors are encouraged to make their specifications
-   publicly available, for maximum interoperability.  However, it is not
-   necessary for a vendor to request publication of a VSA specification
-   as an RFC.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Guidelines"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Guidelines</span>
-
-   The RADIUS protocol as defined in [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>] and [<a href="./rfc2866.html" title='"RADIUS Accounting"'>RFC2866</a>] uses
-   elements known as attributes in order to represent authentication,
-   authorization, and accounting data.
-
-
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                 [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   Unlike Simple Network Management Protocol (SNMP), first defined in
-   [<a href="./rfc1157.html" title='"Simple Network Management Protocol (SNMP)"'>RFC1157</a>] and [<a href="./rfc1155.html" title='"Structure and identification of management information for TCP/IP- based internets"'>RFC1155</a>], RADIUS does not define a formal data
-   definition language.  The data type of RADIUS attributes is not
-   transported on the wire.  Rather, the data type of a RADIUS attribute
-   is fixed when an attribute is defined.  Based on the RADIUS attribute
-   type code, RADIUS clients and servers can determine the data type
-   based on pre-configured entries within a data dictionary.
-
-   To explain the implications of this early RADIUS design decision, we
-   distinguish two kinds of data types, namely "basic" and "complex".
-   Basic data types use one of the existing RADIUS data types as defined
-   in <a href="#section-2.1">Section 2.1</a>, encapsulated in a [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>] RADIUS attribute or in a
-   [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>] RADIUS VSA.  All other data formats are "complex types".
-
-   RADIUS attributes can be classified into one of three broad
-   categories:
-
-      * Attributes that are of interest to a single vendor, e.g., for a
-        product or product line.  Minimal cross-vendor interoperability
-        is needed.
-
-        Vendor-Specific Attributes (VSAs) are appropriate for use in
-        this situation.  Code-point allocation is managed by the vendor
-        with the vendor space defined by their Private Enterprise Number
-        (PEN), as given in the Vendor-Id field.
-
-      * Attributes that are of interest to an industry segment, where an
-        SDO defines the attributes for that industry.  Multi-vendor
-        interoperability within an industry segment is expected.
-
-        Vendor-Specific Attributes (VSAs) <em>MUST</em> be used.  Code-point
-        allocation is managed by the SDO with the vendor space defined
-        by the SDO's PEN rather than the PEN of an individual vendor.
-
-      * Attributes that are of broad interest to the Internet community.
-        Multi-vendor interoperability is expected.
-
-        Attributes within the standard space are appropriate for this
-        purpose and are allocated via IANA as described in [<a href="./rfc3575.html" title='"IANA Considerations for RADIUS (Remote Authentication Dial In User Service)"'>RFC3575</a>].
-        Since the standard space represents a finite resource, and is
-        the only attribute space available for use by IETF working
-        groups, vendors, and SDOs are encouraged to utilize the vendor
-        space rather than request allocation of attributes from the
-        standard space.  Usage of attribute type codes reserved for
-        standard attributes is considered antisocial behavior and is
-        strongly discouraged.
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                 [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Data%20Types"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Data Types</span>
-
-   RADIUS defines a limited set of data types, defined as "basic data
-   types".  The following data qualifies as "basic data types":
-
-      * 32-bit unsigned integer in network byte order.
-
-      * Enumerated data types, represented as a 32-bit unsigned integer
-        with a list of name to value mappings (e.g., Service-Type).
-
-      * IPv4 address in network byte order.
-
-      * Time as a 32-bit unsigned value in network byte order and in
-        seconds since 00:00:00 UTC, January 1, 1970.
-
-      * IPv6 address in network byte order.
-
-      * Interface-Id (8-octet string in network byte order).
-
-      * IPv6 prefix.
-
-      * String (i.e., binary data), totaling 253 octets or less in
-        length.  This includes the opaque encapsulation of data
-        structures defined outside of RADIUS.  See also <a href="#appendix-A.1.3">Appendix A.1.3</a>
-        for additional discussion.
-
-      * UTF-8 text [<a href="./rfc3629.html" title='"UTF-8, a transformation format of ISO 10646"'>RFC3629</a>], totaling 253 octets or less in length.
-
-   Note that the length limitations for VSAs of type String and Text are
-   less than 253 octets, due to the additional overhead of the Vendor-
-   Specific encoding.
-
-   The following data also qualifies as "basic data types":
-
-      * Attributes grouped into a logical container using the [<a href="./rfc2868.html" title='"RADIUS Attributes for Tunnel Protocol Support"'>RFC2868</a>]
-        tagging mechanism.  This approach is NOT <em>RECOMMENDED</em> (see
-        <a href="#section-3.2.2">Section 3.2.2</a>) but is permissible where the alternatives are
-        worse.
-
-      * Attributes requiring the transport of more than 253 octets of
-        Text or String data.  This includes the opaque encapsulation of
-        data structures defined outside of RADIUS, e.g., EAP-Message.
-
-   All other data formats (including nested attributes) are defined to
-   be "complex data types" and are NOT <em>RECOMMENDED</em> for normal use.
-   Complex data types <em>MAY</em> be used in situations where they reduce
-   complexity in non-RADIUS systems or where using the basic data types
-   would be awkward (such as where grouping would be required in order
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                 [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   to link related attributes).  Since there are no "hard and fast"
-   rules for where complexity is best located, each situation has to be
-   decided on a case-by-case basis.  Examples of this trade-off are
-   discussed in <a href="#appendix-B">Appendix B</a>.  Where a complex data type is selected, an
-   explanation <em>SHOULD</em> be offered as to why this was necessary.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Vendor%20Space"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Vendor Space</span>
-
-   The Vendor space is defined to be the contents of the Vendor-Specific
-   Attribute (<a href="./rfc2865.html#section-5.26">[RFC2865], Section 5.26</a>) where the Vendor-Id defines the
-   space for a particular vendor, and the contents of the "String" field
-   define a unique attribute type space for that vendor.  As discussed
-   there, it is intended for vendors and SDOs to support their own
-   attributes not suitable for general use.
-
-   While the encoding of attributes within the vendor space is under the
-   control of vendors and SDOs, following the guidelines described here
-   is advantageous since it enables maximum interoperability with
-   minimal changes to existing systems.
-
-   For example, RADIUS server support for new attributes using "basic
-   data types" can typically be accomplished by editing a RADIUS
-   dictionary, whereas "complex data types" typically require RADIUS
-   server code changes, which can add complexity and delays in
-   implementation.
-
-   Vendor RADIUS Attribute specifications <em>SHOULD</em> self-allocate
-   attributes from the vendor space rather than request an allocation
-   from within the standard space.
-
-   VSA encodings that do not follow the <a href="./rfc2865.html#section-5.26">[RFC2865], Section 5.26</a> encoding
-   scheme are NOT <em>RECOMMENDED</em>.  Although [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>] does not mandate it,
-   implementations commonly assume that the Vendor Id can be used as a
-   key to determine the on-the-wire encoding of a VSA.  Vendors
-   therefore <em>SHOULD NOT</em> use multiple encodings for VSAs that are
-   associated with a particular Vendor Id.  A vendor wishing to use
-   multiple VSA encodings <em>SHOULD</em> request one Vendor Id for each VSA
-   encoding that they will use.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Service%20Definitions%20and%20RADIUS"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Service Definitions and RADIUS</span>
-
-   RADIUS specifications define how an existing service or protocol can
-   be provisioned using RADIUS, usually via the Service-Type Attribute.
-   Therefore, it is expected that a RADIUS attribute specification will
-   reference documents defining the protocol or service to be
-   provisioned.  Within the IETF, a RADIUS attribute specification
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                 [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   <em>SHOULD NOT</em> be used to define the protocol or service being
-   provisioned.  New services using RADIUS for provisioning <em>SHOULD</em> be
-   defined elsewhere and referenced in the RADIUS specification.
-
-   New attributes, or new values of existing attributes, <em>SHOULD NOT</em> be
-   used to define new RADIUS commands.  RADIUS attributes are intended
-   to:
-
-      * authenticate users
-
-      * authorize users (i.e., service provisioning or changes to
-        provisioning)
-
-      * account for user activity (i.e., logging of session activity)
-
-   Requirements for allocation of new commands (i.e., the Code field in
-   the packet header) and new attributes within the standard space are
-   described in <a href="./rfc3575.html#section-2.1">[RFC3575], Section 2.1</a>.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Translation%20of%20Vendor%20Specifications"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Translation of Vendor Specifications</span>
-
-   <a href="./rfc2865.html#section-5.26">[RFC2865], Section 5.26</a> defines Vendor-Specific Attributes as
-   follows:
-
-      This Attribute is available to allow vendors to support their own
-      extended Attributes not suitable for general usage.  It <em>MUST NOT</em>
-      affect the operation of the RADIUS protocol.
-
-      Servers not equipped to interpret the vendor-specific information
-      sent by a client <em>MUST</em> ignore it (although it may be reported).
-      Clients which do not receive desired vendor-specific information
-      <em>SHOULD</em> make an attempt to operate without it, although they may do
-      so (and report they are doing so) in a degraded mode.
-
-   The limitation on changes to the RADIUS protocol effectively
-   prohibits VSAs from changing fundamental aspects of RADIUS operation,
-   such as modifying RADIUS packet sequences or adding new commands.
-   However, the requirement for clients and servers to be able to
-   operate in the absence of VSAs has proven to be less of a constraint
-   since it is still possible for a RADIUS client and server to mutually
-   indicate support for VSAs, after which behavior expectations can be
-   reset.
-
-   Therefore, <a href="./rfc2865.html">RFC 2865</a> provides considerable latitude for development of
-   new attributes within the vendor space, while prohibiting development
-   of protocol variants.  This flexibility implies that RADIUS
-   attributes can often be developed within the vendor space without
-   loss (and possibly even with gain) in functionality.
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   As a result, translation of RADIUS attributes developed within the
-   vendor space into the standard space may provide only modest
-   benefits, while accelerating the exhaustion of the standard space.
-   We do not expect that all RADIUS attribute specifications requiring
-   interoperability will be developed within the IETF, and allocated
-   from the standard space.  A more scalable approach is to recognize
-   the flexibility of the vendor space, while working toward
-   improvements in the quality and availability of RADIUS attribute
-   specifications, regardless of where they are developed.
-
-   It is therefore NOT <em>RECOMMENDED</em> that specifications intended solely
-   for use by a vendor or SDO be translated into the standard space.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Rationale"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Rationale</span>
-
-   This section outlines the rationale behind the above recommendations.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20RADIUS%20Operational%20Model"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  RADIUS Operational Model</span>
-
-   The RADIUS operational model includes several assumptions:
-
-      * The RADIUS protocol is stateless.
-
-      * Provisioning of services is not possible within an Access-Reject
-        or Disconnect-Request.
-
-      * There is a distinction between authorization checks and user
-        authentication.
-
-      * The protocol provides for authentication and integrity
-        protection of packets.
-
-      * The RADIUS protocol is a Request/Response protocol.
-
-      * The protocol defines packet length restrictions.
-
-   While RADIUS server implementations may keep state, the RADIUS
-   protocol is stateless, although information may be passed from one
-   protocol transaction to another via the State Attribute.  As a
-   result, documents that require stateful protocol behavior without use
-   of the State Attribute are inherently incompatible with RADIUS as
-   defined in [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>] and <em>MUST</em> be redesigned.  See [<a href="./rfc5080.html" title='"Common Remote Authentication Dial In User Service (RADIUS) Implementation Issues and Suggested Fixes"'>RFC5080</a>], <a href="#section-2.1.1">Section</a>
-   <a href="#section-2.1.1">2.1.1</a> for additional discussion surrounding the use of the State
-   Attribute.
-
-   As noted in <a href="./rfc5080.html#section-2.6">[RFC5080], Section 2.6</a>, the intent of an Access-Reject is
-   to deny access to the requested service.  As a result, RADIUS does
-   not allow the provisioning of services within an Access-Reject or
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   Disconnect-Request.  Documents that include provisioning of services
-   within an Access-Reject or Disconnect-Request are inherently
-   incompatible with RADIUS and need to be redesigned.
-
-   <a href="./rfc5176.html#section-3">[RFC5176], Section 3</a> notes the following:
-
-      A Disconnect-Request <em>MUST</em> contain only NAS and session
-      identification attributes.  If other attributes are included in a
-      Disconnect-Request, implementations <em>MUST</em> send a Disconnect-NAK; an
-      Error-Cause Attribute with value "Unsupported Attribute" <em>MAY</em> be
-      included.
-
-   As a result, documents that include provisioning of services within a
-   Disconnect-Request are inherently incompatible with RADIUS and need
-   to be redesigned.
-
-   As noted in <a href="./rfc5080.html#section-2.1.1">[RFC5080], Section 2.1.1</a>, a RADIUS Access-Request may not
-   contain user authentication attributes or a State Attribute linking
-   the Access-Request to an earlier user authentication.  Such an
-   Access-Request, known as an authorization check, provides no
-   assurance that it corresponds to a live user.  RADIUS specifications
-   defining attributes containing confidential information (such as
-   Tunnel-Password) should be careful to prohibit such attributes from
-   being returned in response to an authorization check.  Also,
-   <a href="./rfc5080.html#section-2.1.1">[RFC5080], Section 2.1.1</a> notes that authentication mechanisms need to
-   tie a sequence of Access-Request/Access-Challenge packets together
-   into one authentication session.  The State Attribute is <em>RECOMMENDED</em>
-   for this purpose.
-
-   While [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>] did not require authentication and integrity
-   protection of RADIUS Access-Request packets, subsequent
-   authentication mechanism specifications, such as RADIUS/EAP [<a href="./rfc3579.html" title='"RADIUS (Remote Authentication Dial In User Service) Support For Extensible Authentication Protocol (EAP)"'>RFC3579</a>]
-   and Digest Authentication [<a href="./rfc5090.html" title="which improperly uses two attributes from the standard space without having been assigned them by IANA. This self-allocation is forbidden">RFC5090</a>], have mandated authentication and
-   integrity protection for certain RADIUS packets.  [<a href="./rfc5080.html" title='"Common Remote Authentication Dial In User Service (RADIUS) Implementation Issues and Suggested Fixes"'>RFC5080</a>], <a href="#section-2.1.1">Section</a>
-   <a href="#section-2.1.1">2.1.1</a> makes this behavior <em>RECOMMENDED</em> for all Access-Request packets,
-   including Access-Request packets performing authorization checks.  It
-   is expected that specifications for new RADIUS authentication
-   mechanisms will continue this practice.
-
-   The RADIUS protocol as defined in [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>] is a request-response
-   protocol spoken between RADIUS clients and servers.  A single RADIUS
-   request packet ([<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>], [<a href="./rfc2866.html" title='"RADIUS Accounting"'>RFC2866</a>], or [<a href="./rfc5176.html" title='"Dynamic Authorization Extensions to Remote Authentication Dial In User Service (RADIUS)"'>RFC5176</a>]) will solicit in
-   response at most a single response packet, sent to the IP address and
-   port of the RADIUS client that originated the request.  Changes to
-   this model are likely to require major revisions to existing
-   implementations, and this practice is NOT <em>RECOMMENDED</em>.
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   The Length field in the RADIUS packet header is defined in <a href="./rfc2865.html#section-3">[RFC2865]
-   Section 3</a>.  It is noted there that the maximum length of a RADIUS
-   packet is 4096 octets.  As a result, attribute designers <em>SHOULD NOT</em>
-   assume that a RADIUS implementation can successfully process RADIUS
-   packets larger than 4096 octets.
-
-   Even when packets are less than 4096 octets, they may be larger than
-   the Path Maximum Transmission Unit (PMTU).  Any packet larger than
-   the PMTU will be fragmented, making communications more brittle as
-   firewalls and filtering devices often discard fragments.  Transport
-   of fragmented UDP packets appears to be a poorly tested code path on
-   network devices.  Some devices appear to be incapable of transporting
-   fragmented UDP packets, making it difficult to deploy RADIUS in a
-   network where those devices are deployed.  We RECOMMEND that RADIUS
-   messages be kept as small possible.
-
-   If a situation is envisaged where it may be necessary to carry
-   authentication, authorization, or accounting data in a packet larger
-   than 4096 octets, then one of the following approaches is
-   <em>RECOMMENDED</em>:
-
-      1.  Utilization of a sequence of packets.
-          For RADIUS authentication, a sequence of Access-
-          Request/Access-Challenge packets would be used.  For this to
-          be feasible, attribute designers need to enable inclusion of
-          attributes that can consume considerable space within Access-
-          Challenge packets.  To maintain compatibility with existing
-          NASes, either the use of Access-Challenge packets needs to be
-          permissible (as with RADIUS/EAP, defined in [<a href="./rfc3579.html" title='"RADIUS (Remote Authentication Dial In User Service) Support For Extensible Authentication Protocol (EAP)"'>RFC3579</a>]) or
-          support for receipt of an Access-Challenge needs to be
-          indicated by the NAS (as in RADIUS Location [<a href="./rfc5580.html" title='"Carrying Location Objects in RADIUS and Diameter"'>RFC5580</a>]).  Also,
-          the specification needs to clearly describe how attribute
-          splitting is to be signaled and how attributes included within
-          the sequence are to be interpreted, without requiring stateful
-          operation.  Unfortunately, previous specifications have not
-          always exhibited the required foresight.  For example, even
-          though very large filter rules are conceivable, the NAS-
-          Filter-Rule Attribute defined in [<a href="./rfc4849.html" title='"RADIUS Filter Rule Attribute"'>RFC4849</a>] is not permitted in
-          an Access-Challenge packet, nor is a mechanism specified to
-          allow a set of NAS-Filter-Rule Attributes to be split across
-          an Access-Request/Access-Challenge sequence.
-
-          In the case of RADIUS accounting, transporting large amounts
-          of data would require a sequence of Accounting-Request
-          packets.  This is a non-trivial change to RADIUS, since RADIUS
-          accounting clients would need to be modified to split the
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-          attribute stream across multiple Accounting-Requests, and
-          billing servers would need to be modified to reassemble and
-          interpret the attribute stream.
-
-      2.  Utilization of names rather than values.
-          Where an attribute relates to a policy that could conceivably
-          be pre-provisioned on the NAS, then the name of the pre-
-          provisioned policy can be transmitted in an attribute rather
-          than the policy itself, which could be quite large.  An
-          example of this is the Filter-Id Attribute defined in
-          <a href="./rfc2865.html#section-5.11">[RFC2865], Section 5.11</a>, which enables a set of pre-
-          provisioned filter rules to be referenced by name.
-
-      3.  Utilization of Packetization Layer Path MTU Discovery
-          techniques, as specified in [<a href="./rfc4821.html" title='"Packetization Layer Path MTU Discovery"'>RFC4821</a>].
-          As a last resort, where the above techniques cannot be made to
-          work, it may be possible to apply the techniques described in
-          [<a href="./rfc4821.html" title='"Packetization Layer Path MTU Discovery"'>RFC4821</a>] to discover the maximum supported RADIUS packet size
-          on the path between a RADIUS client and a home server.  While
-          such an approach can avoid the complexity of utilization of a
-          sequence of packets, dynamic discovery is likely to be time
-          consuming and cannot be guaranteed to work with existing
-          RADIUS implementations.  As a result, this technique is not
-          generally applicable.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Data%20Model%20Issues"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Data Model Issues</span>
-
-   While <a href="./rfc2865.html#section-5">[RFC2865], Section 5</a> defines basic data types, later
-   specifications did not follow this practice.  This problem has led
-   implementations to define their own names for data types, resulting
-   in non-standard names for those types.
-
-   In addition, the number of vendors and SDOs creating new attributes
-   within the vendor space has grown, and this has led to some
-   divergence in approaches to RADIUS attribute design.  For example,
-   vendors and SDOs have evolved the data model to support functions
-   such as new data types along with attribute grouping and attribute
-   fragmentation, with different groups taking different approaches.
-   These approaches are often incompatible, leading to additional
-   complexity in RADIUS implementations.
-
-   In order to avoid repeating old mistakes, this section describes the
-   history of the RADIUS data model and attempts to codify existing
-   practices.
-
-
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Issues%20with%20Definitions%20of%20Types"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Issues with Definitions of Types</span>
-
-   <a href="./rfc2865.html#section-5">[RFC2865], Section 5</a> explicitly defines five data types: text,
-   string, address, integer, and time.  Both the names and
-   interpretations of the types are given.
-
-   Subsequent RADIUS specifications defined attributes by using type
-   names not defined in [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>], without defining the new names as
-   done in [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>].  They did not consistently indicate the format of
-   the value field using the same conventions as [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>].  As a
-   result, the data type is ambiguous in some cases and may not be
-   consistent among different implementations.
-
-   It is out of the scope of this document to resolve all potential
-   ambiguities within existing RADIUS specifications.  However, in order
-   to prevent future ambiguities, it is <em>RECOMMENDED</em> that future RADIUS
-   attribute specifications explicitly define newly created data types
-   at the beginning of the document and indicate clearly the data type
-   to be used for each attribute.
-
-   For example, [<a href="./rfc3162.html" title='"RADIUS and IPv6"'>RFC3162</a>] utilizes, but does not explicitly define, a
-   type that encapsulates an IPv6 address (Sections <a href="#section-2.1">2.1</a> and <a href="#section-2.4">2.4</a>) and
-   another type that encapsulates an IPv6 prefix (<a href="#section-2.3">Section 2.3</a>).  The
-   IPv6 address attributes confusingly are referenced as type "Address"
-   in the document.  This is a similar name as the "address" type
-   defined in [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>], which was defined to refer solely to IPv4
-   addresses.
-
-   While the Framed-Interface-Id Attribute defined in [<a href="./rfc3162.html" title='"RADIUS and IPv6"'>RFC3162</a>], <a href="#section-2.2">Section</a>
-   <a href="#section-2.2">2.2</a> included a value field of 8 octets, the data type was not
-   explicitly indicated; therefore, there is controversy over whether
-   the format of the data was intended to be an 8-octet String or
-   whether a special Interface-Id type was intended.
-
-   Given that attributes encapsulating an IPv6 address and an IPv6
-   prefix are already in use, it is <em>RECOMMENDED</em> that RADIUS server
-   implementations include support for these as basic types, in addition
-   to the types defined in [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>].  Where the intent is to represent
-   a specific IPv6 address, an "IPv6 address" type <em>SHOULD</em> be used.
-   Although it is possible to use an "IPv6 Prefix" type with a prefix
-   length of 128 to represent an IPv6 address, this usage is NOT
-   <em>RECOMMENDED</em>.  Implementations supporting the Framed-Interface-Id
-   Attribute may select a data type of their choosing (most likely an
-   8-octet String or a special "Interface Id" data type).
-
-
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   It is worth noting that since RADIUS only supports unsigned integers
-   of 32 bits, attributes using signed integer data types or unsigned
-   integer types of other sizes will require code changes and <em>SHOULD</em> be
-   avoided.
-
-   For [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>] RADIUS VSAs, the length limitation of the String and
-   Text types is 247 octets instead of 253 octets, due to the additional
-   overhead of the Vendor-Specific Attribute.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Tagging%20Mechanism"></a></body></html><a class="selflink" href="#section-3.2.2" name="section-3.2.2">3.2.2</a>.  Tagging Mechanism</span>
-
-   [<a id="ref-RFC2868" name="ref-RFC2868">RFC2868</a>] defines an attribute grouping mechanism based on the use of
-   a one-octet tag value.  Tunnel attributes that refer to the same
-   tunnel are grouped together by virtue of using the same tag value.
-
-   This tagging mechanism has some drawbacks.  There are a limited
-   number of unique tags (31).  The tags are not well suited for use
-   with arbitrary binary data values because it is not always possible
-   to tell if the first byte after the Length is the tag or the first
-   byte of the untagged value (assuming the tag is optional).
-
-   Other limitations of the tagging mechanism are that when integer
-   values are tagged, the value portion is reduced to three bytes,
-   meaning only 24-bit numbers can be represented.  The tagging
-   mechanism does not offer an ability to create nested groups of
-   attributes.  Some RADIUS implementations treat tagged attributes as
-   having the additional data types tagged-string and tagged-integer.
-   These types increase the complexity of implementing and managing
-   RADIUS systems.
-
-   For these reasons, the tagging scheme described in <a href="./rfc2868.html">RFC 2868</a> is NOT
-   <em>RECOMMENDED</em> for use as a generic grouping mechanism.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Complex%20Data%20Types"></a></body></html><a class="selflink" href="#section-3.2.3" name="section-3.2.3">3.2.3</a>.  Complex Data Types</span>
-
-   As described in this section, the creation of complex types can lead
-   to interoperability and deployment issues, so they need to be
-   introduced with care.  For example, the RADIUS attribute encoding is
-   summarized in [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>]:
-
-    0                   1                   2
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-   |     Type      |    Length     |  Value ...
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   However, some standard attributes pack multiple sub-fields into the
-   "Value" field, resulting in the creation a non-standard, i.e.,
-   complex, type.  Separating these sub-fields into different
-   attributes, each with its own type and length, would have the
-   following benefits:
-
-      * When manual data entry is required, it is easier for an
-        administrator to enter the data as well-known types rather than
-        as complex structures.
-
-      * It enables additional error checking by leveraging the parsing
-        and validation routines for well-known types.
-
-      * It simplifies implementations by eliminating special-case,
-        attribute-specific parsing.
-
-   One of the fundamental goals of the RADIUS protocol design was to
-   allow RADIUS servers to be configured to support new attributes,
-   without requiring server code changes.  RADIUS server implementations
-   typically provide support for basic data types and define attributes
-   in a data dictionary.  This architecture enables a new attribute to
-   be supported by the addition of a dictionary entry, without requiring
-   other RADIUS server code changes.
-
-   Code changes can also be required in policy management systems and in
-   the RADIUS server's receive path.  These changes are due to
-   limitations in RADIUS server policy languages, which commonly provide
-   for limited operations (such as comparisons or arithmetic operations)
-   on the existing data types.  Many existing RADIUS policy languages
-   typically are not capable of parsing sub-elements or providing more
-   sophisticated matching functionality.
-
-   On the RADIUS client, code changes are typically required in order to
-   implement a new attribute.  The RADIUS client typically has to
-   compose the attribute dynamically when sending.  When receiving, a
-   RADIUS client needs to be able to parse the attribute and carry out
-   the requested service.  As a result, a detailed understanding of the
-   new attribute is required on clients, and data dictionaries are less
-   useful on clients than on servers.
-
-   Given these limitations, the introduction of new types can require
-   code changes on the RADIUS server, which would be unnecessary if
-   basic data types had been used instead.  In addition, if "ad hoc"
-   types are used, attribute-specific parsing is required, which means
-   more complex software to develop and maintain.  More complexity can
-   lead to more error-prone implementations, interoperability problems,
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   and even security vulnerabilities.  These issues can increase costs
-   to network administrators as well as reduce reliability and introduce
-   deployment barriers.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.4.%20%20Complex%20Data%20Type%20Exceptions"></a></body></html><a class="selflink" href="#section-3.2.4" name="section-3.2.4">3.2.4</a>.  Complex Data Type Exceptions</span>
-
-   As described in <a href="#section-2.1">Section 2.1</a>, the introduction of complex data types
-   is discouraged where viable alternatives are available.  A potential
-   exception is attributes that inherently require code changes on both
-   the client and server.  For example, as described in <a href="#appendix-B">Appendix B</a>,
-   complex attributes have been used in situations involving
-   authentication and security attributes, which need to be dynamically
-   computed and verified.  Supporting this functionality requires code
-   changes on both the RADIUS client and server, regardless of the
-   attribute format.  As a result, in most cases, the use of complex
-   attributes to represent these methods is acceptable and does not
-   create additional interoperability or deployment issues.
-
-   Another exception to the recommendation against complex types is for
-   types that can be treated as opaque data by the RADIUS server.  For
-   example, the EAP-Message Attribute, defined in [<a href="./rfc3579.html" title='"RADIUS (Remote Authentication Dial In User Service) Support For Extensible Authentication Protocol (EAP)"'>RFC3579</a>], <a href="#section-3.1">Section</a>
-   <a href="#section-3.1">3.1</a>, contains a complex data type that is an Extensible
-   Authentication Protocol (EAP) packet.  Since these complex types do
-   not need to be parsed by the RADIUS server, the issues arising from
-   server limitations do not arise.  Similarly, since attributes of
-   these complex types can be configured on the server using a data type
-   of String, dictionary limitations are also not encountered.  <a href="#appendix-A.1">Appendix</a>
-   <a href="#appendix-A.1">A.1</a> includes a series of checklists that may be used to analyze a
-   design for <em>RECOMMENDED</em> and NOT <em>RECOMMENDED</em> behavior in relation to
-   complex types.
-
-   If the RADIUS Server simply passes the contents of an attribute to
-   some non-RADIUS portion of the network, then the data is opaque to
-   RADIUS and <em>SHOULD</em> be defined to be of type String.  A concrete way of
-   judging this requirement is whether or not the attribute definition
-   in the RADIUS document contains delineated fields for sub-parts of
-   the data.  If those fields need to be delineated in RADIUS, then the
-   data is not opaque to RADIUS, and it <em>SHOULD</em> be separated into
-   individual RADIUS attributes.
-
-   An examination of existing RADIUS RFCs discloses a number of complex
-   attributes that have already been defined.  <a href="#appendix-B">Appendix B</a> includes a
-   listing of complex attributes used within [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>], [<a href="./rfc2868.html" title='"RADIUS Attributes for Tunnel Protocol Support"'>RFC2868</a>],
-   [<a href="./rfc2869.html" title='"RADIUS Extensions"'>RFC2869</a>], [<a href="./rfc3162.html" title='"RADIUS and IPv6"'>RFC3162</a>], [<a href="./rfc4818.html" title='"RADIUS Delegated-IPv6-Prefix Attribute"'>RFC4818</a>], and [<a href="./rfc4675.html" title='"RADIUS Attributes for Virtual LAN and Priority Support"'>RFC4675</a>].  The discussion of
-   these attributes includes reasons why a complex type is acceptable or
-   suggestions for how the attribute could have been defined to follow
-   the RADIUS data model.
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   In other cases, the data in the complex type are described textually
-   in a specification.  This is possible because the data types are not
-   sent within the attributes but are a matter for endpoint
-   interpretation.  An implementation can define additional data types
-   and use these data types today by matching them to the attribute's
-   textual definition.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Vendor%20Space"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Vendor Space</span>
-
-   The usage model for RADIUS VSAs is described in [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>], <a href="#section-6.2">Section</a>
-   <a href="#section-6.2">6.2</a>:
-
-      Note that RADIUS defines a mechanism for Vendor-Specific
-      extensions (Attribute 26) and the use of that should be encouraged
-      instead of allocation of global attribute types, for functions
-      specific only to one vendor's implementation of RADIUS, where no
-      interoperability is deemed useful.
-
-   Nevertheless, many new attributes have been defined in the vendor
-   space in situations where interoperability is not only useful but is
-   required.  For example, SDOs outside the IETF (such as the IEEE 802
-   and the 3rd Generation Partnership Project (3GPP)) have been assigned
-   Vendor-Ids, enabling them to define their own VSA encoding and assign
-   Vendor types within their own vendor space, as defined by their
-   unique Vendor-Id.
-
-   The use of VSAs by SDOs outside the IETF has gained in popularity for
-   several reasons:
-
-   Efficiency
-      As with SNMP, which defines an "Enterprise" Object Identifier
-      (OID) space suitable for use by vendors as well as other SDOs, the
-      definition of Vendor-Specific Attributes has become a common
-      occurrence as part of standards activity outside the IETF.  For
-      reasons of efficiency, it is easiest if the RADIUS attributes
-      required to manage a standard are developed within the same SDO
-      that develops the standard itself.  As noted in "Transferring MIB
-      Work from IETF Bridge MIB WG to IEEE 802.1 WG" [<a href="./rfc4663.html" title='"Transferring MIB Work from IETF Bridge MIB WG to IEEE 802.1 WG"'>RFC4663</a>], today
-      few vendors are willing to simultaneously fund individuals to
-      participate within an SDO to complete a standard as well as to
-      participate in the IETF in order to complete the associated RADIUS
-      attributes specification.
-
-   Attribute scarcity
-      The standard space is limited to 255 unique attributes.  Of these,
-      only about half remain available for allocation.  In the vendor
-      space, the number of attributes available is a function of the
-      encoding of the attribute (the size of the Vendor type field).
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Interoperability%20Considerations"></a></body></html><a class="selflink" href="#section-3.3.1" name="section-3.3.1">3.3.1</a>.  Interoperability Considerations</span>
-
-   Vendors and SDOs are reminded that the standard space and the
-   enumerated value space for enumerated attributes are reserved for
-   allocation through work published via the IETF, as noted in
-   <a href="./rfc3575.html#section-2.1">[RFC3575], Section 2.1</a>.  In the past, some vendors and SDOs have
-   assigned vendor-specific meaning to "unused" values from the standard
-   space.  This process results in interoperability issues and is
-   counterproductive.  Similarly, the vendor-specific enumeration
-   practice discussed in <a href="./rfc2882.html#section-2.2.1">[RFC2882], Section 2.2.1</a> is NOT <em>RECOMMENDED</em>.
-
-   If it is not possible to follow the IETF process, vendors and SDOs
-   <em>SHOULD</em> self-allocate an attribute, which <em>MUST</em> be in their own vendor
-   space as defined by their unique Vendor-Id, as discussed in Sections
-   3.3.2 and 3.3.3.
-
-   The design and specification of VSAs for multi-vendor usage <em>SHOULD</em> be
-   undertaken with the same level of care as standard RADIUS attributes.
-   Specifically, the provisions of this document that apply to standard
-   RADIUS attributes also apply to VSAs for multi-vendor usage.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.%20%20Vendor%20Allocations"></a></body></html><a class="selflink" href="#section-3.3.2" name="section-3.3.2">3.3.2</a>.  Vendor Allocations</span>
-
-   As noted in <a href="./rfc3575.html#section-2.1">[RFC3575], Section 2.1</a>, vendors are encouraged to utilize
-   VSAs to define functions "specific only to one vendor's
-   implementation of RADIUS, where no interoperability is deemed useful.
-   For functions specific only to one vendor's implementation of RADIUS,
-   the use of that should be encouraged instead of the allocation of
-   global attribute types".
-
-   The recommendation for vendors to allocate attributes from a vendor
-   space rather than via the IETF process is a recognition that vendors
-   desire to assert change control over their own RADIUS specifications.
-   This change control can be obtained by requesting a PEN from the
-   Internet Assigned Number Authority (IANA) for use as a Vendor-Id
-   within a Vendor-Specific Attribute.  The vendor can then allocate
-   attributes within the vendor space defined by that Vendor-Id at their
-   sole discretion.  Similarly, the use of data types (complex or
-   otherwise) within that vendor space is solely under the discretion of
-   the vendor.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.3.%20%20SDO%20Allocations"></a></body></html><a class="selflink" href="#section-3.3.3" name="section-3.3.3">3.3.3</a>.  SDO Allocations</span>
-
-   Given the expanded utilization of RADIUS, it has become apparent that
-   requiring SDOs to accomplish all their RADIUS work within the IETF is
-   inherently inefficient and unscalable.  It is therefore <em>RECOMMENDED</em>
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   that SDO RADIUS Attribute specifications allocate attributes from the
-   vendor space rather than request an allocation from the RADIUS
-   standard space for attributes matching any of the following criteria:
-
-      * Attributes relying on data types not defined within RADIUS
-
-      * Attributes intended primarily for use within an SDO
-
-      * Attributes intended primarily for use within a group of SDOs
-
-   Any new RADIUS attributes or values intended for interoperable use
-   across a broad spectrum of the Internet community <em>SHOULD</em> follow the
-   allocation process defined in [<a href="./rfc3575.html" title='"IANA Considerations for RADIUS (Remote Authentication Dial In User Service)"'>RFC3575</a>].
-
-   The recommendation for SDOs to allocate attributes from a vendor
-   space rather than via the IETF process is a recognition that SDOs
-   desire to assert change control over their own RADIUS specifications.
-   This change control can be obtained by requesting a PEN from the
-   Internet Assigned Number Authority (IANA) for use as a Vendor-Id
-   within a Vendor-Specific Attribute.  The SDO can then allocate
-   attributes within the vendor space defined by that Vendor-Id at their
-   sole discretion.  Similarly, the use of data types (complex or
-   otherwise) within that vendor space is solely under the discretion of
-   the SDO.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20%20Polymorphic%20Attributes"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>.  Polymorphic Attributes</span>
-
-   A polymorphic attribute is one whose format or meaning is dynamic.
-   For example, rather than using a fixed data format, an attribute's
-   format might change based on the contents of another attribute.  Or,
-   the meaning of an attribute may depend on earlier packets in a
-   sequence.
-
-   RADIUS server dictionary entries are typically static, enabling the
-   user to enter the contents of an attribute without support for
-   changing the format based on dynamic conditions.  However, this
-   limitation on static types does not prevent implementations from
-   implementing policies that return different attributes based on the
-   contents of received attributes; this is a common feature of existing
-   RADIUS implementations.
-
-   In general, polymorphism is NOT <em>RECOMMENDED</em>.  Polymorphism rarely
-   enables capabilities that would not be available through use of
-   multiple attributes.  Polymorphism requires code changes in the
-   RADIUS server in situations where attributes with fixed formats would
-   not require such changes.  Thus, polymorphism increases complexity
-   while decreasing generality, without delivering any corresponding
-   benefits.
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   Note that changing an attribute's format dynamically is not the same
-   thing as using a fixed format and computing the attribute itself
-   dynamically.  RADIUS authentication attributes, such as User-
-   Password, EAP-Message, etc., while being computed dynamically, use a
-   fixed format.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  IANA Considerations</span>
-
-   This document has no action items for IANA.  However, it does provide
-   guidelines for Expert Reviewers appointed as described in [<a href="./rfc3575.html" title='"IANA Considerations for RADIUS (Remote Authentication Dial In User Service)"'>RFC3575</a>].
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
-
-   This specification provides guidelines for the design of RADIUS
-   attributes used in authentication, authorization, and accounting.
-   Threats and security issues for this application are described in
-   [<a href="./rfc3579.html" title='"RADIUS (Remote Authentication Dial In User Service) Support For Extensible Authentication Protocol (EAP)"'>RFC3579</a>] and [<a href="./rfc3580.html" title='"IEEE 802.1X Remote Authentication Dial In User Service (RADIUS) Usage Guidelines"'>RFC3580</a>]; security issues encountered in roaming are
-   described in [<a href="./rfc2607.html" title='"Proxy Chaining and Policy Implementation in Roaming"'>RFC2607</a>].
-
-   Obfuscation of RADIUS attributes on a per-attribute basis is
-   necessary in some cases.  The current standard mechanism for this is
-   described in <a href="./rfc2865.html#section-5.2">[RFC2865], Section 5.2</a> (for obscuring User-Password
-   values) and is based on the MD5 algorithm specified in [<a href="./rfc1321.html" title='"The MD5 Message-Digest Algorithm"'>RFC1321</a>].
-   The MD5 and SHA-1 algorithms have recently become a focus of scrutiny
-   and concern in security circles, and as a result, the use of these
-   algorithms in new attributes is NOT <em>RECOMMENDED</em>.  In addition,
-   previous documents referred to this method as generating "encrypted"
-   data.  This terminology is no longer accepted within the
-   cryptographic community.
-
-   Where new RADIUS attributes use cryptographic algorithms, algorithm
-   negotiation <em>SHOULD</em> be supported.  Specification of a mandatory-to-
-   implement algorithm is <em>REQUIRED</em>, and it is <em>RECOMMENDED</em> that the
-   mandatory-to-implement algorithm be certifiable under FIPS 140
-   [<a href="#ref-FIPS" title='"Security Requirements for Cryptographic Modules"'>FIPS</a>].
-
-   Where new RADIUS attributes encapsulate complex data types, or
-   transport opaque data, the security considerations discussed in
-   <a href="#section-5.1">Section 5.1</a> <em>SHOULD</em> be addressed.
-
-   Message authentication in RADIUS is provided largely via the Message-
-   Authenticator attribute.  See <a href="./rfc3579.html#section-3.2">Section 3.2 of [RFC3579]</a> and also
-   <a href="./rfc5080.html#section-2.2.2">Section 2.2.2 of [RFC5080]</a>, which say that client implementations
-   <em>SHOULD</em> include a Message-Authenticator Attribute in every Access-
-   Request.
-
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   In general, the security of the RADIUS protocol is poor.  Robust
-   deployments <em>SHOULD</em> support a secure communications protocol such as
-   IPsec.  See <a href="./rfc3579.html#section-4">Section 4 of [RFC3579]</a> and <a href="./rfc3580.html#section-5">Section 5 of [RFC3580]</a> for a
-   more in-depth explanation of these issues.
-
-   Implementations not following the suggestions outlined in this
-   document may be subject to problems such as ambiguous protocol
-   decoding, packet loss leading to loss of billing information, and
-   denial-of-service attacks.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20New%20Data%20Types%20and%20Complex%20Attributes"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  New Data Types and Complex Attributes</span>
-
-   The introduction of complex data types brings the potential for the
-   introduction of new security vulnerabilities.  Experience shows that
-   the common data types have few security vulnerabilities, or else that
-   all known issues have been found and fixed.  New data types require
-   new code, which may introduce new bugs and therefore new attack
-   vectors.
-
-   Some systems permit complex attributes to be defined via a method
-   that is more capable than traditional RADIUS dictionaries.  These
-   systems can reduce the security threat of new types significantly,
-   but they do not remove it entirely.
-
-   RADIUS servers are highly valued targets, as they control network
-   access and interact with databases that store usernames and
-   passwords.  An extreme outcome of a vulnerability due to a new,
-   complex type would be that an attacker is capable of taking complete
-   control over the RADIUS server.
-
-   The use of attributes representing opaque data does not reduce this
-   threat.  The threat merely moves from the RADIUS server to the system
-   that consumes that opaque data.  The threat is particularly severe
-   when the opaque data originates from the user and is not validated by
-   the NAS.  In those cases, the RADIUS server is potentially exposed to
-   attack by malware residing on an unauthenticated host.
-
-   Any system consuming opaque data that originates from a RADIUS system
-   <em>SHOULD</em> be properly isolated from that RADIUS system and <em>SHOULD</em> run
-   with minimal privileges.  Any potential vulnerabilities in the non-
-   RADIUS system will then have minimal impact on the security of the
-   system as a whole.
-
-
-
-
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  References</span>
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Normative References</span>
-
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]     Bradner, S., "Key words for use in RFCs to Indicate
-                 Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
-
-   [<a id="ref-RFC2865" name="ref-RFC2865">RFC2865</a>]     Rigney, C., Willens, S., Rubens, A., and W. Simpson,
-                 "Remote Authentication Dial In User Service (RADIUS)",
-                 <a href="./rfc2865.html">RFC 2865</a>, June 2000.
-
-   [<a id="ref-RFC3575" name="ref-RFC3575">RFC3575</a>]     Aboba, B., "IANA Considerations for RADIUS (Remote
-                 Authentication Dial In User Service)", <a href="./rfc3575.html">RFC 3575</a>, July
-                 2003.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Informative References</span>
-
-   [<a id="ref-RFC1155" name="ref-RFC1155">RFC1155</a>]     Rose, M. and K. McCloghrie, "Structure and
-                 identification of management information for TCP/IP-
-                 based internets", STD 16, <a href="./rfc1155.html">RFC 1155</a>, May 1990.
-
-   [<a id="ref-RFC1157" name="ref-RFC1157">RFC1157</a>]     Case, J., Fedor, M., Schoffstall, M., and J. Davin,
-                 "Simple Network Management Protocol (SNMP)", <a href="./rfc1157.html">RFC 1157</a>,
-                 May 1990.
-
-   [<a id="ref-RFC1321" name="ref-RFC1321">RFC1321</a>]     Rivest, R., "The MD5 Message-Digest Algorithm", <a href="./rfc1321.html">RFC</a>
-                 <a href="./rfc1321.html">1321</a>, April 1992.
-
-   [<a id="ref-RFC2548" name="ref-RFC2548">RFC2548</a>]     Zorn, G., "Microsoft Vendor-specific RADIUS
-                 Attributes", <a href="./rfc2548.html">RFC 2548</a>, March 1999.
-
-   [<a id="ref-RFC2607" name="ref-RFC2607">RFC2607</a>]     Aboba, B. and J. Vollbrecht, "Proxy Chaining and Policy
-                 Implementation in Roaming", <a href="./rfc2607.html">RFC 2607</a>, June 1999.
-
-   [<a id="ref-RFC2866" name="ref-RFC2866">RFC2866</a>]     Rigney, C., "RADIUS Accounting", <a href="./rfc2866.html">RFC 2866</a>, June 2000.
-
-   [<a id="ref-RFC2868" name="ref-RFC2868">RFC2868</a>]     Zorn, G., Leifer, D., Rubens, A., Shriver, J.,
-                 Holdrege, M., and I. Goyret, "RADIUS Attributes for
-                 Tunnel Protocol Support", <a href="./rfc2868.html">RFC 2868</a>, June 2000.
-
-   [<a id="ref-RFC2869" name="ref-RFC2869">RFC2869</a>]     Rigney, C., Willats, W., and P. Calhoun, "RADIUS
-                 Extensions", <a href="./rfc2869.html">RFC 2869</a>, June 2000.
-
-   [<a id="ref-RFC2882" name="ref-RFC2882">RFC2882</a>]     Mitton, D., "Network Access Servers Requirements:
-                 Extended RADIUS Practices", <a href="./rfc2882.html">RFC 2882</a>, July 2000.
-
-   [<a id="ref-RFC3162" name="ref-RFC3162">RFC3162</a>]     Aboba, B., Zorn, G., and D. Mitton, "RADIUS and IPv6",
-                 <a href="./rfc3162.html">RFC 3162</a>, August 2001.
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   [<a id="ref-RFC3579" name="ref-RFC3579">RFC3579</a>]     Aboba, B. and P. Calhoun, "RADIUS (Remote
-                 Authentication Dial In User Service) Support For
-                 Extensible Authentication Protocol (EAP)", <a href="./rfc3579.html">RFC 3579</a>,
-                 September 2003.
-
-   [<a id="ref-RFC3580" name="ref-RFC3580">RFC3580</a>]     Congdon, P., Aboba, B., Smith, A., Zorn, G., and J.
-                 Roese, "IEEE 802.1X Remote Authentication Dial In User
-                 Service (RADIUS) Usage Guidelines", <a href="./rfc3580.html">RFC 3580</a>, September
-                 2003.
-
-   [<a id="ref-RFC3629" name="ref-RFC3629">RFC3629</a>]     Yergeau, F., "UTF-8, a transformation format of ISO
-                 10646", STD 63, <a href="./rfc3629.html">RFC 3629</a>, November 2003.
-
-   [<a id="ref-RFC4181" name="ref-RFC4181">RFC4181</a>]     Heard, C., Ed., "Guidelines for Authors and Reviewers
-                 of MIB Documents", <a href="./bcp111.html">BCP 111</a>, <a href="./rfc4181.html">RFC 4181</a>, September 2005.
-
-   [<a id="ref-RFC4663" name="ref-RFC4663">RFC4663</a>]     Harrington, D., "Transferring MIB Work from IETF Bridge
-                 MIB WG to IEEE 802.1 WG", <a href="./rfc4663.html">RFC 4663</a>, September 2006.
-
-   [<a id="ref-RFC4675" name="ref-RFC4675">RFC4675</a>]     Congdon, P., Sanchez, M., and B. Aboba, "RADIUS
-                 Attributes for Virtual LAN and Priority Support", <a href="./rfc4675.html">RFC</a>
-                 <a href="./rfc4675.html">4675</a>, September 2006.
-
-   [<a id="ref-RFC4679" name="ref-RFC4679">RFC4679</a>]     Mammoliti, V., Zorn, G., Arberg, P., and R. Rennison,
-                 "DSL Forum Vendor-Specific RADIUS Attributes", <a href="./rfc4679.html">RFC</a>
-                 <a href="./rfc4679.html">4679</a>, September 2006.
-
-   [<a id="ref-RFC4818" name="ref-RFC4818">RFC4818</a>]     Salowey, J. and R. Droms, "RADIUS Delegated-IPv6-Prefix
-                 Attribute", <a href="./rfc4818.html">RFC 4818</a>, April 2007.
-
-   [<a id="ref-RFC4821" name="ref-RFC4821">RFC4821</a>]     Mathis, M. and J. Heffner, "Packetization Layer Path
-                 MTU Discovery", <a href="./rfc4821.html">RFC 4821</a>, March 2007.
-
-   [<a id="ref-RFC4849" name="ref-RFC4849">RFC4849</a>]     Congdon, P., Sanchez, M., and B. Aboba, "RADIUS Filter
-                 Rule Attribute", <a href="./rfc4849.html">RFC 4849</a>, April 2007.
-
-   [<a id="ref-RFC5080" name="ref-RFC5080">RFC5080</a>]     Nelson, D. and A. DeKok, "Common Remote Authentication
-                 Dial In User Service (RADIUS) Implementation Issues and
-                 Suggested Fixes", <a href="./rfc5080.html">RFC 5080</a>, December 2007.
-
-   [<a id="ref-RFC5090" name="ref-RFC5090">RFC5090</a>]     Sterman, B., Sadolevsky, D., Schwartz, D., Williams,
-                 D., and W. Beck, "RADIUS Extension for Digest
-                 Authentication", <a href="./rfc5090.html">RFC 5090</a>, February 2008.
-
-   [<a id="ref-RFC5176" name="ref-RFC5176">RFC5176</a>]     Chiba, M., Dommety, G., Eklund, M., Mitton, D., and B.
-                 Aboba, "Dynamic Authorization Extensions to Remote
-                 Authentication Dial In User Service (RADIUS)", <a href="./rfc5176.html">RFC</a>
-                 <a href="./rfc5176.html">5176</a>, January 2008.
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   [<a id="ref-DOCTORS" name="ref-DOCTORS">DOCTORS</a>]     AAA Doctors Mailing List, www.ietf.org/mail-
-                 archive/web/aaa-doctors.
-
-   [<a id="ref-FIPS" name="ref-FIPS">FIPS</a>]        FIPS 140-3 (DRAFT), "Security Requirements for
-                 Cryptographic Modules",
-                 <a href="http://csrc.nist.gov/publications/PubsFIPS.html">http://csrc.nist.gov/publications/PubsFIPS.html</a>.
-
-   [<a id="ref-IEEE-802.1Q" name="ref-IEEE-802.1Q">IEEE-802.1Q</a>] IEEE Standards for Local and Metropolitan Area
-                 Networks: Draft Standard for Virtual Bridged Local Area
-                 Networks, P802.1Q-2003, January 2003.
-
-   [<a id="ref-RFC5580" name="ref-RFC5580">RFC5580</a>]     Tschofenig, H., Ed., Adrangi, F., Jones, M., Lior, A.,
-                 and B. Aboba, "Carrying Location Objects in RADIUS and
-                 Diameter", <a href="./rfc5580.html">RFC 5580</a>, August 2009.
-
-   [<a id="ref-AAA-SIP" name="ref-AAA-SIP">AAA-SIP</a>]     Sterman, B., Sadolevsky, D., Schwartz, D., Williams,
-                 D., and W. Beck, "RADIUS Extension for Digest
-                 Authentication", Work in Progress, November 2004.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Design%20Guidelines%20Checklist"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Design Guidelines Checklist</span>
-
-   The following text provides guidelines for the design of attributes
-   used by the RADIUS protocol.  Specifications that follow these
-   guidelines are expected to achieve maximum interoperability with
-   minimal changes to existing systems.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.%20Types%20Matching%20the%20RADIUS%20Data%20Model"></a></body></html><a class="selflink" href="#appendix-A.1" name="appendix-A.1">A.1</a>. Types Matching the RADIUS Data Model</span>
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.1.%20Transport%20of%20Basic%20Data%20Types"></a></body></html><a class="selflink" href="#appendix-A.1.1" name="appendix-A.1.1">A.1.1</a>. Transport of Basic Data Types</span>
-
-   Does the data fit within the basic data types described in <a href="#section-2.1">Section</a>
-   <a href="#section-2.1">2.1</a>?  If so, it <em>SHOULD</em> be encapsulated in a [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>] format RADIUS
-   attribute or in a [<a href="./rfc2865.html" title='"Remote Authentication Dial In User Service (RADIUS)"'>RFC2865</a>] format RADIUS VSA that uses one of the
-   existing RADIUS data types.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.2.%20Transport%20of%20Authentication%20and%20Security%20Data"></a></body></html><a class="selflink" href="#appendix-A.1.2" name="appendix-A.1.2">A.1.2</a>. Transport of Authentication and Security Data</span>
-
-   Does the data provide authentication and/or security capabilities for
-   the RADIUS protocol as outlined below?  If so, use of a complex data
-   type is acceptable under the following circumstances:
-
-      * Complex data types that carry authentication methods that RADIUS
-        servers are expected to parse and verify as part of an
-        authentication process.
-
-      * Complex data types that carry security information intended to
-        increase the security of the RADIUS protocol itself.
-
-   Any data type carrying authentication and/or security data that is
-   not meant to be parsed by a RADIUS server is an "opaque data type",
-   as defined in Section A.1.3.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.3.%20Opaque%20Data%20Types"></a></body></html><a class="selflink" href="#appendix-A.1.3" name="appendix-A.1.3">A.1.3</a>. Opaque Data Types</span>
-
-   Does the attribute encapsulate an existing data structure defined
-   outside of the RADIUS specifications?  Can the attribute be treated
-   as opaque data by RADIUS servers (including proxies)?  If both
-   questions can be answered affirmatively, a complex structure <em>MAY</em> be
-   used in a RADIUS specification.
-
-   The specification of the attribute <em>SHOULD</em> define the encapsulating
-   attribute to be of type String.  The specification <em>SHOULD</em> refer to an
-   external document defining the structure.  The specification <em>SHOULD</em>
-   NOT define or describe the structure, for reasons discussed in
-   <a href="#section-3.2.3">Section 3.2.3</a>.
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.1.4.%20Pre-Existing%20Data%20Types"></a></body></html><a class="selflink" href="#appendix-A.1.4" name="appendix-A.1.4">A.1.4</a>. Pre-Existing Data Types</span>
-
-   There is a trade-off in design between reusing existing formats for
-   historical compatibility or choosing new formats for a "better"
-   design.  This trade-off does not always require the "better" design
-   to be used.  As a result, pre-existing complex data types described
-   in <a href="#appendix-B">Appendix B</a> <em>MAY</em> be used.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.%20Improper%20Data%20Types"></a></body></html><a class="selflink" href="#appendix-A.2" name="appendix-A.2">A.2</a>. Improper Data Types</span>
-
-   This section suggests alternatives to data types that do not fall
-   within the "basic data type" definition.  Section A.2.1 describes
-   simple data types, which should be replaced by basic data types.
-   Section A.2.2 describes more complex data types, which should be
-   replaced by multiple attributes using the basic data types.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.1.%20Simple%20Data%20Types"></a></body></html><a class="selflink" href="#appendix-A.2.1" name="appendix-A.2.1">A.2.1</a>. Simple Data Types</span>
-
-   Does the attribute use any of the following data types?  If so, the
-   data type <em>SHOULD</em> be replaced with the suggested alternatives, or it
-   <em>SHOULD NOT</em> be used at all.
-
-      * Signed integers of any size.
-        <em>SHOULD NOT</em> be used.  <em>SHOULD</em> be replaced with one or more
-        unsigned integer attributes.  The definition of the attribute
-        can contain information that would otherwise go into the sign
-        value of the integer.
-
-      * 8-bit unsigned integers.
-        <em>SHOULD</em> be replaced with 32-bit unsigned integer.  There is
-        insufficient justification to save three bytes.
-
-      * 16-bit unsigned integers.
-        <em>SHOULD</em> be replaced with 32-bit unsigned integer.  There is
-        insufficient justification to save two bytes.
-
-      * Unsigned integers of size other than 32 bits.
-        <em>SHOULD</em> be replaced by an unsigned integer of 32 bits.  There is
-        insufficient justification to define a new size of integer.
-
-      * Integers of any size in non-network byte order.
-        <em>SHOULD</em> be replaced by unsigned integer of 32 bits in network.
-        There is no reason to transport integers in any format other
-        than network byte order.
-
-      * Multi-field text strings.
-        Each field <em>SHOULD</em> be encapsulated in a separate attribute.
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-      * Polymorphic attributes.
-        Multiple attributes, each with a static data type, <em>SHOULD</em> be
-        defined instead.
-
-      * Nested attribute-value pairs (AVPs).
-        Attributes should be defined in a flat typespace.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.2.2.%20More%20Complex%20Data%20Types"></a></body></html><a class="selflink" href="#appendix-A.2.2" name="appendix-A.2.2">A.2.2</a>. More Complex Data Types</span>
-
-   Does the attribute:
-
-      * define a complex data type not described in <a href="#appendix-B">Appendix B</a>?
-
-      * that a RADIUS server and/or client is expected to parse,
-        validate, or create the contents of via a dynamic computation
-        (i.e., a type that cannot be treated as opaque data (Section
-        A.1.3))?
-
-      * involve functionality that could be implemented without code
-        changes on both the client and server (i.e., a type that doesn't
-        require dynamic computation and verification, such as those
-        performed for authentication or security attributes)?
-
-   If so, this data type <em>SHOULD</em> be replaced with simpler types, as
-   discussed in <a href="#appendix-A.2.1">Appendix A.2.1</a>.  See also <a href="#section-2.1">Section 2.1</a> for a discussion
-   of why complex types are problematic.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.3.%20Vendor-Specific%20Formats"></a></body></html><a class="selflink" href="#appendix-A.3" name="appendix-A.3">A.3</a>. Vendor-Specific Formats</span>
-
-   Does the specification contain Vendor-Specific Attributes that match
-   any of the following criteria?  If so, the VSA encoding should be
-   replaced with the <a href="./rfc2865.html#section-5.26">[RFC2865], Section 5.26</a> encoding or should not be
-   used at all.
-
-      * Vendor types of more than 8 bits.
-        <em>SHOULD NOT</em> be used.  Vendor types of 8 bits <em>SHOULD</em> be used
-        instead.
-
-      * Vendor lengths of less than 8 bits (i.e., zero bits).
-        <em>SHOULD NOT</em> be used.  Vendor lengths of 8 bits <em>SHOULD</em> be used
-        instead.
-
-      * Vendor lengths of more than 8 bits.
-        <em>SHOULD NOT</em> be used.  Vendor lengths of 8 bits <em>SHOULD</em> be used
-        instead.
-
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-      * Vendor-specific contents that are not in Type-Length-Value
-        format.
-        <em>SHOULD NOT</em> be used.  Vendor-Specific Attributes <em>SHOULD</em> be in
-        Type-Length-Value format.
-
-   In general, Vendor-Specific Attributes <em>SHOULD</em> follow the encoding
-   suggested in <a href="./rfc2865.html#section-5.26">Section 5.26 of [RFC2865]</a>.  Vendor extensions to non-
-   standard encodings are NOT <em>RECOMMENDED</em> as they can negatively affect
-   interoperability.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.4.%20Changes%20to%20the%20RADIUS%20Operational%20Model"></a></body></html><a class="selflink" href="#appendix-A.4" name="appendix-A.4">A.4</a>. Changes to the RADIUS Operational Model</span>
-
-   Does the specification change the RADIUS operation model as outlined
-   in the list below?  If so, then another method of achieving the
-   design objectives <em>SHOULD</em> be used.  Potential problem areas include
-   the following:
-
-      * Defining new commands in RADIUS using attributes.
-        The addition of new commands to RADIUS <em>MUST</em> be handled via
-        allocation of a new Code and not by the use of an attribute.
-        This restriction includes new commands created by overloading
-        the Service-Type Attribute to define new values that modify the
-        functionality of Access-Request packets.
-
-      * Using RADIUS as a transport protocol for data unrelated to
-        authentication, authorization, or accounting.
-        Using RADIUS to transport authentication methods such as EAP is
-        explicitly permitted, even if those methods require the
-        transport of relatively large amounts of data.  Transport of
-        opaque data relating to AAA is also permitted, as discussed in
-        <a href="#section-3.2.3">Section 3.2.3</a>. However, if the specification does not relate to
-        AAA, then RADIUS <em>SHOULD NOT</em> be used.
-
-      * Assuming support for packet lengths greater than 4096 octets.
-        Attribute designers cannot assume that RADIUS implementations
-        can successfully handle packets larger than 4096 octets.  If a
-        specification could lead to a RADIUS packet larger than 4096
-        octets, then the alternatives described in <a href="#section-3.3">Section 3.3</a> <em>SHOULD</em> be
-        considered.
-
-      * Stateless operation.
-        The RADIUS protocol is stateless, and documents that require
-        stateful protocol behavior without the use of the State
-        Attribute need to be redesigned.
-
-
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-      * Provisioning of service in an Access-Reject.
-        Such provisioning is not permitted, and <em>MUST NOT</em> be used.  If
-        limited access needs to be provided, then an Access-Accept with
-        appropriate authorizations can be used instead.
-
-      * Provisioning of service in a Disconnect-Request.
-        Such provisioning is not permitted and <em>MUST NOT</em> be used.  If
-        limited access needs to be provided, then a CoA-Request
-        [<a href="./rfc5176.html" title='"Dynamic Authorization Extensions to Remote Authentication Dial In User Service (RADIUS)"'>RFC5176</a>] with appropriate authorizations can be used instead.
-
-      * Lack of user authentication or authorization restrictions.
-        In an authorization check, where there is no demonstration of a
-        live user, confidential data cannot be returned.  Where there is
-        a link to a previous user authentication, the State Attribute
-        <em>SHOULD</em> be present.
-
-      * Lack of per-packet integrity and authentication.
-        It is expected that documents will support per-packet integrity
-        and authentication.
-
-      * Modification of RADIUS packet sequences.
-        In RADIUS, each request is encapsulated in its own packet and
-        elicits a single response that is sent to the requester.  Since
-        changes to this paradigm are likely to require major
-        modifications to RADIUS client and server implementations, they
-        <em>SHOULD</em> be avoided if possible.
-
-   For further details, see <a href="#section-3.1">Section 3.1</a>.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/A.5.%20Allocation%20of%20Attributes"></a></body></html><a class="selflink" href="#appendix-A.5" name="appendix-A.5">A.5</a>. Allocation of Attributes</span>
-
-   Does the attribute have a limited scope of applicability as outlined
-   below?  If so, then the attributes <em>SHOULD</em> be allocated from the
-   vendor space rather than requesting allocation from the standard
-   space.
-
-      * attributes intended for a vendor to support their own systems
-        and not suitable for general usage
-
-      * attributes relying on data types not defined within RADIUS
-
-      * attributes intended primarily for use within an SDO
-
-      * attributes intended primarily for use within a group of SDOs
-
-   Note that the points listed above do not relax the recommendations
-   discussed in this document.  Instead, they recognize that the RADIUS
-   data model has limitations.  In certain situations where
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   interoperability can be strongly constrained by the SDO or vendor, an
-   expanded data model <em>MAY</em> be used.  It is <em>RECOMMENDED</em>, however, that
-   the RADIUS data model be used, even when it is marginally less
-   efficient than alternatives.
-
-   When attributes are used primarily within a group of SDOs, and are
-   not applicable to the wider Internet community, we expect that one
-   SDO will be responsible for allocation from their own private vendor
-   space.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20B.%20%20Complex%20Attributes"></a></body></html><a class="selflink" href="#appendix-B" name="appendix-B">Appendix B</a>.  Complex Attributes</span>
-
-   This appendix summarizes RADIUS attributes with complex data types
-   that are defined in existing RFCs.
-
-   This appendix is published for informational purposes only and
-   reflects the usage of attributes with complex data types at the time
-   of the publication of this document.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.1.%20CHAP-Password"></a></body></html><a class="selflink" href="#appendix-B.1" name="appendix-B.1">B.1</a>. CHAP-Password</span>
-
-   <a href="./rfc2865.html#section-5.3">[RFC2865], Section 5.3</a> defines the CHAP-Password Attribute, which is
-   sent from the RADIUS client to the RADIUS server in an Access-
-   Request.  The data type of the CHAP Identifier is not given, only the
-   one-octet length:
-
-    0                   1                   2
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-   |     Type      |    Length     |  CHAP Ident   |  String ...
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-
-   Since this is an authentication attribute, code changes are required
-   on the RADIUS client and server to support it, regardless of the
-   attribute format.  Therefore, this complex data type is acceptable in
-   this situation.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.2.%20CHAP-Challenge"></a></body></html><a class="selflink" href="#appendix-B.2" name="appendix-B.2">B.2</a>. CHAP-Challenge</span>
-
-   <a href="./rfc2865.html#section-5.40">[RFC2865], Section 5.40</a> defines the CHAP-Challenge Attribute, which
-   is sent from the RADIUS client to the RADIUS server in an Access-
-   Request.  While the data type of the CHAP Identifier is given, the
-   text also says:
-
-      If the CHAP challenge value is 16 octets long it <em>MAY</em> be placed in
-      the Request Authenticator field instead of using this attribute.
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   Defining attributes to contain values taken from the RADIUS packet
-   header is NOT <em>RECOMMENDED</em>.  Attributes should have values that are
-   packed into a RADIUS AVP.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.3.%20Tunnel-Password"></a></body></html><a class="selflink" href="#appendix-B.3" name="appendix-B.3">B.3</a>. Tunnel-Password</span>
-
-   <a href="./rfc2868.html#section-3.5">[RFC2868], Section 3.5</a> defines the Tunnel-Password Attribute, which
-   is sent from the RADIUS server to the client in an Access-Accept.
-   This attribute includes Tag and Salt fields, as well as a String
-   field that consists of three logical sub-fields: the Data-Length
-   (required and one octet), Password sub-fields (required), and the
-   optional Padding sub-field.  The attribute appears as follows:
-
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Type      |    Length     |     Tag       |   Salt
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-      Salt (cont)  |   String ...
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-   Since this is a security attribute, code changes are required on the
-   RADIUS client and server to support it, regardless of the attribute
-   format.  However, while use of a complex data type is acceptable in
-   this situation, the design of the Tunnel-Password Attribute is
-   problematic from a security perspective since it uses MD5 as a cipher
-   and provides a password to a NAS, potentially without proper
-   authorization.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.4.%20ARAP-Password"></a></body></html><a class="selflink" href="#appendix-B.4" name="appendix-B.4">B.4</a>. ARAP-Password</span>
-
-   <a href="./rfc2869.html#section-5.4">[RFC2869], Section 5.4</a> defines the ARAP-Password Attribute, which is
-   sent from the RADIUS client to the server in an Access-Request.  It
-   contains four 4-octet values instead of having a single Value field:
-
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Type      |    Length     |             Value1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-                                   |             Value2
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-                                   |             Value3
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-                                   |             Value4
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-                                   |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   As with the CHAP-Password Attribute, this is an authentication
-   attribute that would have required code changes on the RADIUS client
-   and server, regardless of format.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.5.%20ARAP-Features"></a></body></html><a class="selflink" href="#appendix-B.5" name="appendix-B.5">B.5</a>. ARAP-Features</span>
-
-   <a href="./rfc2869.html#section-5.5">[RFC2869], Section 5.5</a> defines the ARAP-Features Attribute, which is
-   sent from the RADIUS server to the client in an Access-Accept or
-   Access-Challenge.  It contains a compound string of two single octet
-   values, plus three 4-octet values, which the RADIUS client
-   encapsulates in a feature flags packet in the Apple Remote Access
-   Protocol (ARAP):
-
-   0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Type      |    Length     |     Value1    |    Value2     |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |                           Value3                              |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |                           Value4                              |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |                           Value5                              |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-   Unlike the previous attributes, this attribute contains no encrypted
-   component, nor is it directly involved in authentication.  The
-   individual sub-fields therefore could have been encapsulated in
-   separate attributes.
-
-   While the contents of this attribute are intended to be placed in an
-   ARAP packet, the fields need to be set by the RADIUS server.  Using
-   standard RADIUS data types would have simplified RADIUS server
-   implementations and subsequent management.  The current form of the
-   attribute requires either the RADIUS server implementation or the
-   RADIUS server administrator to understand the internals of the ARAP
-   protocol.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.6.%20Connect-Info"></a></body></html><a class="selflink" href="#appendix-B.6" name="appendix-B.6">B.6</a>. Connect-Info</span>
-
-   <a href="./rfc2869.html#section-5.11">[RFC2869], Section 5.11</a> defines the Connect-Info Attribute, which is
-   used to indicate the nature of the connection.
-
-    0                   1                   2
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Type      |    Length     |     Text...
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   Even though the type is Text, the rest of the description indicates
-   that it is a complex attribute:
-
-      The Text field consists of UTF-8 encoded 10646 [8] characters.
-      The connection speed <em>SHOULD</em> be included at the beginning of the
-      first Connect-Info attribute in the packet.  If the transmit and
-      receive connection speeds differ, they may both be included in the
-      first attribute with the transmit speed first (the speed the NAS
-      modem transmits at), a slash (/), the receive speed, then
-      optionally other information.
-
-      For example, "28800 V42BIS/LAPM" or "52000/31200 V90"
-
-      More than one Connect-Info attribute may be present in an
-      Accounting-Request packet to accommodate expected efforts by ITU
-      to have modems report more connection information in a standard
-      format that might exceed 252 octets.
-
-   This attribute contains no encrypted component and is not directly
-   involved in authentication.  The individual sub-fields could
-   therefore have been encapsulated in separate attributes.
-
-   However, since the definition refers to potential standardization
-   activity within ITU, the Connect-Info Attribute can also be thought
-   of as opaque data whose definition is provided elsewhere.  The
-   Connect-Info Attribute could therefore qualify for an exception as
-   described in <a href="#section-3.2.4">Section 3.2.4</a>.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.7.%20Framed-IPv6-Prefix"></a></body></html><a class="selflink" href="#appendix-B.7" name="appendix-B.7">B.7</a>. Framed-IPv6-Prefix</span>
-
-   <a href="./rfc3162.html#section-2.3">Section 2.3 of [RFC3162]</a> defines the Framed-IPv6-Prefix Attribute,
-   and <a href="./rfc4818.html#section-3">Section 3 of [RFC4818]</a> reuses this format for the Delegated-
-   IPv6-Prefix Attribute; these attributes are sent from the RADIUS
-   server to the client in an Access-Accept.
-
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Type      |    Length     |  Reserved     | Prefix-Length |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-                                Prefix
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-                                Prefix
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-                                Prefix
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-                                Prefix                             |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-   The sub-fields encoded in these attributes are strongly related, and
-   there was no previous definition of this data structure that could be
-   referenced.  Support for this attribute requires code changes on both
-   the client and server, due to a new data type being defined.  In this
-   case, it appears to be acceptable to encode them in one attribute.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.8.%20Egress-VLANID"></a></body></html><a class="selflink" href="#appendix-B.8" name="appendix-B.8">B.8</a>. Egress-VLANID</span>
-
-   <a href="./rfc4675.html#section-2.1">[RFC4675], Section 2.1</a> defines the Egress-VLANID Attribute, which can
-   be sent by a RADIUS client or server.
-
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Type      |    Length     |            Value
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-           Value (cont)            |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-   While it appears superficially to be of type Integer, the Value field
-   is actually a packed structure, as follows:
-
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |  Tag Indic.   |        Pad            |       VLANID          |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-   The length of the VLANID field is defined by the [<a href="#ref-IEEE-802.1Q" title="P802.1Q-2003">IEEE-802.1Q</a>]
-   specification.  The Tag Indicator field is either 0x31 or 0x32, for
-   compatibility with the Egress-VLAN-Name, as discussed below.  The
-   complex structure of Egress-VLANID overlaps with that of the base
-   Integer data type, meaning that no code changes are required for a
-   RADIUS server to support this attribute.  Code changes are required
-   on the NAS, if only to implement the VLAN ID enforcement.
-
-   Given the IEEE VLAN requirements and the limited data model of
-   RADIUS, the chosen method is likely the best of the possible
-   alternatives.
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.9.%20Egress-VLAN-Name"></a></body></html><a class="selflink" href="#appendix-B.9" name="appendix-B.9">B.9</a>. Egress-VLAN-Name</span>
-
-   <a href="./rfc4675.html#section-2.3">[RFC4675], Section 2.3</a> defines the Egress-VLAN-Name Attribute, which
-   can be sent by a RADIUS client or server.
-
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Type      |    Length     |   Tag Indic.  |   String...
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-   The Tag Indicator is either the character '1' or '2', which in ASCII
-   map to the identical values for Tag Indicator in Egress-VLANID above.
-   The complex structure of this attribute is acceptable for reasons
-   identical to those given for Egress-VLANID.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/B.10.%20Digest-%2A"></a></body></html><a class="selflink" href="#appendix-B.10" name="appendix-B.10">B.10</a>. Digest-*</span>
-
-   [<a id="ref-RFC5090" name="ref-RFC5090">RFC5090</a>] attempts to standardize the functionality provided by an
-   expired Internet-Draft [<a href="#ref-AAA-SIP" title='"RADIUS Extension for Digest Authentication"'>AAA-SIP</a>], which improperly uses two
-   attributes from the standard space without having been assigned them
-   by IANA.  This self-allocation is forbidden, as described in <a href="#section-2">Section</a>
-   <a href="#section-2">2</a>.  In addition, the document uses nested attributes, which are
-   discouraged in <a href="#section-2.1">Section 2.1</a>.  The updated document uses basic data
-   types and allocates nearly 20 attributes in the process.
-
-   However, the document has seen wide-spread implementation, but
-   [<a href="./rfc5090.html" title="which improperly uses two attributes from the standard space without having been assigned them by IANA. This self-allocation is forbidden">RFC5090</a>] has not.  One explanation may be that implementors
-   disagreed with the trade-offs made in the updated specification.  It
-   may have been better to simply document the existing format and
-   request IANA allocation of two attributes.  The resulting design
-   would have used nested attributes but may have gained more wide-
-   spread implementation.
-
-Acknowledgments
-
-   We would like to acknowledge David Nelson, Bernard Aboba, Emile van
-   Bergen, Barney Wolff, Glen Zorn, Avi Lior, and Hannes Tschofenig for
-   contributions to this document.
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">DeKok &amp; Weber             Best Current Practice                [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
-<span class="grey"><a href="./rfc6158.html">RFC 6158</a>                RADIUS Design Guidelines              March 2011</span>
-
-
-Authors' Addresses
-
-   Alan DeKok (editor)
-   The FreeRADIUS Server Project
-   <a href="http://freeradius.org/">http://freeradius.org/</a>
-
-   EMail: aland@freeradius.org
-
-
-   Greg Weber
-   Knoxville, TN 37932
-   USA
-
-   EMail: gdweber@gmail.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-DeKok &amp; Weber             Best Current Practice                [Page 38]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
+<br/><br/><div id="footer">
+<div id="footerdivs">
+</div>
+<div style="clear:both"></div>
+<p class="credit">
+<a href="./www.iab.org/.html">IAB</a> • <a href="./www.iana.org/.html">IANA</a>  • <a href="./www.ietf.org.html">IETF</a> • <a href="./www.irtf.org.html">IRTF</a> • <a href="/about/independent">ISE</a> • <a href="./www.internetsociety.org.html">ISOC</a> • <a href="./trustee.ietf.org/.html">IETF Trust</a>
+<br/>
+<a href="/report-summary">Reports</a> • <a href="./www.ietf.org/privacy-statement/.html">Privacy Statement</a> • <a href="/sitemap">Site Map</a> • <a href="/contact">Contact Us</a> </p>
+</div><!--footer-->
+</div><!--page-->
+<button aria-controls="rmp-container-2538" aria-label="Menu Trigger" class="rmp_menu_trigger rmp-menu-trigger-boring" id="rmp_menu_trigger-2538" type="button">
+<span class="rmp-trigger-box">
+<span class="responsive-menu-pro-inner"></span>
+</span>
+</button>
+<div class="rmp-container rmp-container rmp-slide-left" id="rmp-container-2538">
+<div class="rmp-menu-title" id="rmp-menu-title-2538">
+<a href="" id="rmp-menu-title-link" target="_self">
+<span></span>
+</a>
+</div>
+<div class="rmp-menu-wrap" id="rmp-menu-wrap-2538"><ul aria-label="Default Menu" class="rmp-menu" id="rmp-menu-2538" role="menubar"><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-632" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/retrieve/" role="menuitem">Document Retrieval</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-633" role="none"><a class="rmp-menu-item-link" href="/errata.php" role="menuitem">Errata</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-634" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/faq/" role="menuitem">Frequently Asked Questions</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-636" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/rse/format-faq/" role="menuitem">Future Format FAQ</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-637" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/history/" role="menuitem">History</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-638" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/about/" role="menuitem">About Us</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-639" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/other/" role="menuitem">Other Information</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-640" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/pubprocess/" role="menuitem">Publication Process</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-641" role="none"><a class="rmp-menu-item-link" href="/current_queue.php" role="menuitem">Publication Queue</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-642" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/styleguide/" role="menuitem">Style Guide</a></li></ul></div> <div class="rmp-menu-additional-content" id="rmp-menu-additional-content-2538">
+<a href="/search/rfc_search.php">Advanced Search</a>
+<form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="20" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+</div>
 </div>
 </body>
 </html>

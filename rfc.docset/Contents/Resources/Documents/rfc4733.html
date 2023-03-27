@@ -1,37 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="rfc2833" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:4733" name="DC.Identifier"/>
-<meta content="December, 2006" name="DC.Date.Issued"/>
-<meta content="Taylor, Tom" name="DC.Creator"/>
-<meta content="Schulzrinne, Henning" name="DC.Creator"/>
-<meta content="This memo describes how to carry dual-tone multifrequency (DTMF)
-signalling, other tone signals, and telephony events in RTP packets.
-It obsoletes RFC 2833.  This memo captures and expands upon the basic
-framework defined in RFC 2833, but retains only the most basic event
-codes. It sets up an IANA registry to which other event code
-assignments may be added. Companion documents add event codes to this
-registry relating to modem, fax, text telephony, and channel-
-associated signalling events. The remainder of the event codes defined
-in RFC 2833 are conditionally reserved in case other documents revive
-their use.  This document provides a number of clarifications to the
-original document. However, it specifically differs from RFC 2833 by
-removing the requirement that all compliant implementations support
-the DTMF events. Instead, compliant implementations taking part in
-out-of-band negotiations of media stream content indicate what events
-they support. This memo adds three new procedures to the RFC 2833
-framework: subdivision of long events into segments, reporting of
-multiple events in a single packet, and the concept and reporting of
-state events. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
-<meta content="RTP Payload for DTMF Digits, Telephony Tones, and Telephony Signals" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 4733 - RTP Payload for DTMF Digits, Telephony Tones, and Telephony Signals</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="H. Schulzrinne" name="citation_author"/>
+<meta content="T. Taylor" name="citation_author"/>
+<meta content="December, 2006" name="citation_publication_date"/>
+<meta content="RTP Payload for DTMF Digits, Telephony Tones, and Telephony Signals" name="citation_title"/>
+<meta content="10.17487/RFC4733" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc4733" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc4733.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 4733: RTP Payload for DTMF Digits, Telephony Tones, and Telephony Signals</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -60,7 +41,7 @@ state events. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -69,7 +50,7 @@ state events. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -148,19 +129,18 @@ state events. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -174,21 +154,9 @@ state events. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc4733.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc4733" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-avt-rfc2833bis.html" title="draft-ietf-avt-rfc2833bis">draft-ietf-avt-rf...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc4733" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc4733" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=4733">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">Updated by: <a href="./rfc4734.html">4734</a>, <a href="./rfc5244.html">5244</a>                                 PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                     H. Schulzrinne
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc4733.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc4733.txt.pdf">PDF</a>|<a href="/rfc/rfc4733.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc4733" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=4733&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc4733" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc4733" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo">Updated by: <a href="/rfc/rfc4734" target="_blank">4734</a>, <a href="/rfc/rfc5244" target="_blank">5244</a> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                     H. Schulzrinne
 Request for Comments: 4733                                   Columbia U.
 Obsoletes: <a href="./rfc2833.html">2833</a>                                                T. Taylor
 Category: Standards Track                                         Nortel
@@ -240,7 +208,7 @@ Abstract
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -296,7 +264,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -352,13 +320,13 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Terminology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Terminology"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Terminology</span>
 
    In this document, the key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>",
    "<em>SHALL</em>", "<em>SHALL NOT</em>", "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>",
@@ -380,7 +348,7 @@ Table of Contents
 
    SDP     Session Description Protocol [<a href="#ref-9" title='"SDP: Session Description Protocol"'>9</a>]
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Overview"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Overview</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Overview"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Overview</span>
 
    This memo defines two RTP [<a href="#ref-5" title='"RTP: A Transport Protocol for Real-Time Applications"'>5</a>] payload formats, one for carrying
    dual-tone multifrequency (DTMF) digits and other line and trunk
@@ -408,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -417,7 +385,7 @@ Table of Contents
    <a href="#appendix-A">Appendix A</a> describes the changes from <a href="./rfc2833.html">RFC 2833</a> [<a href="#ref-12" title='"RTP Payload for DTMF Digits, Telephony Tones and Telephony Signals"'>12</a>] and in particular
    indicates the disposition of the event codes defined in [<a href="#ref-12" title='"RTP Payload for DTMF Digits, Telephony Tones and Telephony Signals"'>12</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Potential%20Applications"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>.  Potential Applications</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Potential%20Applications"></a></body></html><a class="selflink" href="#section-1.3" id="section-1.3">1.3</a>.  Potential Applications</span>
 
    The payload formats described here may be useful in a number of
    different scenarios.
@@ -464,7 +432,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -506,7 +474,7 @@ Table of Contents
    analogue lines, the signals sent will be in a different class from
    those received.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.4.%20%20Events%2C%20States%2C%20Tone%20Patterns%2C%20and%20Voice-Encoded%20Tones"></a></body></html><a class="selflink" href="#section-1.4" name="section-1.4">1.4</a>.  Events, States, Tone Patterns, and Voice-Encoded Tones</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.4.%20%20Events%2C%20States%2C%20Tone%20Patterns%2C%20and%20Voice-Encoded%20Tones"></a></body></html><a class="selflink" href="#section-1.4" id="section-1.4">1.4</a>.  Events, States, Tone Patterns, and Voice-Encoded Tones</span>
 
    This document provides the means for in-band transport over the
    Internet of two broad classes of signalling information: in-band
@@ -520,7 +488,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -576,13 +544,13 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20RTP%20Payload%20Format%20for%20Named%20Telephone%20Events"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  RTP Payload Format for Named Telephone Events</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20RTP%20Payload%20Format%20for%20Named%20Telephone%20Events"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  RTP Payload Format for Named Telephone Events</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Introduction</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Introduction</span>
 
    The RTP payload format for named telephone events is designated as
    "telephone-event", the media type as "audio/telephone-event".  In
@@ -599,9 +567,9 @@ Table of Contents
    be a very highly-compressed audio codec and is treated the same as
    other codecs.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Use%20of%20RTP%20Header%20Fields"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Use of RTP Header Fields</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Use%20of%20RTP%20Header%20Fields"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Use of RTP Header Fields</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.1.%20%20Timestamp"></a></body></html><a class="selflink" href="#section-2.2.1" name="section-2.2.1">2.2.1</a>.  Timestamp</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.1.%20%20Timestamp"></a></body></html><a class="selflink" href="#section-2.2.1" id="section-2.2.1">2.2.1</a>.  Timestamp</span>
 
    The event duration described in <a href="#section-2.5">Section 2.5</a> begins at the time given
    by the RTP timestamp.  For events that span multiple RTP packets, the
@@ -610,14 +578,14 @@ Table of Contents
    that have to be split into segments (see below, <a href="#section-2.5.1.3">Section 2.5.1.3</a>), the
    timestamp indicates the beginning of the segment.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.2.%20%20Marker%20Bit"></a></body></html><a class="selflink" href="#section-2.2.2" name="section-2.2.2">2.2.2</a>.  Marker Bit</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.2.%20%20Marker%20Bit"></a></body></html><a class="selflink" href="#section-2.2.2" id="section-2.2.2">2.2.2</a>.  Marker Bit</span>
 
    The RTP marker bit indicates the beginning of a new event.  For long-
    lasting events that have to be split into segments (see below,
    <a href="#section-2.5.1.3">Section 2.5.1.3</a>), only the first segment will have the marker bit
    set.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Payload%20Format"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Payload Format</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Payload%20Format"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Payload Format</span>
 
    The payload format for named telephone events is shown in Figure 1.
 
@@ -632,30 +600,30 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.%20%20Event%20Field"></a></body></html><a class="selflink" href="#section-2.3.1" name="section-2.3.1">2.3.1</a>.  Event Field</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.1.%20%20Event%20Field"></a></body></html><a class="selflink" href="#section-2.3.1" id="section-2.3.1">2.3.1</a>.  Event Field</span>
 
    The event field is a number between 0 and 255 identifying a specific
    telephony event.  An IANA registry of event codes for this field has
    been established (see IANA Considerations, <a href="#section-7">Section 7</a>).  The initial
    content of this registry consists of the events defined in <a href="#section-3">Section 3</a>.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.2.%20%20E%20%28%22End%22%29%20Bit"></a></body></html><a class="selflink" href="#section-2.3.2" name="section-2.3.2">2.3.2</a>.  E ("End") Bit</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.2.%20%20E%20%28%22End%22%29%20Bit"></a></body></html><a class="selflink" href="#section-2.3.2" id="section-2.3.2">2.3.2</a>.  E ("End") Bit</span>
 
    If set to a value of one, the "end" bit indicates that this packet
    contains the end of the event.  For long-lasting events that have to
    be split into segments (see below, <a href="#section-2.5.1.3">Section 2.5.1.3</a>), only the final
    packet for the final segment will have the E bit set.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.3.%20%20R%20Bit"></a></body></html><a class="selflink" href="#section-2.3.3" name="section-2.3.3">2.3.3</a>.  R Bit</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.3.%20%20R%20Bit"></a></body></html><a class="selflink" href="#section-2.3.3" id="section-2.3.3">2.3.3</a>.  R Bit</span>
 
    This field is reserved for future use.  The sender <em>MUST</em> set it to
    zero, and the receiver <em>MUST</em> ignore it.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.4.%20%20Volume%20Field"></a></body></html><a class="selflink" href="#section-2.3.4" name="section-2.3.4">2.3.4</a>.  Volume Field</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.4.%20%20Volume%20Field"></a></body></html><a class="selflink" href="#section-2.3.4" id="section-2.3.4">2.3.4</a>.  Volume Field</span>
 
    For DTMF digits and other events representable as tones, this field
    describes the power level of the tone, expressed in dBm0 after
@@ -665,7 +633,7 @@ Table of Contents
    applicable.  For other events, the sender <em>MUST</em> set volume to zero and
    the receiver <em>MUST</em> ignore the value.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.5.%20%20Duration%20Field"></a></body></html><a class="selflink" href="#section-2.3.5" name="section-2.3.5">2.3.5</a>.  Duration Field</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.5.%20%20Duration%20Field"></a></body></html><a class="selflink" href="#section-2.3.5" id="section-2.3.5">2.3.5</a>.  Duration Field</span>
 
    The duration field indicates the duration of the event or segment
    being reported, in timestamp units, expressed as an unsigned integer
@@ -688,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -699,7 +667,7 @@ Table of Contents
       For a sampling rate of 8000 Hz, the duration field is sufficient
       to express event durations of up to approximately 8 seconds.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Optional%20Media%20Type%20Parameters"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Optional Media Type Parameters</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Optional%20Media%20Type%20Parameters"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Optional Media Type Parameters</span>
 
    As indicated in the media type registration for named events in
    <a href="#section-7.1.1">Section 7.1.1</a>, the telephone-event media type supports two optional
@@ -720,7 +688,7 @@ Table of Contents
    number is written as an integer.  If omitted, the default value is
    8000 Hz.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.1.%20%20Relationship%20to%20SDP"></a></body></html><a class="selflink" href="#section-2.4.1" name="section-2.4.1">2.4.1</a>.  Relationship to SDP</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.1.%20%20Relationship%20to%20SDP"></a></body></html><a class="selflink" href="#section-2.4.1" id="section-2.4.1">2.4.1</a>.  Relationship to SDP</span>
 
    The recommended mapping of media type optional parameters to SDP is
    given in <a href="./rfc3555.html#section-3">Section 3 of RFC 3555</a> [<a href="#ref-6" title='"MIME Type Registration of RTP Payload Formats"'>6</a>].  The "rate" media type parameter
@@ -744,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -763,15 +731,15 @@ Table of Contents
 
       audio/telephone-event;events="0-15,66,70";rate="8000"
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Procedures"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  Procedures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Procedures"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  Procedures</span>
 
    This section defines the procedures associated with the named event
    payload type.  Additional procedures may be specified in the
    documentation associated with specific event codes.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.%20%20Sending%20Procedures"></a></body></html><a class="selflink" href="#section-2.5.1" name="section-2.5.1">2.5.1</a>.  Sending Procedures</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.%20%20Sending%20Procedures"></a></body></html><a class="selflink" href="#section-2.5.1" id="section-2.5.1">2.5.1</a>.  Sending Procedures</span>
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.1.%20%20Negotiation%20of%20Payloads"></a></body></html><a class="selflink" href="#section-2.5.1.1" name="section-2.5.1.1">2.5.1.1</a>.  Negotiation of Payloads</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.1.%20%20Negotiation%20of%20Payloads"></a></body></html><a class="selflink" href="#section-2.5.1.1" id="section-2.5.1.1">2.5.1.1</a>.  Negotiation of Payloads</span>
 
    Events are usually sent in combination with or alternating with other
    payload types.  Payload negotiation may specify separate event and
@@ -800,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -845,7 +813,7 @@ Table of Contents
 
    For further discussion of packetization periods see <a href="#section-2.6.3">Section 2.6.3</a>.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.2.%20%20Transmission%20of%20Event%20Packets"></a></body></html><a class="selflink" href="#section-2.5.1.2" name="section-2.5.1.2">2.5.1.2</a>.  Transmission of Event Packets</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.2.%20%20Transmission%20of%20Event%20Packets"></a></body></html><a class="selflink" href="#section-2.5.1.2" id="section-2.5.1.2">2.5.1.2</a>.  Transmission of Event Packets</span>
 
    DTMF digits and other named telephone events are carried as part of
    the audio stream, and they <em>MUST</em> use the same sequence number and
@@ -856,7 +824,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -912,11 +880,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.3.%20%20Long-Duration%20Events"></a></body></html><a class="selflink" href="#section-2.5.1.3" name="section-2.5.1.3">2.5.1.3</a>.  Long-Duration Events</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.3.%20%20Long-Duration%20Events"></a></body></html><a class="selflink" href="#section-2.5.1.3" id="section-2.5.1.3">2.5.1.3</a>.  Long-Duration Events</span>
 
    If an event persists beyond the maximum duration expressible in the
    duration field (0xFFFF), the sender <em>MUST</em> send a packet reporting this
@@ -930,7 +898,7 @@ Table of Contents
    complete event <em>MUST</em> have the E bit set (either on initial
    transmission or on retransmission as described below).
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.3.1.%20%20Exceptional%20Procedure%20for%20Combined%20Payloads"></a></body></html><a class="selflink" href="#section-2.5.1.3.1" name="section-2.5.1.3.1">2.5.1.3.1</a>.  Exceptional Procedure for Combined Payloads</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.3.1.%20%20Exceptional%20Procedure%20for%20Combined%20Payloads"></a></body></html><a class="selflink" href="#section-2.5.1.3.1" id="section-2.5.1.3.1">2.5.1.3.1</a>.  Exceptional Procedure for Combined Payloads</span>
 
    If events are combined as a redundant payload with another payload
    type using <a href="./rfc2198.html">RFC 2198</a> [<a href="#ref-2" title='"RTP Payload for Redundant Audio Data"'>2</a>] redundancy, the above procedure <em>SHALL</em> be
@@ -954,7 +922,7 @@ Table of Contents
       constraining when older generations of events are also included in
       the combined payload.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.4.%20%20Retransmission%20of%20Final%20Packet"></a></body></html><a class="selflink" href="#section-2.5.1.4" name="section-2.5.1.4">2.5.1.4</a>.  Retransmission of Final Packet</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.4.%20%20Retransmission%20of%20Final%20Packet"></a></body></html><a class="selflink" href="#section-2.5.1.4" id="section-2.5.1.4">2.5.1.4</a>.  Retransmission of Final Packet</span>
 
    The final packet for each event and for each segment <em>SHOULD</em> be sent a
    total of three times at the interval used by the source for updates.
@@ -968,7 +936,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -993,7 +961,7 @@ Table of Contents
    <em>MUST</em> continue to set the E bit for any further retransmissions of
    that packet.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.5.%20%20Packing%20Multiple%20Events%20into%20One%20Packet"></a></body></html><a class="selflink" href="#section-2.5.1.5" name="section-2.5.1.5">2.5.1.5</a>.  Packing Multiple Events into One Packet</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.5.%20%20Packing%20Multiple%20Events%20into%20One%20Packet"></a></body></html><a class="selflink" href="#section-2.5.1.5" id="section-2.5.1.5">2.5.1.5</a>.  Packing Multiple Events into One Packet</span>
 
    Multiple named events can be packed into a single RTP packet if and
    only if the events are consecutive and contiguous, i.e., occur
@@ -1024,27 +992,27 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.6.%20%20RTP%20Sequence%20Number"></a></body></html><a class="selflink" href="#section-2.5.1.6" name="section-2.5.1.6">2.5.1.6</a>.  RTP Sequence Number</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.1.6.%20%20RTP%20Sequence%20Number"></a></body></html><a class="selflink" href="#section-2.5.1.6" id="section-2.5.1.6">2.5.1.6</a>.  RTP Sequence Number</span>
 
    The RTP sequence number <em>MUST</em> be incremented by one in each successive
    RTP packet sent.  Incrementing applies to retransmitted as well as
    initial instances of event reports, to permit the receiver to detect
    lost packets for RTP Control Protocol (RTCP) receiver reports.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.%20%20Receiving%20Procedures"></a></body></html><a class="selflink" href="#section-2.5.2" name="section-2.5.2">2.5.2</a>.  Receiving Procedures</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.%20%20Receiving%20Procedures"></a></body></html><a class="selflink" href="#section-2.5.2" id="section-2.5.2">2.5.2</a>.  Receiving Procedures</span>
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.1.%20%20Indication%20of%20Receiver%20Capabilities%20Using%20SDP"></a></body></html><a class="selflink" href="#section-2.5.2.1" name="section-2.5.2.1">2.5.2.1</a>.  Indication of Receiver Capabilities Using SDP</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.1.%20%20Indication%20of%20Receiver%20Capabilities%20Using%20SDP"></a></body></html><a class="selflink" href="#section-2.5.2.1" id="section-2.5.2.1">2.5.2.1</a>.  Indication of Receiver Capabilities Using SDP</span>
 
    Receivers can indicate which named events they can handle, for
    example, by using the Session Description Protocol (<a href="./rfc4566.html">RFC 4566</a> [<a href="#ref-9" title='"SDP: Session Description Protocol"'>9</a>]).
    SDP descriptions using the event payload <em>MUST</em> contain an fmtp format
    attribute that lists the event values that the receiver can process.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.2.%20%20Playout%20of%20Tone%20Events"></a></body></html><a class="selflink" href="#section-2.5.2.2" name="section-2.5.2.2">2.5.2.2</a>.  Playout of Tone Events</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.2.%20%20Playout%20of%20Tone%20Events"></a></body></html><a class="selflink" href="#section-2.5.2.2" id="section-2.5.2.2">2.5.2.2</a>.  Playout of Tone Events</span>
 
    In the gateway scenario, an Internet telephony gateway connecting a
    packet voice network to the PSTN re-creates the DTMF or other tones
@@ -1080,7 +1048,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -1136,7 +1104,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -1167,7 +1135,7 @@ Table of Contents
    ensures backwards compatibility with <a href="./rfc2833.html">RFC 2833</a> [<a href="#ref-12" title='"RTP Payload for DTMF Digits, Telephony Tones and Telephony Signals"'>12</a>], where the volume
    field was defined only for DTMF events.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.3.%20%20Long-Duration%20Events"></a></body></html><a class="selflink" href="#section-2.5.2.3" name="section-2.5.2.3">2.5.2.3</a>.  Long-Duration Events</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.3.%20%20Long-Duration%20Events"></a></body></html><a class="selflink" href="#section-2.5.2.3" id="section-2.5.2.3">2.5.2.3</a>.  Long-Duration Events</span>
 
    If an event report is received with duration equal to the maximum
    duration expressible in the duration field (0xFFFF) and the E bit for
@@ -1192,11 +1160,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.3.1.%20%20Exceptional%20Procedure%20for%20Combined%20Payloads"></a></body></html><a class="selflink" href="#section-2.5.2.3.1" name="section-2.5.2.3.1">2.5.2.3.1</a>.  Exceptional Procedure for Combined Payloads</span>
+<span class="h6"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.3.1.%20%20Exceptional%20Procedure%20for%20Combined%20Payloads"></a></body></html><a class="selflink" href="#section-2.5.2.3.1" id="section-2.5.2.3.1">2.5.2.3.1</a>.  Exceptional Procedure for Combined Payloads</span>
 
    If events are combined as a redundant payload with another payload
    type using <a href="./rfc2198.html">RFC 2198</a> [<a href="#ref-2" title='"RTP Payload for Redundant Audio Data"'>2</a>] redundancy, segments are generated at
@@ -1207,7 +1175,7 @@ Table of Contents
    bit and the adjacency of two reports with the same event code are
    strong indicators in themselves.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.4.%20%20Multiple%20Events%20in%20a%20Packet"></a></body></html><a class="selflink" href="#section-2.5.2.4" name="section-2.5.2.4">2.5.2.4</a>.  Multiple Events in a Packet</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.4.%20%20Multiple%20Events%20in%20a%20Packet"></a></body></html><a class="selflink" href="#section-2.5.2.4" id="section-2.5.2.4">2.5.2.4</a>.  Multiple Events in a Packet</span>
 
    The procedures of <a href="#section-2.5.1.5">Section 2.5.1.5</a> require that if multiple events are
    reported in the same packet, they are contiguous and non-overlapping.
@@ -1219,13 +1187,13 @@ Table of Contents
    start time of the preceding event plus the duration of the preceding
    event.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.5.%20%20Soft%20States"></a></body></html><a class="selflink" href="#section-2.5.2.5" name="section-2.5.2.5">2.5.2.5</a>.  Soft States</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.2.5.%20%20Soft%20States"></a></body></html><a class="selflink" href="#section-2.5.2.5" id="section-2.5.2.5">2.5.2.5</a>.  Soft States</span>
 
    If the duration of a soft state event expires, the receiver <em>SHOULD</em>
    consider the value of the state to be "unknown" unless otherwise
    indicated in the event documentation.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20Congestion%20and%20Performance"></a></body></html><a class="selflink" href="#section-2.6" name="section-2.6">2.6</a>.  Congestion and Performance</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.%20%20Congestion%20and%20Performance"></a></body></html><a class="selflink" href="#section-2.6" id="section-2.6">2.6</a>.  Congestion and Performance</span>
 
    Packet transmission through the Internet is marked by occasional
    periods of congestion lasting on the order of second, during which
@@ -1248,11 +1216,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.1.%20%20Performance%20Requirements"></a></body></html><a class="selflink" href="#section-2.6.1" name="section-2.6.1">2.6.1</a>.  Performance Requirements</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.1.%20%20Performance%20Requirements"></a></body></html><a class="selflink" href="#section-2.6.1" id="section-2.6.1">2.6.1</a>.  Performance Requirements</span>
 
    Typically, an implementation of the telephone-event payload will aim
    to limit the rate at which each of the following impairments occurs:
@@ -1275,7 +1243,7 @@ Table of Contents
    The relative importance of these constraints varies between
    applications.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.2.%20%20Reliability%20Mechanisms"></a></body></html><a class="selflink" href="#section-2.6.2" name="section-2.6.2">2.6.2</a>.  Reliability Mechanisms</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.2.%20%20Reliability%20Mechanisms"></a></body></html><a class="selflink" href="#section-2.6.2" id="section-2.6.2">2.6.2</a>.  Reliability Mechanisms</span>
 
    To improve reliability, all payload types including telephone-events
    can use a jitter buffer, i.e., impose a playout delay, at the
@@ -1304,7 +1272,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -1360,7 +1328,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -1374,7 +1342,7 @@ Table of Contents
    of those events.  This mandate is repeated in the section on IANA
    considerations.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.3.%20%20Adjusting%20to%20Congestion"></a></body></html><a class="selflink" href="#section-2.6.3" name="section-2.6.3">2.6.3</a>.  Adjusting to Congestion</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.6.3.%20%20Adjusting%20to%20Congestion"></a></body></html><a class="selflink" href="#section-2.6.3" id="section-2.6.3">2.6.3</a>.  Adjusting to Congestion</span>
 
    So far, the discussion has been about meeting performance
    requirements.  However, there is also the question of whether
@@ -1416,7 +1384,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -1457,11 +1425,11 @@ Table of Contents
    packets are reporting two events.  Longer intervals require a second
    level of redundancy in at least some packets.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Specification%20of%20Event%20Codes%20for%20DTMF%20Events"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Specification of Event Codes for DTMF Events</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Specification%20of%20Event%20Codes%20for%20DTMF%20Events"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Specification of Event Codes for DTMF Events</span>
 
    This document defines one class of named events: DTMF tones.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20DTMF%20Applications"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  DTMF Applications</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20DTMF%20Applications"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  DTMF Applications</span>
 
    DTMF signalling [<a href="#ref-10" title='"Technical features of push-button telephone sets"'>10</a>] is typically generated by a telephone set or
    possibly by a PBX (Private branch telephone exchange).  DTMF digits
@@ -1472,7 +1440,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -1528,7 +1496,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -1545,7 +1513,7 @@ Table of Contents
    than the first one in <a href="#section-2.5.2.2">Section 2.5.2.2</a>.  This provides some robustness
    against packet loss or congestion.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20DTMF%20Events"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  DTMF Events</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20DTMF%20Events"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  DTMF Events</span>
 
    Table 3 shows the DTMF-related event codes within the telephone-event
    payload format.  The DTMF digits 0-9 and * and # are commonly
@@ -1563,7 +1531,7 @@ Table of Contents
 
                         Table 3: DTMF Named Events
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Congestion%20Considerations"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Congestion Considerations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Congestion%20Considerations"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Congestion Considerations</span>
 
    The key considerations for the delivery of DTMF events are
    reliability and avoidance of unintended breaks within the playout of
@@ -1584,13 +1552,13 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20RTP%20Payload%20Format%20for%20Telephony%20Tones"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  RTP Payload Format for Telephony Tones</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20RTP%20Payload%20Format%20for%20Telephony%20Tones"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  RTP Payload Format for Telephony Tones</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Introduction</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Introduction</span>
 
    As an alternative to describing tones and events by name, as
    described in <a href="#section-2">Section 2</a>, it is sometimes preferable to describe them
@@ -1640,11 +1608,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Examples%20of%20Common%20Telephone%20Tone%20Signals"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Examples of Common Telephone Tone Signals</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Examples%20of%20Common%20Telephone%20Tone%20Signals"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Examples of Common Telephone Tone Signals</span>
 
    As an aid to the implementor, Table 4 summarizes some common tones.
    The rows labeled "ITU ..." refer to ITU-T Recommendation E.180 [<a href="#ref-18" title='"Technical characteristics of tones for the telephone service"'>18</a>].
@@ -1677,15 +1645,15 @@ Table of Contents
 
                    Table 4: Examples of Telephony Tones
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Use%20of%20RTP%20Header%20Fields"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Use of RTP Header Fields</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Use%20of%20RTP%20Header%20Fields"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Use of RTP Header Fields</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.%20%20Timestamp"></a></body></html><a class="selflink" href="#section-4.3.1" name="section-4.3.1">4.3.1</a>.  Timestamp</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.%20%20Timestamp"></a></body></html><a class="selflink" href="#section-4.3.1" id="section-4.3.1">4.3.1</a>.  Timestamp</span>
 
    The RTP timestamp reflects the measurement point for the current
    packet.  The event duration described in <a href="#section-4.3.3">Section 4.3.3</a> begins at that
    time.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.2.%20%20Marker%20Bit"></a></body></html><a class="selflink" href="#section-4.3.2" name="section-4.3.2">4.3.2</a>.  Marker Bit</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.2.%20%20Marker%20Bit"></a></body></html><a class="selflink" href="#section-4.3.2" id="section-4.3.2">4.3.2</a>.  Marker Bit</span>
 
    The tone payload type uses the marker bit to distinguish the first
    RTP packet reporting a given instance of a tone from succeeding
@@ -1696,11 +1664,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.3.%20%20Payload%20Format"></a></body></html><a class="selflink" href="#section-4.3.3" name="section-4.3.3">4.3.3</a>.  Payload Format</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.3.%20%20Payload%20Format"></a></body></html><a class="selflink" href="#section-4.3.3" id="section-4.3.3">4.3.3</a>.  Payload Format</span>
 
    Based on the characteristics described above, this document defines
    an RTP payload format called "tone" that can represent tones
@@ -1752,7 +1720,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -1785,18 +1753,18 @@ Table of Contents
       This field is reserved for future use.  The sender <em>MUST</em> set it to
       zero, and the receiver <em>MUST</em> ignore it.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.4.%20%20Optional%20Media%20Type%20Parameters"></a></body></html><a class="selflink" href="#section-4.3.4" name="section-4.3.4">4.3.4</a>.  Optional Media Type Parameters</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.4.%20%20Optional%20Media%20Type%20Parameters"></a></body></html><a class="selflink" href="#section-4.3.4" id="section-4.3.4">4.3.4</a>.  Optional Media Type Parameters</span>
 
    The "rate" parameter describes the sampling rate, in Hertz.  The
    number is written as an integer.  If omitted, the default value is
    8000 Hz.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Procedures"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Procedures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Procedures"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Procedures</span>
 
    This section defines the procedures associated with the tone payload
    type.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Sending%20Procedures"></a></body></html><a class="selflink" href="#section-4.4.1" name="section-4.4.1">4.4.1</a>.  Sending Procedures</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Sending%20Procedures"></a></body></html><a class="selflink" href="#section-4.4.1" id="section-4.4.1">4.4.1</a>.  Sending Procedures</span>
 
    The sender <em>MAY</em> send an initial tones packet as soon as a tone is
    recognized, or <em>MAY</em> wait until a pre-negotiated packetization period
@@ -1808,7 +1776,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -1833,7 +1801,7 @@ Table of Contents
    old tone reports in the same RTP packet using <a href="./rfc2198.html">RFC 2198</a> [<a href="#ref-2" title='"RTP Payload for Redundant Audio Data"'>2</a>] audio
    redundancy.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Receiving%20Procedures"></a></body></html><a class="selflink" href="#section-4.4.2" name="section-4.4.2">4.4.2</a>.  Receiving Procedures</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Receiving%20Procedures"></a></body></html><a class="selflink" href="#section-4.4.2" id="section-4.4.2">4.4.2</a>.  Receiving Procedures</span>
 
    Receiving implementations play out the tones as received, typically
    with a playout delay to allow for lost packets.  When playing out
@@ -1842,7 +1810,7 @@ Table of Contents
    payload content is identical), the receiving implementation <em>SHOULD</em>
    continue the tone without change or a break.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.%20%20Handling%20of%20Congestion"></a></body></html><a class="selflink" href="#section-4.4.3" name="section-4.4.3">4.4.3</a>.  Handling of Congestion</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.%20%20Handling%20of%20Congestion"></a></body></html><a class="selflink" href="#section-4.4.3" id="section-4.4.3">4.4.3</a>.  Handling of Congestion</span>
 
    If the sender determines that packets are being lost due to
    congestion (e.g., through RTCP receiver reports), it <em>SHOULD</em> increase
@@ -1864,11 +1832,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Examples"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Examples</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Examples"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Examples</span>
 
    Consider a DTMF dialling sequence, where the user dials the digits
    "911" and a sending gateway detects them.  The first digit is 200 ms
@@ -1920,7 +1888,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -1976,7 +1944,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -2032,7 +2000,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -2088,7 +2056,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -2144,7 +2112,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -2200,7 +2168,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -2256,11 +2224,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    RTP packets using the payload formats defined in this specification
    are subject to the security considerations discussed in the RTP
@@ -2289,7 +2257,7 @@ Table of Contents
    uniformity in the receiver side computational complexity for packet
    processing to cause a potential denial-of-service threat.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  IANA Considerations</span>
 
    This document updates the descriptions of two RTP payload formats,
    'telephone-event' and 'tone', and associated Internet media types,
@@ -2298,7 +2266,7 @@ Table of Contents
 
    Within the audio/telephone-event type, events <em>MUST</em> be registered with
    IANA.  Registrations are subject to the policies "Specification
-   Required" and "Expert Review" as defined in <a href="./rfc2434.html">RFC 2434</a> [<a href="#ref-3" title='"Guidelines for Writing an IANA Considerations Section in RFCs"'>3</a>].  The IETF-
+   Required" and "Expert Review" as defined in <a href="./rfc2434.html">RFC 2434</a> [<a href="#ref-3" title="">3</a>].  The IETF-
    appointed expert must ensure that:
 
    a.  the meaning and application of the proposed events are clearly
@@ -2312,7 +2280,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -2368,7 +2336,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -2395,9 +2363,9 @@ Table of Contents
 
             Table 7: audio/telephone-event Event Code Registry
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Media%20Type%20Registrations"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Media Type Registrations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Media%20Type%20Registrations"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Media Type Registrations</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.1.%20%20Registration%20of%20Media%20Type%20audio/telephone-event"></a></body></html><a class="selflink" href="#section-7.1.1" name="section-7.1.1">7.1.1</a>.  Registration of Media Type audio/telephone-event</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.1.%20%20Registration%20of%20Media%20Type%20audio/telephone-event"></a></body></html><a class="selflink" href="#section-7.1.1" id="section-7.1.1">7.1.1</a>.  Registration of Media Type audio/telephone-event</span>
 
    This registration is done in accordance with [<a href="#ref-6" title='"MIME Type Registration of RTP Payload Formats"'>6</a>] and [<a href="#ref-8" title='"Media Type Specifications and Registration Procedures"'>8</a>].
 
@@ -2424,7 +2392,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -2480,11 +2448,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.2.%20%20Registration%20of%20Media%20Type%20audio/tone"></a></body></html><a class="selflink" href="#section-7.1.2" name="section-7.1.2">7.1.2</a>.  Registration of Media Type audio/tone</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.2.%20%20Registration%20of%20Media%20Type%20audio/tone"></a></body></html><a class="selflink" href="#section-7.1.2" id="section-7.1.2">7.1.2</a>.  Registration of Media Type audio/tone</span>
 
    This registration is done in accordance with [<a href="#ref-6" title='"MIME Type Registration of RTP Payload Formats"'>6</a>] and [<a href="#ref-8" title='"Media Type Specifications and Registration Procedures"'>8</a>].
 
@@ -2536,7 +2504,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 42]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-43" id="page-43" name="page-43"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-43"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -2551,7 +2519,7 @@ Table of Contents
       IETF Audio/Video Transport Working Group as delegated from the
       IESG.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgements</span>
 
    Scott Petrack was the original author of <a href="./rfc2833.html">RFC 2833</a>.  Henning
    Schulzrinne later loaned his expertise to complete the document, but
@@ -2570,75 +2538,75 @@ Table of Contents
    Peleg, Raghavendra Prabhu, Moshe Samoha, Todd Sherer, Adrian Soncodi,
    Yaakov Stein, Mira Stevanovic, Alex Urquizo, and Herb Wildfeur.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-1" name="ref-1">1</a>]   Bradner, S., "Key words for use in RFCs to Indicate Requirement
-         Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-1">1</a>]   Bradner, S., "Key words for use in RFCs to Indicate Requirement
+         Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-2" name="ref-2">2</a>]   Perkins, C., Kouvelas, I., Hodson, O., Hardman, V., Handley,
+   [<a id="ref-2">2</a>]   Perkins, C., Kouvelas, I., Hodson, O., Hardman, V., Handley,
          M., Bolot, J., Vega-Garcia, A., and S. Fosse-Parisis, "RTP
          Payload for Redundant Audio Data", <a href="./rfc2198.html">RFC 2198</a>, September 1997.
 
-   [<a id="ref-3" name="ref-3">3</a>]   Narten, T. and H. Alvestrand, "Guidelines for Writing an IANA
-         Considerations Section in RFCs", <a href="./bcp26.html">BCP 26</a>, <a href="./rfc2434.html">RFC 2434</a>,
+   [<a id="ref-3">3</a>]   Narten, T. and H. Alvestrand, "Guidelines for Writing an IANA
+         Considerations Section in RFCs", <a href="https://www.rfc-editor.org/bcp/bcp26">BCP 26</a>, <a href="./rfc2434.html">RFC 2434</a>,
          October 1998.
 
-   [<a id="ref-4" name="ref-4">4</a>]   Rosenberg, J. and H. Schulzrinne, "An Offer/Answer Model with
+   [<a id="ref-4">4</a>]   Rosenberg, J. and H. Schulzrinne, "An Offer/Answer Model with
          Session Description Protocol (SDP)", <a href="./rfc3264.html">RFC 3264</a>, June 2002.
 
 
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 43]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-44" id="page-44" name="page-44"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-44"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-   [<a id="ref-5" name="ref-5">5</a>]   Schulzrinne, H., Casner, S., Frederick, R., and V. Jacobson,
+   [<a id="ref-5">5</a>]   Schulzrinne, H., Casner, S., Frederick, R., and V. Jacobson,
          "RTP: A Transport Protocol for Real-Time Applications", STD 64,
          <a href="./rfc3550.html">RFC 3550</a>, July 2003.
 
-   [<a id="ref-6" name="ref-6">6</a>]   Casner, S. and P. Hoschka, "MIME Type Registration of RTP
+   [<a id="ref-6">6</a>]   Casner, S. and P. Hoschka, "MIME Type Registration of RTP
          Payload Formats", <a href="./rfc3555.html">RFC 3555</a>, July 2003.
 
-   [<a id="ref-7" name="ref-7">7</a>]   Baugher, M., McGrew, D., Naslund, M., Carrara, E., and K.
+   [<a id="ref-7">7</a>]   Baugher, M., McGrew, D., Naslund, M., Carrara, E., and K.
          Norrman, "The Secure Real-time Transport Protocol (SRTP)",
          <a href="./rfc3711.html">RFC 3711</a>, March 2004.
 
-   [<a id="ref-8" name="ref-8">8</a>]   Freed, N. and J. Klensin, "Media Type Specifications and
-         Registration Procedures", <a href="./bcp13.html">BCP 13</a>, <a href="./rfc4288.html">RFC 4288</a>, December 2005.
+   [<a id="ref-8">8</a>]   Freed, N. and J. Klensin, "Media Type Specifications and
+         Registration Procedures", <a href="https://www.rfc-editor.org/bcp/bcp13">BCP 13</a>, <a href="./rfc4288.html">RFC 4288</a>, December 2005.
 
-   [<a id="ref-9" name="ref-9">9</a>]   Handley, M., Jacobson, V., and C. Perkins, "SDP: Session
+   [<a id="ref-9">9</a>]   Handley, M., Jacobson, V., and C. Perkins, "SDP: Session
          Description Protocol", <a href="./rfc4566.html">RFC 4566</a>, July 2006.
 
-   [<a id="ref-10" name="ref-10">10</a>]  International Telecommunication Union, "Technical features of
+   [<a id="ref-10">10</a>]  International Telecommunication Union, "Technical features of
          push-button telephone sets", ITU-T Recommendation Q.23,
          November 1988.
 
-   [<a id="ref-11" name="ref-11">11</a>]  International Telecommunication Union, "Multifrequency push-
+   [<a id="ref-11">11</a>]  International Telecommunication Union, "Multifrequency push-
          button signal reception", ITU-T Recommendation Q.24,
          November 1988.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-12" name="ref-12">12</a>]  Schulzrinne, H. and S. Petrack, "RTP Payload for DTMF Digits,
+   [<a id="ref-12">12</a>]  Schulzrinne, H. and S. Petrack, "RTP Payload for DTMF Digits,
          Telephony Tones and Telephony Signals", <a href="./rfc2833.html">RFC 2833</a>, May 2000.
 
-   [<a id="ref-13" name="ref-13">13</a>]  Schulzrinne, H. and S. Casner, "RTP Profile for Audio and Video
+   [<a id="ref-13">13</a>]  Schulzrinne, H. and S. Casner, "RTP Profile for Audio and Video
          Conferences with Minimal Control", STD 65, <a href="./rfc3551.html">RFC 3551</a>, July 2003.
 
-   [<a id="ref-14" name="ref-14">14</a>]  Kreuter, R., "RTP Payload Format for a 64 kbit/s Transparent
+   [<a id="ref-14">14</a>]  Kreuter, R., "RTP Payload Format for a 64 kbit/s Transparent
          Call", <a href="./rfc4040.html">RFC 4040</a>, April 2005.
 
-   [<a id="ref-15" name="ref-15">15</a>]  Hellstrom, G. and P. Jones, "RTP Payload for Text
+   [<a id="ref-15">15</a>]  Hellstrom, G. and P. Jones, "RTP Payload for Text
          Conversation", <a href="./rfc4103.html">RFC 4103</a>, June 2005.
 
-   [<a id="ref-16" name="ref-16">16</a>]  Schulzrinne, H. and T. Taylor, "Definition of Events for Modem,
+   [<a id="ref-16">16</a>]  Schulzrinne, H. and T. Taylor, "Definition of Events for Modem,
          Fax, and Text Telephony Signals", <a href="./rfc4734.html">RFC 4734</a>, December 2006.
 
-   [<a id="ref-17" name="ref-17">17</a>]  Schulzrinne, H. and T. Taylor, "Definition of Events For
+   [<a id="ref-17">17</a>]  Schulzrinne, H. and T. Taylor, "Definition of Events For
          Channel-Oriented Telephony Signalling", Work In Progress ,
          November 2005.
 
@@ -2648,47 +2616,47 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 44]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-45" id="page-45" name="page-45"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-45"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-   [<a id="ref-18" name="ref-18">18</a>]  International Telecommunication Union, "Technical
+   [<a id="ref-18">18</a>]  International Telecommunication Union, "Technical
          characteristics of tones for the telephone service", ITU-T
          Recommendation E.180/Q.35, March 1998.
 
-   [<a id="ref-19" name="ref-19">19</a>]  International Telecommunication Union, "Pulse code modulation
+   [<a id="ref-19">19</a>]  International Telecommunication Union, "Pulse code modulation
          (PCM) of voice frequencies", ITU-T Recommendation G.711,
          November 1988.
 
-   [<a id="ref-20" name="ref-20">20</a>]  International Telecommunication Union, "Speech coders : Dual
+   [<a id="ref-20">20</a>]  International Telecommunication Union, "Speech coders : Dual
          rate speech coder for multimedia communications transmitting at
          5.3 and 6.3 kbit/s", ITU-T Recommendation G.723.1, March 1996.
 
-   [<a id="ref-21" name="ref-21">21</a>]  International Telecommunication Union, "Coding of speech at 8
+   [<a id="ref-21">21</a>]  International Telecommunication Union, "Coding of speech at 8
          kbit/s using conjugate-structure algebraic-code-excited linear-
          prediction (CS-ACELP)", ITU-T Recommendation G.729, March 1996.
 
-   [<a id="ref-22" name="ref-22">22</a>]  International Telecommunication Union, "ISDN user-network
+   [<a id="ref-22">22</a>]  International Telecommunication Union, "ISDN user-network
          interface layer 3 specification for basic call control", ITU-T
          Recommendation Q.931, May 1998.
 
-   [<a id="ref-23" name="ref-23">23</a>]  International Telecommunication Union, "Procedures for real-
+   [<a id="ref-23">23</a>]  International Telecommunication Union, "Procedures for real-
          time Group 3 facsimile communication over IP networks", ITU-T
          Recommendation T.38, July 2003.
 
-   [<a id="ref-24" name="ref-24">24</a>]  International Telecommunication Union, "Procedures for starting
+   [<a id="ref-24">24</a>]  International Telecommunication Union, "Procedures for starting
          sessions of data transmission over the public switched
          telephone network", ITU-T Recommendation V.8, November 2000.
 
-   [<a id="ref-25" name="ref-25">25</a>]  International Telecommunication Union, "Modem-over-IP networks:
+   [<a id="ref-25">25</a>]  International Telecommunication Union, "Modem-over-IP networks:
          Procedures for the end-to-end connection of V-series DCEs",
          ITU-T Recommendation V.150.1, January 2003.
 
-   [<a id="ref-26" name="ref-26">26</a>]  International Telecommunication Union, "Procedures for
+   [<a id="ref-26">26</a>]  International Telecommunication Union, "Procedures for
          supporting Voice-Band Data over IP Networks", ITU-T
          Recommendation V.152, January 2005.
 
-   [<a id="ref-27" name="ref-27">27</a>]  International Telecommunication Union, "Operational and
+   [<a id="ref-27">27</a>]  International Telecommunication Union, "Operational and
          interworking requirements for {DCEs operating in the text
          telephone mode", ITU-T Recommendation V.18, November 2000.
 
@@ -2704,11 +2672,11 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 45]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-46" id="page-46" name="page-46"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-46"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Summary%20of%20Changes%20from%20RFC%202833"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Summary of Changes from <a href="./rfc2833.html">RFC 2833</a></span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Summary%20of%20Changes%20from%20RFC%202833"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Summary of Changes from <a href="./rfc2833.html">RFC 2833</a></span>
 
    The memo has been significantly restructured, incorporating a large
    number of clarifications to the specification.  With the exception of
@@ -2760,7 +2728,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 46]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-47" id="page-47" name="page-47"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-47"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -2816,7 +2784,7 @@ Table of Contents
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 47]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-48" id="page-48" name="page-48"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-48"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -2872,7 +2840,7 @@ Authors' Addresses
 
 
 <span class="grey">Schulzrinne &amp; Taylor        Standards Track                    [Page 48]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-49" id="page-49" name="page-49"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-49"></span>
 <span class="grey"><a href="./rfc4733.html">RFC 4733</a>               Telephony Events and Tones          December 2006</span>
 
 
@@ -2881,7 +2849,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2006).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -2902,7 +2870,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -2928,11 +2896,6 @@ Acknowledgement
 
 
 Schulzrinne &amp; Taylor        Standards Track                    [Page 49]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,23 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-krovetz-ocb" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:7253" name="DC.Identifier"/>
-<meta content="May, 2014" name="DC.Date.Issued"/>
-<meta content="Krovetz, Ted" name="DC.Creator"/>
-<meta content="Rogaway, Phillip" name="DC.Creator"/>
-<meta content="This document specifies OCB, a shared-key blockcipher-based encryption
-scheme that provides confidentiality and authenticity for plaintexts
-and authenticity for associated data. This document is a product of
-the Crypto Forum Research Group (CFRG)." name="DC.Description.Abstract"/>
-<meta content="The OCB Authenticated-Encryption Algorithm" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7253 - The OCB Authenticated-Encryption Algorithm</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="T. Krovetz" name="citation_author"/>
+<meta content="P. Rogaway" name="citation_author"/>
+<meta content="May, 2014" name="citation_publication_date"/>
+<meta content="The OCB Authenticated-Encryption Algorithm" name="citation_title"/>
+<meta content="10.17487/RFC7253" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7253" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7253.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7253: The OCB Authenticated-Encryption Algorithm</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -46,7 +41,7 @@ the Crypto Forum Research Group (CFRG)." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -55,7 +50,7 @@ the Crypto Forum Research Group (CFRG)." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -134,19 +129,18 @@ the Crypto Forum Research Group (CFRG)." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -160,21 +154,9 @@ the Crypto Forum Research Group (CFRG)." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7253.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7253" title="PDF version of this document">pdf</a>] [<a href="./draft-irtf-cfrg-ocb.html" title="draft-irtf-cfrg-ocb">draft-irtf-cfrg-ocb</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc7253" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc7253" title="Side-by-side diff">Diff2</a>]                  </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Research Task Force (IRTF)                           T. Krovetz
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7253.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7253.txt.pdf">PDF</a>|<a href="/rfc/rfc7253.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7253" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7253&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc7253" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Research Task Force (IRTF)                           T. Krovetz
 Request for Comments: 7253                              Sacramento State
 Category: Informational                                       P. Rogaway
 ISSN: 2070-1721                                                 UC Davis
@@ -212,7 +194,7 @@ Copyright Notice
    Copyright (c) 2014 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -226,7 +208,7 @@ Copyright Notice
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -249,7 +231,7 @@ Table of Contents
       <a href="#section-8.2">8.2</a>. Informative References ....................................<a href="#page-14">14</a>
    <a href="#appendix-A">Appendix A</a>.  Sample Results .......................................<a href="#page-15">15</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Schemes for authenticated encryption (AE) simultaneously provide for
    confidentiality and authentication.  While this goal would
@@ -282,7 +264,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -338,7 +320,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -355,7 +337,7 @@ Table of Contents
    this document are suitable for use in providing confidentiality and
    authentication.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Notation%20and%20Basic%20Operations"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Notation and Basic Operations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Notation%20and%20Basic%20Operations"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Notation and Basic Operations</span>
 
    There are two types of variables used in this specification, strings
    and integers.  Although strings processed by most implementations of
@@ -394,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -411,7 +393,7 @@ Table of Contents
                  otherwise, double(S) == (S[2..128] || 0) xor
                  (zeros(120) || 10000111).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20OCB%20Global%20Parameters"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  OCB Global Parameters</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20OCB%20Global%20Parameters"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  OCB Global Parameters</span>
 
    To be complete, the algorithms in this document require specification
    of two global parameters: a blockcipher operating on 128-bit blocks
@@ -450,11 +432,11 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Named%20OCB%20Parameter%20Sets%20and%20RFC%205116%20Constants"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Named OCB Parameter Sets and <a href="./rfc5116.html">RFC 5116</a> Constants</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Named%20OCB%20Parameter%20Sets%20and%20RFC%205116%20Constants"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Named OCB Parameter Sets and <a href="./rfc5116.html">RFC 5116</a> Constants</span>
 
    The following table gives names to common OCB global parameter sets.
    Each of the AES variants is defined in [<a href="#ref-AES" title='"Advanced Encryption Standard (AES)"'>AES</a>].
@@ -486,14 +468,14 @@ Table of Contents
    instance, an AEAD_AES_128_OCB_TAGLEN64 ciphertext is exactly 64 bits
    longer than its corresponding plaintext.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20OCB%20Algorithms"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  OCB Algorithms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20OCB%20Algorithms"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  OCB Algorithms</span>
 
    OCB is described in this section using pseudocode.  Given any
    collection of inputs of the required types, following the pseudocode
    description for a function will produce the correct output of the
    promised type.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Processing%20Associated%20Data%3A%20HASH"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  Processing Associated Data: HASH</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20Processing%20Associated%20Data%3A%20HASH"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  Processing Associated Data: HASH</span>
 
    OCB has the ability to authenticate unencrypted associated data at
    the same time that it provides for authentication and encrypts a
@@ -506,7 +488,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -562,11 +544,11 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Encryption%3A%20OCB-ENCRYPT"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Encryption: OCB-ENCRYPT</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Encryption%3A%20OCB-ENCRYPT"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Encryption: OCB-ENCRYPT</span>
 
    This function computes a ciphertext (which includes a bundled
    authentication tag) when given a plaintext, associated data, nonce,
@@ -618,7 +600,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -650,7 +632,7 @@ Table of Contents
      //
      C = C_1 || C_2 || ... || C_m || C_* || Tag[1..TAGLEN]
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Decryption%3A%20OCB-DECRYPT"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  Decryption: OCB-DECRYPT</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20Decryption%3A%20OCB-DECRYPT"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  Decryption: OCB-DECRYPT</span>
 
    This function computes a plaintext when given a ciphertext,
    associated data, nonce, and key.  An authentication tag is embedded
@@ -674,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -730,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -748,7 +730,7 @@ Table of Contents
         P = INVALID
      end if
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Security Considerations</span>
 
    OCB achieves two security properties, confidentiality and
    authenticity.  Confidentiality is defined via "indistinguishability
@@ -786,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -828,7 +810,7 @@ Table of Contents
    introduces no security concerns.  Because TAGLEN is fixed, both
    versions allow ciphertexts to be parsed unambiguously.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Nonce%20Requirements"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Nonce Requirements</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Nonce%20Requirements"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Nonce Requirements</span>
 
    It is crucial that, as one encrypts, one does not repeat a nonce.
    The inadvertent reuse of the same nonce by two invocations of the OCB
@@ -842,7 +824,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -867,7 +849,7 @@ Table of Contents
    encrypt could be used by the other to encrypt (e.g., odd and even
    counters).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  IANA Considerations</span>
 
    The Internet Assigned Numbers Authority (IANA) has defined a registry
    for Authenticated Encryption with Associated Data parameters.  The
@@ -888,7 +870,7 @@ Table of Contents
          | AEAD_AES_256_OCB_TAGLEN64  | <a href="#section-3.1">Section 3.1</a> |     28     |
          +----------------------------+-------------+------------+
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgements</span>
 
    The design of the original OCB scheme [<a href="#ref-OCB1" title='"OCB: A Block-Cipher Mode of Operation for Efficient Authenticated Encryption"'>OCB1</a>] was done while Rogaway
    was at Chiang Mai University, Thailand.  Follow-up work [<a href="#ref-OCB2" title='"Efficient Instantiations of Tweakable Blockciphers and Refinements to Modes OCB and PMAC"'>OCB2</a>] was
@@ -898,7 +880,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -912,35 +894,35 @@ Table of Contents
    and to Stephen Farrell and Spencer Dawkins for their careful reading
    and suggestions.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Normative References</span>
 
-   [<a id="ref-AES" name="ref-AES">AES</a>]      National Institute of Standards and Technology, "Advanced
+   [<a id="ref-AES">AES</a>]      National Institute of Standards and Technology, "Advanced
               Encryption Standard (AES)", FIPS PUB 197, November 2001.
 
-   [<a id="ref-RFC5116" name="ref-RFC5116">RFC5116</a>]  McGrew, D., "An Interface and Algorithms for Authenticated
+   [<a id="ref-RFC5116">RFC5116</a>]  McGrew, D., "An Interface and Algorithms for Authenticated
               Encryption", <a href="./rfc5116.html">RFC 5116</a>, January 2008.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Informative References</span>
 
-   [<a id="ref-OCB1" name="ref-OCB1">OCB1</a>]     Rogaway, P., Bellare, M., Black, J., and T. Krovetz, "OCB:
+   [<a id="ref-OCB1">OCB1</a>]     Rogaway, P., Bellare, M., Black, J., and T. Krovetz, "OCB:
               A Block-Cipher Mode of Operation for Efficient
               Authenticated Encryption", ACM Conference on Computer and
               Communications Security 2001 - CCS 2001, ACM Press, 2001.
 
-   [<a id="ref-OCB2" name="ref-OCB2">OCB2</a>]     Rogaway, P., "Efficient Instantiations of Tweakable
+   [<a id="ref-OCB2">OCB2</a>]     Rogaway, P., "Efficient Instantiations of Tweakable
               Blockciphers and Refinements to Modes OCB and PMAC",
               Advances in Cryptology - ASIACRYPT 2004, Springer, 2004.
 
-   [<a id="ref-OCB3" name="ref-OCB3">OCB3</a>]     Krovetz, T. and P. Rogaway, "The Software Performance of
+   [<a id="ref-OCB3">OCB3</a>]     Krovetz, T. and P. Rogaway, "The Software Performance of
               Authenticated-Encryption Modes", Fast Software Encryption
               - FSE 2011 Springer, 2011.
 
-   [<a id="ref-RFC4107" name="ref-RFC4107">RFC4107</a>]  Bellovin, S. and R. Housley, "Guidelines for Cryptographic
-              Key Management", <a href="./bcp107.html">BCP 107</a>, <a href="./rfc4107.html">RFC 4107</a>, June 2005.
+   [<a id="ref-RFC4107">RFC4107</a>]  Bellovin, S. and R. Housley, "Guidelines for Cryptographic
+              Key Management", <a href="https://www.rfc-editor.org/bcp/bcp107">BCP 107</a>, <a href="./rfc4107.html">RFC 4107</a>, June 2005.
 
-   [<a id="ref-RFC5297" name="ref-RFC5297">RFC5297</a>]  Harkins, D., "Synthetic Initialization Vector (SIV)
+   [<a id="ref-RFC5297">RFC5297</a>]  Harkins, D., "Synthetic Initialization Vector (SIV)
               Authenticated Encryption Using the Advanced Encryption
               Standard (AES)", <a href="./rfc5297.html">RFC 5297</a>, October 2008.
 
@@ -954,11 +936,11 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Sample%20Results"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Sample Results</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Sample%20Results"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Sample Results</span>
 
    This section gives sample output values for various inputs when using
    OCB with AES as per the parameters defined in <a href="#section-3.1">Section 3.1</a>.  All
@@ -1010,7 +992,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -1066,7 +1048,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -1122,7 +1104,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -1178,7 +1160,7 @@ Table of Contents
 
 
 <span class="grey">Krovetz &amp; Rogaway             Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc7253.html">RFC 7253</a>              OCB Authenticated Encryption              May 2014</span>
 
 
@@ -1234,11 +1216,6 @@ Authors' Addresses
 
 
 Krovetz &amp; Rogaway             Informational                    [Page 19]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

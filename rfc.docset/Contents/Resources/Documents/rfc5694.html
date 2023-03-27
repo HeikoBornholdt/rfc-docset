@@ -1,25 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:5694" name="DC.Identifier"/>
-<meta content="In this document we provide a survey of P2P (Peer-to-Peer) systems.
-The survey includes a definition and a taxonomy of P2P systems. This
-survey also includes a description of which types of applications can
-be built with P2P technologies and examples of P2P applications that
-are currently in use on the Internet. Finally, we discuss
-architectural tradeoffs and provide guidelines for deciding whether or
-not a P2P architecture would be suitable to meet the requirements of a
-given application." name="DC.Description.Abstract"/>
-<meta content="Gonzalo Camarillo &lt;gonzalo.camarillo@ericsson.com&gt;" name="DC.Creator"/>
-<meta content="November, 2009" name="DC.Date.Issued"/>
-<meta content="Peer-to-peer (P2P) Architectures" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5694 - Peer-to-peer (P2P) Architectures</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="G. Camarillo" name="citation_author"/>
+<meta content="IAB" name="citation_author"/>
+<meta content="November, 2009" name="citation_publication_date"/>
+<meta content="Peer-to-Peer (P2P) Architecture: Definition, Taxonomies, Examples, and Applicability" name="citation_title"/>
+<meta content="10.17487/RFC5694" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5694" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5694.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5694: Peer-to-Peer (P2P) Architecture: Definition, Taxonomies, Examples, and Applicability</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -48,7 +41,7 @@ given application." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -57,7 +50,7 @@ given application." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -136,19 +129,18 @@ given application." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -162,21 +154,9 @@ given application." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5694.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5694" title="PDF version of this document">pdf</a>] [<a href="./draft-iab-p2p-archs.html" title="draft-iab-p2p-archs">draft-iab-p2p-archs</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5694" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5694" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5694">Errata</a>]         </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                  G. Camarillo, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5694.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5694.txt.pdf">PDF</a>|<a href="/rfc/rfc5694.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5694" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5694&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5694" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5694" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                  G. Camarillo, Ed.
 Request for Comments: 5694                                   For the IAB
 Category: Informational                                    November 2009
 
@@ -206,7 +186,7 @@ Copyright Notice
    Copyright (c) 2009 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -228,7 +208,7 @@ Copyright Notice
 
 
 <span class="grey">Camarillo &amp;                  Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -284,11 +264,11 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    P2P (Peer-to-peer) systems have received a great deal of attention in
    the last few years.  A large number of scientific publications
@@ -322,7 +302,7 @@ Table of Contents
    applications and business models by providing several examples
    throughout the document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Definition%20of%20a%20P2P%20System"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Definition of a P2P System</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Definition%20of%20a%20P2P%20System"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Definition of a P2P System</span>
 
    In order to discuss P2P systems, we first need a working definition
    of a P2P system.  In this section, we provide such a definition.  All
@@ -340,7 +320,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -396,7 +376,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -426,7 +406,7 @@ Table of Contents
    apply the definition to the DNS, SIP, P2PSIP, and BitTorrent and
    discuss which of these systems are P2P.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Applying%20the%20P2P%20Definition%20to%20the%20DNS"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Applying the P2P Definition to the DNS</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Applying%20the%20P2P%20Definition%20to%20the%20DNS"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Applying the P2P Definition to the DNS</span>
 
    The DNS is a hierarchical distributed system that has sometimes been
    classified as a hierarchical client-server system and sometimes as a
@@ -435,7 +415,7 @@ Table of Contents
    service providers.  The elements in a system need to be both service
    requesters and service providers for the system to be considered P2P.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Applying%20the%20P2P%20Definition%20to%20SIP"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Applying the P2P Definition to SIP</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Applying%20the%20P2P%20Definition%20to%20SIP"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Applying the P2P Definition to SIP</span>
 
    SIP [<a href="./rfc3261.html" title='"SIP: Session Initiation Protocol"'>RFC3261</a>] is a rendezvous protocol that allows a user to locate a
    remote user and establish a communication session with that remote
@@ -452,7 +432,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -482,7 +462,7 @@ Table of Contents
    transactions that are related to services that do not benefit the
    nodes directly.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Applying%20the%20P2P%20Definition%20to%20P2PSIP"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Applying the P2P Definition to P2PSIP</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Applying%20the%20P2P%20Definition%20to%20P2PSIP"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Applying the P2P Definition to P2PSIP</span>
 
    In addition to the traditional way of using SIP, SIP can also be used
    in a way that is generally referred to as P2PSIP (P2PSIP is the name
@@ -508,11 +488,11 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Applying%20the%20P2P%20Definition%20to%20BitTorrent"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Applying the P2P Definition to BitTorrent</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Applying%20the%20P2P%20Definition%20to%20BitTorrent"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Applying the P2P Definition to BitTorrent</span>
 
    BitTorrent [<a href="#ref-BitTorrent" title='"The BitTorrent Protocol Specification Version 11031"'>BitTorrent</a>] is a protocol used to distribute files.  The
    group of endpoints involved in the distribution of a particular file
@@ -538,7 +518,7 @@ Table of Contents
    strictly considered a P2P system because most endpoints would only be
    providing services, not requesting them.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Functions%20in%20a%20P2P%20System"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Functions in a P2P System</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Functions%20in%20a%20P2P%20System"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Functions in a P2P System</span>
 
    P2P systems include several functions.  The following functions are
    independent of the service provided by the P2P system.  They handle
@@ -564,7 +544,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -600,7 +580,7 @@ Table of Contents
    may not be needed.  <a href="#section-5">Section 5</a> discusses different types of P2P
    applications, which implement different services.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Taxonomies%20for%20P2P%20Systems"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Taxonomies for P2P Systems</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Taxonomies%20for%20P2P%20Systems"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Taxonomies for P2P Systems</span>
 
    Taxonomies classify elements into groups so that they can be studied
    more easily.  People studying similar elements can focus on common
@@ -620,7 +600,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -676,7 +656,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -700,13 +680,13 @@ Table of Contents
    P2P system would still be considered pure even if it had centralized
    enrollment and peer discovery servers.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20P2P%20Applications"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  P2P Applications</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20P2P%20Applications"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  P2P Applications</span>
 
    P2P applications developed so far can be classified into the
    following domains [<a href="#ref-Pourebrahimi2005" title='"A Survey of Peer-to-Peer Networks"'>Pourebrahimi2005</a>] [<a href="#ref-Milojicic2002" title='"Peer-to-Peer Computing"'>Milojicic2002</a>]: content
    distribution, distributed computing, collaboration, and platforms.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Content%20Distribution"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Content Distribution</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Content%20Distribution"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Content Distribution</span>
 
    When most people think of P2P, they think of file sharing.  Moreover,
    they think of illegal file sharing where users exchange material
@@ -732,7 +712,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -788,7 +768,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -819,7 +799,7 @@ Table of Contents
    requests (i.e., the only node interested in receiving data) is a
    central node (i.e., the mobile station).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Distributed%20Computing"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Distributed Computing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Distributed%20Computing"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Distributed Computing</span>
 
    In P2P distributed computing, each task is divided into independent
    subtasks that can be completed in parallel (i.e., no inter-task
@@ -844,7 +824,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -887,7 +867,7 @@ Table of Contents
    DHT-based overlays can also be used to support the configuration of
    different types of radio access networks [<a href="#ref-Oechsner2006" title='"Using Kademlia for the Configuration of B3G Radio Access Nodes"'>Oechsner2006</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Collaboration"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Collaboration</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Collaboration"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Collaboration</span>
 
    P2P collaboration applications include communication applications
    such as Voice over IP (VoIP) and Instant Messaging (IM) applications.
@@ -900,7 +880,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -916,7 +896,7 @@ Table of Contents
    referred to as infrastructureless SIP to distinguish it from
    traditional SIP, which relies on a rendezvous server infrastructure.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Platforms"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Platforms</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Platforms"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Platforms</span>
 
    P2P platforms can be used to build applications on top of them.  They
    provide functionality the applications on top of them can use.  An
@@ -926,7 +906,7 @@ Table of Contents
    preferred environment for application developers.  They take
    advantage of the good scalability properties of P2P systems.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Architectural%20Trade-Offs%20and%20Guidance"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Architectural Trade-Offs and Guidance</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Architectural%20Trade-Offs%20and%20Guidance"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Architectural Trade-Offs and Guidance</span>
 
    In this document, we have provided a brief overview of P2P
    technologies.  In order to dispel the notion that P2P technologies
@@ -956,7 +936,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -1012,7 +992,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -1059,7 +1039,7 @@ Table of Contents
    about the application and its context.  In most scenarios, there are
    no easy rules that tell us when to use which architecture.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Security Considerations</span>
 
    Security is an important issue that needs to be considered when
    choosing an architecture to design a system.  The first issue that
@@ -1068,7 +1048,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -1124,7 +1104,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -1180,7 +1160,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -1198,7 +1178,7 @@ Table of Contents
    structure of the overlay unstable.  Limiting the amount of churn per
    node is a possible defense against this attack.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgements</span>
 
    Jouni Maenpaa and Jani Hautakorpi helped with the literature review.
    Henning Schulzrinne provided useful ideas on how to define P2P
@@ -1208,7 +1188,7 @@ Table of Contents
    Dow Street, and Lixia Zhang participated in the IAB discussions on
    this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20IAB%20Members%20at%20the%20Time%20of%20This%20Writing"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  IAB Members at the Time of This Writing</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20IAB%20Members%20at%20the%20Time%20of%20This%20Writing"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  IAB Members at the Time of This Writing</span>
 
    Marcelo Bagnulo
    Gonzalo Camarillo
@@ -1224,9 +1204,9 @@ Table of Contents
    Jon Peterson
    Dave Thaler
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Informative References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Informative References</span>
 
-   [<a id="ref-Alima2005" name="ref-Alima2005">Alima2005</a>]         Alima, L., Ghodsi, A., and S. Haridi, "A
+   [<a id="ref-Alima2005">Alima2005</a>]         Alima, L., Ghodsi, A., and S. Haridi, "A
                        Framework for Structured Peer-to-peer Overlay
                        Networks", Global Computing, vol. 3267, Lecture
                        Notes in Computer Science: Springer Berlin /
@@ -1236,53 +1216,53 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
-   [<a id="ref-BitTorrent" name="ref-BitTorrent">BitTorrent</a>]        Cohen, B., "The BitTorrent Protocol Specification
+   [<a id="ref-BitTorrent">BitTorrent</a>]        Cohen, B., "The BitTorrent Protocol Specification
                        Version 11031", February 2008.
 
-   [<a id="ref-Cooke2005" name="ref-Cooke2005">Cooke2005</a>]         Cooke, E., Jahanian, F., and D. McPherson, "The
+   [<a id="ref-Cooke2005">Cooke2005</a>]         Cooke, E., Jahanian, F., and D. McPherson, "The
                        Zombie roundup: understanding, detecting, and
                        disrupting botnets", Proceedings of the Steps to
                        Reducing Unwanted Traffic on the Internet
                        Workshop, 2005.
 
-   [<a id="ref-Dean2004" name="ref-Dean2004">Dean2004</a>]          Dean, J. and S. Ghemawat, "MapReduce: Simplified
+   [<a id="ref-Dean2004">Dean2004</a>]          Dean, J. and S. Ghemawat, "MapReduce: Simplified
                        Data Processing on Large Clusters", Sixth
                        Symposium on Operating System Design and
                        Implementation (OSDI '04), December 2004.
 
-   [<a id="ref-Douceur2002" name="ref-Douceur2002">Douceur2002</a>]       Douceur, J., "The Sybil Attack", IPTPS 02,
+   [<a id="ref-Douceur2002">Douceur2002</a>]       Douceur, J., "The Sybil Attack", IPTPS 02,
                        March 2002.
 
-   [<a id="ref-Farber1972" name="ref-Farber1972">Farber1972</a>]        Farber, D. and K. Larson, "The Structure of a
+   [<a id="ref-Farber1972">Farber1972</a>]        Farber, D. and K. Larson, "The Structure of a
                        Distributed Computer System - The Communications
                        System", Proceedings Symposium on Computer-
                        Communications Networks and Teletraffic,
                        Microwave Research Institute of Polytechnic
                        Institute of Brooklyn pp. 21-27, 1972.
 
-   [<a id="ref-Feldman2004" name="ref-Feldman2004">Feldman2004</a>]       Feldman, M., Lai, K., Stoica, I., and J. Chuang,
+   [<a id="ref-Feldman2004">Feldman2004</a>]       Feldman, M., Lai, K., Stoica, I., and J. Chuang,
                        "Robust Incentive Techniques for Peer-to-peer
                        Networks", Proceedings of the 5th ACM Conference
                        on Electronic Commerce, 2004.
 
-   [<a id="ref-Foster1999" name="ref-Foster1999">Foster1999</a>]        Foster, I., "Computational Grids", Chapter 2 of
+   [<a id="ref-Foster1999">Foster1999</a>]        Foster, I., "Computational Grids", Chapter 2 of
                        The Grid: Blueprint for a New
                        Computing Infrastructure, 1999.
 
-   [<a id="ref-Foster2003" name="ref-Foster2003">Foster2003</a>]        Foster, I. and A. Iamnitchi, "On Death, Taxes,
+   [<a id="ref-Foster2003">Foster2003</a>]        Foster, I. and A. Iamnitchi, "On Death, Taxes,
                        and the Convergence of Peer-to-Peer and Grid
                        Computing", 2nd International Workshop in Peer-
                        to-Peer Systems IPTPS '02, 2003.
 
-   [<a id="ref-Gkantsidis2005" name="ref-Gkantsidis2005">Gkantsidis2005</a>]    Gkantsidis, C. and P. Rodriguez, "Network Coding
+   [<a id="ref-Gkantsidis2005">Gkantsidis2005</a>]    Gkantsidis, C. and P. Rodriguez, "Network Coding
                        for Large Scale Content Distribution", IEEE
                        INFOCOM 2005, vol. 4, March 2005.
 
-   [<a id="ref-Gong2001" name="ref-Gong2001">Gong2001</a>]          Gong, L., "JXTA: A Network Programming
+   [<a id="ref-Gong2001">Gong2001</a>]          Gong, L., "JXTA: A Network Programming
                        Environment", IEEE Internet Computing, vol. 5,
                        no. 3, pp. 88-95, 2001.
 
@@ -1292,47 +1272,47 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
-   [<a id="ref-Gray1983" name="ref-Gray1983">Gray1983</a>]          Gray, J. and S. Metz, "Solving the Problems of
+   [<a id="ref-Gray1983">Gray1983</a>]          Gray, J. and S. Metz, "Solving the Problems of
                        Distributed Databases", Data Communications, pp.
                        183-192, 1983.
 
-   [<a id="ref-Gray1986A" name="ref-Gray1986A">Gray1986A</a>]         Gray, J., "An Approach to Decentralized Computer
+   [<a id="ref-Gray1986A">Gray1986A</a>]         Gray, J., "An Approach to Decentralized Computer
                        Systems", IEEE Transactions on Software
                        Engineering, V 12.6, pp. 684-689, 1986.
 
-   [<a id="ref-Gray1986B" name="ref-Gray1986B">Gray1986B</a>]         Gray, J. and M. Anderton, "Distributed Systems:
+   [<a id="ref-Gray1986B">Gray1986B</a>]         Gray, J. and M. Anderton, "Distributed Systems:
                        Four Case Studies", IEEE Transactions on
                        Computers and Tandem Technical Report 85.5, 1986.
 
-   [<a id="ref-Grizzard2007" name="ref-Grizzard2007">Grizzard2007</a>]      Grizzard, J., Sharma, V., Nunnery, C., Kang, B.,
+   [<a id="ref-Grizzard2007">Grizzard2007</a>]      Grizzard, J., Sharma, V., Nunnery, C., Kang, B.,
                        and D. Dragon, "Peer-to-peer botnets: overview
                        and case study", Proceedings of Hot Topics in
                        Understanding Botnets (HotBots '07), 2007.
 
-   [<a id="ref-Gurun2006" name="ref-Gurun2006">Gurun2006</a>]         Gurun, S., Nagpurkar, P., and B. Zhao, "Energy
+   [<a id="ref-Gurun2006">Gurun2006</a>]         Gurun, S., Nagpurkar, P., and B. Zhao, "Energy
                        Consumption and Conservation in Mobile Peer-to-
                        Peer Systems", First International Workshop on
                        Decentralized Resource Sharing in Mobile
                        Computing and Networking (MobiShare 2006), 2006.
 
-   [<a id="ref-Huang2007" name="ref-Huang2007">Huang2007</a>]         Huang, Y., Rabinovich, M., and Z. Xiao,
+   [<a id="ref-Huang2007">Huang2007</a>]         Huang, Y., Rabinovich, M., and Z. Xiao,
                        "Challenges of P2P Streaming Technologies for
                        IPTV Services", IPTC Workshop International World
                        Wide Web Conference, Edinburgh, Scotland, United
                        Kingdom, May 2006.
 
-   [<a id="ref-Juang2002" name="ref-Juang2002">Juang2002</a>]         Juang, P., Oki, H., Wang, Y., Martonosi, M., Peh,
+   [<a id="ref-Juang2002">Juang2002</a>]         Juang, P., Oki, H., Wang, Y., Martonosi, M., Peh,
                        L., and D. Rubenstein, "Energy-efficient
                        computing for wildlife tracking: design tradeoffs
                        and early experiences with ZebraNet", Proceedings
                        of Conference on Computer and Communications
                        Security (CCS), ACM, 2002.
 
-   [<a id="ref-Kanich2008" name="ref-Kanich2008">Kanich2008</a>]        Kanich, C., Levchenko, K., Enright, B., Voelker,
+   [<a id="ref-Kanich2008">Kanich2008</a>]        Kanich, C., Levchenko, K., Enright, B., Voelker,
                        G., Paxson, V., and S. Savage, "Spamalytics: An
                        Empirical Analysis of Spam Marketing Conversion",
                        Proceedings of Conference on Computer and
@@ -1348,53 +1328,53 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
-   [<a id="ref-Kelenyi2008" name="ref-Kelenyi2008">Kelenyi2008</a>]       Kelenyi, I. and J. Nurminen, "Energy Aspects of
+   [<a id="ref-Kelenyi2008">Kelenyi2008</a>]       Kelenyi, I. and J. Nurminen, "Energy Aspects of
                        Peer Cooperation - Measurements with a Mobile DHT
                        System", in Proc. of Cognitive and Cooperative
                        Wireless Networks Workshop in the IEEE
                        International Conference on Communications 2008,
                        Beijing, China, pp. 164-168, 2008.
 
-   [<a id="ref-Leibniz2007" name="ref-Leibniz2007">Leibniz2007</a>]       Leibniz, K., Hobfeld, T., Wakamiya, N., and M.
+   [<a id="ref-Leibniz2007">Leibniz2007</a>]       Leibniz, K., Hobfeld, T., Wakamiya, N., and M.
                        Murata, "Peer-to-Peer vs. Client/Server:
                        Reliability and Efficiency of a Content
                        Distribution Service", Lecture Notes in Computer
                        Science, LNCS 4516, pp. 1161-1172, 2007.
 
-   [<a id="ref-Lua2005" name="ref-Lua2005">Lua2005</a>]           Keong Lua, E., Crowcroft, J., Pias, M., Sharma,
+   [<a id="ref-Lua2005">Lua2005</a>]           Keong Lua, E., Crowcroft, J., Pias, M., Sharma,
                        R., and S. Lim, "A Survey and Comparison of Peer-
                        to-peer Overlay Network Schemes", IEEE
                        Communications Surveys &amp; Tutorials, vol. 7, no.
                        2, Second Quarter 2005, pp. 72-93, 2005.
 
-   [<a id="ref-MMUSIC-ICE" name="ref-MMUSIC-ICE">MMUSIC-ICE</a>]        Rosenberg, J., "Interactive Connectivity
+   [<a id="ref-MMUSIC-ICE">MMUSIC-ICE</a>]        Rosenberg, J., "Interactive Connectivity
                        Establishment (ICE): A Protocol for Network
                        Address Translator (NAT) Traversal for Offer/
                        Answer Protocols", Work in Progress,
                        October 2007.
 
-   [<a id="ref-Mahajan2003" name="ref-Mahajan2003">Mahajan2003</a>]       Mahajan, R., Castro, M., and A. Rowstron,
+   [<a id="ref-Mahajan2003">Mahajan2003</a>]       Mahajan, R., Castro, M., and A. Rowstron,
                        "Controlling the Cost of Reliability in Peer-to-
                        Peer Overlays", Proceedings of the 2nd
                        International Workshop on Peer-to-Peer
                        Systems (IPTPS '03), 2003.
 
-   [<a id="ref-Milojicic2002" name="ref-Milojicic2002">Milojicic2002</a>]     Milojicic, D., Kalogeraki, V., Lukose, R.,
+   [<a id="ref-Milojicic2002">Milojicic2002</a>]     Milojicic, D., Kalogeraki, V., Lukose, R.,
                        Nagaraja, K., Pruyne, J., Richard, B., Rollins,
                        S., and Z. Xu, "Peer-to-Peer Computing",
                        Technical Report HP, March 2002.
 
-   [<a id="ref-Mondal2006" name="ref-Mondal2006">Mondal2006</a>]        Mondal, A. and M. Kitsuregawa, "Privacy, Security
+   [<a id="ref-Mondal2006">Mondal2006</a>]        Mondal, A. and M. Kitsuregawa, "Privacy, Security
                        and Trust in P2P environments: A Perspective",
                        17th International Conference on Database and
                        Expert Systems Applications 2006 (DEXA '06),
                        September 2006.
 
-   [<a id="ref-Octoshape" name="ref-Octoshape">Octoshape</a>]         "Octoshape - Large Scale Live Streaming
+   [<a id="ref-Octoshape">Octoshape</a>]         "Octoshape - Large Scale Live Streaming
                        Solutions", &lt;<a href="http://www.octoshape.com">http://www.octoshape.com</a>&gt;.
 
 
@@ -1404,52 +1384,52 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
-   [<a id="ref-Oechsner2006" name="ref-Oechsner2006">Oechsner2006</a>]      Oechsner, S., Hobfeld, T., Tutschku, K.,
+   [<a id="ref-Oechsner2006">Oechsner2006</a>]      Oechsner, S., Hobfeld, T., Tutschku, K.,
                        Andersen, F., and L. Caviglione, "Using Kademlia
                        for the Configuration of B3G Radio Access Nodes",
                        Proceedings of the Fourth Annual IEEE
                        International Conference on Pervasive Computing
                        and Communications Workshops (PERCOMW '06), 2006.
 
-   [<a id="ref-Peltotalo2008" name="ref-Peltotalo2008">Peltotalo2008</a>]     Peltotalo, J., Harju, J., Jantunen, A., Saukko,
+   [<a id="ref-Peltotalo2008">Peltotalo2008</a>]     Peltotalo, J., Harju, J., Jantunen, A., Saukko,
                        M., and L. Vaatamoinen, "Peer-to-Peer Streaming
                        Technology Survey", Seventh International
                        Conference on Networking, Cancun, Mexico, pp.
                        342-350, April 2008.
 
-   [<a id="ref-Pourebrahimi2005" name="ref-Pourebrahimi2005">Pourebrahimi2005</a>]  Pourebrahimi, B., Bertels, K., and S.
+   [<a id="ref-Pourebrahimi2005">Pourebrahimi2005</a>]  Pourebrahimi, B., Bertels, K., and S.
                        Vassiliadis, "A Survey of Peer-to-Peer Networks",
                        Proceedings of the 16th Annual Workshop on
                        Circuits, Systems, and Signal Processing, ProRisc
                        2005, November 2005.
 
-   [<a id="ref-RFC0959" name="ref-RFC0959">RFC0959</a>]           Postel, J. and J. Reynolds, "File Transfer
+   [<a id="ref-RFC0959">RFC0959</a>]           Postel, J. and J. Reynolds, "File Transfer
                        Protocol", STD 9, <a href="./rfc959.html">RFC 959</a>, October 1985.
 
-   [<a id="ref-RFC2616" name="ref-RFC2616">RFC2616</a>]           Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
+   [<a id="ref-RFC2616">RFC2616</a>]           Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
                        Masinter, L., Leach, P., and T. Berners-Lee,
                        "Hypertext Transfer Protocol -- HTTP/1.1",
                        <a href="./rfc2616.html">RFC 2616</a>, June 1999.
 
-   [<a id="ref-RFC3261" name="ref-RFC3261">RFC3261</a>]           Rosenberg, J., Schulzrinne, H., Camarillo, G.,
+   [<a id="ref-RFC3261">RFC3261</a>]           Rosenberg, J., Schulzrinne, H., Camarillo, G.,
                        Johnston, A., Peterson, J., Sparks, R., Handley,
                        M., and E. Schooler, "SIP: Session Initiation
                        Protocol", <a href="./rfc3261.html">RFC 3261</a>, June 2002.
 
-   [<a id="ref-RFC4981" name="ref-RFC4981">RFC4981</a>]           Risson, J. and T. Moors, "Survey of Research
+   [<a id="ref-RFC4981">RFC4981</a>]           Risson, J. and T. Moors, "Survey of Research
                        towards Robust Peer-to-Peer Networks: Search
                        Methods", <a href="./rfc4981.html">RFC 4981</a>, September 2007.
 
-   [<a id="ref-RFC5128" name="ref-RFC5128">RFC5128</a>]           Srisuresh, P., Ford, B., and D. Kegel, "State of
+   [<a id="ref-RFC5128">RFC5128</a>]           Srisuresh, P., Ford, B., and D. Kegel, "State of
                        Peer-to-Peer (P2P) Communication across Network
                        Address Translators (NATs)", <a href="./rfc5128.html">RFC 5128</a>,
                        March 2008.
 
-   [<a id="ref-Rhea2005" name="ref-Rhea2005">Rhea2005</a>]          Rhea, S., Godfrey, B., Karp, B., Kubiatowicz, J.,
+   [<a id="ref-Rhea2005">Rhea2005</a>]          Rhea, S., Godfrey, B., Karp, B., Kubiatowicz, J.,
                        Ratnasamy, S., Shenker, S., Stoica, I., and H.
                        Yu, "Open DHT: A Public DHT Service and Its
                        Uses", ACM/SIGCOMM CCR'05, vol. 35, Issue 4,
@@ -1460,43 +1440,43 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
-   [<a id="ref-Rodriguez2005" name="ref-Rodriguez2005">Rodriguez2005</a>]     Rodriguez, P., Tan, S., and C. Gkantsidis, "On
+   [<a id="ref-Rodriguez2005">Rodriguez2005</a>]     Rodriguez, P., Tan, S., and C. Gkantsidis, "On
                        the Feasibility of Commercial Legal P2P Content
                        Distribution", ACM/SIGCOMM CCR'06, January 2006.
 
-   [<a id="ref-Roussopoulus2004" name="ref-Roussopoulus2004">Roussopoulus2004</a>]  Roussopoulus, M., Baker, M., Rosenthal, D.,
+   [<a id="ref-Roussopoulus2004">Roussopoulus2004</a>]  Roussopoulus, M., Baker, M., Rosenthal, D.,
                        Guili, T., Maniatis, P., and J. Mogul, "2 P2P or
                        Not 2 P2P", Workshop on Peer-to-Peer Systems,
                        February 2004.
 
-   [<a id="ref-SNC" name="ref-SNC">SNC</a>]               "<a href="http://www.snc.sapmi.net">http://www.snc.sapmi.net</a>".
+   [<a id="ref-SNC">SNC</a>]               "<a href="http://www.snc.sapmi.net">http://www.snc.sapmi.net</a>".
 
-   [<a id="ref-Schollmeier2001" name="ref-Schollmeier2001">Schollmeier2001</a>]   Schollmeier, R., "A Definition of Peer-to-Peer
+   [<a id="ref-Schollmeier2001">Schollmeier2001</a>]   Schollmeier, R., "A Definition of Peer-to-Peer
                        Networking for the Classification of Peer-to-Peer
                        Architectures and Applications", In Proceedings
                        of the First International Conference on Peer-to-
                        Peer Computing P2P '01, 2001.
 
-   [<a id="ref-Seti" name="ref-Seti">Seti</a>]              "SETI@home", &lt;<a href="http://setiathome.berkeley.edu">http://setiathome.berkeley.edu</a>&gt;.
+   [<a id="ref-Seti">Seti</a>]              "SETI@home", &lt;<a href="http://setiathome.berkeley.edu">http://setiathome.berkeley.edu</a>&gt;.
 
-   [<a id="ref-Singh2006" name="ref-Singh2006">Singh2006</a>]         Singh, A., Ngan, T., Druschel, T., and D.
+   [<a id="ref-Singh2006">Singh2006</a>]         Singh, A., Ngan, T., Druschel, T., and D.
                        Wallach, "Eclipse Attacks on Overlay Networks:
                        Threats and Defences", INFOCOM 2006, April 2006.
 
-   [<a id="ref-Skype" name="ref-Skype">Skype</a>]             "Skype", &lt;<a href="http://www.skype.com">http://www.skype.com</a>&gt;.
+   [<a id="ref-Skype">Skype</a>]             "Skype", &lt;<a href="http://www.skype.com">http://www.skype.com</a>&gt;.
 
-   [<a id="ref-Tanenbaum1981" name="ref-Tanenbaum1981">Tanenbaum1981</a>]     Tanenbaum, A. and S. Mullender, "An Overview of
+   [<a id="ref-Tanenbaum1981">Tanenbaum1981</a>]     Tanenbaum, A. and S. Mullender, "An Overview of
                        the Amoeba Distributed Operating System", ACM
                        SIGOPS Operating Systems Review, 1981.
 
-   [<a id="ref-WoW" name="ref-WoW">WoW</a>]               "World of Warcraft Community Site",
+   [<a id="ref-WoW">WoW</a>]               "World of Warcraft Community Site",
                        &lt;<a href="http://www.worldofwarcraft.com">http://www.worldofwarcraft.com</a>&gt;.
 
-   [<a id="ref-Zhang2006" name="ref-Zhang2006">Zhang2006</a>]         Zhang, Y., Chen, C., and X. Wang, "Recent
+   [<a id="ref-Zhang2006">Zhang2006</a>]         Zhang, Y., Chen, C., and X. Wang, "Recent
                        Advances in Research on P2P Networks", In
                        Proceedings of the Seventh International
                        Conference on Parallel and Distributed Computing,
@@ -1516,11 +1496,11 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Historical%20Background%20on%20Distributed%20Architectures"></a></body></html><a class="selflink" href="#appendix-A" name="appendix-A">Appendix A</a>.  Historical Background on Distributed Architectures</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/Appendix%20A.%20%20Historical%20Background%20on%20Distributed%20Architectures"></a></body></html><a class="selflink" href="#appendix-A" id="appendix-A">Appendix A</a>.  Historical Background on Distributed Architectures</span>
 
    In this appendix, we briefly provide historical background on
    distributed architectures.  Distributed architectures are relevant to
@@ -1572,7 +1552,7 @@ Table of Contents
 
 
 <span class="grey">Camarillo &amp;                  Informational                     [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc5694.html">RFC 5694</a>                   P2P Architectures               November 2009</span>
 
 
@@ -1628,11 +1608,6 @@ Authors' Addresses
 
 
 Camarillo &amp;                  Informational                     [Page 26]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

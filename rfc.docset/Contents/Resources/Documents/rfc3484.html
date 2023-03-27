@@ -1,31 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:3484" name="DC.Identifier"/>
-<meta content="This document describes two algorithms, for source address selection
-and for destination address selection. The algorithms specify default
-behavior for all Internet Protocol version 6 (IPv6) implementations.
-They do not override choices made by applications or upper-layer
-protocols, nor do they preclude the development of more advanced
-mechanisms for address selection. The two algorithms share a common
-context, including an optional mechanism for allowing administrators
-to provide policy that can override the default behavior. In dual
-stack implementations, the destination address selection algorithm can
-consider both IPv4 and IPv6 addresses - depending on the available
-source addresses, the algorithm might prefer IPv6 addresses over IPv4
-addresses, or vice-versa. All IPv6 nodes, including both hosts and
-routers, must implement default address selection as defined in this
-specification. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
-<meta content="Richard Draves &lt;richdr@microsoft.com&gt;" name="DC.Creator"/>
-<meta content="February, 2003" name="DC.Date.Issued"/>
-<meta content="Default Address Selection for Internet Protocol version 6 (IPv6)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 3484 - Default Address Selection for Internet Protocol version 6 (IPv6)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="R. Draves" name="citation_author"/>
+<meta content="February, 2003" name="citation_publication_date"/>
+<meta content="Default Address Selection for Internet Protocol version 6 (IPv6) " name="citation_title"/>
+<meta content="10.17487/RFC3484" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc3484" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc3484.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 3484: Default Address Selection for Internet Protocol version 6 (IPv6) </title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -54,7 +40,7 @@ specification. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -63,7 +49,7 @@ specification. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -142,19 +128,18 @@ specification. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -168,21 +153,9 @@ specification. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgbrown" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc3484.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc3484" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-ipv6-default-addr-select.html" title="draft-ietf-ipv6-default-addr-select">draft-ietf-ipv6-d...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc3484" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc3484" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">Obsoleted by: <a href="./rfc6724.html">6724</a>                                     PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                          R. Draves
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc3484.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc3484.txt.pdf">PDF</a>|<a href="/rfc/rfc3484.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc3484" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=3484&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc3484" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">Obsoleted by: <a href="/rfc/rfc6724" target="_blank">6724</a>                                     PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> </span><pre>Network Working Group                                          R. Draves
 Request for Comments: 3484                            Microsoft Research
 Category: Standards Track                                  February 2003
 
@@ -234,7 +207,7 @@ Abstract
 
 
 <span class="grey">Draves                      Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -269,7 +242,7 @@ Table of Contents
    Author's Address.................................................<a href="#page-23">23</a>
    Full Copyright Statement.........................................<a href="#page-24">24</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>. Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>. Introduction</span>
 
    The IPv6 addressing architecture [<a href="#ref-1" title='"IP Version 6 Addressing Architecture"'>1</a>] allows multiple unicast
    addresses to be assigned to interfaces.  These addresses may have
@@ -290,7 +263,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -346,7 +319,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -354,13 +327,13 @@ Table of Contents
    to override an application or upper-layer's explicit choice of a
    legal destination or source address.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>. Conventions Used in This Document</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>. Conventions Used in This Document</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
-   document are to be interpreted as described in <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a> [<a href="#ref-4" title='"Key words for use in RFCs to Indicate Requirement Levels"'>4</a>].
+   document are to be interpreted as described in <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a> [<a href="#ref-4" title='"Key words for use in RFCs to Indicate Requirement Levels"'>4</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20Context%20in%20Which%20the%20Algorithms%20Operate"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>. Context in Which the Algorithms Operate</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20Context%20in%20Which%20the%20Algorithms%20Operate"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>. Context in Which the Algorithms Operate</span>
 
    Our context for address selection derives from the most common
    implementation architecture, which separates the choice of
@@ -402,7 +375,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -430,7 +403,7 @@ Table of Contents
    then the default policy table specified in this document <em>SHOULD</em> be
    used.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20Policy%20Table"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>. Policy Table</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20Policy%20Table"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>. Policy Table</span>
 
    The policy table is a longest-matching-prefix lookup table, much like
    a routing table.  Given an address A, a lookup in the policy table
@@ -458,7 +431,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -489,14 +462,14 @@ Table of Contents
    matches against an address during a lookup if the zone index also
    matches the address's zone index.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20Common%20Prefix%20Length"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>. Common Prefix Length</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20Common%20Prefix%20Length"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>. Common Prefix Length</span>
 
    We define the common prefix length CommonPrefixLen(A, B) of two
    addresses A and B as the length of the longest prefix (looking at the
    most significant, or leftmost, bits) that the two addresses have in
    common.  It ranges from 0 to 128.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Address%20Properties"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>. Address Properties</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Address%20Properties"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>. Address Properties</span>
 
    In the rules given in later sections, addresses of different types
    (e.g., IPv4, IPv6, multicast and unicast) are compared against each
@@ -514,11 +487,11 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20Scope%20Comparisons"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>. Scope Comparisons</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20Scope%20Comparisons"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>. Scope Comparisons</span>
 
    Multicast destination addresses have a 4-bit scope field that
    controls the propagation of the multicast packet.  The IPv6
@@ -543,7 +516,7 @@ Table of Contents
    This mapping implicitly conflates unicast site boundaries and
    multicast site boundaries [<a href="#ref-11" title='"IP Version 6 Scoped Address Architecture"'>11</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20IPv4%20Addresses%20and%20IPv4-Mapped%20Addresses"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>. IPv4 Addresses and IPv4-Mapped Addresses</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20IPv4%20Addresses%20and%20IPv4-Mapped%20Addresses"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>. IPv4 Addresses and IPv4-Mapped Addresses</span>
 
    The destination address selection algorithm operates on both IPv6 and
    IPv4 addresses.  For this purpose, IPv4 addresses should be
@@ -570,11 +543,11 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20Other%20IPv6%20Addresses%20with%20Embedded%20IPv4%20Addresses"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>. Other IPv6 Addresses with Embedded IPv4 Addresses</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20Other%20IPv6%20Addresses%20with%20Embedded%20IPv4%20Addresses"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>. Other IPv6 Addresses with Embedded IPv4 Addresses</span>
 
    IPv4-compatible addresses [<a href="#ref-1" title='"IP Version 6 Addressing Architecture"'>1</a>], IPv4-mapped [<a href="#ref-1" title='"IP Version 6 Addressing Architecture"'>1</a>], IPv4-translatable [<a href="#ref-6" title='"Stateless IP/ICMP Translation Algorithm (SIIT)"'>6</a>]
    and 6to4 addresses [<a href="#ref-5" title='"Connection of IPv6 Domains via IPv4 Clouds"'>5</a>] contain an embedded IPv4 address.  For the
@@ -585,7 +558,7 @@ Table of Contents
    be treated as having "preferred" (in the <a href="./rfc2462.html">RFC 2462</a> sense)
    configuration status.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20IPv6%20Loopback%20Address%20and%20Other%20Format%20Prefixes"></a></body></html><a class="selflink" href="#section-3.4" name="section-3.4">3.4</a>. IPv6 Loopback Address and Other Format Prefixes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.4.%20IPv6%20Loopback%20Address%20and%20Other%20Format%20Prefixes"></a></body></html><a class="selflink" href="#section-3.4" id="section-3.4">3.4</a>. IPv6 Loopback Address and Other Format Prefixes</span>
 
    The loopback address should be treated as having link-local scope
    [11, <a href="#section-4">section 4</a>] and "preferred" (in the <a href="./rfc2462.html">RFC 2462</a> sense) configuration
@@ -596,7 +569,7 @@ Table of Contents
    the <a href="./rfc2462.html">RFC 2462</a>) configuration status.  Later standards may supersede
    this treatment.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20Mobility%20Addresses"></a></body></html><a class="selflink" href="#section-3.5" name="section-3.5">3.5</a>. Mobility Addresses</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.5.%20Mobility%20Addresses"></a></body></html><a class="selflink" href="#section-3.5" id="section-3.5">3.5</a>. Mobility Addresses</span>
 
    Some nodes may support mobility using the concepts of a home address
    and a care-of address (for example see [<a href="#ref-8" title='"Mobility Support in IPv6"'>8</a>]). Conceptually, a home
@@ -611,7 +584,7 @@ Table of Contents
    of addresses.  Whether or not an address should be designated a home
    address or care-of address is outside the scope of this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Candidate%20Source%20Addresses"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>. Candidate Source Addresses</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Candidate%20Source%20Addresses"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>. Candidate Source Addresses</span>
 
    The source address selection algorithm uses the concept of a
    "candidate set" of potential source addresses for a given destination
@@ -626,7 +599,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -682,14 +655,14 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
    destination address is not an IPv4-mapped address, then the candidate
    set <em>MUST NOT</em> contain IPv4-translatable addresses.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20Source%20Address%20Selection"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>. Source Address Selection</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20Source%20Address%20Selection"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>. Source Address Selection</span>
 
    The source address selection algorithm produces as output a single
    source address for use with a given destination address.  This
@@ -738,7 +711,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -794,7 +767,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -811,7 +784,7 @@ Table of Contents
    Rule 2 (prefer appropriate scope) <em>MUST</em> be implemented and given high
    priority because it can affect interoperability.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20Destination%20Address%20Selection"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>. Destination Address Selection</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20Destination%20Address%20Selection"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>. Destination Address Selection</span>
 
    The destination address selection algorithm takes a list of
    destination addresses and sorts the addresses to produce a new list.
@@ -850,7 +823,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -906,7 +879,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -930,7 +903,7 @@ Table of Contents
    implementation somehow knows which destination addresses will result
    in the "best" communications performance.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20Interactions%20with%20Routing"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>. Interactions with Routing</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20Interactions%20with%20Routing"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>. Interactions with Routing</span>
 
    This specification of source address selection assumes that routing
    (more precisely, selecting an outgoing interface on a node with
@@ -962,11 +935,11 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20Implementation%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>. Implementation Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20Implementation%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>. Implementation Considerations</span>
 
    The destination address selection algorithm needs information about
    potential source addresses.  One possible implementation strategy is
@@ -1003,7 +976,7 @@ Table of Contents
    current value, the implementation could detect if the derived state
    is potentially stale.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>. Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>. Security Considerations</span>
 
    This document has no direct impact on Internet infrastructure
    security.
@@ -1018,7 +991,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -1027,14 +1000,14 @@ Table of Contents
    packets.)  By using different addresses for itself, the unfriendly
    node can cause the target node to expose the target's own addresses.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20Examples"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>. Examples</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20Examples"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>. Examples</span>
 
    This section contains a number of examples, first of default behavior
    and then demonstrating the utility of policy table configuration.
    These examples are provided for illustrative purposes; they should
    not be construed as normative.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20Default%20Source%20Address%20Selection"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>. Default Source Address Selection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20Default%20Source%20Address%20Selection"></a></body></html><a class="selflink" href="#section-10.1" id="section-10.1">10.1</a>. Default Source Address Selection</span>
 
    The source address selection rules, in conjunction with the default
    policy table, produce the following behavior:
@@ -1074,7 +1047,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -1093,7 +1066,7 @@ Table of Contents
    (temporary)
    Result: 2001::2 (prefer public address)
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20Default%20Destination%20Address%20Selection"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>. Default Destination Address Selection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20Default%20Destination%20Address%20Selection"></a></body></html><a class="selflink" href="#section-10.2" id="section-10.2">10.2</a>. Default Destination Address Selection</span>
 
    The destination address selection rules, in conjunction with the
    default policy table and the source address selection rules, produce
@@ -1130,7 +1103,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -1155,7 +1128,7 @@ Table of Contents
    Result: 2001::1 (src 2001::2) then 2002:836b:4179::1 (src
    2002:836b:4179::2) (prefer higher precedence)
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.3.%20Configuring%20Preference%20for%20IPv6%20or%20IPv4"></a></body></html><a class="selflink" href="#section-10.3" name="section-10.3">10.3</a>. Configuring Preference for IPv6 or IPv4</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.3.%20Configuring%20Preference%20for%20IPv6%20or%20IPv4"></a></body></html><a class="selflink" href="#section-10.3" id="section-10.3">10.3</a>. Configuring Preference for IPv6 or IPv4</span>
 
    The default policy table gives IPv6 addresses higher precedence than
    IPv4 addresses.  This means that applications will use IPv6 in
@@ -1186,7 +1159,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -1195,7 +1168,7 @@ Table of Contents
    New Result: 10.1.2.3 (src 10.1.2.4) then 2001::1 (src 2001::2)
    (prefer higher precedence)
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.4.%20Configuring%20Preference%20for%20Scoped%20Addresses"></a></body></html><a class="selflink" href="#section-10.4" name="section-10.4">10.4</a>. Configuring Preference for Scoped Addresses</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.4.%20Configuring%20Preference%20for%20Scoped%20Addresses"></a></body></html><a class="selflink" href="#section-10.4" id="section-10.4">10.4</a>. Configuring Preference for Scoped Addresses</span>
 
    The destination address selection rules give preference to
    destinations of smaller scope.  For example, a site-local destination
@@ -1228,7 +1201,7 @@ Table of Contents
    Unchanged Result: fec0::1 (src fec0::2) then 2001::1 (src 2001::2)
    (avoid deprecated addresses)
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.5.%20Configuring%20a%20Multi-Homed%20Site"></a></body></html><a class="selflink" href="#section-10.5" name="section-10.5">10.5</a>. Configuring a Multi-Homed Site</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.5.%20Configuring%20a%20Multi-Homed%20Site"></a></body></html><a class="selflink" href="#section-10.5" id="section-10.5">10.5</a>. Configuring a Multi-Homed Site</span>
 
    Consider a site A that has a business-critical relationship with
    another site B.  To support their business needs, the two sites have
@@ -1242,7 +1215,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -1298,7 +1271,7 @@ Table of Contents
 
 
 <span class="grey">Draves                      Standards Track                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -1334,19 +1307,19 @@ Table of Contents
 
 Normative References
 
-   [<a id="ref-1" name="ref-1">1</a>]  Hinden, R. and S. Deering, "IP Version 6 Addressing
+   [<a id="ref-1">1</a>]  Hinden, R. and S. Deering, "IP Version 6 Addressing
         Architecture", <a href="./rfc2373.html">RFC 2373</a>, July 1998.
 
-   [<a id="ref-2" name="ref-2">2</a>]  Thompson, S. and T. Narten, "IPv6 Stateless Address
+   [<a id="ref-2">2</a>]  Thompson, S. and T. Narten, "IPv6 Stateless Address
         Autoconfiguration", <a href="./rfc2462.html">RFC 2462</a> , December 1998.
 
-   [<a id="ref-3" name="ref-3">3</a>]  Narten, T. and R. Draves, "Privacy Extensions for Stateless
+   [<a id="ref-3">3</a>]  Narten, T. and R. Draves, "Privacy Extensions for Stateless
         Address Autoconfiguration in IPv6", <a href="./rfc3041.html">RFC 3041</a>, January 2001.
 
-   [<a id="ref-4" name="ref-4">4</a>]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
-        Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-4">4</a>]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
+        Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-5" name="ref-5">5</a>]  Carpenter, B. and K. Moore, "Connection of IPv6 Domains via IPv4
+   [<a id="ref-5">5</a>]  Carpenter, B. and K. Moore, "Connection of IPv6 Domains via IPv4
         Clouds", <a href="./rfc3056.html">RFC 3056</a>, February 2001.
 
 
@@ -1354,47 +1327,47 @@ Normative References
 
 
 <span class="grey">Draves                      Standards Track                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
-   [<a id="ref-6" name="ref-6">6</a>]  Nordmark, E., "Stateless IP/ICMP Translation Algorithm (SIIT)",
+   [<a id="ref-6">6</a>]  Nordmark, E., "Stateless IP/ICMP Translation Algorithm (SIIT)",
         <a href="./rfc2765.html">RFC 2765</a>, February 2000.
 
 Informative References
 
-   [<a id="ref-7" name="ref-7">7</a>]  Bradner, S., "The Internet Standards Process -- Revision 3", <a href="./bcp9.html">BCP</a>
-        <a href="./bcp9.html">9</a>, <a href="./rfc2026.html">RFC 2026</a>, October 1996.
+   [<a id="ref-7">7</a>]  Bradner, S., "The Internet Standards Process -- Revision 3", <a href="https://www.rfc-editor.org/bcp/bcp9">BCP</a>
+        <a href="https://www.rfc-editor.org/bcp/bcp9">9</a>, <a href="./rfc2026.html">RFC 2026</a>, October 1996.
 
-   [<a id="ref-8" name="ref-8">8</a>]  Johnson, D. and C. Perkins, <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22Mobility+Support+in+IPv6%22" style="text-decoration: none">"Mobility Support in IPv6"</a>, Work in
+   [<a id="ref-8">8</a>]  Johnson, D. and C. Perkins, <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22Mobility+Support+in+IPv6%22" style="text-decoration: none">"Mobility Support in IPv6"</a>, Work in
         Progress.
 
-   [<a id="ref-9" name="ref-9">9</a>]  S. Cheshire, B. Aboba, "Dynamic Configuration of IPv4 Link-local
+   [<a id="ref-9">9</a>]  S. Cheshire, B. Aboba, "Dynamic Configuration of IPv4 Link-local
         Addresses", Work in Progress.
 
-   [<a id="ref-10" name="ref-10">10</a>] Gilligan, R., Thomson, S., Bound, J. and W. Stevens, "Basic
+   [<a id="ref-10">10</a>] Gilligan, R., Thomson, S., Bound, J. and W. Stevens, "Basic
         Socket Interface Extensions for IPv6", <a href="./rfc2553.html">RFC 2553</a>, March 1999.
 
-   [<a id="ref-11" name="ref-11">11</a>] S. Deering et. al, <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22IP+Version+6+Scoped+Address+Architecture%22" style="text-decoration: none">"IP Version 6 Scoped Address Architecture"</a>,
+   [<a id="ref-11">11</a>] S. Deering et. al, <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22IP+Version+6+Scoped+Address+Architecture%22" style="text-decoration: none">"IP Version 6 Scoped Address Architecture"</a>,
         Work in Progress.
 
-   [<a id="ref-12" name="ref-12">12</a>] Rekhter, Y., Moskowitz, B., Karrenberg, D., de Groot, G. and E.
-        Lear, "Address Allocation for Private Internets", <a href="./bcp5.html">BCP 5</a>, <a href="./rfc1918.html">RFC</a>
+   [<a id="ref-12">12</a>] Rekhter, Y., Moskowitz, B., Karrenberg, D., de Groot, G. and E.
+        Lear, "Address Allocation for Private Internets", <a href="https://www.rfc-editor.org/bcp/bcp5">BCP 5</a>, <a href="./rfc1918.html">RFC</a>
         <a href="./rfc1918.html">1918</a>, February 1996.
 
-   [<a id="ref-13" name="ref-13">13</a>] Baker, F, "Requirements for IP Version 4 Routers", <a href="./rfc1812.html">RFC 1812</a>,
+   [<a id="ref-13">13</a>] Baker, F, "Requirements for IP Version 4 Routers", <a href="./rfc1812.html">RFC 1812</a>,
         June 1995.
 
-   [<a id="ref-14" name="ref-14">14</a>] Narten, T. and E. Nordmark, and W. Simpson, "Neighbor Discovery
+   [<a id="ref-14">14</a>] Narten, T. and E. Nordmark, and W. Simpson, "Neighbor Discovery
         for IP Version 6", <a href="./rfc2461.html">RFC 2461</a>, December 1998.
 
-   [<a id="ref-15" name="ref-15">15</a>] Carpenter, B. and C. Jung, "Transmission of IPv6 over IPv4
+   [<a id="ref-15">15</a>] Carpenter, B. and C. Jung, "Transmission of IPv6 over IPv4
         Domains without Explicit Tunnels", <a href="./rfc2529.html">RFC 2529</a>, March 1999.
 
-   [<a id="ref-16" name="ref-16">16</a>] F. Templin et. al, "Intra-Site Automatic Tunnel Addressing
+   [<a id="ref-16">16</a>] F. Templin et. al, "Intra-Site Automatic Tunnel Addressing
         Protocol (ISATAP)", Work in Progress.
 
-   [<a id="ref-17" name="ref-17">17</a>] Gilligan, R. and E. Nordmark, "Transition Mechanisms for IPv6
+   [<a id="ref-17">17</a>] Gilligan, R. and E. Nordmark, "Transition Mechanisms for IPv6
         Hosts and Routers", <a href="./rfc1933.html">RFC 1933</a>, April 1996.
 
 
@@ -1410,7 +1383,7 @@ Informative References
 
 
 <span class="grey">Draves                      Standards Track                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -1466,7 +1439,7 @@ Author's Address
 
 
 <span class="grey">Draves                      Standards Track                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc3484.html">RFC 3484</a>           Default Address Selection for IPv6      February 2003</span>
 
 
@@ -1522,11 +1495,6 @@ Acknowledgement
 
 
 Draves                      Standards Track                    [Page 24]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

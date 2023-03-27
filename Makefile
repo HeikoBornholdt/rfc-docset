@@ -13,7 +13,7 @@ clean:
 
 download:
 	mkdir -p html
-	$(MAKE) $(shell seq -f "html/rfc%g.html" 1 9000)
+	$(MAKE) $(shell seq -f "html/rfc%g.html" 1 9411)
 	$(MAKE) $(shell seq -f "html/bcp%g.html" 1 300)
 	find html -size 0 -delete
 

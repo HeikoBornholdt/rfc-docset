@@ -1,29 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-lapukhov-bgp-routing-large-dc" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:7938" name="DC.Identifier"/>
-<meta content="August, 2016" name="DC.Date.Issued"/>
-<meta content="Premji, Ariff" name="DC.Creator"/>
-<meta content="Lapukhov, Petr" name="DC.Creator"/>
-<meta content="Mitchell, Jon" name="DC.Creator"/>
-<meta content='Some network operators build and operate data centers that support
-over one hundred thousand servers. In this document, such data centers
-are referred to as "large-scale" to differentiate them from smaller
-infrastructures. Environments of this scale have a unique set of
-network requirements with an emphasis on operational simplicity and
-network stability. This document summarizes operational experience in
-designing and operating large-scale data centers using BGP as the only
-routing protocol. The intent is to report on a proven and stable
-routing design that could be leveraged by others in the industry.' name="DC.Description.Abstract"/>
-<meta content="Use of BGP for Routing in Large-Scale Data Centers" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 7938 - Use of BGP for Routing in Large-Scale Data Centers</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="P. Lapukhov" name="citation_author"/>
+<meta content="A. Premji" name="citation_author"/>
+<meta content="J. Mitchell" name="citation_author"/>
+<meta content="August, 2016" name="citation_publication_date"/>
+<meta content="Use of BGP for Routing in Large-Scale Data Centers" name="citation_title"/>
+<meta content="10.17487/RFC7938" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc7938" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc7938.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 7938: Use of BGP for Routing in Large-Scale Data Centers</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -52,7 +42,7 @@ routing design that could be leveraged by others in the industry.' name="DC.Desc
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -61,7 +51,7 @@ routing design that could be leveraged by others in the industry.' name="DC.Desc
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -140,19 +130,18 @@ routing design that could be leveraged by others in the industry.' name="DC.Desc
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -166,21 +155,9 @@ routing design that could be leveraged by others in the industry.' name="DC.Desc
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc7938.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc7938" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-rtgwg-bgp-routing-large-dc.html" title="draft-ietf-rtgwg-bgp-routing-large-dc">draft-ietf-rtgwg-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc7938" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc7938" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                       P. Lapukhov
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc7938.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc7938.txt.pdf">PDF</a>|<a href="/rfc/rfc7938.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc7938" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=7938&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc7938" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc7938" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Internet Engineering Task Force (IETF)                       P. Lapukhov
 Request for Comments: 7938                                      Facebook
 Category: Informational                                        A. Premji
 ISSN: 2070-1721                                          Arista Networks
@@ -232,7 +209,7 @@ Status of This Memo
 
 
 <span class="grey">Lapukhov, et al.              Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -241,7 +218,7 @@ Copyright Notice
    Copyright (c) 2016 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -288,7 +265,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -311,7 +288,7 @@ Table of Contents
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-35">35</a>
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-35">35</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This document describes a practical routing design that can be used
    in a large-scale data center (DC) design.  Such data centers, also
@@ -344,7 +321,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -356,12 +333,12 @@ Table of Contents
    reader planning on deploying the design described within the
    document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Network%20Design%20Requirements"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Network Design Requirements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Network%20Design%20Requirements"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Network Design Requirements</span>
 
    This section describes and summarizes network design requirements for
    large-scale data centers.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Bandwidth%20and%20Traffic%20Patterns"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Bandwidth and Traffic Patterns</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Bandwidth%20and%20Traffic%20Patterns"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Bandwidth and Traffic Patterns</span>
 
    The primary requirement when building an interconnection network for
    a large number of servers is to accommodate application bandwidth and
@@ -384,7 +361,7 @@ Table of Contents
    expensive or impossible due to physical limitations, e.g., port
    density in a switch.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20CAPEX%20Minimization"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  CAPEX Minimization</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20CAPEX%20Minimization"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  CAPEX Minimization</span>
 
    The Capital Expenditures (CAPEX) associated with the network
    infrastructure alone constitutes about 10-15% of total data center
@@ -400,7 +377,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -412,7 +389,7 @@ Table of Contents
    This strategy provides maximum flexibility of vendor equipment
    choices while enforcing interoperability using open standards.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20OPEX%20Minimization"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  OPEX Minimization</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20OPEX%20Minimization"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  OPEX Minimization</span>
 
    Operating large-scale infrastructure can be expensive as a larger
    amount of elements will statistically fail more often.  Having a
@@ -433,7 +410,7 @@ Table of Contents
    the CAPEX section above also reduces testing and training
    requirements.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Traffic%20Engineering"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Traffic Engineering</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Traffic%20Engineering"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Traffic Engineering</span>
 
    In any data center, application load balancing is a critical function
    performed by network devices.  Traditionally, load balancers are
@@ -456,11 +433,11 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Summarized%20Requirements"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>.  Summarized Requirements</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20%20Summarized%20Requirements"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>.  Summarized Requirements</span>
 
    This section summarizes the list of requirements outlined in the
    previous sections:
@@ -483,13 +460,13 @@ Table of Contents
       control of the routing prefix next hop using built-in protocol
       mechanics.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Data%20Center%20Topologies%20Overview"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Data Center Topologies Overview</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Data%20Center%20Topologies%20Overview"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Data Center Topologies Overview</span>
 
    This section provides an overview of two general types of data center
    designs -- hierarchical (also known as "tree-based") and Clos-based
    network designs.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Traditional%20DC%20Topology"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Traditional DC Topology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Traditional%20DC%20Topology"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Traditional DC Topology</span>
 
    In the networking industry, a common design choice for data centers
    typically looks like an (upside down) tree with redundant uplinks and
@@ -512,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -549,12 +526,12 @@ Table of Contents
    is operationally complex.  For this reason, REQ1 is in place,
    eliminating this type of design from consideration.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Clos%20Network%20Topology"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Clos Network Topology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Clos%20Network%20Topology"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Clos Network Topology</span>
 
    This section describes a common design for horizontally scalable
    topology in large-scale data centers in order to meet REQ1.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Overview"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Overview</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Overview"></a></body></html><a class="selflink" href="#section-3.2.1" id="section-3.2.1">3.2.1</a>.  Overview</span>
 
    A common choice for a horizontally scalable topology is a folded Clos
    topology, sometimes called "fat-tree" (for example, [<a href="#ref-INTERCON" title='"Principles and Practices of Interconnection Networks"'>INTERCON</a>] and
@@ -568,7 +545,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -610,7 +587,7 @@ Table of Contents
    (Tier 2).  For uniformity, this document will refer to these layers
    using the "Tier n" notation.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Clos%20Topology%20Properties"></a></body></html><a class="selflink" href="#section-3.2.2" name="section-3.2.2">3.2.2</a>.  Clos Topology Properties</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Clos%20Topology%20Properties"></a></body></html><a class="selflink" href="#section-3.2.2" id="section-3.2.2">3.2.2</a>.  Clos Topology Properties</span>
 
    The following are some key properties of the Clos topology:
 
@@ -624,7 +601,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -638,7 +615,7 @@ Table of Contents
    o  Traffic flowing from server to server is load balanced over all
       available paths using ECMP.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Scaling%20the%20Clos%20Topology"></a></body></html><a class="selflink" href="#section-3.2.3" name="section-3.2.3">3.2.3</a>.  Scaling the Clos Topology</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Scaling%20the%20Clos%20Topology"></a></body></html><a class="selflink" href="#section-3.2.3" id="section-3.2.3">3.2.3</a>.  Scaling the Clos Topology</span>
 
    A Clos topology can be scaled either by increasing network element
    port density or by adding more stages, e.g., moving to a 5-stage
@@ -680,7 +657,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -699,7 +676,7 @@ Table of Contents
    oversubscription does not have a direct relationship to the routing
    design, it is not discussed further in this document.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.4.%20%20Managing%20the%20Size%20of%20Clos%20Topology%20Tiers"></a></body></html><a class="selflink" href="#section-3.2.4" name="section-3.2.4">3.2.4</a>.  Managing the Size of Clos Topology Tiers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.4.%20%20Managing%20the%20Size%20of%20Clos%20Topology%20Tiers"></a></body></html><a class="selflink" href="#section-3.2.4" id="section-3.2.4">3.2.4</a>.  Managing the Size of Clos Topology Tiers</span>
 
    If a data center network size is small, it is possible to reduce the
    number of switches in Tier 1 or Tier 2 of a Clos topology by a factor
@@ -736,17 +713,17 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Data%20Center%20Routing%20Overview"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Data Center Routing Overview</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Data%20Center%20Routing%20Overview"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Data Center Routing Overview</span>
 
    This section provides an overview of three general types of data
    center protocol designs -- Layer 2 only, Hybrid Layer L2/L3, and
    Layer 3 only.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20L2-Only%20Designs"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  L2-Only Designs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20L2-Only%20Designs"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  L2-Only Designs</span>
 
    Originally, most data center designs used Spanning Tree Protocol
    (STP) originally defined in [<a href="#ref-IEEE8021D-1990">IEEE8021D-1990</a>] for loop-free topology
@@ -792,7 +769,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -806,7 +783,7 @@ Table of Contents
    Therefore, TRILL-based designs have issues meeting REQ2, REQ3, and
    REQ4.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Hybrid%20L2/L3%20Designs"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  Hybrid L2/L3 Designs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20Hybrid%20L2/L3%20Designs"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  Hybrid L2/L3 Designs</span>
 
    Operators have sought to limit the impact of data-plane faults and
    build large-scale topologies through implementing routing protocols
@@ -833,7 +810,7 @@ Table of Contents
 
    o  Continued CAPEX differences between L2- and L3-capable switches.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20L3-Only%20Designs"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  L3-Only Designs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20L3-Only%20Designs"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  L3-Only Designs</span>
 
    Network designs that leverage IP routing down to Tier 3 of the
    network have gained popularity as well.  The main benefit of these
@@ -848,7 +825,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -861,14 +838,14 @@ Table of Contents
    previously had driven large Layer 2 domains by using various overlay
    or tunneling techniques.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Routing%20Protocol%20Design"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Routing Protocol Design</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Routing%20Protocol%20Design"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Routing Protocol Design</span>
 
    In this section, the motivations for using External BGP (EBGP) as the
    single routing protocol for data center networks having a Layer 3
    protocol design and Clos topology are reviewed.  Then, a practical
    approach for designing an EBGP-based network is provided.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Choosing%20EBGP%20as%20the%20Routing%20Protocol"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Choosing EBGP as the Routing Protocol</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Choosing%20EBGP%20as%20the%20Routing%20Protocol"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Choosing EBGP as the Routing Protocol</span>
 
    REQ2 would give preference to the selection of a single routing
    protocol to reduce complexity and interdependencies.  While it is
@@ -904,7 +881,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -960,7 +937,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -974,14 +951,14 @@ Table of Contents
       Information (NLRI) information can be easily correlated on both
       sides of a BGP session.  Thus, BGP satisfies REQ3.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20EBGP%20Configuration%20for%20Clos%20Topology"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  EBGP Configuration for Clos Topology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20EBGP%20Configuration%20for%20Clos%20Topology"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  EBGP Configuration for Clos Topology</span>
 
    Clos topologies that have more than 5 stages are very uncommon due to
    the large numbers of interconnects required by such a design.
    Therefore, the examples below are made with reference to the 5-stage
    Clos topology (in unfolded state).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.1.%20%20EBGP%20Configuration%20Guidelines%20and%20Example%20ASN%20Scheme"></a></body></html><a class="selflink" href="#section-5.2.1" name="section-5.2.1">5.2.1</a>.  EBGP Configuration Guidelines and Example ASN Scheme</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.1.%20%20EBGP%20Configuration%20Guidelines%20and%20Example%20ASN%20Scheme"></a></body></html><a class="selflink" href="#section-5.2.1" id="section-5.2.1">5.2.1</a>.  EBGP Configuration Guidelines and Example ASN Scheme</span>
 
    The diagram below illustrates an example of an ASN allocation scheme.
    The following is a list of guidelines that can be used:
@@ -1016,7 +993,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -1049,7 +1026,7 @@ Table of Contents
 
                  Figure 4: BGP ASN Layout for 5-Stage Clos
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.2.%20%20Private%20Use%20ASNs"></a></body></html><a class="selflink" href="#section-5.2.2" name="section-5.2.2">5.2.2</a>.  Private Use ASNs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.2.%20%20Private%20Use%20ASNs"></a></body></html><a class="selflink" href="#section-5.2.2" id="section-5.2.2">5.2.2</a>.  Private Use ASNs</span>
 
    The original range of Private Use ASNs [<a href="./rfc6996.html" title='"Autonomous System (AS) Reservation for Private Use"'>RFC6996</a>] limited operators to
    1023 unique ASNs.  Since it is quite likely that the number of
@@ -1072,7 +1049,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -1091,7 +1068,7 @@ Table of Contents
    remove the Private Use ASNs when external connectivity
    (<a href="#section-5.2.4">Section 5.2.4</a>) to these ASNs is required.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.3.%20%20Prefix%20Advertisement"></a></body></html><a class="selflink" href="#section-5.2.3" name="section-5.2.3">5.2.3</a>.  Prefix Advertisement</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.3.%20%20Prefix%20Advertisement"></a></body></html><a class="selflink" href="#section-5.2.3" id="section-5.2.3">5.2.3</a>.  Prefix Advertisement</span>
 
    A Clos topology features a large number of point-to-point links and
    associated prefixes.  Advertising all of these routes into BGP may
@@ -1128,7 +1105,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -1139,7 +1116,7 @@ Table of Contents
    performing a limited form of route summarization in Clos networks and
    discusses its associated tradeoffs.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.4.%20%20External%20Connectivity"></a></body></html><a class="selflink" href="#section-5.2.4" name="section-5.2.4">5.2.4</a>.  External Connectivity</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.4.%20%20External%20Connectivity"></a></body></html><a class="selflink" href="#section-5.2.4" id="section-5.2.4">5.2.4</a>.  External Connectivity</span>
 
    A dedicated cluster (or clusters) in the Clos topology could be used
    for the purpose of connecting to the Wide Area Network (WAN) edge
@@ -1184,11 +1161,11 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.5.%20%20Route%20Summarization%20at%20the%20Edge"></a></body></html><a class="selflink" href="#section-5.2.5" name="section-5.2.5">5.2.5</a>.  Route Summarization at the Edge</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.5.%20%20Route%20Summarization%20at%20the%20Edge"></a></body></html><a class="selflink" href="#section-5.2.5" id="section-5.2.5">5.2.5</a>.  Route Summarization at the Edge</span>
 
    It is often desirable to summarize network reachability information
    prior to advertising it to the WAN network due to the high amount of
@@ -1240,16 +1217,16 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20ECMP%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  ECMP Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20ECMP%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  ECMP Considerations</span>
 
    This section covers the Equal Cost Multipath (ECMP) functionality for
    Clos topology and discusses a few special requirements.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Basic%20ECMP"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Basic ECMP</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Basic%20ECMP"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Basic ECMP</span>
 
    ECMP is the fundamental load-sharing mechanism used by a Clos
    topology.  Effectively, every lower-tier device will use all of its
@@ -1296,7 +1273,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -1324,7 +1301,7 @@ Table of Contents
    paths through the Tier 1 devices (which don't allow their own ASN in
    the path) are not possible.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20BGP%20ECMP%20over%20Multiple%20ASNs"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  BGP ECMP over Multiple ASNs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20BGP%20ECMP%20over%20Multiple%20ASNs"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  BGP ECMP over Multiple ASNs</span>
 
    For application load-balancing purposes, it is desirable to have the
    same prefix advertised from multiple Tier 3 devices.  From the
@@ -1337,7 +1314,7 @@ Table of Contents
    other attributes are equal as already described in the previous
    section.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Weighted%20ECMP"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  Weighted ECMP</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Weighted%20ECMP"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  Weighted ECMP</span>
 
    It may be desirable for the network devices to implement "weighted"
    ECMP, to be able to send more traffic over some paths in ECMP fan-
@@ -1352,11 +1329,11 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20Consistent%20Hashing"></a></body></html><a class="selflink" href="#section-6.4" name="section-6.4">6.4</a>.  Consistent Hashing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20Consistent%20Hashing"></a></body></html><a class="selflink" href="#section-6.4" id="section-6.4">6.4</a>.  Consistent Hashing</span>
 
    It is often desirable to have the hashing function used for ECMP to
    be consistent (see [<a href="#ref-CONS-HASH">CONS-HASH</a>]), to minimize the impact on flow to
@@ -1374,14 +1351,14 @@ Table of Contents
    Content-Addressable Memory (TCAM) space) are required to implement a
    consistent-hashing function.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Routing%20Convergence%20Properties"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Routing Convergence Properties</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Routing%20Convergence%20Properties"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Routing Convergence Properties</span>
 
    This section reviews routing convergence properties in the proposed
    design.  A case is made that sub-second convergence is achievable if
    the implementation supports fast EBGP peering session deactivation
    and timely RIB and FIB updates upon failure of the associated link.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Fault%20Detection%20Timing"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Fault Detection Timing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Fault%20Detection%20Timing"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Fault Detection Timing</span>
 
    BGP typically relies on an IGP to route around link/node failures
    inside an AS, and implements either a polling-based or an event-
@@ -1408,7 +1385,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -1424,7 +1401,7 @@ Table of Contents
    failure on a LAG, which would have limited its usefulness in some
    designs.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Event%20Propagation%20Timing"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Event Propagation Timing</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Event%20Propagation%20Timing"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Event Propagation Timing</span>
 
    In the proposed design, the impact of the BGP
    MinRouteAdvertisementIntervalTimer (MRAI timer), as specified in
@@ -1464,11 +1441,11 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Impact%20of%20Clos%20Topology%20Fan-Outs"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  Impact of Clos Topology Fan-Outs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Impact%20of%20Clos%20Topology%20Fan-Outs"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  Impact of Clos Topology Fan-Outs</span>
 
    Clos topology has large fan-outs, which may impact the "Up-&gt;Down"
    convergence in some cases, as described in this section.  In a
@@ -1500,7 +1477,7 @@ Table of Contents
    and possible implementation changes that could affect this are well
    described in [<a href="./rfc7196.html" title='"Making Route Flap Damping Usable"'>RFC7196</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Failure%20Impact%20Scope"></a></body></html><a class="selflink" href="#section-7.4" name="section-7.4">7.4</a>.  Failure Impact Scope</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Failure%20Impact%20Scope"></a></body></html><a class="selflink" href="#section-7.4" id="section-7.4">7.4</a>.  Failure Impact Scope</span>
 
    A network is declared to converge in response to a failure once all
    devices within the failure impact scope are notified of the event and
@@ -1520,7 +1497,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -1576,11 +1553,11 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Routing%20Micro-Loops"></a></body></html><a class="selflink" href="#section-7.5" name="section-7.5">7.5</a>.  Routing Micro-Loops</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Routing%20Micro-Loops"></a></body></html><a class="selflink" href="#section-7.5" id="section-7.5">7.5</a>.  Routing Micro-Loops</span>
 
    When a downstream device, e.g., Tier 2 device, loses all paths for a
    prefix, it normally has the default route pointing toward the
@@ -1604,9 +1581,9 @@ Table of Contents
    for the duration of network convergence, until the device learns a
    more specific prefix via a new path.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Additional%20Options%20for%20Design"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Additional Options for Design</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Additional%20Options%20for%20Design"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Additional Options for Design</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Third-Party%20Route%20Injection"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Third-Party Route Injection</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Third-Party%20Route%20Injection"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Third-Party Route Injection</span>
 
    BGP allows for a "third-party", i.e., a directly attached BGP
    speaker, to inject routes anywhere in the network topology, meeting
@@ -1632,11 +1609,11 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Route%20Summarization%20within%20Clos%20Topology"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Route Summarization within Clos Topology</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Route%20Summarization%20within%20Clos%20Topology"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Route Summarization within Clos Topology</span>
 
    As mentioned previously, route summarization is not possible within
    the proposed Clos topology since it makes the network susceptible to
@@ -1663,7 +1640,7 @@ Table of Contents
    described above, which allows Border Routers to summarize the entire
    data center address space.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.1.%20%20Collapsing%20Tier%201%20Devices%20Layer"></a></body></html><a class="selflink" href="#section-8.2.1" name="section-8.2.1">8.2.1</a>.  Collapsing Tier 1 Devices Layer</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.1.%20%20Collapsing%20Tier%201%20Devices%20Layer"></a></body></html><a class="selflink" href="#section-8.2.1" id="section-8.2.1">8.2.1</a>.  Collapsing Tier 1 Devices Layer</span>
 
    In order to add more paths between Tier 1 and Tier 3 devices, group
    Tier 2 devices into pairs, and then connect the pairs to the same
@@ -1688,7 +1665,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -1744,11 +1721,11 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.2.%20%20Simple%20Virtual%20Aggregation"></a></body></html><a class="selflink" href="#section-8.2.2" name="section-8.2.2">8.2.2</a>.  Simple Virtual Aggregation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.2.%20%20Simple%20Virtual%20Aggregation"></a></body></html><a class="selflink" href="#section-8.2.2" id="section-8.2.2">8.2.2</a>.  Simple Virtual Aggregation</span>
 
    A completely different approach to route summarization is possible,
    provided that the main goal is to reduce the FIB size, while allowing
@@ -1780,7 +1757,7 @@ Table of Contents
    prefixes that share their next-hop set with a subsuming less specific
    prefix.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.3.%20%20ICMP%20Unreachable%20Message%20Masquerading"></a></body></html><a class="selflink" href="#section-8.3" name="section-8.3">8.3</a>.  ICMP Unreachable Message Masquerading</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.3.%20%20ICMP%20Unreachable%20Message%20Masquerading"></a></body></html><a class="selflink" href="#section-8.3" id="section-8.3">8.3</a>.  ICMP Unreachable Message Masquerading</span>
 
    This section discusses some operational aspects of not advertising
    point-to-point link subnets into BGP, as previously identified as an
@@ -1800,7 +1777,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -1823,7 +1800,7 @@ Table of Contents
    providing the information about the incoming interface even if the
    return address is the "primary" IP address.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Security Considerations</span>
 
    The design does not introduce any additional security concerns.
    General BGP security considerations are discussed in [<a href="./rfc4271.html" title='"A Border Gateway Protocol 4 (BGP-4)"'>RFC4271</a>] and
@@ -1837,17 +1814,17 @@ Table of Contents
    document.  The Generalized TTL Security Mechanism [<a href="./rfc5082.html" title='"The Generalized TTL Security Mechanism (GTSM)"'>RFC5082</a>] could
    also be used to further reduce the risk of BGP session spoofing.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20References"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" name="section-10.1">10.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-10.1" id="section-10.1">10.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC4271" name="ref-RFC4271">RFC4271</a>]  Rekhter, Y., Ed., Li, T., Ed., and S. Hares, Ed., "A
+   [<a id="ref-RFC4271">RFC4271</a>]  Rekhter, Y., Ed., Li, T., Ed., and S. Hares, Ed., "A
               Border Gateway Protocol 4 (BGP-4)", <a href="./rfc4271.html">RFC 4271</a>,
               DOI 10.17487/RFC4271, January 2006,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4271">http://www.rfc-editor.org/info/rfc4271</a>&gt;.
 
-   [<a id="ref-RFC6996" name="ref-RFC6996">RFC6996</a>]  Mitchell, J., "Autonomous System (AS) Reservation for
-              Private Use", <a href="./bcp6.html">BCP 6</a>, <a href="./rfc6996.html">RFC 6996</a>, DOI 10.17487/RFC6996, July
+   [<a id="ref-RFC6996">RFC6996</a>]  Mitchell, J., "Autonomous System (AS) Reservation for
+              Private Use", <a href="https://www.rfc-editor.org/bcp/bcp6">BCP 6</a>, <a href="./rfc6996.html">RFC 6996</a>, DOI 10.17487/RFC6996, July
               2013, &lt;<a href="http://www.rfc-editor.org/info/rfc6996">http://www.rfc-editor.org/info/rfc6996</a>&gt;.
 
 
@@ -1856,55 +1833,55 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" name="section-10.2">10.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-10.2" id="section-10.2">10.2</a>.  Informative References</span>
 
-   [<a id="ref-ALFARES2008" name="ref-ALFARES2008">ALFARES2008</a>]
+   [<a id="ref-ALFARES2008">ALFARES2008</a>]
               Al-Fares, M., Loukissas, A., and A. Vahdat, "A Scalable,
               Commodity Data Center Network Architecture",
               DOI 10.1145/1402958.1402967, August 2008,
               &lt;<a href="http://dl.acm.org/citation.cfm?id=1402967">http://dl.acm.org/citation.cfm?id=1402967</a>&gt;.
 
-   [<a id="ref-ALLOWASIN" name="ref-ALLOWASIN">ALLOWASIN</a>]
+   [<a id="ref-ALLOWASIN">ALLOWASIN</a>]
               Cisco Systems, "Allowas-in Feature in BGP Configuration
               Example", February 2015,
               &lt;<a href="http://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/112236-allowas-in-bgp-config-example.html">http://www.cisco.com/c/en/us/support/docs/ip/</a>
               <a href="http://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/112236-allowas-in-bgp-config-example.html">border-gateway-protocol-bgp/112236-allowas-in-bgp-config-</a>
               <a href="http://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/112236-allowas-in-bgp-config-example.html">example.html</a>&gt;.
 
-   [<a id="ref-BGP-PIC" name="ref-BGP-PIC">BGP-PIC</a>]  Bashandy, A., Ed., Filsfils, C., and P. Mohapatra, "BGP
+   [<a id="ref-BGP-PIC">BGP-PIC</a>]  Bashandy, A., Ed., Filsfils, C., and P. Mohapatra, "BGP
               Prefix Independent Convergence", Work in Progress,
               <a href="./draft-ietf-rtgwg-bgp-pic-02.html">draft-ietf-rtgwg-bgp-pic-02</a>, August 2016.
 
-   [<a id="ref-CLOS1953" name="ref-CLOS1953">CLOS1953</a>] Clos, C., "A Study of Non-Blocking Switching Networks",
+   [<a id="ref-CLOS1953">CLOS1953</a>] Clos, C., "A Study of Non-Blocking Switching Networks",
               The Bell System Technical Journal, Vol. 32(2),
               DOI 10.1002/j.1538-7305.1953.tb01433.x, March 1953.
 
-   [<a id="ref-CONDITIONALROUTE" name="ref-CONDITIONALROUTE">CONDITIONALROUTE</a>]
+   [<a id="ref-CONDITIONALROUTE">CONDITIONALROUTE</a>]
               Cisco Systems, "Configuring and Verifying the BGP
               Conditional Advertisement Feature", August 2005,
               &lt;<a href="http://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/16137-cond-adv.html">http://www.cisco.com/c/en/us/support/docs/ip/</a>
               <a href="http://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/16137-cond-adv.html">border-gateway-protocol-bgp/16137-cond-adv.html</a>&gt;.
 
-   [<a id="ref-CONS-HASH" name="ref-CONS-HASH">CONS-HASH</a>]
+   [<a id="ref-CONS-HASH">CONS-HASH</a>]
               Wikipedia, "Consistent Hashing", July 2016,
               &lt;<a href="https://en.wikipedia.org/w/index.php?title=Consistent_hashing&amp;oldid=728825684">https://en.wikipedia.org/w/</a>
               <a href="https://en.wikipedia.org/w/index.php?title=Consistent_hashing&amp;oldid=728825684">index.php?title=Consistent_hashing&amp;oldid=728825684</a>&gt;.
 
-   [<a id="ref-FB4POST" name="ref-FB4POST">FB4POST</a>]  Farrington, N. and A. Andreyev, "Facebook's Data Center
+   [<a id="ref-FB4POST">FB4POST</a>]  Farrington, N. and A. Andreyev, "Facebook's Data Center
               Network Architecture", May 2013,
               &lt;<a href="http://nathanfarrington.com/papers/facebook-oic13.pdf">http://nathanfarrington.com/papers/facebook-oic13.pdf</a>&gt;.
 
-   [<a id="ref-GREENBERG2009" name="ref-GREENBERG2009">GREENBERG2009</a>]
+   [<a id="ref-GREENBERG2009">GREENBERG2009</a>]
               Greenberg, A., Hamilton, J., and D. Maltz, "The Cost of a
               Cloud: Research Problems in Data Center Networks",
               DOI 10.1145/1496091.1496103, January 2009,
               &lt;<a href="http://dl.acm.org/citation.cfm?id=1496103">http://dl.acm.org/citation.cfm?id=1496103</a>&gt;.
 
-   [<a id="ref-HADOOP" name="ref-HADOOP">HADOOP</a>]   Apache, "Apache Hadoop", April 2016,
+   [<a id="ref-HADOOP">HADOOP</a>]   Apache, "Apache Hadoop", April 2016,
               &lt;<a href="https://hadoop.apache.org/">https://hadoop.apache.org/</a>&gt;.
 
 
@@ -1912,33 +1889,33 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-   [<a id="ref-IANA.AS" name="ref-IANA.AS">IANA.AS</a>]  IANA, "Autonomous System (AS) Numbers",
+   [<a id="ref-IANA.AS">IANA.AS</a>]  IANA, "Autonomous System (AS) Numbers",
               &lt;<a href="http://www.iana.org/assignments/as-numbers">http://www.iana.org/assignments/as-numbers</a>&gt;.
 
-   [<a id="ref-IEEE8021D-1990" name="ref-IEEE8021D-1990">IEEE8021D-1990</a>]
+   [<a id="ref-IEEE8021D-1990">IEEE8021D-1990</a>]
               IEEE, "IEEE Standard for Local and Metropolitan Area
               Networks: Media Access Control (MAC) Bridges", IEEE
               Std 802.1D, DOI 10.1109/IEEESTD.1991.101050, 1991,
               &lt;<a href="http://ieeexplore.ieee.org/servlet/opac?punumber=2255">http://ieeexplore.ieee.org/servlet/opac?punumber=2255</a>&gt;.
 
-   [<a id="ref-IEEE8021D-2004" name="ref-IEEE8021D-2004">IEEE8021D-2004</a>]
+   [<a id="ref-IEEE8021D-2004">IEEE8021D-2004</a>]
               IEEE, "IEEE Standard for Local and Metropolitan Area
               Networks: Media Access Control (MAC) Bridges", IEEE
               Std 802.1D, DOI 10.1109/IEEESTD.2004.94569, June 2004,
               &lt;<a href="http://ieeexplore.ieee.org/servlet/opac?punumber=9155">http://ieeexplore.ieee.org/servlet/opac?punumber=9155</a>&gt;.
 
-   [<a id="ref-IEEE8021Q" name="ref-IEEE8021Q">IEEE8021Q</a>]
+   [<a id="ref-IEEE8021Q">IEEE8021Q</a>]
               IEEE, "IEEE Standard for Local and Metropolitan Area
               Networks: Bridges and Bridged Networks", IEEE Std 802.1Q,
               DOI 10.1109/IEEESTD.2014.6991462,
               &lt;<a href="http://ieeexplore.ieee.org/servlet/opac?punumber=6991460">http://ieeexplore.ieee.org/servlet/</a>
               <a href="http://ieeexplore.ieee.org/servlet/opac?punumber=6991460">opac?punumber=6991460</a>&gt;.
 
-   [<a id="ref-IEEE8023AD" name="ref-IEEE8023AD">IEEE8023AD</a>]
+   [<a id="ref-IEEE8023AD">IEEE8023AD</a>]
               IEEE, "Amendment to Carrier Sense Multiple Access With
               Collision Detection (CSMA/CD) Access Method and Physical
               Layer Specifications - Aggregation of Multiple Link
@@ -1946,20 +1923,20 @@ Table of Contents
               DOI 10.1109/IEEESTD.2000.91610, October 2000,
               &lt;<a href="http://ieeexplore.ieee.org/servlet/opac?punumber=6867">http://ieeexplore.ieee.org/servlet/opac?punumber=6867</a>&gt;.
 
-   [<a id="ref-INTERCON" name="ref-INTERCON">INTERCON</a>] Dally, W. and B. Towles, "Principles and Practices of
+   [<a id="ref-INTERCON">INTERCON</a>] Dally, W. and B. Towles, "Principles and Practices of
               Interconnection Networks", ISBN 978-0122007514, January
               2004, &lt;<a href="http://dl.acm.org/citation.cfm?id=995703">http://dl.acm.org/citation.cfm?id=995703</a>&gt;.
 
-   [<a id="ref-JAKMA2008" name="ref-JAKMA2008">JAKMA2008</a>]
+   [<a id="ref-JAKMA2008">JAKMA2008</a>]
               Jakma, P., "BGP Path Hunting", 2008,
               &lt;<a href="https://blogs.oracle.com/paulj/entry/bgp_path_hunting">https://blogs.oracle.com/paulj/entry/bgp_path_hunting</a>&gt;.
 
-   [<a id="ref-L3DSR" name="ref-L3DSR">L3DSR</a>]    Schaumann, J., "L3DSR - Overcoming Layer 2 Limitations of
+   [<a id="ref-L3DSR">L3DSR</a>]    Schaumann, J., "L3DSR - Overcoming Layer 2 Limitations of
               Direct Server Return Load Balancing", 2011,
               &lt;<a href="https://www.nanog.org/meetings/nanog51/presentations/Monday/NANOG51.Talk45.nanog51-Schaumann.pdf">https://www.nanog.org/meetings/nanog51/presentations/</a>
               <a href="https://www.nanog.org/meetings/nanog51/presentations/Monday/NANOG51.Talk45.nanog51-Schaumann.pdf">Monday/NANOG51.Talk45.nanog51-Schaumann.pdf</a>&gt;.
 
-   [<a id="ref-LINK" name="ref-LINK">LINK</a>]     Mohapatra, P. and R. Fernando, "BGP Link Bandwidth
+   [<a id="ref-LINK">LINK</a>]     Mohapatra, P. and R. Fernando, "BGP Link Bandwidth
               Extended Community", Work in Progress, <a href="./draft-ietf-idr-link-bandwidth-06.html">draft-ietf-idr-</a>
               <a href="./draft-ietf-idr-link-bandwidth-06.html">link-bandwidth-06</a>, January 2013.
 
@@ -1968,53 +1945,53 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-   [<a id="ref-REMOVAL" name="ref-REMOVAL">REMOVAL</a>]  Mitchell, J., Rao, D., and R. Raszuk, "Private Autonomous
+   [<a id="ref-REMOVAL">REMOVAL</a>]  Mitchell, J., Rao, D., and R. Raszuk, "Private Autonomous
               System (AS) Removal Requirements", Work in Progress,
               <a href="./draft-mitchell-grow-remove-private-as-04.html">draft-mitchell-grow-remove-private-as-04</a>, April 2015.
 
-   [<a id="ref-RFC2328" name="ref-RFC2328">RFC2328</a>]  Moy, J., "OSPF Version 2", STD 54, <a href="./rfc2328.html">RFC 2328</a>,
+   [<a id="ref-RFC2328">RFC2328</a>]  Moy, J., "OSPF Version 2", STD 54, <a href="./rfc2328.html">RFC 2328</a>,
               DOI 10.17487/RFC2328, April 1998,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2328">http://www.rfc-editor.org/info/rfc2328</a>&gt;.
 
-   [<a id="ref-RFC2385" name="ref-RFC2385">RFC2385</a>]  Heffernan, A., "Protection of BGP Sessions via the TCP MD5
+   [<a id="ref-RFC2385">RFC2385</a>]  Heffernan, A., "Protection of BGP Sessions via the TCP MD5
               Signature Option", <a href="./rfc2385.html">RFC 2385</a>, DOI 10.17487/RFC2385, August
               1998, &lt;<a href="http://www.rfc-editor.org/info/rfc2385">http://www.rfc-editor.org/info/rfc2385</a>&gt;.
 
-   [<a id="ref-RFC2992" name="ref-RFC2992">RFC2992</a>]  Hopps, C., "Analysis of an Equal-Cost Multi-Path
+   [<a id="ref-RFC2992">RFC2992</a>]  Hopps, C., "Analysis of an Equal-Cost Multi-Path
               Algorithm", <a href="./rfc2992.html">RFC 2992</a>, DOI 10.17487/RFC2992, November 2000,
               &lt;<a href="http://www.rfc-editor.org/info/rfc2992">http://www.rfc-editor.org/info/rfc2992</a>&gt;.
 
-   [<a id="ref-RFC4272" name="ref-RFC4272">RFC4272</a>]  Murphy, S., "BGP Security Vulnerabilities Analysis",
+   [<a id="ref-RFC4272">RFC4272</a>]  Murphy, S., "BGP Security Vulnerabilities Analysis",
               <a href="./rfc4272.html">RFC 4272</a>, DOI 10.17487/RFC4272, January 2006,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4272">http://www.rfc-editor.org/info/rfc4272</a>&gt;.
 
-   [<a id="ref-RFC4277" name="ref-RFC4277">RFC4277</a>]  McPherson, D. and K. Patel, "Experience with the BGP-4
+   [<a id="ref-RFC4277">RFC4277</a>]  McPherson, D. and K. Patel, "Experience with the BGP-4
               Protocol", <a href="./rfc4277.html">RFC 4277</a>, DOI 10.17487/RFC4277, January 2006,
               &lt;<a href="http://www.rfc-editor.org/info/rfc4277">http://www.rfc-editor.org/info/rfc4277</a>&gt;.
 
-   [<a id="ref-RFC4786" name="ref-RFC4786">RFC4786</a>]  Abley, J. and K. Lindqvist, "Operation of Anycast
-              Services", <a href="./bcp126.html">BCP 126</a>, <a href="./rfc4786.html">RFC 4786</a>, DOI 10.17487/RFC4786,
+   [<a id="ref-RFC4786">RFC4786</a>]  Abley, J. and K. Lindqvist, "Operation of Anycast
+              Services", <a href="https://www.rfc-editor.org/bcp/bcp126">BCP 126</a>, <a href="./rfc4786.html">RFC 4786</a>, DOI 10.17487/RFC4786,
               December 2006, &lt;<a href="http://www.rfc-editor.org/info/rfc4786">http://www.rfc-editor.org/info/rfc4786</a>&gt;.
 
-   [<a id="ref-RFC5082" name="ref-RFC5082">RFC5082</a>]  Gill, V., Heasley, J., Meyer, D., Savola, P., Ed., and C.
+   [<a id="ref-RFC5082">RFC5082</a>]  Gill, V., Heasley, J., Meyer, D., Savola, P., Ed., and C.
               Pignataro, "The Generalized TTL Security Mechanism
               (GTSM)", <a href="./rfc5082.html">RFC 5082</a>, DOI 10.17487/RFC5082, October 2007,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5082">http://www.rfc-editor.org/info/rfc5082</a>&gt;.
 
-   [<a id="ref-RFC5837" name="ref-RFC5837">RFC5837</a>]  Atlas, A., Ed., Bonica, R., Ed., Pignataro, C., Ed., Shen,
+   [<a id="ref-RFC5837">RFC5837</a>]  Atlas, A., Ed., Bonica, R., Ed., Pignataro, C., Ed., Shen,
               N., and JR. Rivers, "Extending ICMP for Interface and
               Next-Hop Identification", <a href="./rfc5837.html">RFC 5837</a>, DOI 10.17487/RFC5837,
               April 2010, &lt;<a href="http://www.rfc-editor.org/info/rfc5837">http://www.rfc-editor.org/info/rfc5837</a>&gt;.
 
-   [<a id="ref-RFC5880" name="ref-RFC5880">RFC5880</a>]  Katz, D. and D. Ward, "Bidirectional Forwarding Detection
+   [<a id="ref-RFC5880">RFC5880</a>]  Katz, D. and D. Ward, "Bidirectional Forwarding Detection
               (BFD)", <a href="./rfc5880.html">RFC 5880</a>, DOI 10.17487/RFC5880, June 2010,
               &lt;<a href="http://www.rfc-editor.org/info/rfc5880">http://www.rfc-editor.org/info/rfc5880</a>&gt;.
 
-   [<a id="ref-RFC5925" name="ref-RFC5925">RFC5925</a>]  Touch, J., Mankin, A., and R. Bonica, "The TCP
+   [<a id="ref-RFC5925">RFC5925</a>]  Touch, J., Mankin, A., and R. Bonica, "The TCP
               Authentication Option", <a href="./rfc5925.html">RFC 5925</a>, DOI 10.17487/RFC5925,
               June 2010, &lt;<a href="http://www.rfc-editor.org/info/rfc5925">http://www.rfc-editor.org/info/rfc5925</a>&gt;.
 
@@ -2024,52 +2001,52 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
-   [<a id="ref-RFC6325" name="ref-RFC6325">RFC6325</a>]  Perlman, R., Eastlake 3rd, D., Dutt, D., Gai, S., and A.
+   [<a id="ref-RFC6325">RFC6325</a>]  Perlman, R., Eastlake 3rd, D., Dutt, D., Gai, S., and A.
               Ghanwani, "Routing Bridges (RBridges): Base Protocol
               Specification", <a href="./rfc6325.html">RFC 6325</a>, DOI 10.17487/RFC6325, July 2011,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6325">http://www.rfc-editor.org/info/rfc6325</a>&gt;.
 
-   [<a id="ref-RFC6769" name="ref-RFC6769">RFC6769</a>]  Raszuk, R., Heitz, J., Lo, A., Zhang, L., and X. Xu,
+   [<a id="ref-RFC6769">RFC6769</a>]  Raszuk, R., Heitz, J., Lo, A., Zhang, L., and X. Xu,
               "Simple Virtual Aggregation (S-VA)", <a href="./rfc6769.html">RFC 6769</a>,
               DOI 10.17487/RFC6769, October 2012,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6769">http://www.rfc-editor.org/info/rfc6769</a>&gt;.
 
-   [<a id="ref-RFC6774" name="ref-RFC6774">RFC6774</a>]  Raszuk, R., Ed., Fernando, R., Patel, K., McPherson, D.,
+   [<a id="ref-RFC6774">RFC6774</a>]  Raszuk, R., Ed., Fernando, R., Patel, K., McPherson, D.,
               and K. Kumaki, "Distribution of Diverse BGP Paths",
               <a href="./rfc6774.html">RFC 6774</a>, DOI 10.17487/RFC6774, November 2012,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6774">http://www.rfc-editor.org/info/rfc6774</a>&gt;.
 
-   [<a id="ref-RFC6793" name="ref-RFC6793">RFC6793</a>]  Vohra, Q. and E. Chen, "BGP Support for Four-Octet
+   [<a id="ref-RFC6793">RFC6793</a>]  Vohra, Q. and E. Chen, "BGP Support for Four-Octet
               Autonomous System (AS) Number Space", <a href="./rfc6793.html">RFC 6793</a>,
               DOI 10.17487/RFC6793, December 2012,
               &lt;<a href="http://www.rfc-editor.org/info/rfc6793">http://www.rfc-editor.org/info/rfc6793</a>&gt;.
 
-   [<a id="ref-RFC7067" name="ref-RFC7067">RFC7067</a>]  Dunbar, L., Eastlake 3rd, D., Perlman, R., and I.
+   [<a id="ref-RFC7067">RFC7067</a>]  Dunbar, L., Eastlake 3rd, D., Perlman, R., and I.
               Gashinsky, "Directory Assistance Problem and High-Level
               Design Proposal", <a href="./rfc7067.html">RFC 7067</a>, DOI 10.17487/RFC7067, November
               2013, &lt;<a href="http://www.rfc-editor.org/info/rfc7067">http://www.rfc-editor.org/info/rfc7067</a>&gt;.
 
-   [<a id="ref-RFC7130" name="ref-RFC7130">RFC7130</a>]  Bhatia, M., Ed., Chen, M., Ed., Boutros, S., Ed.,
+   [<a id="ref-RFC7130">RFC7130</a>]  Bhatia, M., Ed., Chen, M., Ed., Boutros, S., Ed.,
               Binderberger, M., Ed., and J. Haas, Ed., "Bidirectional
               Forwarding Detection (BFD) on Link Aggregation Group (LAG)
               Interfaces", <a href="./rfc7130.html">RFC 7130</a>, DOI 10.17487/RFC7130, February
               2014, &lt;<a href="http://www.rfc-editor.org/info/rfc7130">http://www.rfc-editor.org/info/rfc7130</a>&gt;.
 
-   [<a id="ref-RFC7196" name="ref-RFC7196">RFC7196</a>]  Pelsser, C., Bush, R., Patel, K., Mohapatra, P., and O.
+   [<a id="ref-RFC7196">RFC7196</a>]  Pelsser, C., Bush, R., Patel, K., Mohapatra, P., and O.
               Maennel, "Making Route Flap Damping Usable", <a href="./rfc7196.html">RFC 7196</a>,
               DOI 10.17487/RFC7196, May 2014,
               &lt;<a href="http://www.rfc-editor.org/info/rfc7196">http://www.rfc-editor.org/info/rfc7196</a>&gt;.
 
-   [<a id="ref-RFC7911" name="ref-RFC7911">RFC7911</a>]  Walton, D., Retana, A., Chen, E., and J. Scudder,
+   [<a id="ref-RFC7911">RFC7911</a>]  Walton, D., Retana, A., Chen, E., and J. Scudder,
               "Advertisement of Multiple Paths in BGP", <a href="./rfc7911.html">RFC 7911</a>,
               DOI 10.17487/RFC7911, July 2016,
               &lt;<a href="http://www.rfc-editor.org/info/rfc7911">http://www.rfc-editor.org/info/rfc7911</a>&gt;.
 
-   [<a id="ref-VENDOR-REMOVE-PRIVATE-AS" name="ref-VENDOR-REMOVE-PRIVATE-AS">VENDOR-REMOVE-PRIVATE-AS</a>]
+   [<a id="ref-VENDOR-REMOVE-PRIVATE-AS">VENDOR-REMOVE-PRIVATE-AS</a>]
               Cisco Systems, "Removing Private Autonomous System Numbers
               in BGP", August 2005,
               &lt;<a href="http://www.cisco.com/en/US/tech/tk365/technologies_tech_note09186a0080093f27.shtml">http://www.cisco.com/en/US/tech/tk365/</a>
@@ -2080,7 +2057,7 @@ Table of Contents
 
 
 <span class="grey">Lapukhov, et al.              Informational                    [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc7938.html">RFC 7938</a>               BGP Routing in Data Centers           August 2016</span>
 
 
@@ -2136,11 +2113,6 @@ Authors' Addresses
 
 
 Lapukhov, et al.              Informational                    [Page 35]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

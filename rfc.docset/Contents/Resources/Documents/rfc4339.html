@@ -1,24 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:4339" name="DC.Identifier"/>
-<meta content="This document describes three approaches for IPv6 recursive DNS server
-address configuration. It details the operational attributes of three
-solutions: RA option, DHCPv6 option, and well-known anycast addresses
-for recursive DNS servers. Additionally, it suggests the deployment
-scenarios in four kinds of networks (ISP, enterprise, 3GPP, and
-unmanaged networks) considering multi-solution resolution. This memo
-provides information for the Internet community." name="DC.Description.Abstract"/>
-<meta content="Jaehoon Paul Jeong &lt;jjeong@cs.umn.edu&gt;" name="DC.Creator"/>
-<meta content="February, 2006" name="DC.Date.Issued"/>
-<meta content="IPv6 Host Configuration of DNS Server Information Approaches" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 4339 - IPv6 Host Configuration of DNS Server Information Approaches</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="J. Jeong" name="citation_author"/>
+<meta content="February, 2006" name="citation_publication_date"/>
+<meta content="IPv6 Host Configuration of DNS Server Information Approaches" name="citation_title"/>
+<meta content="10.17487/RFC4339" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc4339" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc4339.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 4339: IPv6 Host Configuration of DNS Server Information Approaches</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -47,7 +40,7 @@ provides information for the Internet community." name="DC.Description.Abstract"
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -56,7 +49,7 @@ provides information for the Internet community." name="DC.Description.Abstract"
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -135,19 +128,18 @@ provides information for the Internet community." name="DC.Description.Abstract"
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -161,21 +153,9 @@ provides information for the Internet community." name="DC.Description.Abstract"
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc4339.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc4339" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-dnsop-ipv6-dns-configuration.html" title="draft-ietf-dnsop-ipv6-dns-configuration">draft-ietf-dnsop-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc4339" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc4339" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=4339">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                      J. Jeong, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc4339.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc4339.txt.pdf">PDF</a>|<a href="/rfc/rfc4339.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc4339" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=4339&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc4339" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc4339" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                      J. Jeong, Ed.
 Request for Comments: 4339                  ETRI/University of Minnesota
 Category: Informational                                    February 2006
 
@@ -227,7 +207,7 @@ Abstract
 
 
 <span class="grey">Jeong                        Informational                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -283,11 +263,11 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    Neighbor Discovery (ND) for IP Version 6 and IPv6 Stateless Address
    Autoconfiguration provide ways to configure either fixed or mobile
@@ -313,7 +293,7 @@ Table of Contents
    select the approaches suitable for IPv6 host configuration of
    recursive DNS servers.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology</span>
 
    This document uses the terminology described in [<a href="#ref-1" title='"Neighbor Discovery for IP Version 6 (IPv6)"'>1</a>]-[<a href="#ref-7" title='"Preconfigured DNS Server Addresses"'>7</a>].  In
    addition, a new term is defined below:
@@ -321,12 +301,12 @@ Table of Contents
    o  Recursive DNS Server (RDNSS): Server which provides a recursive
       DNS resolution service.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20IPv6%20DNS%20Configuration%20Approaches"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  IPv6 DNS Configuration Approaches</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20IPv6%20DNS%20Configuration%20Approaches"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  IPv6 DNS Configuration Approaches</span>
 
    In this section, the operational attributes of the three solutions
    are described in detail.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20RA%20Option"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  RA Option</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20RA%20Option"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  RA Option</span>
 
    The RA approach defines a new ND option, called the RDNSS option,
    that contains a recursive DNS server address [<a href="#ref-6" title='"IPv6 Router Advertisement Option for DNS Configuration"'>6</a>].  Existing ND
@@ -339,7 +319,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -371,7 +351,7 @@ Table of Contents
    IPv6 hosts to select primary RDNSS among several RDNSSes [<a href="#ref-6" title='"IPv6 Router Advertisement Option for DNS Configuration"'>6</a>]; this
    can be used for the load balancing of RDNSSes.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Advantages"></a></body></html><a class="selflink" href="#section-3.1.1" name="section-3.1.1">3.1.1</a>.  Advantages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.1.%20%20Advantages"></a></body></html><a class="selflink" href="#section-3.1.1" id="section-3.1.1">3.1.1</a>.  Advantages</span>
 
    The RA option for RDNSS has a number of advantages.  These include:
 
@@ -395,7 +375,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -418,7 +398,7 @@ Table of Contents
        addresses, such as NTP server address, that are common to all
        clients on a subnet would be easy to define.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Disadvantages"></a></body></html><a class="selflink" href="#section-3.1.2" name="section-3.1.2">3.1.2</a>.  Disadvantages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.2.%20%20Disadvantages"></a></body></html><a class="selflink" href="#section-3.1.2" id="section-3.1.2">3.1.2</a>.  Disadvantages</span>
 
    1.  ND is mostly implemented in the kernel of the operating system.
        Therefore, if ND supports the configuration of some additional
@@ -441,7 +421,7 @@ Table of Contents
        router on every link where this information needs to be
        configured via the RA option.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.%20%20Observations"></a></body></html><a class="selflink" href="#section-3.1.3" name="section-3.1.3">3.1.3</a>.  Observations</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.3.%20%20Observations"></a></body></html><a class="selflink" href="#section-3.1.3" id="section-3.1.3">3.1.3</a>.  Observations</span>
 
    The proposed RDNSS RA option, along with the IPv6 ND and
    Autoconfiguration, allows a host to obtain all of the information it
@@ -451,7 +431,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -469,7 +449,7 @@ Table of Contents
    environments where the local administration chooses to have per host
    configuration control.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20DHCPv6%20Option"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  DHCPv6 Option</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20DHCPv6%20Option"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  DHCPv6 Option</span>
 
    DHCPv6 [<a href="#ref-3" title='"Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>3</a>] includes the "DNS Recursive Name Server" option, through
    which a host can obtain a list of IP addresses of recursive DNS
@@ -507,7 +487,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -540,7 +520,7 @@ Table of Contents
    with tens of thousands of hosts that may initiate a DHCPv4 message
    exchange simultaneously.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Advantages"></a></body></html><a class="selflink" href="#section-3.2.1" name="section-3.2.1">3.2.1</a>.  Advantages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.1.%20%20Advantages"></a></body></html><a class="selflink" href="#section-3.2.1" id="section-3.2.1">3.2.1</a>.  Advantages</span>
 
    The DHCPv6 option for RDNSS has a number of advantages.  These
    include:
@@ -563,7 +543,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -587,7 +567,7 @@ Table of Contents
    7.  Interoperability among independent implementations has been
        demonstrated.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Disadvantages"></a></body></html><a class="selflink" href="#section-3.2.2" name="section-3.2.2">3.2.2</a>.  Disadvantages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.2.%20%20Disadvantages"></a></body></html><a class="selflink" href="#section-3.2.2" id="section-3.2.2">3.2.2</a>.  Disadvantages</span>
 
    The DHCPv6 option for RDNSS has a few disadvantages.  These include:
 
@@ -619,11 +599,11 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Observations"></a></body></html><a class="selflink" href="#section-3.2.3" name="section-3.2.3">3.2.3</a>.  Observations</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.3.%20%20Observations"></a></body></html><a class="selflink" href="#section-3.2.3" id="section-3.2.3">3.2.3</a>.  Observations</span>
 
    In the general case, on general-purpose networks, stateless DHCPv6
    provides significant advantages and no significant disadvantages.
@@ -640,7 +620,7 @@ Table of Contents
    RA should be standardized so as to allow these special applications
    to be handled using DNS information in the RA packet.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Well-known%20Anycast%20Addresses"></a></body></html><a class="selflink" href="#section-3.3" name="section-3.3">3.3</a>.  Well-known Anycast Addresses</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.%20%20Well-known%20Anycast%20Addresses"></a></body></html><a class="selflink" href="#section-3.3" id="section-3.3">3.3</a>.  Well-known Anycast Addresses</span>
 
    Anycast uses the same routing system as unicast [<a href="#ref-9" title='"Host Anycasting Service"'>9</a>].  However,
    administrative entities are local ones.  The local entities may
@@ -675,7 +655,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -686,7 +666,7 @@ Table of Contents
    also depend on their ISPs or may have their own RDNSSes within "site"
    boundaries.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Advantages"></a></body></html><a class="selflink" href="#section-3.3.1" name="section-3.3.1">3.3.1</a>.  Advantages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.1.%20%20Advantages"></a></body></html><a class="selflink" href="#section-3.3.1" id="section-3.3.1">3.3.1</a>.  Advantages</span>
 
    The basic advantage of the well-known addresses approach is that it
    uses no transport mechanism.  Thus, the following apply:
@@ -710,7 +690,7 @@ Table of Contents
    subscriber and the ISP do nothing and there is no protocol to
    exchange DNS server information between the subscriber and the ISP.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.%20%20Disadvantages"></a></body></html><a class="selflink" href="#section-3.3.2" name="section-3.3.2">3.3.2</a>.  Disadvantages</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.2.%20%20Disadvantages"></a></body></html><a class="selflink" href="#section-3.3.2" id="section-3.3.2">3.3.2</a>.  Disadvantages</span>
 
    The well-known anycast addresses approach requires that DNS servers
    (or routers near to them as a proxy) act as routers to advertise
@@ -722,7 +702,7 @@ Table of Contents
    possibility of denial of service attacks on the internal DNS
    infrastructure.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.3.%20%20Observations"></a></body></html><a class="selflink" href="#section-3.3.3" name="section-3.3.3">3.3.3</a>.  Observations</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.3.3.%20%20Observations"></a></body></html><a class="selflink" href="#section-3.3.3" id="section-3.3.3">3.3.3</a>.  Observations</span>
 
    If other approaches are used in addition, the well-known anycast
    addresses should also be set in RA or DHCP configuration files to
@@ -731,7 +711,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -765,7 +745,7 @@ Table of Contents
    detected by ICMP or sequence number inconsistency, and that the TCP
    connection is reset and retried.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Interworking%20among%20IPv6%20DNS%20Configuration%20Approaches"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Interworking among IPv6 DNS Configuration Approaches</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Interworking%20among%20IPv6%20DNS%20Configuration%20Approaches"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Interworking among IPv6 DNS Configuration Approaches</span>
 
    Three approaches can work together for IPv6 host configuration of
    RDNSS.  This section shows a consideration on how these approaches
@@ -787,7 +767,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -817,7 +797,7 @@ Table of Contents
    interwork in the way described here.  In fact, as a result of further
    discussion some approaches may not even be adopted at all.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Deployment%20Scenarios"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Deployment Scenarios</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Deployment%20Scenarios"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Deployment Scenarios</span>
 
    Regarding the DNS configuration on the IPv6 host, several mechanisms
    are being considered by the DNSOP Working Group, such as RA option,
@@ -832,7 +812,7 @@ Table of Contents
    main objective of this work is to provide a useful guideline for IPv6
    DNS configuration.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20ISP%20Network"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  ISP Network</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20ISP%20Network"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  ISP Network</span>
 
    A characteristic of an ISP network is that multiple Customer Premises
    Equipment (CPE) devices are connected to IPv6 PE (Provider Edge)
@@ -843,7 +823,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -855,7 +835,7 @@ Table of Contents
    This section discusses how the different approaches to distributing
    DNS information are compared in an ISP network.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20RA%20Option%20Approach"></a></body></html><a class="selflink" href="#section-5.1.1" name="section-5.1.1">5.1.1</a>.  RA Option Approach</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20RA%20Option%20Approach"></a></body></html><a class="selflink" href="#section-5.1.1" id="section-5.1.1">5.1.1</a>.  RA Option Approach</span>
 
    When the CPE is a host, the RA option for RDNSS can be used to allow
    the CPE to get RDNSS information and /64 prefix information for
@@ -877,7 +857,7 @@ Table of Contents
    Secure ND [<a href="#ref-12" title='"SEcure Neighbor Discovery (SEND)"'>12</a>] can provide extended security when RA messages are
    used.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.%20%20DHCPv6%20Option%20Approach"></a></body></html><a class="selflink" href="#section-5.1.2" name="section-5.1.2">5.1.2</a>.  DHCPv6 Option Approach</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.%20%20DHCPv6%20Option%20Approach"></a></body></html><a class="selflink" href="#section-5.1.2" id="section-5.1.2">5.1.2</a>.  DHCPv6 Option Approach</span>
 
    DHCPv6 can be used for RDNSS configuration through the use of the DNS
    option, and can provide other configuration information in the same
@@ -899,7 +879,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -910,7 +890,7 @@ Table of Contents
    RDNSS configuration information to the hosts in the customer network
    through DHCP.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.%20%20Well-known%20Anycast%20Addresses%20Approach"></a></body></html><a class="selflink" href="#section-5.1.3" name="section-5.1.3">5.1.3</a>.  Well-known Anycast Addresses Approach</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.%20%20Well-known%20Anycast%20Addresses%20Approach"></a></body></html><a class="selflink" href="#section-5.1.3" id="section-5.1.3">5.1.3</a>.  Well-known Anycast Addresses Approach</span>
 
    The well-known anycast addresses approach is also a feasible and
    simple mechanism for ISP [<a href="#ref-7" title='"Preconfigured DNS Server Addresses"'>7</a>].  The use of well-known anycast
@@ -923,7 +903,7 @@ Table of Contents
    be equal to the number of RDNSSes that could be made available to
    subscribers.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Enterprise%20Network"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Enterprise Network</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Enterprise%20Network"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Enterprise Network</span>
 
    An enterprise network is defined as a network that has multiple
    internal links, one or more router connections to one or more
@@ -955,7 +935,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -964,7 +944,7 @@ Table of Contents
        This way is most recommended for the sake of the user's
        convenience.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%203GPP%20Network"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  3GPP Network</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%203GPP%20Network"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  3GPP Network</span>
 
    The IPv6 DNS configuration is a missing part of IPv6
    autoconfiguration and an important part of the basic IPv6
@@ -990,7 +970,7 @@ Table of Contents
    mechanism, and 5.3.4 analyzes the well-known addresses approach.
    <a href="#section-5.3.5">Section 5.3.5</a> summarizes the recommendations.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.1.%20%20Currently%20Available%20Mechanisms%20and%20Recommendations"></a></body></html><a class="selflink" href="#section-5.3.1" name="section-5.3.1">5.3.1</a>.  Currently Available Mechanisms and Recommendations</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.1.%20%20Currently%20Available%20Mechanisms%20and%20Recommendations"></a></body></html><a class="selflink" href="#section-5.3.1" id="section-5.3.1">5.3.1</a>.  Currently Available Mechanisms and Recommendations</span>
 
    3GPP has defined a mechanism in which RDNSS addresses can be received
    in the PDP context activation (a control plane mechanism).  That is
@@ -1011,7 +991,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -1033,7 +1013,7 @@ Table of Contents
    but also 3GPP networks and UEs would certainly benefit from the new
    mechanism.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.2.%20%20RA%20Extension"></a></body></html><a class="selflink" href="#section-5.3.2" name="section-5.3.2">5.3.2</a>.  RA Extension</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.2.%20%20RA%20Extension"></a></body></html><a class="selflink" href="#section-5.3.2" id="section-5.3.2">5.3.2</a>.  RA Extension</span>
 
    Router Advertisement extension [<a href="#ref-6" title='"IPv6 Router Advertisement Option for DNS Configuration"'>6</a>] is a lightweight IPv6 DNS
    configuration mechanism that requires minor changes in the 3GPP UE
@@ -1057,7 +1037,7 @@ Table of Contents
    should, however, be pretty straightforward, and new IPv6 equipment
    could support RA extension already from the beginning.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.3.%20%20Stateless%20DHCPv6"></a></body></html><a class="selflink" href="#section-5.3.3" name="section-5.3.3">5.3.3</a>.  Stateless DHCPv6</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.3.%20%20Stateless%20DHCPv6"></a></body></html><a class="selflink" href="#section-5.3.3" id="section-5.3.3">5.3.3</a>.  Stateless DHCPv6</span>
 
    A DHCPv6-based solution needs the implementation of Stateless DHCP
    [<a href="#ref-4" title='"Stateless Dynamic Host Configuration Protocol (DHCP) Service for IPv6"'>4</a>] and DHCPv6 DNS options [<a href="#ref-5" title='"DNS Configuration options for Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>5</a>] in the UE, and a DHCPv6 server in the
@@ -1067,7 +1047,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -1113,7 +1093,7 @@ Table of Contents
    5.  If the DNS information (suddenly) changes, Stateless DHCPv6
        cannot automatically update the UE; see [<a href="#ref-21" title='"Renumbering Requirements for Stateless Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>21</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.4.%20%20Well-known%20Addresses"></a></body></html><a class="selflink" href="#section-5.3.4" name="section-5.3.4">5.3.4</a>.  Well-known Addresses</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.4.%20%20Well-known%20Addresses"></a></body></html><a class="selflink" href="#section-5.3.4" id="section-5.3.4">5.3.4</a>.  Well-known Addresses</span>
 
    Using well-known addresses is also a feasible and light mechanism for
    3GPP UEs.  Those well-known addresses can be preconfigured in the UE
@@ -1123,7 +1103,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -1142,7 +1122,7 @@ Table of Contents
    operating systems and 3GPP UEs as a last resort of IPv6 DNS
    configuration.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.5.%20%20Recommendations"></a></body></html><a class="selflink" href="#section-5.3.5" name="section-5.3.5">5.3.5</a>.  Recommendations</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.5.%20%20Recommendations"></a></body></html><a class="selflink" href="#section-5.3.5" id="section-5.3.5">5.3.5</a>.  Recommendations</span>
 
    It is suggested that a lightweight, stateless DNS configuration
    mechanism be specified as soon as possible.  From a 3GPP UE and
@@ -1151,7 +1131,7 @@ Table of Contents
    specified, the sooner we can stop using well-known site-local
    addresses for IPv6 DNS configuration.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Unmanaged%20Network"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  Unmanaged Network</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20Unmanaged%20Network"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  Unmanaged Network</span>
 
    There are four deployment scenarios of interest in unmanaged networks
    [<a href="#ref-22" title='"Unmanaged Networks IPv6 Transition Scenarios"'>22</a>]:
@@ -1164,7 +1144,7 @@ Table of Contents
 
    4.  A gateway connected to an IPv6-only ISP.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.1.%20%20Case%20A%3A%20Gateway%20Does%20Not%20Provide%20IPv6%20at%20All"></a></body></html><a class="selflink" href="#section-5.4.1" name="section-5.4.1">5.4.1</a>.  Case A: Gateway Does Not Provide IPv6 at All</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.1.%20%20Case%20A%3A%20Gateway%20Does%20Not%20Provide%20IPv6%20at%20All"></a></body></html><a class="selflink" href="#section-5.4.1" id="section-5.4.1">5.4.1</a>.  Case A: Gateway Does Not Provide IPv6 at All</span>
 
    In this case, the gateway does not provide IPv6; the ISP may or may
    not provide IPv6.  Automatic or Configured tunnels are the
@@ -1179,7 +1159,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -1190,25 +1170,25 @@ Table of Contents
    well-known anycast addresses in a tunneled environment is unclear or
    not well understood.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.2.%20%20Case%20B%3A%20A%20Dual-stack%20Gateway%20Connected%20to%20a%20Dual-stack%20ISP"></a></body></html><a class="selflink" href="#section-5.4.2" name="section-5.4.2">5.4.2</a>.  Case B: A Dual-stack Gateway Connected to a Dual-stack ISP</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.2.%20%20Case%20B%3A%20A%20Dual-stack%20Gateway%20Connected%20to%20a%20Dual-stack%20ISP"></a></body></html><a class="selflink" href="#section-5.4.2" id="section-5.4.2">5.4.2</a>.  Case B: A Dual-stack Gateway Connected to a Dual-stack ISP</span>
 
    This is similar to a typical IPv4 home user scenario, where DNS
    configuration parameters are obtained using DHCP.  The exception is
    that Stateless DHCPv6 is used, as opposed to the IPv4 scenario, where
    the DHCP server is stateful (it maintains the state for clients).
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.3.%20%20Case%20C%3A%20A%20Dual-stack%20Gateway%20Connected%20to%20an%20IPv4-only%20ISP"></a></body></html><a class="selflink" href="#section-5.4.3" name="section-5.4.3">5.4.3</a>.  Case C: A Dual-stack Gateway Connected to an IPv4-only ISP</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.3.%20%20Case%20C%3A%20A%20Dual-stack%20Gateway%20Connected%20to%20an%20IPv4-only%20ISP"></a></body></html><a class="selflink" href="#section-5.4.3" id="section-5.4.3">5.4.3</a>.  Case C: A Dual-stack Gateway Connected to an IPv4-only ISP</span>
 
    This is similar to Case B.  If a gateway provides IPv6 connectivity
    by managing tunnels, then it is also supposed to provide access to an
    RDNSS.  Like this, the tunnel for IPv6 connectivity originates from
    the dual-stack gateway instead of from the host.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.4.%20%20Case%20D%3A%20A%20Gateway%20Connected%20to%20an%20IPv6-only%20ISP"></a></body></html><a class="selflink" href="#section-5.4.4" name="section-5.4.4">5.4.4</a>.  Case D: A Gateway Connected to an IPv6-only ISP</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.4.%20%20Case%20D%3A%20A%20Gateway%20Connected%20to%20an%20IPv6-only%20ISP"></a></body></html><a class="selflink" href="#section-5.4.4" id="section-5.4.4">5.4.4</a>.  Case D: A Gateway Connected to an IPv6-only ISP</span>
 
    This is similar to Case B.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    As security requirements depend solely on applications and differ
    from application to application, there can be no generic requirement
@@ -1235,7 +1215,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -1265,7 +1245,7 @@ Table of Contents
    reliable, clients may be directed to a false resolver with the same
    IP address as the true one.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20RA%20Option"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  RA Option</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20RA%20Option"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  RA Option</span>
 
    The security of RA option for RDNSS is the same as the ND protocol
    security [<a href="#ref-1" title='"Neighbor Discovery for IP Version 6 (IPv6)"'>1</a>][6].  The RA option does not add any new vulnerability.
@@ -1291,11 +1271,11 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20DHCPv6%20Option"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  DHCPv6 Option</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20DHCPv6%20Option"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  DHCPv6 Option</span>
 
    The DNS Recursive Name Server option may be used by an intruder DHCP
    server to cause DHCP clients to send DNS queries to an intruder DNS
@@ -1307,7 +1287,7 @@ Table of Contents
    of DHCP messages" in <a href="./rfc3315.html">RFC 3315</a> [<a href="#ref-3" title='"Dynamic Host Configuration Protocol for IPv6 (DHCPv6)"'>3</a>][13]) before installing a list of
    DNS recursive name servers obtained through authenticated DHCP.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Well-known%20Anycast%20Addresses"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  Well-known Anycast Addresses</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20Well-known%20Anycast%20Addresses"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  Well-known Anycast Addresses</span>
 
    The well-known anycast addresses approach is not a protocol, thus
    there is no need to secure the protocol itself.
@@ -1316,7 +1296,7 @@ Table of Contents
    be easier to achieve as the anycast addresses used are by definition
    well known.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Contributors"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Contributors</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Contributors"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Contributors</span>
 
    Ralph Droms
    Cisco Systems, Inc.
@@ -1347,7 +1327,7 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -1403,11 +1383,11 @@ Table of Contents
 
 
 <span class="grey">Jeong                        Informational                     [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgements</span>
 
    This document has greatly benefited from inputs by David Meyer, Rob
    Austein, Tatuya Jinmei, Pekka Savola, Tim Chown, Luc Beloeil,
@@ -1415,121 +1395,121 @@ Table of Contents
    Also, Tony Bonanno proofread this document.  The authors appreciate
    their contribution.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-1" name="ref-1">1</a>]  Narten, T., Nordmark, E., and W. Simpson, "Neighbor Discovery
+   [<a id="ref-1">1</a>]  Narten, T., Nordmark, E., and W. Simpson, "Neighbor Discovery
         for IP Version 6 (IPv6)", <a href="./rfc2461.html">RFC 2461</a>, December 1998.
 
-   [<a id="ref-2" name="ref-2">2</a>]  Thomson, S. and T. Narten, "IPv6 Stateless Address
+   [<a id="ref-2">2</a>]  Thomson, S. and T. Narten, "IPv6 Stateless Address
         Autoconfiguration", <a href="./rfc2462.html">RFC 2462</a>, December 1998.
 
-   [<a id="ref-3" name="ref-3">3</a>]  Droms, R., Bound, J., Volz, B., Lemon, T., Perkins, C., and M.
+   [<a id="ref-3">3</a>]  Droms, R., Bound, J., Volz, B., Lemon, T., Perkins, C., and M.
         Carney, "Dynamic Host Configuration Protocol for IPv6 (DHCPv6)",
         <a href="./rfc3315.html">RFC 3315</a>, July 2003.
 
-   [<a id="ref-4" name="ref-4">4</a>]  Droms, R., "Stateless Dynamic Host Configuration Protocol (DHCP)
+   [<a id="ref-4">4</a>]  Droms, R., "Stateless Dynamic Host Configuration Protocol (DHCP)
         Service for IPv6", <a href="./rfc3736.html">RFC 3736</a>, April 2004.
 
-   [<a id="ref-5" name="ref-5">5</a>]  Droms, R., "DNS Configuration options for Dynamic Host
+   [<a id="ref-5">5</a>]  Droms, R., "DNS Configuration options for Dynamic Host
         Configuration Protocol for IPv6 (DHCPv6)", <a href="./rfc3646.html">RFC 3646</a>, December
         2003.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-6" name="ref-6">6</a>]  Jeong, J., Park, S., Beloeil, L., and S. Madanapalli, "IPv6
+   [<a id="ref-6">6</a>]  Jeong, J., Park, S., Beloeil, L., and S. Madanapalli, "IPv6
         Router Advertisement Option for DNS Configuration", Work in
         Progress, September 2005.
 
-   [<a id="ref-7" name="ref-7">7</a>]  Ohta, M., <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22Preconfigured+DNS+Server+Addresses%22" style="text-decoration: none">"Preconfigured DNS Server Addresses"</a>, Work in
+   [<a id="ref-7">7</a>]  Ohta, M., <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22Preconfigured+DNS+Server+Addresses%22" style="text-decoration: none">"Preconfigured DNS Server Addresses"</a>, Work in
         Progress, February 2004.
 
-   [<a id="ref-8" name="ref-8">8</a>]  Venaas, S., Chown, T., and B. Volz, "Information Refresh Time
+   [<a id="ref-8">8</a>]  Venaas, S., Chown, T., and B. Volz, "Information Refresh Time
         Option for Dynamic Host Configuration Protocol for IPv6
         (DHCPv6)", <a href="./rfc4242.html">RFC 4242</a>, November 2005.
 
-   [<a id="ref-9" name="ref-9">9</a>]  Partridge, C., Mendez, T., and W. Milliken, "Host Anycasting
+   [<a id="ref-9">9</a>]  Partridge, C., Mendez, T., and W. Milliken, "Host Anycasting
         Service", <a href="./rfc1546.html">RFC 1546</a>, November 1993.
 
-   [<a id="ref-10" name="ref-10">10</a>] Hinden, R. and S. Deering, "Internet Protocol Version 6 (IPv6)
+   [<a id="ref-10">10</a>] Hinden, R. and S. Deering, "Internet Protocol Version 6 (IPv6)
         Addressing Architecture", <a href="./rfc3513.html">RFC 3513</a>, April 2003.
 
 
 
 
 <span class="grey">Jeong                        Informational                     [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
-   [<a id="ref-11" name="ref-11">11</a>] Lind, M., Ksinant, V., Park, S., Baudot, A., and P. Savola,
+   [<a id="ref-11">11</a>] Lind, M., Ksinant, V., Park, S., Baudot, A., and P. Savola,
         "Scenarios and Analysis for Introducing IPv6 into ISP Networks",
         <a href="./rfc4029.html">RFC 4029</a>, March 2005.
 
-   [<a id="ref-12" name="ref-12">12</a>] Arkko, J., Kempf, J., Zill, B., and P. Nikander, "SEcure
+   [<a id="ref-12">12</a>] Arkko, J., Kempf, J., Zill, B., and P. Nikander, "SEcure
         Neighbor Discovery (SEND)", <a href="./rfc3971.html">RFC 3971</a>, March 2005.
 
-   [<a id="ref-13" name="ref-13">13</a>] Droms, R. and W. Arbaugh, "Authentication for DHCP Messages",
+   [<a id="ref-13">13</a>] Droms, R. and W. Arbaugh, "Authentication for DHCP Messages",
         <a href="./rfc3118.html">RFC 3118</a>, June 2001.
 
-   [<a id="ref-14" name="ref-14">14</a>] Bound, J., "IPv6 Enterprise Network Scenarios", <a href="./rfc4057.html">RFC 4057</a>, June
+   [<a id="ref-14">14</a>] Bound, J., "IPv6 Enterprise Network Scenarios", <a href="./rfc4057.html">RFC 4057</a>, June
         2005.
 
-   [<a id="ref-15" name="ref-15">15</a>] Troan, O. and R. Droms, "IPv6 Prefix Options for Dynamic Host
+   [<a id="ref-15">15</a>] Troan, O. and R. Droms, "IPv6 Prefix Options for Dynamic Host
         Configuration Protocol (DHCP) version 6", <a href="./rfc3633.html">RFC 3633</a>, December
         2003.
 
-   [<a id="ref-16" name="ref-16">16</a>] Wasserman, M., "Recommendations for IPv6 in Third Generation
+   [<a id="ref-16">16</a>] Wasserman, M., "Recommendations for IPv6 in Third Generation
         Partnership Project (3GPP) Standards", <a href="./rfc3314.html">RFC 3314</a>, September 2002.
 
-   [<a id="ref-17" name="ref-17">17</a>] Soininen, J., "Transition Scenarios for 3GPP Networks", <a href="./rfc3574.html">RFC</a>
+   [<a id="ref-17">17</a>] Soininen, J., "Transition Scenarios for 3GPP Networks", <a href="./rfc3574.html">RFC</a>
         <a href="./rfc3574.html">3574</a>, August 2003.
 
-   [<a id="ref-18" name="ref-18">18</a>] Wiljakka, J., "Analysis on IPv6 Transition in Third Generation
+   [<a id="ref-18">18</a>] Wiljakka, J., "Analysis on IPv6 Transition in Third Generation
         Partnership Project (3GPP) Networks", <a href="./rfc4215.html">RFC 4215</a>, October 2005.
 
-   [<a id="ref-19" name="ref-19">19</a>] 3GPP TS 23.060 V5.4.0, "General Packet Radio Service (GPRS);
+   [<a id="ref-19">19</a>] 3GPP TS 23.060 V5.4.0, "General Packet Radio Service (GPRS);
         Service description; Stage 2 (Release 5)", December 2002.
 
-   [<a id="ref-20" name="ref-20">20</a>] 3GPP TS 24.008 V5.8.0, "Mobile radio interface Layer 3
+   [<a id="ref-20">20</a>] 3GPP TS 24.008 V5.8.0, "Mobile radio interface Layer 3
         specification; Core network protocols; Stage 3 (Release 5)",
         June 2003.
 
-   [<a id="ref-21" name="ref-21">21</a>] Chown, T., Venaas, S., and A. Vijayabhaskar, "Renumbering
+   [<a id="ref-21">21</a>] Chown, T., Venaas, S., and A. Vijayabhaskar, "Renumbering
         Requirements for Stateless Dynamic Host Configuration Protocol
         for IPv6 (DHCPv6)", <a href="./rfc4076.html">RFC 4076</a>, May 2005.
 
-   [<a id="ref-22" name="ref-22">22</a>] Huitema, C., Austein, R., Satapati, S., and R. van der Pol,
+   [<a id="ref-22">22</a>] Huitema, C., Austein, R., Satapati, S., and R. van der Pol,
         "Unmanaged Networks IPv6 Transition Scenarios", <a href="./rfc3750.html">RFC 3750</a>, April
         2004.
 
-   [<a id="ref-23" name="ref-23">23</a>] Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose,
+   [<a id="ref-23">23</a>] Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose,
         "DNS Security Introduction and Requirements", <a href="./rfc4033.html">RFC 4033</a>, March
         2005.
 
-   [<a id="ref-24" name="ref-24">24</a>] Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose,
+   [<a id="ref-24">24</a>] Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose,
         "Resource Records for the DNS Security Extensions", <a href="./rfc4034.html">RFC 4034</a>,
         March 2005.
 
 
 
 <span class="grey">Jeong                        Informational                     [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
-   [<a id="ref-25" name="ref-25">25</a>] Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose,
+   [<a id="ref-25">25</a>] Arends, R., Austein, R., Larson, M., Massey, D., and S. Rose,
         "Protocol Modifications for the DNS Security Extensions", <a href="./rfc4035.html">RFC</a>
         <a href="./rfc4035.html">4035</a>, March 2005.
 
-   [<a id="ref-26" name="ref-26">26</a>] Kolkman, O. and R. Gieben, <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22DNSSEC+Operational+Practices%22" style="text-decoration: none">"DNSSEC Operational Practices"</a>, Work
+   [<a id="ref-26">26</a>] Kolkman, O. and R. Gieben, <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22DNSSEC+Operational+Practices%22" style="text-decoration: none">"DNSSEC Operational Practices"</a>, Work
         in Progress, October 2005.
 
-   [<a id="ref-27" name="ref-27">27</a>] Guette, G. and O. Courtay, "Requirements for Automated Key
+   [<a id="ref-27">27</a>] Guette, G. and O. Courtay, "Requirements for Automated Key
         Rollover in DNSSEC", Work in Progress, January 2005.
 
-   [<a id="ref-28" name="ref-28">28</a>] Park, S., Madanapalli, S., and T. Jinmei, "Considerations on M
+   [<a id="ref-28">28</a>] Park, S., Madanapalli, S., and T. Jinmei, "Considerations on M
         and O Flags of IPv6 Router Advertisement", Work in Progress,
         March 2005.
 
@@ -1571,7 +1551,7 @@ Author's Address
 
 
 <span class="grey">Jeong                        Informational                     [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc4339.html">RFC 4339</a>         IPv6 Host Configuration of DNS Server     February 2006</span>
 
 
@@ -1580,7 +1560,7 @@ Full Copyright Statement
    Copyright (C) The Internet Society (2006).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1600,7 +1580,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1627,11 +1607,6 @@ Acknowledgement
 
 
 Jeong                        Informational                     [Page 26]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

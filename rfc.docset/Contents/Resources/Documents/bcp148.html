@@ -1,1794 +1,1180 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-<meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<link href="" rel="icon" type="image/png"/>
-<link href="" rel="shortcut icon" type="image/png"/>
-<title>BCP 148 - NAT Behavioral Requirements for ICMP</title>
-<style type="text/css">
-	@media only screen 
-	  and (min-width: 992px)
-	  and (max-width: 1199px) {
-	    body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 768px)
-	  and (max-width: 991px) {
-            body { font-size: 14pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-width: 480px)
-	  and (max-width: 767px) {
-            body { font-size: 11pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (max-width: 479px) {
-            body { font-size: 8pt; }
-            div.content { width: 96ex; margin: 0 auto; }
-        }
-	@media only screen 
-	  and (min-device-width : 375px) 
-	  and (max-device-width : 667px) {
-            body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
-        }
-	@media only screen 
-	  and (min-device-width: 1200px) {
-            body { font-size: 10pt; margin: 0 4em; }
-            div.content { width: 96ex; margin: 0; }
-        }
-        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-	    font-weight: bold;
-            line-height: 0pt;
-            display: inline;
-            white-space: pre;
-            font-family: monospace;
-            font-size: 1em;
-	    font-weight: bold;
-        }
-        pre {
-            font-size: 1em;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-	.pre {
-	    white-space: pre;
-	    font-family: monospace;
-	}
-	.header{
-	    font-weight: bold;
-	}
-        .newpage {
-            page-break-before: always;
-        }
-        .invisible {
-            text-decoration: none;
-            color: white;
-        }
-        a.selflink {
-          color: black;
-          text-decoration: none;
-        }
-        @media print {
-            body {
-                font-family: monospace;
-                font-size: 10.5pt;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                font-size: 1em;
-            }
-        
-            a:link, a:visited {
-                color: inherit;
-                text-decoration: none;
-            }
-            .noprint {
-                display: none;
-            }
-        }
-	@media screen {
-	    .grey, .grey a:link, .grey a:visited {
-		color: #777;
-	    }
-            .docinfo {
-                background-color: #EEE;
-            }
-            .top {
-                border-top: 7px solid #EEE;
-            }
-            .bgwhite  { background-color: white; }
-            .bgred    { background-color: #F44; }
-            .bggrey   { background-color: #666; }
-            .bgbrown  { background-color: #840; }            
-            .bgorange { background-color: #FA0; }
-            .bgyellow { background-color: #EE0; }
-            .bgmagenta{ background-color: #F4F; }
-            .bgblue   { background-color: #66F; }
-            .bgcyan   { background-color: #4DD; }
-            .bggreen  { background-color: #4F4; }
-
-            .legend   { font-size: 90%; }
-            .cplate   { font-size: 70%; border: solid grey 1px; }
-	}
-    </style>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="http://gmpg.org/xfn/11" rel="profile"/>
+<meta charset="utf-8"/>
+<meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/> <title>Information on BCP 148 » RFC Editor</title>
+<meta content="WordPress 6.0.3" name="generator"/> <!-- leave this for stats -->
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/style.css" media="screen" rel="stylesheet" type="text/css"/>
 <!--[if IE]>
-    <style>
-    body {
-       font-size: 13px;
-       margin: 10px 10px;
-    }
+                <style type="text/css">
+                #headerimg{ filter:alpha(opacity=80);}
+                .top img{ filter:alpha(opacity=60);}
+                .top img:hover{ filter:alpha(opacity=100);}
+                ul.comment-preview li{ filter:alpha(opacity=70);}
+                ul.comment-preview li:hover{ filter:alpha(opacity=100);}
+                #commentform input[type="text"],#commentform .comment-form-author .required, 
+                #commentform .comment-form-email .required{padding-left: 65px !important;}
+                .top a {position: relative;top: 2px;}
+                </style>
+        <![endif]-->
+<!--[if IE 7]>
+                <style type="text/css">
+                #headerimgwrap{ position:absolute;left:20%}
+                .hleft{position:absolute;}
+                .hright{position:absolute; right:0;}
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<!--[if IE 8 ]>
+                <style type="text/css">
+                .top:hover {bottom: -30px;}
+                </style>
+        <![endif]-->
+<link href="https://www.rfc-editor.org/xmlrpc.php" rel="pingback"/>
+<meta content="max-image-preview:large" name="robots"/>
+<link href="./fonts.googleapis.com.html" rel="dns-prefetch"/>
+<link href="./s.w.org.html" rel="dns-prefetch"/>
+<link href="https://www.rfc-editor.org/feed/" rel="alternate" title="RFC Editor » Feed" type="application/rss+xml"/>
+<link href="https://www.rfc-editor.org/comments/feed/" rel="alternate" title="RFC Editor » Comments Feed" type="application/rss+xml"/>
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.rfc-editor.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.3"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dist/block-library/style.min.css?ver=6.0.3" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<style id="responsive-menu-inline-css" type="text/css">
+/** This file is major component of this plugin so please don't try to edit here. */
+#rmp_menu_trigger-2538 {
+  width: 55px;
+  height: 55px;
+  position: fixed;
+  top: 15px;
+  border-radius: 5px;
+  display: none;
+  text-decoration: none;
+  right: 5%;
+  background: #000000;
+  transition: transform 0.5s, background-color 0.5s;
+}
+#rmp_menu_trigger-2538:hover, #rmp_menu_trigger-2538:focus {
+  background: #000000;
+  text-decoration: unset;
+}
+#rmp_menu_trigger-2538.is-active {
+  background: #000000;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-box {
+  width: 25px;
+  color: #ffffff;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-icon-active, #rmp_menu_trigger-2538 .rmp-trigger-text-open {
+  display: none;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-active, #rmp_menu_trigger-2538.is-active .rmp-trigger-text-open {
+  display: inline;
+}
+#rmp_menu_trigger-2538.is-active .rmp-trigger-icon-inactive, #rmp_menu_trigger-2538.is-active .rmp-trigger-text {
+  display: none;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label {
+  color: #ffffff;
+  pointer-events: none;
+  line-height: 13px;
+  font-family: inherit;
+  font-size: 14px;
+  display: inline;
+  text-transform: inherit;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-top {
+  display: block;
+  margin-bottom: 12px;
+}
+#rmp_menu_trigger-2538 .rmp-trigger-label.rmp-trigger-label-bottom {
+  display: block;
+  margin-top: 12px;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner {
+  display: block;
+}
+#rmp_menu_trigger-2538 .responsive-menu-pro-inner, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538 .responsive-menu-pro-inner::after {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  position: absolute;
+}
+#rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538.is-active .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+#rmp_menu_trigger-2538:hover .responsive-menu-pro-inner, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::before, #rmp_menu_trigger-2538:hover .responsive-menu-pro-inner::after {
+  background-color: #ffffff;
+}
+/* Hamburger menu styling */
+@media screen and (max-width: 1024px) {
+  /** Menu Title Style */
+  /** Menu Additional Content Style */
+  #l_sidebar {
+    display: none !important;
+  }
+  #rmp_menu_trigger-2538 {
+    display: block;
+  }
+  #rmp-container-2538 {
+    position: fixed;
+    top: 0;
+    margin: 0;
+    transition: transform 0.5s;
+    overflow: auto;
+    display: block;
+    width: 75%;
+    background-color: #212121;
+    background-image: url("");
+    height: 100%;
+    left: 0;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+  }
+  #rmp-menu-wrap-2538 {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu, #rmp-menu-wrap-2538 .rmp-submenu {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-1 .rmp-menu-item-link {
+    padding-left: 10%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-2 .rmp-menu-item-link {
+    padding-left: 15%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-3 .rmp-menu-item-link {
+    padding-left: 20%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu-depth-4 .rmp-menu-item-link {
+    padding-left: 25%;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu.rmp-submenu-open {
+    display: block;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+    font-weight: normal;
+    letter-spacing: 0px;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.5s, border-color 0.5s, 0.5s;
+    padding: 0 5%;
+    padding-right: 50px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:after, #rmp-menu-wrap-2538 .rmp-menu-item-link:before {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link:focus {
+    outline: none;
+    border-color: unset;
+    box-shadow: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-link .rmp-font-icon {
+    height: 40px;
+    line-height: 40px;
+    margin-right: 10px;
+    font-size: 13px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    overflow: hidden;
+    background-size: cover;
+    overflow: hidden;
+    right: 0;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow .rmp-font-icon {
+    margin-right: unset;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow * {
+    vertical-align: middle;
+    line-height: 40px;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active {
+    display: block;
+    background-size: cover;
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu {
+    display: none;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link {
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid #212121;
+    font-family: inherit;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: left;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-current-item .rmp-menu-item-link:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow {
+    right: 0;
+    border-right: unset;
+    border-left-style: solid;
+    border-left-color: #212121;
+    border-left-width: 1px;
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    color: #ffffff;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active {
+    color: #ffffff;
+    border-color: #212121;
+    background-color: #212121;
+  }
+  #rmp-menu-wrap-2538 .rmp-submenu .rmp-menu-subarrow-active:hover {
+    color: #ffffff;
+    border-color: #3f3f3f;
+    background-color: #3f3f3f;
+  }
+  #rmp-menu-wrap-2538 .rmp-menu-item-description {
+    margin: 0;
+    padding: 5px 5%;
+    opacity: 0.8;
+    color: #ffffff;
+  }
+  #rmp-search-box-2538 {
+    display: block;
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+  }
+  #rmp-search-box-2538 .rmp-search-form {
+    margin: 0;
+  }
+  #rmp-search-box-2538 .rmp-search-box {
+    background: #ffffff;
+    border: 1px solid #dadada;
+    color: #333333;
+    width: 100%;
+    padding: 0 5%;
+    border-radius: 30px;
+    height: 45px;
+    -webkit-appearance: none;
+  }
+  #rmp-search-box-2538 .rmp-search-box::placeholder {
+    color: #c7c7cd;
+  }
+  #rmp-search-box-2538 .rmp-search-box:focus {
+    background-color: #ffffff;
+    outline: 2px solid #dadada;
+    color: #333333;
+  }
+  #rmp-menu-title-2538 {
+    background-color: #212121;
+    color: #ffffff;
+    text-align: left;
+    font-size: 13px;
+    padding-top: 10%;
+    padding-left: 5%;
+    padding-bottom: 0%;
+    padding-right: 5%;
+    font-weight: 400;
+    transition: background-color 0.5s, border-color 0.5s, color 0.5s;
+  }
+  #rmp-menu-title-2538:hover {
+    background-color: #212121;
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 > a {
+    color: #ffffff;
+    width: 100%;
+    background-color: unset;
+    text-decoration: none;
+  }
+  #rmp-menu-title-2538 > a:hover {
+    color: #ffffff;
+  }
+  #rmp-menu-title-2538 .rmp-font-icon {
+    font-size: 13px;
+  }
+  #rmp-menu-additional-content-2538 {
+    padding-top: 0px;
+    padding-left: 5%;
+    padding-bottom: 0px;
+    padding-right: 5%;
+    color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+/**
+This file contents common styling of menus.
+*/
+.rmp-container {
+  display: none;
+  visibility: visible;
+  padding: 0px 0px 0px 0px;
+  z-index: 99998;
+  transition: all 0.3s;
+  /** Scrolling bar in menu setting box **/
+}
+.rmp-container.rmp-fade-top, .rmp-container.rmp-fade-left, .rmp-container.rmp-fade-right, .rmp-container.rmp-fade-bottom {
+  display: none;
+}
+.rmp-container.rmp-slide-left, .rmp-container.rmp-push-left {
+  transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+}
+.rmp-container.rmp-slide-left.rmp-menu-open, .rmp-container.rmp-push-left.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-right, .rmp-container.rmp-push-right {
+  transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+}
+.rmp-container.rmp-slide-right.rmp-menu-open, .rmp-container.rmp-push-right.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container.rmp-slide-top, .rmp-container.rmp-push-top {
+  transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+}
+.rmp-container.rmp-slide-top.rmp-menu-open, .rmp-container.rmp-push-top.rmp-menu-open {
+  transform: translateY(0);
+  -ms-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+}
+.rmp-container.rmp-slide-bottom, .rmp-container.rmp-push-bottom {
+  transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+  -moz-transform: translateY(100%);
+}
+.rmp-container.rmp-slide-bottom.rmp-menu-open, .rmp-container.rmp-push-bottom.rmp-menu-open {
+  transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+}
+.rmp-container::-webkit-scrollbar {
+  width: 0px;
+}
+.rmp-container ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.rmp-container ::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+.rmp-container .rmp-menu-wrap .rmp-menu {
+  transition: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  border: 0;
+  bottom: auto;
+  box-sizing: border-box;
+  clip: auto;
+  color: #666;
+  display: block;
+  float: none;
+  font-family: inherit;
+  font-size: 14px;
+  height: auto;
+  left: auto;
+  line-height: 1.7;
+  list-style-type: none;
+  margin: 0;
+  min-height: auto;
+  max-height: none;
+  opacity: 1;
+  outline: none;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  pointer-events: auto;
+  right: auto;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  transform: none;
+  top: auto;
+  visibility: inherit;
+  width: auto;
+  word-wrap: break-word;
+  white-space: normal;
+}
+.rmp-container .rmp-menu-additional-content {
+  display: block;
+  word-break: break-word;
+}
+.rmp-container .rmp-menu-title {
+  display: flex;
+  flex-direction: column;
+}
+.rmp-container .rmp-menu-title .rmp-menu-title-image {
+  max-width: 100%;
+  margin-bottom: 15px;
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+}
+button.rmp_menu_trigger {
+  z-index: 999999;
+  overflow: hidden;
+  outline: none;
+  border: 0;
+  display: none;
+  margin: 0;
+  transition: transform 0.5s, background-color 0.5s;
+  padding: 0;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before, button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  content: "";
+  display: block;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::before {
+  top: 10px;
+}
+button.rmp_menu_trigger .responsive-menu-pro-inner::after {
+  bottom: 10px;
+}
+button.rmp_menu_trigger .rmp-trigger-box {
+  width: 40px;
+  display: inline-block;
+  position: relative;
+  pointer-events: none;
+  vertical-align: super;
+}
+.admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+  margin-top: 32px !important;
+}
+@media screen and (max-width: 782px) {
+  .admin-bar .rmp-container, .admin-bar .rmp_menu_trigger {
+    margin-top: 46px !important;
+  }
+}
+/*  Menu Trigger Boring Animation */
+.rmp-menu-trigger-boring .responsive-menu-pro-inner {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring .responsive-menu-pro-inner::after, .rmp-menu-trigger-boring .responsive-menu-pro-inner::before {
+  transition-property: none;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner {
+  transform: rotate(45deg);
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:before {
+  top: 0;
+  opacity: 0;
+}
+.rmp-menu-trigger-boring.is-active .responsive-menu-pro-inner:after {
+  bottom: 0;
+  transform: rotate(-90deg);
+}
+
+</style>
+<link href="https://www.rfc-editor.org/wp-includes/css/dashicons.min.css?ver=6.0.3" id="dashicons-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/css/mobile.css?ver=0.1" id="tech-mobile-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans%7C&amp;ver=6.0.3" id="google_fonts-css" media="screen" rel="stylesheet" type="text/css"/>
+<script id="jquery-core-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" type="text/javascript"></script>
+<script id="jquery-migrate-js" src="https://www.rfc-editor.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" type="text/javascript"></script>
+<script id="rmp_menu_scripts-js-extra" type="text/javascript">
+/* <![CDATA[ */
+var rmp_menu = {"ajaxURL":"https:\/\/www.rfc-editor.org\/wp-admin\/admin-ajax.php","wp_nonce":"2262d2d074","menu":[{"menu_theme":null,"theme_type":"default","theme_location_menu":"","submenu_submenu_arrow_width":"40","submenu_submenu_arrow_width_unit":"px","submenu_submenu_arrow_height":"40","submenu_submenu_arrow_height_unit":"px","submenu_arrow_position":"right","submenu_sub_arrow_background_colour":"#212121","submenu_sub_arrow_background_hover_colour":"#3f3f3f","submenu_sub_arrow_background_colour_active":"#212121","submenu_sub_arrow_background_hover_colour_active":"#3f3f3f","submenu_sub_arrow_border_width":"1","submenu_sub_arrow_border_width_unit":"px","submenu_sub_arrow_border_colour":"#212121","submenu_sub_arrow_border_hover_colour":"#3f3f3f","submenu_sub_arrow_border_colour_active":"#212121","submenu_sub_arrow_border_hover_colour_active":"#3f3f3f","submenu_sub_arrow_shape_colour":"#ffffff","submenu_sub_arrow_shape_hover_colour":"#ffffff","submenu_sub_arrow_shape_colour_active":"#ffffff","submenu_sub_arrow_shape_hover_colour_active":"#ffffff","use_header_bar":"off","header_bar_items_order":"{\"logo\":\"on\",\"title\":\"on\",\"search\":\"on\",\"html content\":\"on\"}","header_bar_title":"","header_bar_html_content":"","header_bar_logo":"","header_bar_logo_link":"","header_bar_logo_width":null,"header_bar_logo_width_unit":"%","header_bar_logo_height":null,"header_bar_logo_height_unit":"%","header_bar_height":"80","header_bar_height_unit":"px","header_bar_padding":{"top":"0px","right":"5%","bottom":"0px","left":"5%"},"header_bar_font":"","header_bar_font_size":"14","header_bar_font_size_unit":"px","header_bar_text_color":"#ffffff","header_bar_background_color":"#ffffff","header_bar_breakpoint":"800","header_bar_position_type":"fixed","header_bar_adjust_page":null,"header_bar_scroll_enable":"off","header_bar_scroll_background_color":"#36bdf6","mobile_breakpoint":"600","tablet_breakpoint":"1024","transition_speed":"0.5","sub_menu_speed":"0.2","show_menu_on_page_load":"","menu_disable_scrolling":"off","menu_overlay":"off","menu_overlay_colour":"rgba(0, 0, 0, 0.7)","desktop_menu_width":"","desktop_menu_width_unit":"px","desktop_menu_positioning":"fixed","desktop_menu_side":"","desktop_menu_to_hide":"","use_current_theme_location":"off","mega_menu":{"225":"off","227":"off","229":"off","228":"off","226":"off"},"desktop_submenu_open_animation":"none","desktop_submenu_open_animation_speed":"100ms","desktop_submenu_open_on_click":"off","desktop_menu_hide_and_show":"off","menu_name":"Default Menu","menu_to_use":"responsive-menu","different_menu_for_mobile":"off","menu_to_use_in_mobile":"main-menu","use_mobile_menu":"on","use_tablet_menu":"on","use_desktop_menu":null,"menu_display_on":"all-pages","menu_to_hide":"#l_sidebar,.hright,#r_sidebar","submenu_descriptions_on":"","custom_walker":"","menu_background_colour":"#212121","menu_depth":"5","smooth_scroll_on":"off","smooth_scroll_speed":"500","menu_font_icons":[],"menu_links_height":"40","menu_links_height_unit":"px","menu_links_line_height":"40","menu_links_line_height_unit":"px","menu_depth_0":"5","menu_depth_0_unit":"%","menu_font_size":"13","menu_font_size_unit":"px","menu_font":"","menu_font_weight":"normal","menu_text_alignment":"left","menu_text_letter_spacing":"","menu_word_wrap":"off","menu_link_colour":"#ffffff","menu_link_hover_colour":"#ffffff","menu_current_link_colour":"#ffffff","menu_current_link_hover_colour":"#ffffff","menu_item_background_colour":"#212121","menu_item_background_hover_colour":"#3f3f3f","menu_current_item_background_colour":"#212121","menu_current_item_background_hover_colour":"#3f3f3f","menu_border_width":"1","menu_border_width_unit":"px","menu_item_border_colour":"#212121","menu_item_border_colour_hover":"#212121","menu_current_item_border_colour":"#212121","menu_current_item_border_hover_colour":"#3f3f3f","submenu_links_height":"40","submenu_links_height_unit":"px","submenu_links_line_height":"40","submenu_links_line_height_unit":"px","menu_depth_side":"left","menu_depth_1":"10","menu_depth_1_unit":"%","menu_depth_2":"15","menu_depth_2_unit":"%","menu_depth_3":"20","menu_depth_3_unit":"%","menu_depth_4":"25","menu_depth_4_unit":"%","submenu_item_background_colour":"#212121","submenu_item_background_hover_colour":"#3f3f3f","submenu_current_item_background_colour":"#212121","submenu_current_item_background_hover_colour":"#3f3f3f","submenu_border_width":"1","submenu_border_width_unit":"px","submenu_item_border_colour":"#212121","submenu_item_border_colour_hover":"#212121","submenu_current_item_border_colour":"#212121","submenu_current_item_border_hover_colour":"#3f3f3f","submenu_font_size":"13","submenu_font_size_unit":"px","submenu_font":"","submenu_font_weight":"normal","submenu_text_letter_spacing":"","submenu_text_alignment":"left","submenu_link_colour":"#ffffff","submenu_link_hover_colour":"#ffffff","submenu_current_link_colour":"#ffffff","submenu_current_link_hover_colour":"#ffffff","inactive_arrow_shape":"\u25bc","active_arrow_shape":"\u25b2","inactive_arrow_font_icon":"","active_arrow_font_icon":"","inactive_arrow_image":"","active_arrow_image":"","submenu_arrow_width":"40","submenu_arrow_width_unit":"px","submenu_arrow_height":"40","submenu_arrow_height_unit":"px","arrow_position":"right","menu_sub_arrow_shape_colour":"#ffffff","menu_sub_arrow_shape_hover_colour":"#ffffff","menu_sub_arrow_shape_colour_active":"#ffffff","menu_sub_arrow_shape_hover_colour_active":"#ffffff","menu_sub_arrow_border_width":"1","menu_sub_arrow_border_width_unit":"px","menu_sub_arrow_border_colour":"#212121","menu_sub_arrow_border_hover_colour":"#3f3f3f","menu_sub_arrow_border_colour_active":"#212121","menu_sub_arrow_border_hover_colour_active":"#3f3f3f","menu_sub_arrow_background_colour":"#212121","menu_sub_arrow_background_hover_colour":"#3f3f3f","menu_sub_arrow_background_colour_active":"#212121","menu_sub_arrow_background_hover_colour_active":"#3f3f3f","fade_submenus":"off","fade_submenus_side":"left","fade_submenus_delay":"100","fade_submenus_speed":"500","use_slide_effect":"off","slide_effect_back_to_text":"Back","accordion_animation":"off","auto_expand_all_submenus":"off","auto_expand_current_submenus":"off","menu_item_click_to_trigger_submenu":"off","button_width":"55","button_width_unit":"px","button_height":"55","button_height_unit":"px","button_background_colour":"#000000","button_background_colour_hover":"#000000","button_background_colour_active":"#000000","toggle_button_border_radius":"5","button_transparent_background":"off","button_left_or_right":"right","button_position_type":"fixed","button_distance_from_side":"5","button_distance_from_side_unit":"%","button_top":"15","button_top_unit":"px","button_push_with_animation":"off","button_click_animation":"boring","button_line_margin":"5","button_line_margin_unit":"px","button_line_width":"25","button_line_width_unit":"px","button_line_height":"3","button_line_height_unit":"px","button_line_colour":"#ffffff","button_line_colour_hover":"#ffffff","button_line_colour_active":"#ffffff","button_font_icon":"","button_font_icon_when_clicked":"","button_image":"","button_image_when_clicked":"","button_title":"","button_title_open":"","button_title_position":"left","button_font":"","button_font_size":"14","button_font_size_unit":"px","button_title_line_height":"13","button_title_line_height_unit":"px","button_text_colour":"#ffffff","button_trigger_type_click":"on","button_trigger_type_hover":"off","button_click_trigger":"#responsive-menu-button","items_order":{"title":"on","menu":"on","search":"","additional content":"on"},"menu_title":"","menu_title_link":"","menu_title_link_location":"_self","menu_title_image":"","menu_title_font_icon":"","menu_title_section_padding":{"top":"10%","right":"5%","bottom":"0%","left":"5%"},"menu_title_background_colour":"#212121","menu_title_background_hover_colour":"#212121","menu_title_font_size":"13","menu_title_font_size_unit":"px","menu_title_alignment":"left","menu_title_font_weight":"400","menu_title_font_family":"","menu_title_colour":"#ffffff","menu_title_hover_colour":"#ffffff","menu_title_image_width":null,"menu_title_image_width_unit":"%","menu_title_image_height":null,"menu_title_image_height_unit":"px","menu_additional_content":"<a href=\"\/search\/rfc_search.php\">Advanced Search<\/a>\r\n<form id=\"search_query_separator_id\" name=\"search_query_separator_name\"  action=\"\/search\/rfc_search_detail.php\" method=\"POST\" onsubmit=\"return validateComboBox(this);\"> \r\n<input type=\"text\" id =\"combo_box_id\" name=\"combo_box\"  maxlength=\"20\" size =\"35\" placeholder=\"number, title, keyword, or author surname\"><\/form>\r\n","menu_additional_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_additional_content_font_size":"16","menu_additional_content_font_size_unit":"px","menu_additional_content_alignment":"center","menu_additional_content_colour":"#ffffff","menu_search_box_text":"Search","menu_search_section_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_search_box_height":"45","menu_search_box_height_unit":"px","menu_search_box_border_radius":"30","menu_search_box_text_colour":"#333333","menu_search_box_background_colour":"#ffffff","menu_search_box_placeholder_colour":"#c7c7cd","menu_search_box_border_colour":"#dadada","menu_section_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_width":"75","menu_width_unit":"%","menu_maximum_width":"","menu_maximum_width_unit":"px","menu_minimum_width":"","menu_minimum_width_unit":"px","menu_auto_height":"off","menu_container_padding":{"top":"0px","right":"0px","bottom":"0px","left":"0px"},"menu_container_background_colour":"#212121","menu_background_image":"","animation_type":"slide","menu_appear_from":"left","animation_speed":"0.5","page_wrapper":"","menu_close_on_body_click":"off","menu_close_on_scroll":"off","menu_close_on_link_click":"off","enable_touch_gestures":"","breakpoint":"1024","menu_depth_5":"30","menu_depth_5_unit":"%","keyboard_shortcut_close_menu":"27,37","keyboard_shortcut_open_menu":"32,39","button_image_alt":"","button_image_alt_when_clicked":"","button_font_icon_type":"font-awesome","button_font_icon_when_clicked_type":"font-awesome","button_trigger_type":"click","active_arrow_image_alt":"","inactive_arrow_image_alt":"","active_arrow_font_icon_type":"font-awesome","inactive_arrow_font_icon_type":"font-awesome","menu_adjust_for_wp_admin_bar":"off","menu_title_image_alt":"","menu_title_font_icon_type":"font-awesome","minify_scripts":"off","scripts_in_footer":"off","external_files":"off","remove_fontawesome":"","remove_bootstrap":"","shortcode":"off","mobile_only":"off","custom_css":"","single_menu_height":"80","single_menu_height_unit":"px","single_menu_font":"","single_menu_font_size":"14","single_menu_font_size_unit":"px","single_menu_submenu_height":"40","single_menu_submenu_height_unit":"px","single_menu_submenu_font":"","single_menu_submenu_font_size":"12","single_menu_submenu_font_size_unit":"px","single_menu_item_link_colour":"#000000","single_menu_item_link_colour_hover":"#000000","single_menu_item_background_colour":"#ffffff","single_menu_item_background_colour_hover":"#ffffff","single_menu_item_submenu_link_colour":"#000000","single_menu_item_submenu_link_colour_hover":"#000000","single_menu_item_submenu_background_colour":"#ffffff","single_menu_item_submenu_background_colour_hover":"#ffffff","header_bar_logo_alt":"","desktop_menu_options":"{}","admin_theme":"light","single_menu_line_height":"80","single_menu_line_height_unit":"px","single_menu_submenu_line_height":"40","single_menu_submenu_line_height_unit":"px","hide_on_mobile":"off","hide_on_desktop":"off","menu_title_padding":{"left":"5%","top":"0px","right":"5%","bottom":"0px"},"menu_id":2538,"active_toggle_contents":"\u25b2","inactive_toggle_contents":"\u25bc"}]};
+/* ]]> */
+</script>
+<script id="rmp_menu_scripts-js" src="https://www.rfc-editor.org/wp-content/plugins/responsive-menu/v4.0.0/assets/js/rmp-menu.js?ver=4.1.11" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-json/" rel="https://api.w.org/"/><link href="https://www.rfc-editor.org/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+<link href="https://www.rfc-editor.org/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+<meta content="WordPress 6.0.3" name="generator"/>
+<script type="text/javascript">
+        jQuery(document).ready(function($){
+	/* toggle nav */
+	$("#menu-icon").on("click", function(){
+		$(".top-menu").slideToggle();
+		$(this).toggleClass("active");
+	});
+
+        });
+        </script><script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/matomo-tracking.js" type="text/javascript"></script>
+<style type="text/css">/*Variable Styles*/
+#page{ 
+background:#FFFFFF url() repeat top center scroll;
+}
+body{
+font:normal 14px/1.3em Noto Sans, Sans-Serif;
+background:#FFFFFF url() repeat top center scroll;
+}
+.techozoic_font_size{
+font-size: 14px;
+}
+.narrowcolumn .entry,.widecolumn .entry, .top {
+font:normal 14px/1.5em Noto Sans, Sans-Serif;
+color: #2C4353;
+}
+.noclass,.home .narrowcolumn .entry, home .widecolumn .entry, .top,.post .singlepost,.archive .narrowcolumn .entry, .archive .widecolumn .entry, .top{
+background-color:#E3E3E3;
+border-top:1px #A0B3C2 solid;
+}
+.top{
+border:none;
+}
+.blog_title, .blog_title a, .blog_title a:hover, .blog_title a:visited{
+font:normal 40px/1.3em Courier, Sans-Serif;
+color:  	#000000;
+}
+h1.post_title{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.post_title a{
+font:bold 30px/1.4em Noto Sans, Sans-Serif;
+color:#2C4353 !important;
+}
+.entry h1{
+font:bold 3em/2.2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h2{
+font:bold 2em/2em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h3{
+font:bold 1.4em/1.6em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h4{
+font:bold 1.3em/1.4em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.entry h5{
+font:bold 1.2em/1.3em Noto Sans, Sans-Serif;
+color: #2C4353 !important;
+}
+.sidebar h2, .sidebar h3, #footer h2{
+font: bold 18px/1.3em Noto Sans, Sans-Serif;
+color:#2C4353;
+}
+.widgettitle {
+font-size: 18px;
+margin: 1px 0;
+}
+#content {
+font-size: 14px;
+}
+acronym,abbr,span.caps,small,.trackback li,.sidebar, .postmetadata {
+font-size: 12px;
+}
+.postmetadata{
+font: normal 12px/1.3em Noto Sans, Sans-Serif;
+color: #777777;
+}
+ul#nav a, ul#admin a, #dropdown li.current_page_item a:hover, .top-menu li.current-menu-item a:hover, #dropdown li.current_page_item ul a, .top-menu li.current-menu-item ul a, ul#nav li.current_page_item a:hover, {
+color: #A0B3C2;
+}
+.commenlist .author,#searchform #s, #searchsubmit:hover,#catsubmit:hover,#wp-submit:hover,#TB_ajaxContent {
+background-color: #A0B3C2 ;
+}
+ul#admin li, ul#dropdown li, #navmenu .top-menu li{
+/*background-color: #E3E3E3;*/
+}
+ul#admin li a, ul#dropdown li a, #navmenu .top-menu li a{
+font-style: bold; 
+font-size:14px;
+font-family: Noto Sans, Sans-Serif;
+color:#A0B3C2;
+}
+ul#admin li a:hover, ul#dropdown li a:hover, #navmenu .top-menu li a:hover{
+color: #A0B3C2;
+}
+#dropdown > li, ul.top-menu > li{
+margin: 0 3px;
+}
+.ribbon ul.top-menu > li, .square ul.top-menu > li, #dropdown > li{
+margin: 0;
+padding: 0 3px;
+}
+.ribbon ul.top-menu > li.has_children:hover:after, .square ul.top-menu > li.has_children:hover:after, #dropdown > li.has_children:hover:after {
+border-bottom: 5px solid #E3E3E3;
+}
+#dropdown ul, .top-menu ul{
+background-color: #E3E3E3;
+}
+.ribbon, .square, #dropdown{
+background-color: #E3E3E3;
+background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E3E3E3), to(#CCCCCC));
+background-image: -webkit-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:    -moz-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:     -ms-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:      -o-linear-gradient(top, #E3E3E3, #CCCCCC);
+background-image:         linear-gradient(top, #E3E3E3, #CCCCCC);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E3E3E3', endColorstr='#CCCCCC');
+}
+.ribbon ul.top-menu:before{
+border-right: 10px solid #CCCCCC;
+}
+.ribbon ul.top-menu:after{
+border-left: 10px solid #CCCCCC;
+}.ribbon ul.top-menu > li:last-child, .square ul.top-menu > li:last-child, #dropdown > li:last-child{
+margin-right: 100px;
+}#navmenu .top-menu li, #navmenu .top-menu ul.sub-menu, ul#admin li, #navmenu #dropdown li{
+background-color: #E3E3E3;
+}       
+#navmenu #dropdown li.current_page_item, #navmenu .top-menu li.current-menu-item, #navmenu .top-menu ul.sub-menu li.current-menu-item {
+background-color: #A0B3C2 ;
+}
+#navmenu #dropdown li:hover, #navmenu .top-menu li:hover, #navmenu .top-menu ul.sub-menu > li:hover {
+background-color:#EFEFEF;
+}
+#navmenu #dropdown li.current_page_item > a:hover, #navmenu .top-menu li.current-menu-item > a:hover, #navmenu .top-menu li.current-menu-item:hover > a, #navmenu .top-menu li:hover > a, #navmenu #dropdown li:hover > a {
+color:#A0B3C2;
+}
+#navmenu #dropdown li.current_page_item > a, #navmenu .top-menu li.current-menu-item > a{
+color:#F7F7F7;
+}
+ul#admin li:hover{
+background:#EFEFEF;
+box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-moz-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+-webkit-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.3);
+}#dropdown li ul li, .top-menu li ul li, #dropdown li ul , .top-menu li ul{
+width: 250px !important;
+}
+#dropdown li ul ul, .top-menu li ul ul{
+left:250px ; 
+}
+.tags {
+border-bottom:1px #A0B3C2 solid;
+border-top:1px #A0B3C2 solid;
+}
+a,h2 a:hover,h3 a:hover,#user_login,#user_pass, #sidenav a:visited {
+color:#597EAA; 
+text-decoration:none;
+}
+#searchform #s {
+color:#E3E3E3; 
+text-decoration:none;
+}
+a:hover {
+color:#114477; 
+text-decoration:underline;
+}
+a:visited{
+color:#476588;
+}
+.description {
+color:#A0B3C2;
+}
+#headerimg {
+;
+float:left;margin-left:10px;
+}
+#header-logo{
+float:left;margin-left:10px;
+padding-top:0px;
+padding-left:0px;
+}
+.single .blog_title a:hover {
+cursor:default;
+text-decoration:none;
+}
+.noclass{
+-moz-box-shadow:none !important;
+box-shadow:none !important;
+-webkit-box-shadow: none !important;
+opacity:1 !important;
+border: none !important;
+}#headerimgwrap{
+top:20%;
+}  #page {
+width: 90%;
+}
+.narrowcolumn {
+float:left;
+margin:0;
+padding:25px 3% 20px 2%;
+width:75%;
+}
+#l_sidebar {
+float:left;
+padding:25px 1% 0 2%;
+width:17%
+}#dropdown, .top-menu{
+text-align:left;
+}#header {
+background-repeat: no-repeat;  
+background-position: center center;
+height: 110px;
+}
+.hleft, .hright {
+height: 70px;
+}table.statictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.statictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #CACACA;
+}
+table.statictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+
+
+table.statictable tr{
+        background-color: #F6F6F6;
+}
+
+table.statictable td.special {
+          font-weight: bold;
+          color:grey
+}
+table.statictable td.title {
+         font-weight: bold;
+         letter-spacing: inherit
+}
+
+table.statictable .boldtext {
+       font-weight: bold;
+       color: #597eaa;
+}
+
+table.dynamictable {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      
+}
+table.dynamictable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+        background-color: #FEFEFEFE;
+}
+table.dynamictable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style:solid;
+        border-left: 1em;
+        border-right: 1em;
+        border-color: #D2D2D2;
+      
+}
+
+table.dynamictable tr.even{
+        background-color: #ffffff;
+}
+table.dynamictable tr.odd{
+        background-color: #F6F6F6;
+}
+table.erratasearch {
+        font-family: verdana,arial,sans-serif;
+        font-size:12px;
+        color:#333333;
+        border-color: #666666;
+        border-collapse: collapse;
+        text-align:center;
+}
+table.erratasearch th {
+        border-width: 1px;
+        padding: 8px;
+        
+        text-decoration: underline;
+        border-color: #666666;
+        //background-color: #ffffff;
+        background-color: silver;
+}
+
+table.erratasearch td {
+        border-width: 1px;
+        padding: 8px;
+        border-color: #666666;
+        background-color: #ffffff;
+        text-align:left;
+}
+table.erratasearch td.sbar { 
+          background-color: silver;
+          text-align: center;
+        }
+
+
+.nosidebar{
+    float:left;
+    margin:0 10%;
+    padding:0 0 10px;
+    width:70%;
+}
+
+input[type="button"], .button, div#infinite-handle span {
+    display: inline-block;
+    zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+    *display: inline;
+    vertical-align: baseline;
+    margin: 0 2px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    padding: .3em 1em .35em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .25em; 
+    -moz-border-radius: .25em;
+    border-radius: .25em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    color: #505050;
+    border: solid 1px #b7b7b7;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+    background: -moz-linear-gradient(top,  #fff,  #ededed);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+}
+input[type="button"]:hover, .button:hover, div#infinite-handle span:hover {
+    text-decoration: none;
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+    background: -moz-linear-gradient(top,  #fff,  #dcdcdc);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+}
+input[type="button"]:active, .button:active, div#infinite-handle span: active {
+    position: relative;
+    top: 1px;
+    color: #999;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+    background: -moz-linear-gradient(top,  #ededed,  #fff);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
+}
+
+.search_label_bold { text-align: left;
+                     border-style: none;
+                     font-weight: bold;
+                   }
+
+.error { font-weight: bold; color: red; }
+
+textarea {
+   font-family: inherit;
+   font-size: inherit;
+}
+/*DIV to hold scroll tables*/
+.scrolltable{
+   width:95%
+
+}
+
+/*--------------------------------------------------------------------------------
+----------------------------RFCMETA PAGE  Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+ body.rfcmeta {
+font-family: 'Noto Sans', sans-serif;
+color: #2C4353;
+width: 100%;}
+
+ body.rfcmeta #page {
+width: 100%;
+box-shadow:none;
+margin-top: 0px;}
+
+ body.rfcmeta .hright { height:120px;}
+
+ body.rfcmeta #header {width: 100%;
+ background-color: #fff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 0px;;}
+
+ body.rfcmeta .singlepost.entry {padding-top: 0px!important;}
+ body.rfcmeta .singlepost.entry dl,  body.rfcmeta .singlepost.entry p, body.rfcmeta .singlepost.entry h2, body.rfcmeta .singlepost.entry h3 { margin-left:40px;
+ margin-right: 20px; }
+
+ body.rfcmeta .singlepost.entry dt{
+         font-weight: bold!important;
+         margin-top: 15px;}
+
+          body.rfcmeta .singlepost.entry dd{
+         margin-left: 15px;}
+
+ body.rfcmeta a{
+color: #597eaa;}
+  body.rfcmeta .entryheader {background-color:#2C4353 !important;
+  border-bottom: 10px solid #FFF !important;
+  margin-top: 0px;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;}
+
+   body.rfcmeta .entryheader h2 a, body.rfcmeta .entryheader h2 {color: #fff  !important;
+   font-size: 50px;
+   padding: 0px !important;
+   line-height: 1.2;
+   font:bold !important;}
+
+   body.rfcmeta .entryheader h2 a:hover {color: #aob3c2 !important;}
+
+   body.rfcmeta .entryheader h3 {color: #fff  !important;
+   font-size: 18px;
+   padding: 0px;
+   line-height: 1.2;
+   padding-top: 10px;
+   }
+
+      body.rfcmeta .entryheader h3 span {font-weight: normal;
+          font-size: 14px;
+          text-transform: uppercase;}
+    h2 {font-weight: bold;}
+
+ body.rfcmeta   #search_query_separator_id  {padding-bottom: 5px;
+ padding-top: 5px;}
+
+ body.rfcmeta .page {margin-top: 0px!important;
+ padding-top: 0px!important;}
+
+    /*--------------------------------------------------------------------------------
+----------------------------end RFCMETA PAGE Styles---------------------------------------
+-------------------------------------------------------------------------------*/
+
+.cluster_heading {
+ font-size: 14px;
+}
+</style> <style type="text/css">
+        #header {
+            background-image: url();
+        }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
-    function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
-                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
-                }
-	    }
-	}
-    }
-    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
-    function showElem(id) {
-        var elem = document.getElementById(id);
-        elem.innerHTML = eval(id+"_html");
-        elem.style.visibility='visible';
-    }
-    function hideElem(id) {
-        var elem = document.getElementById(id);
-        elem.style.visibility='hidden';        
-        elem.innerHTML = "";
-    }
-    // -->
-    </script>
+<script src="https://www.rfc-editor.org/wp-content/themes/techozoic-fluid/js/iterate-survey.js" type="text/javascript"></script>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="32x32"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="icon" sizes="192x192"/>
+<link href="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" rel="apple-touch-icon"/>
+<meta content="https://www.rfc-editor.org/wp-content/uploads/favicon-1.ico" name="msapplication-TileImage"/>
 </head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo " onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
+<body class="rfcmeta">
+<a id="top"></a>
+<div id="page">
+<div id="header">
+<div class="hright">
+<div class="hwidget widget_text"><h2 class="widgettitle">Search RFCs</h2> <div class="textwidget"><form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="40" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+<a href="/search/rfc_search.php">Advanced Search</a>
+</div>
+</div></div>
+<div id="headerimgwrap">
+<div id="headerimg">
+<h1 class="blog_title"> <a href="https://www.rfc-editor.org/">RFC Editor</a>
+</h1> </div><!--end headerimg-->
+</div><!--end headerimgwrap-->
+</div><!--end header-->
+<div class="nosidebar" id="content">
+<h1 class="post_title"></h1>
+<div class="post-127 page type-page status-publish hentry post clear" id="post-127">
+<div class="singlepost entry">
+<div class="entryheader"><h2><a href="https://www.rfc-editor.org/bcp/bcp148.txt">BCP 148</a></h2><h2><a href="https://www.rfc-editor.org/rfc/rfc5508.txt">RFC 5508</a></h2>
+<h3>NAT Behavioral Requirements for ICMP, <span>April 2009</span></h3>
+</div><dl>
+<dt><b>File formats:</b></dt><dd><a href="https://www.rfc-editor.org/rfc/rfc5508.txt"><img alt="icon for text file" src="/rfcscripts/images/RFC_ICONS_Text_40x50.png" title="text"/></a> <a href="https://www.rfc-editor.org/rfc/pdfrfc/rfc5508.txt.pdf"><img alt="icon for PDF" src="/rfcscripts/images/RFC_ICONS_PDF_2019_50x40.png" title="PDF"/></a> <a href="https://www.rfc-editor.org/rfc/rfc5508.html"><img alt="icon for HTML" src="/rfcscripts/images/RFC_ICONS_HTML_40x50.png" title="HTML"/></a></dd>
+<dt><b>Status:</b></dt><dd>BEST CURRENT PRACTICE</dd>
+<dt><b>Updated by:</b></dt><dd><a href="/info/rfc7857">RFC 7857</a></dd>
+<dt><b>Authors:</b></dt><dd>P. Srisuresh<br/>B. Ford<br/>S. Sivakumar<br/>S. Guha</dd>
+<dt><b>Stream:</b></dt><dd><a href="https://www.ietf.org">IETF</a></dd>
+<dt><b>Source:</b></dt><dd><a href="./datatracker.ietf.org/wg/behave/about/.html">behave</a> 
+                                      (<a href="./datatracker.ietf.org/wg/.html#tsv">tsv</a>)</dd>
+</dl>
+<p>
+<b>Cite this BCP</b>: 
+<a href="/refs/ref-bcp148.txt">TXT</a></p>
+<p><b>Discuss this RFC</b>: Send questions or comments to the mailing list <a href="mailto:iesg@ietf.org?subject=Question regarding RFC  ">iesg@ietf.org</a></p><p>
+<b>Other actions</b>: 
+<a href="/errata.php#reportnew">Submit Errata</a>  | 
+<a href="https://datatracker.ietf.org/ipr/search/?draft=&amp;rfc=rfc5508&amp;submit=rfc">
+Find IPR Disclosures from the IETF</a>  | 
+<a href="https://datatracker.ietf.org/doc/rfc/">
+View History of RFC </a>
+</p>
+<hr/>
+<h2>Abstract</h2>
+<p>This document specifies the behavioral properties required of the
+Network Address Translator (NAT) devices in conjunction with the
+Internet Control Message Protocol (ICMP).  The objective of this
+memo is to make NAT devices more predictable and compatible with
+diverse application protocols that traverse the devices.  Companion
+documents provide behavioral recommendations specific to TCP, UDP,
+and other protocols.  This document specifies an Internet Best Current 
+Practices for the Internet Community, and requests discussion and 
+suggestions for improvements.</p> <hr/>
+<p>
+For the definition of <b>Status</b>,
+see <a href="/info/rfc2026">RFC 2026</a>.
+</p><p>
+For the definition of <b>Stream</b>, see <a href="/info/rfc8729">RFC 8729</a>.
+</p>
+<hr/> </div>
 </div>
 </div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/bcp/bcp148.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/bcp148" title="PDF version of this document">pdf</a>]                                                        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                       P. Srisuresh
-Request for Comments: 5508                                Kazeon Systems
-BCP: 148                                                         B. Ford
-Category: Best Current Practice                                  MPI-SWS
-                                                            S. Sivakumar
-                                                           Cisco Systems
-                                                                 S. Guha
-                                                              Cornell U.
-                                                              April 2009
-
-
-                 <span class="h1">NAT Behavioral Requirements for ICMP</span>
-
-Status of This Memo
-
-   This document specifies an Internet Best Current Practices for the
-   Internet Community, and requests discussion and suggestions for
-   improvements.  Distribution of this memo is unlimited.
-
-Copyright Notice
-
-   Copyright (c) 2009 IETF Trust and the persons identified as the
-   document authors.  All rights reserved.
-
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
-   Provisions Relating to IETF Documents in effect on the date of
-   publication of this document (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>).
-   Please review these documents carefully, as they describe your rights
-   and restrictions with respect to this document.
-
-   This document may contain material from IETF Documents or IETF
-   Contributions published or made publicly available before November
-   10, 2008.  The person(s) controlling the copyright in some of this
-   material may not have granted the IETF Trust the right to allow
-   modifications of such material outside the IETF Standards Process.
-   Without obtaining an adequate license from the person(s) controlling
-   the copyright in such materials, this document may not be modified
-   outside the IETF Standards Process, and derivative works of it may
-   not be created outside the IETF Standards Process, except to format
-   it for publication as an RFC or to translate it into languages other
-   than English.
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                  [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-Abstract
-
-   This document specifies the behavioral properties required of the
-   Network Address Translator (NAT) devices in conjunction with the
-   Internet Control Message Protocol (ICMP).  The objective of this memo
-   is to make NAT devices more predictable and compatible with diverse
-   application protocols that traverse the devices.  Companion documents
-   provide behavioral recommendations specific to TCP, UDP, and other
-   protocols.
-
-Table of Contents
-
-   <a href="#section-1">1</a>. Introduction and Scope ..........................................<a href="#page-3">3</a>
-   <a href="#section-2">2</a>. Terminology .....................................................<a href="#page-4">4</a>
-   <a href="#section-3">3</a>. ICMP Query Handling .............................................<a href="#page-6">6</a>
-      <a href="#section-3.1">3.1</a>. ICMP Query Mapping .........................................<a href="#page-6">6</a>
-      <a href="#section-3.2">3.2</a>. ICMP Query Session Timeouts ................................<a href="#page-7">7</a>
-   <a href="#section-4">4</a>. ICMP Error Forwarding ...........................................<a href="#page-8">8</a>
-      <a href="#section-4.1">4.1</a>. ICMP Error Payload Validation ..............................<a href="#page-8">8</a>
-      <a href="#section-4.2">4.2</a>. ICMP Error Packet Translation .............................<a href="#page-10">10</a>
-           4.2.1. ICMP Error Packet Received from the External Realm .11
-           <a href="#section-4.2.2">4.2.2</a>. ICMP Error Packet Received from the Private Realm ..13
-      <a href="#section-4.3">4.3</a>. NAT Sessions Pertaining to ICMP Error Payload .............<a href="#page-15">15</a>
-   <a href="#section-5">5</a>. Hairpinning Support for ICMP Packets ...........................<a href="#page-16">16</a>
-   <a href="#section-6">6</a>. Rejection of Outbound Flows Disallowed by NAT ..................<a href="#page-17">17</a>
-   <a href="#section-7">7</a>. Conformance to <a href="./rfc1812.html">RFC 1812</a> ........................................<a href="#page-17">17</a>
-      <a href="#section-7.1">7.1</a>. IP Packet Fragmentation ...................................<a href="#page-19">19</a>
-           <a href="#section-7.1.1">7.1.1</a>.  Generating "Packet Too Big" ICMP Error Message ....<a href="#page-19">19</a>
-           <a href="#section-7.1.2">7.1.2</a>.  Forwarding "Packet Too Big" ICMP Error Message ....<a href="#page-20">20</a>
-      <a href="#section-7.2">7.2</a>. Time Exceeded Message .....................................<a href="#page-20">20</a>
-      <a href="#section-7.3">7.3</a>. Source Route Options ......................................<a href="#page-20">20</a>
-      <a href="#section-7.4">7.4</a>. Address Mask Request/Reply Messages .......................<a href="#page-20">20</a>
-      <a href="#section-7.5">7.5</a>. Parameter Problem Message .................................<a href="#page-21">21</a>
-      <a href="#section-7.6">7.6</a>. Router Advertisement and Solicitations ....................<a href="#page-21">21</a>
-      <a href="#section-7.7">7.7</a>. DS Field Usage ............................................<a href="#page-21">21</a>
-   <a href="#section-8">8</a>. Non-QueryError ICMP Messages ...................................<a href="#page-22">22</a>
-   <a href="#section-9">9</a>. Summary of Requirements ........................................<a href="#page-22">22</a>
-   <a href="#section-10">10</a>. Security Considerations .......................................<a href="#page-25">25</a>
-   <a href="#section-11">11</a>. Acknowledgements ..............................................<a href="#page-26">26</a>
-   <a href="#section-12">12</a>. References ....................................................<a href="#page-27">27</a>
-      <a href="#section-12.1">12.1</a>. Normative References .....................................<a href="#page-27">27</a>
-      <a href="#section-12.2">12.2</a>. Informative References ...................................<a href="#page-27">27</a>
-
-
-
-
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                  [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction%20and%20Scope"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction and Scope</span>
-
-   As pointed out in <a href="./rfc3424.html">RFC 3424</a> [<a href="#ref-UNSAF" title='"IAB Considerations for UNilateral Self-Address Fixing (UNSAF) Across Network Address Translation"'>UNSAF</a>], NAT implementations vary widely
-   in terms of how they handle different traffic.  The purpose of this
-   document is to define a specific set of requirements for NAT behavior
-   with regard to ICMP messages.  The objective is to reduce the
-   unpredictability and brittleness the NAT devices (NATs) introduce.
-   This document is an adjunct to [<a href="#ref-BEH-UDP" title='"Network Address Translation (NAT) Behavioral Requirements for Unicast UDP"'>BEH-UDP</a>], [<a href="#ref-BEH-TCP" title='"NAT Behavioral Requirements for TCP"'>BEH-TCP</a>], and other
-   protocol-specific BEHAVE document(s) in the future that define
-   requirements for NATs when handling protocol-specific traffic.
-
-   The requirements of this specification apply to traditional NATs as
-   described in [<a href="#ref-NAT-TRAD" title='"Traditional IP Network Address Translator (Traditional NAT)"'>NAT-TRAD</a>].  A traditional NAT has two variations,
-   namely Basic NAT and Network Address Port Translator (NAPT).  Of
-   these, NAPT is by far the most commonly deployed NAT device.  NAPT
-   allows multiple private hosts to share a single public IP address
-   simultaneously.
-
-   This document only covers the ICMP aspects of NAT traversal,
-   specifically the traversal of ICMP Query messages and ICMP Error
-   messages.  Traditional NAT inherently mandates firewall-like
-   filtering behavior [<a href="#ref-BEH-UDP" title='"Network Address Translation (NAT) Behavioral Requirements for Unicast UDP"'>BEH-UDP</a>].  However, firewall functionality in
-   general or any other middlebox functionality is out of the scope of
-   this document.
-
-   In some cases, ICMP message traversal behavior on a NAT device may be
-   overridden by local administrative policies.  Some administrators may
-   choose to entirely prohibit forwarding of ICMP Error messages across
-   a NAT device.  Some others may choose to prohibit ICMP-Query-based
-   applications across a NAT device.  These are local policies and not
-   within the scope of this document.  For this reason, some of the ICMP
-   requirements listed in the document are preceded with a constraint of
-   local policy permitting.
-
-   This document focuses strictly on the behavior of the NAT device, and
-   not on the behavior of applications that traverse NATs.  Application
-   designers may refer to [<a href="#ref-BEH-APP" title='"Application Design Guidelines for Traversal through Network Address Translators"'>BEH-APP</a>] and [<a href="#ref-ICE" title='"Interactive Connectivity Establishment (ICE): A Protocol for Network Address Translator (NAT) Traversal for Offer/Answer Protocols"'>ICE</a>] for recommendations and
-   guidelines on how to make applications work robustly over NATs that
-   follow the requirements specified here and the adjunct protocol-
-   specific BEHAVE documents.
-
-   Per [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>], ICMP is a control protocol that is considered to be an
-   integral part of IP, although it is architecturally layered upon IP
-   -- it uses IP to carry its data end-to-end.  As such, many of the
-   ICMP behavioral requirements discussed in this document apply to all
-   IP protocols.
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                  [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   In case a requirement in this document conflicts with protocol-
-   specific BEHAVE requirement(s), protocol-specific BEHAVE documents
-   will take precedence.  The authors are not aware of any conflicts
-   between this and any other IETF document at the time of this writing.
-
-   <a href="#section-2">Section 2</a> describes the terminology used throughout the document.
-   <a href="#section-3">Section 3</a> is focused on requirements concerning ICMP-Query-based
-   applications traversing a NAT device.  Sections <a href="#section-4">4</a> and <a href="#section-5">5</a> describe
-   requirements concerning ICMP Error messages traversing a NAT device.
-   Sections <a href="#section-6">6</a> describes requirements concerning ICMP Error messages
-   generated by a NAT device.  <a href="#section-7">Section 7</a> reviews <a href="./rfc1812.html">RFC 1812</a> conformance
-   requirements and applicability to NATs when handling ICMP messages.
-   <a href="#section-8">Section 8</a> reviews a requirement for ICMP messages that are neither
-   ICMP Query nor ICMP Error kind.  <a href="#section-9">Section 9</a> summarizes all the
-   requirements in one place.  <a href="#section-10">Section 10</a> has a discussion on security
-   considerations.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology</span>
-
-   Definitions for the majority of the NAT terms used throughout the
-   document may be found in [<a href="#ref-NAT-TERM" title='"IP Network Address Translator (NAT) Terminology and Considerations"'>NAT-TERM</a>] and [<a href="#ref-BEH-UDP" title='"Network Address Translation (NAT) Behavioral Requirements for Unicast UDP"'>BEH-UDP</a>].
-
-   The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
-   "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
-   document are to be interpreted as described in <a href="./rfc2119.html">RFC 2119</a> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
-
-   The term "Realm" is adapted from [<a href="#ref-NAT-TERM" title='"IP Network Address Translator (NAT) Terminology and Considerations"'>NAT-TERM</a>] and is defined as
-   follows.  "Realm" is often interchanged for "network domain" or
-   simply "network" throughout the document.
-
-   Address realm or Realm - An address realm is a network domain in
-   which the network addresses are uniquely assigned to entities such
-   that datagrams can be routed to them.  Routing protocols used within
-   the network domain are responsible for finding routes to entities
-   given their network addresses.  Note that this document is limited to
-   describing NAT in the IPv4 environment and does not address the use
-   of NAT in other types of environments (e.g., the IPV6 environment).
-
-   The term "NAT Session" is adapted from [<a href="#ref-NAT-MIB" title='"Definitions of Managed Objects for Network Address Translators (NAT)"'>NAT-MIB</a>] and is defined as
-   follows:
-
-   NAT Session - A NAT session is an association between a session as
-   seen in the private realm and a session as seen in the public realm,
-   by virtue of NAT translation.  If a session in the private realm were
-   to be represented as (PrivateSrcAddr, PrivateDstAddr,
-   TransportProtocol, PrivateSrcPort, PrivateDstPort) and the same
-   session in the public realm were to be represented as (PublicSrcAddr,
-   PublicDstAddr, TransportProtocol, PublicSrcPort, PublicDstPort), the
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                  [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   NAT session would provide the translation glue between the two
-   session representations.  NAT sessions in the document are restricted
-   to sessions based on TCP, UDP, and ICMP.  In the future, NAT sessions
-   may be extended to be based on other transport protocols such as
-   Stream Control Transmission Protocol (SCTP), UDP-lite, and Datagram
-   Congestion Control Protocol (DCCP).
-
-   ICMP Message Classification - <a href="./rfc1122.html#section-3.2.2">Section 3.2.2 of [RFC1122]</a> and <a href="#section-4.3.1">Section</a>
-   <a href="#section-4.3.1">4.3.1</a> of [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>] broadly group ICMP messages into two main
-   categories, namely "ICMP Query" messages and "ICMP Error" messages.
-   All ICMP Error messages listed in <a href="./rfc1122.html">RFC 1122</a> and <a href="./rfc1812.html">RFC 1812</a> contain part
-   of the Internet datagram that elicited the ICMP error.  All the ICMP
-   Query messages listed in <a href="./rfc1122.html">RFC 1122</a> and <a href="./rfc1812.html">RFC 1812</a> contain an
-   "Identifier" field, which is referred to in this document as the
-   "Query Identifier".  There are however ICMP messages that do not fall
-   into either of these two categories.  We refer to them as "Non-
-   QueryError ICMP Messages".  All three ICMP message classes are
-   described as follows:
-
-   o ICMP Query Messages - ICMP Query messages are characterized by an
-     Identifier field in the ICMP header.  The Identifier field used by
-     the ICMP Query messages is also referred to as "Query Identifier"
-     or "Query Id", for short throughout the document.  A Query Id is
-     used by Query senders and responders as the equivalent of a TCP/UDP
-     port to identify an ICMP Query session.  ICMP Query messages
-     include ICMP messages defined after <a href="./rfc1122.html">RFC 1122</a> or <a href="./rfc1812.html">RFC 1812</a> (for
-     example, Domain Name Request/Reply ICMP messages defined in <a href="./rfc1788.html">RFC</a>
-     <a href="./rfc1788.html">1788</a>), as they include request/response pairs and contain an
-     "Identifier" field.
-
-   o ICMP Error Messages - ICMP Error messages provide signaling for IP.
-     All ICMP Error messages are characterized by the fact that they
-     embed the original datagram that triggered the ICMP Error message.
-     The original datagram embedded within the ICMP Error payload is
-     also referred to as the "Embedded packet" throughout the document.
-     Unlike ICMP Query messages, ICMP Error messages do not have a Query
-     Id in the ICMP header.
-
-   o Non-QueryError ICMP Messages - ICMP messages that do not fall under
-     either of the above two classes are referred to as "Non-QueryError
-     ICMP Messages" throughout the document.  For example, Router
-     Discovery ICMP messages [<a href="./rfc1256.html" title='"ICMP Router Discovery Messages"'>RFC1256</a>] are "request/response" type ICMP
-     messages.  However, they are not characterized as ICMP Query
-     messages in this document as they do not have an "Identifier" field
-     within the messages.  Likewise, there are other ICMP messages
-     defined in [<a href="./rfc4065.html" title='"Instructions for Seamoby and Experimental Mobility Protocol IANA Allocations"'>RFC4065</a>] that do not fall in either of the ICMP Query
-     or ICMP Error message categories, but will be referred to as Non-
-     QueryError ICMP messages.
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                  [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   The reason for categorizing ICMP messages for NAT behavioral
-   properties is that each category has different characteristics used
-   for mapping (i.e., the Query Id and the Embedded datagram), which
-   leaves the Non-QueryError ICMP messages in a separate, distinctive
-   group.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20ICMP%20Query%20Handling"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  ICMP Query Handling</span>
-
-   This section lists the behavioral requirements for a NAT device when
-   processing ICMP Query packets.  The following subsections discuss
-   requirements specific to ICMP Query handling in detail.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20ICMP%20Query%20Mapping"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  ICMP Query Mapping</span>
-
-   Unless explicitly overridden by local policy, a NAT device <em>MUST</em>
-   permit ICMP Queries and their associated responses, when the Query is
-   initiated from a private host to the external hosts.  ICMP Query
-   mapping by NAT devices is necessary for current ICMP-Query-based
-   applications to work.  This entails a NAT device to transparently
-   forward ICMP Query packets initiated from the nodes behind NAT, and
-   the responses to these Query packets in the opposite direction.  As
-   specified in [<a href="#ref-NAT-TRAD" title='"Traditional IP Network Address Translator (Traditional NAT)"'>NAT-TRAD</a>], this requires translating the IP header.  A
-   NAPT device further translates the ICMP Query Id and the associated
-   checksum in the ICMP header prior to forwarding.
-
-   NAT mapping of ICMP Query Identifiers <em>SHOULD</em> be external-host
-   independent.  Say, an internal host A sent an ICMP Query out to an
-   external host B using Query Id X.  And, say, the NAT assigned this an
-   external mapping of Query Id X' on the NAT's public address.  If host
-   A reused the Query Id X to send ICMP Queries to the same or different
-   external host, the NAT device <em>SHOULD</em> reuse the same Query Id mapping
-   (i.e., map the private host's Query Id X to Query Id X' on NAT's
-   public IP address) instead of assigning a different mapping.  This is
-   similar to the "endpoint independent mapping" requirement specified
-   in the TCP and UDP requirement documents [<a href="#ref-BEH-UDP" title='"Network Address Translation (NAT) Behavioral Requirements for Unicast UDP"'>BEH-UDP</a>], [<a href="#ref-BEH-TCP" title='"NAT Behavioral Requirements for TCP"'>BEH-TCP</a>].
-
-   Below is justification for making the endpoint-independent mapping
-   for ICMP Query Id a <em>SHOULD</em> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>] requirement.  ICMP Ping
-   [<a href="./rfc1470.html" title='"FYI on a Network Management Tool Catalog: Tools for Monitoring and Debugging TCP/IP Internets and Interconnected Devices"'>RFC1470</a>] and ICMP traceroute [<a href="#ref-MS-TRCRT" title='"How to use the Tracert command-line utility to troubleshoot TCP/IP problems in Windows"'>MS-TRCRT</a>] are two most commonly known
-   legacy applications built on top of ICMP Query messages.  Neither of
-   these applications require the ICMP Query Id to be retained across
-   different sessions with external hosts.  But, that may not be the
-   case with future applications.  In the future, when an end host
-   application reuses the same Query Identifier in sessions with
-   different target hosts, the end host application might require that
-   the endpoint identity (i.e., the tuple of IP address and Query
-   Identifier) appears the same across all its target hosts.  In an IP
-   network without NAT requirements, such a requirement will be valid.
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                  [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   In a world with NAT devices, the above assumption will be valid when
-   NAT devices enforce endpoint mapping that is external-host
-   independent.  Given the dichotomy between legacy applications not
-   requiring endpoint-independent mapping and future applications that
-   might require it, the requirement level is kept at <em>SHOULD</em> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
-
-   REQ-1: Unless explicitly overridden by local policy, a NAT device
-          <em>MUST</em> permit ICMP Queries and their associated responses, when
-          the Query is initiated from a private host to the external
-          hosts.
-
-          a) NAT mapping of ICMP Query Identifiers <em>SHOULD</em> be external-
-             host independent.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20ICMP%20Query%20Session%20Timeouts"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  ICMP Query Session Timeouts</span>
-
-   NATs maintain a mapping timeout for the ICMP Queries that traverse
-   them.  The mapping timeout is the time a mapping will stay active
-   without packets traversing the NAT.  There is great variation in the
-   values used by different NATs.  The ICMP Query session timeout
-   requirement is necessary for current ICMP Query applications to work.
-   Query response times can vary.  ICMP-Query-based applications are
-   primarily request/response driven.
-
-   Ideally, the timeout should be set to Maximum Round Trip Time
-   (Maximum RTT).  For the purposes of constraining the maximum RTT, the
-   Maximum Segment Lifetime (MSL), defined in [<a href="./rfc793.html" title='"Transmission Control Protocol"'>RFC793</a>], could be
-   considered a guideline to set packet lifetime.  Per [<a href="./rfc793.html" title='"Transmission Control Protocol"'>RFC793</a>], MSL is
-   the maximum amount of time a TCP segment can exist in a network
-   before being delivered to the intended recipient.  This is the
-   maximum duration an IP packet can be assumed to take to reach the
-   intended destination node before declaring that the packet will no
-   longer be delivered.  For an application initiating an ICMP Query
-   message and waiting for a response for the Query, the Maximum RTT
-   could in practice be constrained to be the sum total of MSL for the
-   Query message and MSL for the response message.  In other words,
-   Maximum RTT could be constrained to no more than 2x MSL.  The
-   recommended value for MSL in [<a href="./rfc793.html" title='"Transmission Control Protocol"'>RFC793</a>] is 120 seconds, even though
-   several implementations set this to 60 seconds or 30 seconds.  When
-   MSL is 120 seconds, the Maximum RTT (2x MSL) would be 240 seconds.
-
-   In practice, ICMP Ping [<a href="./rfc1470.html" title='"FYI on a Network Management Tool Catalog: Tools for Monitoring and Debugging TCP/IP Internets and Interconnected Devices"'>RFC1470</a>] and ICMP traceroute [<a href="#ref-MS-TRCRT" title='"How to use the Tracert command-line utility to troubleshoot TCP/IP problems in Windows"'>MS-TRCRT</a>], the
-   two most commonly known legacy applications built on top of ICMP
-   Query messages, take less than 10 seconds to complete a round trip
-   when the target node is operational on the network.
-
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                  [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   Setting the ICMP NAT session timeout to a very large duration (say,
-   240 seconds) could potentially tie up precious NAT resources such as
-   Query mappings and NAT Sessions for the whole duration.  On the other
-   hand, setting the timeout very low can result in premature freeing of
-   NAT resources and applications failing to complete gracefully.  The
-   ICMP Query session timeout needs to be a balance between the two
-   extremes.  A 60-second timeout is a balance between the two extremes.
-   An ICMP Query session timer <em>MUST NOT</em> expire in less than 60 seconds.
-   It is <em>RECOMMENDED</em> that the ICMP Query session timer be made
-   configurable.
-
-   REQ-2: An ICMP Query session timer <em>MUST NOT</em> expire in less than 60
-          seconds.
-
-          a) It is <em>RECOMMENDED</em> that the ICMP Query session timer be made
-             configurable.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20ICMP%20Error%20Forwarding"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  ICMP Error Forwarding</span>
-
-   Many applications make use of ICMP Error messages from end hosts and
-   intermediate devices to shorten application timeouts.  Some
-   applications will not operate correctly without the receipt of ICMP
-   Error messages.  The following sub-sections discuss the requirements
-   a NAT device must conform to in order to ensure reliable forwarding.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20ICMP%20Error%20Payload%20Validation"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  ICMP Error Payload Validation</span>
-
-   An ICMP Error message checksum covers the entire ICMP message,
-   including the payload.  When an ICMP Error packet is received, if the
-   ICMP checksum fails to validate, the NAT <em>SHOULD</em> silently drop the
-   ICMP Error packet.  This is because NAT uses the embedded IP and
-   transport headers for forwarding and translating the ICMP Error
-   message (described in <a href="#section-4.2">Section 4.2</a>).  When the ICMP checksum is
-   invalid, the embedded IP and transport headers, which are covered by
-   the ICMP checksum, are also suspect.
-
-   [<a id="ref-RFC1812" name="ref-RFC1812">RFC1812</a>] and [<a href="./rfc1122.html" title='"Requirements for Internet Hosts - Communication Layers"'>RFC1122</a>] require a router or an end host that receives
-   an IP packet with an invalid IP header checksum to silently drop the
-   IP packet.  As such, end hosts and routers do not generate an ICMP
-   Error message in response to IP packets with invalid IP header
-   checksums.  For this reason, if the IP checksum of the embedded
-   packet within an ICMP Error message fails to validate, the NAT <em>SHOULD</em>
-   silently drop the Error packet.
-
-   When the IP packet embedded within the ICMP Error message includes IP
-   options, the NAT device must not assume that the transport header of
-   the embedded packet is at a fixed offset (as would be the case when
-   there are no IP options associated with the packet) from the start of
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                  [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   the embedded packet.  Specifically, if the embedded packet includes
-   IP options, the NAT device <em>MUST</em> traverse past the IP options to
-   locate the start of transport header for the embedded packet.
-
-   It is possible to compute the transport checksum of the embedded
-   packet within an ICMP Error message when the ICMP Error message
-   contains the entire transport segment.  However, ICMP Error messages
-   do not contain the entire transport segment in many cases.  This is
-   because [<a href="#ref-ICMP" title='"Internet Control Message Protocol"'>ICMP</a>] stipulates that an ICMP Error message should embed an
-   IP header and only a minimum of 64 bits of the IP payload.  Even
-   though <a href="./rfc1812.html#section-4.3.2.3">Section 4.3.2.3 of [RFC1812]</a> recommends an ICMP Error
-   originator include as much of the original packet as possible in the
-   payload, the length of the resulting ICMP datagram cannot exceed 576
-   bytes.  ICMP Error originators truncate IP packets that do not fit
-   within the stipulations.
-
-   A NAT device <em>SHOULD NOT</em> validate the transport checksum of the
-   embedded packet within an ICMP Error message, even when it is
-   possible to do so.  This is because a NAT dropping an ICMP Error
-   message due to an invalid transport checksum will make it harder for
-   end hosts to receive error reporting for certain types of corruption.
-   End-to-end validation of ICMP Error messages is best left to end
-   hosts.  Many newer revision end host TCP/IP stacks implement the
-   improvements in [<a href="#ref-TCP-SOFT" title="&quot;TCP's Reaction to Soft Errors&quot;">TCP-SOFT</a>] and do not accept ICMP Error messages with
-   a mismatched IP or TCP checksum in the embedded packet, if the
-   embedded datagram contains a full IP packet and the TCP checksum can
-   be calculated.
-
-   In the case that the ICMP Error payload includes ICMP extensions
-   [<a href="#ref-ICMP-EXT" title='"Extended ICMP to Support Multi-Part Messages"'>ICMP-EXT</a>], the NAT device <em>MUST</em> exclude the optional zero-padding and
-   the ICMP extensions when evaluating transport checksum for the
-   embedded packet.  Readers are urged to refer to [<a href="#ref-ICMP-EXT" title='"Extended ICMP to Support Multi-Part Messages"'>ICMP-EXT</a>] for
-   information on identifying the presence of ICMP extensions in an ICMP
-   message.
-
-   REQ-3: When an ICMP Error packet is received, if the ICMP checksum
-          fails to validate, the NAT <em>SHOULD</em> silently drop the ICMP Error
-          packet.  If the ICMP checksum is valid, do the following:
-
-          a) If the IP checksum of the embedded packet fails to
-             validate, the NAT <em>SHOULD</em> silently drop the Error packet;
-             and
-
-          b) If the embedded packet includes IP options, the NAT device
-             <em>MUST</em> traverse past the IP options to locate the start of
-             the transport header for the embedded packet; and
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                  [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-          c) The NAT device <em>SHOULD NOT</em> validate the transport checksum
-             of the embedded packet within an ICMP Error message, even
-             when it is possible to do so; and
-
-          d) If the ICMP Error payload contains ICMP extensions
-             [<a href="#ref-ICMP-EXT" title='"Extended ICMP to Support Multi-Part Messages"'>ICMP-EXT</a>], the NAT device <em>MUST</em> exclude the optional zero-
-             padding and the ICMP extensions when evaluating transport
-             checksum for the embedded packet.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20ICMP%20Error%20Packet%20Translation"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  ICMP Error Packet Translation</span>
-
-   Section 4.3 of [<a href="#ref-NAT-TRAD" title='"Traditional IP Network Address Translator (Traditional NAT)"'>NAT-TRAD</a>] describes the fields of an ICMP Error
-   message that a NAT device translates.  In this section, we describe
-   the requirements a NAT device must conform to while performing the
-   translations.  Requirements identified in this section are necessary
-   for the current applications to work correctly.
-
-   Consider the following scenario in Figure 1.  Say, NAT-xy is a NAT
-   device connecting hosts in private and external networks.  Router-x
-   and Host-x are in the external network.  Router-y and Host-y are in
-   the private network.  The subnets in the external network are
-   routable from the private as well as the external domains.  By
-   contrast, the subnets in the private network are only routable within
-   the private domain.  When Host-y initiated a session to Host-x, let
-   us say that the NAT device mapped the endpoint on Host-y into Host-y'
-   in the external network.  The following subsections describe the
-   processing of ICMP Error messages on the NAT device(NAT-xy) when the
-   NAT device receives an ICMP Error message in response to a packet
-   pertaining to this session.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-                               Host-x
-                                  |
-                          ---------------+-------------------
-                                         |
-                                  +-------------+
-                                  |  Router-x   |
-                                  +-------------+
-            External Network             |
-            --------------------+--------+-------------------
-                                |   ^
-                                |   | (Host-y', Host-x)
-                                |   |
-                          +-------------+
-                          |    NAT-xy   |
-                          +-------------+
-                                |
-    Private Network             |
-   ----------------+------------+----------------
-                   |
-            +-------------+
-            | Router-y    |
-            +-------------+
-                   |
-   ----------------+-------+--------
-                           | ^
-                           | | (Host-y, Host-x)
-                           | |
-                         Host-y
-
-     Figure 1.  A Session from a Private Host Traversing a NAT Device
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20ICMP%20Error%20Packet%20Received%20from%20the%20External%20Realm"></a></body></html><a class="selflink" href="#section-4.2.1" name="section-4.2.1">4.2.1</a>.  ICMP Error Packet Received from the External Realm</span>
-
-   Say, a packet from Host-y to Host-x triggered an ICMP Error message
-   from one of Router-x or Host-x (both of which are in the external
-   domain).  Such an ICMP Error packet will have one of Router-x or
-   Host-x as the source IP address and Host-y' as the destination IP
-   address as described in Figure 2 below.
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-                               Host-x
-                                  |
-                          ---------------+-------------------
-                                         |
-                                  +-------------+
-                                  |  Router-x   |
-                                  +-------------+
-            External Network             |
-            --------------------+--------+-------------------
-                                |
-                                |  | ICMP Error Packet to Host-y'
-                                |  v
-                          +-------------+
-                          |    NAT-xy   |
-                          +-------------+
-    Private Network             |
-   ----------------+------------+----------------
-                   |
-            +-------------+
-            | Router-y    |
-            +-------------+
-                   |
-   ----------------+-------+--------
-                           |
-                         Host-y
-
-        Figure 2.  ICMP Error Packet Received from External Network
-
-   When the NAT device receives the ICMP Error packet, the NAT device
-   uses the packet embedded within the ICMP Error message (i.e., the IP
-   packet from Host-y' to Host-x) to look up the NAT Session to which
-   the embedded packet belongs.  If the NAT device does not have an
-   active mapping for the embedded packet, the NAT <em>SHOULD</em> silently drop
-   the ICMP Error packet.  Otherwise, the NAT device <em>MUST</em> use the
-   matching NAT Session to translate the embedded packet; that is,
-   translate the source IP address of the embedded packet (e.g., Host-y'
-   -&gt; Host-y) and transport headers.
-
-   The ICMP Error payload may contain ICMP extension objects [<a href="#ref-ICMP-EXT" title='"Extended ICMP to Support Multi-Part Messages"'>ICMP-EXT</a>].
-   NATs are encouraged to support ICMP extension objects.  At the time
-   of this writing, the authors are not aware of any standard ICMP
-   extension objects containing realm-specific information.
-
-   The NAT device <em>MUST</em> also use the matching NAT Session to translate
-   the destination IP address in the outer IP header.  In the outer
-   header, the source IP address will remain unchanged because the
-   originator of the ICMP Error message (Host-x or Router-x) is in an
-   external domain and is routable from the private domain.
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   REQ-4: If a NAT device receives an ICMP Error packet from an external
-          realm, and the NAT device does not have an active mapping for
-          the embedded payload, the NAT <em>SHOULD</em> silently drop the ICMP
-          Error packet.  If the NAT has active mapping for the embedded
-          payload, then the NAT <em>MUST</em> do the following prior to
-          forwarding the packet, unless explicitly overridden by local
-          policy:
-
-          a) Revert the IP and transport headers of the embedded IP
-             packet to their original form, using the matching mapping;
-             and
-
-          b) Leave the ICMP Error type and code unchanged; and
-
-          c) Modify the destination IP address of the outer IP header to
-             be the same as the source IP address of the embedded packet
-             after translation.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20ICMP%20Error%20Packet%20Received%20from%20the%20Private%20Realm"></a></body></html><a class="selflink" href="#section-4.2.2" name="section-4.2.2">4.2.2</a>.  ICMP Error Packet Received from the Private Realm</span>
-
-   Now, say, a packet from Host-x to Host-y triggered an ICMP Error
-   message from one of Router-y or Host-y (both of which are in the
-   private domain).  Such an ICMP Error packet will have one of Router-y
-   or Host-y as the source IP address and Host-x as the destination IP
-   address as specified in Figure 3 below.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-                               Host-x
-                                  |
-                          ---------------+-------------------
-                                         |
-                                  +-------------+
-                                  |  Router-x   |
-                                  +-------------+
-            External Network             |
-            --------------------+--------+-------------------
-                                |
-                                |
-                          +-------------+
-                          |    NAT-xy   |
-                          +-------------+
-                                |  ^
-                                |  | ICMP Error Packet to Host-x
-    Private Network             |
-   ----------------+------------+----------------
-                   |
-            +-------------+
-            | Router-y    |
-            +-------------+
-                   |
-   ----------------+-------+--------
-                           |
-                         Host-y
-
-        Figure 3.  ICMP Error Packet Received from Private Network
-
-   When the NAT device receives the ICMP Error packet, the NAT device
-   <em>MUST</em> use the packet embedded within the ICMP Error message (i.e., the
-   IP packet from Host-x to Host-y) to look up the NAT Session to which
-   the embedded packet belongs.  If the NAT device does not have an
-   active mapping for the embedded packet, the NAT <em>SHOULD</em> silently drop
-   the ICMP Error packet.  Otherwise, the NAT device <em>MUST</em> use the
-   matching NAT Session to translate the embedded packet.
-
-   The ICMP Error payload may contain ICMP extension objects [<a href="#ref-ICMP-EXT" title='"Extended ICMP to Support Multi-Part Messages"'>ICMP-EXT</a>].
-   NATs are encouraged to support ICMP extension objects.  At the time
-   of this writing, the authors are not aware of any standard ICMP
-   extension objects containing realm-specific information.
-
-   In the outer header, the destination IP address will remain
-   unchanged, as the IP address for Host-x is already in the external
-   domain.  If the ICMP Error message is generated by Host-y, the NAT
-   device must simply use the NAT Session to translate the source IP
-   address Host-y to Host-y'.  If the ICMP Error message is originated
-   by the intermediate node Router-y, translation of the source IP
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   address varies depending on whether the Basic NAT or NAPT function
-   [<a href="#ref-NAT-TRAD" title='"Traditional IP Network Address Translator (Traditional NAT)"'>NAT-TRAD</a>] is enforced by the NAT device.  A NAT device enforcing the
-   Basic NAT function has a pool of public IP addresses and enforces
-   address mapping (which is different from the endpoint mapping
-   enforced by NAPT) when a private node initiates an outgoing session
-   via the NAT device.  So, if the NAT device has active mapping for the
-   IP address of the intermediate node Router-y, the NAT device <em>MUST</em>
-   translate the source IP address of the ICMP Error packet with the
-   public IP address in the mapping.  In all other cases, the NAT device
-   <em>MUST</em> simply use its own IP address in the external domain to
-   translate the source IP address.
-
-   REQ-5: If a NAT device receives an ICMP Error packet from the private
-          realm, and the NAT does not have an active mapping for the
-          embedded payload, the NAT <em>SHOULD</em> silently drop the ICMP Error
-          packet.  If the NAT has active mapping for the embedded
-          payload, then the NAT <em>MUST</em> do the following prior to
-          forwarding the packet, unless explicitly overridden by local
-          policy:
-
-          a) Revert the IP and transport headers of the embedded IP
-             packet to their original form, using the matching mapping;
-             and
-
-          b) Leave the ICMP Error type and code unchanged; and
-
-          c) If the NAT enforces Basic NAT function ([<a href="#ref-NAT-TRAD" title='"Traditional IP Network Address Translator (Traditional NAT)"'>NAT-TRAD</a>]), and
-             the NAT has active mapping for the IP address that sent the
-             ICMP Error, translate the source IP address of the ICMP
-             Error packet with the public IP address in the mapping.  In
-             all other cases, translate the source IP address of the
-             ICMP Error packet with its own public IP address.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20NAT%20Sessions%20Pertaining%20to%20ICMP%20Error%20Payload"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  NAT Sessions Pertaining to ICMP Error Payload</span>
-
-   While processing an ICMP Error packet pertaining to an ICMP Query or
-   Query response message, a NAT device <em>MUST NOT</em> refresh or delete the
-   NAT Session that pertains to the embedded payload within the ICMP
-   Error packet.  This is in spite of the fact that the NAT device uses
-   the NAT Session to translate the embedded payload.  This ensures that
-   the NAT Session will not be modified if someone is able to spoof ICMP
-   Error messages for the session.  [<a href="#ref-ICMP-ATK" title='"ICMP Attacks against TCP"'>ICMP-ATK</a>] lists a number of
-   potential ICMP attacks that may be attempted by malicious users on
-   the network.  This requirement is necessary for current applications
-   to work correctly.
-
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   REQ-6: While processing an ICMP Error packet pertaining to an ICMP
-          Query or Query response message, a NAT device <em>MUST NOT</em> refresh
-          or delete the NAT Session that pertains to the embedded
-          payload within the ICMP Error packet.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Hairpinning%20Support%20for%20ICMP%20Packets"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Hairpinning Support for ICMP Packets</span>
-
-   [<a id="ref-BEH-UDP" name="ref-BEH-UDP">BEH-UDP</a>] and [<a href="#ref-BEH-TCP" title='"NAT Behavioral Requirements for TCP"'>BEH-TCP</a>] mandate support for hairpinning for UDP and
-   TCP sessions, respectively, on NAT devices.  A NAT device needs to
-   support hairpinning for ICMP Query sessions as well.  Specifically,
-   NAT devices enforcing Basic NAT [<a href="#ref-NAT-TRAD" title='"Traditional IP Network Address Translator (Traditional NAT)"'>NAT-TRAD</a>] <em>MUST</em> support the traversal
-   of hairpinned ICMP Query sessions.  Say, for example, individual
-   private hosts register their NAT assigned external IP address with a
-   rendezvous server.  Other hosts that wish to initiate ICMP Query
-   sessions to the registered hosts might do so using the public address
-   registered with the rendezvous server.  For this reason, Basic NAT
-   devices are required to support the traversal of hairpinned ICMP
-   Query sessions.  This requirement is necessary for current
-   applications to work correctly.
-
-   Packets belonging to any of the hairpinned sessions could, in turn,
-   trigger ICMP Error messages directed to the source of hairpinned IP
-   packets.  Such hairpinned ICMP Error messages will traverse the NAT
-   devices en route.  All NAT devices (i.e., Basic NAT as well as NAPT
-   devices) <em>MUST</em> support the traversal of hairpinned ICMP Error
-   messages.  Specifically, the NAT device must translate not only the
-   embedded hairpinned packet, but also the outer IP header that is
-   hairpinned.  This requirement is necessary for current applications
-   to work correctly.
-
-   A hairpinned ICMP Error message is received from a node in a private
-   network.  As such, the ICMP Error processing requirement specified in
-   Req-5 is applicable in its entirety in processing the ICMP Error
-   message.  In addition, the NAT device <em>MUST</em> translate the destination
-   IP address of the outer IP header to be same as the source IP address
-   of the embedded IP packet after the translation.
-
-   REQ-7: NAT devices enforcing Basic NAT [<a href="#ref-NAT-TRAD" title='"Traditional IP Network Address Translator (Traditional NAT)"'>NAT-TRAD</a>] <em>MUST</em> support the
-          traversal of hairpinned ICMP Query sessions.  All NAT devices
-          (i.e., Basic NAT as well as NAPT devices) <em>MUST</em> support the
-          traversal of hairpinned ICMP Error messages:
-
-          a) When forwarding a hairpinned ICMP Error message, the NAT
-             device <em>MUST</em> translate the destination IP address of the
-             outer IP header to be same as the source IP address of the
-             embedded IP packet after the translation.
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Rejection%20of%20Outbound%20Flows%20Disallowed%20by%20NAT"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Rejection of Outbound Flows Disallowed by NAT</span>
-
-   A NAT device typically permits all outbound sessions.  However, a NAT
-   device may disallow some outbound sessions due to resource
-   constraints or administration considerations.  For example, a NAT
-   device may not permit the first packet of a new outbound session if
-   the NAT device is out of resources (out of addresses or TCP/UDP
-   ports, or NAT Session resources) to set up a state for the session,
-   or, if the specific session is administratively restricted by the NAT
-   device.
-
-   When a NAT device is unable to establish a NAT Session for a new
-   transport-layer (TCP, UDP, ICMP, etc.) flow due to resource
-   constraints or administrative restrictions, the NAT device <em>SHOULD</em>
-   send an ICMP destination unreachable message, with a code of 13
-   (Communication administratively prohibited) to the sender, and drop
-   the original packet.  This requirement is meant primarily for future
-   use.  Current applications do not require this for them to work
-   correctly.  The justification for using ICMP code 13 in the ICMP
-   Error message is as follows: <a href="./rfc1812.html#section-5.2.7.1">Section 5.2.7.1 of [RFC1812]</a> recommends
-   routers use ICMP code 13 (Communication administratively prohibited)
-   when they administratively filter packets.  ICMP code 13 is a soft
-   error and is on par with other soft error codes generated in response
-   to transient events such as "network unreachable" (ICMP type=3,
-   code=0).
-
-   Some NAT designers opt to never reject an outbound flow.  When a NAT
-   runs short of resources, they prefer to steal a resource from an
-   existing NAT Session rather than reject the outbound flow.  Such a
-   design choice may appear conformant to REQ-8 below.  However, the
-   design choice is in violation of the spirit of both REQ-8 and REQ-2.
-   Such a design choice is strongly discouraged.
-
-   REQ-8: When a NAT device is unable to establish a NAT Session for a
-   new transport-layer (TCP, UDP, ICMP, etc.) flow due to resource
-   constraints or administrative restrictions, the NAT device <em>SHOULD</em>
-   send an ICMP destination unreachable message, with a code of 13
-   (Communication administratively prohibited) to the sender, and drop
-   the original packet.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Conformance%20to%20RFC%201812"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Conformance to <a href="./rfc1812.html">RFC 1812</a></span>
-
-   This document specifies NATs to have a behavior that is consistent
-   with the way routers handle ICMP messages, as specified in <a href="#section-4.3">Section</a>
-   <a href="#section-4.3">4.3</a> of [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>].  However, since the publication of [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>], some
-   of its requirements are no longer best current practices.  Thus, the
-   following requirements are derived from [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>] and apply to NATs
-   compliant with this specification:
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   REQ-9: A NAT device <em>MAY</em> implement a policy control that prevents ICMP
-          messages being generated toward certain interface(s).
-          Implementation of such a policy control overrides the <em>MUST</em>s
-          and <em>SHOULD</em>s in REQ-10.
-
-   REQ-10: Unless overridden by REQ-9's policy, a NAT device needs to
-           support ICMP messages as below, some conforming to <a href="#section-4.3">Section</a>
-           <a href="#section-4.3">4.3</a> of [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>] and some superseding the requirements of
-           <a href="./rfc1812.html#section-4.3">Section 4.3 of [RFC1812]</a>:
-
-          a. <em>MUST</em> support:
-
-             1. Destination Unreachable Message, as described in <a href="#section-7.1">Section</a>
-                <a href="#section-7.1">7.1</a> of this document.
-
-             2. Time Exceeded Message, as described in <a href="#section-7.2">Section 7.2</a> of
-                this document.
-
-             3. Echo Request/Reply Messages, as described in REQ-1.
-
-          b. <em>MAY</em> support:
-
-             1. Redirect Message, as described in <a href="./rfc1812.html#section-4.3.3.2">Section 4.3.3.2 of
-                [RFC1812]</a>.
-
-             2. Timestamp and Timestamp Reply Messages, as described in
-                <a href="./rfc1812.html#section-4.3.3.8">Section 4.3.3.8 of [RFC1812]</a>.
-
-             3. Source Route Options, as described in <a href="#section-7.3">Section 7.3</a> of
-                this document.
-
-             4. Address Mask Request/Reply Message, as described in
-                <a href="#section-7.4">Section 7.4</a> of this document.
-
-             5. Parameter Problem Message, as described in <a href="#section-7.5">Section 7.5</a>
-                of this document.
-
-             6. Router Advertisement and Solicitations, as described in
-                <a href="#section-7.6">Section 7.6</a> of this document.
-
-          c. <em>SHOULD NOT</em> support:
-
-             1. Source Quench Message, as described in <a href="./rfc1812.html#section-4.3.3.3">Section 4.3.3.3
-                of [RFC1812]</a>.
-
-             2. Information Request/reply, as described in <a href="#section-4.3.3.7">Section</a>
-                <a href="#section-4.3.3.7">4.3.3.7</a> of [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>].
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-          In addition, a NAT device is <em>RECOMMENDED</em> to conform to the
-          following implementation considerations:
-
-          d. DS Field Usage, as described in <a href="#section-7.7">Section 7.7</a> of this
-             document.
-
-          e. When Not to Send ICMP Errors, as described in <a href="#section-4.3.2.7">Section</a>
-             <a href="#section-4.3.2.7">4.3.2.7</a> of [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>].
-
-          f. Rate Limiting, as described in <a href="./rfc1812.html#section-4.3.2.8">Section 4.3.2.8 of
-             [RFC1812]</a>.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20IP%20Packet%20Fragmentation"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  IP Packet Fragmentation</span>
-
-   Many networking applications (which include TCP- as well as UDP-based
-   applications) depend on ICMP Error messages from the network to
-   perform end-to-end path MTU discovery [<a href="#ref-PMTU" title='"Path MTU discovery"'>PMTU</a>].  Once the path MTU is
-   discovered, an application that chooses to avoid fragmentation may do
-   so by originating IP packets that fit within the path MTU en route
-   and setting the DF (Don't Fragment) bit in the IP header, so the
-   intermediate nodes en route do not fragment the IP packets.  The
-   following sub-sections discuss the need for NAT devices to honor the
-   DF bit in the IP header and be able to generate "Packet Too Big" ICMP
-   Error message when they cannot forward the IP packet without
-   fragmentation.  Also discussed is the need to seamlessly forward ICMP
-   Error messages generated by other intermediate devices.
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.1.%20%20Generating%20%22Packet%20Too%20Big%22%20ICMP%20Error%20Message"></a></body></html><a class="selflink" href="#section-7.1.1" name="section-7.1.1">7.1.1</a>.  Generating "Packet Too Big" ICMP Error Message</span>
-
-   When a router is unable to forward a datagram because it exceeds the
-   MTU of the next-hop network and its Don't Fragment (DF) bit is set,
-   the router is required by [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>] to return an ICMP Destination
-   Unreachable message to the source of the datagram, with the code
-   indicating "fragmentation needed and DF set".  Further, [<a href="#ref-PMTU" title='"Path MTU discovery"'>PMTU</a>] states
-   that the router <em>MUST</em> include the MTU of that next-hop network in the
-   low-order 16 bits of the ICMP header field that is labeled "unused"
-   in the ICMP specification [<a href="#ref-ICMP" title='"Internet Control Message Protocol"'>ICMP</a>].
-
-   A NAT device <em>MUST</em> honor the DF bit in the IP header of the packets
-   that transit the device.  The NAT device may not be able to forward
-   an IP packet without fragmentation if the MTU on the forwarding
-   interface of the NAT device is not adequate for the IP packet.  If
-   the DF bit is set on a transit IP packet and the NAT device cannot
-   forward the packet without fragmentation, the NAT device <em>MUST</em> send a
-   "Packet Too Big" ICMP message (ICMP type 3, code 4) with the next-hop
-   MTU back to the sender and drop the original IP packet.  The sender
-   will usually resend after taking the appropriate corrective action.
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   If the DF bit is not set and the MTU on the forwarding interface of
-   the NAT device mandates fragmentation, the NAT device <em>MUST</em> fragment
-   the packet and forward the fragments [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>].
-
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.2.%20%20Forwarding%20%22Packet%20Too%20Big%22%20ICMP%20Error%20Message"></a></body></html><a class="selflink" href="#section-7.1.2" name="section-7.1.2">7.1.2</a>.  Forwarding "Packet Too Big" ICMP Error Message</span>
-
-   This is the flip side of the argument for the above section.  By
-   virtue of the address translation NAT performs, NAT may end up being
-   the recipient of "Packet Too Big" messages.
-
-   When the NAT device is the recipient of a "Packet Too Big" ICMP
-   message from the network, the NAT device <em>MUST</em> forward the ICMP
-   message back to the intended recipient, pursuant to the previously
-   stated requirements (REQ-3, REQ-4, and REQ-5).
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Time%20Exceeded%20Message"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Time Exceeded Message</span>
-
-   A NAT device <em>MUST</em> generate a "Time Exceeded" ICMP Error message when
-   it discards a packet due to an expired Time to Live (TTL) field.  A
-   NAT device <em>MAY</em> have a per-interface option to disable origination of
-   these messages on that interface, but that option <em>MUST</em> default to
-   allowing the messages to be originated.
-
-   When a NAT device conforms to the above requirement, it ensures that
-   legacy applications such as Traceroute [<a href="./rfc1470.html" title='"FYI on a Network Management Tool Catalog: Tools for Monitoring and Debugging TCP/IP Internets and Interconnected Devices"'>RFC1470</a>], [<a href="#ref-MS-TRCRT" title='"How to use the Tracert command-line utility to troubleshoot TCP/IP problems in Windows"'>MS-TRCRT</a>], which
-   depend upon the "Time Exceeded" ICMP Error message, will continue to
-   operate even as NAT devices are en route.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Source%20Route%20Options"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  Source Route Options</span>
-
-   A NAT device <em>MAY</em> support modifying IP addresses in the source route
-   option so the IP addresses in the source route option are realm
-   relevant.  If a NAT device does not support forwarding packets with
-   the source route option, the NAT device <em>SHOULD NOT</em> forward outbound
-   ICMP messages that contain the source route option in the outer or
-   inner IP header.  This is because such messages could reveal private
-   IP addresses to the external realm.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.4.%20%20Address%20Mask%20Request/Reply%20Messages"></a></body></html><a class="selflink" href="#section-7.4" name="section-7.4">7.4</a>.  Address Mask Request/Reply Messages</span>
-
-   <a href="./rfc1812.html#section-4.3.3.9">Section 4.3.3.9 of [RFC1812]</a> says an IP router <em>MUST</em> implement support
-   for receiving ICMP Address Mask Request messages and responding with
-   ICMP Address Mask Reply messages.  However, several years (more than
-   13 years at the time of this document) have elapsed since the text in
-   <a href="./rfc1812.html">RFC 1812</a> was written.  In the intervening time, DHCP [<a href="#ref-DHCP" title='"Dynamic Host Configuration Protocol"'>DHCP</a>] has
-   replaced the use of address mask request/reply.  At the current time,
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   there is rarely any host that does not meet host requirements
-   [<a href="./rfc1122.html" title='"Requirements for Internet Hosts - Communication Layers"'>RFC1122</a>] and needs a NAT device to support address mask
-   request/reply.
-
-   For this reason, a NAT device is not required to support this ICMP
-   message.
-
-   A NAT device <em>MAY</em> support address mask request/reply messages.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.5.%20%20Parameter%20Problem%20Message"></a></body></html><a class="selflink" href="#section-7.5" name="section-7.5">7.5</a>.  Parameter Problem Message</span>
-
-   <a href="./rfc1812.html#section-4.3.3.5">Section 4.3.3.5 of [RFC1812]</a> says an IP router <em>MUST</em> generate a
-   Parameter Problem message for any error not specifically covered by
-   another ICMP message.  However, this message is rarely used in
-   practice in networks where IPv4 NATs are deployed.
-
-   For this reason, a NAT device is not required to support this ICMP
-   message.
-
-   A NAT device <em>MAY</em> support parameter problem messages.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.6.%20%20Router%20Advertisement%20and%20Solicitations"></a></body></html><a class="selflink" href="#section-7.6" name="section-7.6">7.6</a>.  Router Advertisement and Solicitations</span>
-
-   <a href="./rfc1812.html#section-4.3.3.10">Section 4.3.3.10 of [RFC1812]</a> says an IP router <em>MUST</em> support the
-   router part of the ICMP Router Discovery Protocol on all connected
-   networks on which the router supports either IP multicast or IP
-   broadcast addressing.  However, this message is rarely used in
-   practice in networks where IPv4 NATs are deployed.
-
-   For this reason, a NAT device is not required to support this ICMP
-   message.
-
-   A NAT device <em>MAY</em> support Router Advertisement and Solicitations.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.7.%20%20DS%20Field%20Usage"></a></body></html><a class="selflink" href="#section-7.7" name="section-7.7">7.7</a>.  DS Field Usage</span>
-
-   [<a id="ref-RFC1812" name="ref-RFC1812">RFC1812</a>] refers to the Type of Service (TOS) octet in the IP header,
-   which contains the TOS and IP precedence fields.  However, the TOS
-   and IP precedence fields are no longer in use today.  [<a href="./rfc2474.html" title='"Definition of the Differentiated Services Field (DS Field) in the IPv4 and IPv6 Headers"'>RFC2474</a>]
-   renamed the TOS octet as the DS field and defined diffserv classes
-   within the DS field.
-
-   When generating an ICMP message, a NAT device <em>SHOULD</em> copy the
-   diffserv class of the message that causes the sending of the ICMP
-   error message.  A NAT device <em>MAY</em> allow configuration of the diffserv
-   class to be used for the different types of ICMP messages.
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Non-QueryError%20ICMP%20Messages"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Non-QueryError ICMP Messages</span>
-
-   In the preceding sections, ICMP requirements were identified for NAT
-   devices, with a primary focus on ICMP Query and ICMP Error messages,
-   as defined in the Terminology Section (see <a href="#section-2">Section 2</a>).  This document
-   provides no guidance on the handling of Non-QueryError ICMP messages
-   by the NAT devices.  A NAT <em>MAY</em> drop or appropriately handle Non-
-   QueryError ICMP messages.
-
-       REQ-11: A NAT <em>MAY</em> drop or appropriately handle Non-QueryError
-           ICMP messages.  The semantics of Non-QueryError ICMP messages
-           is defined in <a href="#section-2">Section 2</a>.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Summary%20of%20Requirements"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Summary of Requirements</span>
-
-   Below is a summary of all the requirements.
-
-   REQ-1: Unless explicitly overridden by local policy, a NAT device
-          <em>MUST</em> permit ICMP Queries and their associated responses, when
-          the Query is initiated from a private host to the external
-          hosts.
-
-          a) NAT mapping of ICMP Query Identifiers <em>SHOULD</em> be external
-             host independent.
-
-   REQ-2: An ICMP Query session timer <em>MUST NOT</em> expire in less than 60
-          seconds.
-
-          a) It is <em>RECOMMENDED</em> that the ICMP Query session timer be made
-             configurable.
-
-   REQ-3: When an ICMP Error packet is received, if the ICMP checksum
-          fails to validate, the NAT <em>SHOULD</em> silently drop the ICMP Error
-          packet.  If the ICMP checksum is valid, do the following:
-
-          a) If the IP checksum of the embedded packet fails to
-             validate, the NAT <em>SHOULD</em> silently drop the Error packet;
-             and
-
-          b) If the embedded packet includes IP options, the NAT device
-             <em>MUST</em> traverse past the IP options to locate the start of
-             the transport header for the embedded packet; and
-
-          c) The NAT device <em>SHOULD NOT</em> validate the transport checksum
-             of the embedded packet within an ICMP Error message, even
-             when it is possible to do so; and
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-          d) If the ICMP Error payload contains ICMP extensions
-             [<a href="#ref-ICMP-EXT" title='"Extended ICMP to Support Multi-Part Messages"'>ICMP-EXT</a>], the NAT device <em>MUST</em> exclude the optional zero-
-             padding and the ICMP extensions when evaluating transport
-             checksum for the embedded packet.
-
-   REQ-4: If a NAT device receives an ICMP Error packet from an external
-          realm, and the NAT device does not have an active mapping for
-          the embedded payload, the NAT <em>SHOULD</em> silently drop the ICMP
-          Error packet.  If the NAT has active mapping for the embedded
-          payload, then the NAT <em>MUST</em> do the following prior to
-          forwarding the packet, unless explicitly overridden by local
-          policy:
-
-          a) Revert the IP and transport headers of the embedded IP
-             packet to their original form, using the matching mapping;
-             and
-
-          b) Leave the ICMP Error type and code unchanged; and
-
-          c) Modify the destination IP address of the outer IP header to
-             be same as the source IP address of the embedded packet
-             after translation.
-
-   REQ-5: If a NAT device receives an ICMP Error packet from the private
-          realm, and the NAT does not have an active mapping for the
-          embedded payload, the NAT <em>SHOULD</em> silently drop the ICMP Error
-          packet.  If the NAT has active mapping for the embedded
-          payload, then the NAT <em>MUST</em> do the following prior to
-          forwarding the packet, unless explicitly overridden by local
-          policy.
-
-          a) Revert the IP and transport headers of the embedded IP
-             packet to their original form, using the matching mapping;
-             and
-
-          b) Leave the ICMP Error type and code unchanged; and
-
-          c) If the NAT enforces Basic NAT function [<a href="#ref-NAT-TRAD" title='"Traditional IP Network Address Translator (Traditional NAT)"'>NAT-TRAD</a>], and the
-             NAT has active mapping for the IP address that sent the
-             ICMP Error, translate the source IP address of the ICMP
-             Error packet with the public IP address in the mapping.  In
-             all other cases, translate the source IP address of the
-             ICMP Error packet with its own public IP address.
-
-   REQ-6: While processing an ICMP Error packet pertaining to an ICMP
-          Query or Query response message, a NAT device <em>MUST NOT</em> refresh
-          or delete the NAT Session that pertains to the embedded
-          payload within the ICMP Error packet.
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   REQ-7: NAT devices enforcing Basic NAT ([<a href="#ref-NAT-TRAD" title='"Traditional IP Network Address Translator (Traditional NAT)"'>NAT-TRAD</a>]) <em>MUST</em> support the
-          traversal of hairpinned ICMP Query sessions.  All NAT devices
-          (i.e., Basic NAT as well as NAPT devices) <em>MUST</em> support the
-          traversal of hairpinned ICMP Error messages.
-
-          a) When forwarding a hairpinned ICMP Error message, the NAT
-             device <em>MUST</em> translate the destination IP address of the
-             outer IP header to be same as the source IP address of the
-             embedded IP packet after the translation.
-
-   REQ-8: When a NAT device is unable to establish a NAT Session for a
-          new transport-layer (TCP, UDP, ICMP, etc.) flow due to
-          resource constraints or administrative restrictions, the NAT
-          device <em>SHOULD</em> send an ICMP destination unreachable message,
-          with a code of 13 (Communication administratively prohibited)
-          to the sender, and drop the original packet.
-
-   REQ-9: A NAT device <em>MAY</em> implement a policy control that prevents ICMP
-          messages being generated toward certain interface(s).
-          Implementation of such a policy control overrides the <em>MUST</em>s
-          and <em>SHOULD</em>s in REQ-10.
-
-   REQ-10: Unless overridden by REQ-9's policy, a NAT device needs to
-           support ICMP messages as below, some conforming to <a href="#section-4.3">Section</a>
-           <a href="#section-4.3">4.3</a> of [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>] and some superseding the requirements of
-           <a href="./rfc1812.html#section-4.3">Section 4.3 of [RFC1812]</a>:
-
-          a. <em>MUST</em> support:
-
-             1. Destination Unreachable Message, as described in <a href="#section-7.1">Section</a>
-                <a href="#section-7.1">7.1</a> of this document.
-
-             2. Time Exceeded Message, as described in <a href="#section-7.2">Section 7.2</a> of
-                this document.
-
-             3. Echo Request/Reply Messages, as described in REQ-1.
-
-          b. <em>MAY</em> support:
-
-             1. Redirect Message, as described in <a href="./rfc1812.html#section-4.3.3.2">Section 4.3.3.2 of
-                [RFC1812]</a>.
-
-             2. Timestamp and Timestamp Reply Messages, as described in
-                <a href="./rfc1812.html#section-4.3.3.8">Section 4.3.3.8 of [RFC1812]</a>.
-
-             3. Source Route Options, as described in <a href="#section-7.3">Section 7.3</a> of
-                this document.
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-             4. Address Mask Request/Reply Message, as described in
-                <a href="#section-7.4">Section 7.4</a> of this document.
-
-             5. Parameter Problem Message, as described in <a href="#section-7.5">Section 7.5</a>
-                of this document.
-
-             6. Router Advertisement and Solicitations, as described in
-                <a href="#section-7.6">Section 7.6</a> of this document.
-
-          c. <em>SHOULD NOT</em> support:
-
-             1. Source Quench Message, as described in <a href="./rfc1812.html#section-4.3.3.3">Section 4.3.3.3
-                of [RFC1812]</a>.
-
-             2. Information Request/reply, as described in <a href="#section-4.3.3.7">Section</a>
-                <a href="#section-4.3.3.7">4.3.3.7</a> of [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>].
-
-          In addition, a NAT device is <em>RECOMMENDED</em> to conform to the
-          following implementation considerations:
-
-          d. DS Field Usage, as described in <a href="#section-7.7">Section 7.7</a> of this
-             document.
-
-          e. When Not to Send ICMP Errors, as described in <a href="#section-4.3.2.7">Section</a>
-             <a href="#section-4.3.2.7">4.3.2.7</a> of [<a href="./rfc1812.html" title='"Requirements for IP Version 4 Routers"'>RFC1812</a>].
-
-          f. Rate Limiting, as described in <a href="./rfc1812.html#section-4.3.2.8">Section 4.3.2.8 of
-             [RFC1812]</a>.
-
-   REQ-11: A NAT <em>MAY</em> drop or appropriately handle Non-QueryError ICMP
-           messages.  The semantics of Non-QueryError ICMP messages is
-           defined in <a href="#section-2">Section 2</a>.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Security Considerations</span>
-
-   This document does not introduce any new security concerns related to
-   ICMP message handling in the NAT devices.  However, the requirements
-   in the document do mitigate some security concerns known to exist
-   with ICMP messages.
-
-   [<a id="ref-ICMP-ATK" name="ref-ICMP-ATK">ICMP-ATK</a>] lists a number of ICMP attacks that can be directed
-   against end host TCP stacks.  For example, a rogue entity could
-   bombard the NAT device with a large number of ICMP Errors.  If the
-   NAT device did not validate the legitimacy of the ICMP Error packets,
-   the ICMP Errors would be forwarded directly to the end nodes.  End
-   hosts not capable of defending themselves against such bogus ICMP
-   Error attacks could be adversely impacted by such attacks.  Req-3
-   recommends validating the ICMP checksum and the IP checksum of the
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   embedded payload prior to forwarding.  These checksum validations by
-   themselves do not protect end hosts from attacks.  However, checksum
-   validation mitigates end hosts from malformed ICMP Error attacks.
-   Req-4 and Req-5 further mandate that when a NAT device does not find
-   a mapping selection for the embedded payload, the NAT should drop the
-   ICMP Error packets, without forwarding.
-
-   A rogue source could also try to send bogus ICMP Error messages for
-   the active NAT sessions, with intent to destroy the sessions.  Req-6
-   averts such an attack by ensuring that an ICMP Error message does not
-   affect the state of a session on the NAT device.
-
-   Req-8 recommends a NAT device sending an ICMP Error message when the
-   NAT device is unable to create a NAT session due to lack of
-   resources.  Some administrators may choose not to have the NAT device
-   send an ICMP Error message, as doing so could confirm to a malicious
-   attacker that the attack has succeeded.  For this reason, sending of
-   the specific ICMP Error message stated in REQ-8 is left to the
-   discretion of the NAT device administrator.
-
-   Unfortunately, ICMP messages are sometimes blocked at network
-   boundaries due to local security policy.  Thus, some of the
-   requirements in this document allow local policy to override the
-   recommendations of this document.  Blocking such ICMP messages is
-   known to break some protocol features (most notably path MTU
-   Discovery) and some applications (e.g., ping, traceroute), and such
-   blocking is NOT <em>RECOMMENDED</em>.
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  Acknowledgements</span>
-
-   The authors wish to thank Fernando Gont, Dan Wing, Carlos Pignataro,
-   Philip Matthews, and members of the BEHAVE working group for doing a
-   thorough review of early versions of the document and providing
-   valuable input and offering generous amounts of their time in shaping
-   the ICMP requirements.  Their valuable feedback made this document a
-   better read.  Dan Wing and Fernando Gont were a steady source of
-   encouragement.  Fernando Gont spent many hours preparing slides and
-   presenting the document in an IETF meeting on behalf of the authors.
-   The authors wish to thank Carlos Pignataro and Dan Tappan, authors of
-   the [<a href="#ref-ICMP-EXT" title='"Extended ICMP to Support Multi-Part Messages"'>ICMP-EXT</a>] document, for their feedback concerning ICMP
-   extensions.  The authors wish to thank Philip Matthews for agreeing
-   to be a technical reviewer for the document.  Lastly, the authors
-   highly appreciate the rigorous feedback from the IESG members.
-
-
-
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.%20%20References"></a></body></html><a class="selflink" href="#section-12" name="section-12">12</a>.  References</span>
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-12.1" name="section-12.1">12.1</a>.  Normative References</span>
-
-   [<a id="ref-BEH-UDP" name="ref-BEH-UDP">BEH-UDP</a>]  Audet, F., Ed., and C. Jennings, "Network Address
-              Translation (NAT) Behavioral Requirements for Unicast
-              UDP", <a href="./bcp127.html">BCP 127</a>, <a href="./rfc4787.html">RFC 4787</a>, January 2007.
-
-   [<a id="ref-ICMP" name="ref-ICMP">ICMP</a>]     Postel, J., "Internet Control Message Protocol", STD 5,
-              <a href="./rfc792.html">RFC 792</a>, September 1981.
-
-   [<a id="ref-ICMP-EXT" name="ref-ICMP-EXT">ICMP-EXT</a>] Bonica, R., Gan, D., Tappan, D., and C. Pignataro,
-              "Extended ICMP to Support Multi-Part Messages", <a href="./rfc4884.html">RFC 4884</a>,
-              April 2007.
-
-   [<a id="ref-NAT-TRAD" name="ref-NAT-TRAD">NAT-TRAD</a>] Srisuresh, P. and K. Egevang, "Traditional IP Network
-              Address Translator (Traditional NAT)", <a href="./rfc3022.html">RFC 3022</a>, January
-              2001.
-
-   [<a id="ref-RFC793" name="ref-RFC793">RFC793</a>]   Postel, J., "Transmission Control Protocol", STD 7, <a href="./rfc793.html">RFC</a>
-              <a href="./rfc793.html">793</a>, September 1981.
-
-   [<a id="ref-RFC1812" name="ref-RFC1812">RFC1812</a>]  Baker, F., Ed., "Requirements for IP Version 4 Routers",
-              <a href="./rfc1812.html">RFC 1812</a>, June 1995.
-
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
-
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/12.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-12.2" name="section-12.2">12.2</a>.  Informative References</span>
-
-   [<a id="ref-BEH-APP" name="ref-BEH-APP">BEH-APP</a>]  Ford, B., Srisuresh, P., and D. Kegel, "Application Design
-              Guidelines for Traversal through Network Address
-              Translators", Work in Progress, March 2007.
-
-   [<a id="ref-BEH-TCP" name="ref-BEH-TCP">BEH-TCP</a>]  Guha, S., Ed., Biswas, K., Ford, B., Sivakumar, S., and P.
-              Srisuresh, "NAT Behavioral Requirements for TCP", <a href="./bcp142.html">BCP 142</a>,
-              <a href="./rfc5382.html">RFC 5382</a>, October 2008.
-
-   [<a id="ref-DHCP" name="ref-DHCP">DHCP</a>]     Droms, R., "Dynamic Host Configuration Protocol", <a href="./rfc2131.html">RFC</a>
-              <a href="./rfc2131.html">2131</a>, March 1997.
-
-   [<a id="ref-ICE" name="ref-ICE">ICE</a>]      Rosenberg, J., "Interactive Connectivity Establishment
-              (ICE): A Protocol for Network Address Translator (NAT)
-              Traversal for Offer/Answer Protocols", Work in Progress,
-              October 2007.
-
-   [<a id="ref-ICMP-ATK" name="ref-ICMP-ATK">ICMP-ATK</a>] Gont, F., <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22ICMP+Attacks+against+TCP%22" style="text-decoration: none">"ICMP Attacks against TCP"</a>, Work in Progress,
-              October 2008.
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-   [<a id="ref-MS-TRCRT" name="ref-MS-TRCRT">MS-TRCRT</a>] Microsoft Support, "How to use the Tracert command-line
-              utility to troubleshoot TCP/IP problems in Windows",
-              <a href="http://support.microsoft.com/kb/162326">http://support.microsoft.com/kb/162326</a>, October, 2006.
-
-   [<a id="ref-NAT-MIB" name="ref-NAT-MIB">NAT-MIB</a>]  Rohit, R., Srisuresh, P., Raghunarayan, R., Pai, N., and
-              C. Wang, "Definitions of Managed Objects for Network
-              Address Translators (NAT)", <a href="./rfc4008.html">RFC 4008</a>, March 2005.
-
-   [<a id="ref-NAT-TERM" name="ref-NAT-TERM">NAT-TERM</a>] Srisuresh, P. and M. Holdrege, "IP Network Address
-              Translator (NAT) Terminology and Considerations", <a href="./rfc2663.html">RFC</a>
-              <a href="./rfc2663.html">2663</a>, August 1999.
-
-   [<a id="ref-PMTU" name="ref-PMTU">PMTU</a>]     Mogul, J. and S. Deering, "Path MTU discovery", <a href="./rfc1191.html">RFC 1191</a>,
-              November 1990.
-
-   [<a id="ref-RFC1122" name="ref-RFC1122">RFC1122</a>]  Braden, R., Ed., "Requirements for Internet Hosts -
-              Communication Layers", STD 3, <a href="./rfc1122.html">RFC 1122</a>, October 1989.
-
-   [<a id="ref-RFC1256" name="ref-RFC1256">RFC1256</a>]  Deering, S., Ed., "ICMP Router Discovery Messages", <a href="./rfc1256.html">RFC</a>
-              <a href="./rfc1256.html">1256</a>, September 1991.
-
-   [<a id="ref-RFC1470" name="ref-RFC1470">RFC1470</a>]  Enger, R. and J. Reynolds, "FYI on a Network Management
-              Tool Catalog: Tools for Monitoring and Debugging TCP/IP
-              Internets and Interconnected Devices", FYI 2, <a href="./rfc1470.html">RFC 1470</a>,
-              June 1993.
-
-   [<a id="ref-RFC2474" name="ref-RFC2474">RFC2474</a>]  Nichols, K., Blake, S., Baker, F., and D. Black,
-              "Definition of the Differentiated Services Field (DS
-              Field) in the IPv4 and IPv6 Headers", <a href="./rfc2474.html">RFC 2474</a>, December
-              1998.
-
-   [<a id="ref-RFC4065" name="ref-RFC4065">RFC4065</a>]  Kempf, J., "Instructions for Seamoby and Experimental
-              Mobility Protocol IANA Allocations", <a href="./rfc4065.html">RFC 4065</a>, July 2005.
-
-   [<a id="ref-TCP-SOFT" name="ref-TCP-SOFT">TCP-SOFT</a>] Gont, F., "TCP's Reaction to Soft Errors", <a href="./rfc5461.html">RFC 5461</a>,
-              February 2009.
-
-   [<a id="ref-UNSAF" name="ref-UNSAF">UNSAF</a>]    Daigle, L., Ed., and IAB, "IAB Considerations for
-              UNilateral Self-Address Fixing (UNSAF) Across Network
-              Address Translation", <a href="./rfc3424.html">RFC 3424</a>, November 2002.
-
-
-
-
-
-
-
-
-
-
-
-<span class="grey">Srisuresh, et al.        Best Current Practice                 [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
-<span class="grey"><a href="./rfc5508.html">RFC 5508</a>          NAT Behavioral Requirements for ICMP        April 2009</span>
-
-
-Authors' Addresses
-
-   Pyda Srisuresh
-   Kazeon Systems, Inc.
-   1161 San Antonio Rd.
-   Mountain View, CA 94043
-   U.S.A.
-
-   Phone: +1 408 836 4773
-   EMail: srisuresh@yahoo.com
-
-
-   Bryan Ford
-   Max Planck Institute for Software Systems
-   Campus Building E1 4
-   D-66123 Saarbruecken
-   Germany
-
-   Phone: +49-681-9325657
-   EMail: baford@mpi-sws.org
-
-
-   Senthil Sivakumar
-   Cisco Systems, Inc.
-   7100-8 Kit Creek Road
-   PO Box 14987
-   Research Triangle Park, NC  27709-4987
-   U.S.A.
-
-   Phone: +1 919 392 5158
-   EMail: ssenthil@cisco.com
-
-
-   Saikat Guha
-   Cornell University
-   331 Upson Hall
-   Ithaca, NY  14853
-   U.S.A.
-
-   Phone: +1 607 255 1008
-   EMail: saikat@cs.cornell.edu
-
-
-
-
-
-
-
-
-
-
-Srisuresh, et al.        Best Current Practice                 [Page 29]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
+<br/><br/><div id="footer">
+<div id="footerdivs">
+</div>
+<div style="clear:both"></div>
+<p class="credit">
+<a href="./www.iab.org/.html">IAB</a> • <a href="./www.iana.org/.html">IANA</a>  • <a href="./www.ietf.org.html">IETF</a> • <a href="./www.irtf.org.html">IRTF</a> • <a href="/about/independent">ISE</a> • <a href="./www.internetsociety.org.html">ISOC</a> • <a href="./trustee.ietf.org/.html">IETF Trust</a>
+<br/>
+<a href="/report-summary">Reports</a> • <a href="./www.ietf.org/privacy-statement/.html">Privacy Statement</a> • <a href="/sitemap">Site Map</a> • <a href="/contact">Contact Us</a> </p>
+</div><!--footer-->
+</div><!--page-->
+<button aria-controls="rmp-container-2538" aria-label="Menu Trigger" class="rmp_menu_trigger rmp-menu-trigger-boring" id="rmp_menu_trigger-2538" type="button">
+<span class="rmp-trigger-box">
+<span class="responsive-menu-pro-inner"></span>
+</span>
+</button>
+<div class="rmp-container rmp-container rmp-slide-left" id="rmp-container-2538">
+<div class="rmp-menu-title" id="rmp-menu-title-2538">
+<a href="" id="rmp-menu-title-link" target="_self">
+<span></span>
+</a>
+</div>
+<div class="rmp-menu-wrap" id="rmp-menu-wrap-2538"><ul aria-label="Default Menu" class="rmp-menu" id="rmp-menu-2538" role="menubar"><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-632" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/retrieve/" role="menuitem">Document Retrieval</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-633" role="none"><a class="rmp-menu-item-link" href="/errata.php" role="menuitem">Errata</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-634" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/faq/" role="menuitem">Frequently Asked Questions</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-636" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/rse/format-faq/" role="menuitem">Future Format FAQ</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-637" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/history/" role="menuitem">History</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-638" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/about/" role="menuitem">About Us</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-639" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/other/" role="menuitem">Other Information</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-640" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/pubprocess/" role="menuitem">Publication Process</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-641" role="none"><a class="rmp-menu-item-link" href="/current_queue.php" role="menuitem">Publication Queue</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page rmp-menu-item rmp-menu-top-level-item" id="rmp-menu-item-642" role="none"><a class="rmp-menu-item-link" href="https://www.rfc-editor.org/styleguide/" role="menuitem">Style Guide</a></li></ul></div> <div class="rmp-menu-additional-content" id="rmp-menu-additional-content-2538">
+<a href="/search/rfc_search.php">Advanced Search</a>
+<form action="/search/rfc_search_detail.php" id="search_query_separator_id" method="POST" name="search_query_separator_name" onsubmit="return validateComboBox(this);">
+<input id="combo_box_id" maxlength="20" name="combo_box" placeholder="number, title, keyword, or author surname" size="35" type="text"/></form>
+</div>
 </div>
 </body>
 </html>

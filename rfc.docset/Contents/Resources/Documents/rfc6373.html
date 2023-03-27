@@ -1,41 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-abfb-mpls-tp-control-plane-framework" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:6373" name="DC.Identifier"/>
-<meta content="September, 2011" name="DC.Date.Issued"/>
-<meta content="Berger, Lou" name="DC.Creator"/>
-<meta content="Gray, Eric" name="DC.Creator"/>
-<meta content="Bitar, Nabil" name="DC.Creator"/>
-<meta content="Fang, Luyuan" name="DC.Creator"/>
-<meta content="Andersson, Loa" name="DC.Creator"/>
-<meta content="The MPLS Transport Profile (MPLS-TP) supports static provisioning of
-transport paths via a Network Management System (NMS), and dynamic
-provisioning of transport paths via a control plane. This document
-provides the framework for MPLS-TP dynamic provisioning, and covers
-control plane addressing, routing, path computation, signaling,
-traffic engineering, and path recovery. MPLS-TP uses GMPLS as the
-control plane for MPLS-TP LSPs. MPLS-TP also uses the Pseudowire (PW)
-control plane for Pseudowires (PWs). Management plane functions are
-out of scope of this document.  This document is a product of a joint
-Internet Engineering Task Force (IETF) / International
-Telecommunication Union Telecommunication Standardization Sector
-(ITU-T) effort to include an MPLS Transport Profile within the IETF
-MPLS and Pseudowire Emulation Edge-to-Edge (PWE3) architectures to
-support the capabilities and functionalities of a packet transport
-network as defined by the ITU-T.  This Informational Internet-Draft is
-aimed at achieving IETF Consensus before publication as an RFC and
-will be subject to an IETF Last Call.  [RFC Editor, please remove this
-note before publication as an RFC and insert the correct Streams
-Boilerplate to indicate that the published RFC has IETF consensus.]" name="DC.Description.Abstract"/>
-<meta content="MPLS-TP Control Plane Framework" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6373 - MPLS-TP Control Plane Framework</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="L. Andersson" name="citation_author"/>
+<meta content="L. Berger" name="citation_author"/>
+<meta content="L. Fang" name="citation_author"/>
+<meta content="N. Bitar" name="citation_author"/>
+<meta content="E. Gray" name="citation_author"/>
+<meta content="September, 2011" name="citation_publication_date"/>
+<meta content="MPLS Transport Profile (MPLS-TP) Control Plane Framework" name="citation_title"/>
+<meta content="10.17487/RFC6373" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6373" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6373.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6373: MPLS Transport Profile (MPLS-TP) Control Plane Framework</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -64,7 +44,7 @@ Boilerplate to indicate that the published RFC has IETF consensus.]" name="DC.De
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -73,7 +53,7 @@ Boilerplate to indicate that the published RFC has IETF consensus.]" name="DC.De
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -152,19 +132,18 @@ Boilerplate to indicate that the published RFC has IETF consensus.]" name="DC.De
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -178,21 +157,9 @@ Boilerplate to indicate that the published RFC has IETF consensus.]" name="DC.De
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6373.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6373" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-ccamp-mpls-tp-cp-framework.html" title="draft-ietf-ccamp-mpls-tp-cp-framework">draft-ietf-ccamp-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6373" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6373" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                 L. Andersson, Ed.
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6373.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6373.txt.pdf">PDF</a>|<a href="/rfc/rfc6373.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6373" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6373&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6373" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                 L. Andersson, Ed.
 Request for Comments: 6373                                      Ericsson
 Category: Informational                                   L. Berger, Ed.
 ISSN: 2070-1721                                                     LabN
@@ -244,7 +211,7 @@ Status of This Memo
 
 
 <span class="grey">Andersson, et al.             Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -257,7 +224,7 @@ Copyright Notice
    Copyright (c) 2011 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -300,7 +267,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -336,7 +303,7 @@ Table of Contents
       <a href="#section-8.2">8.2</a>. Informative References ....................................<a href="#page-51">51</a>
    <a href="#section-9">9</a>. Contributing Authors ...........................................<a href="#page-56">56</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    The Multiprotocol Label Switching Transport Profile (MPLS-TP) is
    defined as a joint effort between the International Telecommunication
@@ -356,11 +323,11 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Scope"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Scope</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Scope"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Scope</span>
 
    This document covers the control-plane functions involved in
    establishing MPLS-TP Label Switched Paths (LSPs) and pseudowires
@@ -401,7 +368,7 @@ Table of Contents
    used to control MPLS-TP LSPs, and on the control of PWs as specified
    in [<a href="./rfc4447.html" title='"Pseudowire Setup and Maintenance Using the Label Distribution Protocol (LDP)"'>RFC4447</a>], [<a href="./rfc6073.html" title='"Segmented Pseudowire"'>RFC6073</a>], and [<a href="#ref-MS-PW-DYNAMIC">MS-PW-DYNAMIC</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Basic%20Approach"></a></body></html><a class="selflink" href="#section-1.2" name="section-1.2">1.2</a>.  Basic Approach</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.2.%20%20Basic%20Approach"></a></body></html><a class="selflink" href="#section-1.2" id="section-1.2">1.2</a>.  Basic Approach</span>
 
    The basic approach taken in defining the MPLS-TP control-plane
    framework includes the following:
@@ -412,7 +379,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -468,7 +435,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -476,7 +443,7 @@ Table of Contents
          primarily found in <a href="./rfc5654.html#section-2.4">Section 2.4 of [RFC5654]</a> and relevant
          portions of the remainder of <a href="./rfc5654.html#section-2">Section 2 of [RFC5654]</a>.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Reference%20Model"></a></body></html><a class="selflink" href="#section-1.3" name="section-1.3">1.3</a>.  Reference Model</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.3.%20%20Reference%20Model"></a></body></html><a class="selflink" href="#section-1.3" id="section-1.3">1.3</a>.  Reference Model</span>
 
    The control-plane reference model is based on the general MPLS-TP
    reference model as defined in the MPLS-TP framework [<a href="./rfc5921.html" title='"A Framework for MPLS in Transport Networks"'>RFC5921</a>] and
@@ -524,7 +491,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -580,7 +547,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -636,7 +603,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -647,7 +614,7 @@ Table of Contents
    included in LDP as LDP session end point addresses are never
    automatically associated with forwarding.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Control-Plane%20Requirements"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Control-Plane Requirements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Control-Plane%20Requirements"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Control-Plane Requirements</span>
 
    The requirements for the MPLS-TP control plane are derived from the
    MPLS-TP requirements and framework documents, specifically [<a href="./rfc5654.html" title='"Requirements of an MPLS Transport Profile"'>RFC5654</a>],
@@ -656,7 +623,7 @@ Table of Contents
    there are differences between this section and those documents, those
    documents shall be considered authoritative.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Primary%20Requirements"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Primary Requirements</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Primary%20Requirements"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Primary Requirements</span>
 
    These requirements are based on <a href="./rfc5654.html#section-2">Section 2 of [RFC5654]</a>:
 
@@ -692,7 +659,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -748,7 +715,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -804,7 +771,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -860,7 +827,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -916,7 +883,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -972,7 +939,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1028,7 +995,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1084,7 +1051,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1140,7 +1107,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1178,7 +1145,7 @@ Table of Contents
          services that are sensitive to jitter and delay ([<a href="./rfc5654.html" title='"Requirements of an MPLS Transport Profile"'>RFC5654</a>],
          requirement 112).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Requirements%20Derived%20from%20the%20MPLS-TP%20Framework"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Requirements Derived from the MPLS-TP Framework</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Requirements%20Derived%20from%20the%20MPLS-TP%20Framework"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Requirements Derived from the MPLS-TP Framework</span>
 
    The following additional requirements are based on [<a href="./rfc5921.html" title='"A Framework for MPLS in Transport Networks"'>RFC5921</a>],
    [<a href="#ref-TP-P2MP-FWK">TP-P2MP-FWK</a>], and [<a href="./rfc5960.html" title='"MPLS Transport Profile Data Plane Architecture"'>RFC5960</a>]:
@@ -1196,7 +1163,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1252,11 +1219,11 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Requirements%20Derived%20from%20the%20OAM%20Framework"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Requirements Derived from the OAM Framework</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Requirements%20Derived%20from%20the%20OAM%20Framework"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Requirements Derived from the OAM Framework</span>
 
    The following additional requirements are based on [<a href="./rfc5860.html" title='"Requirements for Operations, Administration, and Maintenance (OAM) in MPLS Transport Networks"'>RFC5860</a>] and
    [<a href="./rfc6371.html" title='"Operations, Administration, and Maintenance Framework for MPLS-Based Transport Networks"'>RFC6371</a>]:
@@ -1308,7 +1275,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1364,7 +1331,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1420,7 +1387,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1476,7 +1443,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1532,7 +1499,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1555,13 +1522,13 @@ Table of Contents
          rate, and PHB associated with the DM OAM packets originating
          from a MEP (<a href="./rfc6371.html#section-6.5.1">[RFC6371], Section 6.5.1</a>).
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20Security%20Requirements"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>. Security Requirements</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20Security%20Requirements"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>. Security Requirements</span>
 
    There are no specific MPLS-TP control-plane security requirements.
    The existing framework for MPLS and GMPLS security is documented in
    [<a href="./rfc5920.html" title='"Security Framework for MPLS and GMPLS Networks"'>RFC5920</a>], and that document applies equally to MPLS-TP.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20Identifier%20Requirements"></a></body></html><a class="selflink" href="#section-2.5" name="section-2.5">2.5</a>. Identifier Requirements</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.5.%20Identifier%20Requirements"></a></body></html><a class="selflink" href="#section-2.5" id="section-2.5">2.5</a>. Identifier Requirements</span>
 
    The following are requirements based on [<a href="./rfc6370.html" title='"MPLS Transport Profile (MPLS-TP) Identifiers"'>RFC6370</a>]:
 
@@ -1588,7 +1555,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1600,7 +1567,7 @@ Table of Contents
          Pseudowires of the form defined in <a href="./rfc6370.html#section-7.2.2.2">Section 7.2.2.2 of
          [RFC6370]</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Relationship%20of%20PWs%20and%20TE%20LSPs"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>. Relationship of PWs and TE LSPs</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Relationship%20of%20PWs%20and%20TE%20LSPs"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>. Relationship of PWs and TE LSPs</span>
 
    The data-plane relationship between PWs and LSPs is inherited from
    standard MPLS and is reviewed in the MPLS-TP framework [<a href="./rfc5921.html" title='"A Framework for MPLS in Transport Networks"'>RFC5921</a>].
@@ -1644,7 +1611,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1653,7 +1620,7 @@ Table of Contents
    LSP layer.  PW-based recovery is under development at this time and
    may be used once defined.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20TE%20LSPs"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>. TE LSPs</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20TE%20LSPs"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>. TE LSPs</span>
 
    MPLS-TP uses Generalized MPLS (GMPLS) signaling and routing, see
    [<a href="./rfc3945.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Architecture"'>RFC3945</a>], as the control plane for LSPs.  The GMPLS control plane is
@@ -1666,12 +1633,12 @@ Table of Contents
    anticipated to support the remaining MPLS-TP control-plane
    requirements.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20GMPLS%20Functions%20and%20MPLS-TP%20LSPs"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  GMPLS Functions and MPLS-TP LSPs</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20GMPLS%20Functions%20and%20MPLS-TP%20LSPs"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  GMPLS Functions and MPLS-TP LSPs</span>
 
    This section reviews how existing GMPLS functions can be applied to
    MPLS-TP.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20In-Band%20and%20Out-of-Band%20Control"></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a>.  In-Band and Out-of-Band Control</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20In-Band%20and%20Out-of-Band%20Control"></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a>.  In-Band and Out-of-Band Control</span>
 
    GMPLS supports both in-band and out-of-band control.  The terms "in-
    band" and "out-of-band", in the context of this document, refer to
@@ -1700,7 +1667,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1756,11 +1723,11 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 28]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-29" id="page-29" name="page-29"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-29"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20Addressing"></a></body></html><a class="selflink" href="#section-4.1.2" name="section-4.1.2">4.1.2</a>. Addressing</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20Addressing"></a></body></html><a class="selflink" href="#section-4.1.2" id="section-4.1.2">4.1.2</a>. Addressing</span>
 
    MPLS-TP reuses and supports the addressing mechanisms supported by
    MPLS.  The MPLS-TP identifiers document (see [<a href="./rfc6370.html" title='"MPLS Transport Profile (MPLS-TP) Identifiers"'>RFC6370</a>]) provides
@@ -1783,7 +1750,7 @@ Table of Contents
    MPLS-TP networks to support the MPLS-TP control (and management)
    planes.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3.%20%20Routing"></a></body></html><a class="selflink" href="#section-4.1.3" name="section-4.1.3">4.1.3</a>.  Routing</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3.%20%20Routing"></a></body></html><a class="selflink" href="#section-4.1.3" id="section-4.1.3">4.1.3</a>.  Routing</span>
 
    Routing support for MPLS-TP LSPs is based on GMPLS routing.  GMPLS
    routing builds on TE routing and has been extended to support
@@ -1797,7 +1764,7 @@ Table of Contents
    list as there are other IS-IS and OSPF extensions, as defined in IETF
    RFCs, that can be used within an MPLS-TP network.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.4.%20%20TE%20LSPs%20and%20Constraint-Based%20Path%20Computation"></a></body></html><a class="selflink" href="#section-4.1.4" name="section-4.1.4">4.1.4</a>.  TE LSPs and Constraint-Based Path Computation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.4.%20%20TE%20LSPs%20and%20Constraint-Based%20Path%20Computation"></a></body></html><a class="selflink" href="#section-4.1.4" id="section-4.1.4">4.1.4</a>.  TE LSPs and Constraint-Based Path Computation</span>
 
    Both MPLS and GMPLS allow for traffic engineering and constraint-
    based path computation.  MPLS path computation provides paths for
@@ -1812,14 +1779,14 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 29]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-30" id="page-30" name="page-30"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-30"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
    specific algorithm is standardized by the IETF.  This is anticipated
    to continue to be the case for MPLS-TP LSPs.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.4.1.%20%20Relation%20to%20PCE"></a></body></html><a class="selflink" href="#section-4.1.4.1" name="section-4.1.4.1">4.1.4.1</a>.  Relation to PCE</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.4.1.%20%20Relation%20to%20PCE"></a></body></html><a class="selflink" href="#section-4.1.4.1" id="section-4.1.4.1">4.1.4.1</a>.  Relation to PCE</span>
 
    Path Computation Element (PCE)-based approaches, see [<a href="./rfc4655.html" title='"A Path Computation Element (PCE)-Based Architecture"'>RFC4655</a>], may
    be used for path computation of a GMPLS LSP, and consequently an
@@ -1829,7 +1796,7 @@ Table of Contents
    MPLS-TP-specific extensions to PCEP are currently out of scope of the
    MPLS-TP project and this document.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.5.%20%20Signaling"></a></body></html><a class="selflink" href="#section-4.1.5" name="section-4.1.5">4.1.5</a>.  Signaling</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.5.%20%20Signaling"></a></body></html><a class="selflink" href="#section-4.1.5" id="section-4.1.5">4.1.5</a>.  Signaling</span>
 
    GMPLS signaling is defined in [<a href="./rfc3471.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Functional Description"'>RFC3471</a>] and [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol- Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>] and is based on
    RSVP-TE [<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>].  Constraint-based Routed LDP (CR-LDP) GMPLS (see
@@ -1847,7 +1814,7 @@ Table of Contents
    specific functions in MPLS-TP networks.  Specific references are
    provided below.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.6.%20%20Unnumbered%20Links"></a></body></html><a class="selflink" href="#section-4.1.6" name="section-4.1.6">4.1.6</a>.  Unnumbered Links</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.6.%20%20Unnumbered%20Links"></a></body></html><a class="selflink" href="#section-4.1.6" id="section-4.1.6">4.1.6</a>.  Unnumbered Links</span>
 
    Support for unnumbered links (i.e., links that do not have IP
    addresses) is permitted in MPLS-TP and its usage is at the discretion
@@ -1855,7 +1822,7 @@ Table of Contents
    for routing using OSPF [<a href="./rfc4203.html" title='"OSPF Extensions in Support of Generalized Multi-Protocol Label Switching (GMPLS)"'>RFC4203</a>] and IS-IS [<a href="./rfc5307.html" title='"IS-IS Extensions in Support of Generalized Multi-Protocol Label Switching (GMPLS)"'>RFC5307</a>], and for
    signaling in [<a href="./rfc3477.html" title='"Signalling Unnumbered Links in Resource ReSerVation Protocol - Traffic Engineering (RSVP-TE)"'>RFC3477</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.7.%20%20Link%20Bundling"></a></body></html><a class="selflink" href="#section-4.1.7" name="section-4.1.7">4.1.7</a>.  Link Bundling</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.7.%20%20Link%20Bundling"></a></body></html><a class="selflink" href="#section-4.1.7" id="section-4.1.7">4.1.7</a>.  Link Bundling</span>
 
    Link bundling provides a local construct that can be used to improve
    scaling of TE routing when multiple data links are shared between
@@ -1868,21 +1835,21 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 30]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-31" id="page-31" name="page-31"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-31"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.8.%20%20Hierarchical%20LSPs"></a></body></html><a class="selflink" href="#section-4.1.8" name="section-4.1.8">4.1.8</a>.  Hierarchical LSPs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.8.%20%20Hierarchical%20LSPs"></a></body></html><a class="selflink" href="#section-4.1.8" id="section-4.1.8">4.1.8</a>.  Hierarchical LSPs</span>
 
    This section reuses text from [<a href="./rfc6107.html" title='"Procedures for Dynamically Signaled Hierarchical Label Switched Paths"'>RFC6107</a>].
 
-   [<a id="ref-RFC3031" name="ref-RFC3031">RFC3031</a>] describes how MPLS labels may be stacked so that LSPs may
+   [<a id="ref-RFC3031">RFC3031</a>] describes how MPLS labels may be stacked so that LSPs may
    be nested with one LSP running through another.  This concept of
    hierarchical LSPs (H-LSPs) is formalized in [<a href="./rfc4206.html" title='"Label Switched Paths (LSP) Hierarchy with Generalized Multi-Protocol Label Switching (GMPLS) Traffic Engineering (TE)"'>RFC4206</a>] with a set of
    protocol mechanisms for the establishment of a hierarchical LSP that
    can carry one or more other LSPs.
 
-   [<a id="ref-RFC4206" name="ref-RFC4206">RFC4206</a>] goes on to explain that a hierarchical LSP may carry other
+   [<a id="ref-RFC4206">RFC4206</a>] goes on to explain that a hierarchical LSP may carry other
    LSPs only according to their switching types.  This is a function of
    the way labels are carried.  In a packet switch capable network, the
    hierarchical LSP can carry other packet switch capable LSPs using the
@@ -1910,7 +1877,7 @@ Table of Contents
    networks, particularly in the context of scaling and recovery as well
    as supporting SPMEs.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.9.%20%20LSP%20Recovery"></a></body></html><a class="selflink" href="#section-4.1.9" name="section-4.1.9">4.1.9</a>.  LSP Recovery</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.9.%20%20LSP%20Recovery"></a></body></html><a class="selflink" href="#section-4.1.9" id="section-4.1.9">4.1.9</a>.  LSP Recovery</span>
 
    GMPLS defines RSVP-TE extensions in support for end-to-end GMPLS LSPs
    recovery in [<a href="./rfc4872.html" title='"RSVP-TE Extensions in Support of End-to-End Generalized Multi-Protocol Label Switching (GMPLS) Recovery"'>RFC4872</a>] and segment recovery in [<a href="./rfc4873.html" title='"GMPLS Segment Recovery"'>RFC4873</a>].  GMPLS
@@ -1924,7 +1891,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 31]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-32" id="page-32" name="page-32"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-32"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1948,7 +1915,7 @@ Table of Contents
    function is expected to be supported via OAM.  However, its use is
    not precluded.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.10.%20%20Control-Plane%20Reference%20Points%20%28E-NNI%2C%20I-NNI%2C%20UNI%29"></a></body></html><a class="selflink" href="#section-4.1.10" name="section-4.1.10">4.1.10</a>.  Control-Plane Reference Points (E-NNI, I-NNI, UNI)</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.10.%20%20Control-Plane%20Reference%20Points%20%28E-NNI%2C%20I-NNI%2C%20UNI%29"></a></body></html><a class="selflink" href="#section-4.1.10" id="section-4.1.10">4.1.10</a>.  Control-Plane Reference Points (E-NNI, I-NNI, UNI)</span>
 
    The majority of RFCs about the GMPLS control plane define the control
    plane from the context of an internal Network-to-Network Interface
@@ -1960,7 +1927,7 @@ Table of Contents
    require extensions in order to meet the specific needs of an MPLS-TP
    UNI and E-NNI.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20OAM%2C%20MEP%20%28Hierarchy%29%2C%20MIP%20Configuration%20and%20Control"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  OAM, MEP (Hierarchy), MIP Configuration and Control</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20OAM%2C%20MEP%20%28Hierarchy%29%2C%20MIP%20Configuration%20and%20Control"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  OAM, MEP (Hierarchy), MIP Configuration and Control</span>
 
    MPLS-TP is defined to support a comprehensive set of MPLS-TP OAM
    functions.  The MPLS-TP control plane will not itself provide OAM
@@ -1980,7 +1947,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 32]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-33" id="page-33" name="page-33"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-33"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -1989,7 +1956,7 @@ Table of Contents
    extra overhead and potential errors associated with separate OAM
    configuration mechanisms.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Management-Plane%20Support"></a></body></html><a class="selflink" href="#section-4.2.1" name="section-4.2.1">4.2.1</a>.  Management-Plane Support</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20Management-Plane%20Support"></a></body></html><a class="selflink" href="#section-4.2.1" id="section-4.2.1">4.2.1</a>.  Management-Plane Support</span>
 
    There is no MPLS-TP requirement for a standardized management
    interface to the MPLS-TP control plane.  That said, MPLS and GMPLS
@@ -2002,7 +1969,7 @@ Table of Contents
    requirements for MPLS-based transport networks are provided in
    [<a href="./rfc5951.html" title='"Network Management Requirements for MPLS-based Transport Networks"'>RFC5951</a>].
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.1.%20%20Recovery%20Triggers"></a></body></html><a class="selflink" href="#section-4.2.1.1" name="section-4.2.1.1">4.2.1.1</a>.  Recovery Triggers</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.1.%20%20Recovery%20Triggers"></a></body></html><a class="selflink" href="#section-4.2.1.1" id="section-4.2.1.1">4.2.1.1</a>.  Recovery Triggers</span>
 
    The GMPLS control plane allows for management-plane recovery triggers
    and directly supports control-plane recovery triggers.  Support for
@@ -2025,7 +1992,7 @@ Table of Contents
    Note that control-plane triggers are typically invoked in response to
    a management-plane request at the ingress.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.2.%20%20Management-Plane%20/%20Control-Plane%20Ownership%20Transfer"></a></body></html><a class="selflink" href="#section-4.2.1.2" name="section-4.2.1.2">4.2.1.2</a>.  Management-Plane / Control-Plane Ownership Transfer</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.2.%20%20Management-Plane%20/%20Control-Plane%20Ownership%20Transfer"></a></body></html><a class="selflink" href="#section-4.2.1.2" id="section-4.2.1.2">4.2.1.2</a>.  Management-Plane / Control-Plane Ownership Transfer</span>
 
    In networks where both the control plane and management plane are
    provided, LSP provisioning can be done either by the control plane or
@@ -2036,7 +2003,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 33]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-34" id="page-34" name="page-34"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-34"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -2056,7 +2023,7 @@ Table of Contents
    etc.) of a given LSP.  The LSP handover procedure for MPLS-TP LSPs is
    supported via [<a href="./rfc5852.html" title='"RSVP-TE Signaling Extension for LSP Handover from the Management Plane to the Control Plane in a GMPLS- Enabled Transport Network"'>RFC5852</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20GMPLS%20and%20MPLS-TP%20Requirements%20Table"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  GMPLS and MPLS-TP Requirements Table</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20GMPLS%20and%20MPLS-TP%20Requirements%20Table"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  GMPLS and MPLS-TP Requirements Table</span>
 
    The following table shows how the MPLS-TP control-plane requirements
    can be met using the existing GMPLS control plane (which builds on
@@ -2092,7 +2059,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 34]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-35" id="page-35" name="page-35"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-35"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -2148,7 +2115,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 35]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-36" id="page-36" name="page-36"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-36"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -2204,7 +2171,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 36]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-37" id="page-37" name="page-37"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-37"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -2235,13 +2202,13 @@ Table of Contents
 
                Table 1: GMPLS and MPLS-TP Requirements Table
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Anticipated%20MPLS-TP-Related%20Extensions%20and%20Definitions"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Anticipated MPLS-TP-Related Extensions and Definitions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Anticipated%20MPLS-TP-Related%20Extensions%20and%20Definitions"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Anticipated MPLS-TP-Related Extensions and Definitions</span>
 
    This section identifies the extensions and other documents that have
    been identified as likely to be needed to support the full set of
    MPLS-TP control-plane requirements.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20MPLS-TE%20to%20MPLS-TP%20LSP%20Control-Plane%20Interworking"></a></body></html><a class="selflink" href="#section-4.4.1" name="section-4.4.1">4.4.1</a>.  MPLS-TE to MPLS-TP LSP Control-Plane Interworking</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20MPLS-TE%20to%20MPLS-TP%20LSP%20Control-Plane%20Interworking"></a></body></html><a class="selflink" href="#section-4.4.1" id="section-4.4.1">4.4.1</a>.  MPLS-TE to MPLS-TP LSP Control-Plane Interworking</span>
 
    While no interworking function is expected in the data plane to
    support the interconnection of MPLS-TE and MPLS-TP networking, this
@@ -2260,11 +2227,11 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 37]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-38" id="page-38" name="page-38"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-38"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Associated%20Bidirectional%20LSPs"></a></body></html><a class="selflink" href="#section-4.4.2" name="section-4.4.2">4.4.2</a>.  Associated Bidirectional LSPs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Associated%20Bidirectional%20LSPs"></a></body></html><a class="selflink" href="#section-4.4.2" id="section-4.4.2">4.4.2</a>.  Associated Bidirectional LSPs</span>
 
    GMPLS signaling, [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol- Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>], supports unidirectional and co-routed,
    bidirectional point-to-point LSPs.  MPLS-TP also requires support for
@@ -2284,15 +2251,15 @@ Table of Contents
 
       o  The LSP_TUNNEL_INTERFACE_ID object [<a href="./rfc6107.html" title='"Procedures for Dynamically Signaled Hierarchical Label Switched Paths"'>RFC6107</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.%20%20Asymmetric%20Bandwidth%20LSPs"></a></body></html><a class="selflink" href="#section-4.4.3" name="section-4.4.3">4.4.3</a>.  Asymmetric Bandwidth LSPs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.%20%20Asymmetric%20Bandwidth%20LSPs"></a></body></html><a class="selflink" href="#section-4.4.3" id="section-4.4.3">4.4.3</a>.  Asymmetric Bandwidth LSPs</span>
 
-   [<a id="ref-RFC5467" name="ref-RFC5467">RFC5467</a>] defines support for bidirectional LSPs that have different
+   [<a id="ref-RFC5467">RFC5467</a>] defines support for bidirectional LSPs that have different
    (asymmetric) bandwidth requirements for each direction.  That RFC can
    be used to meet the related MPLS-TP technical requirement, but it is
    currently an Experimental RFC.  To fully satisfy the MPLS-TP
    requirement, <a href="./rfc5467.html">RFC 5467</a> will need to become a Standards Track RFC.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.4.%20%20Recovery%20for%20P2MP%20LSPs"></a></body></html><a class="selflink" href="#section-4.4.4" name="section-4.4.4">4.4.4</a>.  Recovery for P2MP LSPs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.4.%20%20Recovery%20for%20P2MP%20LSPs"></a></body></html><a class="selflink" href="#section-4.4.4" id="section-4.4.4">4.4.4</a>.  Recovery for P2MP LSPs</span>
 
    The definitions of P2MP, [<a href="./rfc4875.html" title='"Extensions to Resource Reservation Protocol - Traffic Engineering (RSVP-TE) for Point-to- Multipoint TE Label Switched Paths (LSPs)"'>RFC4875</a>], and GMPLS recovery, [<a href="./rfc4872.html" title='"RSVP-TE Extensions in Support of End-to-End Generalized Multi-Protocol Label Switching (GMPLS) Recovery"'>RFC4872</a>] and
    [<a href="./rfc4873.html" title='"GMPLS Segment Recovery"'>RFC4873</a>], do not explicitly cover their interactions.  MPLS-TP
@@ -2301,9 +2268,9 @@ Table of Contents
    require any new protocol mechanisms but, nonetheless, must be
    documented.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.5.%20%20Test%20Traffic%20Control%20and%20Other%20OAM%20Functions"></a></body></html><a class="selflink" href="#section-4.4.5" name="section-4.4.5">4.4.5</a>.  Test Traffic Control and Other OAM Functions</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.5.%20%20Test%20Traffic%20Control%20and%20Other%20OAM%20Functions"></a></body></html><a class="selflink" href="#section-4.4.5" id="section-4.4.5">4.4.5</a>.  Test Traffic Control and Other OAM Functions</span>
 
-   [<a id="ref-CCAMP-OAM-FWK" name="ref-CCAMP-OAM-FWK">CCAMP-OAM-FWK</a>] and [<a href="#ref-CCAMP-OAM-EXT">CCAMP-OAM-EXT</a>] are examples of OAM-related
+   [<a id="ref-CCAMP-OAM-FWK">CCAMP-OAM-FWK</a>] and [<a href="#ref-CCAMP-OAM-EXT">CCAMP-OAM-EXT</a>] are examples of OAM-related
    control extensions to GMPLS.  These extensions cover a portion of,
    but not all, OAM-related control functions that have been identified
    in the context of MPLS-TP.  As discussed above, the MPLS-TP control
@@ -2316,7 +2283,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 38]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-39" id="page-39" name="page-39"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-39"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -2324,16 +2291,16 @@ Table of Contents
    and diagnostic testing of a service.  Such support may be included in
    the listed documents or in other documents.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.6.%20%20Diffserv%20Object%20Usage%20in%20GMPLS"></a></body></html><a class="selflink" href="#section-4.4.6" name="section-4.4.6">4.4.6</a>.  Diffserv Object Usage in GMPLS</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.6.%20%20Diffserv%20Object%20Usage%20in%20GMPLS"></a></body></html><a class="selflink" href="#section-4.4.6" id="section-4.4.6">4.4.6</a>.  Diffserv Object Usage in GMPLS</span>
 
-   [<a id="ref-RFC3270" name="ref-RFC3270">RFC3270</a>] and [<a href="./rfc4124.html" title='"Protocol Extensions for Support of Diffserv-aware MPLS Traffic Engineering"'>RFC4124</a>] define support for Diffserv-enabled MPLS
+   [<a id="ref-RFC3270">RFC3270</a>] and [<a href="./rfc4124.html" title='"Protocol Extensions for Support of Diffserv-aware MPLS Traffic Engineering"'>RFC4124</a>] define support for Diffserv-enabled MPLS
    LSPs.  While [<a href="./rfc4124.html" title='"Protocol Extensions for Support of Diffserv-aware MPLS Traffic Engineering"'>RFC4124</a>] references GMPLS signaling, there is no
    explicit discussion on the use of the Diffserv-related objects in
    GMPLS signaling.  A (possibly Informational) document on how GMPLS
    supports Diffserv LSPs is likely to prove useful in the context of
    MPLS-TP.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.7.%20%20Support%20for%20MPLS-TP%20LSP%20Identifiers"></a></body></html><a class="selflink" href="#section-4.4.7" name="section-4.4.7">4.4.7</a>.  Support for MPLS-TP LSP Identifiers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.7.%20%20Support%20for%20MPLS-TP%20LSP%20Identifiers"></a></body></html><a class="selflink" href="#section-4.4.7" id="section-4.4.7">4.4.7</a>.  Support for MPLS-TP LSP Identifiers</span>
 
    MPLS-TP uses two forms of LSP identifiers, see [<a href="./rfc6370.html" title='"MPLS Transport Profile (MPLS-TP) Identifiers"'>RFC6370</a>].  One form
    is based on existing GMPLS fields.  The other form is based on either
@@ -2342,7 +2309,7 @@ Table of Contents
    Recommendation M.1400.  Neither form is currently supported in GMPLS,
    and such extensions will need to be documented.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.8.%20%20Support%20for%20MPLS-TP%20Maintenance%20Identifiers"></a></body></html><a class="selflink" href="#section-4.4.8" name="section-4.4.8">4.4.8</a>.  Support for MPLS-TP Maintenance Identifiers</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.8.%20%20Support%20for%20MPLS-TP%20Maintenance%20Identifiers"></a></body></html><a class="selflink" href="#section-4.4.8" id="section-4.4.8">4.4.8</a>.  Support for MPLS-TP Maintenance Identifiers</span>
 
    MPLS-TP defines several forms of maintenance-entity-related
    identifiers.  Both node-unique and global forms are defined.
@@ -2351,9 +2318,9 @@ Table of Contents
    [<a href="#ref-CCAMP-OAM-FWK" title=" but not all">CCAMP-OAM-FWK</a>] and [<a href="#ref-CCAMP-OAM-EXT">CCAMP-OAM-EXT</a>], or may be defined in independent
    documents.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Pseudowires"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Pseudowires</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Pseudowires"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Pseudowires</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20LDP%20Functions%20and%20Pseudowires"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  LDP Functions and Pseudowires</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20LDP%20Functions%20and%20Pseudowires"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  LDP Functions and Pseudowires</span>
 
    MPLS PWs are defined in [<a href="./rfc3985.html" title='"Pseudo Wire Emulation Edge-to-Edge (PWE3) Architecture"'>RFC3985</a>] and [<a href="./rfc5659.html" title='"An Architecture for Multi- Segment Pseudowire Emulation Edge-to-Edge"'>RFC5659</a>], and provide for
    emulated services over an MPLS Packet Switched Network (PSN).
@@ -2372,7 +2339,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 39]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-40" id="page-40" name="page-40"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-40"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -2406,7 +2373,7 @@ Table of Contents
    interoperability with client networks with native attachment circuits
    or PW segments that are switched across an MPLS-TP network.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20Management-Plane%20Support"></a></body></html><a class="selflink" href="#section-5.1.1" name="section-5.1.1">5.1.1</a>.  Management-Plane Support</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20Management-Plane%20Support"></a></body></html><a class="selflink" href="#section-5.1.1" id="section-5.1.1">5.1.1</a>.  Management-Plane Support</span>
 
    There is no MPLS-TP requirement for a standardized management
    interface to the MPLS-TP control plane.  A general overview of MPLS-
@@ -2414,7 +2381,7 @@ Table of Contents
    requirements for MPLS-based transport networks are provided in
    [<a href="./rfc5951.html" title='"Network Management Requirements for MPLS-based Transport Networks"'>RFC5951</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20PW%20Control%20%28LDP%29%20and%20MPLS-TP%20Requirements%20Table"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  PW Control (LDP) and MPLS-TP Requirements Table</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20PW%20Control%20%28LDP%29%20and%20MPLS-TP%20Requirements%20Table"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  PW Control (LDP) and MPLS-TP Requirements Table</span>
 
    The following table shows how the MPLS-TP control-plane requirements
    can be met using the existing LDP control plane for pseudowires
@@ -2428,7 +2395,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 40]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-41" id="page-41" name="page-41"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-41"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -2484,7 +2451,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 41]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-42" id="page-42" name="page-42"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-42"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -2540,7 +2507,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 42]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-43" id="page-43" name="page-43"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-43"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -2596,11 +2563,11 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 43]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-44" id="page-44" name="page-44"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-44"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Anticipated%20MPLS-TP-Related%20Extensions"></a></body></html><a class="selflink" href="#section-5.3" name="section-5.3">5.3</a>.  Anticipated MPLS-TP-Related Extensions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.%20%20Anticipated%20MPLS-TP-Related%20Extensions"></a></body></html><a class="selflink" href="#section-5.3" id="section-5.3">5.3</a>.  Anticipated MPLS-TP-Related Extensions</span>
 
    Existing control protocol and procedures will be reused as much as
    possible to support MPLS-TP.  However, when using PWs in MPLS-TP, a
@@ -2619,7 +2586,7 @@ Table of Contents
    extensions of the PW control plane must be in-line with the
    procedures defined in [<a href="./rfc4447.html" title='"Pseudowire Setup and Maintenance Using the Label Distribution Protocol (LDP)"'>RFC4447</a>], [<a href="./rfc6073.html" title='"Segmented Pseudowire"'>RFC6073</a>], and [<a href="#ref-MS-PW-DYNAMIC">MS-PW-DYNAMIC</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.1.%20%20Extensions%20to%20Support%20Out-of-Band%20PW%20Control"></a></body></html><a class="selflink" href="#section-5.3.1" name="section-5.3.1">5.3.1</a>.  Extensions to Support Out-of-Band PW Control</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.1.%20%20Extensions%20to%20Support%20Out-of-Band%20PW%20Control"></a></body></html><a class="selflink" href="#section-5.3.1" id="section-5.3.1">5.3.1</a>.  Extensions to Support Out-of-Band PW Control</span>
 
    For MPLS-TP, it is required that the data and control planes can be
    both logically and physically separated.  That is, the PW control
@@ -2652,11 +2619,11 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 44]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-45" id="page-45" name="page-45"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-45"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.2.%20%20Support%20for%20Explicit%20Control%20of%20PW-to-LSP%20Binding"></a></body></html><a class="selflink" href="#section-5.3.2" name="section-5.3.2">5.3.2</a>.  Support for Explicit Control of PW-to-LSP Binding</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.2.%20%20Support%20for%20Explicit%20Control%20of%20PW-to-LSP%20Binding"></a></body></html><a class="selflink" href="#section-5.3.2" id="section-5.3.2">5.3.2</a>.  Support for Explicit Control of PW-to-LSP Binding</span>
 
    Binding a PW to an LSP, or PW segments to LSPs, is left to nodes
    acting as T-PEs and S-PEs or a control-plane entity that may be the
@@ -2699,7 +2666,7 @@ Table of Contents
    bandwidth for the return path.  This approach is consistent with
    <a href="./rfc5921.html#section-3.8.2">Section 3.8.2 of [RFC5921]</a> but does not address P2MP paths.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.3.%20%20Support%20for%20Dynamic%20Transfer%20of%20PW%20Control/Ownership"></a></body></html><a class="selflink" href="#section-5.3.3" name="section-5.3.3">5.3.3</a>.  Support for Dynamic Transfer of PW Control/Ownership</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.3.%20%20Support%20for%20Dynamic%20Transfer%20of%20PW%20Control/Ownership"></a></body></html><a class="selflink" href="#section-5.3.3" id="section-5.3.3">5.3.3</a>.  Support for Dynamic Transfer of PW Control/Ownership</span>
 
    In order to satisfy requirement 47 (as defined in <a href="#section-2">Section 2</a>), it will
    be necessary to specify methods for transfer of PW ownership from the
@@ -2708,11 +2675,11 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 45]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-46" id="page-46" name="page-46"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-46"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.4.%20%20Interoperable%20Support%20for%20PW/LSP%20Resource%20Allocation"></a></body></html><a class="selflink" href="#section-5.3.4" name="section-5.3.4">5.3.4</a>.  Interoperable Support for PW/LSP Resource Allocation</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.4.%20%20Interoperable%20Support%20for%20PW/LSP%20Resource%20Allocation"></a></body></html><a class="selflink" href="#section-5.3.4" id="section-5.3.4">5.3.4</a>.  Interoperable Support for PW/LSP Resource Allocation</span>
 
    Transport applications may require resource guarantees.  For such
    transport LSPs, resource reservation mechanisms are provided via
@@ -2728,7 +2695,7 @@ Table of Contents
    may be sufficient; however, this needs to be verified in detailed
    evaluation.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.5.%20%20Support%20for%20PW%20Protection%20and%20PW%20OAM%20Configuration"></a></body></html><a class="selflink" href="#section-5.3.5" name="section-5.3.5">5.3.5</a>.  Support for PW Protection and PW OAM Configuration</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.5.%20%20Support%20for%20PW%20Protection%20and%20PW%20OAM%20Configuration"></a></body></html><a class="selflink" href="#section-5.3.5" id="section-5.3.5">5.3.5</a>.  Support for PW Protection and PW OAM Configuration</span>
 
    Many of the requirements listed in <a href="#section-2">Section 2</a> are intended to support
    connectivity and performance monitoring (grouped together as OAM), as
@@ -2764,7 +2731,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 46]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-47" id="page-47" name="page-47"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-47"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -2778,7 +2745,7 @@ Table of Contents
    begun on extending BFD to include performance-related monitor
    functions.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.6.%20%20Client-Layer%20and%20Cross-Provider%20Interfaces%20to%20PW%20Control"></a></body></html><a class="selflink" href="#section-5.3.6" name="section-5.3.6">5.3.6</a>.  Client-Layer and Cross-Provider Interfaces to PW Control</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.3.6.%20%20Client-Layer%20and%20Cross-Provider%20Interfaces%20to%20PW%20Control"></a></body></html><a class="selflink" href="#section-5.3.6" id="section-5.3.6">5.3.6</a>.  Client-Layer and Cross-Provider Interfaces to PW Control</span>
 
    Additional work is likely to be required to define consistent access
    by a client-layer network, as well as between provider networks, to
@@ -2788,7 +2755,7 @@ Table of Contents
    avoid establishment of fate-sharing alternate paths.  Such work will
    need to fit within the ASON architecture; see requirement 38 above.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20ASON%20Architecture%20Considerations"></a></body></html><a class="selflink" href="#section-5.4" name="section-5.4">5.4</a>.  ASON Architecture Considerations</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.4.%20%20ASON%20Architecture%20Considerations"></a></body></html><a class="selflink" href="#section-5.4" id="section-5.4">5.4</a>.  ASON Architecture Considerations</span>
 
    MPLS-TP PWs are always transported using LSPs, and these LSPs will
    either have been statically provisioned or signaled using GMPLS.
@@ -2808,7 +2775,7 @@ Table of Contents
    This work is expected to be consistent with ASON architecture and may
    require additional specification in order to achieve this goal.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    This document primarily describes how existing mechanisms can be used
    to meet the MPLS-TP control-plane requirements.  The documents that
@@ -2820,7 +2787,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 47]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-48" id="page-48" name="page-48"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-48"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -2832,210 +2799,210 @@ Table of Contents
    extensions.  It is expected that the documents that define such
    extensions will also include any appropriate security considerations.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  Acknowledgments</span>
 
    The authors would like to acknowledge the contributions of Yannick
    Brehon, Diego Caviglia, Nic Neate, Dave Mcdysan, Dan Frost, and Eric
    Osborne to this work.  We also thank Dan Frost in his help responding
    to Last Call comments.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20References"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" name="section-8.1">8.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-8.1" id="section-8.1">8.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2210" name="ref-RFC2210">RFC2210</a>]  Wroclawski, J., "The Use of RSVP with IETF Integrated
+   [<a id="ref-RFC2210">RFC2210</a>]  Wroclawski, J., "The Use of RSVP with IETF Integrated
               Services", <a href="./rfc2210.html">RFC 2210</a>, September 1997.
 
-   [<a id="ref-RFC2211" name="ref-RFC2211">RFC2211</a>]  Wroclawski, J., "Specification of the Controlled-Load
+   [<a id="ref-RFC2211">RFC2211</a>]  Wroclawski, J., "Specification of the Controlled-Load
               Network Element Service", <a href="./rfc2211.html">RFC 2211</a>, September 1997.
 
-   [<a id="ref-RFC2212" name="ref-RFC2212">RFC2212</a>]  Shenker, S., Partridge, C., and R. Guerin, "Specification
+   [<a id="ref-RFC2212">RFC2212</a>]  Shenker, S., Partridge, C., and R. Guerin, "Specification
               of Guaranteed Quality of Service", <a href="./rfc2212.html">RFC 2212</a>, September
               1997.
 
-   [<a id="ref-RFC3031" name="ref-RFC3031">RFC3031</a>]  Rosen, E., Viswanathan, A., and R. Callon, "Multiprotocol
+   [<a id="ref-RFC3031">RFC3031</a>]  Rosen, E., Viswanathan, A., and R. Callon, "Multiprotocol
               Label Switching Architecture", <a href="./rfc3031.html">RFC 3031</a>, January 2001.
 
-   [<a id="ref-RFC3209" name="ref-RFC3209">RFC3209</a>]  Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan, V.,
+   [<a id="ref-RFC3209">RFC3209</a>]  Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan, V.,
               and G. Swallow, "RSVP-TE: Extensions to RSVP for LSP
               Tunnels", <a href="./rfc3209.html">RFC 3209</a>, December 2001.
 
-   [<a id="ref-RFC3471" name="ref-RFC3471">RFC3471</a>]  Berger, L., Ed., "Generalized Multi-Protocol Label
+   [<a id="ref-RFC3471">RFC3471</a>]  Berger, L., Ed., "Generalized Multi-Protocol Label
               Switching (GMPLS) Signaling Functional Description", <a href="./rfc3471.html">RFC</a>
               <a href="./rfc3471.html">3471</a>, January 2003.
 
-   [<a id="ref-RFC3473" name="ref-RFC3473">RFC3473</a>]  Berger, L., Ed., "Generalized Multi-Protocol Label
+   [<a id="ref-RFC3473">RFC3473</a>]  Berger, L., Ed., "Generalized Multi-Protocol Label
               Switching (GMPLS) Signaling Resource ReserVation Protocol-
               Traffic Engineering (RSVP-TE) Extensions", <a href="./rfc3473.html">RFC 3473</a>,
               January 2003.
 
-   [<a id="ref-RFC3478" name="ref-RFC3478">RFC3478</a>]  Leelanivas, M., Rekhter, Y., and R. Aggarwal, "Graceful
+   [<a id="ref-RFC3478">RFC3478</a>]  Leelanivas, M., Rekhter, Y., and R. Aggarwal, "Graceful
               Restart Mechanism for Label Distribution Protocol", <a href="./rfc3478.html">RFC</a>
               <a href="./rfc3478.html">3478</a>, February 2003.
 
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 48]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-49" id="page-49" name="page-49"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-49"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-   [<a id="ref-RFC3630" name="ref-RFC3630">RFC3630</a>]  Katz, D., Kompella, K., and D. Yeung, "Traffic Engineering
+   [<a id="ref-RFC3630">RFC3630</a>]  Katz, D., Kompella, K., and D. Yeung, "Traffic Engineering
               (TE) Extensions to OSPF Version 2", <a href="./rfc3630.html">RFC 3630</a>, September
               2003.
 
-   [<a id="ref-RFC4124" name="ref-RFC4124">RFC4124</a>]  Le Faucheur, F., Ed., "Protocol Extensions for Support of
+   [<a id="ref-RFC4124">RFC4124</a>]  Le Faucheur, F., Ed., "Protocol Extensions for Support of
               Diffserv-aware MPLS Traffic Engineering", <a href="./rfc4124.html">RFC 4124</a>, June
               2005.
 
-   [<a id="ref-RFC4202" name="ref-RFC4202">RFC4202</a>]  Kompella, K., Ed., and Y. Rekhter, Ed., "Routing
+   [<a id="ref-RFC4202">RFC4202</a>]  Kompella, K., Ed., and Y. Rekhter, Ed., "Routing
               Extensions in Support of Generalized Multi-Protocol Label
               Switching (GMPLS)", <a href="./rfc4202.html">RFC 4202</a>, October 2005.
 
-   [<a id="ref-RFC4203" name="ref-RFC4203">RFC4203</a>]  Kompella, K., Ed., and Y. Rekhter, Ed., "OSPF Extensions
+   [<a id="ref-RFC4203">RFC4203</a>]  Kompella, K., Ed., and Y. Rekhter, Ed., "OSPF Extensions
               in Support of Generalized Multi-Protocol Label Switching
               (GMPLS)", <a href="./rfc4203.html">RFC 4203</a>, October 2005.
 
-   [<a id="ref-RFC4206" name="ref-RFC4206">RFC4206</a>]  Kompella, K. and Y. Rekhter, "Label Switched Paths (LSP)
+   [<a id="ref-RFC4206">RFC4206</a>]  Kompella, K. and Y. Rekhter, "Label Switched Paths (LSP)
               Hierarchy with Generalized Multi-Protocol Label Switching
               (GMPLS) Traffic Engineering (TE)", <a href="./rfc4206.html">RFC 4206</a>, October 2005.
 
-   [<a id="ref-RFC4385" name="ref-RFC4385">RFC4385</a>]  Bryant, S., Swallow, G., Martini, L., and D. McPherson,
+   [<a id="ref-RFC4385">RFC4385</a>]  Bryant, S., Swallow, G., Martini, L., and D. McPherson,
               "Pseudowire Emulation Edge-to-Edge (PWE3) Control Word for
               Use over an MPLS PSN", <a href="./rfc4385.html">RFC 4385</a>, February 2006.
 
-   [<a id="ref-RFC4447" name="ref-RFC4447">RFC4447</a>]  Martini, L., Ed., Rosen, E., El-Aawar, N., Smith, T., and
+   [<a id="ref-RFC4447">RFC4447</a>]  Martini, L., Ed., Rosen, E., El-Aawar, N., Smith, T., and
               G. Heron, "Pseudowire Setup and Maintenance Using the
               Label Distribution Protocol (LDP)", <a href="./rfc4447.html">RFC 4447</a>, April 2006.
 
-   [<a id="ref-RFC4448" name="ref-RFC4448">RFC4448</a>]  Martini, L., Ed., Rosen, E., El-Aawar, N., and G. Heron,
+   [<a id="ref-RFC4448">RFC4448</a>]  Martini, L., Ed., Rosen, E., El-Aawar, N., and G. Heron,
               "Encapsulation Methods for Transport of Ethernet over MPLS
               Networks", <a href="./rfc4448.html">RFC 4448</a>, April 2006.
 
-   [<a id="ref-RFC4842" name="ref-RFC4842">RFC4842</a>]  Malis, A., Pate, P., Cohen, R., Ed., and D. Zelig,
+   [<a id="ref-RFC4842">RFC4842</a>]  Malis, A., Pate, P., Cohen, R., Ed., and D. Zelig,
               "Synchronous Optical Network/Synchronous Digital Hierarchy
               (SONET/SDH) Circuit Emulation over Packet (CEP)", <a href="./rfc4842.html">RFC</a>
               <a href="./rfc4842.html">4842</a>, April 2007.
 
-   [<a id="ref-RFC4863" name="ref-RFC4863">RFC4863</a>]  Martini, L. and G. Swallow, "Wildcard Pseudowire Type",
+   [<a id="ref-RFC4863">RFC4863</a>]  Martini, L. and G. Swallow, "Wildcard Pseudowire Type",
               <a href="./rfc4863.html">RFC 4863</a>, May 2007.
 
-   [<a id="ref-RFC4872" name="ref-RFC4872">RFC4872</a>]  Lang, J., Ed., Rekhter, Y., Ed., and D. Papadimitriou,
+   [<a id="ref-RFC4872">RFC4872</a>]  Lang, J., Ed., Rekhter, Y., Ed., and D. Papadimitriou,
               Ed., "RSVP-TE Extensions in Support of End-to-End
               Generalized Multi-Protocol Label Switching (GMPLS)
               Recovery", <a href="./rfc4872.html">RFC 4872</a>, May 2007.
 
-   [<a id="ref-RFC4873" name="ref-RFC4873">RFC4873</a>]  Berger, L., Bryskin, I., Papadimitriou, D., and A. Farrel,
+   [<a id="ref-RFC4873">RFC4873</a>]  Berger, L., Bryskin, I., Papadimitriou, D., and A. Farrel,
               "GMPLS Segment Recovery", <a href="./rfc4873.html">RFC 4873</a>, May 2007.
 
 
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 49]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-50" id="page-50" name="page-50"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-50"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-   [<a id="ref-RFC4929" name="ref-RFC4929">RFC4929</a>]  Andersson, L., Ed., and A. Farrel, Ed., "Change Process
+   [<a id="ref-RFC4929">RFC4929</a>]  Andersson, L., Ed., and A. Farrel, Ed., "Change Process
               for Multiprotocol Label Switching (MPLS) and Generalized
-              MPLS (GMPLS) Protocols and Procedures", <a href="./bcp129.html">BCP 129</a>, <a href="./rfc4929.html">RFC 4929</a>,
+              MPLS (GMPLS) Protocols and Procedures", <a href="https://www.rfc-editor.org/bcp/bcp129">BCP 129</a>, <a href="./rfc4929.html">RFC 4929</a>,
               June 2007.
 
-   [<a id="ref-RFC4974" name="ref-RFC4974">RFC4974</a>]  Papadimitriou, D. and A. Farrel, "Generalized MPLS (GMPLS)
+   [<a id="ref-RFC4974">RFC4974</a>]  Papadimitriou, D. and A. Farrel, "Generalized MPLS (GMPLS)
               RSVP-TE Signaling Extensions in Support of Calls", <a href="./rfc4974.html">RFC</a>
               <a href="./rfc4974.html">4974</a>, August 2007.
 
-   [<a id="ref-RFC5063" name="ref-RFC5063">RFC5063</a>]  Satyanarayana, A., Ed., and R. Rahman, Ed., "Extensions to
+   [<a id="ref-RFC5063">RFC5063</a>]  Satyanarayana, A., Ed., and R. Rahman, Ed., "Extensions to
               GMPLS Resource Reservation Protocol (RSVP) Graceful
               Restart", <a href="./rfc5063.html">RFC 5063</a>, October 2007.
 
-   [<a id="ref-RFC5151" name="ref-RFC5151">RFC5151</a>]  Farrel, A., Ed., Ayyangar, A., and JP. Vasseur, "Inter-
+   [<a id="ref-RFC5151">RFC5151</a>]  Farrel, A., Ed., Ayyangar, A., and JP. Vasseur, "Inter-
               Domain MPLS and GMPLS Traffic Engineering -- Resource
               Reservation Protocol-Traffic Engineering (RSVP-TE)
               Extensions", <a href="./rfc5151.html">RFC 5151</a>, February 2008.
 
-   [<a id="ref-RFC5287" name="ref-RFC5287">RFC5287</a>]  Vainshtein, A. and Y(J). Stein, "Control Protocol
+   [<a id="ref-RFC5287">RFC5287</a>]  Vainshtein, A. and Y(J). Stein, "Control Protocol
               Extensions for the Setup of Time-Division Multiplexing
               (TDM) Pseudowires in MPLS Networks", <a href="./rfc5287.html">RFC 5287</a>, August
               2008.
 
-   [<a id="ref-RFC5305" name="ref-RFC5305">RFC5305</a>]  Li, T. and H. Smit, "IS-IS Extensions for Traffic
+   [<a id="ref-RFC5305">RFC5305</a>]  Li, T. and H. Smit, "IS-IS Extensions for Traffic
               Engineering", <a href="./rfc5305.html">RFC 5305</a>, October 2008.
 
-   [<a id="ref-RFC5307" name="ref-RFC5307">RFC5307</a>]  Kompella, K., Ed., and Y. Rekhter, Ed., "IS-IS Extensions
+   [<a id="ref-RFC5307">RFC5307</a>]  Kompella, K., Ed., and Y. Rekhter, Ed., "IS-IS Extensions
               in Support of Generalized Multi-Protocol Label Switching
               (GMPLS)", <a href="./rfc5307.html">RFC 5307</a>, October 2008.
 
-   [<a id="ref-RFC5316" name="ref-RFC5316">RFC5316</a>]  Chen, M., Zhang, R., and X. Duan, "ISIS Extensions in
+   [<a id="ref-RFC5316">RFC5316</a>]  Chen, M., Zhang, R., and X. Duan, "ISIS Extensions in
               Support of Inter-Autonomous System (AS) MPLS and GMPLS
               Traffic Engineering", <a href="./rfc5316.html">RFC 5316</a>, December 2008.
 
-   [<a id="ref-RFC5392" name="ref-RFC5392">RFC5392</a>]  Chen, M., Zhang, R., and X. Duan, "OSPF Extensions in
+   [<a id="ref-RFC5392">RFC5392</a>]  Chen, M., Zhang, R., and X. Duan, "OSPF Extensions in
               Support of Inter-Autonomous System (AS) MPLS and GMPLS
               Traffic Engineering", <a href="./rfc5392.html">RFC 5392</a>, January 2009.
 
-   [<a id="ref-RFC5467" name="ref-RFC5467">RFC5467</a>]  Berger, L., Takacs, A., Caviglia, D., Fedyk, D., and J.
+   [<a id="ref-RFC5467">RFC5467</a>]  Berger, L., Takacs, A., Caviglia, D., Fedyk, D., and J.
               Meuric, "GMPLS Asymmetric Bandwidth Bidirectional Label
               Switched Paths (LSPs)", <a href="./rfc5467.html">RFC 5467</a>, March 2009.
 
-   [<a id="ref-RFC5586" name="ref-RFC5586">RFC5586</a>]  Bocci, M., Ed., Vigoureux, M., Ed., and S. Bryant, Ed.,
+   [<a id="ref-RFC5586">RFC5586</a>]  Bocci, M., Ed., Vigoureux, M., Ed., and S. Bryant, Ed.,
               "MPLS Generic Associated Channel", <a href="./rfc5586.html">RFC 5586</a>, June 2009.
 
-   [<a id="ref-RFC5654" name="ref-RFC5654">RFC5654</a>]  Niven-Jenkins, B., Ed., Brungard, D., Ed., Betts, M., Ed.,
+   [<a id="ref-RFC5654">RFC5654</a>]  Niven-Jenkins, B., Ed., Brungard, D., Ed., Betts, M., Ed.,
               Sprecher, N., and S. Ueno, "Requirements of an MPLS
               Transport Profile", <a href="./rfc5654.html">RFC 5654</a>, September 2009.
 
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 50]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-51" id="page-51" name="page-51"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-51"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-   [<a id="ref-RFC5860" name="ref-RFC5860">RFC5860</a>]  Vigoureux, M., Ed., Ward, D., Ed., and M. Betts, Ed.,
+   [<a id="ref-RFC5860">RFC5860</a>]  Vigoureux, M., Ed., Ward, D., Ed., and M. Betts, Ed.,
               "Requirements for Operations, Administration, and
               Maintenance (OAM) in MPLS Transport Networks", <a href="./rfc5860.html">RFC 5860</a>,
               May 2010.
 
-   [<a id="ref-RFC5921" name="ref-RFC5921">RFC5921</a>]  Bocci, M., Ed., Bryant, S., Ed., Frost, D., Ed., Levrau,
+   [<a id="ref-RFC5921">RFC5921</a>]  Bocci, M., Ed., Bryant, S., Ed., Frost, D., Ed., Levrau,
               L., and L. Berger, "A Framework for MPLS in Transport
               Networks", <a href="./rfc5921.html">RFC 5921</a>, July 2010.
 
-   [<a id="ref-RFC5960" name="ref-RFC5960">RFC5960</a>]  Frost, D., Ed., Bryant, S., Ed., and M. Bocci, Ed., "MPLS
+   [<a id="ref-RFC5960">RFC5960</a>]  Frost, D., Ed., Bryant, S., Ed., and M. Bocci, Ed., "MPLS
               Transport Profile Data Plane Architecture", <a href="./rfc5960.html">RFC 5960</a>,
               August 2010.
 
-   [<a id="ref-RFC6370" name="ref-RFC6370">RFC6370</a>]  Bocci, M., Swallow, G., and E. Gray, "MPLS Transport
+   [<a id="ref-RFC6370">RFC6370</a>]  Bocci, M., Swallow, G., and E. Gray, "MPLS Transport
               Profile (MPLS-TP) Identifiers", <a href="./rfc6370.html">RFC 6370</a>, September 2011.
 
-   [<a id="ref-RFC6371" name="ref-RFC6371">RFC6371</a>]  Busi, I., Ed., and D. Allan, Ed., "Operations,
+   [<a id="ref-RFC6371">RFC6371</a>]  Busi, I., Ed., and D. Allan, Ed., "Operations,
               Administration, and Maintenance Framework for MPLS-Based
               Transport Networks", <a href="./rfc6371.html">RFC 6371</a>, September 2011.
 
-   [<a id="ref-RFC6372" name="ref-RFC6372">RFC6372</a>]  Sprecher, N., Ed., and A. Farrel, Ed., "MPLS Transport
+   [<a id="ref-RFC6372">RFC6372</a>]  Sprecher, N., Ed., and A. Farrel, Ed., "MPLS Transport
               Profile (MPLS-TP) Survivability Framework", <a href="./rfc6372.html">RFC 6372</a>,
               September 2011.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" name="section-8.2">8.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-8.2" id="section-8.2">8.2</a>.  Informative References</span>
 
-   [<a id="ref-CCAMP-OAM-EXT" name="ref-CCAMP-OAM-EXT">CCAMP-OAM-EXT</a>]
+   [<a id="ref-CCAMP-OAM-EXT">CCAMP-OAM-EXT</a>]
               Bellagamba, E., Ed., Andersson, L., Ed., Skoldstrom, P.,
               Ed., Ward, D., and A. Takacs, "Configuration of Pro-Active
               Operations, Administration, and Maintenance (OAM)
               Functions for MPLS-based Transport Networks using RSVP-
               TE", Work in Progress, July 2011.
 
-   [<a id="ref-CCAMP-OAM-FWK" name="ref-CCAMP-OAM-FWK">CCAMP-OAM-FWK</a>]
+   [<a id="ref-CCAMP-OAM-FWK">CCAMP-OAM-FWK</a>]
               Takacs, A., Fedyk, D., and J. He, "GMPLS RSVP-TE
               extensions for OAM Configuration", Work in Progress, July
               2011.
 
-   [<a id="ref-GMPLS-PS" name="ref-GMPLS-PS">GMPLS-PS</a>] Takacs, A., Fondelli, F., and B. Tremblay, "GMPLS RSVP-TE
+   [<a id="ref-GMPLS-PS">GMPLS-PS</a>] Takacs, A., Fondelli, F., and B. Tremblay, "GMPLS RSVP-TE
               Recovery Extension for data plane initiated reversion and
               protection timer signalling", Work in Progress, April
               2011.
 
-   [<a id="ref-ITU.G8080.2006" name="ref-ITU.G8080.2006">ITU.G8080.2006</a>]
+   [<a id="ref-ITU.G8080.2006">ITU.G8080.2006</a>]
               International Telecommunication Union, "Architecture for
               the automatically switched optical network (ASON)", ITU-T
               Recommendation G.8080, June 2006.
@@ -3044,54 +3011,54 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 51]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-52" id="page-52" name="page-52"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-52"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-   [<a id="ref-ITU.G8080.2008" name="ref-ITU.G8080.2008">ITU.G8080.2008</a>]
+   [<a id="ref-ITU.G8080.2008">ITU.G8080.2008</a>]
               International Telecommunication Union, "Architecture for
               the automatically switched optical network (ASON)
               Amendment 1", ITU-T Recommendation G.8080 Amendment 1,
               March 2008.
 
-   [<a id="ref-MS-PW-DYNAMIC" name="ref-MS-PW-DYNAMIC">MS-PW-DYNAMIC</a>]
+   [<a id="ref-MS-PW-DYNAMIC">MS-PW-DYNAMIC</a>]
               Martini, L., Ed., Bocci, M., Ed., and F. Balus, Ed.,
               "Dynamic Placement of Multi Segment Pseudowires", Work in
               Progress, July 2011.
 
-   [<a id="ref-NO-PHP" name="ref-NO-PHP">NO-PHP</a>]   Ali, z., et al, "Non Penultimate Hop Popping Behavior and
+   [<a id="ref-NO-PHP">NO-PHP</a>]   Ali, z., et al, "Non Penultimate Hop Popping Behavior and
               out-of-band mapping for RSVP-TE Label Switched Paths",
               Work in Progress, August 2011.
 
-   [<a id="ref-PW-OAM" name="ref-PW-OAM">PW-OAM</a>]   Zhang, F., Ed., Wu, B., Ed., and E. Bellagamba, Ed., "
+   [<a id="ref-PW-OAM">PW-OAM</a>]   Zhang, F., Ed., Wu, B., Ed., and E. Bellagamba, Ed., "
               Label Distribution Protocol Extensions for Proactive
               Operations, Administration and Maintenance Configuration
               of Dynamic MPLS Transport Profile PseudoWire", Work in
               Progress, August 2011.
 
-   [<a id="ref-PW-P2MPE" name="ref-PW-P2MPE">PW-P2MPE</a>] Aggarwal, R. and F. Jounay, "Point-to-Multipoint Pseudo-
+   [<a id="ref-PW-P2MPE">PW-P2MPE</a>] Aggarwal, R. and F. Jounay, "Point-to-Multipoint Pseudo-
               Wire Encapsulation", Work in Progress, March 2010.
 
-   [<a id="ref-PW-P2MPR" name="ref-PW-P2MPR">PW-P2MPR</a>] Jounay, F., Ed., Kamite, Y., Heron, G., and M. Bocci,
+   [<a id="ref-PW-P2MPR">PW-P2MPR</a>] Jounay, F., Ed., Kamite, Y., Heron, G., and M. Bocci,
               "Requirements and Framework for Point-to-Multipoint
               Pseudowire", Work in Progress, July 2011.
 
-   [<a id="ref-PW-RED" name="ref-PW-RED">PW-RED</a>]   Muley, P., Ed., Aissaoui, M., Ed., and M. Bocci,
+   [<a id="ref-PW-RED">PW-RED</a>]   Muley, P., Ed., Aissaoui, M., Ed., and M. Bocci,
               "Pseudowire Redundancy", Work in Progress, July 2011.
 
-   [<a id="ref-PW-REDB" name="ref-PW-REDB">PW-REDB</a>]  Muley, P., Ed., and M. Aissaoui, Ed., "Preferential
+   [<a id="ref-PW-REDB">PW-REDB</a>]  Muley, P., Ed., and M. Aissaoui, Ed., "Preferential
               Forwarding Status Bit", Work in Progress, March 2011.
 
-   [<a id="ref-RFC3270" name="ref-RFC3270">RFC3270</a>]  Le Faucheur, F., Wu, L., Davie, B., Davari, S., Vaananen,
+   [<a id="ref-RFC3270">RFC3270</a>]  Le Faucheur, F., Wu, L., Davie, B., Davari, S., Vaananen,
               P., Krishnan, R., Cheval, P., and J. Heinanen, "Multi-
               Protocol Label Switching (MPLS) Support of Differentiated
               Services", <a href="./rfc3270.html">RFC 3270</a>, May 2002.
 
-   [<a id="ref-RFC3468" name="ref-RFC3468">RFC3468</a>]  Andersson, L. and G. Swallow, "The Multiprotocol Label
+   [<a id="ref-RFC3468">RFC3468</a>]  Andersson, L. and G. Swallow, "The Multiprotocol Label
               Switching (MPLS) Working Group decision on MPLS signaling
               protocols", <a href="./rfc3468.html">RFC 3468</a>, February 2003.
 
-   [<a id="ref-RFC3472" name="ref-RFC3472">RFC3472</a>]  Ashwood-Smith, P., Ed., and L. Berger, Ed., "Generalized
+   [<a id="ref-RFC3472">RFC3472</a>]  Ashwood-Smith, P., Ed., and L. Berger, Ed., "Generalized
               Multi-Protocol Label Switching (GMPLS) Signaling
               Constraint-based Routed Label Distribution Protocol (CR-
               LDP) Extensions", <a href="./rfc3472.html">RFC 3472</a>, January 2003.
@@ -3100,54 +3067,54 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 52]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-53" id="page-53" name="page-53"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-53"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-   [<a id="ref-RFC3477" name="ref-RFC3477">RFC3477</a>]  Kompella, K. and Y. Rekhter, "Signalling Unnumbered Links
+   [<a id="ref-RFC3477">RFC3477</a>]  Kompella, K. and Y. Rekhter, "Signalling Unnumbered Links
               in Resource ReSerVation Protocol - Traffic Engineering
               (RSVP-TE)", <a href="./rfc3477.html">RFC 3477</a>, January 2003.
 
-   [<a id="ref-RFC3812" name="ref-RFC3812">RFC3812</a>]  Srinivasan, C., Viswanathan, A., and T. Nadeau,
+   [<a id="ref-RFC3812">RFC3812</a>]  Srinivasan, C., Viswanathan, A., and T. Nadeau,
               "Multiprotocol Label Switching (MPLS) Traffic Engineering
               (TE) Management Information Base (MIB)", <a href="./rfc3812.html">RFC 3812</a>, June
               2004.
 
-   [<a id="ref-RFC3813" name="ref-RFC3813">RFC3813</a>]  Srinivasan, C., Viswanathan, A., and T. Nadeau,
+   [<a id="ref-RFC3813">RFC3813</a>]  Srinivasan, C., Viswanathan, A., and T. Nadeau,
               "Multiprotocol Label Switching (MPLS) Label Switching
               Router (LSR) Management Information Base (MIB)", <a href="./rfc3813.html">RFC 3813</a>,
               June 2004.
 
-   [<a id="ref-RFC3945" name="ref-RFC3945">RFC3945</a>]  Mannie, E., Ed., "Generalized Multi-Protocol Label
+   [<a id="ref-RFC3945">RFC3945</a>]  Mannie, E., Ed., "Generalized Multi-Protocol Label
               Switching (GMPLS) Architecture", <a href="./rfc3945.html">RFC 3945</a>, October 2004.
 
-   [<a id="ref-RFC3985" name="ref-RFC3985">RFC3985</a>]  Bryant, S., Ed., and P. Pate, Ed., "Pseudo Wire Emulation
+   [<a id="ref-RFC3985">RFC3985</a>]  Bryant, S., Ed., and P. Pate, Ed., "Pseudo Wire Emulation
               Edge-to-Edge (PWE3) Architecture", <a href="./rfc3985.html">RFC 3985</a>, March 2005.
 
-   [<a id="ref-RFC4139" name="ref-RFC4139">RFC4139</a>]  Papadimitriou, D., Drake, J., Ash, J., Farrel, A., and L.
+   [<a id="ref-RFC4139">RFC4139</a>]  Papadimitriou, D., Drake, J., Ash, J., Farrel, A., and L.
               Ong, "Requirements for Generalized MPLS (GMPLS) Signaling
               Usage and Extensions for Automatically Switched Optical
               Network (ASON)", <a href="./rfc4139.html">RFC 4139</a>, July 2005.
 
-   [<a id="ref-RFC4201" name="ref-RFC4201">RFC4201</a>]  Kompella, K., Rekhter, Y., and L. Berger, "Link Bundling
+   [<a id="ref-RFC4201">RFC4201</a>]  Kompella, K., Rekhter, Y., and L. Berger, "Link Bundling
               in MPLS Traffic Engineering (TE)", <a href="./rfc4201.html">RFC 4201</a>, October 2005.
 
-   [<a id="ref-RFC4208" name="ref-RFC4208">RFC4208</a>]  Swallow, G., Drake, J., Ishimatsu, H., and Y. Rekhter,
+   [<a id="ref-RFC4208">RFC4208</a>]  Swallow, G., Drake, J., Ishimatsu, H., and Y. Rekhter,
               "Generalized Multiprotocol Label Switching (GMPLS) User-
               Network Interface (UNI): Resource ReserVation Protocol-
               Traffic Engineering (RSVP-TE) Support for the Overlay
               Model", <a href="./rfc4208.html">RFC 4208</a>, October 2005.
 
-   [<a id="ref-RFC4258" name="ref-RFC4258">RFC4258</a>]  Brungard, D., Ed., "Requirements for Generalized Multi-
+   [<a id="ref-RFC4258">RFC4258</a>]  Brungard, D., Ed., "Requirements for Generalized Multi-
               Protocol Label Switching (GMPLS) Routing for the
               Automatically Switched Optical Network (ASON)", <a href="./rfc4258.html">RFC 4258</a>,
               November 2005.
 
-   [<a id="ref-RFC4379" name="ref-RFC4379">RFC4379</a>]  Kompella, K. and G. Swallow, "Detecting Multi-Protocol
+   [<a id="ref-RFC4379">RFC4379</a>]  Kompella, K. and G. Swallow, "Detecting Multi-Protocol
               Label Switched (MPLS) Data Plane Failures", <a href="./rfc4379.html">RFC 4379</a>,
               February 2006.
 
-   [<a id="ref-RFC4426" name="ref-RFC4426">RFC4426</a>]  Lang, J., Ed., Rajagopalan, B., Ed., and D. Papadimitriou,
+   [<a id="ref-RFC4426">RFC4426</a>]  Lang, J., Ed., Rajagopalan, B., Ed., and D. Papadimitriou,
               Ed., "Generalized Multi-Protocol Label Switching (GMPLS)
               Recovery Functional Specification", <a href="./rfc4426.html">RFC 4426</a>, March 2006.
 
@@ -3156,51 +3123,51 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 53]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-54" id="page-54" name="page-54"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-54"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-   [<a id="ref-RFC4427" name="ref-RFC4427">RFC4427</a>]  Mannie, E., Ed., and D. Papadimitriou, Ed., "Recovery
+   [<a id="ref-RFC4427">RFC4427</a>]  Mannie, E., Ed., and D. Papadimitriou, Ed., "Recovery
               (Protection and Restoration) Terminology for Generalized
               Multi-Protocol Label Switching (GMPLS)", <a href="./rfc4427.html">RFC 4427</a>, March
               2006.
 
-   [<a id="ref-RFC4553" name="ref-RFC4553">RFC4553</a>]  Vainshtein, A., Ed., and YJ. Stein, Ed., "Structure-
+   [<a id="ref-RFC4553">RFC4553</a>]  Vainshtein, A., Ed., and YJ. Stein, Ed., "Structure-
               Agnostic Time Division Multiplexing (TDM) over Packet
               (SAToP)", <a href="./rfc4553.html">RFC 4553</a>, June 2006.
 
-   [<a id="ref-RFC4618" name="ref-RFC4618">RFC4618</a>]  Martini, L., Rosen, E., Heron, G., and A. Malis,
+   [<a id="ref-RFC4618">RFC4618</a>]  Martini, L., Rosen, E., Heron, G., and A. Malis,
               "Encapsulation Methods for Transport of PPP/High-Level
               Data Link Control (HDLC) over MPLS Networks", <a href="./rfc4618.html">RFC 4618</a>,
               September 2006.
 
-   [<a id="ref-RFC4619" name="ref-RFC4619">RFC4619</a>]  Martini, L., Ed., Kawa, C., Ed., and A. Malis, Ed.,
+   [<a id="ref-RFC4619">RFC4619</a>]  Martini, L., Ed., Kawa, C., Ed., and A. Malis, Ed.,
               "Encapsulation Methods for Transport of Frame Relay over
               Multiprotocol Label Switching (MPLS) Networks", <a href="./rfc4619.html">RFC 4619</a>,
               September 2006.
 
-   [<a id="ref-RFC4655" name="ref-RFC4655">RFC4655</a>]  Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
+   [<a id="ref-RFC4655">RFC4655</a>]  Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
               Computation Element (PCE)-Based Architecture", <a href="./rfc4655.html">RFC 4655</a>,
               August 2006.
 
-   [<a id="ref-RFC4783" name="ref-RFC4783">RFC4783</a>]  Berger, L., Ed., "GMPLS - Communication of Alarm
+   [<a id="ref-RFC4783">RFC4783</a>]  Berger, L., Ed., "GMPLS - Communication of Alarm
               Information", <a href="./rfc4783.html">RFC 4783</a>, December 2006.
 
-   [<a id="ref-RFC4802" name="ref-RFC4802">RFC4802</a>]  Nadeau, T., Ed., and A. Farrel, Ed., "Generalized
+   [<a id="ref-RFC4802">RFC4802</a>]  Nadeau, T., Ed., and A. Farrel, Ed., "Generalized
               Multiprotocol Label Switching (GMPLS) Traffic Engineering
               Management Information Base", <a href="./rfc4802.html">RFC 4802</a>, February 2007.
 
-   [<a id="ref-RFC4803" name="ref-RFC4803">RFC4803</a>]  Nadeau, T., Ed., and A. Farrel, Ed., "Generalized
+   [<a id="ref-RFC4803">RFC4803</a>]  Nadeau, T., Ed., and A. Farrel, Ed., "Generalized
               Multiprotocol Label Switching (GMPLS) Label Switching
               Router (LSR) Management Information Base", <a href="./rfc4803.html">RFC 4803</a>,
               February 2007.
 
-   [<a id="ref-RFC4816" name="ref-RFC4816">RFC4816</a>]  Malis, A., Martini, L., Brayley, J., and T. Walsh,
+   [<a id="ref-RFC4816">RFC4816</a>]  Malis, A., Martini, L., Brayley, J., and T. Walsh,
               "Pseudowire Emulation Edge-to-Edge (PWE3) Asynchronous
               Transfer Mode (ATM) Transparent Cell Transport Service",
               <a href="./rfc4816.html">RFC 4816</a>, February 2007.
 
-   [<a id="ref-RFC4875" name="ref-RFC4875">RFC4875</a>]  Aggarwal, R., Ed., Papadimitriou, D., Ed., and S.
+   [<a id="ref-RFC4875">RFC4875</a>]  Aggarwal, R., Ed., Papadimitriou, D., Ed., and S.
               Yasukawa, Ed., "Extensions to Resource Reservation
               Protocol - Traffic Engineering (RSVP-TE) for Point-to-
               Multipoint TE Label Switched Paths (LSPs)", <a href="./rfc4875.html">RFC 4875</a>, May
@@ -3212,103 +3179,103 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 54]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-55" id="page-55" name="page-55"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-55"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-   [<a id="ref-RFC5003" name="ref-RFC5003">RFC5003</a>]  Metz, C., Martini, L., Balus, F., and J. Sugimoto,
+   [<a id="ref-RFC5003">RFC5003</a>]  Metz, C., Martini, L., Balus, F., and J. Sugimoto,
               "Attachment Individual Identifier (AII) Types for
               Aggregation", <a href="./rfc5003.html">RFC 5003</a>, September 2007.
 
-   [<a id="ref-RFC5036" name="ref-RFC5036">RFC5036</a>]  Andersson, L., Ed., Minei, I., Ed., and B. Thomas, Ed.,
+   [<a id="ref-RFC5036">RFC5036</a>]  Andersson, L., Ed., Minei, I., Ed., and B. Thomas, Ed.,
               "LDP Specification", <a href="./rfc5036.html">RFC 5036</a>, October 2007.
 
-   [<a id="ref-RFC5085" name="ref-RFC5085">RFC5085</a>]  Nadeau, T., Ed., and C. Pignataro, Ed., "Pseudowire
+   [<a id="ref-RFC5085">RFC5085</a>]  Nadeau, T., Ed., and C. Pignataro, Ed., "Pseudowire
               Virtual Circuit Connectivity Verification (VCCV): A
               Control Channel for Pseudowires", <a href="./rfc5085.html">RFC 5085</a>, December 2007.
 
-   [<a id="ref-RFC5145" name="ref-RFC5145">RFC5145</a>]  Shiomoto, K., Ed., "Framework for MPLS-TE to GMPLS
+   [<a id="ref-RFC5145">RFC5145</a>]  Shiomoto, K., Ed., "Framework for MPLS-TE to GMPLS
               Migration", <a href="./rfc5145.html">RFC 5145</a>, March 2008.
 
-   [<a id="ref-RFC5440" name="ref-RFC5440">RFC5440</a>]  Vasseur, JP., Ed., and JL. Le Roux, Ed., "Path Computation
+   [<a id="ref-RFC5440">RFC5440</a>]  Vasseur, JP., Ed., and JL. Le Roux, Ed., "Path Computation
               Element (PCE) Communication Protocol (PCEP)", <a href="./rfc5440.html">RFC 5440</a>,
               March 2009.
 
-   [<a id="ref-RFC5493" name="ref-RFC5493">RFC5493</a>]  Caviglia, D., Bramanti, D., Li, D., and D. McDysan,
+   [<a id="ref-RFC5493">RFC5493</a>]  Caviglia, D., Bramanti, D., Li, D., and D. McDysan,
               "Requirements for the Conversion between Permanent
               Connections and Switched Connections in a Generalized
               Multiprotocol Label Switching (GMPLS) Network", <a href="./rfc5493.html">RFC 5493</a>,
               April 2009.
 
-   [<a id="ref-RFC5659" name="ref-RFC5659">RFC5659</a>]  Bocci, M. and S. Bryant, "An Architecture for Multi-
+   [<a id="ref-RFC5659">RFC5659</a>]  Bocci, M. and S. Bryant, "An Architecture for Multi-
               Segment Pseudowire Emulation Edge-to-Edge", <a href="./rfc5659.html">RFC 5659</a>,
               October 2009.
 
-   [<a id="ref-RFC5787" name="ref-RFC5787">RFC5787</a>]  Papadimitriou, D., "OSPFv2 Routing Protocols Extensions
+   [<a id="ref-RFC5787">RFC5787</a>]  Papadimitriou, D., "OSPFv2 Routing Protocols Extensions
               for Automatically Switched Optical Network (ASON)
               Routing", <a href="./rfc5787.html">RFC 5787</a>, March 2010.
 
-   [<a id="ref-RFC5852" name="ref-RFC5852">RFC5852</a>]  Caviglia, D., Ceccarelli, D., Bramanti, D., Li, D., and S.
+   [<a id="ref-RFC5852">RFC5852</a>]  Caviglia, D., Ceccarelli, D., Bramanti, D., Li, D., and S.
               Bardalai, "RSVP-TE Signaling Extension for LSP Handover
               from the Management Plane to the Control Plane in a GMPLS-
               Enabled Transport Network", <a href="./rfc5852.html">RFC 5852</a>, April 2010.
 
-   [<a id="ref-RFC5884" name="ref-RFC5884">RFC5884</a>]  Aggarwal, R., Kompella, K., Nadeau, T., and G. Swallow,
+   [<a id="ref-RFC5884">RFC5884</a>]  Aggarwal, R., Kompella, K., Nadeau, T., and G. Swallow,
               "Bidirectional Forwarding Detection (BFD) for MPLS Label
               Switched Paths (LSPs)", <a href="./rfc5884.html">RFC 5884</a>, June 2010.
 
-   [<a id="ref-RFC5885" name="ref-RFC5885">RFC5885</a>]  Nadeau, T., Ed., and C. Pignataro, Ed., "Bidirectional
+   [<a id="ref-RFC5885">RFC5885</a>]  Nadeau, T., Ed., and C. Pignataro, Ed., "Bidirectional
               Forwarding Detection (BFD) for the Pseudowire Virtual
               Circuit Connectivity Verification (VCCV)", <a href="./rfc5885.html">RFC 5885</a>, June
               2010.
 
-   [<a id="ref-RFC5920" name="ref-RFC5920">RFC5920</a>]  Fang, L., Ed., "Security Framework for MPLS and GMPLS
+   [<a id="ref-RFC5920">RFC5920</a>]  Fang, L., Ed., "Security Framework for MPLS and GMPLS
               Networks", <a href="./rfc5920.html">RFC 5920</a>, July 2010.
 
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 55]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-56" id="page-56" name="page-56"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-56"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
-   [<a id="ref-RFC5951" name="ref-RFC5951">RFC5951</a>]  Lam, K., Mansfield, S., and E. Gray, "Network Management
+   [<a id="ref-RFC5951">RFC5951</a>]  Lam, K., Mansfield, S., and E. Gray, "Network Management
               Requirements for MPLS-based Transport Networks", <a href="./rfc5951.html">RFC 5951</a>,
               September 2010.
 
-   [<a id="ref-RFC6001" name="ref-RFC6001">RFC6001</a>]  Papadimitriou, D., Vigoureux, M., Shiomoto, K., Brungard,
+   [<a id="ref-RFC6001">RFC6001</a>]  Papadimitriou, D., Vigoureux, M., Shiomoto, K., Brungard,
               D., and JL. Le Roux, "Generalized MPLS (GMPLS) Protocol
               Extensions for Multi-Layer and Multi-Region Networks
               (MLN/MRN)", <a href="./rfc6001.html">RFC 6001</a>, October 2010.
 
-   [<a id="ref-RFC6073" name="ref-RFC6073">RFC6073</a>]  Martini, L., Metz, C., Nadeau, T., Bocci, M., and M.
+   [<a id="ref-RFC6073">RFC6073</a>]  Martini, L., Metz, C., Nadeau, T., Bocci, M., and M.
               Aissaoui, "Segmented Pseudowire", <a href="./rfc6073.html">RFC 6073</a>, January 2011.
 
-   [<a id="ref-RFC6107" name="ref-RFC6107">RFC6107</a>]  Shiomoto, K., Ed., and A. Farrel, Ed., "Procedures for
+   [<a id="ref-RFC6107">RFC6107</a>]  Shiomoto, K., Ed., and A. Farrel, Ed., "Procedures for
               Dynamically Signaled Hierarchical Label Switched Paths",
               <a href="./rfc6107.html">RFC 6107</a>, February 2011.
 
-   [<a id="ref-RFC6215" name="ref-RFC6215">RFC6215</a>]  Bocci, M., Levrau, L., and D. Frost, "MPLS Transport
+   [<a id="ref-RFC6215">RFC6215</a>]  Bocci, M., Levrau, L., and D. Frost, "MPLS Transport
               Profile User-to-Network and Network-to-Network
               Interfaces", <a href="./rfc6215.html">RFC 6215</a>, April 2011.
 
-   [<a id="ref-TE-MIB" name="ref-TE-MIB">TE-MIB</a>]   Miyazawa, M., Otani, T., Kumaki, K., and T. Nadeau,
+   [<a id="ref-TE-MIB">TE-MIB</a>]   Miyazawa, M., Otani, T., Kumaki, K., and T. Nadeau,
               "Traffic Engineering Database Management Information Base
               in support of MPLS-TE/GMPLS", Work in Progress, July 2011.
 
-   [<a id="ref-TP-MIB" name="ref-TP-MIB">TP-MIB</a>]   King, D., Ed., and M. Venkatesan, Ed., "Multiprotocol
+   [<a id="ref-TP-MIB">TP-MIB</a>]   King, D., Ed., and M. Venkatesan, Ed., "Multiprotocol
               Label Switching Transport Profile (MPLS-TP) MIB-based
               Management Overview", Work in Progress, August 2011.
 
-   [<a id="ref-TP-P2MP-FWK" name="ref-TP-P2MP-FWK">TP-P2MP-FWK</a>]
+   [<a id="ref-TP-P2MP-FWK">TP-P2MP-FWK</a>]
               Frost, D., Ed., Bocci, M., Ed., and L. Berger, Ed., "A
               Framework for Point-to-Multipoint MPLS in Transport
               Networks", Work in Progress, July 2011.
 
-   [<a id="ref-TP-RING" name="ref-TP-RING">TP-RING</a>]  Weingarten, Y., Ed., <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22MPLS-TP+Ring+Protection%22" style="text-decoration: none">"MPLS-TP Ring Protection"</a>, Work in
+   [<a id="ref-TP-RING">TP-RING</a>]  Weingarten, Y., Ed., <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22MPLS-TP+Ring+Protection%22" style="text-decoration: none">"MPLS-TP Ring Protection"</a>, Work in
               Progress, June 2011
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Contributing%20Authors"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  Contributing Authors</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20Contributing%20Authors"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  Contributing Authors</span>
 
    Attila Takacs
    Ericsson
@@ -3324,7 +3291,7 @@ Table of Contents
 
 
 <span class="grey">Andersson, et al.             Informational                    [Page 56]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-57" id="page-57" name="page-57"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-57"></span>
 <span class="grey"><a href="./rfc6373.html">RFC 6373</a>            MPLS-TP Control Plane Framework       September 2011</span>
 
 
@@ -3380,11 +3347,6 @@ Authors' Addresses
 
 
 Andersson, et al.             Informational                    [Page 57]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

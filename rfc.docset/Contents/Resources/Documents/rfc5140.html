@@ -1,29 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-ietf-iptel-trip-gw" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5140" name="DC.Identifier"/>
-<meta content="March, 2008" name="DC.Date.Issued"/>
-<meta content="Manjunath Bangalore &lt;manjax@cisco.com&gt;" name="DC.Creator"/>
-<meta content="This document describes the Telephony Gateway Registration Protocol
-(TGREP) for registration of telephony prefixes supported by telephony
-gateways and soft switches. The registration mechanism can also be
-used to export resource information. The prefix and resource
-information can then be passed on to a Telephony Routing over IP
-(TRIP) Location Server, which in turn can propagate that routing
-information within and between Internet Telephony Administrative
-Domains (ITADs). TGREP shares a lot of similarities with the TRIP
-protocol. It has similar procedures and finite state machine for
-session establishment. It also shares the same format for messages and
-a subset of attributes with TRIP. [STANDARDS-TRACK]" name="DC.Description.Abstract"/>
-<meta content="A Telephony Gateway REgistration Protocol (TGREP)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5140 - A Telephony Gateway REgistration Protocol (TGREP)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="M. Bangalore" name="citation_author"/>
+<meta content="R. Kumar" name="citation_author"/>
+<meta content="J. Rosenberg" name="citation_author"/>
+<meta content="H. Salama" name="citation_author"/>
+<meta content="D.N. Shah" name="citation_author"/>
+<meta content="March, 2008" name="citation_publication_date"/>
+<meta content="A Telephony Gateway REgistration Protocol (TGREP)" name="citation_title"/>
+<meta content="10.17487/RFC5140" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5140" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5140.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5140: A Telephony Gateway REgistration Protocol (TGREP)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -52,7 +44,7 @@ a subset of attributes with TRIP. [STANDARDS-TRACK]" name="DC.Description.Abstra
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -61,7 +53,7 @@ a subset of attributes with TRIP. [STANDARDS-TRACK]" name="DC.Description.Abstra
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -140,19 +132,18 @@ a subset of attributes with TRIP. [STANDARDS-TRACK]" name="DC.Description.Abstra
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -166,21 +157,9 @@ a subset of attributes with TRIP. [STANDARDS-TRACK]" name="DC.Description.Abstra
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5140.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5140" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-iptel-tgrep.html" title="draft-ietf-iptel-tgrep">draft-ietf-iptel-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5140" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5140" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=5140">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                       M. Bangalore
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5140.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5140.txt.pdf">PDF</a>|<a href="/rfc/rfc5140.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5140" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5140&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5140" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5140" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                       M. Bangalore
 Request for Comments: 5140                                      R. Kumar
 Category: Standards Track                                   J. Rosenberg
                                                                    Cisco
@@ -232,7 +211,7 @@ Abstract
 
 
 <span class="grey">Bangalore, et al.           Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -288,11 +267,11 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    It is assumed that the reader of this document is familiar with TRIP
    [<a href="#ref-2" title='"Telephony Routing over IP (TRIP)"'>2</a>, <a href="#ref-12" title='"A Framework for Telephony Routing over IP"'>12</a>].  In typical Voice over IP (VoIP) networks, Internet
@@ -344,7 +323,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -400,7 +379,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -432,7 +411,7 @@ Table of Contents
    familiar with the concepts of TRIP like attributes, flags, route
    types, address families, etc.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology%20and%20Definitions"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Terminology and Definitions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Terminology%20and%20Definitions"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Terminology and Definitions</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
@@ -456,7 +435,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -468,7 +447,7 @@ Table of Contents
    Carrier: A carrier is a company offering telephone and data
    communications between points (end-users and/or exchanges).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20TGREP%3A%20Overview%20of%20Operation"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  TGREP: Overview of Operation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20TGREP%3A%20Overview%20of%20Operation"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  TGREP: Overview of Operation</span>
 
    TGREP is a route registration protocol for telephony destinations on
    a gateway.  These telephony destinations could be prefixes,
@@ -512,7 +491,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -542,7 +521,7 @@ Table of Contents
    introduced are also applicable for general usage in TRIP except where
    noted (AvailableCircuits attribute, for example).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20TGREP%20Attributes"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  TGREP Attributes</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20TGREP%20Attributes"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  TGREP Attributes</span>
 
    Due to its usage within a service provider network, TGREP makes use
    of a subset of the attributes defined for TRIP, in addition to
@@ -568,7 +547,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -582,7 +561,7 @@ Table of Contents
       5. TrunkGroup
       6. Carrier
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20TotalCircuitCapacity%20Attribute"></a></body></html><a class="selflink" href="#section-4.1" name="section-4.1">4.1</a>.  TotalCircuitCapacity Attribute</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.%20%20TotalCircuitCapacity%20Attribute"></a></body></html><a class="selflink" href="#section-4.1" id="section-4.1">4.1</a>.  TotalCircuitCapacity Attribute</span>
 
    Mandatory: False.
    Required Flags: Not well-known.
@@ -607,7 +586,7 @@ Table of Contents
    change, for instance, when certain telephony trunks on the gateway
    are taken out of service for maintenance purposes.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20TotalCircuitCapacity%20Syntax"></a></body></html><a class="selflink" href="#section-4.1.1" name="section-4.1.1">4.1.1</a>.  TotalCircuitCapacity Syntax</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.1.%20%20TotalCircuitCapacity%20Syntax"></a></body></html><a class="selflink" href="#section-4.1.1" id="section-4.1.1">4.1.1</a>.  TotalCircuitCapacity Syntax</span>
 
    The TotalCircuitCapacity attribute is a 4-octet unsigned integer.  It
    represents the total number of circuits available for terminating
@@ -615,7 +594,7 @@ Table of Contents
    potentially achievable upper bound on the number of calls that can be
    terminated on this route in total.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20Route%20Origination%20and%20TotalCircuitCapacity"></a></body></html><a class="selflink" href="#section-4.1.2" name="section-4.1.2">4.1.2</a>.  Route Origination and TotalCircuitCapacity</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.2.%20%20Route%20Origination%20and%20TotalCircuitCapacity"></a></body></html><a class="selflink" href="#section-4.1.2" id="section-4.1.2">4.1.2</a>.  Route Origination and TotalCircuitCapacity</span>
 
    Routes <em>MAY</em> be originated containing the TotalCircuitCapacity
    attribute.
@@ -624,11 +603,11 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3.%20%20Route%20Selection%20and%20TotalCircuitCapacity"></a></body></html><a class="selflink" href="#section-4.1.3" name="section-4.1.3">4.1.3</a>.  Route Selection and TotalCircuitCapacity</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.3.%20%20Route%20Selection%20and%20TotalCircuitCapacity"></a></body></html><a class="selflink" href="#section-4.1.3" id="section-4.1.3">4.1.3</a>.  Route Selection and TotalCircuitCapacity</span>
 
    The TotalCircuitCapacity attribute <em>MAY</em> be used for route selection.
    Since one of its primary applications is load balancing, an LS will
@@ -639,21 +618,21 @@ Table of Contents
    attribute ensure that re-running this selection process never results
    in propagation of a new route to other peers.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.4.%20%20Aggregation%20and%20TotalCircuitCapacity"></a></body></html><a class="selflink" href="#section-4.1.4" name="section-4.1.4">4.1.4</a>.  Aggregation and TotalCircuitCapacity</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.4.%20%20Aggregation%20and%20TotalCircuitCapacity"></a></body></html><a class="selflink" href="#section-4.1.4" id="section-4.1.4">4.1.4</a>.  Aggregation and TotalCircuitCapacity</span>
 
    An LS <em>MAY</em> aggregate routes to the same prefix that contains a
    TotalCircuitCapacity attribute.  It <em>SHOULD</em> add the values of the
    individual routes to determine the value for the aggregated route in
    the same ITAD.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.5.%20%20Route%20Dissemination%20and%20TotalCircuitCapacity"></a></body></html><a class="selflink" href="#section-4.1.5" name="section-4.1.5">4.1.5</a>.  Route Dissemination and TotalCircuitCapacity</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.1.5.%20%20Route%20Dissemination%20and%20TotalCircuitCapacity"></a></body></html><a class="selflink" href="#section-4.1.5" id="section-4.1.5">4.1.5</a>.  Route Dissemination and TotalCircuitCapacity</span>
 
    Since this attribute reflects the static capacity of the gateway's
    circuit resources, it is not expected to change frequently.  Hence,
    the LS receiving this attribute <em>MAY</em> disseminate it to other peers,
    both internal and external to the ITAD.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20AvailableCircuits%20Attribute"></a></body></html><a class="selflink" href="#section-4.2" name="section-4.2">4.2</a>.  AvailableCircuits Attribute</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.%20%20AvailableCircuits%20Attribute"></a></body></html><a class="selflink" href="#section-4.2" id="section-4.2">4.2</a>.  AvailableCircuits Attribute</span>
 
    Mandatory: False.
    Required Flags: Not well-known.
@@ -670,7 +649,7 @@ Table of Contents
    its peer LS responsible for managing that gateway.  If it is received
    in a route, it is not propagated.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20AvailableCircuits%20Syntax"></a></body></html><a class="selflink" href="#section-4.2.1" name="section-4.2.1">4.2.1</a>.  AvailableCircuits Syntax</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.1.%20%20AvailableCircuits%20Syntax"></a></body></html><a class="selflink" href="#section-4.2.1" id="section-4.2.1">4.2.1</a>.  AvailableCircuits Syntax</span>
 
    The AvailableCircuits attribute is a 4-octet unsigned integer.  It
    represents the number of circuits remaining for terminating calls to
@@ -680,11 +659,11 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Route%20Origination%20and%20AvailableCircuits"></a></body></html><a class="selflink" href="#section-4.2.2" name="section-4.2.2">4.2.2</a>.  Route Origination and AvailableCircuits</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.2.%20%20Route%20Origination%20and%20AvailableCircuits"></a></body></html><a class="selflink" href="#section-4.2.2" id="section-4.2.2">4.2.2</a>.  Route Origination and AvailableCircuits</span>
 
    Routes <em>MAY</em> be originated containing the AvailableCircuits attribute.
    Since this attribute is highly dynamic, changing with every call,
@@ -693,7 +672,7 @@ Table of Contents
    origination.  It is further <em>RECOMMENDED</em> that a sufficiently large
    window of time be used to provide a useful aggregated statistic.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.3.%20%20Route%20Selection%20and%20AvailableCircuits"></a></body></html><a class="selflink" href="#section-4.2.3" name="section-4.2.3">4.2.3</a>.  Route Selection and AvailableCircuits</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.3.%20%20Route%20Selection%20and%20AvailableCircuits"></a></body></html><a class="selflink" href="#section-4.2.3" id="section-4.2.3">4.2.3</a>.  Route Selection and AvailableCircuits</span>
 
    The AvailableCircuits attribute <em>MAY</em> be used for route selection.
    Since one of its primary applications is load balancing, an LS will
@@ -704,18 +683,18 @@ Table of Contents
    ensure that re-running this selection process never results in
    propagation of a new route to other peers.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.4.%20%20Aggregation%20and%20AvailableCircuits"></a></body></html><a class="selflink" href="#section-4.2.4" name="section-4.2.4">4.2.4</a>.  Aggregation and AvailableCircuits</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.4.%20%20Aggregation%20and%20AvailableCircuits"></a></body></html><a class="selflink" href="#section-4.2.4" id="section-4.2.4">4.2.4</a>.  Aggregation and AvailableCircuits</span>
 
    Not applicable.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.5.%20%20Route%20Dissemination%20and%20AvailableCircuits"></a></body></html><a class="selflink" href="#section-4.2.5" name="section-4.2.5">4.2.5</a>.  Route Dissemination and AvailableCircuits</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.2.5.%20%20Route%20Dissemination%20and%20AvailableCircuits"></a></body></html><a class="selflink" href="#section-4.2.5" id="section-4.2.5">4.2.5</a>.  Route Dissemination and AvailableCircuits</span>
 
    Routes <em>MUST NOT</em> be disseminated with the AvailableCircuits attribute.
    The attribute is meant to reflect capacity at the originating gateway
    only.  Its highly dynamic nature makes it inappropriate to
    disseminate in most cases.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20CallSuccess%20Attribute"></a></body></html><a class="selflink" href="#section-4.3" name="section-4.3">4.3</a>.  CallSuccess Attribute</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.%20%20CallSuccess%20Attribute"></a></body></html><a class="selflink" href="#section-4.3" id="section-4.3">4.3</a>.  CallSuccess Attribute</span>
 
    Mandatory: False.
    Required Flags: Not well-known.
@@ -736,7 +715,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -756,7 +735,7 @@ Table of Contents
    gateways to terminate calls to those destinations with a better
    likelihood of success.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.%20%20CallSuccess%20Syntax"></a></body></html><a class="selflink" href="#section-4.3.1" name="section-4.3.1">4.3.1</a>.  CallSuccess Syntax</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.1.%20%20CallSuccess%20Syntax"></a></body></html><a class="selflink" href="#section-4.3.1" id="section-4.3.1">4.3.1</a>.  CallSuccess Syntax</span>
 
    The CallSuccess attribute is composed of two component fields -- each
    represented as a 4-octet unsigned integer.  The first component field
@@ -772,7 +751,7 @@ Table of Contents
    TGREP receiver using this information should obtain this information
    frequently enough to prevent loss of significance.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.2.%20%20Route%20Origination%20and%20CallSuccess"></a></body></html><a class="selflink" href="#section-4.3.2" name="section-4.3.2">4.3.2</a>.  Route Origination and CallSuccess</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.2.%20%20Route%20Origination%20and%20CallSuccess"></a></body></html><a class="selflink" href="#section-4.3.2" id="section-4.3.2">4.3.2</a>.  Route Origination and CallSuccess</span>
 
    Routes <em>MAY</em> be originated containing the CallSuccess attribute.  This
    attribute is expected to get statistically significant with passage
@@ -780,7 +759,7 @@ Table of Contents
    sufficiently large windows be used to provide a useful aggregated
    statistic.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.3.%20%20Route%20Selection%20and%20CallSuccess"></a></body></html><a class="selflink" href="#section-4.3.3" name="section-4.3.3">4.3.3</a>.  Route Selection and CallSuccess</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.3.%20%20Route%20Selection%20and%20CallSuccess"></a></body></html><a class="selflink" href="#section-4.3.3" id="section-4.3.3">4.3.3</a>.  Route Selection and CallSuccess</span>
 
    The CallSuccess attribute <em>MAY</em> be used for route selection.  This
    attribute represents a measure of success of terminating calls to the
@@ -792,21 +771,21 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.4.%20%20Aggregation%20and%20CallSuccess"></a></body></html><a class="selflink" href="#section-4.3.4" name="section-4.3.4">4.3.4</a>.  Aggregation and CallSuccess</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.4.%20%20Aggregation%20and%20CallSuccess"></a></body></html><a class="selflink" href="#section-4.3.4" id="section-4.3.4">4.3.4</a>.  Aggregation and CallSuccess</span>
 
    Not applicable.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.5.%20%20Route%20Dissemination%20and%20CallSuccess"></a></body></html><a class="selflink" href="#section-4.3.5" name="section-4.3.5">4.3.5</a>.  Route Dissemination and CallSuccess</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.3.5.%20%20Route%20Dissemination%20and%20CallSuccess"></a></body></html><a class="selflink" href="#section-4.3.5" id="section-4.3.5">4.3.5</a>.  Route Dissemination and CallSuccess</span>
 
    Routes <em>MUST NOT</em> be disseminated with the CallSuccess attribute.  Its
    potential to change dynamically does not make it suitable to
    disseminate.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Prefix%20Attributes"></a></body></html><a class="selflink" href="#section-4.4" name="section-4.4">4.4</a>.  Prefix Attributes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.%20%20Prefix%20Attributes"></a></body></html><a class="selflink" href="#section-4.4" id="section-4.4">4.4</a>.  Prefix Attributes</span>
 
    Mandatory: False.
    Required Flags: Not well-known.
@@ -823,7 +802,7 @@ Table of Contents
    a given carrier, administrative issues could make certain ranges
    preferable to others.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Prefix%20Attribute%20Syntax"></a></body></html><a class="selflink" href="#section-4.4.1" name="section-4.4.1">4.4.1</a>.  Prefix Attribute Syntax</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.1.%20%20Prefix%20Attribute%20Syntax"></a></body></html><a class="selflink" href="#section-4.4.1" id="section-4.4.1">4.4.1</a>.  Prefix Attribute Syntax</span>
 
    The Prefix attribute could be E.164, Decimal, or Pentadecimal (refer
    to TRIP [<a href="#ref-2" title='"Telephony Routing over IP (TRIP)"'>2</a>]), each of them having its own type code.  The Prefix
@@ -848,7 +827,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -860,26 +839,26 @@ Table of Contents
 
                           Figure 2: Prefix Format
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Route%20Origination%20and%20Prefix"></a></body></html><a class="selflink" href="#section-4.4.2" name="section-4.4.2">4.4.2</a>.  Route Origination and Prefix</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.2.%20%20Route%20Origination%20and%20Prefix"></a></body></html><a class="selflink" href="#section-4.4.2" id="section-4.4.2">4.4.2</a>.  Route Origination and Prefix</span>
 
    Routes <em>MAY</em> be originated containing the Prefix attribute.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.%20%20Route%20Selection%20and%20Prefix"></a></body></html><a class="selflink" href="#section-4.4.3" name="section-4.4.3">4.4.3</a>.  Route Selection and Prefix</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.3.%20%20Route%20Selection%20and%20Prefix"></a></body></html><a class="selflink" href="#section-4.4.3" id="section-4.4.3">4.4.3</a>.  Route Selection and Prefix</span>
 
    The Prefix attribute <em>MAY</em> be used for route selection.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.4.%20%20Aggregation%20and%20Prefix"></a></body></html><a class="selflink" href="#section-4.4.4" name="section-4.4.4">4.4.4</a>.  Aggregation and Prefix</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.4.%20%20Aggregation%20and%20Prefix"></a></body></html><a class="selflink" href="#section-4.4.4" id="section-4.4.4">4.4.4</a>.  Aggregation and Prefix</span>
 
    Routes with differing Prefix attributes <em>MUST NOT</em> be aggregated.
    Routes with the same value in the Prefix attribute <em>MAY</em> be aggregated
    and the same Prefix attribute attached to the aggregated object.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.5.%20%20Route%20Dissemination%20and%20Prefix"></a></body></html><a class="selflink" href="#section-4.4.5" name="section-4.4.5">4.4.5</a>.  Route Dissemination and Prefix</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.4.5.%20%20Route%20Dissemination%20and%20Prefix"></a></body></html><a class="selflink" href="#section-4.4.5" id="section-4.4.5">4.4.5</a>.  Route Dissemination and Prefix</span>
 
    The LS receiving this attribute should disseminate to other peers,
    both internal and external to the ITAD.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20TrunkGroup%20Attribute"></a></body></html><a class="selflink" href="#section-4.5" name="section-4.5">4.5</a>.  TrunkGroup Attribute</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.%20%20TrunkGroup%20Attribute"></a></body></html><a class="selflink" href="#section-4.5" id="section-4.5">4.5</a>.  TrunkGroup Attribute</span>
 
    Mandatory: False.
    Required Flags: Not well-known.
@@ -891,7 +870,7 @@ Table of Contents
    calls to destinations through preferred trunks.  This attribute is
    relatively static.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.1.%20%20TrunkGroup%20Syntax"></a></body></html><a class="selflink" href="#section-4.5.1" name="section-4.5.1">4.5.1</a>.  TrunkGroup Syntax</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.1.%20%20TrunkGroup%20Syntax"></a></body></html><a class="selflink" href="#section-4.5.1" id="section-4.5.1">4.5.1</a>.  TrunkGroup Syntax</span>
 
    The TrunkGroup attribute is a variable-length attribute that is
    composed of a sequence of trunkgroup identifiers.  It indicates that
@@ -904,7 +883,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -931,23 +910,23 @@ Table of Contents
 
                         Figure 3: TrunkGroup Syntax
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.%20%20Route%20Origination%20and%20TrunkGroup"></a></body></html><a class="selflink" href="#section-4.5.2" name="section-4.5.2">4.5.2</a>.  Route Origination and TrunkGroup</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.2.%20%20Route%20Origination%20and%20TrunkGroup"></a></body></html><a class="selflink" href="#section-4.5.2" id="section-4.5.2">4.5.2</a>.  Route Origination and TrunkGroup</span>
 
    Routes <em>MAY</em> be originated containing the TrunkGroup attribute.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.3.%20%20Route%20Selection%20and%20TrunkGroup"></a></body></html><a class="selflink" href="#section-4.5.3" name="section-4.5.3">4.5.3</a>.  Route Selection and TrunkGroup</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.3.%20%20Route%20Selection%20and%20TrunkGroup"></a></body></html><a class="selflink" href="#section-4.5.3" id="section-4.5.3">4.5.3</a>.  Route Selection and TrunkGroup</span>
 
    The TrunkGroup attribute <em>MAY</em> be used for route selection.  Certain
    trunkgroups <em>MAY</em> be preferred over others based on provider policy.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.4.%20%20Aggregation%20and%20TrunkGroup"></a></body></html><a class="selflink" href="#section-4.5.4" name="section-4.5.4">4.5.4</a>.  Aggregation and TrunkGroup</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.4.%20%20Aggregation%20and%20TrunkGroup"></a></body></html><a class="selflink" href="#section-4.5.4" id="section-4.5.4">4.5.4</a>.  Aggregation and TrunkGroup</span>
 
    Routes with differing TrunkGroup attributes <em>MUST NOT</em> be aggregated.
    Routes with the same value in the TrunkGroup attribute <em>MAY</em> be
    aggregated and the same TrunkGroup attribute attached to the
    aggregated object.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.5.%20%20Route%20Dissemination%20and%20TrunkGroup"></a></body></html><a class="selflink" href="#section-4.5.5" name="section-4.5.5">4.5.5</a>.  Route Dissemination and TrunkGroup</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.5.5.%20%20Route%20Dissemination%20and%20TrunkGroup"></a></body></html><a class="selflink" href="#section-4.5.5" id="section-4.5.5">4.5.5</a>.  Route Dissemination and TrunkGroup</span>
 
    This attribute is not expected to change frequently.  Hence, the LS
    receiving this attribute <em>MAY</em> disseminate it to other peers, internal
@@ -960,11 +939,11 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Carrier%20Attribute"></a></body></html><a class="selflink" href="#section-4.6" name="section-4.6">4.6</a>.  Carrier Attribute</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.%20%20Carrier%20Attribute"></a></body></html><a class="selflink" href="#section-4.6" id="section-4.6">4.6</a>.  Carrier Attribute</span>
 
    Mandatory: False.
    Required Flags: Not well-known.
@@ -976,7 +955,7 @@ Table of Contents
    calls to destinations through preferred carriers.  This attribute is
    relatively static.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.1.%20%20Carrier%20Syntax"></a></body></html><a class="selflink" href="#section-4.6.1" name="section-4.6.1">4.6.1</a>.  Carrier Syntax</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.1.%20%20Carrier%20Syntax"></a></body></html><a class="selflink" href="#section-4.6.1" id="section-4.6.1">4.6.1</a>.  Carrier Syntax</span>
 
    The Carrier attribute is a variable-length attribute that is composed
    of a sequence of carrier identifiers.  It indicates that the route
@@ -1008,7 +987,7 @@ Table of Contents
 
                          Figure 4: Carrier Syntax
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.2.%20%20Route%20Origination%20and%20Carrier"></a></body></html><a class="selflink" href="#section-4.6.2" name="section-4.6.2">4.6.2</a>.  Route Origination and Carrier</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.2.%20%20Route%20Origination%20and%20Carrier"></a></body></html><a class="selflink" href="#section-4.6.2" id="section-4.6.2">4.6.2</a>.  Route Origination and Carrier</span>
 
    Routes <em>MAY</em> be originated containing the Carrier attribute.
 
@@ -1016,28 +995,28 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.3.%20%20Route%20Selection%20and%20Carrier"></a></body></html><a class="selflink" href="#section-4.6.3" name="section-4.6.3">4.6.3</a>.  Route Selection and Carrier</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.3.%20%20Route%20Selection%20and%20Carrier"></a></body></html><a class="selflink" href="#section-4.6.3" id="section-4.6.3">4.6.3</a>.  Route Selection and Carrier</span>
 
    The Carrier attribute <em>MAY</em> be used for route selection.  Certain
    carriers <em>MAY</em> be preferred over others based on provider policy.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.4.%20%20Aggregation%20and%20Carrier"></a></body></html><a class="selflink" href="#section-4.6.4" name="section-4.6.4">4.6.4</a>.  Aggregation and Carrier</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.4.%20%20Aggregation%20and%20Carrier"></a></body></html><a class="selflink" href="#section-4.6.4" id="section-4.6.4">4.6.4</a>.  Aggregation and Carrier</span>
 
    Routes with differing Carrier attributes <em>MUST NOT</em> be aggregated.
    Routes with the same value in the Carrier attribute <em>MAY</em> be aggregated
    and the same Carrier attribute attached to the aggregated object.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.5.%20%20Route%20Dissemination%20and%20Carrier"></a></body></html><a class="selflink" href="#section-4.6.5" name="section-4.6.5">4.6.5</a>.  Route Dissemination and Carrier</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.6.5.%20%20Route%20Dissemination%20and%20Carrier"></a></body></html><a class="selflink" href="#section-4.6.5" id="section-4.6.5">4.6.5</a>.  Route Dissemination and Carrier</span>
 
    This attribute is not expected to change frequently.  Hence, the LS
    receiving this attribute <em>MAY</em> disseminate it to other peers, both
    internal and external to the ITAD.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20TrunkGroup%20and%20Carrier%20Address%20Families"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  TrunkGroup and Carrier Address Families</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20TrunkGroup%20and%20Carrier%20Address%20Families"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  TrunkGroup and Carrier Address Families</span>
 
    As described in TRIP [<a href="#ref-2" title='"Telephony Routing over IP (TRIP)"'>2</a>], the Address Family field gives the type of
    address for the route.  Two new address families and their codes are
@@ -1072,7 +1051,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -1084,7 +1063,7 @@ Table of Contents
      increasing efficiency and providing a scalable gateway registration
      model.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Address%20Family%20Syntax"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  Address Family Syntax</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20Address%20Family%20Syntax"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  Address Family Syntax</span>
 
    Consider the generic TRIP route format from TRIP [<a href="#ref-2" title='"Telephony Routing over IP (TRIP)"'>2</a>] shown below.
 
@@ -1128,7 +1107,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -1163,7 +1142,7 @@ Table of Contents
    The TrunkGroup attribute cannot be used if the address family type is
    TrunkGroup.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Gateway%20Operation"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Gateway Operation</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Gateway%20Operation"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Gateway Operation</span>
 
    A gateway uses TGREP to advertise its reachability to its domain's
    Location Server(s) (LS, which are closely coupled with proxies).  The
@@ -1173,7 +1152,7 @@ Table of Contents
    the gateway will not create its own call routing database.  In this
    section, we describe the operation of TGREP on a gateway.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Session%20Establishment"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Session Establishment</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Session%20Establishment"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Session Establishment</span>
 
    When opening a peering session with a TGREP receiver, a TGREP gateway
    follows exactly the same procedures as any other TRIP entity.  The
@@ -1184,7 +1163,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -1192,7 +1171,7 @@ Table of Contents
    the address families supported by the gateway.  The remainder of the
    peer session establishment is identical to TRIP.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20UPDATE%20Messages"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  UPDATE Messages</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20UPDATE%20Messages"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  UPDATE Messages</span>
 
    Once the peer session has been established, the gateway sends UPDATE
    messages to the TRIP LS with the gateway's entire reachability.  The
@@ -1202,13 +1181,13 @@ Table of Contents
    UPDATE processing in TRIP [<a href="#ref-2" title='"Telephony Routing over IP (TRIP)"'>2</a>].  A TGREP sender <em>MUST</em> support all
    mandatory TRIP attributes.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20KEEPALIVE%20Messages"></a></body></html><a class="selflink" href="#section-6.3" name="section-6.3">6.3</a>.  KEEPALIVE Messages</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.3.%20%20KEEPALIVE%20Messages"></a></body></html><a class="selflink" href="#section-6.3" id="section-6.3">6.3</a>.  KEEPALIVE Messages</span>
 
    KEEPALIVE messages are periodically exchanged over the peering
    session between the TGREP gateway and the TRIP LS as specified in
    <a href="#section-4.4">Section 4.4</a> of TRIP [<a href="#ref-2" title='"Telephony Routing over IP (TRIP)"'>2</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20Error%20Handling%20and%20NOTIFICATION%20Messages"></a></body></html><a class="selflink" href="#section-6.4" name="section-6.4">6.4</a>.  Error Handling and NOTIFICATION Messages</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.4.%20%20Error%20Handling%20and%20NOTIFICATION%20Messages"></a></body></html><a class="selflink" href="#section-6.4" id="section-6.4">6.4</a>.  Error Handling and NOTIFICATION Messages</span>
 
    The same procedures used with TRIP are used with TGREP for error
    handling and generating NOTIFICATION messages.  The only difference
@@ -1216,7 +1195,7 @@ Table of Contents
    response to an UPDATE message, irrespective of the contents of the
    UPDATE message.  Any UPDATE message is silently discarded.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.5.%20%20TGREP%20Finite%20State%20Machine"></a></body></html><a class="selflink" href="#section-6.5" name="section-6.5">6.5</a>.  TGREP Finite State Machine</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.5.%20%20TGREP%20Finite%20State%20Machine"></a></body></html><a class="selflink" href="#section-6.5" id="section-6.5">6.5</a>.  TGREP Finite State Machine</span>
 
    When the TGREP finite state machine is in the Established state and
    an UPDATE message is received, the UPDATE message is silently
@@ -1224,7 +1203,7 @@ Table of Contents
    Other than that, the TRIP finite state machine and the TGREP finite
    state machine are identical.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.6.%20%20Call%20Routing%20Databases"></a></body></html><a class="selflink" href="#section-6.6" name="section-6.6">6.6</a>.  Call Routing Databases</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.6.%20%20Call%20Routing%20Databases"></a></body></html><a class="selflink" href="#section-6.6" id="section-6.6">6.6</a>.  Call Routing Databases</span>
 
    A TGREP gateway may maintain simultaneous sessions with more than one
    TRIP LS.  A TGREP gateway maintains one call routing database per
@@ -1240,7 +1219,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 19]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-20" id="page-20" name="page-20"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-20"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -1249,7 +1228,7 @@ Table of Contents
    routes from its peer TRIP LSs, and hence it does not run call route
    selection.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.7.%20%20Multiple%20Address%20Families"></a></body></html><a class="selflink" href="#section-6.7" name="section-6.7">6.7</a>.  Multiple Address Families</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.7.%20%20Multiple%20Address%20Families"></a></body></html><a class="selflink" href="#section-6.7" id="section-6.7">6.7</a>.  Multiple Address Families</span>
 
    As mentioned above, TGREP supports various address families in order
    to convey the reachability of telephony destinations.  A TGREP
@@ -1261,12 +1240,12 @@ Table of Contents
    message.  And route-type specification in the OPEN message violating
    the above rule should be rejected with a NOTIFICATION message.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.8.%20%20Route%20Selection%20and%20Aggregation"></a></body></html><a class="selflink" href="#section-6.8" name="section-6.8">6.8</a>.  Route Selection and Aggregation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.8.%20%20Route%20Selection%20and%20Aggregation"></a></body></html><a class="selflink" href="#section-6.8" id="section-6.8">6.8</a>.  Route Selection and Aggregation</span>
 
    TRIP's route selection and aggregation operations <em>MUST NOT</em> be
    implemented by TGREP gateways.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20LS/Proxy%20Behavior"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  LS/Proxy Behavior</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20LS/Proxy%20Behavior"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  LS/Proxy Behavior</span>
 
    As mentioned earlier, TGREP can be considered as a protocol
    complimentary to TRIP in providing reachability information, which
@@ -1296,7 +1275,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 20]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-21" id="page-21" name="page-21"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-21"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -1352,11 +1331,11 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 21]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-22" id="page-22" name="page-22"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-22"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Route%20Consolidation"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Route Consolidation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Route%20Consolidation"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Route Consolidation</span>
 
    The TGREP receiver (Ingress LS) may receive routing information from
    one or more gateways.  It is possible that multiple routes are
@@ -1408,11 +1387,11 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 22]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-23" id="page-23" name="page-23"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-23"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Aggregation"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Aggregation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Aggregation"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Aggregation</span>
 
    The set of gateway routes, which are in a consolidated form or
    otherwise, may be aggregated before importing it to the LS instance
@@ -1421,7 +1400,7 @@ Table of Contents
    TRIP [<a href="#ref-2" title='"Telephony Routing over IP (TRIP)"'>2</a>], while adhering to the aggregation rules for each route
    attribute.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Consolidation%20versus%20Aggregation"></a></body></html><a class="selflink" href="#section-7.3" name="section-7.3">7.3</a>.  Consolidation versus Aggregation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.3.%20%20Consolidation%20versus%20Aggregation"></a></body></html><a class="selflink" href="#section-7.3" id="section-7.3">7.3</a>.  Consolidation versus Aggregation</span>
 
    To highlight the difference between the two operations discussed
    above, "consolidation" combines multiple routes for the same route
@@ -1441,7 +1420,7 @@ Table of Contents
    "408" with each of the attributes computed using the aggregation
    procedures defined in TRIP.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Security Considerations</span>
 
    The security considerations for TGREP are identical to that
    identified in TRIP [<a href="#ref-2" title='"Telephony Routing over IP (TRIP)"'>2</a>] and are just restated here for the purposes of
@@ -1464,7 +1443,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 23]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-24" id="page-24" name="page-24"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-24"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -1487,14 +1466,14 @@ Table of Contents
    transport mode SA is a security association between two hosts, and is
    appropriate for protecting the TRIP session between two peer LSs.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  IANA Considerations</span>
 
    Both TRIP [<a href="#ref-2" title='"Telephony Routing over IP (TRIP)"'>2</a>] and TGREP share the same IANA registry for
    Capabilities, Attributes, Address Families, and Application
    Protocols.  IANA has added the following attribute codes and address
    family codes to the TRIP [<a href="#ref-2" title='"Telephony Routing over IP (TRIP)"'>2</a>] registries.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Attribute%20Codes"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Attribute Codes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Attribute%20Codes"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Attribute Codes</span>
 
    The Attribute Type Codes assigned for the new attributes defined in
    this document are listed below:
@@ -1510,7 +1489,7 @@ Table of Contents
       19     TrunkGroup                          [<a href="./rfc5140.html">RFC5140</a>]
       20     Carrier                             [<a href="./rfc5140.html">RFC5140</a>]
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Address%20Family%20Codes"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Address Family Codes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Address%20Family%20Codes"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Address Family Codes</span>
 
    The following subsections show the codes that have been assigned for
    the two new address families introduced in this document.
@@ -1520,83 +1499,83 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 24]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-25" id="page-25" name="page-25"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-25"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.1.%20%20TrunkGroup%20Address%20Family"></a></body></html><a class="selflink" href="#section-9.2.1" name="section-9.2.1">9.2.1</a>.  TrunkGroup Address Family</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.1.%20%20TrunkGroup%20Address%20Family"></a></body></html><a class="selflink" href="#section-9.2.1" id="section-9.2.1">9.2.1</a>.  TrunkGroup Address Family</span>
 
       Code      Address Family                   Reference
       ----      --------------                   ---------
        4          TrunkGroup                     [<a href="./rfc5140.html">RFC5140</a>]
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.2.%20%20Carrier%20Address%20Family"></a></body></html><a class="selflink" href="#section-9.2.2" name="section-9.2.2">9.2.2</a>.  Carrier Address Family</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.2.%20%20Carrier%20Address%20Family"></a></body></html><a class="selflink" href="#section-9.2.2" id="section-9.2.2">9.2.2</a>.  Carrier Address Family</span>
 
       Code      Address Family                   Reference
       ----      --------------                   ---------
        5          Carrier                        [<a href="./rfc5140.html">RFC5140</a>]
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>.  Acknowledgments</span>
 
    We wish to thank Vijay Gurbani, Li Li, Kevin McDermott, David Oran,
    Bob Penfield, Jon Peterson, Anirudh Sahoo, and James Yu for their
    insightful comments and suggestions.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20References"></a></body></html><a class="selflink" href="#section-11" name="section-11">11</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.%20%20References"></a></body></html><a class="selflink" href="#section-11" id="section-11">11</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-11.1" name="section-11.1">11.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-11.1" id="section-11.1">11.1</a>.  Normative References</span>
 
-   [<a id="ref-1" name="ref-1">1</a>]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
-        Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-1">1</a>]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
+        Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-2" name="ref-2">2</a>]  Rosenberg, J., Salama, H., and M. Squire, "Telephony Routing
+   [<a id="ref-2">2</a>]  Rosenberg, J., Salama, H., and M. Squire, "Telephony Routing
         over IP (TRIP)", <a href="./rfc3219.html">RFC 3219</a>, January 2002.
 
-   [<a id="ref-3" name="ref-3">3</a>]  Kent, S. and K. Seo, "Security Architecture for the Internet
+   [<a id="ref-3">3</a>]  Kent, S. and K. Seo, "Security Architecture for the Internet
         Protocol", <a href="./rfc4301.html">RFC 4301</a>, December 2005.
 
-   [<a id="ref-4" name="ref-4">4</a>]  Gurbani, V. and C. Jennings, "Representing Trunk Groups in
+   [<a id="ref-4">4</a>]  Gurbani, V. and C. Jennings, "Representing Trunk Groups in
         tel/sip Uniform Resource Identifiers (URIs)", <a href="./rfc4904.html">RFC 4904</a>, June
         2007.
 
-   [<a id="ref-5" name="ref-5">5</a>]  Yu, J., "Number Portability Parameters for the "tel" URI", <a href="./rfc4694.html">RFC</a>
+   [<a id="ref-5">5</a>]  Yu, J., "Number Portability Parameters for the "tel" URI", <a href="./rfc4694.html">RFC</a>
         <a href="./rfc4694.html">4694</a>, October 2006.
 
-   [<a id="ref-6" name="ref-6">6</a>]  Kent, S., "IP Authentication Header", <a href="./rfc4302.html">RFC 4302</a>, December 2005.
+   [<a id="ref-6">6</a>]  Kent, S., "IP Authentication Header", <a href="./rfc4302.html">RFC 4302</a>, December 2005.
 
-   [<a id="ref-7" name="ref-7">7</a>]  Kent, S., "IP Encapsulating Security Payload (ESP)", <a href="./rfc4303.html">RFC 4303</a>,
+   [<a id="ref-7">7</a>]  Kent, S., "IP Encapsulating Security Payload (ESP)", <a href="./rfc4303.html">RFC 4303</a>,
         December 2005.
 
-   [<a id="ref-8" name="ref-8">8</a>]  Crocker, D., Ed., and P. Overell, "Augmented BNF for Syntax
+   [<a id="ref-8">8</a>]  Crocker, D., Ed., and P. Overell, "Augmented BNF for Syntax
         Specifications: ABNF", STD 68, <a href="./rfc5234.html">RFC 5234</a>, January 2008.
 
-   [<a id="ref-9" name="ref-9">9</a>]  Kaufman, C., Ed., "Internet Key Exchange (IKEv2) Protocol", <a href="./rfc4306.html">RFC</a>
+   [<a id="ref-9">9</a>]  Kaufman, C., Ed., "Internet Key Exchange (IKEv2) Protocol", <a href="./rfc4306.html">RFC</a>
         <a href="./rfc4306.html">4306</a>, December 2005.
 
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 25]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-26" id="page-26" name="page-26"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-26"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
-   [<a id="ref-10" name="ref-10">10</a>] Manral, V., "Cryptographic Algorithm Implementation Requirements
+   [<a id="ref-10">10</a>] Manral, V., "Cryptographic Algorithm Implementation Requirements
         for Encapsulating Security Payload (ESP) and Authentication
         Header (AH)", <a href="./rfc4835.html">RFC 4835</a>, April 2007.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20Informative%20References"></a></body></html><a class="selflink" href="#section-11.2" name="section-11.2">11.2</a>. Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/11.2.%20Informative%20References"></a></body></html><a class="selflink" href="#section-11.2" id="section-11.2">11.2</a>. Informative References</span>
 
-   [<a id="ref-11" name="ref-11">11</a>] Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston, A.,
+   [<a id="ref-11">11</a>] Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston, A.,
         Peterson, J., Sparks, R., Handley, M., and E. Schooler, "SIP:
         Session Initiation Protocol", <a href="./rfc3261.html">RFC 3261</a>, June 2002.
 
-   [<a id="ref-12" name="ref-12">12</a>] Rosenberg, J. and H. Schulzrinne, "A Framework for Telephony
+   [<a id="ref-12">12</a>] Rosenberg, J. and H. Schulzrinne, "A Framework for Telephony
         Routing over IP", <a href="./rfc2871.html">RFC 2871</a>, June 2000.
 
-   [<a id="ref-13" name="ref-13">13</a>] ITU-T List of ITU Carrier Codes (published periodically in the
+   [<a id="ref-13">13</a>] ITU-T List of ITU Carrier Codes (published periodically in the
         ITU-T Operational Bulletin).
 
-   [<a id="ref-14" name="ref-14">14</a>] Rosenberg, J., <a href="https://www.google.com/search?sitesearch=tools.ietf.org%2Fhtml%2F&amp;q=inurl:draft-+%22Requirements+for+Gateway+Registration%22" style="text-decoration: none">"Requirements for Gateway Registration"</a>, Work in
+   [<a id="ref-14">14</a>] Rosenberg, J., <a href="https://www.google.com/search?sitesearch=datatracker.ietf.org%2Fdoc%2Fhtml%2F&amp;q=inurl:draft-+%22Requirements+for+Gateway+Registration%22" style="text-decoration: none">"Requirements for Gateway Registration"</a>, Work in
         Progress, November 2001.
 
 
@@ -1632,7 +1611,7 @@ Table of Contents
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 26]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-27" id="page-27" name="page-27"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-27"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -1688,7 +1667,7 @@ Authors' Addresses
 
 
 <span class="grey">Bangalore, et al.           Standards Track                    [Page 27]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-28" id="page-28" name="page-28"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-28"></span>
 <span class="grey"><a href="./rfc5140.html">RFC 5140</a>                         TGREP                        March 2008</span>
 
 
@@ -1697,7 +1676,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2008).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1717,7 +1696,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1744,11 +1723,6 @@ Intellectual Property
 
 
 Bangalore, et al.           Standards Track                    [Page 28]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

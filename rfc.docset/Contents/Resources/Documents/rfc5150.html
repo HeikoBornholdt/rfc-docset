@@ -1,36 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-ayyangar-ccamp-lsp-stitching" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:5150" name="DC.Identifier"/>
-<meta content="February, 2008" name="DC.Date.Issued"/>
-<meta content="Arthi Ayyangar &lt;arthi@nuovasystems.com&gt;" name="DC.Creator"/>
-<meta content='In certain scenarios, there may be a need to combine several
-Generalized Multiprotocol Label Switching (GMPLS) Label Switched Paths
-(LSPs) such that a single end-to-end (e2e) LSP is realized and all
-traffic from one constituent LSP is switched onto the next LSP. We
-will refer to this as "LSP stitching", the key requirement being that
-a constituent LSP not be allocated to more than one e2e LSP. The
-constituent LSPs will be referred to as "LSP segments" (S-LSPs).  This
-document describes extensions to the existing GMPLS signaling protocol
-(Resource Reservation Protocol-Traffic Engineering (RSVP-TE)) to
-establish e2e LSPs created from S-LSPs, and describes how the LSPs can
-be managed using the GMPLS signaling and routing protocols.  It may be
-possible to configure a GMPLS node to switch the traffic from an LSP
-for which it is the egress, to another LSP for which it is the
-ingress, without requiring any signaling or routing extensions
-whatsoever and such that the operation is completely transparent to
-other nodes. This will also result in LSP stitching in the data plane.
-However, this document does not cover this scenario of LSP stitching.
-[STANDARDS-TRACK]' name="DC.Description.Abstract"/>
-<meta content="Label Switched Path Stitching with Generalized Multiprotocol Label Switching Traffic Engineering (GMPLS TE)" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 5150 - Label Switched Path Stitching with Generalized Multiprotocol Label Switching Traffic Engineering (GMPLS TE)</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="A. Ayyangar" name="citation_author"/>
+<meta content="K. Kompella" name="citation_author"/>
+<meta content="JP. Vasseur" name="citation_author"/>
+<meta content="A. Farrel" name="citation_author"/>
+<meta content="February, 2008" name="citation_publication_date"/>
+<meta content="Label Switched Path Stitching with Generalized Multiprotocol Label Switching Traffic Engineering (GMPLS TE)" name="citation_title"/>
+<meta content="10.17487/RFC5150" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc5150" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc5150.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 5150: Label Switched Path Stitching with Generalized Multiprotocol Label Switching Traffic Engineering (GMPLS TE)</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -59,7 +43,7 @@ However, this document does not cover this scenario of LSP stitching.
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -68,7 +52,7 @@ However, this document does not cover this scenario of LSP stitching.
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -147,19 +131,18 @@ However, this document does not cover this scenario of LSP stitching.
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -173,21 +156,9 @@ However, this document does not cover this scenario of LSP stitching.
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgblue" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc5150.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc5150" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-ccamp-lsp-stitching.html" title="draft-ietf-ccamp-lsp-stitching">draft-ietf-ccamp-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc5150" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc5150" title="Side-by-side diff">Diff2</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5150&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>]           </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Network Working Group                                        A. Ayyangar
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc5150.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc5150.txt.pdf">PDF</a>|<a href="/rfc/rfc5150.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc5150" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=5150&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc5150" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc5150" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                       PROPOSED STANDARD</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                        A. Ayyangar
 Request for Comments: 5150                                   K. Kompella
 Category: Standards Track                               Juniper Networks
                                                              JP. Vasseur
@@ -239,7 +210,7 @@ Abstract
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -276,7 +247,7 @@ Table of Contents
       <a href="#section-9.1">9.1</a>. Normative References ......................................<a href="#page-16">16</a>
       <a href="#section-9.2">9.2</a>. Informative References ....................................<a href="#page-17">17</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    A stitched Generalized Multiprotocol Label Switching (GMPLS) Traffic
    Engineering (TE) Label Switched Path (LSP) is built from a set of
@@ -295,7 +266,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -311,13 +282,13 @@ Table of Contents
    here results in an end-to-end LSP both in the control and data
    planes.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-1.1" name="section-1.1">1.1</a>.  Conventions Used in This Document</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.1.%20%20Conventions%20Used%20in%20This%20Document"></a></body></html><a class="selflink" href="#section-1.1" id="section-1.1">1.1</a>.  Conventions Used in This Document</span>
 
    The key words "<em>MUST</em>", "<em>MUST NOT</em>", "<em>REQUIRED</em>", "<em>SHALL</em>", "<em>SHALL NOT</em>",
    "<em>SHOULD</em>", "<em>SHOULD NOT</em>", "<em>RECOMMENDED</em>", "<em>MAY</em>", and "<em>OPTIONAL</em>" in this
    document are to be interpreted as described in <a href="./rfc2119.html">RFC 2119</a> [<a href="./rfc2119.html" title='"Key words for use in RFCs to Indicate Requirement Levels"'>RFC2119</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Comparison%20with%20LSP%20Hierarchy"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Comparison with LSP Hierarchy</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Comparison%20with%20LSP%20Hierarchy"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Comparison with LSP Hierarchy</span>
 
    LSP hierarchy ([<a href="./rfc4206.html" title='"Label Switched Paths (LSP) Hierarchy with Generalized Multi-Protocol Label Switching (GMPLS) Traffic Engineering (TE)"'>RFC4206</a>]) provides signaling and routing procedures
    so that:
@@ -351,7 +322,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -394,9 +365,9 @@ Table of Contents
    S-LSP may be different from that of an H-LSP and will be described in
    detail in <a href="#section-3.1">Section 3.1</a>.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Usage"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Usage</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Usage"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Usage</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Triggers%20for%20LSP%20Segment%20Setup"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>.  Triggers for LSP Segment Setup</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20%20Triggers%20for%20LSP%20Segment%20Setup"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>.  Triggers for LSP Segment Setup</span>
 
    An S-LSP may be created either by administrative control
    (configuration trigger) or dynamically due to an incoming LSP
@@ -407,7 +378,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -424,7 +395,7 @@ Table of Contents
    satisfy locally configured policies on the node as described in
    [<a href="./rfc5151.html" title='"Inter- Domain MPLS and GMPLS Traffic Engineering -- Resource Reservation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC5151</a>].
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Applications"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Applications</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Applications"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Applications</span>
 
    LSP stitching procedures described in this document are applicable to
    GMPLS nodes that need to associate an e2e LSP with another S-LSP of
@@ -449,7 +420,7 @@ Table of Contents
    attractiveness of RSVP P2MP and should carefully be examined before
    deployment.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Routing%20Aspects"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Routing Aspects</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Routing%20Aspects"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Routing Aspects</span>
 
    An S-LSP is created between two GMPLS nodes, and it may traverse zero
    or more intermediate GMPLS nodes.  There is no forwarding adjacency
@@ -463,7 +434,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -510,7 +481,7 @@ Table of Contents
    recalculated.  This will prevent more than one LSP from being
    computed and admitted over an S-LSP.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Signaling%20Aspects"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Signaling Aspects</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Signaling%20Aspects"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Signaling Aspects</span>
 
    The end nodes of an S-LSP may or may not have a routing adjacency.
    However, they <em>SHOULD</em> have a signaling adjacency (RSVP neighbor
@@ -519,7 +490,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -532,7 +503,7 @@ Table of Contents
    Additional signaling extensions for stitching are described in the
    next section.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20RSVP-TE%20Signaling%20Extensions"></a></body></html><a class="selflink" href="#section-5.1" name="section-5.1">5.1</a>.  RSVP-TE Signaling Extensions</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.%20%20RSVP-TE%20Signaling%20Extensions"></a></body></html><a class="selflink" href="#section-5.1" id="section-5.1">5.1</a>.  RSVP-TE Signaling Extensions</span>
 
    The signaling extensions described here <em>MUST</em> be used for stitching an
    e2e packet or non-packet GMPLS LSP ([<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>]) to an S-LSP.
@@ -545,7 +516,7 @@ Table of Contents
 
    2. Stitching the e2e LSP to the S-LSP.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20Creating%20and%20Preparing%20an%20LSP%20Segment%20for%20Stitching"></a></body></html><a class="selflink" href="#section-5.1.1" name="section-5.1.1">5.1.1</a>.  Creating and Preparing an LSP Segment for Stitching</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.%20%20Creating%20and%20Preparing%20an%20LSP%20Segment%20for%20Stitching"></a></body></html><a class="selflink" href="#section-5.1.1" id="section-5.1.1">5.1.1</a>.  Creating and Preparing an LSP Segment for Stitching</span>
 
    If a GMPLS node desires to create an S-LSP, i.e., one to be used for
    stitching, then it <em>MUST</em> indicate this in the Path message for the S-
@@ -575,7 +546,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                     [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -615,7 +586,7 @@ Table of Contents
    egress node.  It <em>MUST NOT</em> use the S-LSP for stitching if the "LSP
    segment stitching ready" bit is cleared.
 
-<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.1.%20%20Steps%20to%20Support%20Penultimate%20Hop%20Popping"></a></body></html><a class="selflink" href="#section-5.1.1.1" name="section-5.1.1.1">5.1.1.1</a>.  Steps to Support Penultimate Hop Popping</span>
+<span class="h5"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.1.1.%20%20Steps%20to%20Support%20Penultimate%20Hop%20Popping"></a></body></html><a class="selflink" href="#section-5.1.1.1" id="section-5.1.1.1">5.1.1.1</a>.  Steps to Support Penultimate Hop Popping</span>
 
    Note that this section is only applicable to packet LSPs that use
    Penultimate Hop Popping (PHP) at the last hop, where the egress node
@@ -631,7 +602,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                     [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -647,7 +618,7 @@ Table of Contents
    an Implicit or Explicit NULL Upstream Label, and only then proceed
    with the signaling of the e2e LSP.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.%20%20Stitching%20the%20e2e%20LSP%20to%20the%20LSP%20Segment"></a></body></html><a class="selflink" href="#section-5.1.2" name="section-5.1.2">5.1.2</a>.  Stitching the e2e LSP to the LSP Segment</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.2.%20%20Stitching%20the%20e2e%20LSP%20to%20the%20LSP%20Segment"></a></body></html><a class="selflink" href="#section-5.1.2" id="section-5.1.2">5.1.2</a>.  Stitching the e2e LSP to the LSP Segment</span>
 
    When a GMPLS node receives an e2e LSP request, depending on the
    applicable trigger, it may either dynamically create an S-LSP based
@@ -687,7 +658,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                     [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -725,7 +696,7 @@ Table of Contents
    satisfied, then the node <em>SHOULD</em> send back a PathErr with the error
    codes as described in [<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>].
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.%20%20RRO%20Processing%20for%20e2e%20LSPs"></a></body></html><a class="selflink" href="#section-5.1.3" name="section-5.1.3">5.1.3</a>.  RRO Processing for e2e LSPs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.3.%20%20RRO%20Processing%20for%20e2e%20LSPs"></a></body></html><a class="selflink" href="#section-5.1.3" id="section-5.1.3">5.1.3</a>.  RRO Processing for e2e LSPs</span>
 
    RRO procedures for the S-LSP specific to LSP stitching are already
    described in <a href="#section-5.1.1">Section 5.1.1</a>.  In this section, we will look at the RRO
@@ -743,7 +714,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                    [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -751,7 +722,7 @@ Table of Contents
    nodes traversed by the S-LSP itself <em>SHOULD NOT</em> be recorded in the RRO
    for the e2e LSP over the S-LSP hop.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.4.%20%20Teardown%20of%20LSP%20Segments"></a></body></html><a class="selflink" href="#section-5.1.4" name="section-5.1.4">5.1.4</a>.  Teardown of LSP Segments</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.4.%20%20Teardown%20of%20LSP%20Segments"></a></body></html><a class="selflink" href="#section-5.1.4" id="section-5.1.4">5.1.4</a>.  Teardown of LSP Segments</span>
 
    S-LSP teardown follows the standard procedures defined in [<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>]
    and [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>].  This includes procedures without and with setting the
@@ -766,7 +737,7 @@ Table of Contents
    the ingress of this event.  The actual signaling procedures to handle
    this event is out of the scope of this document.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.5.%20%20Teardown%20of%20e2e%20LSPs"></a></body></html><a class="selflink" href="#section-5.1.5" name="section-5.1.5">5.1.5</a>.  Teardown of e2e LSPs</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.1.5.%20%20Teardown%20of%20e2e%20LSPs"></a></body></html><a class="selflink" href="#section-5.1.5" id="section-5.1.5">5.1.5</a>.  Teardown of e2e LSPs</span>
 
    e2e LSP teardown also follows standard procedures defined in
    [<a href="./rfc3209.html" title='"RSVP-TE: Extensions to RSVP for LSP Tunnels"'>RFC3209</a>] and [<a href="./rfc3473.html" title='"Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions"'>RFC3473</a>] either without or with the administrative
@@ -799,7 +770,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                    [Page 11]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-12" id="page-12" name="page-12"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-12"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -815,9 +786,9 @@ Table of Contents
    interval may be set based on local implementation.  The <em>RECOMMENDED</em>
    interval is 30 seconds.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Summary%20of%20LSP%20Stitching%20Procedures"></a></body></html><a class="selflink" href="#section-5.2" name="section-5.2">5.2</a>.  Summary of LSP Stitching Procedures</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.%20%20Summary%20of%20LSP%20Stitching%20Procedures"></a></body></html><a class="selflink" href="#section-5.2" id="section-5.2">5.2</a>.  Summary of LSP Stitching Procedures</span>
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.1.%20%20Example%20Topology"></a></body></html><a class="selflink" href="#section-5.2.1" name="section-5.2.1">5.2.1</a>.  Example Topology</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.1.%20%20Example%20Topology"></a></body></html><a class="selflink" href="#section-5.2.1" id="section-5.2.1">5.2.1</a>.  Example Topology</span>
 
    The following topology will be used for the purpose of examples
    quoted in the following sections.
@@ -846,7 +817,7 @@ Table of Contents
                  +++++++++++++++++++++
                          RESV (Label)
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.2.%20%20LSP%20Segment%20Setup"></a></body></html><a class="selflink" href="#section-5.2.2" name="section-5.2.2">5.2.2</a>.  LSP Segment Setup</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.2.%20%20LSP%20Segment%20Setup"></a></body></html><a class="selflink" href="#section-5.2.2" id="section-5.2.2">5.2.2</a>.  LSP Segment Setup</span>
 
    Let us consider an S-LSP LSP-AB being set up between two nodes A and
    B that are more than one hop away.  Node A sends a Path message for
@@ -855,7 +826,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                    [Page 12]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-13" id="page-13" name="page-13"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-13"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -867,7 +838,7 @@ Table of Contents
    stitching.  Node A cannot use LSP-AB for stitching if the bit is
    cleared in the RRO.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.3.%20%20Setup%20of%20an%20e2e%20LSP"></a></body></html><a class="selflink" href="#section-5.2.3" name="section-5.2.3">5.2.3</a>.  Setup of an e2e LSP</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.3.%20%20Setup%20of%20an%20e2e%20LSP"></a></body></html><a class="selflink" href="#section-5.2.3" id="section-5.2.3">5.2.3</a>.  Setup of an e2e LSP</span>
 
    Let us consider an e2e LSP LSP1-2 starting one hop before A on R1 and
    ending on node R2, as shown above.  If the S-LSP has been advertised
@@ -881,7 +852,7 @@ Table of Contents
    outside the domain.  R1 would use either per-domain path computation
    ([<a href="./rfc5152.html" title='"A Per-Domain Path Computation Method for Establishing Inter-Domain Traffic Engineering (TE) Label Switched Paths (LSPs)"'>RFC5152</a>]) or PCE-based computation ([<a href="./rfc4655.html" title='"A Path Computation Element (PCE)-Based Architecture"'>RFC4655</a>]) for LSP1-2.
 
-<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.4.%20%20Stitching%20of%20an%20e2e%20LSP%20into%20an%20LSP%20Segment"></a></body></html><a class="selflink" href="#section-5.2.4" name="section-5.2.4">5.2.4</a>.  Stitching of an e2e LSP into an LSP Segment</span>
+<span class="h4"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.2.4.%20%20Stitching%20of%20an%20e2e%20LSP%20into%20an%20LSP%20Segment"></a></body></html><a class="selflink" href="#section-5.2.4" id="section-5.2.4">5.2.4</a>.  Stitching of an e2e LSP into an LSP Segment</span>
 
    When the Path message for the e2e LSP LSP1-2 arrives at node A, A
    matches the switching type of LSP1-2 with the S-LSP LSP-AB.  If the
@@ -911,11 +882,11 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                    [Page 13]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-14" id="page-14" name="page-14"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-14"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    From a security point of view, the changes introduced in this
    document model the changes introduced by [<a href="./rfc4206.html" title='"Label Switched Paths (LSP) Hierarchy with Generalized Multi-Protocol Label Switching (GMPLS) Traffic Engineering (TE)"'>RFC4206</a>].  That is, the
@@ -932,7 +903,7 @@ Table of Contents
    neighbors, and security associations <em>MUST</em> be bound to the
    communicating neighbors themselves.
 
-   [<a id="ref-RFC2747" name="ref-RFC2747">RFC2747</a>] provides a solution to this issue: in <a href="#section-2.1">Section 2.1</a>, under
+   [<a id="ref-RFC2747">RFC2747</a>] provides a solution to this issue: in <a href="#section-2.1">Section 2.1</a>, under
    "Key Identifier", an IP address is a valid identifier for the sending
    (and by analogy, receiving) interface.  Since RSVP messages for a
    given LSP are sent to an IP address that identifies the next/previous
@@ -967,7 +938,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                    [Page 14]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-15" id="page-15" name="page-15"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-15"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -978,11 +949,11 @@ Table of Contents
 
    An analysis of GMPLS security issues can be found in [<a href="#ref-MPLS-SEC" title='"Security Framework for MPLS and GMPLS Networks"'>MPLS-SEC</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  IANA Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20IANA%20Considerations"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  IANA Considerations</span>
 
    IANA has made the following codepoint allocations for this document.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Attribute%20Flags%20for%20LSP_ATTRIBUTES%20Object"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Attribute Flags for LSP_ATTRIBUTES Object</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Attribute%20Flags%20for%20LSP_ATTRIBUTES%20Object"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Attribute Flags for LSP_ATTRIBUTES Object</span>
 
    The "RSVP TE Parameters" registry includes the "Attributes Flags"
    sub-registry.
@@ -1006,7 +977,7 @@ Table of Contents
    ----+----------------------+------------+------------+-----+----------
    5    LSP stitching desired   Yes          No           Yes   [<a href="./rfc5150.html">RFC5150</a>]
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20New%20Error%20Codes"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  New Error Codes</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20New%20Error%20Codes"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  New Error Codes</span>
 
    The "Resource ReSerVation Protocol (RSVP) Parameters" registry
    includes the "Error Codes and Globally-Defined Error Value Sub-Codes"
@@ -1023,7 +994,7 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                    [Page 15]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-16" id="page-16" name="page-16"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-16"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -1033,37 +1004,37 @@ Table of Contents
 
        30 = Stitching unsupported  [<a href="./rfc5150.html">RFC5150</a>]
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>.  Acknowledgments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20%20Acknowledgments"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>.  Acknowledgments</span>
 
    The authors would like to thank Dimitri Papadimitriou and Igor
    Bryskin for their thorough review of the document and discussions
    regarding the same.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20%20References"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" name="section-9.1">9.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-9.1" id="section-9.1">9.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2119" name="ref-RFC2119">RFC2119</a>]    Bradner, S., "Key words for use in RFCs to Indicate
-                Requirement Levels", <a href="./bcp14.html">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
+   [<a id="ref-RFC2119">RFC2119</a>]    Bradner, S., "Key words for use in RFCs to Indicate
+                Requirement Levels", <a href="https://www.rfc-editor.org/bcp/bcp14">BCP 14</a>, <a href="./rfc2119.html">RFC 2119</a>, March 1997.
 
-   [<a id="ref-RFC2747" name="ref-RFC2747">RFC2747</a>]    Baker, F., Lindell, B., and M. Talwar, "RSVP
+   [<a id="ref-RFC2747">RFC2747</a>]    Baker, F., Lindell, B., and M. Talwar, "RSVP
                 Cryptographic Authentication", <a href="./rfc2747.html">RFC 2747</a>, January 2000.
 
-   [<a id="ref-RFC3209" name="ref-RFC3209">RFC3209</a>]    Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan,
+   [<a id="ref-RFC3209">RFC3209</a>]    Awduche, D., Berger, L., Gan, D., Li, T., Srinivasan,
                 V., and G. Swallow, "RSVP-TE: Extensions to RSVP for LSP
                 Tunnels", <a href="./rfc3209.html">RFC 3209</a>, December 2001.
 
-   [<a id="ref-RFC3473" name="ref-RFC3473">RFC3473</a>]    Berger, L., Ed., "Generalized Multi-Protocol Label
+   [<a id="ref-RFC3473">RFC3473</a>]    Berger, L., Ed., "Generalized Multi-Protocol Label
                 Switching (GMPLS) Signaling Resource ReserVation
                 Protocol-Traffic Engineering (RSVP-TE) Extensions", <a href="./rfc3473.html">RFC</a>
                 <a href="./rfc3473.html">3473</a>, January 2003.
 
-   [<a id="ref-RFC4206" name="ref-RFC4206">RFC4206</a>]    Kompella, K. and Y. Rekhter, "Label Switched Paths (LSP)
+   [<a id="ref-RFC4206">RFC4206</a>]    Kompella, K. and Y. Rekhter, "Label Switched Paths (LSP)
                 Hierarchy with Generalized Multi-Protocol Label
                 Switching (GMPLS) Traffic Engineering (TE)", <a href="./rfc4206.html">RFC 4206</a>,
                 October 2005.
 
-   [<a id="ref-RFC4420" name="ref-RFC4420">RFC4420</a>]    Farrel, A., Ed., Papadimitriou, D., Vasseur, J.-P., and
+   [<a id="ref-RFC4420">RFC4420</a>]    Farrel, A., Ed., Papadimitriou, D., Vasseur, J.-P., and
                 A. Ayyangar, "Encoding of Attributes for Multiprotocol
                 Label Switching (MPLS) Label Switched Path (LSP)
                 Establishment Using Resource ReserVation Protocol-
@@ -1079,53 +1050,53 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                    [Page 16]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-17" id="page-17" name="page-17"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-17"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" name="section-9.2">9.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-9.2" id="section-9.2">9.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC3032" name="ref-RFC3032">RFC3032</a>]    Rosen, E., Tappan, D., Fedorkow, G., Rekhter, Y.,
+   [<a id="ref-RFC3032">RFC3032</a>]    Rosen, E., Tappan, D., Fedorkow, G., Rekhter, Y.,
                 Farinacci, D., Li, T., and A. Conta, "MPLS Label Stack
                 Encoding", <a href="./rfc3032.html">RFC 3032</a>, January 2001.
 
-   [<a id="ref-RFC3477" name="ref-RFC3477">RFC3477</a>]    Kompella, K. and Y. Rekhter, "Signalling Unnumbered
+   [<a id="ref-RFC3477">RFC3477</a>]    Kompella, K. and Y. Rekhter, "Signalling Unnumbered
                 Links in Resource ReSerVation Protocol - Traffic
                 Engineering (RSVP-TE)", <a href="./rfc3477.html">RFC 3477</a>, January 2003.
 
-   [<a id="ref-RFC4201" name="ref-RFC4201">RFC4201</a>]    Kompella, K., Rekhter, Y., and L. Berger, "Link Bundling
+   [<a id="ref-RFC4201">RFC4201</a>]    Kompella, K., Rekhter, Y., and L. Berger, "Link Bundling
                 in MPLS Traffic Engineering (TE)", <a href="./rfc4201.html">RFC 4201</a>, October
                 2005.
 
-   [<a id="ref-RFC4203" name="ref-RFC4203">RFC4203</a>]    Kompella, K., Ed., and Y. Rekhter, Ed., "OSPF Extensions
+   [<a id="ref-RFC4203">RFC4203</a>]    Kompella, K., Ed., and Y. Rekhter, Ed., "OSPF Extensions
                 in Support of Generalized Multi-Protocol Label Switching
                 (GMPLS)", <a href="./rfc4203.html">RFC 4203</a>, October 2005.
 
-   [<a id="ref-RFC4205" name="ref-RFC4205">RFC4205</a>]    Kompella, K., Ed., and Y. Rekhter, Ed., "Intermediate
+   [<a id="ref-RFC4205">RFC4205</a>]    Kompella, K., Ed., and Y. Rekhter, Ed., "Intermediate
                 System to Intermediate System (IS-IS) Extensions in
                 Support of Generalized Multi-Protocol Label Switching
                 (GMPLS)", <a href="./rfc4205.html">RFC 4205</a>, October 2005.
 
-   [<a id="ref-RFC4655" name="ref-RFC4655">RFC4655</a>]    Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
+   [<a id="ref-RFC4655">RFC4655</a>]    Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
                 Computation Element (PCE)-Based Architecture", <a href="./rfc4655.html">RFC 4655</a>,
                 August 2006.
 
-   [<a id="ref-RFC4726" name="ref-RFC4726">RFC4726</a>]    Farrel, A., Vasseur, J.-P., and A. Ayyangar, "A
+   [<a id="ref-RFC4726">RFC4726</a>]    Farrel, A., Vasseur, J.-P., and A. Ayyangar, "A
                 Framework for Inter-Domain Multiprotocol Label Switching
                 Traffic Engineering", <a href="./rfc4726.html">RFC 4726</a>, November 2006.
 
-   [<a id="ref-RFC4875" name="ref-RFC4875">RFC4875</a>]    Aggarwal, R., Ed., Papadimitriou, D., Ed., and S.
+   [<a id="ref-RFC4875">RFC4875</a>]    Aggarwal, R., Ed., Papadimitriou, D., Ed., and S.
                 Yasukawa, Ed., "Extensions to Resource Reservation
                 Protocol - Traffic Engineering (RSVP-TE) for Point-to-
                 Multipoint TE Label Switched Paths (LSPs)", <a href="./rfc4875.html">RFC 4875</a>,
                 May 2007.
 
-   [<a id="ref-RFC5151" name="ref-RFC5151">RFC5151</a>]    Farrel, A., Ed., Ayyangar, A., and JP. Vasseur, "Inter-
+   [<a id="ref-RFC5151">RFC5151</a>]    Farrel, A., Ed., Ayyangar, A., and JP. Vasseur, "Inter-
                 Domain MPLS and GMPLS Traffic Engineering -- Resource
                 Reservation Protocol-Traffic Engineering (RSVP-TE)
                 Extensions", <a href="./rfc5151.html">RFC 5151</a>, February 2008.
 
-   [<a id="ref-RFC5152" name="ref-RFC5152">RFC5152</a>]    Vasseur, JP., Ed., Ayyangar, A., Ed., and R. Zhang, "A
+   [<a id="ref-RFC5152">RFC5152</a>]    Vasseur, JP., Ed., Ayyangar, A., Ed., and R. Zhang, "A
                 Per-Domain Path Computation Method for Establishing
                 Inter-Domain Traffic Engineering (TE) Label Switched
                 Paths (LSPs)", <a href="./rfc5152.html">RFC 5152</a>, February 2008.
@@ -1135,11 +1106,11 @@ Table of Contents
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                    [Page 17]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-18" id="page-18" name="page-18"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-18"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
-   [<a id="ref-MPLS-SEC" name="ref-MPLS-SEC">MPLS-SEC</a>]   Fang, L., Ed., Behringer, M., Callon, R., Le Roux, J.
+   [<a id="ref-MPLS-SEC">MPLS-SEC</a>]   Fang, L., Ed., Behringer, M., Callon, R., Le Roux, J.
                 L., Zhang, R., Knight, P., Stein, Y., Bitar, N., and R.
                 Graveman., "Security Framework for MPLS and GMPLS
                 Networks", Work in Progress, July 2007.
@@ -1191,7 +1162,7 @@ Authors' Addresses
 
 
 <span class="grey">Ayyangar, et al.            Standards Track                    [Page 18]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-19" id="page-19" name="page-19"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-19"></span>
 <span class="grey"><a href="./rfc5150.html">RFC 5150</a>              LSP Stitching with GMPLS TE          February 2008</span>
 
 
@@ -1200,7 +1171,7 @@ Full Copyright Statement
    Copyright (C) The IETF Trust (2008).
 
    This document is subject to the rights, licenses and restrictions
-   contained in <a href="./bcp78.html">BCP 78</a>, and except as set forth therein, the authors
+   contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a>, and except as set forth therein, the authors
    retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -1220,7 +1191,7 @@ Intellectual Property
    might or might not be available; nor does it represent that it has
    made any independent effort to identify any such rights.  Information
    on the procedures with respect to rights in RFC documents can be
-   found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -1247,11 +1218,6 @@ Intellectual Property
 
 
 Ayyangar, et al.            Standards Track                    [Page 19]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

@@ -1,25 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:2861" name="DC.Identifier"/>
-<meta content="This document describes a simple modification to TCP's congestion
-control algorithms to decay the congestion window cwnd after the
-transition from a sufficiently-long application-limited period, while
-using the slow-start threshold ssthresh to save information about the
-previous value of the congestion window. This memo defines an
-Experimental Protocol for the Internet community." name="DC.Description.Abstract"/>
-<meta content="Floyd, Sally" name="DC.Creator"/>
-<meta content="Padhye, Jitendra" name="DC.Creator"/>
-<meta content="Handley, Mark" name="DC.Creator"/>
-<meta content="June, 2000" name="DC.Date.Issued"/>
-<meta content="TCP Congestion Window Validation" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 2861 - TCP Congestion Window Validation</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="M. Handley" name="citation_author"/>
+<meta content="J. Padhye" name="citation_author"/>
+<meta content="S. Floyd" name="citation_author"/>
+<meta content="June, 2000" name="citation_publication_date"/>
+<meta content=" TCP Congestion Window Validation " name="citation_title"/>
+<meta content="10.17487/RFC2861" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc2861" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc2861.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 2861:  TCP Congestion Window Validation </title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -48,7 +42,7 @@ Experimental Protocol for the Internet community." name="DC.Description.Abstract
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -57,7 +51,7 @@ Experimental Protocol for the Internet community." name="DC.Description.Abstract
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -136,19 +130,18 @@ Experimental Protocol for the Internet community." name="DC.Description.Abstract
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -162,21 +155,9 @@ Experimental Protocol for the Internet community." name="DC.Description.Abstract
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgbrown" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc2861.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc2861" title="PDF version of this document">pdf</a>] [<a href="./draft-handley-tcp-cwv.html" title="draft-handley-tcp-cwv">draft-handley-tcp...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc2861" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc2861" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=2861">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">Obsoleted by: <a href="./rfc7661.html">7661</a>                                              HISTORIC</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                         M. Handley
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc2861.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc2861.txt.pdf">PDF</a>|<a href="/rfc/rfc2861.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc2861" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=2861&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc2861" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc2861" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">Obsoleted by: <a href="/rfc/rfc7661" target="_blank">7661</a>                                              HISTORIC</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                         M. Handley
 Request for Comments: 2861                                     J. Padhye
 Category: Experimental                                          S. Floyd
                                                                    ACIRI
@@ -219,7 +200,7 @@ Abstract
    these algorithms both with simulations and with experiments from an
    implementation in FreeBSD.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Conventions%20and%20Acronyms"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Conventions and Acronyms</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Conventions%20and%20Acronyms"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Conventions and Acronyms</span>
 
    The keywords <em>MUST</em>, <em>MUST NOT</em>, <em>REQUIRED</em>, <em>SHALL</em>, <em>SHALL NOT</em>, <em>SHOULD</em>,
    <em>SHOULD NOT</em>, <em>RECOMMENDED</em>, <em>MAY</em>, and <em>OPTIONAL</em>, when they appear in this
@@ -228,11 +209,11 @@ Abstract
 
 
 <span class="grey">Handley, et al.               Experimental                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc2861.html">RFC 2861</a>            TCP Congestion Window Validation           June 2000</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20Introduction"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>. Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20Introduction"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>. Introduction</span>
 
    TCP's congestion window controls the number of packets a TCP flow may
    have in the network at any time.  The congestion window is set using
@@ -284,7 +265,7 @@ Abstract
 
 
 <span class="grey">Handley, et al.               Experimental                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc2861.html">RFC 2861</a>            TCP Congestion Window Validation           June 2000</span>
 
 
@@ -340,7 +321,7 @@ Abstract
 
 
 <span class="grey">Handley, et al.               Experimental                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc2861.html">RFC 2861</a>            TCP Congestion Window Validation           June 2000</span>
 
 
@@ -354,7 +335,7 @@ Abstract
    orthogonal to the algorithms used to determine the appropriate size
    of the congestion window.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Description"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>. Description</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20Description"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>. Description</span>
 
    When a TCP sender has sufficient data available to fill the available
    network capacity for that flow, cwnd and ssthresh get set to
@@ -396,7 +377,7 @@ Abstract
 
 
 <span class="grey">Handley, et al.               Experimental                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc2861.html">RFC 2861</a>            TCP Congestion Window Validation           June 2000</span>
 
 
@@ -421,7 +402,7 @@ Abstract
    always a valid reflection of the current network state as probed by
    the connection.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20The%20basic%20algorithm%20for%20reducing%20the%20congestion%20window"></a></body></html><a class="selflink" href="#section-3.1" name="section-3.1">3.1</a>. The basic algorithm for reducing the congestion window</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.1.%20The%20basic%20algorithm%20for%20reducing%20the%20congestion%20window"></a></body></html><a class="selflink" href="#section-3.1" id="section-3.1">3.1</a>. The basic algorithm for reducing the congestion window</span>
 
    A key issue in the CWV algorithm is to determine how to apply the
    guideline of reducing the congestion window once for every roundtrip
@@ -452,7 +433,7 @@ Abstract
 
 
 <span class="grey">Handley, et al.               Experimental                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc2861.html">RFC 2861</a>            TCP Congestion Window Validation           June 2000</span>
 
 
@@ -478,7 +459,7 @@ Abstract
    limited period the CWV algorithm reduces the congestion window once
    per RTO.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Pseudo-code%20for%20reducing%20the%20congestion%20window"></a></body></html><a class="selflink" href="#section-3.2" name="section-3.2">3.2</a>.  Pseudo-code for reducing the congestion window</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.2.%20%20Pseudo-code%20for%20reducing%20the%20congestion%20window"></a></body></html><a class="selflink" href="#section-3.2" id="section-3.2">3.2</a>.  Pseudo-code for reducing the congestion window</span>
 
    Initially:
        T_last = tcpnow, T_prev = tcpnow, W_used = 0
@@ -508,7 +489,7 @@ Abstract
 
 
 <span class="grey">Handley, et al.               Experimental                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc2861.html">RFC 2861</a>            TCP Congestion Window Validation           June 2000</span>
 
 
@@ -517,7 +498,7 @@ Abstract
                    T_prev = tcpnow
                    W_used = 0
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Simulations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>. Simulations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20Simulations"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>. Simulations</span>
 
    The CWV proposal has been implemented as an option in the network
    simulator NS [<a href="#ref-NS" title='"http://www-mash.cs.berkeley.edu/ns/"'>NS</a>].  The simulations in the validation test suite for
@@ -530,7 +511,7 @@ Abstract
    critical part of the Congestion Window Validation algorithm.  [<a href="#ref-HPF99" title='"ftp://www- net.cs.umass.edu/pub/Handley99-tcpq-tr-99-77.ps.gz"'>HPF99</a>]
    discusses these simulations in more detail.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20Experiments"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>. Experiments</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20Experiments"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>. Experiments</span>
 
    We have implemented the CWV mechanism in the TCP implementation in
    FreeBSD 3.2.  [<a href="#ref-HPF99" title='"ftp://www- net.cs.umass.edu/pub/Handley99-tcpq-tr-99-77.ps.gz"'>HPF99</a>] discusses these experiments in more detail.
@@ -564,7 +545,7 @@ Abstract
 
 
 <span class="grey">Handley, et al.               Experimental                      [Page 7]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-8" id="page-8" name="page-8"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-8"></span>
 <span class="grey"><a href="./rfc2861.html">RFC 2861</a>            TCP Congestion Window Validation           June 2000</span>
 
 
@@ -592,7 +573,7 @@ Abstract
    competing flows, but it is necessary with current TCP implementations
    that produce bursts similar to those shown in the top graph.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20Conclusions"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>. Conclusions</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20Conclusions"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>. Conclusions</span>
 
    This document has presented several TCP algorithms for Congestion
    Window Validation, to be employed after an idle period or a period in
@@ -620,54 +601,54 @@ Abstract
 
 
 <span class="grey">Handley, et al.               Experimental                      [Page 8]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-9" id="page-9" name="page-9"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-9"></span>
 <span class="grey"><a href="./rfc2861.html">RFC 2861</a>            TCP Congestion Window Validation           June 2000</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20References"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>. References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20References"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>. References</span>
 
-   [<a id="ref-FF96" name="ref-FF96">FF96</a>]     Fall, K., and Floyd, S., Simulation-based Comparisons of
+   [<a id="ref-FF96">FF96</a>]     Fall, K., and Floyd, S., Simulation-based Comparisons of
               Tahoe, Reno, and SACK TCP, Computer Communication Review,
               V. 26 N. 3, July 1996, pp. 5-21.  URL
               "<a href="http://www.aciri.org/floyd/papers.html">http://www.aciri.org/floyd/papers.html</a>".
 
-   [<a id="ref-HPF99" name="ref-HPF99">HPF99</a>]    Mark Handley, Jitendra Padhye, Sally Floyd, TCP Congestion
+   [<a id="ref-HPF99">HPF99</a>]    Mark Handley, Jitendra Padhye, Sally Floyd, TCP Congestion
               Window Validation, UMass CMPSCI Technical Report 99-77,
               September 1999.  URL "<a href="ftp://www-net.cs.umass.edu/pub/Handley99-tcpq-tr-99-77.ps.gz">ftp://www-</a>
               <a href="ftp://www-net.cs.umass.edu/pub/Handley99-tcpq-tr-99-77.ps.gz">net.cs.umass.edu/pub/Handley99-tcpq-tr-99-77.ps.gz</a>".
 
-   [<a id="ref-HTH98" name="ref-HTH98">HTH98</a>]    Amy Hughes, Joe Touch, John Heidemann, "Issues in TCP
+   [<a id="ref-HTH98">HTH98</a>]    Amy Hughes, Joe Touch, John Heidemann, "Issues in TCP
               Slow-Start Restart After Idle", Work in Progress.
 
-   [<a id="ref-J88" name="ref-J88">J88</a>]      Jacobson, V., Congestion Avoidance and Control, Originally
+   [<a id="ref-J88">J88</a>]      Jacobson, V., Congestion Avoidance and Control, Originally
               from Proceedings of SIGCOMM '88 (Palo Alto, CA, Aug.
               1988), and revised in 1992.  URL "<a href="http://www-nrg.ee.lbl.gov/nrg-papers.html">http://www-</a>
               <a href="http://www-nrg.ee.lbl.gov/nrg-papers.html">nrg.ee.lbl.gov/nrg-papers.html</a>".
 
-   [<a id="ref-JKBFL96" name="ref-JKBFL96">JKBFL96</a>]  Raj Jain, Shiv Kalyanaraman, Rohit Goyal, Sonia Fahmy, and
+   [<a id="ref-JKBFL96">JKBFL96</a>]  Raj Jain, Shiv Kalyanaraman, Rohit Goyal, Sonia Fahmy, and
               Fang Lu, Comments on "Use-it or Lose-it", ATM Forum
               Document Number:  ATM Forum/96-0178, URL
               "<a href="http://www.netlab.ohio-state.edu/~jain/atmf/af_rl5b2.htm">http://www.netlab.ohio-</a>
               <a href="http://www.netlab.ohio-state.edu/~jain/atmf/af_rl5b2.htm">state.edu/~jain/atmf/af_rl5b2.htm</a>".
 
-   [<a id="ref-JKGFL95" name="ref-JKGFL95">JKGFL95</a>]  R. Jain, S. Kalyanaraman, R. Goyal, S. Fahmy, and F. Lu, A
+   [<a id="ref-JKGFL95">JKGFL95</a>]  R. Jain, S. Kalyanaraman, R. Goyal, S. Fahmy, and F. Lu, A
               Fix for Source End System Rule 5, AF-TM 95-1660, December
               1995, URL "<a href="http://www.netlab.ohio-state.edu/~jain/atmf/af_rl52.htm">http://www.netlab.ohio-</a>
               <a href="http://www.netlab.ohio-state.edu/~jain/atmf/af_rl52.htm">state.edu/~jain/atmf/af_rl52.htm</a>".
 
-   [<a id="ref-MSML99" name="ref-MSML99">MSML99</a>]   Matt Mathis, Jeff Semke, Jamshid Mahdavi, and Kevin Lahey,
+   [<a id="ref-MSML99">MSML99</a>]   Matt Mathis, Jeff Semke, Jamshid Mahdavi, and Kevin Lahey,
               The Rate-Halving Algorithm for TCP Congestion Control,
               June 1999.  URL
               "<a href="http://www.psc.edu/networking/ftp/papers/draft-ratehalving.txt">http://www.psc.edu/networking/ftp/papers/draft-</a>
               <a href="http://www.psc.edu/networking/ftp/papers/draft-ratehalving.txt">ratehalving.txt</a>".
 
-   [<a id="ref-NS" name="ref-NS">NS</a>]       NS, the UCB/LBNL/VINT Network Simulator.  URL
+   [<a id="ref-NS">NS</a>]       NS, the UCB/LBNL/VINT Network Simulator.  URL
               "<a href="http://www-mash.cs.berkeley.edu/ns/">http://www-mash.cs.berkeley.edu/ns/</a>".
 
-   [<a id="ref-RFC2581" name="ref-RFC2581">RFC2581</a>]  Allman, M., Paxson, V. and W. Stevens, TCP Congestion
+   [<a id="ref-RFC2581">RFC2581</a>]  Allman, M., Paxson, V. and W. Stevens, TCP Congestion
               Control, <a href="./rfc2581.html">RFC 2581</a>, April 1999.
 
-   [<a id="ref-VH97" name="ref-VH97">VH97</a>]     Vikram Visweswaraiah and John Heidemann. Improving Restart
+   [<a id="ref-VH97">VH97</a>]     Vikram Visweswaraiah and John Heidemann. Improving Restart
               of Idle TCP Connections, Technical Report 97-661,
               University of Southern California, November, 1997.
 
@@ -676,15 +657,15 @@ Abstract
 
 
 <span class="grey">Handley, et al.               Experimental                      [Page 9]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-10" id="page-10" name="page-10"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-10"></span>
 <span class="grey"><a href="./rfc2861.html">RFC 2861</a>            TCP Congestion Window Validation           June 2000</span>
 
 
-   [<a id="ref-Dummynet" name="ref-Dummynet">Dummynet</a>] Luigi Rizzo, "Dummynet and Forward Error Correction",
+   [<a id="ref-Dummynet">Dummynet</a>] Luigi Rizzo, "Dummynet and Forward Error Correction",
               Freenix 98, June 1998, New Orleans.  URL
               "<a href="http://info.iet.unipi.it/~luigi/ip_dummynet/">http://info.iet.unipi.it/~luigi/ip_dummynet/</a>".
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" name="section-8">8</a>. Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/8.%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-8" id="section-8">8</a>. Security Considerations</span>
 
    General security considerations concerning TCP congestion control are
    discussed in <a href="./rfc2581.html">RFC 2581</a>.  This document describes a algorithm for one
@@ -693,7 +674,7 @@ Abstract
    There are no known additional security concerns for this specific
    algorithm.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20Authors%27%20Addresses"></a></body></html><a class="selflink" href="#section-9" name="section-9">9</a>. Authors' Addresses</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/9.%20Authors%27%20Addresses"></a></body></html><a class="selflink" href="#section-9" id="section-9">9</a>. Authors' Addresses</span>
 
    Mark Handley
    AT&amp;T Center for Internet Research at ICSI (ACIRI)
@@ -732,11 +713,11 @@ Abstract
 
 
 <span class="grey">Handley, et al.               Experimental                     [Page 10]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-11" id="page-11" name="page-11"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-11"></span>
 <span class="grey"><a href="./rfc2861.html">RFC 2861</a>            TCP Congestion Window Validation           June 2000</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20Full%20Copyright%20Statement"></a></body></html><a class="selflink" href="#section-10" name="section-10">10</a>. Full Copyright Statement</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/10.%20Full%20Copyright%20Statement"></a></body></html><a class="selflink" href="#section-10" id="section-10">10</a>. Full Copyright Statement</span>
 
    Copyright (C) The Internet Society (2000).  All Rights Reserved.
 
@@ -788,11 +769,6 @@ Acknowledgement
 
 
 Handley, et al.               Experimental                     [Page 11]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

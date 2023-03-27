@@ -1,32 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="urn:ietf:rfc:3742" name="DC.Identifier"/>
-<meta content="This document describes an optional modification for TCP's slow-
-start for use with TCP connections with large congestion windows. For
-TCP connections that are able to use congestion windows of thousands
-(or tens of thousands) of MSS-sized segments (for MSS the sender's
-MAXIMUM SEGMENT SIZE), the current slow-start procedure can result in
-increasing the congestion window by thousands of segments in a single
-round-trip time. Such an increase can easily result in thousands of
-packets being dropped in one round-trip time. This is often counter-
-productive for the TCP flow itself, and is also hard on the rest of
-the traffic sharing the congested link. This note describes Limited
-Slow-Start as an optional mechanism for limiting the number of
-segments by which the congestion window is increased for one window of
-data during slow-start, in order to improve performance for TCP
-connections with large congestion windows. This memo defines an
-Experimental Protocol for the Internet community." name="DC.Description.Abstract"/>
-<meta content="Sally Floyd &lt;floyd@icir.org&gt;" name="DC.Creator"/>
-<meta content="March, 2004" name="DC.Date.Issued"/>
-<meta content="Limited Slow-Start for TCP with Large Congestion Windows" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 3742 - Limited Slow-Start for TCP with Large Congestion Windows</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="S. Floyd" name="citation_author"/>
+<meta content="March, 2004" name="citation_publication_date"/>
+<meta content=" Limited Slow-Start for TCP with Large Congestion Windows " name="citation_title"/>
+<meta content="10.17487/RFC3742" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc3742" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc3742.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 3742:  Limited Slow-Start for TCP with Large Congestion Windows </title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -55,7 +40,7 @@ Experimental Protocol for the Internet community." name="DC.Description.Abstract
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -64,7 +49,7 @@ Experimental Protocol for the Internet community." name="DC.Description.Abstract
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -143,19 +128,18 @@ Experimental Protocol for the Internet community." name="DC.Description.Abstract
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -169,21 +153,9 @@ Experimental Protocol for the Internet community." name="DC.Description.Abstract
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgyellow" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc3742.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc3742" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-tsvwg-slowstart.html" title="draft-ietf-tsvwg-slowstart">draft-ietf-tsvwg-...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc3742" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc3742" title="Side-by-side diff">Diff2</a>] [<a href="https://www.rfc-editor.org/errata_search.php?rfc=3742">Errata</a>]        </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/>
-<span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><br/>
-<pre>
-Network Working Group                                           S. Floyd
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc3742.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc3742.txt.pdf">PDF</a>|<a href="/rfc/rfc3742.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc3742" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=3742&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a class="boldtext" href="/errata/rfc3742" target="_blank">Errata</a>] [<a href="https://www.rfc-editor.org/info/rfc3742" title="Info page">Info page</a>]         </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                            EXPERIMENTAL</span><br/><span class="pre noprint docinfo"> <span style="color: #C00;">Errata Exist</span></span><pre>Network Working Group                                           S. Floyd
 Request for Comments: 3742                                          ICSI
 Category: Experimental                                        March 2004
 
@@ -218,7 +190,7 @@ Abstract
    window of data during slow-start, in order to improve performance for
    TCP connections with large congestion windows.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    This note describes an optional modification for TCP's slow-start for
    use with TCP connections with large congestion windows.  For TCP
@@ -235,7 +207,7 @@ Abstract
 
 
 <span class="grey">Floyd                         Experimental                      [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc3742.html">RFC 3742</a>     TCP's Slow-Start with Large Congestion Windows   March 2004</span>
 
 
@@ -253,7 +225,7 @@ Abstract
    large number of round-trip times to recover its old congestion
    window.  This poor performance is illustrated in [<a href="#ref-F02" title="&quot;Performance Problems with TCP's Slow-Start&quot;">F02</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20The%20Proposal%20for%20Limited%20Slow-Start"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  The Proposal for Limited Slow-Start</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20The%20Proposal%20for%20Limited%20Slow-Start"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  The Proposal for Limited Slow-Start</span>
 
    Limited Slow-Start introduces a parameter, "max_ssthresh", and
    modifies the slow-start mechanism for values of the congestion window
@@ -291,7 +263,7 @@ Abstract
 
 
 <span class="grey">Floyd                         Experimental                      [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc3742.html">RFC 3742</a>     TCP's Slow-Start with Large Congestion Windows   March 2004</span>
 
 
@@ -347,11 +319,11 @@ Abstract
 
 
 <span class="grey">Floyd                         Experimental                      [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc3742.html">RFC 3742</a>     TCP's Slow-Start with Large Congestion Windows   March 2004</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Experimental%20Results"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Experimental Results</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Experimental%20Results"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Experimental Results</span>
 
    Tom Dunigan has added Limited Slow-Start to the Linux 2.4.16 Web100
    kernel, and performed experiments comparing TCP with and without
@@ -359,7 +331,7 @@ Abstract
    for TCPs using Limited Slow-Start.  There are also several
    experiments comparing different values for max_ssthresh.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Related%20Proposals"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Related Proposals</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Related%20Proposals"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Related Proposals</span>
 
    There has been considerable research on mechanisms for the TCP sender
    to learn about the limitations of the available bandwidth, and to
@@ -393,7 +365,7 @@ Abstract
    therefore would reduce the size of the transient queue in units of
    MSS.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Acknowledgements</span>
 
    This proposal is part of a larger proposal for HighSpeed TCP for TCP
    connections with large congestion windows, and resulted from
@@ -403,7 +375,7 @@ Abstract
 
 
 <span class="grey">Floyd                         Experimental                      [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc3742.html">RFC 3742</a>     TCP's Slow-Start with Large Congestion Windows   March 2004</span>
 
 
@@ -415,40 +387,40 @@ Abstract
    Research Group, and members of the Transport Area Working Group, for
    feedback on this document.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  Security Considerations</span>
 
    This proposal makes no changes to the underlying security of TCP.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" name="section-7">7</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.%20%20References"></a></body></html><a class="selflink" href="#section-7" id="section-7">7</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" name="section-7.1">7.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-7.1" id="section-7.1">7.1</a>.  Normative References</span>
 
-   [<a id="ref-RFC2581" name="ref-RFC2581">RFC2581</a>] Allman, M., Paxson, V. and W. Stevens, "TCP Congestion
+   [<a id="ref-RFC2581">RFC2581</a>] Allman, M., Paxson, V. and W. Stevens, "TCP Congestion
              Control", <a href="./rfc2581.html">RFC 2581</a>, April 1999.
 
-   [<a id="ref-RFC3465" name="ref-RFC3465">RFC3465</a>] Allman, M., "TCP Congestion Control with Appropriate Byte
+   [<a id="ref-RFC3465">RFC3465</a>] Allman, M., "TCP Congestion Control with Appropriate Byte
              Counting (ABC)", <a href="./rfc3465.html">RFC 3465</a>, February 2003.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" name="section-7.2">7.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/7.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-7.2" id="section-7.2">7.2</a>.  Informative References</span>
 
-   [<a id="ref-AD98" name="ref-AD98">AD98</a>]    Mohit Aron and Peter Druschel, "TCP: Improving Start-up
+   [<a id="ref-AD98">AD98</a>]    Mohit Aron and Peter Druschel, "TCP: Improving Start-up
              Dynamics by Adaptive Timers and Congestion Control"",
              TR98-318, Rice University, 1998.  URL "<a href="http://cs-tr.cs.rice.edu/Dienst/UI/2.0/Describe/ncstrl.rice_cs/TR98-">http://cs-</a>
              <a href="http://cs-tr.cs.rice.edu/Dienst/UI/2.0/Describe/ncstrl.rice_cs/TR98-">tr.cs.rice.edu/Dienst/UI/2.0/Describe/ncstrl.rice_cs/TR98-</a>
              318/".
 
-   [<a id="ref-ASA00" name="ref-ASA00">ASA00</a>]   A. Aggarwal, S. Savage, and T. Anderson, "Understanding the
+   [<a id="ref-ASA00">ASA00</a>]   A. Aggarwal, S. Savage, and T. Anderson, "Understanding the
              Performance of TCP Pacing", Proceedings of the 2000 IEEE
              Infocom Conference, Tel-Aviv, Israel, March, 2000.  URL
              "<a href="http://www.cs.ucsd.edu/~savage/">http://www.cs.ucsd.edu/~savage/</a>".
 
-   [<a id="ref-D02" name="ref-D02">D02</a>]     T. Dunigan, "Floyd's TCP slow-start and AIMD mods", 2002.
+   [<a id="ref-D02">D02</a>]     T. Dunigan, "Floyd's TCP slow-start and AIMD mods", 2002.
              URL "<a href="http://www.csm.ornl.gov/~dunigan/net100/floyd.html">http://www.csm.ornl.gov/~dunigan/net100/floyd.html</a>".
 
-   [<a id="ref-F02" name="ref-F02">F02</a>]     S. Floyd, "Performance Problems with TCP's Slow-Start",
+   [<a id="ref-F02">F02</a>]     S. Floyd, "Performance Problems with TCP's Slow-Start",
              2002.  URL "<a href="http://www.icir.org/floyd/hstcp/slowstart/">http://www.icir.org/floyd/hstcp/slowstart/</a>".
 
-   [<a id="ref-G00" name="ref-G00">G00</a>]     A. Gurtov, "TCP Performance in the Presence of Congestion
+   [<a id="ref-G00">G00</a>]     A. Gurtov, "TCP Performance in the Presence of Congestion
              and Corruption Losses", Master's Thesis, University of
              Helsinki, Department of Computer Science, Helsinki,
              December 2000.  URL
@@ -459,33 +431,33 @@ Abstract
 
 
 <span class="grey">Floyd                         Experimental                      [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc3742.html">RFC 3742</a>     TCP's Slow-Start with Large Congestion Windows   March 2004</span>
 
 
-   [<a id="ref-H96" name="ref-H96">H96</a>]     J. C. Hoe, "Improving the Start-up Behavior of a Congestion
+   [<a id="ref-H96">H96</a>]     J. C. Hoe, "Improving the Start-up Behavior of a Congestion
              Control Scheme for TCP", SIGCOMM 96, 1996.  URL
              "<a href="http://www.acm.org/sigcomm/sigcomm96/program.html">http://www.acm.org/sigcomm/sigcomm96/program.html</a>".
 
-   [<a id="ref-KCRP99" name="ref-KCRP99">KCRP99</a>]  J. Kulik, R. Coulter, D. Rockwell, and C. Partridge, "A
+   [<a id="ref-KCRP99">KCRP99</a>]  J. Kulik, R. Coulter, D. Rockwell, and C. Partridge, "A
              Simulation Study of Paced TCP", BBN Technical Memorandum
              No. 1218, 1999.  URL
              "<a href="http://www.ir.bbn.com/documents/techmemos/index.html">http://www.ir.bbn.com/documents/techmemos/index.html</a>".
 
-   [<a id="ref-MM96" name="ref-MM96">MM96</a>]    M. Mathis and J. Mahdavi, "Forward Acknowledgment: Refining
+   [<a id="ref-MM96">MM96</a>]    M. Mathis and J. Mahdavi, "Forward Acknowledgment: Refining
              TCP Congestion Control", SIGCOMM, August 1996.
 
-   [<a id="ref-NS" name="ref-NS">NS</a>]      The Network Simulator (NS). URL
+   [<a id="ref-NS">NS</a>]      The Network Simulator (NS). URL
              "<a href="http://www.isi.edu/nsnam/ns/">http://www.isi.edu/nsnam/ns/</a>".
 
-   [<a id="ref-VEGAS" name="ref-VEGAS">VEGAS</a>]   Vegas Web Page, University of Arizona.  URL
+   [<a id="ref-VEGAS">VEGAS</a>]   Vegas Web Page, University of Arizona.  URL
              "<a href="http://www.cs.arizona.edu/protocols/">http://www.cs.arizona.edu/protocols/</a>".
 
-   [<a id="ref-VH97" name="ref-VH97">VH97</a>]    Vikram Visweswaraiah and John Heidemann, "Rate Based Pacing
+   [<a id="ref-VH97">VH97</a>]    Vikram Visweswaraiah and John Heidemann, "Rate Based Pacing
              for TCP", 1997.  URL
              "<a href="http://www.isi.edu/lsam/publications/rate_based_pacing/">http://www.isi.edu/lsam/publications/rate_based_pacing/</a>".
 
-   [<a id="ref-WS95" name="ref-WS95">WS95</a>]    G. Wright and W. Stevens, "TCP/IP Illustrated", Volume 2,
+   [<a id="ref-WS95">WS95</a>]    G. Wright and W. Stevens, "TCP/IP Illustrated", Volume 2,
              Addison-Wesley Publishing Company, 1995.
 
 Authors' Address
@@ -515,14 +487,14 @@ Authors' Address
 
 
 <span class="grey">Floyd                         Experimental                      [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc3742.html">RFC 3742</a>     TCP's Slow-Start with Large Congestion Windows   March 2004</span>
 
 
 Full Copyright Statement
 
    Copyright (C) The Internet Society (2004).  This document is subject
-   to the rights, licenses and restrictions contained in <a href="./bcp78.html">BCP 78</a> and
+   to the rights, licenses and restrictions contained in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and
    except as set forth therein, the authors retain all their rights.
 
    This document and the information contained herein are provided on an
@@ -542,7 +514,7 @@ Intellectual Property
    under such rights might or might not be available; nor does it
    represent that it has made any independent effort to identify any
    such rights.  Information on the procedures with respect to
-   rights in RFC documents can be found in <a href="./bcp78.html">BCP 78</a> and <a href="./bcp79.html">BCP 79</a>.
+   rights in RFC documents can be found in <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and <a href="https://www.rfc-editor.org/bcp/bcp79">BCP 79</a>.
 
    Copies of IPR disclosures made to the IETF Secretariat and any
    assurances of licenses to be made available, or the result of an
@@ -571,11 +543,6 @@ Acknowledgement
 
 
 Floyd                         Experimental                      [Page 7]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>

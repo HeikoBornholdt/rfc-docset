@@ -1,27 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="index,follow" name="robots"/>
-<meta content="rfcmarkup version 1.120" name="creator"/>
-<link href="http://purl.org/dc/elements/1.1/" rel="schema.DC"/>
-<meta content="draft-kukec-csi-hash-threat" name="DC.Relation.Replaces"/>
-<meta content="urn:ietf:rfc:6273" name="DC.Identifier"/>
-<meta content="June, 2011" name="DC.Date.Issued"/>
-<meta content="Krishnan, Suresh" name="DC.Creator"/>
-<meta content="Kukec, Ana" name="DC.Creator"/>
-<meta content="Jiang, Sheng" name="DC.Creator"/>
-<meta content="This document analyzes the use of hashes in Secure Neighbor Discovery
-(SEND), the possible threats to these hashes and the impact of recent
-attacks on hash functions used by SEND. The SEND specification
-[RFC3971] currently uses the SHA-1 [SHA1] hash algorithm and PKIX
-certificates [RFC5280] and does not provide support for hash algorithm
-agility. This document provides an analysis of possible threats to the
-hash algorithms used in SEND." name="DC.Description.Abstract"/>
-<meta content="SEND Hash Threat Analysis" name="DC.Title"/>
-<link href="/images/rfc.png" rel="icon" type="image/png"/>
-<link href="/images/rfc.png" rel="shortcut icon" type="image/png"/>
-<title>RFC 6273 - SEND Hash Threat Analysis</title>
+<meta content="rfchandler version 0.2" name="creator"/>
+<meta content="A. Kukec" name="citation_author"/>
+<meta content="S. Krishnan" name="citation_author"/>
+<meta content="S. Jiang" name="citation_author"/>
+<meta content="June, 2011" name="citation_publication_date"/>
+<meta content="The Secure Neighbor Discovery (SEND) Hash Threat Analysis" name="citation_title"/>
+<meta content="10.17487/RFC6273" name="citation_doi"/>
+<meta content="2070-1721" name="citation_issn"/>
+<meta content="rfc6273" name="citation_technical_report_number"/>
+<meta content="https://www.rfc-editor.org/rfc/pdfrfc/rfc6273.txt.pdf" name="citation_pdf_url"/>
+<title>RFC 6273: The Secure Neighbor Discovery (SEND) Hash Threat Analysis</title>
 <style type="text/css">
 	@media only screen 
 	  and (min-width: 992px)
@@ -50,7 +42,7 @@ hash algorithms used in SEND." name="DC.Description.Abstract"/>
 	  and (min-device-width : 375px) 
 	  and (max-device-width : 667px) {
             body { font-size: 9.5pt; }
-            div.content { width: 96ex; margin: 0 1px; }
+            div.content { width: 96ex; margin: 0; }
         }
 	@media only screen 
 	  and (min-device-width: 1200px) {
@@ -59,7 +51,7 @@ hash algorithms used in SEND." name="DC.Description.Abstract"/>
         }
         h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	    font-weight: bold;
-            line-height: 0pt;
+           /* line-height: 0pt; */
             display: inline;
             white-space: pre;
             font-family: monospace;
@@ -138,19 +130,18 @@ hash algorithms used in SEND." name="DC.Description.Abstract"/>
        margin: 10px 10px;
     }
     </style>
-    <![endif]-->
-<script type="text/javascript"><!--
+    <![endif]--> <script type="text/javascript"><!--
     function addHeaderTags() {
-	var spans = document.getElementsByTagName("span");
-	for (var i=0; i < spans.length; i++) {
-	    var elem = spans[i];
-	    if (elem) {
-		var level = elem.getAttribute("class");
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
                 if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
-                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
                 }
-	    }
-	}
+            }
+        }
     }
     var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
     function showElem(id) {
@@ -164,21 +155,9 @@ hash algorithms used in SEND." name="DC.Description.Abstract"/>
         elem.innerHTML = "";
     }
     // -->
-    </script>
-</head>
-<body onload="addHeaderTags()">
-<div class="content">
-<div style="height: 13px;">
-<div class="pre noprint docinfo bgorange" onclick="showElem('legend');" onmouseout="hideElem('legend')" onmouseover="this.style.cursor='pointer';" style="height: 6px; position: absolute;" title="Click for colour legend."> </div>
-<div class="docinfo noprint pre legend" id="legend" onmouseout="hideElem('legend');" onmouseover="showElem('legend');" style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; ">
-</div>
-</div>
-<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="/rfc/rfc6273.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/rfc6273" title="PDF version of this document">pdf</a>] [<a href="./draft-ietf-csi-hash-threat.html" title="draft-ietf-csi-hash-threat">draft-ietf-csi-ha...</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=rfc6273" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=rfc6273" title="Side-by-side diff">Diff2</a>]                 </span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/>
-<span class="pre noprint docinfo"> </span><br/>
-<pre>
-Internet Engineering Task Force (IETF)                          A. Kukec
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org" title="RFC Editor">RFC Home</a>] [<a href="/rfc/rfc6273.txt">TEXT</a>|<a href="/rfc/pdfrfc/rfc6273.txt.pdf">PDF</a>|<a href="/rfc/rfc6273.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc6273" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=6273&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc6273" title="Info page">Info page</a>]                  </span><br/><span class="pre noprint docinfo"> </span><br/><span class="pre noprint docinfo">                                                           INFORMATIONAL</span><br/><span class="pre noprint docinfo"> </span><pre>Internet Engineering Task Force (IETF)                          A. Kukec
 Request for Comments: 6273                          University of Zagreb
 Category: Informational                                      S. Krishnan
 ISSN: 2070-1721                                                 Ericsson
@@ -230,7 +209,7 @@ Status of This Memo
 
 
 <span class="grey">Kukec, et al.                 Informational                     [Page 1]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-2" id="page-2" name="page-2"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-2"></span>
 <span class="grey"><a href="./rfc6273.html">RFC 6273</a>                SEND Hash Threat Analysis              June 2011</span>
 
 
@@ -239,7 +218,7 @@ Copyright Notice
    Copyright (c) 2011 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to <a href="./bcp78.html">BCP 78</a> and the IETF Trust's Legal
+   This document is subject to <a href="https://www.rfc-editor.org/bcp/bcp78">BCP 78</a> and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
    publication of this document.  Please review these documents
@@ -267,7 +246,7 @@ Table of Contents
      <a href="#section-6.1">6.1</a>.  Normative References  . . . . . . . . . . . . . . . . . . . <a href="#page-5">5</a>
      <a href="#section-6.2">6.2</a>.  Informative References  . . . . . . . . . . . . . . . . . . <a href="#page-5">5</a>
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" name="section-1">1</a>.  Introduction</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/1.%20%20Introduction"></a></body></html><a class="selflink" href="#section-1" id="section-1">1</a>.  Introduction</span>
 
    SEND [<a href="./rfc3971.html" title='"SEcure Neighbor Discovery (SEND)"'>RFC3971</a>] uses the SHA-1 hash algorithm [<a href="#ref-SHA1" title='"Secure Hash Standard"'>SHA1</a>] to generate the
    contents of the Key Hash field and the Digital Signature field of the
@@ -286,13 +265,13 @@ Table of Contents
 
 
 <span class="grey">Kukec, et al.                 Informational                     [Page 2]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-3" id="page-3" name="page-3"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-3"></span>
 <span class="grey"><a href="./rfc6273.html">RFC 6273</a>                SEND Hash Threat Analysis              June 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Impact%20of%20Collision%20Attacks%20on%20SEND"></a></body></html><a class="selflink" href="#section-2" name="section-2">2</a>.  Impact of Collision Attacks on SEND</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.%20%20Impact%20of%20Collision%20Attacks%20on%20SEND"></a></body></html><a class="selflink" href="#section-2" id="section-2">2</a>.  Impact of Collision Attacks on SEND</span>
 
-   [<a id="ref-RFC4270" name="ref-RFC4270">RFC4270</a>] summarizes a study that assesses the threat of the
+   [<a id="ref-RFC4270">RFC4270</a>] summarizes a study that assesses the threat of the
    aforementioned attacks on the use of cryptographic hashes in Internet
    protocols.  This document analyzes the hash usage in SEND following
    the approach recommended by [<a href="./rfc4270.html" title='"Attacks on Cryptographic Hashes in Internet Protocols"'>RFC4270</a>] and [<a href="#ref-NEW-HASHES" title='"Deploying a New Hash Algorithm"'>NEW-HASHES</a>].
@@ -301,7 +280,7 @@ Table of Contents
    SEND and determine whether they are affected by the attacks on the
    underlying hash functions.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Attacks%20against%20CGAs%20Used%20in%20SEND"></a></body></html><a class="selflink" href="#section-2.1" name="section-2.1">2.1</a>.  Attacks against CGAs Used in SEND</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.1.%20%20Attacks%20against%20CGAs%20Used%20in%20SEND"></a></body></html><a class="selflink" href="#section-2.1" id="section-2.1">2.1</a>.  Attacks against CGAs Used in SEND</span>
 
    Cryptographically Generated Addresses (CGAs) are defined in [<a href="./rfc3972.html" title='"Cryptographically Generated Addresses (CGA)"'>RFC3972</a>]
    and are used to securely associate a cryptographic public key with an
@@ -317,7 +296,7 @@ Table of Contents
    potentially dangerous since the security of SEND messages relies on
    the strength of the CGA.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Attacks%20against%20PKIX%20Certificates%20in%20Authorization%20Delegation"></a></body></html><a class="selflink" href="#section-2.2" name="section-2.2">2.2</a>.  Attacks against PKIX Certificates in Authorization Delegation</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.2.%20%20Attacks%20against%20PKIX%20Certificates%20in%20Authorization%20Delegation"></a></body></html><a class="selflink" href="#section-2.2" id="section-2.2">2.2</a>.  Attacks against PKIX Certificates in Authorization Delegation</span>
 <span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20Discovery%20Process"></a></body></html>      Discovery Process</span>
 
    To protect Router Discovery, SEND requires that routers be authorized
@@ -342,11 +321,11 @@ Table of Contents
 
 
 <span class="grey">Kukec, et al.                 Informational                     [Page 3]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-4" id="page-4" name="page-4"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-4"></span>
 <span class="grey"><a href="./rfc6273.html">RFC 6273</a>                SEND Hash Threat Analysis              June 2011</span>
 
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Attacks%20against%20the%20Digital%20Signature%20in%20the%20SEND%20RSA%20Signature"></a></body></html><a class="selflink" href="#section-2.3" name="section-2.3">2.3</a>.  Attacks against the Digital Signature in the SEND RSA Signature</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.3.%20%20Attacks%20against%20the%20Digital%20Signature%20in%20the%20SEND%20RSA%20Signature"></a></body></html><a class="selflink" href="#section-2.3" id="section-2.3">2.3</a>.  Attacks against the Digital Signature in the SEND RSA Signature</span>
 <span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20Option"></a></body></html>      Option</span>
 
    The digital signature in the RSA Signature option is produced by
@@ -358,7 +337,7 @@ Table of Contents
    the Neighbor Discovery messages is well defined, it is not practical
    to use this vulnerability in real world attacks.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Attacks%20against%20the%20Key%20Hash%20Field%20of%20the%20SEND%20RSA%20Signature"></a></body></html><a class="selflink" href="#section-2.4" name="section-2.4">2.4</a>.  Attacks against the Key Hash Field of the SEND RSA Signature</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/2.4.%20%20Attacks%20against%20the%20Key%20Hash%20Field%20of%20the%20SEND%20RSA%20Signature"></a></body></html><a class="selflink" href="#section-2.4" id="section-2.4">2.4</a>.  Attacks against the Key Hash Field of the SEND RSA Signature</span>
 <span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/%20%20%20%20%20%20Option"></a></body></html>      Option</span>
 
    The SEND RSA signature option described in <a href="./rfc3971.html#section-5.2">Section 5.2 of [RFC3971]</a>
@@ -373,7 +352,7 @@ Table of Contents
    hashes into the same Key Hash value will be detected due to a
    mismatch with the CGA or the router certificate).
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Conclusion"></a></body></html><a class="selflink" href="#section-3" name="section-3">3</a>.  Conclusion</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/3.%20%20Conclusion"></a></body></html><a class="selflink" href="#section-3" id="section-3">3</a>.  Conclusion</span>
 
    Current attacks on hash functions do not constitute any practical
    threat to the digital signatures used in SEND (both in the RSA
@@ -382,7 +361,7 @@ Table of Contents
    need to be addressed by encoding the hash algorithm information into
    the CGA as specified in [<a href="./rfc4982.html" title='"Support for Multiple Hash Algorithms in Cryptographically Generated Addresses (CGAs)"'>RFC4982</a>].
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" name="section-4">4</a>.  Security Considerations</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/4.%20%20Security%20Considerations"></a></body></html><a class="selflink" href="#section-4" id="section-4">4</a>.  Security Considerations</span>
 
    This document analyzes the impact that the attacks against hash
    functions have on SEND.  It concludes that the only practical attack
@@ -398,11 +377,11 @@ Table of Contents
 
 
 <span class="grey">Kukec, et al.                 Informational                     [Page 4]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-5" id="page-5" name="page-5"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-5"></span>
 <span class="grey"><a href="./rfc6273.html">RFC 6273</a>                SEND Hash Threat Analysis              June 2011</span>
 
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-5" name="section-5">5</a>.  Acknowledgements</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/5.%20%20Acknowledgements"></a></body></html><a class="selflink" href="#section-5" id="section-5">5</a>.  Acknowledgements</span>
 
    The authors would like to thank Lars Eggert, Pete McCann, Julien
    Laganier, Jari Arkko, Paul Hoffman, Pasi Eronen, Adrian Farrel, Dan
@@ -410,41 +389,41 @@ Table of Contents
    for reviewing earlier versions of this document and providing
    comments to make it better.
 
-<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" name="section-6">6</a>.  References</span>
+<span class="h2"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.%20%20References"></a></body></html><a class="selflink" href="#section-6" id="section-6">6</a>.  References</span>
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-6.1" name="section-6.1">6.1</a>.  Normative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.1.%20%20Normative%20References"></a></body></html><a class="selflink" href="#section-6.1" id="section-6.1">6.1</a>.  Normative References</span>
 
-   [<a id="ref-NEW-HASHES" name="ref-NEW-HASHES">NEW-HASHES</a>] Bellovin, S. and E. Rescorla, "Deploying a New Hash
+   [<a id="ref-NEW-HASHES">NEW-HASHES</a>] Bellovin, S. and E. Rescorla, "Deploying a New Hash
                 Algorithm", November 2005.
 
-   [<a id="ref-RFC4270" name="ref-RFC4270">RFC4270</a>]    Hoffman, P. and B. Schneier, "Attacks on Cryptographic
+   [<a id="ref-RFC4270">RFC4270</a>]    Hoffman, P. and B. Schneier, "Attacks on Cryptographic
                 Hashes in Internet Protocols", <a href="./rfc4270.html">RFC 4270</a>, November 2005.
 
-   [<a id="ref-RFC4982" name="ref-RFC4982">RFC4982</a>]    Bagnulo, M. and J. Arkko, "Support for Multiple Hash
+   [<a id="ref-RFC4982">RFC4982</a>]    Bagnulo, M. and J. Arkko, "Support for Multiple Hash
                 Algorithms in Cryptographically Generated Addresses
                 (CGAs)", <a href="./rfc4982.html">RFC 4982</a>, July 2007.
 
-<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6.2" name="section-6.2">6.2</a>.  Informative References</span>
+<span class="h3"><html><body><a class="dashAnchor" name="//apple_ref/cpp/Shortcut/6.2.%20%20Informative%20References"></a></body></html><a class="selflink" href="#section-6.2" id="section-6.2">6.2</a>.  Informative References</span>
 
-   [<a id="ref-RFC3971" name="ref-RFC3971">RFC3971</a>]    Arkko, J., Ed., Kempf, J., Zill, B., and P. Nikander,
+   [<a id="ref-RFC3971">RFC3971</a>]    Arkko, J., Ed., Kempf, J., Zill, B., and P. Nikander,
                 "SEcure Neighbor Discovery (SEND)", <a href="./rfc3971.html">RFC 3971</a>, March
                 2005.
 
-   [<a id="ref-RFC3972" name="ref-RFC3972">RFC3972</a>]    Aura, T., "Cryptographically Generated Addresses (CGA)",
+   [<a id="ref-RFC3972">RFC3972</a>]    Aura, T., "Cryptographically Generated Addresses (CGA)",
                 <a href="./rfc3972.html">RFC 3972</a>, March 2005.
 
-   [<a id="ref-RFC5280" name="ref-RFC5280">RFC5280</a>]    Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+   [<a id="ref-RFC5280">RFC5280</a>]    Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
                 Housley, R., and W. Polk, "Internet X.509 Public Key
                 Infrastructure Certificate and Certificate Revocation
                 List (CRL) Profile", <a href="./rfc5280.html">RFC 5280</a>, May 2008.
 
-   [<a id="ref-SHA1" name="ref-SHA1">SHA1</a>]       NIST, FIPS PUB 180-1, "Secure Hash Standard", April
+   [<a id="ref-SHA1">SHA1</a>]       NIST, FIPS PUB 180-1, "Secure Hash Standard", April
                 1995.
 
-   [<a id="ref-SHA1-COLL" name="ref-SHA1-COLL">SHA1-COLL</a>]  Wang, X., Yin, L., and H. Yu, "Finding Collisions in the
+   [<a id="ref-SHA1-COLL">SHA1-COLL</a>]  Wang, X., Yin, L., and H. Yu, "Finding Collisions in the
                 Full SHA-1. CRYPTO 2005: 17-36", 2005.
 
-   [<a id="ref-SLdeW2007" name="ref-SLdeW2007">SLdeW2007</a>]  Stevens, M., Lenstra, A., de Weger, B., "Chosen-prefix
+   [<a id="ref-SLdeW2007">SLdeW2007</a>]  Stevens, M., Lenstra, A., de Weger, B., "Chosen-prefix
                 Collisions for MD5 and Colliding X.509 Certificates for
                 Different Identities".  EuroCrypt 2007.
 
@@ -454,26 +433,26 @@ Table of Contents
 
 
 <span class="grey">Kukec, et al.                 Informational                     [Page 5]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-6" id="page-6" name="page-6"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-6"></span>
 <span class="grey"><a href="./rfc6273.html">RFC 6273</a>                SEND Hash Threat Analysis              June 2011</span>
 
 
-   [<a id="ref-SLdeW2009" name="ref-SLdeW2009">SLdeW2009</a>]  Stevens, M., Lenstra, A., de Weger, B., "Chosen-prefix
+   [<a id="ref-SLdeW2009">SLdeW2009</a>]  Stevens, M., Lenstra, A., de Weger, B., "Chosen-prefix
                 Collisions for MD5 and Applications, Journal of
                 Cryptology", 2009, &lt;<a href="http://deweger.xs4all.nl/papers/%5B42%5DStLedW-MD5-JCryp%5B2009%5D.pdf">http://deweger.xs4all.nl/</a>
                 <a href="http://deweger.xs4all.nl/papers/%5B42%5DStLedW-MD5-JCryp%5B2009%5D.pdf">papers/%5B42%5DStLedW-MD5-JCryp%5B2009%5D.pdf</a>&gt;.
 
-   [<a id="ref-SSALMOdeW2009" name="ref-SSALMOdeW2009">SSALMOdeW2009</a>]
+   [<a id="ref-SSALMOdeW2009">SSALMOdeW2009</a>]
                 Stevens, M., Sotirov, A., Appelbaum, J., Lenstra, A.,
                 Molnar, D., Osvik, D., and B. de Weger., "Short chosen-
                 prefix collisions for MD5 and the creation of a rogue CA
                 certificate, Crypto 2009", 2009.
 
-   [<a id="ref-STEV2007" name="ref-STEV2007">STEV2007</a>]   Stevens, M., "On Collisions for MD5",
+   [<a id="ref-STEV2007">STEV2007</a>]   Stevens, M., "On Collisions for MD5",
                 &lt;<a href="http://www.win.tue.nl/hashclash/On%20Collisions%20for%20MD5%20-%20M.M.J.%20Stevens.pdf">http://www.win.tue.nl/hashclash/</a>
                 <a href="http://www.win.tue.nl/hashclash/On%20Collisions%20for%20MD5%20-%20M.M.J.%20Stevens.pdf">On%20Collisions%20for%20MD5%20-%20M.M.J.%20Stevens.pdf</a>&gt;.
 
-   [<a id="ref-X509-COLL" name="ref-X509-COLL">X509-COLL</a>]  Stevens, M., Lenstra, A., and B. Weger, "Chosen-Prefix
+   [<a id="ref-X509-COLL">X509-COLL</a>]  Stevens, M., Lenstra, A., and B. Weger, "Chosen-Prefix
                 Collisions for MD5 and Colliding X.509 Certificates for
                 Different Identities. EUROCRYPT 2007: 1-22", 2007.
 
@@ -510,7 +489,7 @@ Table of Contents
 
 
 <span class="grey">Kukec, et al.                 Informational                     [Page 6]</span></pre>
-<hr align="left" class="noprint" style="width: 96ex;"/><!--NewPage--><pre class="newpage"><a class="invisible" href="#page-7" id="page-7" name="page-7"> </a>
+<hr class="noprint"/><!--NewPage--><pre class="newpage"><span id="page-7"></span>
 <span class="grey"><a href="./rfc6273.html">RFC 6273</a>                SEND Hash Threat Analysis              June 2011</span>
 
 
@@ -566,11 +545,6 @@ Authors' Addresses
 
 
 Kukec, et al.                 Informational                     [Page 7]
-
-</pre><br/>
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.120, available from
-      <a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
-</small></small></span>
-</div>
+</pre>
 </body>
 </html>
